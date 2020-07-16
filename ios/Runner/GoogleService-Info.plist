@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>852466867016-q41a75kp9bh2bku5l75ui1pm1mvti911.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.852466867016-q41a75kp9bh2bku5l75ui1pm1mvti911</string>
+	<key>API_KEY</key>
+	<string>AIzaSyANFBL7nKG6bFHGfD0OzSWqIdFxY27fvv4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>852466867016</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.mozin</string>
+	<key>PROJECT_ID</key>
+	<string>mozin-2c81d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mozin-2c81d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:852466867016:ios:9d0a5d5888b80e5866317d</string>
+	<key>DATABASE_URL</key>
+	<string>https://mozin-2c81d.firebaseio.com</string>
+</dict>
+</plist>
