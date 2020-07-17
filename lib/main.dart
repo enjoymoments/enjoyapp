@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/theme.dart';
-import 'package:mozin/views/home/home.dart';
+import 'package:mozin/views/onboading.dart';
 
 void main() async {
   await setup();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Mozin',
       debugShowCheckedModeBanner: false,
       theme: getTheme(context),
-      home: Home(),
+      home: OnBoardingPage(),
     );
   }
 }
