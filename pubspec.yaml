@@ -55,6 +55,14 @@ flutter:
   assets:
     - assets/
 
+  fonts:
+    - family: Abel
+      fonts:
+        - asset: assets/fonts/Abel/Abel-Regular.ttf
+    - family: ABeeZee
+      fonts:
+        - asset: assets/fonts/ABeeZee/ABeeZee-Regular.ttf
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
