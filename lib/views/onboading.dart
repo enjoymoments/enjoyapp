@@ -77,7 +77,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     return PageViewModel(
       titleWidget: SizedBox(
-        height: 200,
+        height: MediaQuery.of(context).size.height / 2.5,
       ),
       bodyWidget: Column(
         mainAxisAlignment: MainAxisAlignment.center,

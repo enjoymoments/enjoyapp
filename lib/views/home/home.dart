@@ -26,6 +26,24 @@ class _HomeState extends State<Home> {
             title: new Text('Linha'),
           ),
           BottomNavigationBarItem(
+            icon: Container(
+              height: 45.0,
+              width: 45.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.add,
+                    size: 30.0,
+                  ),
+                  elevation: 2.0,
+                  backgroundColor: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             title: Text('Notificações'),
           ),

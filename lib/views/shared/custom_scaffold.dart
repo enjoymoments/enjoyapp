@@ -20,16 +20,6 @@ class CustomScaffold extends StatelessWidget {
       appBar: appBar,
       body: child,
       bottomNavigationBar: bottomNavigationBar ?? CustomMenu(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.add,
-          size: 24.0,
-        ),
-        elevation: 2.0,
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
     );
   }
 }
