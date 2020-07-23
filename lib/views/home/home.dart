@@ -13,20 +13,26 @@ class _HomeState extends State<Home> {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(),
-      //TODO:in development
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: 0, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            title: new Text('Início'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Messages'),
+            icon: new Icon(Icons.linear_scale),
+            title: new Text('Linha'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('Profile'))
+            icon: Icon(Icons.notifications),
+            title: Text('Notificações'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu),
+            title: Text('Mais'),
+          ),
         ],
       ),
     );

@@ -10,6 +10,7 @@ ThemeData getTheme(BuildContext context) {
         color: AppColors.secundary,
       ),
     ),
+    bottomAppBarColor: AppColors.menuColor,
     primaryColor: AppColors.primary,
     backgroundColor: AppColors.secundary,
     inputDecorationTheme: InputDecorationTheme(
