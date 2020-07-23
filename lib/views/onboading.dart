@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/views/home/home.dart';
+import 'package:mozin/views/screen_manager.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => Home()),
+      MaterialPageRoute(builder: (_) => ScreenManager()),
       (route) => false,
     );
   }

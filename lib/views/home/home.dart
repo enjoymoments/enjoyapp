@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/day_one/day_one.dart';
 import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
-import 'package:mozin/views/shared/default_menu.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,17 +10,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: DefaultMenu(),
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Início'),
-    );
+    return _buildBody();
   }
 
   Widget _buildBody() {

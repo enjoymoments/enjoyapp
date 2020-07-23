@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/more/more.dart';
 import 'package:mozin/views/notifications/notifications.dart';
+import 'package:mozin/views/shared/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {
+  final Function(DEFAULT_MENU_ENUM) onTap;
+
+  const DefaultMenu({Key key, this.onTap}) : super(key: key);
+
   @override
   _DefaultMenuState createState() => _DefaultMenuState();
 }
@@ -14,25 +19,10 @@ class _DefaultMenuState extends State<DefaultMenu> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: _currentIndex, // this will be set when a new tab is tapped
+      currentIndex: _currentIndex,
       onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-
-        if (_currentIndex == 3) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Notifications()),
-          );
-        }
-
-        if (_currentIndex == 4) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => More()),
-          );
-        }
+        _currentIndex = index;
+        widget.onTap(DEFAULT_MENU_ENUM.values[_currentIndex]);
       },
       items: [
         BottomNavigationBarItem(
