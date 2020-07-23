@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/views/home/home.dart';
 
-class DefaultMenu extends StatelessWidget {
+class DefaultMenu extends StatefulWidget {
+  @override
+  _DefaultMenuState createState() => _DefaultMenuState();
+}
+
+class _DefaultMenuState extends State<DefaultMenu> {
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: 0, // this will be set when a new tab is tapped
+      currentIndex: _currentIndex, // this will be set when a new tab is tapped
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+
+        // if (_currentIndex == 4) {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(builder: (context) => Home()),
+        //   );
+        // }
+      },
       items: [
         BottomNavigationBarItem(
           icon: new Icon(Icons.home),
