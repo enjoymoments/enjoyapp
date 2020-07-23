@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/day_one/day_one.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
-import 'package:mozin/views/shared/default_menu.dart';
 
-class Home extends StatefulWidget {
+class DayOne extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _DayOneState createState() => _DayOneState();
 }
 
-class _HomeState extends State<Home> {
+class _DayOneState extends State<DayOne> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(),
-      bottomNavigationBar: DefaultMenu(),
+      bottomNavigationBar: null,
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text('Início'),
+      title: Text('Dia 1'),
     );
   }
 
@@ -29,17 +27,14 @@ class _HomeState extends State<Home> {
     return CustomContainer(
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DayOne()),
-          );
+          print('tocou');
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Toque aqui para adicionar o dia 1',
+              'Dia 1',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,
