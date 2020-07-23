@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/home/home.dart';
+import 'package:mozin/views/more/more.dart';
+import 'package:mozin/views/notifications/notifications.dart';
 
 class DefaultMenu extends StatefulWidget {
   @override
@@ -19,12 +20,19 @@ class _DefaultMenuState extends State<DefaultMenu> {
           _currentIndex = index;
         });
 
-        // if (_currentIndex == 4) {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => Home()),
-        //   );
-        // }
+        if (_currentIndex == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Notifications()),
+          );
+        }
+
+        if (_currentIndex == 4) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => More()),
+          );
+        }
       },
       items: [
         BottomNavigationBarItem(
