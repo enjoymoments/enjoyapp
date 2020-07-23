@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/custom_menu.dart';
+import 'package:mozin/views/shared/default_menu.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget child;
@@ -19,7 +19,7 @@ class CustomScaffold extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar,
       body: child,
-      bottomNavigationBar: bottomNavigationBar ?? CustomMenu(),
+      bottomNavigationBar: bottomNavigationBar ?? DefaultMenu(),
     );
   }
 }
