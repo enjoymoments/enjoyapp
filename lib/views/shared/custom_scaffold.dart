@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/default_menu.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget child;
   final AppBar appBar;
   final Widget bottomNavigationBar;
 
-  const CustomScaffold(
+  CustomScaffold(
       {Key key,
       @required this.child,
       @required this.appBar,
-      this.bottomNavigationBar})
+      @required this.bottomNavigationBar})
       : super(key: key);
 
   @override
@@ -19,7 +18,7 @@ class CustomScaffold extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: appBar,
       body: child,
-      bottomNavigationBar: bottomNavigationBar ?? DefaultMenu(),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 }
