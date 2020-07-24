@@ -27,39 +27,43 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
-    if (itemSelected == DEFAULT_MENU_ENUM.NOTIFICATION) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Notifications()),
-      );
-    } else if (itemSelected == DEFAULT_MENU_ENUM.MORE) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => More()),
-      );
-    } else {
-      setState(() {
-        _default_menu_item = itemSelected;
-      });
-    }
+    setState(() {
+      _default_menu_item = itemSelected;
+    });
   }
 
   Widget _buildBody() {
     switch (_default_menu_item) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return TimeLine();
-      case DEFAULT_MENU_ENUM.HOME:
-        return Home();
       case DEFAULT_MENU_ENUM.NOTIFICATION:
-        break;
+        return Notifications();
       case DEFAULT_MENU_ENUM.MORE:
-        break;
+        return More();
+      case DEFAULT_MENU_ENUM.HOME:
+      default:
+        return Home();
     }
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text('Início'),
+      title: Text(getStringbyScreen()),
     );
+  }
+
+  String getStringbyScreen() {
+    switch (_default_menu_item) {
+      case DEFAULT_MENU_ENUM.HOME:
+        return 'Início';
+      case DEFAULT_MENU_ENUM.TIME_LINE:
+        return 'Linha';
+      case DEFAULT_MENU_ENUM.ADD:
+        break;
+      case DEFAULT_MENU_ENUM.NOTIFICATION:
+        return 'Notificação';
+      case DEFAULT_MENU_ENUM.MORE:
+        return 'Mais';
+    }
   }
 }

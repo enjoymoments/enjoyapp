@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
 
 class More extends StatefulWidget {
   @override
@@ -10,17 +9,7 @@ class More extends StatefulWidget {
 class _MoreState extends State<More> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: null,
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Mais'),
-    );
+    return _buildBody();
   }
 
   Widget _buildBody() {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
 
 class Notifications extends StatefulWidget {
   @override
@@ -10,17 +9,7 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: null,
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Notificações'),
-    );
+    return _buildBody();
   }
 
   Widget _buildBody() {
