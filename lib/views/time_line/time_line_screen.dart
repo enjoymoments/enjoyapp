@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
+import 'package:mozin/views/time_line/components/time_line_item.dart';
 
 class TimeLineScreen extends StatefulWidget {
   @override
@@ -7,6 +8,9 @@ class TimeLineScreen extends StatefulWidget {
 }
 
 class _TimeLineScreenState extends State<TimeLineScreen> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
+
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -14,23 +18,23 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   Widget _buildBody() {
     return CustomContainer(
-      child: InkWell(
-        onTap: () {
-          print('tocou');
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Mais',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 28),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+      child: _buildItems(),
+    );
+  }
+
+  Widget _buildItems() {
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      onRefresh: () async {},
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: 2,
+        itemBuilder: (context, index) => _buildItem(),
       ),
     );
+  }
+
+  Widget _buildItem() {
+    return TimeLineItem();
   }
 }
