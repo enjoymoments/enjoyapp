@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/home/home.dart';
-import 'package:mozin/views/more/more.dart';
-import 'package:mozin/views/notifications/notifications.dart';
+import 'package:mozin/views/home/home_screen.dart';
+import 'package:mozin/views/more/more_screen.dart';
+import 'package:mozin/views/notifications/notifications_screen.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
-import 'package:mozin/views/time_line/time_line.dart';
+import 'package:mozin/views/time_line/time_line_screen.dart';
 
 class ScreenManager extends StatefulWidget {
   @override
@@ -35,14 +35,14 @@ class _ScreenManagerState extends State<ScreenManager> {
   Widget _buildBody() {
     switch (_default_menu_item) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
-        return TimeLine();
+        return TimeLineScreen();
       case DEFAULT_MENU_ENUM.NOTIFICATION:
-        return Notifications();
+        return NotificationsScreen();
       case DEFAULT_MENU_ENUM.MORE:
-        return More();
+        return MoreScreen();
       case DEFAULT_MENU_ENUM.HOME:
       default:
-        return Home();
+        return HomeScreen();
     }
   }
 

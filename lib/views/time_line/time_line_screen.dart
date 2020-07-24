@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
-class Notifications extends StatefulWidget {
+class TimeLineScreen extends StatefulWidget {
   @override
-  _NotificationsState createState() => _NotificationsState();
+  _TimeLineScreenState createState() => _TimeLineScreenState();
 }
 
-class _NotificationsState extends State<Notifications> {
+class _TimeLineScreenState extends State<TimeLineScreen> {
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -23,7 +23,7 @@ class _NotificationsState extends State<Notifications> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Notificações',
+              'Mais',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,

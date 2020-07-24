@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/day_one/day_one.dart';
+import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DayOne()),
+            MaterialPageRoute(builder: (context) => DayOneScreen()),
           );
         },
         child: Column(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/more/more.dart';
-import 'package:mozin/views/notifications/notifications.dart';
+import 'package:mozin/views/more/more_screen.dart';
+import 'package:mozin/views/notifications/notifications_screen.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {

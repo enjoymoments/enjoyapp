@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
 
-class DayOne extends StatefulWidget {
+class MoreScreen extends StatefulWidget {
   @override
-  _DayOneState createState() => _DayOneState();
+  _MoreScreenState createState() => _MoreScreenState();
 }
 
-class _DayOneState extends State<DayOne> {
+class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: null,
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Dia 1'),
-    );
+    return _buildBody();
   }
 
   Widget _buildBody() {
@@ -34,7 +23,7 @@ class _DayOneState extends State<DayOne> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Dia 1',
+              'Mais',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,
