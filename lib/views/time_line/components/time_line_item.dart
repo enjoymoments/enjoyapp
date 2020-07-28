@@ -1,30 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/views/time_line/components/body_card.dart';
+import 'package:mozin/views/time_line/components/footer_card.dart';
+import 'package:mozin/views/time_line/components/header_card.dart';
 
 class TimeLineItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      semanticContainer: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Column(
-        children: <Widget>[
-          Image.network(
-            'https://raw.githubusercontent.com/kevmoo/dart_side/master/Dash%20Dart%20PNG%20%20-%20white.png',
-            fit: BoxFit.fill,
-          ),
-          // CachedNetworkImage(
-          //   fit: BoxFit.fill,
-          //   imageUrl: model.url,
-          //   placeholder: (context, url) => CircularProgressIndicator(),
-          //   errorWidget: (context, url, error) => Icon(Icons.error),
-          // ),
-        ],
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 5,
-      margin: EdgeInsets.all(10),
+    return Column(
+      children: <Widget>[
+        SpacerBox.v4,
+        HeaderCard(),
+        SpacerBox.v8,
+        BodyCard(),
+        FooterCard(),
+        SpacerBox.v4,
+      ],
     );
   }
 }

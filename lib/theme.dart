@@ -10,6 +10,10 @@ ThemeData getTheme(BuildContext context) {
         color: AppColors.secundary,
       ),
     ),
+    iconTheme: IconThemeData(
+      size: 24.0,
+      color: AppColors.iconsColor,
+    ),
     bottomAppBarColor: AppColors.menuColor,
     primaryColor: AppColors.primary,
     backgroundColor: AppColors.secundary,
