@@ -64,7 +64,7 @@ extension Texts on String {
 
   Widget label(
     BuildContext context, {
-    double fontSize,
+    double fontSize = 17,
     Color color,
     int maxLines,
     double letterSpacing,

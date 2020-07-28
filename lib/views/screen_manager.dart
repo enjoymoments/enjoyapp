@@ -5,6 +5,7 @@ import 'package:mozin/views/notifications/notifications_screen.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
+import 'package:mozin/views/time_line/add_time_line_screen.dart';
 import 'package:mozin/views/time_line/time_line_screen.dart';
 
 class ScreenManager extends StatefulWidget {
@@ -27,9 +28,16 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
-    setState(() {
-      _default_menu_item = itemSelected;
-    });
+    if (itemSelected == DEFAULT_MENU_ENUM.ADD) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddTimeLineScreen()),
+      );
+    } else {
+      setState(() {
+        _default_menu_item = itemSelected;
+      });
+    }
   }
 
   Widget _buildBody() {

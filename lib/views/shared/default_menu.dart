@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/more/more_screen.dart';
-import 'package:mozin/views/notifications/notifications_screen.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {
@@ -39,7 +37,9 @@ class _DefaultMenuState extends State<DefaultMenu> {
             width: 45.0,
             child: FittedBox(
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  widget.onTap(DEFAULT_MENU_ENUM.ADD);
+                },
                 child: Icon(
                   Icons.add,
                   size: 30.0,
