@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:mozin/modules/shared/image_picker_service.dart';
+import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 
 GetIt getItInstance = GetIt.instance;
 
@@ -23,16 +25,9 @@ void _registerSingletonProviders() {
 }
 
 void _registerSingletonServices() {
-  // getItInstance.registerLazySingleton<Uuid>(() => Uuid());
-  // getItInstance.registerLazySingleton<CategoryService>(() => CategoryService());
-
-  // getItInstance.registerLazySingleton<DatabaseService>(
-  //     () => DatabaseService(getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<ImagePickerService>(() => ImagePickerService());
 }
 
 void _registerBlocs() {
-  // getItInstance.registerLazySingleton<YourIdeasBloc>(() => YourIdeasBloc(getItInstance()));
-  // getItInstance.registerLazySingleton<IdeaBloc>(() => IdeaBloc(getItInstance()));
-  // getItInstance.registerLazySingleton<CategoryBloc>(() => CategoryBloc(getItInstance()));
-  // getItInstance.registerLazySingleton<HomeBloc>(() => HomeBloc(getItInstance()));
+  getItInstance.registerLazySingleton<AddTimeLineBloc>(() => AddTimeLineBloc(getItInstance()));
 }
