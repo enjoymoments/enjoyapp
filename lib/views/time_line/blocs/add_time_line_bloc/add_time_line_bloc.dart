@@ -26,6 +26,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   Stream<AddTimeLineState> mapOpenCameratoState(OpenCameraEvent event) async* {
     yield state.copyWith(isLoading: true);
     var result = await imagePickerService.getImageAsync(source: event.source);
-    yield state.copyWith(isLoading: false, medias: [result]);
+    yield state.copyWith(
+        isLoading: false, medias: result != null ? [result] : []);
   }
 }
