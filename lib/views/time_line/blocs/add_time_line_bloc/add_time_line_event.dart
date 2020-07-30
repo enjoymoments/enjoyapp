@@ -4,10 +4,10 @@ abstract class AddTimeLineEvent extends Equatable {
   const AddTimeLineEvent();
 }
 
-class OpenCameraEvent extends AddTimeLineEvent {
+class OpenMediaEvent extends AddTimeLineEvent {
   final ImageSource source;
 
-  OpenCameraEvent(this.source);
+  OpenMediaEvent(this.source);
 
   @override
   List<Object> get props => [

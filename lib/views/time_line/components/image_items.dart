@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_dialog.dart';
 
 class ImageItems extends StatelessWidget {
-  final File image;
-
-  //final JokeModel currentJoke;
-  //final ImageBloc imageBloc;
-  //final Function(List<JokeMediaModel>) saveJoke;
+  final List<File> images;
 
   const ImageItems({
     Key key,
-    this.image,
-    // @required this.currentJoke,
-    // @required this.imageBloc,
-    // @required this.saveJoke,
+    @required this.images,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _buildCardImage(context, image, null);
-    //return _buildImages(context);
+    if (images != null) {
+      return Wrap(
+        children: images.map<Widget>(
+          (image) {
+            return _buildCardImage(context, image, null);
+          },
+        ).toList(),
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 
   // Widget _buildImages(BuildContext context) {

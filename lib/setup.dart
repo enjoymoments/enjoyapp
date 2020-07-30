@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:mozin/modules/shared/image_picker_service.dart';
+import 'package:mozin/modules/shared/wrapper_media_service.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 
 GetIt getItInstance = GetIt.instance;
@@ -25,7 +25,7 @@ void _registerSingletonProviders() {
 }
 
 void _registerSingletonServices() {
-  getItInstance.registerLazySingleton<ImagePickerService>(() => ImagePickerService());
+  getItInstance.registerLazySingleton<WrapperMediaService>(() => WrapperMediaService());
 }
 
 void _registerBlocs() {

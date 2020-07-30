@@ -69,10 +69,10 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         }
         if (state.medias.length > 0) {
           return ImageItems(
-            image: state.medias[0],
+            images: state.medias,
           );
         }
-        return Text('test 2');
+        return SizedBox.shrink();
       },
     );
   }
@@ -86,7 +86,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _currentIndex = index;
         });
 
-        _addTimeLineBloc.add(OpenCameraEvent(
+        _addTimeLineBloc.add(OpenMediaEvent(
             index == 0 ? ImageSource.camera : ImageSource.gallery));
       },
       items: [
