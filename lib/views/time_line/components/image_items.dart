@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_dialog.dart';
+import 'package:vibration/vibration.dart';
 
 class ImageItems extends StatelessWidget {
   final List<File> images;
@@ -82,7 +83,11 @@ class ImageItems extends StatelessWidget {
     );
   }
 
-  void _removeMedia(BuildContext context, String imageUrl) {
+  void _removeMedia(BuildContext context, String imageUrl) async {
+    if (await Vibration.hasVibrator()) {
+      Vibration.vibrate();
+    }
+
     var content = Text('Tem certeza?');
 
     var actions = [
