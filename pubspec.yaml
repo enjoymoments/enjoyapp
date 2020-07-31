@@ -39,6 +39,8 @@ dependencies:
   file_picker: ^1.13.0+1
   image_picker: ^0.6.7+4
   vibration: ^1.4.0
+  photo_view: ^0.9.2
+  uuid: ^2.2.0
 
 dev_dependencies:
   flutter_test:

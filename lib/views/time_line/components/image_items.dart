@@ -1,12 +1,12 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/custom_dialog.dart';
-import 'package:vibration/vibration.dart';
+import 'package:mozin/modules/shared/galley_images/models/gallery_image_model.dart';
+import 'package:mozin/views/gallery_images/gallery_image_thumbnail.dart';
+import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
 
 class ImageItems extends StatelessWidget {
-  final List<File> images;
+  final List<GalleryImageModel> images;
 
-  const ImageItems({
+  ImageItems({
     Key key,
     @required this.images,
   }) : super(key: key);
@@ -17,13 +17,44 @@ class ImageItems extends StatelessWidget {
       return Wrap(
         children: images.map<Widget>(
           (image) {
-            return _buildCardImage(context, image, null);
+            return _buildCardImage(
+              context,
+              image,
+            );
           },
         ).toList(),
       );
     } else {
       return SizedBox.shrink();
     }
+  }
+
+  Widget _buildCardImage(
+    BuildContext context,
+    GalleryImageModel image,
+  ) {
+    return GalleryImageThumbnail(
+      galleryImageModel: image,
+      onTap: () {
+        open(context, image.index);
+      },
+    );
+  }
+
+  void open(BuildContext context, final int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GalleryPhotoViewWrapper(
+          galleryItems: images,
+          backgroundDecoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
+          ),
+          initialIndex: index,
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
   }
 
   // Widget _buildImages(BuildContext context) {
@@ -51,61 +82,4 @@ class ImageItems extends StatelessWidget {
   //     },
   //   );
   // }
-
-  Widget _buildCardImage(BuildContext context, File image, String imageUrl) {
-    return GestureDetector(
-      onLongPress: () {
-        _removeMedia(context, imageUrl);
-      },
-      child: Container(
-        height: 80,
-        child: Card(
-          semanticContainer: true,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Image.file(
-            image,
-            fit: BoxFit.fill,
-          ),
-          // CachedNetworkImage(
-          //   imageUrl: imageUrl,
-          //   fit: BoxFit.fill,
-          //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-          //       CircularProgressIndicator(value: downloadProgress.progress),
-          //   errorWidget: (context, url, error) => Icon(Icons.error),
-          // ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-        ),
-      ),
-    );
-  }
-
-  void _removeMedia(BuildContext context, String imageUrl) async {
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate();
-    }
-
-    var content = Text('Tem certeza?');
-
-    var actions = [
-      FlatButton(
-        child: Text('Não'),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ),
-      FlatButton(
-        child: Text('Sim'),
-        onPressed: () {
-          // imageBloc.add(RemoveMedia(imageUrl, currentJoke.medias, false));
-          Navigator.of(context).pop();
-        },
-      ),
-    ];
-
-    simpleDialog(context, 'Remover', content, true, actions);
-  }
 }

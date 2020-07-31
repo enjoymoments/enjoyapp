@@ -2,33 +2,33 @@ part of 'add_time_line_bloc.dart';
 
 class AddTimeLineState extends Equatable {
   final bool isLoading;
-  final List<File> medias;
+  final List<GalleryImageModel> images;
 
   AddTimeLineState({
     this.isLoading,
-    this.medias,
+    this.images,
   });
 
   factory AddTimeLineState.initial() {
     return AddTimeLineState(
       isLoading: false,
-      medias: List(),
+      images: List(),
     );
   }
 
   AddTimeLineState copyWith({
     bool isLoading,
-    List<File> medias,
+    List<GalleryImageModel> images,
   }) {
     return AddTimeLineState(
       isLoading: isLoading ?? this.isLoading,
-      medias: medias ?? this.medias,
+      images: images ?? this.images,
     );
   }
 
   @override
   List<Object> get props => [
         isLoading,
-        medias,
+        images,
       ];
 }

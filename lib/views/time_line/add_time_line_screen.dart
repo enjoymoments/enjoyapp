@@ -67,9 +67,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         if (state.isLoading) {
           return CustomCircularProgressIndicator();
         }
-        if (state.medias.length > 0) {
+        if (state.images.length > 0) {
           return ImageItems(
-            images: state.medias,
+            images: state.images,
           );
         }
         return SizedBox.shrink();

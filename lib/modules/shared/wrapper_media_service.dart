@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
 class WrapperMediaService {
-  Future<List<File>> getMedias({FileType fileType = FileType.media}) async {
+  Future<List<File>> getMedias({FileType fileType = FileType.image}) async {
     return await FilePicker.getMultiFile(
       type: fileType,
     );
