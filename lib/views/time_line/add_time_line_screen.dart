@@ -92,7 +92,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
       items: [
         BottomNavigationBarItem(
           icon: new Icon(Icons.camera_alt),
-          title: new Text('Camera'),
+          title: new Text('Câmera'),
         ),
         BottomNavigationBarItem(
           icon: new Icon(Icons.camera_roll),

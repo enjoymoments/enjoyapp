@@ -36,7 +36,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       var file = await wrapperMediaService.openCamera();
       images = file != null
           ? [
-              GalleryImageModel(id: uuidService.v4(), resource: file.path),
+              GalleryImageModel(id: uuidService.v4(), file: file),
             ]
           : [];
     } else if (event.source == ImageSource.gallery) {
@@ -54,8 +54,8 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       var item = files[i];
       galleryItems.add(GalleryImageModel(
         id: uuidService.v4(),
-        resource: item.path,
         index: i,
+        file: item,
       ));
     }
 

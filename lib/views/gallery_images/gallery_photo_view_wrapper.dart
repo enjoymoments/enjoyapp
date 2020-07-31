@@ -71,7 +71,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
               child: Text(
                 "Image ${currentIndex + 1}",
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 17.0,
                   decoration: null,
                 ),
@@ -86,7 +86,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
     final GalleryImageModel item = widget.galleryItems[index];
     return PhotoViewGalleryPageOptions(
-      imageProvider: AssetImage(item.resource),
+      imageProvider: FileImage(item.file),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 1.1,

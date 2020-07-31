@@ -27,8 +27,8 @@ class GalleryImageThumbnail extends StatelessWidget {
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Image.asset(
-                galleryImageModel.resource,
+              child: Image.file(
+                galleryImageModel.file,
                 fit: BoxFit.fill,
               ),
               // CachedNetworkImage(
