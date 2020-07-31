@@ -30,7 +30,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   Stream<AddTimeLineState> mapOpenCameratoState(OpenMediaEvent event) async* {
     yield state.copyWith(isLoading: true);
 
-    List<GalleryImageModel> images = [];
+    List<GalleryImageModel> images = state.images ?? [];
 
     if (event.source == ImageSource.camera) {
       var file = await wrapperMediaService.openCamera();
@@ -41,7 +41,9 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
           : [];
     } else if (event.source == ImageSource.gallery) {
       var files = await wrapperMediaService.getMedias();
-      images = _transformFilesToImages(files);
+      if (files != null) {
+        images = _transformFilesToImages(files);
+      }
     }
 
     yield state.copyWith(isLoading: false, images: images);
