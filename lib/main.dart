@@ -4,6 +4,7 @@ import 'package:mozin/theme.dart';
 import 'package:mozin/views/onboading.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(MyApp());
 }

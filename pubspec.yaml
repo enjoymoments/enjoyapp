@@ -41,6 +41,9 @@ dependencies:
   vibration: ^1.4.0
   photo_view: ^0.9.2
   uuid: ^2.2.0
+  device_info: ^0.4.2+4
+  hive: ^1.4.2
+  path_provider: any
 
 dev_dependencies:
   flutter_test:
