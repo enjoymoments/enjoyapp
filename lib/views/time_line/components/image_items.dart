@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/shared/galley_images/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/views/gallery_images/gallery_image_thumbnail.dart';
 import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
 

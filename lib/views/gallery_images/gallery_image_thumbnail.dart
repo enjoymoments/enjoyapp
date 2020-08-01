@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/shared/galley_images/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/views/shared/custom_dialog.dart';
 import 'package:vibration/vibration.dart';
 
@@ -52,7 +52,7 @@ class GalleryImageThumbnail extends StatelessWidget {
 
   void _removeMedia(BuildContext context) async {
     if (await Vibration.hasVibrator()) {
-      Vibration.vibrate();
+      Vibration.vibrate(duration: 250);
     }
 
     var content = Text('Tem certeza?');

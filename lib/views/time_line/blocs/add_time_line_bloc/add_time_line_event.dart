@@ -14,3 +14,14 @@ class OpenMediaEvent extends AddTimeLineEvent {
         source,
       ];
 }
+
+class SaveTimeLine extends AddTimeLineEvent {
+  final List<GalleryImageModel> images;
+
+  SaveTimeLine(this.images);
+
+  @override
+  List<Object> get props => [
+        images,
+      ];
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
 import 'package:mozin/views/shared/custom_container.dart';
@@ -17,9 +18,11 @@ class AddTimeLineScreen extends StatefulWidget {
 class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   AddTimeLineBloc _addTimeLineBloc;
   int _currentIndex = 0;
+  List<GalleryImageModel> _images;
 
   @override
   void initState() {
+    _images = [];
     _addTimeLineBloc = getItInstance<AddTimeLineBloc>();
     super.initState();
   }
@@ -41,7 +44,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.save),
-          onPressed: () {},
+          onPressed: () {
+            _addTimeLineBloc.add(SaveTimeLine(_images));
+          },
         ),
       ],
     );
@@ -68,6 +73,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           return CustomCircularProgressIndicator();
         }
         if (state.images.length > 0) {
+          _images = state.images;
           return ImageItems(
             images: state.images,
           );
