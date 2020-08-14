@@ -45,7 +45,10 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
   Stream<DefaultState> mapLogoutToState() async* {
     try {
       yield Loading();
+      
       await _authenticationRepository.logOut();
+      await resetInstances();
+
       yield LogoutSuccess();
     } catch (e) {
       yield Error(error: 'Ops');

@@ -54,8 +54,8 @@ void _registerBlocs() {
   getItInstance.registerLazySingleton<AddTimeLineBloc>(
       () => AddTimeLineBloc(getItInstance(), getItInstance(), getItInstance()));
 
-  getItInstance
-      .registerLazySingleton<AuthenticationBloc>(() => AuthenticationBloc(getItInstance()));
+  getItInstance.registerLazySingleton<AuthenticationBloc>(
+      () => AuthenticationBloc(getItInstance()));
 }
 
 void _registerSingletonRepositories() {
@@ -69,4 +69,10 @@ Future<LocalStorageService> _setupHive() async {
 
   final userBox = await Hive.openBox("user_box");
   return LocalStorageService(userBox);
+}
+
+Future<void> resetInstances() async {
+  getItInstance.reset();
+
+  await setup();
 }
