@@ -21,7 +21,6 @@ Future setup() async {
   getItInstance.registerSingleton(localstorage);
 
   _registerSingletonModels();
-  _registerSingletonProviders();
   _registerSingletonServices();
   _registerSingletonRepositories();
   _registerBlocs();
@@ -31,11 +30,6 @@ void _registerSingletonModels() {
   //TODO:mock
   UserModel userModel = new UserModel();
   getItInstance.registerSingleton(userModel);
-}
-
-void _registerSingletonProviders() {
-  // getItInstance
-  //     .registerLazySingleton<DatabaseProvider>(() => DatabaseProvider());
 }
 
 void _registerSingletonServices() {
