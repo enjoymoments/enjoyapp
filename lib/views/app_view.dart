@@ -28,37 +28,33 @@ class _AppViewState extends State<AppView> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: null,
       bottomNavigationBar: null,
-      child: BlocListener<AuthenticationBloc, DefaultState>(
+      child: BlocConsumer<AuthenticationBloc, DefaultState>(
         cubit: _authenticationBloc,
         listener: (context, state) {
-          if (state is Loading) {
-            return CustomCircularProgressIndicator();
-          }
-
           if (state is AuthenticationSuccess) {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => ScreenManager()),
-              (route) => false,
-            );
-            return ScreenManager();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => ScreenManager())
+                    //(route) => false,
+                    );
           }
 
           if (state is LogoutSuccess) {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (_) => LoginScreen(
-                        authenticationBloc: _authenticationBloc,
-                      )),
-              (route) => false,
-            );
-            return ScreenManager();
+            Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => LoginScreen(
+                          authenticationBloc: _authenticationBloc,
+                        ))
+                //(route) => false,
+                );
           }
-
-          return CustomCircularProgressIndicator();
         },
-        child: LoginScreen(
-          authenticationBloc: _authenticationBloc,
-        ),
+        builder: (BuildContext context, DefaultState state) {
+          if (state is Loading) {
+            return CustomCircularProgressIndicator();
+          }
+          return LoginScreen(
+            authenticationBloc: _authenticationBloc,
+          );
+        },
       ),
     );
   }
