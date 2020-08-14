@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/shared/models/user.dart';
+import 'package:mozin/setup.dart';
 import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
@@ -8,6 +10,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  User _user;
+
+  @override
+  void initState() {
+    _user = getItInstance<User>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -27,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Toque aqui para adicionar o dia 1',
+              'Olá,\n${_user.name}',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/models/user.dart';
+import 'package:mozin/setup.dart';
 import 'package:mozin/views/shared/bloc/default_state.dart';
 
 part 'login_event.dart';
@@ -31,6 +32,8 @@ class LoginBloc extends Bloc<LoginEvent, DefaultState> {
     try {
       await _authenticationRepository.logInWithGoogle();
       final _user = await _authenticationRepository.user.first;
+      getItInstance.registerSingleton(_user);
+
       yield LoginSuccess(_user);
     } catch (e) {
       yield Error(error: 'Ops');
