@@ -24,48 +24,49 @@ class _AppViewState extends State<AppView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: null,
-      bottomNavigationBar: null,
-      child: BlocConsumer<AuthenticationBloc, DefaultState>(
-        cubit: _authenticationBloc,
-        listener: (context, state) {
-          if (state is Error) {
-            Scaffold.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                const SnackBar(
-                    content: Text(
-                        'Ops... houve um erro ao tentar logar')),
+    return BlocConsumer<AuthenticationBloc, DefaultState>(
+      cubit: _authenticationBloc,
+      listener: (context, state) {
+        if (state is Error) {
+          Scaffold.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(
+                  content: Text('Ops... houve um erro ao tentar logar')),
+            );
+        }
+
+        if (state is AuthenticationSuccess) {
+          Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ScreenManager(
+                        authenticationBloc: _authenticationBloc,
+                      ))
+              //(route) => false,
               );
-          }
+        }
 
-          if (state is AuthenticationSuccess) {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => ScreenManager())
-                    //(route) => false,
-                    );
-          }
-
-          if (state is LogoutSuccess) {
-            Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => LoginScreen(
-                          authenticationBloc: _authenticationBloc,
-                        ))
-                //(route) => false,
-                );
-          }
-        },
-        builder: (BuildContext context, DefaultState state) {
-          if (state is Loading) {
-            return CustomCircularProgressIndicator();
-          }
-          return LoginScreen(
-            authenticationBloc: _authenticationBloc,
+        if (state is LogoutSuccess) {
+          Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => LoginScreen(
+                        authenticationBloc: _authenticationBloc,
+                      ))
+              //(route) => false,
+              );
+        }
+      },
+      builder: (BuildContext context, DefaultState state) {
+        if (state is Loading) {
+          return CustomScaffold(
+            backgroundColor: Theme.of(context).primaryColor,
+            appBar: null,
+            bottomNavigationBar: null,
+            child: CustomCircularProgressIndicator(),
           );
-        },
-      ),
+        }
+        return LoginScreen(
+          authenticationBloc: _authenticationBloc,
+        );
+      },
     );
   }
 }

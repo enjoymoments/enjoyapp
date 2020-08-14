@@ -9,13 +9,16 @@ import 'package:mozin/views/shared/spacer_box.dart';
 class LoginScreen extends StatefulWidget {
   final AuthenticationBloc authenticationBloc;
 
-  const LoginScreen({Key key, @required this.authenticationBloc}) : super(key: key);
+  const LoginScreen({
+    Key key,
+    @required this.authenticationBloc,
+  }) : super(key: key);
+  
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     return _buildBody();

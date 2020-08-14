@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/setup.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
 class MoreScreen extends StatefulWidget {
+  final AuthenticationBloc authenticationBloc;
+
+  const MoreScreen({
+    Key key,
+    @required this.authenticationBloc,
+  }) : super(key: key);
+
   @override
   _MoreScreenState createState() => _MoreScreenState();
 }
@@ -19,7 +25,7 @@ class _MoreScreenState extends State<MoreScreen> {
       child: InkWell(
         onTap: () {
           print('tocou');
-          getItInstance<AuthenticationBloc>().add(Logout());
+          widget.authenticationBloc.add(Logout());
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

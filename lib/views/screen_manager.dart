@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/home/home_screen.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/notifications/notifications_screen.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
@@ -9,6 +10,13 @@ import 'package:mozin/views/time_line/add_time_line_screen.dart';
 import 'package:mozin/views/time_line/time_line_screen.dart';
 
 class ScreenManager extends StatefulWidget {
+  final AuthenticationBloc authenticationBloc;
+
+  const ScreenManager({
+    Key key,
+    @required this.authenticationBloc,
+  }) : super(key: key);
+  
   @override
   _ScreenManagerState createState() => _ScreenManagerState();
 }
@@ -47,7 +55,9 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.NOTIFICATION:
         return NotificationsScreen();
       case DEFAULT_MENU_ENUM.MORE:
-        return MoreScreen();
+        return MoreScreen(
+          authenticationBloc: widget.authenticationBloc,
+        );
       case DEFAULT_MENU_ENUM.HOME:
       default:
         return HomeScreen();
