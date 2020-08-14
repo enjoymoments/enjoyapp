@@ -13,7 +13,7 @@ class GoogleLoginButton extends StatelessWidget {
     return RaisedButton.icon(
       key: const Key('loginForm_googleLogin_raisedButton'),
       label: const Text(
-        'SIGN IN WITH GOOGLE',
+        'ENTRAR COM GOOGLE',
         style: TextStyle(color: Colors.white),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
