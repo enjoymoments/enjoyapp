@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/login/bloc/login_bloc.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/login/login_screen.dart';
 import 'package:mozin/views/screen_manager.dart';
 import 'package:mozin/views/shared/bloc/default_state.dart';
@@ -14,11 +14,11 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-  LoginBloc _loginBloc;
+  AuthenticationBloc _authenticationBloc;
 
   @override
   void initState() {
-    _loginBloc = getItInstance<LoginBloc>();
+    _authenticationBloc = getItInstance<AuthenticationBloc>();
     super.initState();
   }
 
@@ -28,16 +28,27 @@ class _AppViewState extends State<AppView> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: null,
       bottomNavigationBar: null,
-      child: BlocListener<LoginBloc, DefaultState>(
-        cubit: _loginBloc,
+      child: BlocListener<AuthenticationBloc, DefaultState>(
+        cubit: _authenticationBloc,
         listener: (context, state) {
           if (state is Loading) {
             return CustomCircularProgressIndicator();
           }
 
-          if (state is LoginSuccess) {
+          if (state is AuthenticationSuccess) {
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (_) => ScreenManager()),
+              (route) => false,
+            );
+            return ScreenManager();
+          }
+
+          if (state is LogoutSuccess) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (_) => LoginScreen(
+                        authenticationBloc: _authenticationBloc,
+                      )),
               (route) => false,
             );
             return ScreenManager();
@@ -46,7 +57,7 @@ class _AppViewState extends State<AppView> {
           return CustomCircularProgressIndicator();
         },
         child: LoginScreen(
-          loginBloc: _loginBloc,
+          authenticationBloc: _authenticationBloc,
         ),
       ),
     );

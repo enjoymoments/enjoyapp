@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/login/bloc/login_bloc.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/login/widgets/google_login_button.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
@@ -7,9 +7,9 @@ import 'package:mozin/views/shared/custom_text_form_field.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
 class LoginScreen extends StatefulWidget {
-  final LoginBloc loginBloc;
+  final AuthenticationBloc authenticationBloc;
 
-  const LoginScreen({Key key, @required this.loginBloc}) : super(key: key);
+  const LoginScreen({Key key, @required this.authenticationBloc}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SpacerBox.v16,
             GoogleLoginButton(
-              loginBloc: widget.loginBloc,
+              authenticationBloc: widget.authenticationBloc,
             ),
           ],
         ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/setup.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -17,13 +19,14 @@ class _MoreScreenState extends State<MoreScreen> {
       child: InkWell(
         onTap: () {
           print('tocou');
+          getItInstance<AuthenticationBloc>().add(Logout());
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Mais',
+              'Toque para sair',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,

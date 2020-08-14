@@ -7,7 +7,7 @@ import 'package:mozin/modules/shared/services/device_info_service.dart';
 import 'package:mozin/modules/shared/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/services/user_service.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
-import 'package:mozin/views/login/bloc/login_bloc.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -55,7 +55,7 @@ void _registerBlocs() {
       () => AddTimeLineBloc(getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance
-      .registerLazySingleton<LoginBloc>(() => LoginBloc(getItInstance()));
+      .registerLazySingleton<AuthenticationBloc>(() => AuthenticationBloc(getItInstance()));
 }
 
 void _registerSingletonRepositories() {

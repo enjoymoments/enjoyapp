@@ -7,24 +7,27 @@ import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/shared/bloc/default_state.dart';
 
-part 'login_event.dart';
-part 'login_state.dart';
+part 'authentication_event.dart';
+part 'authentication_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, DefaultState> {
-  LoginBloc(this._authenticationRepository) : super(LoginInitial());
+class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
+  AuthenticationBloc(this._authenticationRepository)
+      : super(AuthenticationInitial());
 
   final AuthenticationRepository _authenticationRepository;
 
   @override
   Stream<DefaultState> mapEventToState(
-    LoginEvent event,
+    AuthenticationEvent event,
   ) async* {
     if (event is RequestGoogleLogin) {
-      yield* mapGoogleLoginToState(event);
+      yield* mapLogInWithGoogleToState(event);
+    } else if (event is Logout) {
+      yield* mapLogoutToState();
     }
   }
 
-  Stream<DefaultState> mapGoogleLoginToState(
+  Stream<DefaultState> mapLogInWithGoogleToState(
     RequestGoogleLogin event,
   ) async* {
     yield Loading();
@@ -34,7 +37,16 @@ class LoginBloc extends Bloc<LoginEvent, DefaultState> {
       final _user = await _authenticationRepository.user.first;
       getItInstance.registerSingleton(_user);
 
-      yield LoginSuccess(_user);
+      yield AuthenticationSuccess(_user);
+    } catch (e) {
+      yield Error(error: 'Ops');
+    }
+  }
+
+  Stream<DefaultState> mapLogoutToState() async* {
+    try {
+      await _authenticationRepository.logOut();
+      yield LogoutSuccess();
     } catch (e) {
       yield Error(error: 'Ops');
     }

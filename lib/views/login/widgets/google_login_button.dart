@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/login/bloc/login_bloc.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 
 class GoogleLoginButton extends StatelessWidget {
 
-  final LoginBloc loginBloc;
+  final AuthenticationBloc authenticationBloc;
 
-  const GoogleLoginButton({Key key, @required this.loginBloc}) : super(key: key);
+  const GoogleLoginButton({Key key, @required this.authenticationBloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class GoogleLoginButton extends StatelessWidget {
       icon: const Icon(Icons.access_alarm, color: Colors.white),
       color: theme.accentColor,
       onPressed: () {
-         loginBloc.add(RequestGoogleLogin());
+         authenticationBloc.add(RequestGoogleLogin());
       },
     );
   }
