@@ -31,6 +31,16 @@ class _AppViewState extends State<AppView> {
       child: BlocConsumer<AuthenticationBloc, DefaultState>(
         cubit: _authenticationBloc,
         listener: (context, state) {
+          if (state is Error) {
+            Scaffold.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(
+                    content: Text(
+                        'Ops... houve um erro ao tentar logar')),
+              );
+          }
+
           if (state is AuthenticationSuccess) {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (_) => ScreenManager())
