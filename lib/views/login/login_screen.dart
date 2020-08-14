@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/shared/repositories/authentication_repository.dart';
+import 'package:mozin/views/login/bloc/login_bloc.dart';
+import 'package:mozin/views/login/widgets/google_login_button.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/custom_text_form_field.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
-//TODO:in development
-
 class LoginScreen extends StatefulWidget {
+  final LoginBloc loginBloc;
+
+  const LoginScreen({Key key, @required this.loginBloc}) : super(key: key);
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -61,32 +64,12 @@ class _LoginScreenState extends State<LoginScreen> {
               validate: (String value) {},
             ),
             SpacerBox.v16,
-            _GoogleLoginButton(),
+            GoogleLoginButton(
+              loginBloc: widget.loginBloc,
+            ),
           ],
         ),
       ),
-    );
-  }
-}
-
-//TODO: in development
-class _GoogleLoginButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return RaisedButton.icon(
-      key: const Key('loginForm_googleLogin_raisedButton'),
-      label: const Text(
-        'SIGN IN WITH GOOGLE',
-        style: TextStyle(color: Colors.white),
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      icon: const Icon(Icons.access_alarm, color: Colors.white),
-      color: theme.accentColor,
-      onPressed: () {
-        AuthenticationRepository authenticationRepository = AuthenticationRepository();
-        authenticationRepository.logInWithGoogle();
-      },
     );
   }
 }
