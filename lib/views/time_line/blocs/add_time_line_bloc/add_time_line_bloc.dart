@@ -4,9 +4,13 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mozin/modules/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
+import 'package:mozin/modules/time_line/models/media_model.dart';
+import 'package:mozin/modules/time_line/models/time_line_model.dart';
+import 'package:mozin/modules/time_line/services/time_line_service.dart';
+import 'package:mozin/views/time_line/blocs/upload_image/upload_image_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_time_line_event.dart';
@@ -14,12 +18,18 @@ part 'add_time_line_state.dart';
 
 class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   AddTimeLineBloc(
-      this.wrapperMediaService, this.uuidService, this.firebaseStorageService)
-      : super(AddTimeLineState.initial());
+    this.wrapperMediaService,
+    this.uuidService,
+    this.user,
+    this.uploadImageBloc,
+    this.timeLineService,
+  ) : super(AddTimeLineState.initial());
 
   final WrapperMediaService wrapperMediaService;
-  final FirebaseStorageService firebaseStorageService;
   final Uuid uuidService;
+  final User user;
+  final UploadImageBloc uploadImageBloc;
+  final TimeLineService timeLineService;
 
   @override
   Stream<AddTimeLineState> mapEventToState(
@@ -36,7 +46,11 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      _updateImages(event.images);
+      final urls = await this.uploadImageBloc.uploadGalleryImages(event.images);
+
+      final transform = _transformTimeLineModel(urls);
+      await this.timeLineService.addTimeLineItem(this.user.id, transform);
+
       yield state.copyWith(isLoading: false, isSuccess: true);
     } catch (e) {
       yield state.copyWith(isLoading: false, isFailure: true);
@@ -65,10 +79,6 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     yield state.copyWith(isLoading: false, images: images);
   }
 
-  void _updateImages(List<GalleryImageModel> images) {
-    firebaseStorageService.uploadFile('userIdentifier', images[0].file);
-  }
-
   List<GalleryImageModel> _transformFilesToImages(List<File> files) {
     final List<GalleryImageModel> galleryItems = [];
 
@@ -82,5 +92,15 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     }
 
     return galleryItems;
+  }
+
+  TimeLineItemModel _transformTimeLineModel(List<String> urls) {
+    final timeLineItemModel = TimeLineItemModel(medias: []);
+
+    urls.map((e) {
+      timeLineItemModel.medias.add(MediaModel(type: 1, url: e));
+    });
+
+    return timeLineItemModel;
   }
 }

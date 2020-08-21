@@ -32,6 +32,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
   ) async* {
     try {
       yield Loading();
+
       await _authenticationRepository.logInWithGoogle();
       final _user = await _authenticationRepository.user.first;
       getItInstance.registerSingleton(_user);
@@ -45,7 +46,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
   Stream<DefaultState> mapLogoutToState() async* {
     try {
       yield Loading();
-      
+
       await _authenticationRepository.logOut();
       await resetInstances();
 

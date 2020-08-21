@@ -2,13 +2,15 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/firebase/firebase_storage_service.dart';
-import 'package:mozin/modules/shared/models/user_model.dart';
+import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/modules/shared/services/device_info_service.dart';
 import 'package:mozin/modules/shared/services/local_storage_service.dart';
-import 'package:mozin/modules/shared/services/user_service.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
+import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
+import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
+import 'package:mozin/views/time_line/blocs/upload_image/upload_image_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -27,9 +29,7 @@ Future setup() async {
 }
 
 void _registerSingletonModels() {
-  //TODO:mock
-  UserModel userModel = new UserModel();
-  getItInstance.registerSingleton(userModel);
+  getItInstance.registerSingleton(User(id: '', email: '', name: '', photo: ''));
 }
 
 void _registerSingletonServices() {
@@ -40,13 +40,15 @@ void _registerSingletonServices() {
       () => FirebaseStorageService());
   getItInstance
       .registerLazySingleton<DeviceInfoService>(() => DeviceInfoService());
-  getItInstance.registerLazySingleton<UserService>(
-      () => UserService(getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<TimeLineService>(() => TimeLineService(getItInstance()));
 }
 
 void _registerBlocs() {
-  getItInstance.registerLazySingleton<AddTimeLineBloc>(
-      () => AddTimeLineBloc(getItInstance(), getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<UploadImageBloc>(
+      () => UploadImageBloc(getItInstance(), getItInstance()));
+
+  getItInstance.registerLazySingleton<AddTimeLineBloc>(() => AddTimeLineBloc(
+      getItInstance(), getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(
       () => AuthenticationBloc(getItInstance()));
@@ -55,6 +57,9 @@ void _registerBlocs() {
 void _registerSingletonRepositories() {
   getItInstance.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepository());
+
+  getItInstance
+      .registerLazySingleton<TimeLineRepository>(() => TimeLineRepository());
 }
 
 Future<LocalStorageService> _setupHive() async {
