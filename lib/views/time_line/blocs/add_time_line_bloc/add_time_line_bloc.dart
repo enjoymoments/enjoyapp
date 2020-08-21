@@ -97,9 +97,9 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   TimeLineItemModel _transformTimeLineModel(List<String> urls) {
     final timeLineItemModel = TimeLineItemModel(medias: []);
 
-    urls.map((e) {
-      timeLineItemModel.medias.add(MediaModel(type: 1, url: e));
-    });
+    for (var item in urls) {
+      timeLineItemModel.medias.add(MediaModel(type: 1, url: item));
+    }
 
     return timeLineItemModel;
   }

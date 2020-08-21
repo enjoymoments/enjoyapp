@@ -38,7 +38,7 @@ class UploadImageBloc extends Bloc<UploadImageEvent, UploadImageState> {
       );
     }
 
-    Future.wait(_listFutures);
+    await Future.wait(_listFutures);
 
     return _listUrls;
   }
