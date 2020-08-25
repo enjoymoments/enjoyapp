@@ -30,9 +30,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      child: SingleChildScrollView(
-        child: _buildBody(),
-      ),
+      child: _buildBody(),
       appBar: _buildAppBar(),
       bottomNavigationBar: _buildBottomMenu(),
     );
@@ -86,14 +84,16 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   }
 
   Widget _buildContent(Widget images) {
-    return CustomContainer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          "Selecione suas fotos".label(context),
-          images,
-        ],
+    return SingleChildScrollView(
+      child: CustomContainer(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            "Selecione suas fotos".label(context),
+            images,
+          ],
+        ),
       ),
     );
   }
