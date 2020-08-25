@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/constants.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
@@ -49,7 +50,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       final urls = await this.uploadImageBloc.uploadGalleryImages(event.images);
 
       final transform = _transformTimeLineModel(urls);
-      await this.timeLineService.addTimeLineItem('tQTtQIC2rjpysVLeSvGv',transform);
+      await this.timeLineService.addTimeLineItem(temp_time_line,transform);
 
       yield state.copyWith(isLoading: false, isSuccess: true);
     } catch (e) {
