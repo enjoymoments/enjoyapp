@@ -28,6 +28,12 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   }
 
   @override
+  void dispose() {
+    _addTimeLineBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),

@@ -44,10 +44,10 @@ void _registerSingletonServices() {
 }
 
 void _registerBlocs() {
-  getItInstance.registerLazySingleton<UploadImageBloc>(
+  getItInstance.registerFactory<UploadImageBloc>(
       () => UploadImageBloc(getItInstance(), getItInstance()));
 
-  getItInstance.registerLazySingleton<AddTimeLineBloc>(() => AddTimeLineBloc(
+  getItInstance.registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(
       getItInstance(), getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(
