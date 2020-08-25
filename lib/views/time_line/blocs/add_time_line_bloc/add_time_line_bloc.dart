@@ -49,7 +49,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       final urls = await this.uploadImageBloc.uploadGalleryImages(event.images);
 
       final transform = _transformTimeLineModel(urls);
-      await this.timeLineService.addTimeLineItem(this.user.id, transform);
+      await this.timeLineService.addTimeLineItem('tQTtQIC2rjpysVLeSvGv',transform);
 
       yield state.copyWith(isLoading: false, isSuccess: true);
     } catch (e) {
@@ -64,11 +64,11 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
 
     if (event.source == ImageSource.camera) {
       var file = await wrapperMediaService.openCamera();
-      images = file != null
-          ? [
-              GalleryImageModel(id: uuidService.v4(), file: file, index: 0),
-            ]
-          : [];
+      if (file != null) {
+        images = [
+          GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
+        ];
+      }
     } else if (event.source == ImageSource.gallery) {
       var files = await wrapperMediaService.getMedias();
       if (files != null) {

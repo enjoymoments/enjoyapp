@@ -8,7 +8,7 @@ class TimeLineService implements TimeLineInterface {
   TimeLineService(this.timeLineRepository);
 
   @override
-  Future<String> addTimeLineItem(String userIdentifier, TimeLineItemModel model) {
-    return timeLineRepository.addTimeLineItem(userIdentifier, model);
+  Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model) {
+    return timeLineRepository.addTimeLineItem(timelineID, model);
   }
 }
