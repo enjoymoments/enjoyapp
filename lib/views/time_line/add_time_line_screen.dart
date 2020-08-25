@@ -53,33 +53,48 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   }
 
   Widget _buildBody() {
+    return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
+      cubit: _addTimeLineBloc,
+      listener: (context, state) {
+        if (state.isFailure) {
+          context.showSnackBar('Ops, houve um erro. Tente novamente');
+        }
+
+        if (state.isSuccess) {
+          Navigator.of(context).pop();
+        }
+      },
+      builder: (context, state) {
+        if (state.isLoading) {
+          return CustomCircularProgressIndicator();
+        }
+
+        if (state.images.length > 0) {
+          _images = state.images;
+          return _buildContent(
+            ImageItems(
+              images: state.images,
+            ),
+          );
+        }
+
+        return _buildContent(
+          SizedBox.shrink(),
+        );
+      },
+    );
+  }
+
+  Widget _buildContent(Widget images) {
     return CustomContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           "Selecione suas fotos".label(context),
-          _buildImages(),
+          images,
         ],
       ),
-    );
-  }
-
-  Widget _buildImages() {
-    return BlocBuilder<AddTimeLineBloc, AddTimeLineState>(
-      cubit: _addTimeLineBloc,
-      builder: (context, state) {
-        if (state.isLoading) {
-          return CustomCircularProgressIndicator();
-        }
-        if (state.images.length > 0) {
-          _images = state.images;
-          return ImageItems(
-            images: state.images,
-          );
-        }
-        return SizedBox.shrink();
-      },
     );
   }
 
@@ -92,8 +107,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _currentIndex = index;
         });
 
-        _addTimeLineBloc.add(OpenMediaEvent(
-            index == 0 ? ImageSource.camera : ImageSource.gallery));
+        _addTimeLineBloc.add(OpenMediaEvent(ImageSource.values[index]));
       },
       items: [
         BottomNavigationBarItem(
