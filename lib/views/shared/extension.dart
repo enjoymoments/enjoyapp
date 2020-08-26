@@ -1,6 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+extension Snackbar on BuildContext {
+  void showSnackBar(String message) {
+    Scaffold.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+  }
+}
+
 extension Texts on String {
   Widget description(BuildContext context,
           {double fontSize = 14,

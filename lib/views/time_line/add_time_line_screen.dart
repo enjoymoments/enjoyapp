@@ -59,9 +59,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   Widget _buildBody() {
     return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
       cubit: _addTimeLineBloc,
-      listener: (context, state) {
+      listener: (consumerContext, state) {
         if (state.isFailure) {
-          context.showSnackBar('Ops, houve um erro. Tente novamente');
+          consumerContext.showSnackBar('Ops, houve um erro. Tente novamente');
         }
 
         if (state.isSuccess) {
