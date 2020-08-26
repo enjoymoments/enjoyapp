@@ -8,6 +8,7 @@ import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/extension.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
+import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/views/time_line/components/image_items.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
@@ -65,6 +66,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         }
 
         if (state.isSuccess) {
+          getItInstance<TimelineBloc>()..add(LoadPosts());
           Navigator.of(context).pop();
         }
       },
