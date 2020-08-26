@@ -1,4 +1,5 @@
 import 'package:mozin/modules/firebase/firebase_instance_provider.dart';
+import 'package:mozin/modules/time_line/entities/time_line_item_entity.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 
 class TimeLineRepository {
@@ -18,6 +19,25 @@ class TimeLineRepository {
 
       await document.setData(map);
       return Future.value(document.documentID);
+    } catch (error) {
+      return Future.value(null);
+    }
+  }
+
+  Future<List<TimeLineItemModel>> getPosts(String timelineID) async {
+    try {
+      var collection = _instance.firestore
+          .document('$_collectionRoot/$timelineID')
+          .collection('posts');
+
+      var result = await collection.getDocuments();
+
+      return result.documents.map(
+        (item) {
+          return TimeLineItemModel.fromEntity(
+              TimeLineItemEntity.fromSnapshot(item));
+        },
+      ).toList();
     } catch (error) {
       return Future.value(null);
     }

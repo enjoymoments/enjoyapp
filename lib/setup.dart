@@ -10,6 +10,7 @@ import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
+import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/views/time_line/blocs/upload_image/upload_image_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -40,7 +41,8 @@ void _registerSingletonServices() {
       () => FirebaseStorageService());
   getItInstance
       .registerLazySingleton<DeviceInfoService>(() => DeviceInfoService());
-  getItInstance.registerLazySingleton<TimeLineService>(() => TimeLineService(getItInstance()));
+  getItInstance.registerLazySingleton<TimeLineService>(
+      () => TimeLineService(getItInstance()));
 }
 
 void _registerBlocs() {
@@ -48,10 +50,17 @@ void _registerBlocs() {
       () => UploadImageBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(
-      getItInstance(), getItInstance(), getItInstance(), getItInstance(), getItInstance()));
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(
       () => AuthenticationBloc(getItInstance()));
+
+  getItInstance
+      .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
 }
 
 void _registerSingletonRepositories() {

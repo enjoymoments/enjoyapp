@@ -11,4 +11,9 @@ class TimeLineService implements TimeLineInterface {
   Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model) {
     return timeLineRepository.addTimeLineItem(timelineID, model);
   }
+
+  @override
+  Future<List<TimeLineItemModel>> getPosts(String timelineID) {
+    return timeLineRepository.getPosts(timelineID);
+  }
 }
