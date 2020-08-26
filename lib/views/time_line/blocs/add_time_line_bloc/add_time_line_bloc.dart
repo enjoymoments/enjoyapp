@@ -50,7 +50,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       final urls = await this.uploadImageBloc.uploadGalleryImages(event.images);
 
       final transform = _transformTimeLineModel(urls);
-      await this.timeLineService.addTimeLineItem(temp_time_line,transform);
+      await this.timeLineService.addTimeLineItem(temp_time_line, transform);
 
       yield state.copyWith(isLoading: false, isSuccess: true);
     } catch (e) {
@@ -61,23 +61,27 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   Stream<AddTimeLineState> mapOpenCameraToState(OpenMediaEvent event) async* {
     yield state.copyWith(isLoading: true);
 
-    List<GalleryImageModel> images = state.images ?? [];
+    try {
+      List<GalleryImageModel> images = state.images ?? [];
 
-    if (event.source == ImageSource.camera) {
-      var file = await wrapperMediaService.openCamera();
-      if (file != null) {
-        images = [
-          GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
-        ];
+      if (event.source == ImageSource.camera) {
+        var file = await wrapperMediaService.openCamera();
+        if (file != null) {
+          images = [
+            GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
+          ];
+        }
+      } else if (event.source == ImageSource.gallery) {
+        var files = await wrapperMediaService.getMedias();
+        if (files != null) {
+          images = _transformFilesToImages(files);
+        }
       }
-    } else if (event.source == ImageSource.gallery) {
-      var files = await wrapperMediaService.getMedias();
-      if (files != null) {
-        images = _transformFilesToImages(files);
-      }
+
+      yield state.copyWith(isLoading: false, images: images);
+    } catch (e) {
+      yield state.copyWith(isLoading: false, isFailure: true);
     }
-
-    yield state.copyWith(isLoading: false, images: images);
   }
 
   List<GalleryImageModel> _transformFilesToImages(List<File> files) {

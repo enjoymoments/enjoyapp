@@ -8,38 +8,30 @@ class TimeLineRepository {
 
   Future<String> addTimeLineItem(
       String timelineID, TimeLineItemModel model) async {
-    try {
-      var document = _instance.firestore
-          .document('$_collectionRoot/$timelineID')
-          .collection('posts')
-          .document();
+    var document = _instance.firestore
+        .document('$_collectionRoot/$timelineID')
+        .collection('posts')
+        .document();
 
-      var map = model.toJson();
-      map['dateCreation'] = DateTime.now();
+    var map = model.toJson();
+    map['dateCreation'] = DateTime.now();
 
-      await document.setData(map);
-      return Future.value(document.documentID);
-    } catch (error) {
-      return Future.value(null);
-    }
+    await document.setData(map);
+    return Future.value(document.documentID);
   }
 
   Future<List<TimeLineItemModel>> getPosts(String timelineID) async {
-    try {
-      var collection = _instance.firestore
-          .document('$_collectionRoot/$timelineID')
-          .collection('posts');
+    var collection = _instance.firestore
+        .document('$_collectionRoot/$timelineID')
+        .collection('posts');
 
-      var result = await collection.getDocuments();
+    var result = await collection.getDocuments();
 
-      return result.documents.map(
-        (item) {
-          return TimeLineItemModel.fromEntity(
-              TimeLineItemEntity.fromSnapshot(item));
-        },
-      ).toList();
-    } catch (error) {
-      return Future.value(null);
-    }
+    return result.documents.map(
+      (item) {
+        return TimeLineItemModel.fromEntity(
+            TimeLineItemEntity.fromSnapshot(item));
+      },
+    ).toList();
   }
 }

@@ -9,11 +9,19 @@ class TimeLineService implements TimeLineInterface {
 
   @override
   Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model) {
-    return timeLineRepository.addTimeLineItem(timelineID, model);
+    try {
+      return timeLineRepository.addTimeLineItem(timelineID, model);
+    } catch (e) {
+      return Future.value(null);
+    }
   }
 
   @override
   Future<List<TimeLineItemModel>> getPosts(String timelineID) {
-    return timeLineRepository.getPosts(timelineID);
+    try {
+      return timeLineRepository.getPosts(timelineID);
+    } catch (e) {
+      return Future.value(null);
+    }
   }
 }
