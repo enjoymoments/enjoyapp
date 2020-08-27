@@ -4,7 +4,7 @@ import 'package:mozin/setup.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/login/login_screen.dart';
 import 'package:mozin/views/screen_manager.dart';
-import 'package:mozin/views/shared/bloc/default_state.dart';
+import 'package:mozin/views/shared/blocs/default_state.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 

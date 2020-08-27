@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/shared/bloc/default_state.dart';
+import 'package:mozin/views/shared/blocs/default_state.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

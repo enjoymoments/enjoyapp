@@ -9,9 +9,9 @@ import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
 import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
-import 'package:mozin/views/time_line/blocs/upload_image/upload_image_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -46,21 +46,17 @@ void _registerSingletonServices() {
 }
 
 void _registerBlocs() {
-  getItInstance.registerFactory<UploadImageBloc>(
-      () => UploadImageBloc(getItInstance(), getItInstance()));
-
-  getItInstance.registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(
-      getItInstance(),
-      getItInstance(),
-      getItInstance(),
-      getItInstance(),
-      getItInstance()));
+  getItInstance.registerFactory<AddTimeLineBloc>(
+      () => AddTimeLineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(
       () => AuthenticationBloc(getItInstance()));
 
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
+
+  getItInstance.registerLazySingleton<QueuePostBloc>(
+      () => QueuePostBloc(getItInstance(), getItInstance(), getItInstance()));
 }
 
 void _registerSingletonRepositories() {

@@ -4,15 +4,10 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mozin/constants.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
-import 'package:mozin/modules/shared/models/key_value.dart';
-import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
-import 'package:mozin/modules/time_line/models/media_model.dart';
-import 'package:mozin/modules/time_line/models/time_line_model.dart';
-import 'package:mozin/modules/time_line/services/time_line_service.dart';
-import 'package:mozin/views/time_line/blocs/upload_image/upload_image_bloc.dart';
+import 'package:mozin/setup.dart';
+import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_time_line_event.dart';
@@ -22,16 +17,10 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   AddTimeLineBloc(
     this.wrapperMediaService,
     this.uuidService,
-    this.user,
-    this.uploadImageBloc,
-    this.timeLineService,
   ) : super(AddTimeLineState.initial());
 
   final WrapperMediaService wrapperMediaService;
   final Uuid uuidService;
-  final User user;
-  final UploadImageBloc uploadImageBloc;
-  final TimeLineService timeLineService;
 
   @override
   Stream<AddTimeLineState> mapEventToState(
@@ -45,18 +34,8 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   }
 
   Stream<AddTimeLineState> mapSaveToState(SaveTimeLine event) async* {
-    yield state.copyWith(isLoading: true);
-
-    try {
-      final keyValues = await this.uploadImageBloc.uploadGalleryImages(event.images);
-
-      final transform = _transformTimeLineModel(keyValues);
-      await this.timeLineService.addTimeLineItem(temp_time_line, transform);
-
-      yield state.copyWith(isLoading: false, isSuccess: true);
-    } catch (e) {
-      yield state.copyWith(isLoading: false, isFailure: true);
-    }
+    getItInstance<QueuePostBloc>()..add(QueueNewPost(event.images));
+    yield state.copyWith(isLoading: false, isSuccess: true);
   }
 
   Stream<AddTimeLineState> mapOpenCameraToState(OpenMediaEvent event) async* {
@@ -98,15 +77,5 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     }
 
     return galleryItems;
-  }
-
-  TimeLineItemModel _transformTimeLineModel(List<KeyValue<String, String>> keyValues) {
-    final timeLineItemModel = TimeLineItemModel(medias: []);
-
-    for (var item in keyValues) {
-      timeLineItemModel.medias.add(MediaModel(id:item.key, type: 1, url: item.value));
-    }
-
-    return timeLineItemModel;
   }
 }

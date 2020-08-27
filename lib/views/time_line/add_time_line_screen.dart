@@ -50,7 +50,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         IconButton(
           icon: Icon(Icons.save),
           onPressed: () {
-            _addTimeLineBloc.add(SaveTimeLine(_images));
+            if (_images.length > 0) {
+              _addTimeLineBloc.add(SaveTimeLine(_images));
+            }
           },
         ),
       ],
