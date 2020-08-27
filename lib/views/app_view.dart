@@ -35,24 +35,6 @@ class _AppViewState extends State<AppView> {
                   content: Text('Ops... houve um erro ao tentar logar')),
             );
         }
-
-        if (state is AuthenticationSuccess) {
-          Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ScreenManager(
-                        authenticationBloc: _authenticationBloc,
-                      ))
-              //(route) => false,
-              );
-        }
-
-        if (state is LogoutSuccess) {
-          Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => LoginScreen(
-                        authenticationBloc: _authenticationBloc,
-                      ))
-              //(route) => false,
-              );
-        }
       },
       builder: (BuildContext context, DefaultState state) {
         if (state is Loading) {
@@ -63,6 +45,13 @@ class _AppViewState extends State<AppView> {
             child: CustomCircularProgressIndicator(),
           );
         }
+
+        if (state is AuthenticationSuccess) {
+          return ScreenManager(
+            authenticationBloc: _authenticationBloc,
+          );
+        }
+
         return LoginScreen(
           authenticationBloc: _authenticationBloc,
         );
