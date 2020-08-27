@@ -19,12 +19,7 @@ class TimeLineItemModel {
 
   List<Map<String, dynamic>> _toJsonMedias() {
     return medias.map<Map<String, dynamic>>(
-      (item) {
-        return {
-          'type': item.type,
-          'url': item.url,
-        };
-      },
+      (item) => item.toJson()
     ).toList();
   }
 

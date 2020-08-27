@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mozin/constants.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/models/key_value.dart';
 import 'package:mozin/modules/shared/models/user.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
 import 'package:mozin/modules/time_line/models/media_model.dart';
@@ -47,9 +48,9 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      final urls = await this.uploadImageBloc.uploadGalleryImages(event.images);
+      final keyValues = await this.uploadImageBloc.uploadGalleryImages(event.images);
 
-      final transform = _transformTimeLineModel(urls);
+      final transform = _transformTimeLineModel(keyValues);
       await this.timeLineService.addTimeLineItem(temp_time_line, transform);
 
       yield state.copyWith(isLoading: false, isSuccess: true);
@@ -99,11 +100,11 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     return galleryItems;
   }
 
-  TimeLineItemModel _transformTimeLineModel(List<String> urls) {
+  TimeLineItemModel _transformTimeLineModel(List<KeyValue<String, String>> keyValues) {
     final timeLineItemModel = TimeLineItemModel(medias: []);
 
-    for (var item in urls) {
-      timeLineItemModel.medias.add(MediaModel(type: 1, url: item));
+    for (var item in keyValues) {
+      timeLineItemModel.medias.add(MediaModel(id:item.key, type: 1, url: item.value));
     }
 
     return timeLineItemModel;

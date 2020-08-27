@@ -1,24 +1,23 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart' as Path;
 
 class FirebaseStorageService {
-  Future<dynamic> uploadFile(String userIdentifier, File image) async {
+  Future<dynamic> uploadFile(String userIdentifier, File file, String fileName) async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('users/$userIdentifier/${Path.basename(image.path)}');
+        .child('users/$userIdentifier/$fileName');
 
-    StorageUploadTask uploadTask = storageReference.putFile(image);
+    StorageUploadTask uploadTask = storageReference.putFile(file);
 
     await uploadTask.onComplete;
 
     return storageReference.getDownloadURL();
   }
 
-  Future<void> removeFile(String userIdentifier, String imageName) async {
+  Future<void> removeFile(String userIdentifier, String fileName) async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('users/$userIdentifier/$imageName');
+        .child('users/$userIdentifier/$fileName');
 
     storageReference.delete();
   }
