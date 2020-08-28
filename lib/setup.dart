@@ -8,6 +8,8 @@ import 'package:mozin/modules/shared/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
 import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
+import 'package:mozin/modules/user/repositories/user_repository.dart';
+import 'package:mozin/modules/user/services/user_service.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
@@ -30,7 +32,8 @@ Future setup() async {
 }
 
 void _registerSingletonModels() {
-  getItInstance.registerSingleton(UserAppModel(id: '', email: '', name: '', photo: ''));
+  getItInstance
+      .registerSingleton(UserAppModel(id: '', email: '', name: '', photo: ''));
 }
 
 void _registerSingletonServices() {
@@ -43,6 +46,9 @@ void _registerSingletonServices() {
       .registerLazySingleton<DeviceInfoService>(() => DeviceInfoService());
   getItInstance.registerLazySingleton<TimeLineService>(
       () => TimeLineService(getItInstance()));
+
+  getItInstance
+      .registerLazySingleton<UserService>(() => UserService(getItInstance()));
 }
 
 void _registerBlocs() {
@@ -50,7 +56,7 @@ void _registerBlocs() {
       () => AddTimeLineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(
-      () => AuthenticationBloc(getItInstance()));
+      () => AuthenticationBloc(getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
@@ -65,6 +71,8 @@ void _registerSingletonRepositories() {
 
   getItInstance
       .registerLazySingleton<TimeLineRepository>(() => TimeLineRepository());
+
+  getItInstance.registerLazySingleton<UserRepository>(() => UserRepository());
 }
 
 Future<LocalStorageService> _setupHive() async {

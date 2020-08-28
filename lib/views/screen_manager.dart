@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/push_notification_config.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
@@ -34,7 +33,6 @@ class _ScreenManagerState extends State<ScreenManager> {
   @override
   void initState() {
     _queuePostBloc = getItInstance<QueuePostBloc>();
-    _setConfigPushNotificationAsync();
     super.initState();
   }
 
@@ -108,18 +106,6 @@ class _ScreenManagerState extends State<ScreenManager> {
         return 'Notificação';
       case DEFAULT_MENU_ENUM.MORE:
         return 'Mais';
-    }
-  }
-
-  //TODO:review
-  void _setConfigPushNotificationAsync() async {
-    try {
-      PushNotificationConfig _pushNoficationConfig = PushNotificationConfig();
-      var token = await _pushNoficationConfig.configureAsync();
-
-      print('TOKEN: ' + token);
-    } catch (e) {
-      print(e);
     }
   }
 }
