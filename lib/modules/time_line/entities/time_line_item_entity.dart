@@ -10,8 +10,8 @@ class TimeLineItemEntity extends Equatable {
 
   static TimeLineItemEntity fromSnapshot(DocumentSnapshot snap) {
     return TimeLineItemEntity(
-      snap.data['dateCreation'] != null ? DateTime.parse(snap.data['dateCreation'].toDate().toString()) : null,
-      _toEntity(snap.data['medias']),
+      snap.data()['dateCreation'] != null ? DateTime.parse(snap.data()['dateCreation'].toDate().toString()) : null,
+      _toEntity(snap.data()['medias']),
     );
   }
 

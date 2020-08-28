@@ -6,7 +6,7 @@ import 'package:mozin/constants.dart';
 import 'package:mozin/modules/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/models/key_value.dart';
-import 'package:mozin/modules/shared/models/user.dart';
+import 'package:mozin/modules/shared/models/user_app_model.dart';
 import 'package:mozin/modules/time_line/models/media_model.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
@@ -23,7 +23,7 @@ class QueuePostBloc extends Bloc<QueuePostEvent, QueuePostState> {
 
   final TimeLineService timeLineService;
   final FirebaseStorageService firebaseStorageService;
-  final User user;
+  final UserAppModel user;
 
   @override
   Stream<QueuePostState> mapEventToState(

@@ -9,25 +9,25 @@ class TimeLineRepository {
   Future<String> addTimeLineItem(
       String timelineID, TimeLineItemModel model) async {
     var document = _instance.firestore
-        .document('$_collectionRoot/$timelineID')
+        .doc('$_collectionRoot/$timelineID')
         .collection('posts')
-        .document();
+        .doc();
 
     var map = model.toJson();
     map['dateCreation'] = DateTime.now();
 
-    await document.setData(map);
-    return Future.value(document.documentID);
+    await document.set(map);
+    return Future.value(document.id);
   }
 
   Future<List<TimeLineItemModel>> getPosts(String timelineID) async {
     var collection = _instance.firestore
-        .document('$_collectionRoot/$timelineID')
+        .doc('$_collectionRoot/$timelineID')
         .collection('posts');
 
-    var result = await collection.getDocuments();
+    var result = await collection.get();
 
-    return result.documents.map(
+    return result.docs.map(
       (item) {
         return TimeLineItemModel.fromEntity(
             TimeLineItemEntity.fromSnapshot(item));

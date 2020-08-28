@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mozin/modules/shared/models/user.dart';
+import 'package:mozin/modules/shared/models/user_app_model.dart';
 
-extension user on FirebaseUser {
-  User get toUser {
-    return User(id: uid, email: email, name: displayName, photo: photoUrl);
+extension user on User {
+  UserAppModel get toUser {
+    return UserAppModel(id: uid, email: email, name: displayName, photo: photoURL);
   }
 }

@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/firebase/firebase_storage_service.dart';
-import 'package:mozin/modules/shared/models/user.dart';
+import 'package:mozin/modules/shared/models/user_app_model.dart';
 import 'package:mozin/modules/shared/services/device_info_service.dart';
 import 'package:mozin/modules/shared/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
@@ -30,7 +30,7 @@ Future setup() async {
 }
 
 void _registerSingletonModels() {
-  getItInstance.registerSingleton(User(id: '', email: '', name: '', photo: ''));
+  getItInstance.registerSingleton(UserAppModel(id: '', email: '', name: '', photo: ''));
 }
 
 void _registerSingletonServices() {
