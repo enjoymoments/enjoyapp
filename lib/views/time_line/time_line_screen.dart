@@ -49,8 +49,10 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: state.posts.length,
-                itemBuilder: (context, index) =>
-                    TimeLineItem(item: state.posts[index]),
+                itemBuilder: (context, index) => TimeLineItem(
+                  item: state.posts[index],
+                  timelineBloc: _timelineBloc,
+                ),
               ),
             ),
           );

@@ -46,6 +46,7 @@ dependencies:
   path_provider: any
   firebase_auth: ^0.16.1
   google_sign_in: ^4.5.1
+  modal_bottom_sheet: ^0.2.0+1
 
 dev_dependencies:
   flutter_test:

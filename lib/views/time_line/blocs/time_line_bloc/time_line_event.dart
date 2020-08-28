@@ -6,3 +6,9 @@ class TimelineEvent extends Equatable  {
 }
 
 class LoadPosts extends TimelineEvent {}
+
+class DeletePost extends TimelineEvent {
+  final TimeLineItemModel post;
+
+  DeletePost(this.post);
+}
