@@ -23,6 +23,7 @@ class TimeLineItem extends StatelessWidget {
       children: <Widget>[
         SpacerBox.v4,
         HeaderCard(
+          item: item,
           callback: (action) {
             _invokeActionsHeader(context, action);
           },
