@@ -77,7 +77,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           return CustomCircularProgressIndicator();
         }
 
-        if (state.images.length > 0) {
+        if (state.images != null && state.images.length > 0) {
           _images = state.images;
           return _buildContent(
             ImageItems(
