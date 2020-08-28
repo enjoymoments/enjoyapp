@@ -23,7 +23,7 @@ class HeaderCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(item.dateCreation.toString()),//.date(context),
+            item.dateCreationFormatted.date(context),
             IconButton(
               icon: new Icon(Icons.more_horiz),
               iconSize: Theme.of(context).iconTheme.size,

@@ -1,5 +1,6 @@
 import 'package:mozin/modules/time_line/entities/time_line_item_entity.dart';
 import 'package:mozin/modules/time_line/models/media_model.dart';
+import 'package:mozin/views/shared/utils.dart';
 
 class TimeLineItemModel {
   DateTime dateCreation;
@@ -9,6 +10,8 @@ class TimeLineItemModel {
     this.dateCreation,
     this.medias,
   });
+
+  String get dateCreationFormatted => DateUtils.dateFormat(dateCreation);
 
   Map<String, dynamic> toJson() {
     return {
