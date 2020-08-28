@@ -81,6 +81,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _images = state.images;
           return _buildContent(
             ImageItems(
+              addTimeLineBloc: _addTimeLineBloc,
               images: state.images,
             ),
           );

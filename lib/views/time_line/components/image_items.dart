@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/views/gallery_images/gallery_image_thumbnail.dart';
 import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
+import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 
 class ImageItems extends StatelessWidget {
+  final AddTimeLineBloc addTimeLineBloc;
   final List<GalleryImageModel> images;
 
   ImageItems({
     Key key,
-    @required this.images,
+    @required this.images, 
+    @required this.addTimeLineBloc,
   }) : super(key: key);
 
   @override
@@ -34,6 +37,7 @@ class ImageItems extends StatelessWidget {
     GalleryImageModel image,
   ) {
     return GalleryImageThumbnail(
+      addTimeLineBloc: addTimeLineBloc,
       galleryImageModel: image,
       onTap: () {
         open(context, image.index);

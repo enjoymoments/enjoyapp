@@ -25,3 +25,14 @@ class SaveTimeLine extends AddTimeLineEvent {
         images,
       ];
 }
+
+class RemoveMedia extends AddTimeLineEvent {
+  final GalleryImageModel media;
+
+  RemoveMedia(this.media);
+
+  @override
+  List<Object> get props => [
+        media,
+      ];
+}

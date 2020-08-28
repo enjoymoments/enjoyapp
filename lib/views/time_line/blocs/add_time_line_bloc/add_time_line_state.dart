@@ -5,12 +5,14 @@ class AddTimeLineState extends Equatable {
   final List<GalleryImageModel> images;
   final bool isSuccess;
   final bool isFailure;
+  final int forceRefresh;
 
   AddTimeLineState({
     this.isLoading,
     this.images,
     this.isSuccess,
     this.isFailure,
+    this.forceRefresh,
   });
 
   factory AddTimeLineState.initial() {
@@ -19,6 +21,7 @@ class AddTimeLineState extends Equatable {
       images: List(),
       isSuccess: false,
       isFailure: false,
+      forceRefresh: 0,
     );
   }
 
@@ -27,12 +30,14 @@ class AddTimeLineState extends Equatable {
     bool isSuccess,
     bool isFailure,
     List<GalleryImageModel> images,
+    int forceRefresh,
   }) {
     return AddTimeLineState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
-      images: images ?? this.images,
+      forceRefresh: forceRefresh,
+      images: images,
     );
   }
 
@@ -41,6 +46,7 @@ class AddTimeLineState extends Equatable {
         isLoading,
         isSuccess,
         isFailure,
+        forceRefresh,
         images,
       ];
 }

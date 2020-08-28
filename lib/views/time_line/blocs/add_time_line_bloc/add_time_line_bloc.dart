@@ -8,6 +8,7 @@ import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
+import 'package:mozin/views/shared/utils.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_time_line_event.dart';
@@ -30,6 +31,20 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       yield* mapOpenCameraToState(event);
     } else if (event is SaveTimeLine) {
       yield* mapSaveToState(event);
+    } else if (event is RemoveMedia) {
+      yield* mapRemoveMediaToState(event);
+    }
+  }
+
+  Stream<AddTimeLineState> mapRemoveMediaToState(RemoveMedia event) async* {
+    try {
+      state.images.removeWhere((element) => element.id == event.media.id);
+
+      yield state.copyWith(
+          images: state.images,
+          forceRefresh: StateUtils.generateRandomNumber());
+    } catch (e) {
+      yield state.copyWith(isFailure: true);
     }
   }
 
@@ -47,14 +62,15 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       if (event.source == ImageSource.camera) {
         var file = await wrapperMediaService.openCamera();
         if (file != null) {
-          images = [
-            GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
-          ];
+          images
+            ..addAll([
+              GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
+            ]);
         }
       } else if (event.source == ImageSource.gallery) {
         var files = await wrapperMediaService.getMedias();
         if (files != null) {
-          images = _transformFilesToImages(files);
+          images.addAll(_transformFilesToImages(files));
         }
       }
 

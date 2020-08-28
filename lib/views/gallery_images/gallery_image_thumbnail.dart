@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/views/shared/custom_dialog.dart';
+import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:vibration/vibration.dart';
 
 class GalleryImageThumbnail extends StatelessWidget {
-  const GalleryImageThumbnail({Key key, this.galleryImageModel, this.onTap})
-      : super(key: key);
+  const GalleryImageThumbnail({
+    Key key,
+    @required this.galleryImageModel,
+    @required this.addTimeLineBloc,
+    @required this.onTap,
+  }) : super(key: key);
 
   final GalleryImageModel galleryImageModel;
-
+  final AddTimeLineBloc addTimeLineBloc;
   final GestureTapCallback onTap;
 
   @override
@@ -31,13 +36,6 @@ class GalleryImageThumbnail extends StatelessWidget {
                 galleryImageModel.file,
                 fit: BoxFit.fill,
               ),
-              // CachedNetworkImage(
-              //   imageUrl: imageUrl,
-              //   fit: BoxFit.fill,
-              //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-              //       CircularProgressIndicator(value: downloadProgress.progress),
-              //   errorWidget: (context, url, error) => Icon(Icons.error),
-              // ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -59,14 +57,21 @@ class GalleryImageThumbnail extends StatelessWidget {
 
     var actions = [
       FlatButton(
-        child: Text('Não'),
+        child: Text(
+          'Não',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
       FlatButton(
-        child: Text('Sim'),
+        child: Text(
+          'Sim',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
         onPressed: () {
+          addTimeLineBloc.add(RemoveMedia(galleryImageModel));
           Navigator.of(context).pop();
         },
       ),
