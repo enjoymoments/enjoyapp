@@ -6,7 +6,7 @@ import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/views/time_line/components/actions/delete_confirmation_modal_fit.dart';
 import 'package:mozin/views/time_line/components/body_card.dart';
 import 'package:mozin/views/time_line/components/enum/action_header_enum.dart';
-import 'package:mozin/views/time_line/components/footer_card.dart';
+//import 'package:mozin/views/time_line/components/footer_card.dart';
 import 'package:mozin/views/time_line/components/header_card.dart';
 
 class TimeLineItem extends StatelessWidget {
@@ -29,7 +29,8 @@ class TimeLineItem extends StatelessWidget {
         ),
         SpacerBox.v8,
         BodyCard(item: item),
-        FooterCard(),
+        //TODO:review
+        //FooterCard(),
         SpacerBox.v4,
       ],
     );
