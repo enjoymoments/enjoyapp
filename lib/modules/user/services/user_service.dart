@@ -8,7 +8,7 @@ class UserService implements UserIterface {
   UserService(this.userRepository);
 
   @override
-  Future setTokensPushNotifications(String userId, String token) {
-    return this.userRepository.setTokensPushNotifications(userId, token);
+  Future setTokensPushNotifications(String userId, String userEmail, String token) {
+    return this.userRepository.setTokensPushNotifications(userId, userEmail, token);
   }
 }

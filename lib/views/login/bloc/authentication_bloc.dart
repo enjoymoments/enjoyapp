@@ -44,7 +44,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
 
       final _token = await _pushNotificationConfig.configureAsync();
 
-      this._userService.setTokensPushNotifications(_user.id, _token);
+      this._userService.setTokensPushNotifications(_user.id, _user.email, _token);
 
       yield AuthenticationSuccess(_user);
     } catch (e) {

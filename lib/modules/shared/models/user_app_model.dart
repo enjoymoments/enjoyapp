@@ -9,11 +9,13 @@ import 'package:meta/meta.dart';
 class UserAppModel extends Equatable {
   /// {@macro user}
   const UserAppModel({
-    @required this.email,
     @required this.id,
+    @required this.autenticatorProviderId,
+    @required this.email,
     @required this.name,
     @required this.photo,
   })  : assert(email != null),
+        assert(autenticatorProviderId != null),
         assert(id != null);
 
   /// The current user's email address.
@@ -22,6 +24,8 @@ class UserAppModel extends Equatable {
   /// The current user's id.
   final String id;
 
+  final String autenticatorProviderId;
+
   /// The current user's name (display name).
   final String name;
 
@@ -29,7 +33,8 @@ class UserAppModel extends Equatable {
   final String photo;
 
   /// Empty user which represents an unauthenticated user.
-  static const empty = UserAppModel(email: '', id: '', name: null, photo: null);
+  static const empty = UserAppModel(
+      id: '', autenticatorProviderId: '', email: '', name: null, photo: null);
 
   @override
   List<Object> get props => [email, id, name, photo];
