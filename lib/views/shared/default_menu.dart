@@ -38,11 +38,11 @@ class _DefaultMenuState extends State<DefaultMenu> {
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () {
-                  widget.onTap(DEFAULT_MENU_ENUM.ADD);
+                  widget.onTap(DEFAULT_MENU_ENUM.SEARCH);
                 },
-                child: Icon(
-                  Icons.add,
-                  size: 30.0,
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  fit: BoxFit.fill,
                 ),
                 elevation: 2.0,
                 backgroundColor: Theme.of(context).primaryColor,

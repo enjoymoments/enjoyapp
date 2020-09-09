@@ -48,7 +48,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
-    if (itemSelected == DEFAULT_MENU_ENUM.ADD) {
+    if (itemSelected == DEFAULT_MENU_ENUM.SEARCH) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => AddTimeLineScreen()),
@@ -69,19 +69,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         }
       },
       builder: (context, state) {
-        switch (_default_menu_item) {
-          case DEFAULT_MENU_ENUM.TIME_LINE:
-            return TimeLineScreen();
-          case DEFAULT_MENU_ENUM.NOTIFICATION:
-            return NotificationsScreen();
-          case DEFAULT_MENU_ENUM.MORE:
-            return MoreScreen(
-              authenticationBloc: widget.authenticationBloc,
-            );
-          case DEFAULT_MENU_ENUM.HOME:
-          default:
-            return HomeScreen();
-        }
+        return _buildContent();
       },
     );
   }
@@ -91,7 +79,48 @@ class _ScreenManagerState extends State<ScreenManager> {
       title: Text(
         _getStringbyScreen(),
       ),
+      actions: _buildActionButtons(),
     );
+  }
+
+  Widget _buildContent() {
+    switch (_default_menu_item) {
+      case DEFAULT_MENU_ENUM.TIME_LINE:
+        return TimeLineScreen();
+      case DEFAULT_MENU_ENUM.NOTIFICATION:
+        return NotificationsScreen();
+      case DEFAULT_MENU_ENUM.MORE:
+        return MoreScreen(
+          authenticationBloc: widget.authenticationBloc,
+        );
+      case DEFAULT_MENU_ENUM.HOME:
+      default:
+        return HomeScreen();
+    }
+  }
+
+  List<Widget> _buildActionButtons() {
+    switch (_default_menu_item) {
+      case DEFAULT_MENU_ENUM.TIME_LINE:
+        return [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddTimeLineScreen()),
+              );
+            },
+          ),
+        ];
+      case DEFAULT_MENU_ENUM.HOME:
+      case DEFAULT_MENU_ENUM.SEARCH:
+      case DEFAULT_MENU_ENUM.NOTIFICATION:
+      case DEFAULT_MENU_ENUM.MORE:
+        return [];
+      default:
+        return [];
+    }
   }
 
   String _getStringbyScreen() {
@@ -100,12 +129,14 @@ class _ScreenManagerState extends State<ScreenManager> {
         return 'Início';
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return 'Linha';
-      case DEFAULT_MENU_ENUM.ADD:
-        break;
+      case DEFAULT_MENU_ENUM.SEARCH:
+        return '';
       case DEFAULT_MENU_ENUM.NOTIFICATION:
         return 'Notificação';
       case DEFAULT_MENU_ENUM.MORE:
         return 'Mais';
+      default:
+        return '';
     }
   }
 }
