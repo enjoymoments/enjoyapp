@@ -52,8 +52,8 @@ class _DefaultMenuState extends State<DefaultMenu> {
           title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          title: Text('Notificações'),
+          icon: Icon(Icons.person),
+          title: Text('Eu'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.menu),

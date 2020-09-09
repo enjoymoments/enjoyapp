@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
-class NotificationsScreen extends StatefulWidget {
+class MeScreen extends StatefulWidget {
   @override
-  _NotificationsScreenState createState() => _NotificationsScreenState();
+  _MeScreenState createState() => _MeScreenState();
 }
 
-class _NotificationsScreenState extends State<NotificationsScreen> {
+class _MeScreenState extends State<MeScreen> {
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -23,7 +23,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Notificações',
+              'Informações do usuário e login por aqui',
               style: TextStyle(
                   color: Theme.of(context).primaryColor, fontSize: 28),
               textAlign: TextAlign.center,

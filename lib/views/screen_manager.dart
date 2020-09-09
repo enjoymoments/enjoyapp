@@ -5,7 +5,7 @@ import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/interest/interest_screen.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/more/more_screen.dart';
-import 'package:mozin/views/notifications/notifications_screen.dart';
+import 'package:mozin/views/me/me_screen.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
@@ -88,8 +88,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     switch (_default_menu_item) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return TimeLineScreen();
-      case DEFAULT_MENU_ENUM.NOTIFICATION:
-        return NotificationsScreen();
+      case DEFAULT_MENU_ENUM.ME:
+        return MeScreen();
       case DEFAULT_MENU_ENUM.MORE:
         return MoreScreen(
           authenticationBloc: widget.authenticationBloc,
@@ -116,7 +116,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         ];
       case DEFAULT_MENU_ENUM.HOME:
       case DEFAULT_MENU_ENUM.SEARCH:
-      case DEFAULT_MENU_ENUM.NOTIFICATION:
+      case DEFAULT_MENU_ENUM.ME:
       case DEFAULT_MENU_ENUM.MORE:
         return [];
       default:
@@ -132,8 +132,8 @@ class _ScreenManagerState extends State<ScreenManager> {
         return 'Linha';
       case DEFAULT_MENU_ENUM.SEARCH:
         return '';
-      case DEFAULT_MENU_ENUM.NOTIFICATION:
-        return 'Notificação';
+      case DEFAULT_MENU_ENUM.ME:
+        return 'Eu';
       case DEFAULT_MENU_ENUM.MORE:
         return 'Mais';
       default:
