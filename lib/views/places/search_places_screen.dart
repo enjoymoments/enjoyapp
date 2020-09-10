@@ -3,6 +3,7 @@ import 'package:mozin/views/interest/widgets/interest_menu.dart';
 import 'package:mozin/views/places/widgets/place_card_item.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
+import 'package:mozin/views/shared/spacer_box.dart';
 
 class SearchPlacesScreen extends StatelessWidget {
   @override
@@ -15,8 +16,20 @@ class SearchPlacesScreen extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return CustomContainer(
-      child: PlaceCardItem(),
+    return SingleChildScrollView(
+      child: CustomContainer(
+        child: Column(
+          children: [
+            PlaceCardItem(),
+            SpacerBox.v8,
+            PlaceCardItem(),
+            SpacerBox.v8,
+            PlaceCardItem(),
+            SpacerBox.v8,
+            PlaceCardItem(),
+          ],
+        ),
+      ),
     );
   }
 
