@@ -50,7 +50,7 @@ class GalleryImageThumbnail extends StatelessWidget {
 
   void _removeMedia(BuildContext context) async {
     if (await Vibration.hasVibrator()) {
-      Vibration.vibrate(duration: 250);
+      Vibration.vibrate(duration: 50);
     }
 
     var content = Text('Tem certeza?');
