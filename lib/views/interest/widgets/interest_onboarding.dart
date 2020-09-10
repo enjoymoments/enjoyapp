@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/views/interest/widgets/interest_categories.dart';
 import 'package:mozin/views/interest/widgets/interest_categories_details.dart';
-import 'package:mozin/views/search_places/search_places_screen.dart';
+import 'package:mozin/views/places/search_places_screen.dart';
 
 class InterestOnBoarding extends StatefulWidget {
   @override

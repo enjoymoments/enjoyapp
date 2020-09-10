@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/interest/widgets/interest_menu.dart';
-import 'package:mozin/views/places/places_screen.dart';
+import 'package:mozin/views/places/widgets/place_card_item.dart';
+import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 
 class SearchPlacesScreen extends StatelessWidget {
@@ -14,7 +15,9 @@ class SearchPlacesScreen extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return PlacesScreen();
+    return CustomContainer(
+      child: PlaceCardItem(),
+    );
   }
 
   AppBar _buildAppBar(BuildContext context) {
