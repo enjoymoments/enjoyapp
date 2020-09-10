@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/shared/extension.dart';
 
-class InterestCategoryItemBadges extends StatefulWidget {
-  const InterestCategoryItemBadges(
+class InterestCategoryItemBadge extends StatefulWidget {
+  const InterestCategoryItemBadge(
       {Key key, @required this.model, @required this.callbackSelected})
       : super(key: key);
 
@@ -10,12 +10,12 @@ class InterestCategoryItemBadges extends StatefulWidget {
   final Function(bool) callbackSelected;
 
   @override
-  _InterestCategoryItemBadgesState createState() =>
-      _InterestCategoryItemBadgesState();
+  _InterestCategoryItemBadgeState createState() =>
+      _InterestCategoryItemBadgeState();
 }
 
-class _InterestCategoryItemBadgesState
-    extends State<InterestCategoryItemBadges> {
+class _InterestCategoryItemBadgeState
+    extends State<InterestCategoryItemBadge> {
   bool _isSelected;
 
   @override

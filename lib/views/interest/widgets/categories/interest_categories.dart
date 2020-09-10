@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/interest/widgets/interest_category_item.dart';
+import 'package:mozin/views/interest/widgets/categories/interest_category_item.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 import 'package:mozin/views/shared/extension.dart';

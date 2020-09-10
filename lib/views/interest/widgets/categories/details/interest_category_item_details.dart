@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/interest/widgets/interest_category_item_badges.dart';
+import 'package:mozin/views/interest/widgets/categories/details/interest_category_item_badge.dart';
 import 'package:mozin/views/shared/extension.dart';
 
 class InterestCategoryItemDetails extends StatelessWidget {
@@ -23,19 +23,19 @@ class InterestCategoryItemDetails extends StatelessWidget {
           alignment: WrapAlignment.start,
           spacing: 10,
           children: [
-            InterestCategoryItemBadges(
+            InterestCategoryItemBadge(
               model: model,
               callbackSelected: callbackSelected,
             ),
-            InterestCategoryItemBadges(
+            InterestCategoryItemBadge(
               model: model,
               callbackSelected: callbackSelected,
             ),
-            InterestCategoryItemBadges(
+            InterestCategoryItemBadge(
               model: model,
               callbackSelected: callbackSelected,
             ),
-            InterestCategoryItemBadges(
+            InterestCategoryItemBadge(
               model: model,
               callbackSelected: callbackSelected,
             ),
