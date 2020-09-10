@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/views/interest/widgets/interest_category.dart';
+import 'package:mozin/views/interest/widgets/interest_categories.dart';
 import 'package:mozin/views/search_places/search_places_screen.dart';
 
 class InterestOnBoarding extends StatefulWidget {
@@ -59,14 +59,14 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
   PageViewModel _selectCategory() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: InterestCategory(),
+      bodyWidget: InterestCategories(),
     );
   }
 
   PageViewModel _selectItemsByCategory() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: InterestCategory(),
+      bodyWidget: InterestCategories(),
     );
   }
 }

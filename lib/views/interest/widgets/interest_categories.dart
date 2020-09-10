@@ -4,7 +4,7 @@ import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 import 'package:mozin/views/shared/extension.dart';
 
-class InterestCategory extends StatelessWidget {
+class InterestCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
