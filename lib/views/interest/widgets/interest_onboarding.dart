@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/views/interest/widgets/interest_categories.dart';
+import 'package:mozin/views/interest/widgets/interest_categories_details.dart';
 import 'package:mozin/views/search_places/search_places_screen.dart';
 
 class InterestOnBoarding extends StatefulWidget {
@@ -24,8 +25,8 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
     return IntroductionScreen(
       key: introKey,
       pages: [
-        _selectCategory(),
-        _selectItemsByCategory(),
+        _selectCategories(),
+        _selectCategoriesDetails(),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
@@ -56,17 +57,17 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
     );
   }
 
-  PageViewModel _selectCategory() {
+  PageViewModel _selectCategories() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
       bodyWidget: InterestCategories(),
     );
   }
 
-  PageViewModel _selectItemsByCategory() {
+  PageViewModel _selectCategoriesDetails() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: InterestCategories(),
+      bodyWidget: InterestCategoriesDetails(),
     );
   }
 }
