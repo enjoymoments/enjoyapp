@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
-import 'package:mozin/views/interest/interest_screen.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
@@ -50,10 +49,6 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
     if (itemSelected == DEFAULT_MENU_ENUM.SEARCH) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => InterestScreen()),
-      );
     } else {
       setState(() {
         _default_menu_item = itemSelected;

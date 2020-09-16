@@ -58,7 +58,18 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
           );
         }
 
-        return SizedBox.shrink();
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Sua linha do tempo, registre todos os momentos',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 28),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        );
       },
     );
   }

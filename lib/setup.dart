@@ -10,7 +10,6 @@ import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/user/repositories/user_repository.dart';
 import 'package:mozin/modules/user/services/user_service.dart';
-import 'package:mozin/push_notification_config.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
@@ -50,18 +49,14 @@ void _registerSingletonServices() {
 
   getItInstance
       .registerLazySingleton<UserService>(() => UserService(getItInstance()));
-
-  getItInstance.registerLazySingleton<PushNotificationConfig>(
-      () => PushNotificationConfig());
 }
 
 void _registerBlocs() {
   getItInstance.registerFactory<AddTimeLineBloc>(
       () => AddTimeLineBloc(getItInstance(), getItInstance()));
 
-  getItInstance.registerLazySingleton<AuthenticationBloc>(() =>
-      AuthenticationBloc(getItInstance(), getItInstance(), getItInstance()));
-
+getItInstance.registerLazySingleton<AuthenticationBloc>(() =>
+      AuthenticationBloc(getItInstance(), getItInstance()));
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
 

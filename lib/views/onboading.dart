@@ -22,8 +22,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     return IntroductionScreen(
       key: introKey,
       pages: [
-        _buildItem('Conheça o Mozin',
-            'O app para tirar o casal da rotina e criar experiênias incriveis'),
+        _buildItem('Conheça o Enjoy',
+            'O app para tirar o casal da rotina e criar experiências incríveis'),
         _buildItem('Compartilhe fotos',
             'Construa uma linha do tempo contendo todas as suas memórias'),
       ],

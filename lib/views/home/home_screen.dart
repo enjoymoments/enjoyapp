@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/models/user_app_model.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,10 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return CustomContainer(
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DayOneScreen()),
-          );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
