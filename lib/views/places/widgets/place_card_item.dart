@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/places/place_item_details.dart';
+import 'package:mozin/views/places/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_badge.dart';
 import 'package:mozin/views/shared/extension.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
@@ -30,7 +31,7 @@ class PlaceCardItem extends StatelessWidget {
                 Row(
                   children: [
                     CustomBadge(
-                      child: _buildRating(context),
+                      child: RatingItem(),
                     ),
                     SpacerBox.h8,
                     CustomBadge(
@@ -42,7 +43,7 @@ class PlaceCardItem extends StatelessWidget {
                   ],
                 ),
                 SpacerBox.v8,
-                "R. Doces lembranças, 123 - Vila Eternize,  São Paulo - SP, 04310-040"
+                "R. Doces lembranças, 123 - Vila Eternize, \nSão Paulo - SP, 04310-040"
                     .description(context,
                         maxLines: 2, color: Theme.of(context).iconTheme.color),
               ],
@@ -63,23 +64,6 @@ class PlaceCardItem extends StatelessWidget {
     return BoxDecoration(
       border: Border.all(color: Theme.of(context).hintColor),
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-    );
-  }
-
-  Widget _buildRating(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        "4,3".description(context, color: Theme.of(context).iconTheme.color),
-        SpacerBox.h5,
-        Icon(
-          Icons.star,
-          size: 10,
-        ),
-        SpacerBox.h5,
-        "(1.568)"
-            .description(context, color: Theme.of(context).iconTheme.color),
-      ],
     );
   }
 }

@@ -29,7 +29,7 @@ class _InterestMenuState extends State<InterestMenu> {
         ),
         BottomNavigationBarItem(
           icon: new Icon(Icons.filter),
-          title: new Text('Filtrar'),
+          title: new Text('Mudar Filtro'),
         ),
       ],
     );

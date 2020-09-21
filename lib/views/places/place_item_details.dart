@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/views/places/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
+import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/views/shared/spacer_box.dart';
 
 //TODO:in development
 
@@ -19,16 +22,17 @@ class PlaceItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      child: _buildBody(),
+      child: _buildBody(context),
       appBar: _buildAppBar(context),
       bottomNavigationBar: null,
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: CustomContainer(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CarouselSlider(
               options: CarouselOptions(
@@ -38,7 +42,10 @@ class PlaceItemDetails extends StatelessWidget {
                 initialPage: 2,
               ),
               items: _buildPhotos(),
-            )
+            ),
+            "Gelato".title(context),
+            SpacerBox.v8,
+            RatingItem(mainAxisAlignment: MainAxisAlignment.start,),
           ],
         ),
       ),
