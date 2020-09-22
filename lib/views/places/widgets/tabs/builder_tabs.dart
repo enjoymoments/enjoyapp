@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/size_config.dart';
 import 'package:mozin/views/places/widgets/tabs/general/general_tab_item.dart';
+import 'package:mozin/views/places/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/views/places/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/views/shared/custom_border.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
@@ -70,12 +71,7 @@ class _BuilderTabsState extends State<BuilderTabs>
             children: <Widget>[
               GeneralTabItem(),
               RatingTabItem(),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.purple,
-                ),
-              ),
+              PhotosTabItem(),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.0),
