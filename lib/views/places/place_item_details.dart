@@ -52,8 +52,6 @@ class PlaceItemDetails extends StatelessWidget {
             ),
             SpacerBox.v8,
             NestedTabBar(),
-            //_buildTabs(),
-            //MyDemo(),
           ],
         ),
       ),
