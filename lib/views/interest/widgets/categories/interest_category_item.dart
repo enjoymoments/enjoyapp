@@ -36,7 +36,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
         setState(() {});
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom:10.0),
+        margin: const EdgeInsets.only(bottom: 10.0),
         padding: const EdgeInsets.all(20.0),
         decoration: myBoxDecoration(context),
         child: Column(
@@ -72,8 +72,10 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
   }
 
   Color _getTextColor() {
-    return _isSelected
-        ? Theme.of(context).backgroundColor
-        : Theme.of(context).iconTheme.color;
+    if (_isSelected) {
+      return Theme.of(context).backgroundColor;
+    }
+
+    return null;
   }
 }

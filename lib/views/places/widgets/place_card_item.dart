@@ -37,15 +37,16 @@ class PlaceCardItem extends StatelessWidget {
                     CustomBadge(
                       child: 'Sorvetes'.description(
                         context,
-                        color: Theme.of(context).iconTheme.color,
                       ),
                     ),
                   ],
                 ),
                 SpacerBox.v8,
                 "R. Doces lembranças, 123 - Vila Eternize, \nSão Paulo - SP, 04310-040"
-                    .description(context,
-                        maxLines: 2, color: Theme.of(context).iconTheme.color),
+                    .description(
+                  context,
+                  maxLines: 2,
+                ),
               ],
             ),
             Expanded(

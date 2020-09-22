@@ -14,8 +14,7 @@ class InterestCategoryItemBadge extends StatefulWidget {
       _InterestCategoryItemBadgeState();
 }
 
-class _InterestCategoryItemBadgeState
-    extends State<InterestCategoryItemBadge> {
+class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
   bool _isSelected;
 
   @override
@@ -65,8 +64,10 @@ class _InterestCategoryItemBadgeState
   }
 
   Color _getTextColor() {
-    return _isSelected
-        ? Theme.of(context).backgroundColor
-        : Theme.of(context).iconTheme.color;
+    if (_isSelected) {
+      return Theme.of(context).backgroundColor;
+    }
+
+    return null;
   }
 }

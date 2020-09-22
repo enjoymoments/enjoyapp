@@ -13,7 +13,7 @@ const RatingItem({Key key, this.mainAxisAlignment}) : super(key: key);
     return Row(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
-        "4,3".description(context, color: Theme.of(context).iconTheme.color),
+        "4,3".description(context),
         SpacerBox.h5,
         Icon(
           Icons.star,
@@ -21,7 +21,7 @@ const RatingItem({Key key, this.mainAxisAlignment}) : super(key: key);
         ),
         SpacerBox.h5,
         "(1.568)"
-            .description(context, color: Theme.of(context).iconTheme.color),
+            .description(context),
       ],
     );
   }
