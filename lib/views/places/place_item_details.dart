@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/size_config.dart';
+import 'package:mozin/views/places/widgets/tabs/builder_tabs.dart';
 import 'package:mozin/views/places/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
@@ -51,7 +51,7 @@ class PlaceItemDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
             ),
             SpacerBox.v8,
-            NestedTabBar(),
+            BuilderTabs(),
           ],
         ),
       ),
@@ -82,105 +82,5 @@ class PlaceItemDetails extends StatelessWidget {
           ),
         )
         .toList();
-  }
-}
-
-class NestedTabBar extends StatefulWidget {
-  @override
-  _NestedTabBarState createState() => _NestedTabBarState();
-}
-
-class _NestedTabBarState extends State<NestedTabBar>
-    with TickerProviderStateMixin {
-  TabController _nestedTabController;
-
-  List<Widget> _tabsTitle = [
-    Tab(
-      text: "Geral",
-    ),
-    Tab(
-      text: "Avaliações",
-    ),
-    Tab(
-      text: "Fotos",
-    ),
-    Tab(
-      text: "Sobre",
-    ),
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _nestedTabController =
-        new TabController(length: _tabsTitle.length, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _nestedTabController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: SizeConfig.sizeByPixel(34),
-          decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).iconTheme.color),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Center(
-            child: TabBar(
-              controller: _nestedTabController,
-              indicatorColor: Theme.of(context).primaryColor,
-              labelColor: Theme.of(context).primaryColor,
-              unselectedLabelColor: Theme.of(context).iconTheme.color,
-              isScrollable: true,
-              tabs: _tabsTitle,
-            ),
-          ),
-        ),
-        SpacerBox.v8,
-        Container(
-          height: SizeConfig.screenHeight * 0.70,
-          child: TabBarView(
-            controller: _nestedTabController,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.blueGrey[300],
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.yellow,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.purple,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
   }
 }
