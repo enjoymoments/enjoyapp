@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/size_config.dart';
 import 'package:mozin/views/places/widgets/tabs/general/general_tab_item.dart';
+import 'package:mozin/views/places/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/views/shared/custom_border.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
@@ -68,12 +69,7 @@ class _BuilderTabsState extends State<BuilderTabs>
             controller: _nestedTabController,
             children: <Widget>[
               GeneralTabItem(),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.yellow,
-                ),
-              ),
+              RatingTabItem(),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.0),
