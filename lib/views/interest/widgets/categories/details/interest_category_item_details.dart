@@ -16,7 +16,7 @@ class InterestCategoryItemDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "Alimentação".label(
+        "Alimentação".title(
           context,
         ),
         Wrap(

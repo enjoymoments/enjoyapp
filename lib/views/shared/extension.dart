@@ -24,7 +24,7 @@ extension Texts on String {
         this,
         textAlign: textAlign,
         maxLines: maxLines,
-        style: Theme.of(context).textTheme.headline5.copyWith(
+        style: Theme.of(context).textTheme.headline3.copyWith(
             fontSize: fontSize,
             decoration: decoration,
             color: color ?? Theme.of(context).textTheme.headline5.color,
@@ -43,7 +43,7 @@ extension Texts on String {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline6.copyWith(
+      style: Theme.of(context).textTheme.headline4.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,
@@ -74,7 +74,7 @@ extension Texts on String {
 
   Widget label(
     BuildContext context, {
-    double fontSize = 17,
+    double fontSize = 16,
     Color color,
     int maxLines = 2,
     double letterSpacing,
@@ -83,7 +83,7 @@ extension Texts on String {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline6.copyWith(
+      style: Theme.of(context).textTheme.headline5.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,

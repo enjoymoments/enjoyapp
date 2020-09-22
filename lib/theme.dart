@@ -18,6 +18,9 @@ ThemeData getTheme(BuildContext context) {
     bottomAppBarColor: AppColors.menuColor,
     primaryColor: AppColors.primary,
     backgroundColor: AppColors.secundary,
+    textTheme: TextTheme(
+      headline5: TextStyle(color: AppColors.iconsColor),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       border: UnderlineInputBorder(
         borderSide: BorderSide(
