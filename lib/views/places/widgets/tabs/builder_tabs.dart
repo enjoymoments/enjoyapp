@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/size_config.dart';
+import 'package:mozin/views/places/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/views/shared/custom_border.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
@@ -48,6 +49,7 @@ class _BuilderTabsState extends State<BuilderTabs>
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         CustomBorder(
+          height: SizeConfig.sizeByPixel(34),
           child: Center(
             child: TabBar(
               controller: _nestedTabController,
@@ -65,12 +67,7 @@ class _BuilderTabsState extends State<BuilderTabs>
           child: TabBarView(
             controller: _nestedTabController,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.0),
-                  color: Colors.blueGrey[300],
-                ),
-              ),
+              GeneralTabItem(),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.0),

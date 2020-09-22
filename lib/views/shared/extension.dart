@@ -76,7 +76,7 @@ extension Texts on String {
     BuildContext context, {
     double fontSize = 17,
     Color color,
-    int maxLines,
+    int maxLines = 2,
     double letterSpacing,
     FontWeight fontWeight,
   }) {
