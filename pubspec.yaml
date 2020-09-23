@@ -51,6 +51,8 @@ dependencies:
   firebase_core: ^0.5.0
   firebase_messaging: ^7.0.0
   carousel_slider: ^2.2.1
+  url_launcher: ^5.7.0
+  expandable: ^4.1.4
 
 dev_dependencies:
   flutter_test:
