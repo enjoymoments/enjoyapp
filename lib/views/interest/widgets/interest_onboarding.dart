@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/views/interest/widgets/categories/details/interest_categories_details.dart';
-import 'package:mozin/views/interest/widgets/categories/interest_categories.dart';
+import 'package:mozin/views/interest/widgets/filters/categories/details/interest_categories_details.dart';
+import 'package:mozin/views/interest/widgets/filters/categories/interest_categories.dart';
+import 'package:mozin/views/interest/widgets/filters/general/general_filters_screen.dart';
 import 'package:mozin/views/places/search_places_screen.dart';
 
 class InterestOnBoarding extends StatefulWidget {
@@ -27,6 +28,7 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
       pages: [
         _selectCategories(),
         _selectCategoriesDetails(),
+        _selectedGeneralFilters(),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
@@ -68,6 +70,13 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
       bodyWidget: InterestCategoriesDetails(),
+    );
+  }
+
+  PageViewModel _selectedGeneralFilters() {
+    return PageViewModel(
+      titleWidget: SizedBox.shrink(),
+      bodyWidget: GeneralFiltersScreen(),
     );
   }
 }
