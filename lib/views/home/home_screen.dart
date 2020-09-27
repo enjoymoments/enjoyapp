@@ -3,6 +3,7 @@ import 'package:mozin/modules/shared/models/user_app_model.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/shared/custom_container.dart';
+import 'package:mozin/views/shared/extension.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,7 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   UserAppModel _user;
 
   @override
@@ -33,19 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialPageRoute(builder: (context) => DayOneScreen()),
           );
         },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Olá,\n${_user.name}',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 28),
-              textAlign: TextAlign.center,
-            ),
-          ],
+        child: Center(
+          child: _buildContent(),
         ),
       ),
     );
+  }
+
+  Widget _buildContent() {
+    if (_user.id == null || _user.id.isEmpty) {
+      return "Olá,\nSeja bem vindo".labelIntro(context);
+    }
+
+    return 'Olá,\n${_user.name}'.labelIntro(context);
   }
 }
