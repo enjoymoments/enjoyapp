@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
+import 'package:mozin/views/me/widgets/connected/connected.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/me/widgets/login/login_screen.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';
@@ -37,7 +38,7 @@ class _MeScreenState extends State<MeScreen> {
         }
 
         if (state is AuthenticationSuccess) {
-          return "Conectado".labelIntro(context);
+          return Connected(authenticationBloc: _authenticationBloc,);
         }
 
         return SingleChildScrollView(
