@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/views/app_view.dart';
+import 'package:mozin/setup.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/screen_manager.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -12,7 +14,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => AppView()),
+      MaterialPageRoute(
+        builder: (_) => ScreenManager(
+          authenticationBloc: getItInstance<AuthenticationBloc>(),
+        ),
+      ),
       (route) => false,
     );
   }
