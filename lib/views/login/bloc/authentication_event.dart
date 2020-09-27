@@ -10,3 +10,5 @@ abstract class AuthenticationEvent extends Equatable {
 class RequestGoogleLogin extends AuthenticationEvent {}
 
 class Logout extends AuthenticationEvent {}
+
+class CheckAuthenticated extends AuthenticationEvent {}

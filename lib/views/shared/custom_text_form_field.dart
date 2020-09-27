@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: TextStyle(
           fontSize: 17,
         ),
-        fillColor: Colors.white,
+        fillColor: Theme.of(context).backgroundColor,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5.0),

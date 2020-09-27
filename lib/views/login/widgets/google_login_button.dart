@@ -18,7 +18,7 @@ class GoogleLoginButton extends StatelessWidget {
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       icon: const Icon(Icons.access_alarm, color: Colors.white),
-      color: theme.accentColor,
+      color: theme.primaryColor,
       onPressed: () {
          authenticationBloc.add(RequestGoogleLogin());
       },

@@ -13,7 +13,8 @@ part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
-  AuthenticationBloc(this._authenticationRepository, this._userService, this._pushNotificationConfig)
+  AuthenticationBloc(this._authenticationRepository, this._userService,
+      this._pushNotificationConfig)
       : super(AuthenticationInitial());
 
   final AuthenticationRepository _authenticationRepository;
@@ -28,6 +29,24 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
       yield* mapLogInWithGoogleToState(event);
     } else if (event is Logout) {
       yield* mapLogoutToState();
+    } else if (event is CheckAuthenticated) {
+      yield* mapCheckAuthenticatedToState();
+    }
+  }
+
+  Stream<DefaultState> mapCheckAuthenticatedToState() async* {
+    try {
+      yield Loading();
+
+      final _user = getItInstance<UserAppModel>();
+      if (_user.id == null || _user.id.isEmpty) {
+        yield Unauthenticated();
+        return;
+      }
+
+      yield AuthenticationSuccess(_user);
+    } catch (e) {
+      yield Error(error: 'Ops');
     }
   }
 
@@ -38,13 +57,15 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
       yield Loading();
 
       await _authenticationRepository.logInWithGoogle();
-      
+
       final _user = await _authenticationRepository.user.first;
       getItInstance.registerSingleton(_user);
 
       final _token = await _pushNotificationConfig.configureAsync();
 
-      this._userService.setTokensPushNotifications(_user.id, _user.email, _token);
+      this
+          ._userService
+          .setTokensPushNotifications(_user.id, _user.email, _token);
 
       yield AuthenticationSuccess(_user);
     } catch (e) {

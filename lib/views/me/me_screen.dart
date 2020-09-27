@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/custom_container.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/setup.dart';
+import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/login/login_screen.dart';
+import 'package:mozin/views/shared/blocs/default_state.dart';
+import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
+import 'package:mozin/views/shared/extension.dart';
 
 class MeScreen extends StatefulWidget {
   @override
@@ -7,30 +13,35 @@ class MeScreen extends StatefulWidget {
 }
 
 class _MeScreenState extends State<MeScreen> {
+  AuthenticationBloc _authenticationBloc;
+
   @override
-  Widget build(BuildContext context) {
-    return _buildBody();
+  void initState() {
+    _authenticationBloc = getItInstance<AuthenticationBloc>()
+      ..add(CheckAuthenticated());
+    super.initState();
   }
 
-  Widget _buildBody() {
-    return CustomContainer(
-      child: InkWell(
-        onTap: () {
-          print('tocou');
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Informações do usuário e login por aqui',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 28),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AuthenticationBloc, DefaultState>(
+      cubit: _authenticationBloc,
+      listener: (BuildContext context, DefaultState state) {
+        if (state is Error) {
+          context.showSnackBar('message');
+        }
+      },
+      builder: (BuildContext context, DefaultState state) {
+        if (state is Loading) {
+          return CustomCircularProgressIndicator();
+        }
+
+        if (state is AuthenticationSuccess) {}
+
+        return SingleChildScrollView(
+          child: LoginScreen(),
+        );
+      },
     );
   }
 }

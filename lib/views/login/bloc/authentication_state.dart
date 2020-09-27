@@ -8,4 +8,6 @@ class AuthenticationSuccess extends DefaultState {
   AuthenticationSuccess(this.user);
 }
 
+class Unauthenticated extends DefaultState {}
+
 class LogoutSuccess extends DefaultState {}
