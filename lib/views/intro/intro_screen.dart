@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
-import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/onboading.dart';
 import 'package:mozin/views/screen_manager.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';
@@ -45,9 +44,7 @@ class _IntroScreenState extends State<IntroScreen> {
         } else if (state is RedirectHome) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (_) => ScreenManager(
-                authenticationBloc: getItInstance<AuthenticationBloc>(),
-              ),
+              builder: (_) => ScreenManager(),
             ),
             (route) => false,
           );

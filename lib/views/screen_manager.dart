@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/interest/interest_screen.dart';
-import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
@@ -15,13 +14,6 @@ import 'package:mozin/views/time_line/time_line_screen.dart';
 import 'package:mozin/views/shared/extension.dart';
 
 class ScreenManager extends StatefulWidget {
-  final AuthenticationBloc authenticationBloc;
-
-  const ScreenManager({
-    Key key,
-    @required this.authenticationBloc,
-  }) : super(key: key);
-
   @override
   _ScreenManagerState createState() => _ScreenManagerState();
 }
@@ -91,9 +83,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.ME:
         return MeScreen();
       case DEFAULT_MENU_ENUM.MORE:
-        return MoreScreen(
-          authenticationBloc: widget.authenticationBloc,
-        );
+        return MoreScreen();
       case DEFAULT_MENU_ENUM.HOME:
       default:
         return HomeScreen();
