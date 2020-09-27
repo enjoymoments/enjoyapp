@@ -12,7 +12,7 @@ import 'package:mozin/modules/user/repositories/user_repository.dart';
 import 'package:mozin/modules/user/services/user_service.dart';
 import 'package:mozin/push_notification_config.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';

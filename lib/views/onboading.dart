@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/screen_manager.dart';
 
 class OnBoardingPage extends StatefulWidget {

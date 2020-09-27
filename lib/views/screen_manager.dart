@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/interest/interest_screen.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';

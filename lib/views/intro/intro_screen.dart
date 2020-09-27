@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/onboading.dart';
 import 'package:mozin/views/screen_manager.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 
 class MoreScreen extends StatefulWidget {
