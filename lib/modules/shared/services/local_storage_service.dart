@@ -14,4 +14,8 @@ class LocalStorageService {
   Future<Value> get<Key, Value>(Key key) async {
     return box.get(key);
   }
+
+  bool containsKey(String key) {
+    return box.containsKey(key);
+  }
 }

@@ -11,6 +11,7 @@ import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/user/repositories/user_repository.dart';
 import 'package:mozin/modules/user/services/user_service.dart';
 import 'package:mozin/push_notification_config.dart';
+import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/views/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
@@ -33,8 +34,8 @@ Future setup() async {
 }
 
 void _registerSingletonModels() {
-  getItInstance
-      .registerSingleton(UserAppModel(id: '', autenticatorProviderId: '', email: '', name: '', photo: ''));
+  getItInstance.registerSingleton(UserAppModel(
+      id: '', autenticatorProviderId: '', email: '', name: '', photo: ''));
 }
 
 void _registerSingletonServices() {
@@ -67,6 +68,8 @@ void _registerBlocs() {
 
   getItInstance.registerLazySingleton<QueuePostBloc>(
       () => QueuePostBloc(getItInstance(), getItInstance(), getItInstance()));
+
+  getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }
 
 void _registerSingletonRepositories() {

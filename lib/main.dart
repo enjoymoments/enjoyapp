@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/theme.dart';
-import 'package:mozin/views/onboading.dart';
+import 'package:mozin/views/intro/intro_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Mozin',
       debugShowCheckedModeBanner: false,
       theme: getTheme(context),
-      home: OnBoardingPage(),
+      home: IntroScreen(),
     );
   }
 }
