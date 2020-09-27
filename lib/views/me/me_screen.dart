@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/login/login_screen.dart';
+import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/views/me/widgets/login/login_screen.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
 import 'package:mozin/views/shared/extension.dart';
@@ -36,7 +36,9 @@ class _MeScreenState extends State<MeScreen> {
           return CustomCircularProgressIndicator();
         }
 
-        if (state is AuthenticationSuccess) {}
+        if (state is AuthenticationSuccess) {
+          return "Conectado".labelIntro(context);
+        }
 
         return SingleChildScrollView(
           child: LoginScreen(),
