@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/custom_container.dart';
+import 'package:mozin/views/shared/extension.dart';
 
 class Connected extends StatelessWidget {
 
@@ -20,12 +21,7 @@ class Connected extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Toque para sair',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor, fontSize: 28),
-              textAlign: TextAlign.center,
-            ),
+            'Toque para sair'.labelIntro(context),
           ],
         ),
       ),
