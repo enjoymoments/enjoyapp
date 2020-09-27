@@ -11,36 +11,43 @@ import 'package:mozin/modules/time_line/models/media_model.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/setup.dart';
+import 'package:mozin/views/shared/enum/default_menu_enum.dart';
 import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:path/path.dart' as Path;
 
-part 'queue_post_event.dart';
-part 'queue_post_state.dart';
+part 'screen_manager_event.dart';
+part 'screen_manager_state.dart';
 
-class QueuePostBloc extends Bloc<QueuePostEvent, QueuePostState> {
-  QueuePostBloc(this.firebaseStorageService, this.user, this.timeLineService)
-      : super(QueuePostState.initial());
+class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
+  ScreenManagerBloc(this.firebaseStorageService, this.user, this.timeLineService)
+      : super(ScreenManagerState.initial());
 
   final TimeLineService timeLineService;
   final FirebaseStorageService firebaseStorageService;
   final UserAppModel user;
 
   @override
-  Stream<QueuePostState> mapEventToState(
-    QueuePostEvent event,
+  Stream<ScreenManagerState> mapEventToState(
+    ScreenManagerEvent event,
   ) async* {
     if (event is QueueNewPost) {
       yield* mapSaveToState(event);
     } else if (event is QueueReset) {
       yield* mapQueueResetToState();
+    } else if (event is TapScreen) {
+      yield* mapTapScreenToState(event);
     }
   }
 
-  Stream<QueuePostState> mapQueueResetToState() async* {
-    yield QueuePostState.initial();
+  Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
+   yield state.copyWith(currentScreen: event.screenSelected); 
   }
 
-  Stream<QueuePostState> mapSaveToState(QueueNewPost event) async* {
+  Stream<ScreenManagerState> mapQueueResetToState() async* {
+    yield ScreenManagerState.initial();
+  }
+
+  Stream<ScreenManagerState> mapSaveToState(QueueNewPost event) async* {
     yield state.copyWith(isLoading: true);
 
     try {

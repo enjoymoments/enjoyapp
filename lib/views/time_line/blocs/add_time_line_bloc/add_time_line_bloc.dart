@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
+import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/views/shared/utils.dart';
 import 'package:uuid/uuid.dart';
 
@@ -49,7 +49,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   }
 
   Stream<AddTimeLineState> mapSaveToState(SaveTimeLine event) async* {
-    getItInstance<QueuePostBloc>()..add(QueueNewPost(event.images));
+    getItInstance<ScreenManagerBloc>()..add(QueueNewPost(event.images));
     yield state.copyWith(isLoading: false, isSuccess: true);
   }
 

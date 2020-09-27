@@ -78,8 +78,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
       yield Loading();
 
       await _authenticationRepository.logOut();
-      //TODO:review logout
-      //await resetInstances();
+      await resetInstances();
 
       yield LogoutSuccess();
     } catch (e) {

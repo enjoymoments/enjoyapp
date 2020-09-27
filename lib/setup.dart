@@ -13,7 +13,7 @@ import 'package:mozin/modules/user/services/user_service.dart';
 import 'package:mozin/push_notification_config.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
+import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -66,8 +66,8 @@ void _registerBlocs() {
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
 
-  getItInstance.registerLazySingleton<QueuePostBloc>(
-      () => QueuePostBloc(getItInstance(), getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<ScreenManagerBloc>(
+      () => ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }

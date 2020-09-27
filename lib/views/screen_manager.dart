@@ -5,7 +5,7 @@ import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/interest/interest_screen.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
-import 'package:mozin/views/shared/blocs/queue_post/queue_post_bloc.dart';
+import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
@@ -19,24 +19,32 @@ class ScreenManager extends StatefulWidget {
 }
 
 class _ScreenManagerState extends State<ScreenManager> {
-  DEFAULT_MENU_ENUM _default_menu_item = DEFAULT_MENU_ENUM.HOME;
-
-  QueuePostBloc _queuePostBloc;
+  ScreenManagerBloc _screenManagerBloc;
 
   @override
   void initState() {
-    _queuePostBloc = getItInstance<QueuePostBloc>();
+    _screenManagerBloc = getItInstance<ScreenManagerBloc>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
-        _tapScreen(itemSelected);
-      }),
+    return BlocConsumer<ScreenManagerBloc, ScreenManagerState>(
+      cubit: _screenManagerBloc,
+      listener: (consumerContext, state) {
+        if (state.isSuccess) {
+          consumerContext.showSnackBar('Opa, deu certo !');
+        }
+      },
+      builder: (BuildContext context, ScreenManagerState state) {
+        return CustomScaffold(
+          child: _buildContent(state),
+          appBar: _buildAppBar(state),
+          bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
+            _tapScreen(itemSelected);
+          }),
+        );
+      },
     );
   }
 
@@ -46,38 +54,23 @@ class _ScreenManagerState extends State<ScreenManager> {
         context,
         MaterialPageRoute(builder: (context) => InterestScreen()),
       );
-    } else {
-      setState(() {
-        _default_menu_item = itemSelected;
-      });
+      return;
     }
+
+    _screenManagerBloc.add(TapScreen(itemSelected));
   }
 
-  Widget _buildBody() {
-    return BlocConsumer<QueuePostBloc, QueuePostState>(
-      cubit: _queuePostBloc,
-      listener: (consumerContext, state) {
-        if (state.isSuccess) {
-          consumerContext.showSnackBar('Opa, deu certo !');
-        }
-      },
-      builder: (context, state) {
-        return _buildContent();
-      },
-    );
-  }
-
-  Widget _buildAppBar() {
+  Widget _buildAppBar(ScreenManagerState state) {
     return AppBar(
       title: Text(
-        _getStringbyScreen(),
+        _getStringbyScreen(state),
       ),
-      actions: _buildActionButtons(),
+      actions: _buildActionButtons(state),
     );
   }
 
-  Widget _buildContent() {
-    switch (_default_menu_item) {
+  Widget _buildContent(ScreenManagerState state) {
+    switch (state.currentScreen) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return TimeLineScreen();
       case DEFAULT_MENU_ENUM.ME:
@@ -90,8 +83,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
   }
 
-  List<Widget> _buildActionButtons() {
-    switch (_default_menu_item) {
+  List<Widget> _buildActionButtons(ScreenManagerState state) {
+    switch (state.currentScreen) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return [
           IconButton(
@@ -114,8 +107,8 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
   }
 
-  String _getStringbyScreen() {
-    switch (_default_menu_item) {
+  String _getStringbyScreen(ScreenManagerState state) {
+    switch (state.currentScreen) {
       case DEFAULT_MENU_ENUM.HOME:
         return 'Início';
       case DEFAULT_MENU_ENUM.TIME_LINE:
