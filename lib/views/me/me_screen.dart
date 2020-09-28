@@ -5,7 +5,9 @@ import 'package:mozin/views/me/widgets/connected/connected.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/me/widgets/login/login_screen.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';
+import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
+import 'package:mozin/views/shared/enum/default_menu_enum.dart';
 import 'package:mozin/views/shared/extension.dart';
 
 class MeScreen extends StatefulWidget {
@@ -31,6 +33,11 @@ class _MeScreenState extends State<MeScreen> {
         if (state is Error) {
           context.showSnackBar('message');
         }
+
+        if (state is LogoutSuccess) {
+          getItInstance<ScreenManagerBloc>()
+            ..add(TapScreen(DEFAULT_MENU_ENUM.ME));
+        }
       },
       builder: (BuildContext context, DefaultState state) {
         if (state is Loading) {
@@ -38,7 +45,9 @@ class _MeScreenState extends State<MeScreen> {
         }
 
         if (state is AuthenticationSuccess) {
-          return Connected(authenticationBloc: _authenticationBloc,);
+          return Connected(
+            authenticationBloc: _authenticationBloc,
+          );
         }
 
         return SingleChildScrollView(
