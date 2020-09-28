@@ -38,13 +38,12 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
     try {
       yield Loading();
 
-      final _user = getItInstance<UserAppModel>();
-      if (_user.id == null || _user.id.isEmpty) {
+      if (!_authenticationRepository.isAuthenticated()) {
         yield Unauthenticated();
         return;
       }
 
-      yield AuthenticationSuccess(_user);
+      yield AuthenticationSuccess(getItInstance<UserAppModel>());
     } catch (e) {
       yield Error(error: 'Ops');
     }

@@ -96,4 +96,8 @@ class AuthenticationRepository {
       throw LogOutFailure();
     }
   }
+
+  bool isAuthenticated() {
+    return _firebaseAuth.currentUser != null && _googleSignIn.currentUser != null;
+  }
 }
