@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/views/screen_manager.dart';
 
-class OnBoardingPage extends StatefulWidget {
+class OnBoardingScreen extends StatefulWidget {
   @override
-  _OnBoardingPageState createState() => _OnBoardingPageState();
+  _OnBoardingScreenState createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingPageState extends State<OnBoardingPage> {
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
