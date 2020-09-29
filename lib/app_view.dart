@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/router.gr.dart';
 import 'package:mozin/setup.dart';
@@ -25,6 +26,12 @@ class _AppViewState extends State<AppView> {
       debugShowCheckedModeBanner: false,
       theme: getTheme(context),
       onGenerateRoute: Router(),
+      builder: ExtendedNavigator.builder(
+        router: Router(),
+        builder: (context, extendedNav) {
+          return extendedNav;
+        },
+      ),
     );
   }
 }
