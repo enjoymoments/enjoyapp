@@ -16,7 +16,7 @@ class SearchPlacesScreen extends StatelessWidget {
       appBar: _buildAppBar(context),
       bottomNavigationBar: InterestMenu(onTap: (itemSelected) {
         if(itemSelected == INTEREST_MENU_ENUM.CHANGE_FILTER) {
-          //TODO:review this route 'interest_screen' duplicate in tree
+          //TODO:review this - route 'interest_screen' duplicate in tree
           ExtendedNavigator.of(context).push(Routes.interest_screen);
         }
       }),
