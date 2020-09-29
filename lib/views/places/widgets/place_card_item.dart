@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/views/places/place_item_details.dart';
+import 'package:mozin/router.gr.dart';
 import 'package:mozin/views/places/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_badge.dart';
 import 'package:mozin/views/shared/extension.dart';
@@ -10,11 +11,7 @@ class PlaceCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => PlaceItemDetails(),
-          ),
-        );
+        ExtendedNavigator.of(context).push(Routes.place_item_details);
       },
       child: Container(
         padding: const EdgeInsets.only(

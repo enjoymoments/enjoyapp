@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/models/gallery_image_model.dart';
 import 'package:mozin/views/shared/custom_dialog.dart';
@@ -62,7 +63,7 @@ class GalleryImageThumbnail extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         onPressed: () {
-          Navigator.of(context).pop();
+          ExtendedNavigator.of(context).pop();
         },
       ),
       FlatButton(
@@ -72,7 +73,7 @@ class GalleryImageThumbnail extends StatelessWidget {
         ),
         onPressed: () {
           addTimeLineBloc.add(RemoveMedia(galleryImageModel));
-          Navigator.of(context).pop();
+          ExtendedNavigator.of(context).pop();
         },
       ),
     ];

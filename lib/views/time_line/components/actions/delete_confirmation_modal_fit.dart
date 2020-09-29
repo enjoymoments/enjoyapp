@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class DeleteConfirmationModalFit extends StatelessWidget {
@@ -22,14 +23,14 @@ class DeleteConfirmationModalFit extends StatelessWidget {
               title: Text('Sim'),
               leading: Icon(Icons.done),
               onTap: () {
-                Navigator.of(context).pop();
+                ExtendedNavigator.of(context).pop();
                 deleteConfirmed();
               },
             ),
             ListTile(
               title: Text('Não'),
               leading: Icon(Icons.close),
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () => ExtendedNavigator.of(context).pop(),
             ),
           ],
         ),

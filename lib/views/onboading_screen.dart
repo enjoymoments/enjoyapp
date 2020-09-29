@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/views/screen_manager.dart';
+import 'package:mozin/router.gr.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override
@@ -11,12 +12,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (_) => ScreenManager(),
-      ),
-      (route) => false,
-    );
+    ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager, (route) => false);
   }
 
   @override

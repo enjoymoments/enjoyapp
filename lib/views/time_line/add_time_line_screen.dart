@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,7 +70,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
 
         if (state.isSuccess) {
           getItInstance<TimelineBloc>()..add(LoadPosts());
-          Navigator.of(context).pop();
+          ExtendedNavigator.of(context).pop();
         }
       },
       builder: (context, state) {

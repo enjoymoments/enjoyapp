@@ -1,15 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/router.gr.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
-import 'package:mozin/views/interest/interest_screen.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
 import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
-import 'package:mozin/views/time_line/add_time_line_screen.dart';
 import 'package:mozin/views/time_line/time_line_screen.dart';
 import 'package:mozin/views/shared/extension.dart';
 
@@ -50,10 +50,7 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
     if (itemSelected == DEFAULT_MENU_ENUM.SEARCH) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => InterestScreen()),
-      );
+      ExtendedNavigator.of(context).push(Routes.interest_screen);
       return;
     }
 
@@ -90,10 +87,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddTimeLineScreen()),
-              );
+              ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
             },
           ),
         ];

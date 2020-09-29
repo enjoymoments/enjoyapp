@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/models/user_app_model.dart';
+import 'package:mozin/router.gr.dart';
 import 'package:mozin/setup.dart';
-import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/extension.dart';
 
@@ -28,10 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return CustomContainer(
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DayOneScreen()),
-          );
+          ExtendedNavigator.of(context).push(Routes.day_one_screen);
         },
         child: Center(
           child: _buildContent(),

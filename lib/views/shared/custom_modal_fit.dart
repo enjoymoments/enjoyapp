@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class CustomModalFit extends StatelessWidget {
@@ -22,7 +23,7 @@ class CustomModalFit extends StatelessWidget {
               title: Text('Deletar'),
               leading: Icon(Icons.delete),
               onTap: () {
-                Navigator.of(context).pop();
+                ExtendedNavigator.of(context).pop();
                 onTapDelete();
               },
             )

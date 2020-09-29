@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:mozin/router.gr.dart';
 import 'package:mozin/views/interest/widgets/filters/categories/details/interest_categories_details.dart';
 import 'package:mozin/views/interest/widgets/filters/categories/interest_categories.dart';
 import 'package:mozin/views/interest/widgets/filters/general/general_filters_screen.dart';
-import 'package:mozin/views/places/search_places_screen.dart';
 
 class InterestOnBoarding extends StatefulWidget {
   @override
@@ -14,11 +15,8 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (_) => SearchPlacesScreen(),
-      ),
-    );
+    ExtendedNavigator.of(context).pop();
+    ExtendedNavigator.of(context).push(Routes.search_places_screen);
   }
 
   @override
