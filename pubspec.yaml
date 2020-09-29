@@ -19,6 +19,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
+  flutter: ^1.20.3
 
 dependencies:
   flutter:
@@ -54,10 +55,13 @@ dependencies:
   url_launcher: ^5.7.0
   expandable: ^4.1.4
   percent_indicator: ^2.1.6
+  auto_route: ^0.6.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^0.6.8
+  build_runner: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

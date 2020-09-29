@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/router.gr.dart';
 import 'package:mozin/setup.dart';
 import 'package:mozin/theme.dart';
-import 'package:mozin/views/intro/intro_screen.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 
 class AppView extends StatefulWidget {
@@ -24,7 +24,7 @@ class _AppViewState extends State<AppView> {
       title: 'Mozin',
       debugShowCheckedModeBanner: false,
       theme: getTheme(context),
-      home: IntroScreen(),
+      onGenerateRoute: Router(),
     );
   }
 }
