@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/enum/default_menu_enum.dart';
+import 'package:mozin/views/interest/widgets/enums/interest_menu_enum.dart';
 
 class InterestMenu extends StatefulWidget {
-  final Function(DEFAULT_MENU_ENUM) onTap;
+  final Function(INTEREST_MENU_ENUM) onTap;
 
   const InterestMenu({Key key, this.onTap}) : super(key: key);
 
@@ -20,7 +20,7 @@ class _InterestMenuState extends State<InterestMenu> {
       currentIndex: _currentIndex,
       onTap: (index) {
         _currentIndex = index;
-        widget.onTap(DEFAULT_MENU_ENUM.values[_currentIndex]);
+        widget.onTap(INTEREST_MENU_ENUM.values[_currentIndex]);
       },
       items: [
         BottomNavigationBarItem(
