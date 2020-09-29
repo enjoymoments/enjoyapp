@@ -15,17 +15,25 @@ part 'authentication_state.dart';
 class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
   AuthenticationBloc(this._authenticationRepository, this._userService,
       this._pushNotificationConfig)
-      : super(AuthenticationInitial());
+      : super(AuthenticationInitial()) {
+    _userSubscription = _authenticationRepository.user.listen(
+      (user) => add(AuthenticationUserChanged(user)),
+    );
+  }
 
   final AuthenticationRepository _authenticationRepository;
   final UserService _userService;
   final PushNotificationConfig _pushNotificationConfig;
 
+  StreamSubscription<UserAppModel> _userSubscription;
+
   @override
   Stream<DefaultState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    if (event is RequestGoogleLogin) {
+    if (event is AuthenticationUserChanged) {
+      _mapAuthenticationUserChangedToState(event);
+    } else if (event is RequestGoogleLogin) {
       yield* mapLogInWithGoogleToState(event);
     } else if (event is Logout) {
       yield* mapLogoutToState();
@@ -34,16 +42,24 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
     }
   }
 
+  @override
+  Future<void> close() {
+    _userSubscription?.cancel();
+    return super.close();
+  }
+
   Stream<DefaultState> mapCheckAuthenticatedToState() async* {
     try {
       yield Loading();
 
-      if (!_authenticationRepository.isAuthenticated()) {
-        yield Unauthenticated();
+      var _user = getItInstance<UserAppModel>();
+
+      if (_user != UserAppModel.empty) {
+        yield AuthenticationSuccess(_user);
         return;
       }
 
-      yield AuthenticationSuccess(getItInstance<UserAppModel>());
+      yield Unauthenticated();
     } catch (e) {
       yield Error(error: 'Ops');
     }
@@ -58,13 +74,9 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
       await _authenticationRepository.logInWithGoogle();
 
       final _user = await _authenticationRepository.user.first;
+
       getItInstance.registerSingleton(_user);
-
-      final _token = await _pushNotificationConfig.configureAsync();
-
-      this
-          ._userService
-          .setTokensPushNotifications(_user.id, _user.email, _token);
+      _settingsUser(_user);
 
       yield AuthenticationSuccess(_user);
     } catch (e) {
@@ -83,5 +95,20 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
     } catch (e) {
       yield Error(error: 'Ops');
     }
+  }
+
+  void _mapAuthenticationUserChangedToState(
+      AuthenticationUserChanged event) async {
+    getItInstance.registerSingleton(event.user);
+
+    if (event.user != UserAppModel.empty) {
+      _settingsUser(event.user);
+    }
+  }
+
+  void _settingsUser(UserAppModel user) async {
+    final _token = await _pushNotificationConfig.configureAsync();
+
+    this._userService.setTokensPushNotifications(user.id, user.email, _token);
   }
 }

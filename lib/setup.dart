@@ -34,8 +34,7 @@ Future setup() async {
 }
 
 void _registerSingletonModels() {
-  getItInstance.registerSingleton(UserAppModel(
-      id: '', autenticatorProviderId: '', email: '', name: '', photo: ''));
+  getItInstance.registerSingleton(UserAppModel.empty);
 }
 
 void _registerSingletonServices() {
