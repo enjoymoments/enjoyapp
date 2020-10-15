@@ -1,4 +1,4 @@
-const String url_endpoint = "";
+const String url_endpoint = "url_endpoint";
 
 Map<String, dynamic> getRemoteConfigDefault() {
   return {url_endpoint: url_endpoint};
