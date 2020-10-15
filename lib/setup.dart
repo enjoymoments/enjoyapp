@@ -1,9 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/firebase/firebase_storage_service.dart';
+import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
+import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/models/user_app_model.dart';
+import 'package:mozin/modules/shared/remote_client_repository.dart';
 import 'package:mozin/modules/shared/services/device_info_service.dart';
 import 'package:mozin/modules/shared/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/services/wrapper_media_service.dart';
@@ -36,6 +40,8 @@ Future setup() async {
   _registerSingletonServices();
   _registerSingletonRepositories();
   _registerBlocs();
+
+  _setupRemoteClientRepository();
 }
 
 Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
@@ -44,6 +50,15 @@ Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
   await remoteConfig.fetch();
   await remoteConfig.activateFetched();
   return remoteConfig;
+}
+
+void _setupRemoteClientRepository() {
+  getItInstance.registerLazySingleton<RemoteClientRepository>(
+      () => RemoteClientRepository(
+            dio: Dio(),
+            url: getItInstance<RemoteConfig>().getString(url_endpoint),
+            loggerService: getItInstance<LoggerService>(),
+          ));
 }
 
 void _registerSingletonModels() {
@@ -66,6 +81,11 @@ void _registerSingletonServices() {
 
   getItInstance.registerLazySingleton<PushNotificationConfig>(
       () => PushNotificationConfig());
+
+  getItInstance.registerLazySingleton<LoggerService>(() => LoggerService(
+      loggerRepository: getItInstance(),
+      deviceInfoService: getItInstance(),
+      userAppModel: getItInstance()));
 }
 
 void _registerBlocs() {
@@ -78,8 +98,8 @@ void _registerBlocs() {
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
 
-  getItInstance.registerLazySingleton<ScreenManagerBloc>(
-      () => ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
+      ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }
@@ -92,6 +112,9 @@ void _registerSingletonRepositories() {
       .registerLazySingleton<TimeLineRepository>(() => TimeLineRepository());
 
   getItInstance.registerLazySingleton<UserRepository>(() => UserRepository());
+
+  getItInstance
+      .registerLazySingleton<LoggerRepository>(() => LoggerRepository());
 }
 
 Future<LocalStorageService> _setupHive() async {
