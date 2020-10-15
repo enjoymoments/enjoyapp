@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
@@ -11,6 +12,7 @@ import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/user/repositories/user_repository.dart';
 import 'package:mozin/modules/user/services/user_service.dart';
 import 'package:mozin/push_notification_config.dart';
+import 'package:mozin/remote_config.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
@@ -27,10 +29,21 @@ Future setup() async {
   var localstorage = await _setupHive();
   getItInstance.registerSingleton(localstorage);
 
+  var remoteConfig = await _setupFirebaseRemoteConfig();
+  getItInstance.registerSingleton(remoteConfig);
+
   _registerSingletonModels();
   _registerSingletonServices();
   _registerSingletonRepositories();
   _registerBlocs();
+}
+
+Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
+  final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  await remoteConfig.setDefaults(getRemoteConfigDefault());
+  await remoteConfig.fetch();
+  await remoteConfig.activateFetched();
+  return remoteConfig;
 }
 
 void _registerSingletonModels() {
