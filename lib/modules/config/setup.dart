@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
+import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
@@ -20,8 +22,6 @@ import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
-import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
-import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 

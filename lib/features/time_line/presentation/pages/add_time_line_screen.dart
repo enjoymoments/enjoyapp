@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
+import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/extension.dart';
-import 'package:mozin/views/time_line/blocs/add_time_line_bloc/add_time_line_bloc.dart';
-import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
-import 'package:mozin/views/time_line/components/image_items.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
   @override

@@ -7,7 +7,7 @@ import 'package:mozin/views/onboading_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
 import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';
 import 'package:mozin/views/screen_manager.dart';
-import 'package:mozin/views/time_line/add_time_line_screen.dart';
+import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[

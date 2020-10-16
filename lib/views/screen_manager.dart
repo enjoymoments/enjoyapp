@@ -10,7 +10,7 @@ import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/default_menu.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
-import 'package:mozin/views/time_line/time_line_screen.dart';
+import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
 import 'package:mozin/views/shared/extension.dart';
 
 class ScreenManager extends StatefulWidget {

@@ -17,7 +17,7 @@ import '../../views/gallery_images/gallery_photo_view_wrapper.dart';
 import '../../views/intro/intro_screen.dart';
 import '../../views/onboading_screen.dart';
 import '../../views/screen_manager.dart';
-import '../../views/time_line/add_time_line_screen.dart';
+import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
 import '../shared/general/models/gallery_image_model.dart';
 
 class Routes {

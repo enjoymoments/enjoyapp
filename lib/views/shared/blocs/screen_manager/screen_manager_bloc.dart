@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
@@ -12,7 +13,6 @@ import 'package:mozin/modules/time_line/models/time_line_model.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/shared/enum/default_menu_enum.dart';
-import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:path/path.dart' as Path;
 
 part 'screen_manager_event.dart';
