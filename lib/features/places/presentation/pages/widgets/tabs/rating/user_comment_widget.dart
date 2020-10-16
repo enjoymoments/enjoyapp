@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/places/widgets/rating_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_border.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/extension.dart';

@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/views/places/widgets/tabs/builder_tabs.dart';
-import 'package:mozin/views/places/widgets/rating_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/builder_tabs.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';
 import 'package:mozin/views/shared/extension.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/places/widgets/tabs/photos/photo_item_widget.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photo_item_widget.dart';
 
 class PhotosTabItem extends StatelessWidget {
   @override

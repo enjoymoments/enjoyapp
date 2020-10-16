@@ -4,8 +4,8 @@ import 'package:mozin/views/day_one/day_one_screen.dart';
 import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
 import 'package:mozin/views/intro/intro_screen.dart';
 import 'package:mozin/views/onboading_screen.dart';
-import 'package:mozin/views/places/place_item_details.dart';
-import 'package:mozin/views/places/search_places_screen.dart';
+import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
+import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';
 import 'package:mozin/views/screen_manager.dart';
 import 'package:mozin/views/time_line/add_time_line_screen.dart';
 

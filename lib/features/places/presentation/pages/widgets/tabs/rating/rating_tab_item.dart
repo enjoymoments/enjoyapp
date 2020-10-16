@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/places/widgets/tabs/rating/percentage_widget.dart';
-import 'package:mozin/views/places/widgets/tabs/rating/user_comment_widget.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/percentage_widget.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/user_comment_widget.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
 class RatingTabItem extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/views/places/widgets/tabs/general/general_tab_item.dart';
-import 'package:mozin/views/places/widgets/tabs/photos/photos_tab_item.dart';
-import 'package:mozin/views/places/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/views/shared/custom_border.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 
