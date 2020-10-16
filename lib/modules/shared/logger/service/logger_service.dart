@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
-import 'package:mozin/modules/shared/models/user_app_model.dart';
-import 'package:mozin/modules/shared/services/device_info_service.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/services/device_info_service.dart';
 import 'package:package_info/package_info.dart';
 
 class LoggerService {

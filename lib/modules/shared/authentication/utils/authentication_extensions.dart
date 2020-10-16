@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mozin/modules/shared/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 
 extension user on User {
   UserAppModel get toUser {

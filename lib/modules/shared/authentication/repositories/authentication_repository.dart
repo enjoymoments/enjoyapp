@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mozin/modules/authentication/exceptions/authentication_exceptions.dart';
-import 'package:mozin/modules/authentication/utils/authentication_extensions.dart';
-import 'package:mozin/modules/shared/models/user_app_model.dart';
+import 'package:mozin/modules/shared/authentication/exceptions/authentication_exceptions.dart';
+import 'package:mozin/modules/shared/authentication/utils/authentication_extensions.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 
 /// {@template authentication_repository}
 /// Repository which manages user authentication.

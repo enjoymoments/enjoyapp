@@ -18,7 +18,7 @@ import '../../views/intro/intro_screen.dart';
 import '../../views/onboading_screen.dart';
 import '../../views/screen_manager.dart';
 import '../../views/time_line/add_time_line_screen.dart';
-import '../shared/models/gallery_image_model.dart';
+import '../shared/general/models/gallery_image_model.dart';
 
 class Routes {
   static const String intro_screen = '/';

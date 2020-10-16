@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mozin/modules/firebase/firebase_instance_provider.dart';
+import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 
 class UserRepository {
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();

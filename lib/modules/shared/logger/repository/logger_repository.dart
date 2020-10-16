@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:mozin/modules/firebase/firebase_instance_provider.dart';
+import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 
 class LoggerRepository {

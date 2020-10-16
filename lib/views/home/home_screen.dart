@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/shared/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/shared/custom_container.dart';

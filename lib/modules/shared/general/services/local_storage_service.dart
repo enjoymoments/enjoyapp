@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:mozin/modules/shared/models/key_value.dart';
+import 'package:mozin/modules/shared/general/models/key_value.dart';
 
 class LocalStorageService {
 

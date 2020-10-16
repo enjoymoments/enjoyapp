@@ -1,4 +1,4 @@
-import 'package:mozin/modules/firebase/firebase_instance_provider.dart';
+import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/time_line/entities/time_line_item_entity.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 
