@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/interest/widgets/enums/interest_menu_enum.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
 
 class InterestMenu extends StatefulWidget {
   final Function(INTEREST_MENU_ENUM) onTap;

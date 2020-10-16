@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/views/interest/widgets/enums/interest_menu_enum.dart';
-import 'package:mozin/views/interest/widgets/interest_menu.dart';
 import 'package:mozin/views/places/widgets/place_card_item.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/custom_scaffold.dart';

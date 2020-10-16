@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/interest/widgets/filters/general/widgets/custom_range_filter.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/widgets/custom_range_filter.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/shared/extension.dart';
 import 'package:mozin/views/shared/spacer_box.dart';

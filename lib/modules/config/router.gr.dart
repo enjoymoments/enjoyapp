@@ -9,16 +9,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../shared/models/gallery_image_model.dart';
+import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../views/day_one/day_one_screen.dart';
 import '../../views/gallery_images/gallery_photo_view_wrapper.dart';
-import '../../views/interest/interest_screen.dart';
 import '../../views/intro/intro_screen.dart';
 import '../../views/onboading_screen.dart';
 import '../../views/places/place_item_details.dart';
 import '../../views/places/search_places_screen.dart';
 import '../../views/screen_manager.dart';
 import '../../views/time_line/add_time_line_screen.dart';
+import '../shared/models/gallery_image_model.dart';
 
 class Routes {
   static const String intro_screen = '/';
