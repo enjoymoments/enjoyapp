@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
-import 'package:mozin/modules/time_line/models/media_model.dart';
-import 'package:mozin/modules/time_line/models/time_line_model.dart';
-import 'package:mozin/modules/time_line/services/time_line_service.dart';
+import 'package:mozin/features/time_line/data/models/media_model.dart';
+import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:path/path.dart' as Path;
@@ -19,10 +19,10 @@ part 'screen_manager_event.dart';
 part 'screen_manager_state.dart';
 
 class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
-  ScreenManagerBloc(this.firebaseStorageService, this.user, this.timeLineService)
+  ScreenManagerBloc(this.firebaseStorageService, this.user, this.timelineRepository)
       : super(ScreenManagerState.initial());
 
-  final TimeLineService timeLineService;
+  final TimelineRepository timelineRepository;
   final FirebaseStorageService firebaseStorageService;
   final UserAppModel user;
 
@@ -54,7 +54,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       final keyValues = await this._uploadMedias(event.medias);
 
       final transform = _transformTimeLineModel(keyValues);
-      await this.timeLineService.addTimeLineItem(temp_time_line, transform);
+      await this.timelineRepository.addTimeLineItem(temp_time_line, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 

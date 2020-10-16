@@ -1,33 +1,32 @@
-import 'package:mozin/features/time_line/domain/entities/time_line.dart';
+import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
+import 'package:mozin/features/time_line/data/models/media_model.dart';
+import 'package:mozin/package_view/utils.dart';
 
-class Time_lineModel extends Time_line {
-  
-  const Time_lineModel();
-  // const Time_lineModel(
-  //     {})
-  //     : super();
+class TimeLineItemModel {
+  DateTime dateCreation;
+  List<MediaModel> medias;
 
-  factory Time_lineModel.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> data = <String, dynamic>{};
-    data = json;
-    
-    return Time_lineModel(
-      
-    );
-  }
+  TimeLineItemModel({
+    this.dateCreation,
+    this.medias,
+  });
 
-  @override
-  String toString() {
-    return '''
-    ''';
-  }
+  String get dateCreationFormatted => DateUtils.dateFormat(dateCreation);
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
+    return {
+      "medias": medias != null ? _toJsonMedias() : [],
+    };
   }
 
-  Time_lineModel copyWith() {
-    return Time_lineModel();
+  List<Map<String, dynamic>> _toJsonMedias() {
+    return medias.map<Map<String, dynamic>>((item) => item.toJson()).toList();
+  }
+
+  static TimeLineItemModel fromEntity(TimeLineItemEntity entity) {
+    return TimeLineItemModel(
+      dateCreation: entity.dateCreation,
+      medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),
+    );
   }
 }

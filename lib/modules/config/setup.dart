@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
+import 'package:mozin/features/time_line/data/repositories/time_line_repository_impl.dart';
+import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
@@ -13,8 +16,6 @@ import 'package:mozin/modules/shared/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/device_info_service.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
-import 'package:mozin/modules/time_line/repositories/time_line_repository.dart';
-import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/shared/user/repositories/user_repository.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
@@ -39,6 +40,7 @@ Future setup() async {
   _registerSingletonModels();
   _registerSingletonServices();
   _registerSingletonRepositories();
+  _registerSingletonDataSources();
   _registerBlocs();
 
   _setupRemoteClientRepository();
@@ -73,8 +75,6 @@ void _registerSingletonServices() {
       () => FirebaseStorageService());
   getItInstance
       .registerLazySingleton<DeviceInfoService>(() => DeviceInfoService());
-  getItInstance.registerLazySingleton<TimeLineService>(
-      () => TimeLineService(getItInstance()));
 
   getItInstance
       .registerLazySingleton<UserService>(() => UserService(getItInstance()));
@@ -108,13 +108,18 @@ void _registerSingletonRepositories() {
   getItInstance.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepository());
 
-  getItInstance
-      .registerLazySingleton<TimeLineRepository>(() => TimeLineRepository());
+  getItInstance.registerLazySingleton<TimelineRepository>(
+      () => TimelineRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<UserRepository>(() => UserRepository());
 
   getItInstance
       .registerLazySingleton<LoggerRepository>(() => LoggerRepository());
+}
+
+void _registerSingletonDataSources() {
+  getItInstance.registerLazySingleton<TimelineRemoteDataSource>(
+      () => TimelineRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {

@@ -1,4 +1,4 @@
-import 'package:mozin/modules/time_line/entities/media_entity.dart';
+import 'package:mozin/features/time_line/domain/entities/media_entity.dart';
 
 class MediaModel {
   String id;

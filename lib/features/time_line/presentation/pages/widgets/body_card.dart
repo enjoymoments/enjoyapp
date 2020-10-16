@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/time_line/models/time_line_model.dart';
+import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 
 class BodyCard extends StatelessWidget {
   const BodyCard({Key key, @required this.item}) : super(key: key);

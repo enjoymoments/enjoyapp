@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mozin/modules/time_line/entities/media_entity.dart';
+import 'package:mozin/features/time_line/domain/entities/media_entity.dart';
 
 class TimeLineItemEntity extends Equatable {
   final DateTime dateCreation;
