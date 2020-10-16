@@ -1,5 +1,5 @@
-import 'package:mozin/modules/user/interfaces/user_interface.dart';
-import 'package:mozin/modules/user/repositories/user_repository.dart';
+import 'package:mozin/modules/shared/user/interfaces/user_interface.dart';
+import 'package:mozin/modules/shared/user/repositories/user_repository.dart';
 
 class UserService implements UserIterface {
 

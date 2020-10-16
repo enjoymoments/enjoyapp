@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mozin/modules/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/models/user_app_model.dart';
-import 'package:mozin/modules/user/services/user_service.dart';
+import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';
