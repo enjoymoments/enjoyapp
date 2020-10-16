@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mozin/constants.dart';
+import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/shared/models/key_value.dart';
 import 'package:mozin/modules/shared/services/local_storage_service.dart';
 import 'package:mozin/views/shared/blocs/default_state.dart';

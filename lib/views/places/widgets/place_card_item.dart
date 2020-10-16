@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/router.gr.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/views/places/widgets/rating_item.dart';
 import 'package:mozin/views/shared/custom_badge.dart';
 import 'package:mozin/views/shared/extension.dart';

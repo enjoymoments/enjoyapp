@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/size_config.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/views/shared/spacer_box.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:mozin/views/shared/extension.dart';

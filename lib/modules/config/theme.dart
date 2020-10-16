@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/app_colors.dart';
+import 'package:mozin/modules/config/app_colors.dart';
 
 ThemeData getTheme(BuildContext context) {
   return ThemeData(

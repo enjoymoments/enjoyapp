@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/setup.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
 import 'package:mozin/views/shared/custom_container.dart';
 import 'package:mozin/views/time_line/blocs/time_line_bloc/time_line_bloc.dart';

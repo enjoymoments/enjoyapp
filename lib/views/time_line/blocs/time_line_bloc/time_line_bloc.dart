@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mozin/constants.dart';
+import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 

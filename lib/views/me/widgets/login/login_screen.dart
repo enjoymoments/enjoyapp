@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/setup.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/me/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/views/shared/custom_container.dart';

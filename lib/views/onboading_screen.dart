@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/router.gr.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override

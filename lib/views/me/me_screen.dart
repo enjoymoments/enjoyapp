@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/setup.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/me/widgets/connected/connected.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/me/widgets/login/login_screen.dart';

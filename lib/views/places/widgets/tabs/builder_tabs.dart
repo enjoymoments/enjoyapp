@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/size_config.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/views/places/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/views/places/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/views/places/widgets/tabs/rating/rating_tab_item.dart';
