@@ -4,11 +4,11 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/me/widgets/connected/connected.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/views/me/widgets/login/login_screen.dart';
-import 'package:mozin/views/shared/blocs/default_state.dart';
-import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
-import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
-import 'package:mozin/views/shared/enum/default_menu_enum.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
+import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
+import 'package:mozin/package_view/enum/default_menu_enum.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class MeScreen extends StatefulWidget {
   @override

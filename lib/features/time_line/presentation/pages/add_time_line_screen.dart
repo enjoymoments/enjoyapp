@@ -7,10 +7,10 @@ import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/shared/custom_circular_progress_indicador.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
   @override

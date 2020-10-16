@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/extension.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class RatingItem extends StatelessWidget {
 

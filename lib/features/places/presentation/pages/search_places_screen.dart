@@ -4,9 +4,9 @@ import 'package:mozin/features/interest/presentation/pages/widgets/enums/interes
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class SearchPlacesScreen extends StatelessWidget {
   @override

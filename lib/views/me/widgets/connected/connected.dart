@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class Connected extends StatelessWidget {
 

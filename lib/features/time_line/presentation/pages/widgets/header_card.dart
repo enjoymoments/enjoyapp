@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
-import 'package:mozin/views/shared/custom_modal_fit.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class HeaderCard extends StatelessWidget {
   final Function(ActionHeaderEnum) callback;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_category_item.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class InterestCategories extends StatelessWidget {
   @override

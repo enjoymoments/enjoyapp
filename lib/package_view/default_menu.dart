@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/enum/default_menu_enum.dart';
+import 'package:mozin/package_view/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {
   final Function(DEFAULT_MENU_ENUM) onTap;

@@ -12,7 +12,7 @@ import 'package:mozin/modules/time_line/models/media_model.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
 import 'package:mozin/modules/time_line/services/time_line_service.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/shared/enum/default_menu_enum.dart';
+import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:path/path.dart' as Path;
 
 part 'screen_manager_event.dart';

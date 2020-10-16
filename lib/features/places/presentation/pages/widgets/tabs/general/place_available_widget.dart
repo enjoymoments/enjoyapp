@@ -1,9 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/custom_border.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/custom_border.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class PlaceAvailableWidget extends StatelessWidget {
   final ExpandableController controller = ExpandableController();

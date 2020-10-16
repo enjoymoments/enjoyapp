@@ -6,7 +6,7 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/body_card.da
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/header_card.dart';
 import 'package:mozin/modules/time_line/models/time_line_model.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class TimeLineItem extends StatelessWidget {
   const TimeLineItem(

@@ -3,8 +3,8 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/ge
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/views/shared/custom_border.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/custom_border.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class BuilderTabs extends StatefulWidget {
   @override

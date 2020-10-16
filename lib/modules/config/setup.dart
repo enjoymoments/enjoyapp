@@ -21,7 +21,7 @@ import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
+import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 

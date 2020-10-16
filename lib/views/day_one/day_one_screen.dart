@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_scaffold.dart';
 
 class DayOneScreen extends StatefulWidget {
   @override

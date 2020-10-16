@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_onboarding.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
+import 'package:mozin/package_view/custom_scaffold.dart';
 
 class InterestScreen extends StatelessWidget {
   @override

@@ -7,7 +7,7 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/shared/blocs/default_state.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

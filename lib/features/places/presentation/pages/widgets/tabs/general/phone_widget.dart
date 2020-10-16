@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/phone_modal_fit.dart';
-import 'package:mozin/views/shared/custom_border.dart';
-import 'package:mozin/views/shared/custom_container.dart';
-import 'package:mozin/views/shared/extension.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/custom_border.dart';
+import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class PhoneWidget extends StatelessWidget {
   @override

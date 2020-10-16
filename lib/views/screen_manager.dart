@@ -6,12 +6,12 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/views/home/home_screen.dart';
 import 'package:mozin/views/more/more_screen.dart';
 import 'package:mozin/views/me/me_screen.dart';
-import 'package:mozin/views/shared/blocs/screen_manager/screen_manager_bloc.dart';
-import 'package:mozin/views/shared/custom_scaffold.dart';
-import 'package:mozin/views/shared/default_menu.dart';
-import 'package:mozin/views/shared/enum/default_menu_enum.dart';
+import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
+import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:mozin/package_view/default_menu.dart';
+import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class ScreenManager extends StatefulWidget {
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
-import 'package:mozin/views/shared/blocs/default_state.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'places_event.dart';
 part 'places_state.dart';

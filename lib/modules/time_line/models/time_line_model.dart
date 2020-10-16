@@ -1,6 +1,6 @@
 import 'package:mozin/modules/time_line/entities/time_line_item_entity.dart';
 import 'package:mozin/modules/time_line/models/media_model.dart';
-import 'package:mozin/views/shared/utils.dart';
+import 'package:mozin/package_view/utils.dart';
 
 class TimeLineItemModel {
   DateTime dateCreation;

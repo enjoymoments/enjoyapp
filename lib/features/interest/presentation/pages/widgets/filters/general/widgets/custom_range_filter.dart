@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/views/shared/extension.dart';
-import 'package:mozin/views/shared/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class CustomRangeFilter extends StatefulWidget {
   final String title;

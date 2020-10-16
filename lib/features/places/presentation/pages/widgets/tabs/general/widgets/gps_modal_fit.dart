@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/shared/extension.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class GpsModalFit extends StatelessWidget {
   @override
