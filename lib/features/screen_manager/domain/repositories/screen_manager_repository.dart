@@ -1,2 +1,2 @@
-abstract class Screen_managerRepository {
+abstract class ScreenManagerRepository {
 }

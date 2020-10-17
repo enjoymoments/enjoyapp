@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-class Screen_manager extends Equatable {
+class ScreenManager extends Equatable {
   
-  const Screen_manager();
+  const ScreenManager();
   // const Screen_manager(
   //     {});
 

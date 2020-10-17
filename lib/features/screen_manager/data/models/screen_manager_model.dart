@@ -1,17 +1,17 @@
 import 'package:mozin/features/screen_manager/domain/entities/screen_manager.dart';
 
-class Screen_managerModel extends Screen_manager {
+class ScreenManagerModel extends ScreenManager {
   
-  const Screen_managerModel();
+  const ScreenManagerModel();
   // const Screen_managerModel(
   //     {})
   //     : super();
 
-  factory Screen_managerModel.fromJson(Map<String, dynamic> json) {
+  factory ScreenManagerModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};
     data = json;
     
-    return Screen_managerModel(
+    return ScreenManagerModel(
       
     );
   }
@@ -27,7 +27,7 @@ class Screen_managerModel extends Screen_manager {
     return data;
   }
 
-  Screen_managerModel copyWith() {
-    return Screen_managerModel();
+  ScreenManagerModel copyWith() {
+    return ScreenManagerModel();
   }
 }
