@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
 import 'package:mozin/features/day_one/presentation/pages/day_one_screen.dart';
 import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
-import 'package:mozin/views/intro/intro_screen.dart';
+import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
 import 'package:mozin/views/onboading_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
 import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';

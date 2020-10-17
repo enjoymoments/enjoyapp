@@ -15,7 +15,7 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
 import '../../views/gallery_images/gallery_photo_view_wrapper.dart';
-import '../../views/intro/intro_screen.dart';
+import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../views/onboading_screen.dart';
 import '../../views/screen_manager.dart';
 import '../shared/general/models/gallery_image_model.dart';

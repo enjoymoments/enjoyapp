@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/intro/bloc/intro_bloc.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
