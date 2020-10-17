@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
@@ -14,19 +13,14 @@ class RemoteClientRepository {
     @required this.loggerService,
   });
 
-  Future<Either<Response, Exception>> query(String doc,
-      {Map<String, dynamic> variables}) async {
-    try {
-      Options _opt = _getOptions();
+  Future<dynamic> query(String doc, {Map<String, dynamic> variables}) async {
+    Options _opt = _getOptions();
 
-      var jsonMap = {'query': doc, 'variables': variables};
+    var jsonMap = {'query': doc, 'variables': variables};
 
-      Response response = await dio.post(url, data: jsonMap, options: _opt);
-      return Left<Response, Exception>(response);
-    } on Exception catch (e) {
-      //TODO:implement logger here
-      return Right<Response, Exception>(e);
-    }
+    Response response = await dio.post(url, data: jsonMap, options: _opt);
+    //TODO:implement log here
+    return response.data;
   }
 
   Options _getOptions() {

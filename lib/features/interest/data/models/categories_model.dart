@@ -1,0 +1,60 @@
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
+import 'package:mozin/features/interest/domain/entities/categories.dart';
+
+class CategoriesModel extends Categories {
+  const CategoriesModel({
+    String id,
+    String name,
+    List<SubCategoriesModel> subCategories,
+  }) : super(
+          id: id,
+          name: name,
+          subCategories: subCategories,
+        );
+
+  factory CategoriesModel.fromJson(Map<String, dynamic> json) {
+    var listSubCategories = <SubCategoriesModel>[];
+    json['subCategories'].forEach((dynamic v) {
+      listSubCategories.add(SubCategoriesModel.fromJson(v));
+    });
+
+    return CategoriesModel(
+      id: json['id'],
+      name: json['name'],
+      subCategories: listSubCategories,
+    );
+  }
+
+  @override
+  String toString() {
+    return '''
+    ''';
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+
+    var listSubCategories = [];
+    subCategories.forEach((dynamic v) {
+      listSubCategories.add(v.toJson());
+    });
+
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['subCategories'] = listSubCategories;
+
+    return data;
+  }
+
+  CategoriesModel copyWith({
+    String id,
+    String name,
+    List<SubCategoriesModel> subCategories,
+  }) {
+    return CategoriesModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      subCategories: subCategories ?? this.subCategories,
+    );
+  }
+}
