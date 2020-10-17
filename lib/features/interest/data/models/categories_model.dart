@@ -14,9 +14,12 @@ class CategoriesModel extends Categories {
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) {
     var listSubCategories = <SubCategoriesModel>[];
-    json['subCategories'].forEach((dynamic v) {
-      listSubCategories.add(SubCategoriesModel.fromJson(v));
-    });
+
+    if (json['subCategories'] != null) {
+      json['subCategories'].forEach((dynamic v) {
+        listSubCategories.add(SubCategoriesModel.fromJson(v));
+      });
+    }
 
     return CategoriesModel(
       id: json['id'],

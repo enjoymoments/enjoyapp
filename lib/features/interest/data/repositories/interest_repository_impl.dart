@@ -12,12 +12,12 @@ class InterestRepositoryImpl implements InterestRepository {
   final InterestRemoteDataSource remoteDataSource;
 
   @override
-  Future<Either<CategoriesModel, Exception>> getCategories() async {
+  Future<Either<List<CategoriesModel>, Exception>> getCategories() async {
     try {
       var response = await remoteDataSource.getCategories();
-      return Left<CategoriesModel, Exception>(response);
-    } on Exception catch (e) {
-      return Right<CategoriesModel, Exception>(e);
+      return Left<List<CategoriesModel>, Exception>(response);
+    } on dynamic catch (e) {
+      return Right<List<CategoriesModel>, Exception>(Exception('error'));
     }
   }
 }

@@ -1,17 +1,26 @@
 part of 'interest_bloc.dart';
 
 class InterestState extends DefaultState {
+  InterestState({this.categories});
 
-  InterestState();
+  final List<CategoriesModel> categories;
 
   factory InterestState.initial() {
-    return InterestState();
+    return InterestState(
+      categories: List(),
+    );
   }
 
-  InterestState copyWith() {
-    return InterestState();
+  InterestState copyWith({
+    List<CategoriesModel> categories,
+  }) {
+    return InterestState(
+      categories: categories ?? this.categories,
+    );
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        categories,
+      ];
 }

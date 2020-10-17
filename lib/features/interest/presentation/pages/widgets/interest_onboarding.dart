@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_categories_details.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_categories.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/general_filters_screen.dart';
 import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/modules/config/setup.dart';
 
 class InterestOnBoarding extends StatefulWidget {
   @override
@@ -13,10 +15,12 @@ class InterestOnBoarding extends StatefulWidget {
 
 class _InterestOnBoardingState extends State<InterestOnBoarding> {
   final introKey = GlobalKey<IntroductionScreenState>();
+  InterestBloc _interestBloc;
 
-  void _onIntroEnd(context) {
-    ExtendedNavigator.of(context).pop();
-    ExtendedNavigator.of(context).push(Routes.search_places_screen);
+  @override
+  void initState() {
+    _interestBloc = getItInstance<InterestBloc>()..add(LoadCategories());
+    super.initState();
   }
 
   @override
@@ -57,10 +61,17 @@ class _InterestOnBoardingState extends State<InterestOnBoarding> {
     );
   }
 
+  void _onIntroEnd(context) {
+    ExtendedNavigator.of(context).pop();
+    ExtendedNavigator.of(context).push(Routes.search_places_screen);
+  }
+
   PageViewModel _selectCategories() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: InterestCategories(),
+      bodyWidget: InterestCategories(
+        interestBloc: _interestBloc,
+      ),
     );
   }
 

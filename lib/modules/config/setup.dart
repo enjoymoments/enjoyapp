@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/interest/data/datasources/interest_remote_data_source.dart';
+import 'package:mozin/features/interest/data/repositories/interest_repository_impl.dart';
+import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
+import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
@@ -101,6 +105,9 @@ void _registerBlocs() {
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
 
+  getItInstance.registerLazySingleton<InterestBloc>(
+      () => InterestBloc(interestRepository: getItInstance()));
+
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }
 
@@ -115,11 +122,17 @@ void _registerSingletonRepositories() {
 
   getItInstance
       .registerLazySingleton<LoggerRepository>(() => LoggerRepository());
+
+  getItInstance.registerLazySingleton<InterestRepository>(
+      () => InterestRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
   getItInstance.registerLazySingleton<TimelineRemoteDataSource>(
       () => TimelineRemoteDataSourceImpl(getItInstance()));
+
+  getItInstance.registerLazySingleton<InterestRemoteDataSource>(
+      () => InterestRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {

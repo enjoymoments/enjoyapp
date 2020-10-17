@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/interest/data/models/categories_model.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class InterestCategoryItem extends StatefulWidget {
   const InterestCategoryItem(
-      {Key key, @required this.model, @required this.callbackSelected})
+      {Key key, @required this.categorie, @required this.callbackSelected})
       : super(key: key);
 
-  final dynamic model;
+  final CategoriesModel categorie;
   final Function(bool) callbackSelected;
 
   @override
@@ -24,6 +26,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return _buildCardItem(context);
   }
 
@@ -38,6 +41,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 10.0),
         padding: const EdgeInsets.all(20.0),
+        width: SizeConfig.sizeByPixel(140),
         decoration: myBoxDecoration(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -47,7 +51,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
               size: 30,
               color: _getTextColor(),
             ),
-            "Alimentação".label(
+            widget.categorie.name.label(
               context,
               color: _getTextColor(),
             ),
