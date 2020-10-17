@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 
 class GoogleLoginButton extends StatelessWidget {
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/connected/connected.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/me/widgets/connected/connected.dart';
-import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/me/widgets/login/login_screen.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';

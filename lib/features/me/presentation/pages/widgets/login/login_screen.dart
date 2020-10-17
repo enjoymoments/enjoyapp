@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/views/me/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/views/me/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/spacer_box.dart';
