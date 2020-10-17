@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/package_view/utils.dart';
 import 'package:uuid/uuid.dart';
 

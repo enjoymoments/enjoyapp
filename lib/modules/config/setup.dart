@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
 import 'package:mozin/features/time_line/data/repositories/time_line_repository_impl.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
@@ -22,7 +23,6 @@ import 'package:mozin/modules/shared/user/repositories/user_repository.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/remote_config.dart';
-import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 

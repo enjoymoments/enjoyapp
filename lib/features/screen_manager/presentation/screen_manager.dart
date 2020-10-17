@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/home/presentation/pages/home_screen.dart';
 import 'package:mozin/features/more/presentation/pages/more_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
-import 'package:mozin/package_view/blocs/screen_manager/screen_manager_bloc.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/default_menu.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';

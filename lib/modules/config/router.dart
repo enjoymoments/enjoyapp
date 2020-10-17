@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
 import 'package:mozin/features/day_one/presentation/pages/day_one_screen.dart';
-import 'package:mozin/views/gallery_images/gallery_photo_view_wrapper.dart';
 import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
-import 'package:mozin/views/onboading_screen.dart';
+import 'package:mozin/package_view/gallery_images/gallery_photo_view_wrapper.dart';
+import 'package:mozin/package_view/onboading_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
 import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';
-import 'package:mozin/views/screen_manager.dart';
+import 'package:mozin/features/screen_manager/presentation/screen_manager.dart';
 import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen.dart';
 
 @MaterialAutoRouter(

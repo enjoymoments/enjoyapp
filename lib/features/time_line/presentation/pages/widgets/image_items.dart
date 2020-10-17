@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/views/gallery_images/gallery_image_thumbnail.dart';
+import 'package:mozin/package_view/gallery_images/gallery_image_thumbnail.dart';
 
 class ImageItems extends StatelessWidget {
   final AddTimeLineBloc addTimeLineBloc;
