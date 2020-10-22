@@ -1,7 +1,7 @@
 import 'package:mozin/features/interest/data/models/categories_model.dart';
 
 class FilterChoosedModel {
-  List<CategoriesModel> _categories;
+  final List<CategoriesModel> categories;
 
   factory FilterChoosedModel.initial() {
     return FilterChoosedModel(
@@ -10,16 +10,14 @@ class FilterChoosedModel {
   }
 
   FilterChoosedModel({
-    List<CategoriesModel> categories,
-  }) {
-    _categories = categories;
-  }
+    this.categories,
+  });
 
   void insertCategorie(CategoriesModel item) {
-    _categories.add(item);
+    categories.add(item);
   }
 
   void removeCategorie(CategoriesModel item) {
-    _categories.remove(item);
+    categories.remove(item);
   }
 }

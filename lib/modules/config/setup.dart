@@ -16,6 +16,7 @@ import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/a
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
+import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
@@ -70,7 +71,7 @@ void _setupRemoteClientRepository() {
 
 void _registerSingletonModels() {
   getItInstance.registerSingleton(UserAppModel.empty);
-  getItInstance.registerSingleton(FilterChoosedWrapper());
+  getItInstance.registerSingleton(FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
 }
 
 void _registerSingletonServices() {

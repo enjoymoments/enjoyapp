@@ -37,9 +37,9 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       SelectCategorie event) async* {
     if (event.selected) {
       _filterChoosedWrapper.insertCategorie(event.itemSelected);
+    } else {
+      _filterChoosedWrapper.removeCategorie(event.itemSelected);
     }
-
-    _filterChoosedWrapper.removeCategorie(event.itemSelected);
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {

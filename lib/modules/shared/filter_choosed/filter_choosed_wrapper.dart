@@ -4,12 +4,6 @@ import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.
 class FilterChoosedWrapper {
   FilterChoosedModel _filterChoosed;
 
-  FilterChoosedWrapper({
-    FilterChoosedModel filterChoosed,
-  }) {
-    _filterChoosed = filterChoosed ?? FilterChoosedModel.initial();
-  }
-
   FilterChoosedModel get getFilterChoosed => _filterChoosed;
 
   void assignment(FilterChoosedModel newFilterChoosed) {
