@@ -1,24 +1,28 @@
 part of 'time_line_bloc.dart';
 
-abstract class DefaultBehavior {
-  bool isSuccess;
-  bool isFailure;
-  bool isLoading;
-}
-
-class TimelineState extends Equatable implements DefaultBehavior {
+class TimelineState extends DefaultState {
   TimelineState({
-    this.isFailure,
-    this.isSuccess,
-    this.isLoading,
+    bool isLoading,
+    bool isEmpty,
+    bool isError,
+    bool isSuccess,
+    String errorMessage,
     this.posts,
-  });
+  }): super(
+          isLoading: isLoading,
+          isSuccess: isSuccess,
+          isEmpty: isEmpty,
+          isError: isError,
+          errorMessage: errorMessage,
+        );
 
   factory TimelineState.initial() {
     return TimelineState(
-      isFailure: false,
       isSuccess: false,
+      isEmpty: false,
+      isError: false,
       isLoading: false,
+      errorMessage: null,
       posts: [],
     );
   }
@@ -26,13 +30,17 @@ class TimelineState extends Equatable implements DefaultBehavior {
   TimelineState copyWith({
     bool isLoading,
     bool isSuccess,
-    bool isFailure,
+    bool isEmpty,
+    bool isError,
+    String errorMessage,
     List<TimeLineItemModel> posts,
   }) {
     return TimelineState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
-      isFailure: isFailure ?? this.isFailure,
+      isEmpty: isEmpty ?? this.isEmpty,
+      isError: isError ?? this.isError,
+      errorMessage: errorMessage ?? this.errorMessage,
       posts: posts ?? this.posts,
     );
   }
@@ -40,19 +48,12 @@ class TimelineState extends Equatable implements DefaultBehavior {
   List<TimeLineItemModel> posts;
 
   @override
-  bool isFailure;
-
-  @override
-  bool isSuccess;
-
-  @override
-  bool isLoading;
-
-  @override
   List<Object> get props => [
         isLoading,
         isSuccess,
-        isFailure,
+        isEmpty,
+        isError,
+        errorMessage,
         posts,
       ];
 }

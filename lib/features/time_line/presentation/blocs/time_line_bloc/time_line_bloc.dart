@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'time_line_event.dart';
 part 'time_line_state.dart';
@@ -31,7 +32,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
       yield state.copyWith(isLoading: false, isSuccess: true, posts: posts);
     } catch (e) {
-      yield state.copyWith(isLoading: false, isFailure: true);
+      yield state.copyWith(isLoading: false, isError: true);
     }
   }
 }
