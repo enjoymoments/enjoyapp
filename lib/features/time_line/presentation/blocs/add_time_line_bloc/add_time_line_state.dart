@@ -1,26 +1,33 @@
 part of 'add_time_line_bloc.dart';
 
-class AddTimeLineState extends Equatable {
-  final bool isLoading;
+class AddTimeLineState extends DefaultState {
   final List<GalleryImageModel> images;
-  final bool isSuccess;
-  final bool isFailure;
   final int forceRefresh;
 
   AddTimeLineState({
-    this.isLoading,
+    bool isLoading,
+    bool isEmpty,
+    bool isError,
+    bool isSuccess,
+    String errorMessage,
     this.images,
-    this.isSuccess,
-    this.isFailure,
     this.forceRefresh,
-  });
+  }) : super(
+          isLoading: isLoading,
+          isSuccess: isSuccess,
+          isEmpty: isEmpty,
+          isError: isError,
+          errorMessage: errorMessage,
+        );
 
   factory AddTimeLineState.initial() {
     return AddTimeLineState(
-      isLoading: false,
-      images: List(),
       isSuccess: false,
-      isFailure: false,
+      isEmpty: false,
+      isError: false,
+      isLoading: false,
+      errorMessage: null,
+      images: List(),
       forceRefresh: 0,
     );
   }
@@ -28,14 +35,18 @@ class AddTimeLineState extends Equatable {
   AddTimeLineState copyWith({
     bool isLoading,
     bool isSuccess,
-    bool isFailure,
+    bool isEmpty,
+    bool isError,
+    String errorMessage,
     List<GalleryImageModel> images,
     int forceRefresh,
   }) {
     return AddTimeLineState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
-      isFailure: isFailure ?? this.isFailure,
+      isEmpty: isEmpty ?? this.isEmpty,
+      isError: isError ?? this.isError,
+      errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh,
       images: images,
     );
@@ -45,7 +56,9 @@ class AddTimeLineState extends Equatable {
   List<Object> get props => [
         isLoading,
         isSuccess,
-        isFailure,
+        isEmpty,
+        isError,
+        errorMessage,
         forceRefresh,
         images,
       ];
