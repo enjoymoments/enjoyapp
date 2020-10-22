@@ -15,6 +15,7 @@ import 'package:mozin/features/time_line/domain/repositories/time_line_repositor
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
+import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
@@ -69,6 +70,7 @@ void _setupRemoteClientRepository() {
 
 void _registerSingletonModels() {
   getItInstance.registerSingleton(UserAppModel.empty);
+  getItInstance.registerSingleton(FilterChoosedWrapper());
 }
 
 void _registerSingletonServices() {
@@ -106,7 +108,7 @@ void _registerBlocs() {
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestBloc>(
-      () => InterestBloc(interestRepository: getItInstance()));
+      () => InterestBloc(interestRepository: getItInstance(), filterChoosedWrapper: getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }

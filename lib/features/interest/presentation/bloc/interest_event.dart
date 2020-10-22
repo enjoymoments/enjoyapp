@@ -8,3 +8,10 @@ abstract class InterestEvent extends Equatable {
 }
 
 class LoadCategories extends InterestEvent {}
+
+class SelectCategorie extends InterestEvent {
+  final CategoriesModel itemSelected;
+  final bool selected;
+
+  SelectCategorie({@required this.itemSelected, @required this.selected});
+}

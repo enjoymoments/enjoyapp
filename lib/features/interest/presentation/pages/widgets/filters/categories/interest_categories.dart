@@ -53,7 +53,7 @@ class InterestCategories extends StatelessWidget {
       return InterestCategoryItem(
         categorie: element,
         callbackSelected: (bool selected) {
-          print('selected: ' + selected.toString());
+          interestBloc.add(SelectCategorie(itemSelected: element, selected: selected));
         },
       );
     }).toList();
