@@ -26,11 +26,13 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {
+    yield state.copyWith(isLoading: true);
+
     final response = await _interestRepository.getCategories();
     yield response.fold((categories) {
-      return state.copyWith(categories: categories);
+      return state.copyWith(isLoading:false, categories: categories);
     }, (exception) {
-      return state.copyWith();
+      return state.copyWith(isLoading:false, isError: true);
     });
   }
 }
