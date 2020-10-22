@@ -11,6 +11,8 @@ class DeviceInfoService {
     } else if (Platform.isIOS) {
       return _getMapIOSInfo(deviceInfo);
     }
+
+    return Future.value(Map<String,dynamic>());
   }
 
   Future<Map<String, dynamic>> _getMapAndroidInfo(
