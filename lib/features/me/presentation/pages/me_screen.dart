@@ -5,7 +5,6 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authenti
 import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -27,24 +26,24 @@ class _MeScreenState extends State<MeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationBloc, DefaultState>(
+    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       cubit: _authenticationBloc,
-      listener: (BuildContext context, DefaultState state) {
+      listener: (BuildContext context, AuthenticationState state) {
         if (state is Error) {
           context.showSnackBar('message');
         }
 
-        if (state is LogoutSuccess) {
+        if (state.logoutSuccess) {
           getItInstance<ScreenManagerBloc>()
             ..add(TapScreen(DEFAULT_MENU_ENUM.ME));
         }
       },
-      builder: (BuildContext context, DefaultState state) {
-        if (state is Loading) {
+      builder: (BuildContext context, AuthenticationState state) {
+        if (state.isLoading) {
           return CustomCircularProgressIndicator();
         }
 
-        if (state is AuthenticationSuccess) {
+        if (state.isSuccess) {
           return Connected(
             authenticationBloc: _authenticationBloc,
           );

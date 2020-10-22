@@ -12,10 +12,10 @@ import 'package:mozin/package_view/blocs/default_state.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc(this._authenticationRepository, this._userService,
       this._pushNotificationConfig)
-      : super(AuthenticationInitial()) {
+      : super(AuthenticationState.initial()) {
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AuthenticationUserChanged(user)),
     );
@@ -28,7 +28,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
   StreamSubscription<UserAppModel> _userSubscription;
 
   @override
-  Stream<DefaultState> mapEventToState(
+  Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
     if (event is AuthenticationUserChanged) {
@@ -48,28 +48,28 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
     return super.close();
   }
 
-  Stream<DefaultState> mapCheckAuthenticatedToState() async* {
+  Stream<AuthenticationState> mapCheckAuthenticatedToState() async* {
     try {
-      yield Loading();
+      yield state.copyWith(isLoading: true);
 
       var _user = getItInstance<UserAppModel>();
 
       if (_user != UserAppModel.empty) {
-        yield AuthenticationSuccess(_user);
+        yield state.copyWith(isLoading: false, isSuccess: true);
         return;
       }
 
-      yield Unauthenticated();
+      yield state.copyWith(isLoading: false, unauthenticated: true);
     } catch (e) {
-      yield Error(error: 'Ops');
+      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 
-  Stream<DefaultState> mapLogInWithGoogleToState(
+  Stream<AuthenticationState> mapLogInWithGoogleToState(
     RequestGoogleLogin event,
   ) async* {
     try {
-      yield Loading();
+      yield state.copyWith(isLoading: true);
 
       await _authenticationRepository.logInWithGoogle();
 
@@ -78,22 +78,22 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, DefaultState> {
       getItInstance.registerSingleton(_user);
       _settingsUser(_user);
 
-      yield AuthenticationSuccess(_user);
+      yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
     } catch (e) {
-      yield Error(error: 'Ops');
+      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 
-  Stream<DefaultState> mapLogoutToState() async* {
+  Stream<AuthenticationState> mapLogoutToState() async* {
     try {
-      yield Loading();
+      yield state.copyWith(isLoading: true);
 
       await _authenticationRepository.logOut();
       await resetInstances();
 
-      yield LogoutSuccess();
+      yield state.copyWith(isLoading: false, logoutSuccess: true);
     } catch (e) {
-      yield Error(error: 'Ops');
+      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 

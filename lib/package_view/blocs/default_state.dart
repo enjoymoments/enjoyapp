@@ -1,34 +1,26 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 class DefaultState extends Equatable {
-  DefaultState([List props = const []]) : super();
+  DefaultState({
+    this.isLoading,
+    this.isSuccess,
+    this.isEmpty,
+    this.isError,
+    this.errorMessage,
+  });
+
+  final bool isLoading;
+  final bool isSuccess;
+  final bool isEmpty;
+  final bool isError;
+  final String errorMessage;
 
   @override
-  List<Object> get props => null;
-}
-
-class Initial extends DefaultState {
-  @override
-  String toString() => 'Initial';
-}
-
-class Loading extends DefaultState {
-  @override
-  String toString() => 'Loading';
-}
-
-class Empty extends DefaultState {
-  @override
-  String toString() => 'Empty';
-}
-
-class Error extends DefaultState {
-
-  final String error;
-
-  Error({@required this.error}) : super([error]);
-
-  @override
-  String toString() => 'Error { errorMessage: $error }';
+  List<Object> get props => [
+        isLoading,
+        isSuccess,
+        isError,
+        isEmpty,
+        errorMessage,
+      ];
 }

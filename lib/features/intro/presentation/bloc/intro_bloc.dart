@@ -10,16 +10,16 @@ import 'package:mozin/package_view/blocs/default_state.dart';
 part 'intro_event.dart';
 part 'intro_state.dart';
 
-class IntroBloc extends Bloc<IntroEvent, DefaultState> {
+class IntroBloc extends Bloc<IntroEvent, IntroState> {
   IntroBloc(LocalStorageService localStorageService)
       : assert(localStorageService != null),
         _localStorageService = localStorageService,
-        super(IntroInitial());
+        super(IntroState.initial());
 
   LocalStorageService _localStorageService;
 
   @override
-  Stream<DefaultState> mapEventToState(
+  Stream<IntroState> mapEventToState(
     IntroEvent event,
   ) async* {
     if (event is VerifyScreen) {
@@ -27,16 +27,16 @@ class IntroBloc extends Bloc<IntroEvent, DefaultState> {
     }
   }
 
-  Stream<DefaultState> mapVerifyToState() async* {
-    yield Loading();
+  Stream<IntroState> mapVerifyToState() async* {
+    yield state.copyWith(isLoading: true);
 
     if (_localStorageService.containsKey(bypass_onboarding_screen)) {
-      yield RedirectHome();
+      yield state.copyWith(isLoading: false, redirectHome: true);
       return;
     }
 
     _localStorageService.put(KeyValue<String, String>(
         key: bypass_onboarding_screen, value: bypass_onboarding_screen));
-    yield RedirectOnboarding();
+    yield state.copyWith(isLoading: false, redirectOnboarding: true);
   }
 }

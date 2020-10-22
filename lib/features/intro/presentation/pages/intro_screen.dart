@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -31,19 +30,19 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<IntroBloc, DefaultState>(
+    return BlocConsumer<IntroBloc, IntroState>(
       cubit: _introBloc,
       listener: (context, state) {
         if (state is Error) {
           context.showSnackBar('Ops... houve um erro ao tentar logar');
-        } else if (state is RedirectOnboarding) {
+        } else if (state.redirectOnboarding) {
           ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.onboarding_screen, (route) => false);
-        } else if (state is RedirectHome) {
+        } else if (state.redirectHome) {
           ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager, (route) => false);
         }
       },
-      builder: (BuildContext context, DefaultState state) {
-        if (state is Loading) {
+      builder: (BuildContext context, IntroState state) {
+        if (state.isLoading) {
           return CustomScaffold(
             backgroundColor: Theme.of(context).primaryColor,
             appBar: null,
