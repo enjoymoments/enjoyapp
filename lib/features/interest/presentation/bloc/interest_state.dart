@@ -8,6 +8,7 @@ class InterestState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     this.categories,
+    this.categoriesSelected,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -17,6 +18,7 @@ class InterestState extends DefaultState {
         );
 
   final List<CategoriesModel> categories;
+  final List<CategoriesModel> categoriesSelected;
 
   factory InterestState.initial() {
     return InterestState(
@@ -26,6 +28,7 @@ class InterestState extends DefaultState {
       isLoading: false,
       errorMessage: null,
       categories: List(),
+      categoriesSelected: List(),
     );
   }
 
@@ -36,6 +39,7 @@ class InterestState extends DefaultState {
     bool isError,
     String errorMessage,
     List<CategoriesModel> categories,
+    List<CategoriesModel> categoriesSelected,
   }) {
     return InterestState(
       isLoading: isLoading ?? this.isLoading,
@@ -44,6 +48,7 @@ class InterestState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       categories: categories ?? this.categories,
+      categoriesSelected: categoriesSelected ?? this.categoriesSelected,
     );
   }
 
@@ -55,5 +60,6 @@ class InterestState extends DefaultState {
         isError,
         errorMessage,
         categories,
+        categoriesSelected,
       ];
 }

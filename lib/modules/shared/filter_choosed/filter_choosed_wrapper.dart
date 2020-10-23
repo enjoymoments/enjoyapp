@@ -11,6 +11,7 @@ class FilterChoosedWrapper {
   }
 
   void insertCategorie(CategoriesModel item) {
+    item.selected = true;
     _filterChoosed.insertCategorie(item);
   }
 

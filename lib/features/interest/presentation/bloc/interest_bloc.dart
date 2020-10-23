@@ -41,6 +41,8 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     } else {
       _filterChoosedWrapper.removeCategorie(event.itemSelected);
     }
+
+    yield state.copyWith(categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {

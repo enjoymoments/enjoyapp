@@ -94,7 +94,9 @@ class _InterestScreenState extends State<InterestScreen> {
   PageViewModel _selectCategoriesDetails() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: InterestCategoriesDetails(),
+      bodyWidget: InterestCategoriesDetails(
+        interestBloc: _interestBloc,
+      ),
     );
   }
 
