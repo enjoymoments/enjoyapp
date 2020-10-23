@@ -20,7 +20,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
 
   @override
   void initState() {
-    _isSelected = false;
+    _isSelected = widget.categorie.selected != null && widget.categorie.selected;
     super.initState();
   }
 

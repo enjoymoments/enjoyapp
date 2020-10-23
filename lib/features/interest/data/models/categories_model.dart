@@ -2,7 +2,8 @@ import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/domain/entities/categories.dart';
 
 class CategoriesModel extends Categories {
-  const CategoriesModel({
+  CategoriesModel({
+    this.selected,
     String id,
     String name,
     List<SubCategoriesModel> subCategories,
@@ -11,6 +12,8 @@ class CategoriesModel extends Categories {
           name: name,
           subCategories: subCategories,
         );
+
+  bool selected;
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) {
     var listSubCategories = <SubCategoriesModel>[];
