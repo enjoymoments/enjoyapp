@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class TimeLineScreen extends StatefulWidget {
   @override
@@ -20,8 +21,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
   @override
   void initState() {
     _timelineBloc = getItInstance<TimelineBloc>();
-    
-    if(_timelineBloc.state.posts.isEmpty) {
+
+    if (_timelineBloc.state.posts.isEmpty) {
       _timelineBloc.add(LoadPosts());
     }
 
@@ -38,7 +39,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       cubit: _timelineBloc,
       builder: (context, state) {
         if (state.isLoading) {
-          return CustomCircularProgressIndicator();
+          return _buildLoading();
         }
 
         if (state.posts.isNotEmpty) {
@@ -63,6 +64,15 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
         return SizedBox.shrink();
       },
+    );
+  }
+
+  Widget _buildLoading() {
+    return ListView.separated(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: 5,
+      itemBuilder: (context, index) => TimeLineItemLoading(),
+      separatorBuilder: (context, index) => SpacerBox.v16,
     );
   }
 }
