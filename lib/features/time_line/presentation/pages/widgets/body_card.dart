@@ -18,8 +18,6 @@ class BodyCard extends StatelessWidget {
             fit: BoxFit.fill,
             //TODO:review
             imageUrl: item.medias[0].url,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ],
       ),
