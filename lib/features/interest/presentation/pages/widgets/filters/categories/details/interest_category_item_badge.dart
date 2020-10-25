@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class InterestCategoryItemBadge extends StatefulWidget {
   const InterestCategoryItemBadge(
-      {Key key, @required this.model, @required this.callbackSelected})
+      {Key key, @required this.item, @required this.callbackSelected})
       : super(key: key);
 
-  final dynamic model;
-  final Function(bool) callbackSelected;
+  final SubCategoriesModel item;
+  final Function(bool, SubCategoriesModel) callbackSelected;
 
   @override
   _InterestCategoryItemBadgeState createState() =>
@@ -19,7 +20,7 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
 
   @override
   void initState() {
-    _isSelected = false;
+    _isSelected = widget.item.selected != null && widget.item.selected;
     super.initState();
   }
 
@@ -32,7 +33,7 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
     return GestureDetector(
       onTap: () {
         _isSelected = !_isSelected;
-        widget.callbackSelected(_isSelected);
+        widget.callbackSelected(_isSelected, widget.item);
 
         setState(() {});
       },
@@ -41,7 +42,7 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
         alignment: Alignment.center,
         width: 95, //TODO:review
         decoration: myBoxDecoration(context),
-        child: "Alimentação".label(
+        child: widget.item.name.label(
           context,
           color: _getTextColor(),
         ),

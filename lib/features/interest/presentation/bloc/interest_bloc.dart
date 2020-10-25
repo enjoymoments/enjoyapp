@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
@@ -31,7 +32,21 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       yield* mapLoadCategoriesToState();
     } else if (event is SelectCategorie) {
       yield* mapSelectCategorieToState(event);
+    } else if (event is SelectSubCategorie) {
+      yield* mapSelectSubCategorieToState(event);
     }
+  }
+
+  Stream<InterestState> mapSelectSubCategorieToState(
+      SelectSubCategorie event) async* {
+    if (event.selected) {
+      _filterChoosedWrapper.insertSubCategorie(event.categorie, event.itemSelected);
+    } else {
+      _filterChoosedWrapper.removeSubCategorie(event.categorie, event.itemSelected);
+    }
+
+    yield state.copyWith(
+        categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
   }
 
   Stream<InterestState> mapSelectCategorieToState(
@@ -42,7 +57,8 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       _filterChoosedWrapper.removeCategorie(event.itemSelected);
     }
 
-    yield state.copyWith(categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
+    yield state.copyWith(
+        categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {
@@ -65,7 +81,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       var element = categories.firstWhere(
           (categorie) => categorie.id == filterElement.id,
           orElse: () => null);
-          
+
       if (element != null) {
         element.selected = true;
       }

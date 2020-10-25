@@ -1,13 +1,16 @@
 import 'package:mozin/features/interest/domain/entities/sub_categories.dart';
 
 class SubCategoriesModel extends SubCategories {
-  const SubCategoriesModel({
+  SubCategoriesModel({
+    this.selected,
     String id,
     String name,
   }) : super(
           id: id,
           name: name,
         );
+
+  bool selected;
 
   factory SubCategoriesModel.fromJson(Map<String, dynamic> json) {
     return SubCategoriesModel(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_category_item_badge.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -10,7 +11,7 @@ class InterestCategoryItemDetails extends StatelessWidget {
       : super(key: key);
 
   final CategoriesModel item;
-  final Function(bool) callbackSelected;
+  final Function(bool, SubCategoriesModel) callbackSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class InterestCategoryItemDetails extends StatelessWidget {
   List<Widget> _generateItems() {
     return item.subCategories.map((element) {
       return InterestCategoryItemBadge(
-        model: item,
+        item: element,
         callbackSelected: callbackSelected,
       );
     }).toList();

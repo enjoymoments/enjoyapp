@@ -1,4 +1,5 @@
 import 'package:mozin/features/interest/data/models/categories_model.dart';
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 
 class FilterChoosedWrapper {
@@ -17,5 +18,13 @@ class FilterChoosedWrapper {
 
   void removeCategorie(CategoriesModel item) {
     _filterChoosed.removeCategorie(item);
+  }
+
+  void insertSubCategorie(CategoriesModel categorie, SubCategoriesModel item) { 
+    _filterChoosed.insertSubCategorie(categorie, item);
+  }
+
+  void removeSubCategorie(CategoriesModel categorie, SubCategoriesModel item) {
+    _filterChoosed.removeSubCategorie(categorie, item);
   }
 }
