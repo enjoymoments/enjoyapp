@@ -20,7 +20,6 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
   @override
   void initState() {
     _timelineBloc = getItInstance<TimelineBloc>();
-    _timelineBloc.add(LoadPosts());
 
     super.initState();
   }
