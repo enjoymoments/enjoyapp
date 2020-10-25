@@ -8,6 +8,7 @@ class TimelineState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     this.posts,
+    this.forceRefresh,
   }): super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -24,6 +25,7 @@ class TimelineState extends DefaultState {
       isLoading: false,
       errorMessage: null,
       posts: [],
+      forceRefresh: 0,
     );
   }
 
@@ -34,6 +36,7 @@ class TimelineState extends DefaultState {
     bool isError,
     String errorMessage,
     List<TimeLineItemModel> posts,
+    int forceRefresh,
   }) {
     return TimelineState(
       isLoading: isLoading ?? this.isLoading,
@@ -42,10 +45,12 @@ class TimelineState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       posts: posts ?? this.posts,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
-  List<TimeLineItemModel> posts;
+  final List<TimeLineItemModel> posts;
+  final int forceRefresh;
 
   @override
   List<Object> get props => [
@@ -55,5 +60,6 @@ class TimelineState extends DefaultState {
         isError,
         errorMessage,
         posts,
+        forceRefresh,
       ];
 }

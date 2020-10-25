@@ -6,6 +6,7 @@ import 'package:mozin/features/time_line/domain/repositories/time_line_repositor
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/utils.dart';
 
 part 'time_line_event.dart';
 part 'time_line_state.dart';
@@ -27,12 +28,16 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   }
 
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
-    yield state.copyWith(isLoading: true);
-
     try {
-      await this.timelineRepository.deletePost(temp_time_line, event.post.id);
-
-      this.add(LoadPosts());
+      if (state.posts.remove(event.post)) {
+        await this.timelineRepository.deletePost(temp_time_line, event.post.id);
+        yield state.copyWith(
+          isLoading: false,
+          isSuccess: true,
+          posts: state.posts,
+          forceRefresh: StateUtils.generateRandomNumber(),
+        );
+      }
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
