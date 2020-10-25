@@ -27,4 +27,13 @@ class TimelineRepositoryImpl implements TimelineRepository {
       return Future.value(null);
     }
   }
+
+  @override
+  void deletePost(String timelineID, String postID) {
+    try {
+      return remoteDataSource.deletePost(timelineID, postID);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

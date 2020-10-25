@@ -1,3 +1,5 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
@@ -6,12 +8,14 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 abstract class TimelineRemoteDataSource {
   Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID);
+  void deletePost(String timelineID, String postID);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
-  TimelineRemoteDataSourceImpl(this.remoteClientRepository);
+  TimelineRemoteDataSourceImpl(this.remoteClientRepository, this.remoteConfig);
 
   final RemoteClientRepository remoteClientRepository;
+  final RemoteConfig remoteConfig;
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
   static String _collectionRoot = 'timeline';
@@ -45,5 +49,11 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
             TimeLineItemEntity.fromSnapshot(item));
       },
     ).toList();
+  }
+
+  @override
+  void deletePost(String timelineID, String postID) {
+    remoteClientRepository.dio.delete(
+        '${remoteConfig.getString(url_functions)}/deleteTimeLineItem?timelineID=$timelineID&postID=$postID');
   }
 }
