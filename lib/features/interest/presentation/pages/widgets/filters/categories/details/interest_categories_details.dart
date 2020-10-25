@@ -31,7 +31,7 @@ class InterestCategoriesDetails extends StatelessWidget {
   }
 
   List<Widget> _buildCards() {
-    return interestBloc.state.categoriesSelected.map((element) {
+    return interestBloc.state.filtersSelected.categories.map((element) {
       return InterestCategoryItemDetails(
         item: element,
         callbackSelected: (bool selected, SubCategoriesModel item) {

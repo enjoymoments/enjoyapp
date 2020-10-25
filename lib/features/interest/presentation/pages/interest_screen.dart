@@ -103,7 +103,9 @@ class _InterestScreenState extends State<InterestScreen> {
   PageViewModel _selectedGeneralFilters() {
     return PageViewModel(
       titleWidget: SizedBox.shrink(),
-      bodyWidget: GeneralFiltersScreen(),
+      bodyWidget: GeneralFiltersScreen(
+        generalFilters: _interestBloc.state.filtersSelected.generalFilters,
+      ),
     );
   }
 }

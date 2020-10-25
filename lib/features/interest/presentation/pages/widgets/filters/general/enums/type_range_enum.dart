@@ -1,0 +1,1 @@
+enum TypeRangeEnum { price, distance, time}

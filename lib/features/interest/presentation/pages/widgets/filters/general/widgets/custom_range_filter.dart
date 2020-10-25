@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/enums/type_range_enum.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
@@ -18,6 +21,8 @@ class CustomRangeFilter extends StatefulWidget {
 
   final RangeValues selectedRanges;
 
+  final TypeRangeEnum typeRange;
+
   const CustomRangeFilter({
     Key key,
     @required this.title,
@@ -29,6 +34,7 @@ class CustomRangeFilter extends StatefulWidget {
     @required this.prefixStartRange,
     @required this.prefixEndRange,
     @required this.selectedRanges,
+    @required this.typeRange,
   }) : super(key: key);
 
   @override
@@ -37,10 +43,12 @@ class CustomRangeFilter extends StatefulWidget {
 
 class _CustomRangeFilterState extends State<CustomRangeFilter> {
   RangeValues _selectedRanges;
+  InterestBloc _interestBloc;
 
   @override
   void initState() {
     super.initState();
+    _interestBloc = getItInstance<InterestBloc>();
     _selectedRanges = widget.selectedRanges;
   }
 
@@ -94,11 +102,14 @@ class _CustomRangeFilterState extends State<CustomRangeFilter> {
         max: widget.max,
         divisions: widget.divisions,
         onChanged: (RangeValues value) {
+          _invokeChange(value);
+
           setState(() {
             _selectedRanges = value;
           });
         },
-        labels: RangeLabels('${_selectedRanges.start}', '${_selectedRanges.end}'),
+        labels:
+            RangeLabels('${_selectedRanges.start}', '${_selectedRanges.end}'),
       ),
     );
   }
@@ -112,5 +123,18 @@ class _CustomRangeFilterState extends State<CustomRangeFilter> {
         prefix.description(context),
       ],
     );
+  }
+
+  void _invokeChange(RangeValues value) {
+    if (widget.typeRange == TypeRangeEnum.price) {
+      _interestBloc
+          .add(ChangePrice(minPrice: value.start, maxPrice: value.end));
+    } else if (widget.typeRange == TypeRangeEnum.distance) {
+      _interestBloc
+          .add(ChangeDistance(minDistance: value.start, maxDistance: value.end));
+    } else if (widget.typeRange == TypeRangeEnum.time) {
+      _interestBloc
+          .add(ChangeTime(minTime: value.start, maxTime: value.end));
+    }
   }
 }

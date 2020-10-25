@@ -34,7 +34,40 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       yield* mapSelectCategorieToState(event);
     } else if (event is SelectSubCategorie) {
       yield* mapSelectSubCategorieToState(event);
+    } else if (event is ChangePrice) {
+      yield* mapChangePriceToState(event);
+    } else if (event is ChangeDistance) {
+      yield* mapChangeDistanceToState(event);
+    } else if (event is ChangeTime) {
+      yield* mapChangeTimeToState(event);
     }
+  }
+
+  Stream<InterestState> mapChangeTimeToState(
+      ChangeTime event) async* {
+    
+    _filterChoosedWrapper.changeTime(event.minTime, event.maxTime);
+
+    yield state.copyWith(
+        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+  }
+
+  Stream<InterestState> mapChangeDistanceToState(
+      ChangeDistance event) async* {
+    
+    _filterChoosedWrapper.changeDistance(event.minDistance, event.maxDistance);
+
+    yield state.copyWith(
+        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+  }
+
+  Stream<InterestState> mapChangePriceToState(
+      ChangePrice event) async* {
+    
+    _filterChoosedWrapper.changePrice(event.minPrice, event.maxPrice);
+
+    yield state.copyWith(
+        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
   }
 
   Stream<InterestState> mapSelectSubCategorieToState(
@@ -46,7 +79,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
 
     yield state.copyWith(
-        categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
+        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
   }
 
   Stream<InterestState> mapSelectCategorieToState(
@@ -58,7 +91,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
 
     yield state.copyWith(
-        categoriesSelected: _filterChoosedWrapper.getFilterChoosed.categories);
+        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {

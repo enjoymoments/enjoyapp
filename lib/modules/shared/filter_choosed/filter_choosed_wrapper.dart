@@ -11,6 +11,18 @@ class FilterChoosedWrapper {
     _filterChoosed = newFilterChoosed;
   }
 
+  void changePrice(double minPrice, double maxPrice) {
+    _filterChoosed.changePrice(minPrice, maxPrice);
+  }
+
+  void changeDistance(double minDistance, double maxDistance) {
+    _filterChoosed.changeDistance(minDistance, maxDistance);
+  }
+
+  void changeTime(double minTime, double maxTime) {
+    _filterChoosed.changeTime(minTime, maxTime);
+  }
+
   void insertCategorie(CategoriesModel item) {
     item.selected = true;
     _filterChoosed.insertCategorie(item);
