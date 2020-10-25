@@ -144,7 +144,7 @@ void _registerSingletonRepositories() {
 
 void _registerSingletonDataSources() {
   getItInstance.registerLazySingleton<TimelineRemoteDataSource>(
-      () => TimelineRemoteDataSourceImpl(getItInstance()));
+      () => TimelineRemoteDataSourceImpl(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestRemoteDataSource>(
       () => InterestRemoteDataSourceImpl(getItInstance()));
