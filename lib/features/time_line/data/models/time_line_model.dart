@@ -3,10 +3,12 @@ import 'package:mozin/features/time_line/data/models/media_model.dart';
 import 'package:mozin/package_view/utils.dart';
 
 class TimeLineItemModel {
+  String id;
   DateTime dateCreation;
   List<MediaModel> medias;
 
   TimeLineItemModel({
+    this.id,
     this.dateCreation,
     this.medias,
   });
@@ -25,6 +27,7 @@ class TimeLineItemModel {
 
   static TimeLineItemModel fromEntity(TimeLineItemEntity entity) {
     return TimeLineItemModel(
+      id: entity.id,
       dateCreation: entity.dateCreation,
       medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),
     );

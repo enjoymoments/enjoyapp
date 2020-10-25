@@ -29,7 +29,7 @@ class TimelineRepositoryImpl implements TimelineRepository {
   }
 
   @override
-  void deletePost(String timelineID, String postID) {
+  Future<void> deletePost(String timelineID, String postID) {
     try {
       return remoteDataSource.deletePost(timelineID, postID);
     } catch (e) {

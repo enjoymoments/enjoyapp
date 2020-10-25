@@ -8,7 +8,7 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 abstract class TimelineRemoteDataSource {
   Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID);
-  void deletePost(String timelineID, String postID);
+  Future<void> deletePost(String timelineID, String postID);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
@@ -52,8 +52,14 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   }
 
   @override
-  void deletePost(String timelineID, String postID) {
-    remoteClientRepository.dio.delete(
-        '${remoteConfig.getString(url_functions)}/deleteTimeLineItem?timelineID=$timelineID&postID=$postID');
+  Future<void> deletePost(String timelineID, String postID) async {
+    var url = remoteConfig.getString(url_functions);
+
+    await remoteClientRepository.dio.delete(
+        '$url/deleteTimeLineItem',
+        queryParameters: {
+          'timelineID': timelineID,
+          'postID': postID,
+        });
   }
 }

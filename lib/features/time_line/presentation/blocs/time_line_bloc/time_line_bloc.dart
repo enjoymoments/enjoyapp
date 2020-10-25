@@ -21,6 +21,20 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   ) async* {
     if (event is LoadPosts) {
       yield* mapPostsToState();
+    } else if (event is DeletePost) {
+      yield* mapDeletePostToState(event);
+    }
+  }
+
+  Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
+    yield state.copyWith(isLoading: true);
+
+    try {
+      await this.timelineRepository.deletePost(temp_time_line, event.post.id);
+
+      this.add(LoadPosts());
+    } catch (e) {
+      yield state.copyWith(isLoading: false, isError: true);
     }
   }
 
