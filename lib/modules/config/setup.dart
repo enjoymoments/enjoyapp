@@ -8,6 +8,10 @@ import 'package:mozin/features/interest/domain/repositories/interest_repository.
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/places/data/datasources/places_remote_data_source.dart';
+import 'package:mozin/features/places/data/repositories/places_repository_impl.dart';
+import 'package:mozin/features/places/domain/repositories/places_repository.dart';
+import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
 import 'package:mozin/features/time_line/data/repositories/time_line_repository_impl.dart';
@@ -71,7 +75,8 @@ void _setupRemoteClientRepository() {
 
 void _registerSingletonModels() {
   getItInstance.registerSingleton(UserAppModel.empty);
-  getItInstance.registerSingleton(FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
+  getItInstance.registerSingleton(
+      FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
 }
 
 void _registerSingletonServices() {
@@ -108,8 +113,12 @@ void _registerBlocs() {
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
 
-  getItInstance.registerLazySingleton<InterestBloc>(
-      () => InterestBloc(interestRepository: getItInstance(), filterChoosedWrapper: getItInstance()));
+  getItInstance.registerLazySingleton<InterestBloc>(() => InterestBloc(
+      interestRepository: getItInstance(),
+      filterChoosedWrapper: getItInstance()));
+
+  getItInstance.registerLazySingleton<PlacesBloc>(
+      () => PlacesBloc(placesRepository: getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 }
@@ -128,6 +137,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<InterestRepository>(
       () => InterestRepositoryImpl(remoteDataSource: getItInstance()));
+
+  getItInstance.registerLazySingleton<PlacesRepository>(
+      () => PlacesRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
@@ -136,6 +148,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<InterestRemoteDataSource>(
       () => InterestRemoteDataSourceImpl(getItInstance()));
+
+  getItInstance.registerLazySingleton<PlacesRemoteDataSource>(
+      () => PlacesRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {

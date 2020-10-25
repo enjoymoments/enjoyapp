@@ -2,13 +2,28 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
+import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class SearchPlacesScreen extends StatelessWidget {
+class SearchPlacesScreen extends StatefulWidget {
+  @override
+  _SearchPlacesScreenState createState() => _SearchPlacesScreenState();
+}
+
+class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
+  PlacesBloc _placesBloc;
+
+  @override
+  void initState() {
+    _placesBloc = getItInstance<PlacesBloc>()..add(GetCurrentPosition());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

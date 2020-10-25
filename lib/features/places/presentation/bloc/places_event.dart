@@ -5,3 +5,5 @@ abstract class PlacesEvent extends Equatable {
   @override
   List<Object> get props => <Object>[];
 }
+
+class GetCurrentPosition extends PlacesEvent {}
