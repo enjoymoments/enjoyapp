@@ -1,4 +1,4 @@
-package com.example.mozin
+package com.codefactory.mozin
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,4 @@
-package com.example.mozin
+package com.codefactory.mozin
 
 import io.flutter.app.FlutterApplication
 import io.flutter.plugin.common.PluginRegistry

@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:852466867016:android:ac376bb014c1c9d166317d",
+        "mobilesdk_app_id": "1:852466867016:android:4d80cec77d21668266317d",
         "android_client_info": {
-          "package_name": "com.example.mozin"
+          "package_name": "com.codefactory.mozin"
         }
       },
       "oauth_client": [
