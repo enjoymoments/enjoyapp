@@ -9,6 +9,7 @@ class TimelineState extends DefaultState {
     String errorMessage,
     this.posts,
     this.forceRefresh,
+    this.limit,
   }): super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -26,6 +27,7 @@ class TimelineState extends DefaultState {
       errorMessage: null,
       posts: [],
       forceRefresh: 0,
+      limit: 10,
     );
   }
 
@@ -37,6 +39,7 @@ class TimelineState extends DefaultState {
     String errorMessage,
     List<TimeLineItemModel> posts,
     int forceRefresh,
+    int limit,
   }) {
     return TimelineState(
       isLoading: isLoading ?? this.isLoading,
@@ -46,11 +49,13 @@ class TimelineState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       posts: posts ?? this.posts,
       forceRefresh: forceRefresh ?? this.forceRefresh,
+      limit: limit ?? this.limit,
     );
   }
 
   final List<TimeLineItemModel> posts;
   final int forceRefresh;
+  final int limit;
 
   @override
   List<Object> get props => [
@@ -61,5 +66,6 @@ class TimelineState extends DefaultState {
         errorMessage,
         posts,
         forceRefresh,
+        limit,
       ];
 }

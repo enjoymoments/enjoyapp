@@ -20,9 +20,9 @@ class TimelineRepositoryImpl implements TimelineRepository {
   }
 
   @override
-  Future<List<TimeLineItemModel>> getPosts(String timelineID) {
+  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit) {
     try {
-      return remoteDataSource.getPosts(timelineID);
+      return remoteDataSource.getPosts(timelineID, limit);
     } catch (e) {
       return Future.value(null);
     }

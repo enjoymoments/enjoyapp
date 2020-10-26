@@ -7,7 +7,7 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 
 abstract class TimelineRemoteDataSource {
   Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model);
-  Future<List<TimeLineItemModel>> getPosts(String timelineID);
+  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
 }
 
@@ -36,11 +36,12 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   }
 
   @override
-  Future<List<TimeLineItemModel>> getPosts(String timelineID) async {
+  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit) async {
     var collection = _instance.firestore
         .doc('$_collectionRoot/$timelineID')
         .collection('posts')
-        .orderBy('dateCreation', descending: true);
+        .orderBy('dateCreation', descending: true)
+        .limit(limit);
 
     var result = await collection.get();
 

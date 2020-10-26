@@ -47,7 +47,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      final posts = await this.timelineRepository.getPosts(temp_time_line);
+      final posts = await this.timelineRepository.getPosts(temp_time_line, state.limit);
 
       yield state.copyWith(isLoading: false, isSuccess: true, posts: posts);
     } catch (e) {
