@@ -29,13 +29,8 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ScreenManagerBloc, ScreenManagerState>(
+    return BlocBuilder<ScreenManagerBloc, ScreenManagerState>(
       cubit: _screenManagerBloc,
-      listener: (consumerContext, state) {
-        if (state.isSuccess) {
-          consumerContext.showSnackBar('Opa, deu certo !');
-        }
-      },
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
           child: _buildContent(state),
