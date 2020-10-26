@@ -39,7 +39,8 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   Future<List<TimeLineItemModel>> getPosts(String timelineID) async {
     var collection = _instance.firestore
         .doc('$_collectionRoot/$timelineID')
-        .collection('posts');
+        .collection('posts')
+        .orderBy('dateCreation', descending: true);
 
     var result = await collection.get();
 
