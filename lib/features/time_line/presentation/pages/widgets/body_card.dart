@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/photo_item_loading.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/photo_item_loading.dart';
 import 'package:mozin/modules/config/size_config.dart';
 
 class BodyCard extends StatefulWidget {

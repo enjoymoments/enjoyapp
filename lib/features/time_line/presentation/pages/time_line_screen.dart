@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item_loading.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/time_line_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
