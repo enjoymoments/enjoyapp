@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "852466867016-33lgqv0ojepm5fql8tgikaup6fc8qut6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codefactory.mozin",
+            "certificate_hash": "48b7b0e10299dc47bee5f3a5afea65386b072b94"
+          }
+        },
+        {
+          "client_id": "852466867016-i59g5b986s08qsbh0kaucogeqv3re9lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codefactory.mozin",
+            "certificate_hash": "95bcd227bc6dcb40d92aeb803335135475757de1"
+          }
+        },
+        {
           "client_id": "852466867016-m36abse11p6ui6hf53dkansf1ufi5id3.apps.googleusercontent.com",
           "client_type": 3
         }
