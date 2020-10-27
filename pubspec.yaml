@@ -63,6 +63,7 @@ dependencies:
   geolocator: ^6.1.1
   shimmer: ^1.1.2
   flutter_launcher_icons: ^0.8.1
+  firebase_crashlytics: ^0.1.4+1
 
 dev_dependencies:
   flutter_test:
