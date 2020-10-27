@@ -41,7 +41,7 @@ class _DefaultMenuState extends State<DefaultMenu> {
                   widget.onTap(DEFAULT_MENU_ENUM.SEARCH);
                 },
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/icon/icon.png',
                   fit: BoxFit.fill,
                 ),
                 elevation: 2.0,
