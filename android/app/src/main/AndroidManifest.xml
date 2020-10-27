@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="mozin"
+        android:label="Enjoy"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon">
         <activity
