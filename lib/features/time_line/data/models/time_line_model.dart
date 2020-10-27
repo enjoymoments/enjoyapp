@@ -1,5 +1,6 @@
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
 import 'package:mozin/features/time_line/data/models/media_model.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/utils.dart';
 
 class TimeLineItemModel {
@@ -31,5 +32,23 @@ class TimeLineItemModel {
       dateCreation: entity.dateCreation,
       medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),
     );
+  }
+
+  static List<GalleryImageModel> toGalleryImages(List<MediaModel> medias) {
+    final List<GalleryImageModel> galleryItems = [];
+
+    for (var i = 0; i < medias.length; i++) {
+      var item = medias[i];
+      galleryItems.add(
+        GalleryImageModel(
+          id: item.id,
+          index: i,
+          //file: item,
+          url: item.url,
+        ),
+      );
+    }
+
+    return galleryItems;
   }
 }

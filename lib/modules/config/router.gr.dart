@@ -16,6 +16,7 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
+import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import '../../package_view/onboading_screen.dart';
 import '../shared/general/models/gallery_image_model.dart';
@@ -120,6 +121,7 @@ class Router extends RouterBase {
           maxScale: args.maxScale,
           initialIndex: args.initialIndex,
           galleryItems: args.galleryItems,
+          galleryPhotoSourceType: args.galleryPhotoSourceType,
           scrollDirection: args.scrollDirection,
         ),
         settings: data,
@@ -140,6 +142,7 @@ class GalleryPhotoViewWrapperArguments {
   final dynamic maxScale;
   final int initialIndex;
   final List<GalleryImageModel> galleryItems;
+  final GalleryPhotoSourceTypeEnum galleryPhotoSourceType;
   final Axis scrollDirection;
   GalleryPhotoViewWrapperArguments(
       {this.loadingBuilder,
@@ -148,5 +151,6 @@ class GalleryPhotoViewWrapperArguments {
       this.maxScale,
       this.initialIndex,
       @required this.galleryItems,
+      @required this.galleryPhotoSourceType,
       this.scrollDirection = Axis.horizontal});
 }

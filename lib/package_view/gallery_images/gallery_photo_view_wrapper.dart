@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
+import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -11,6 +12,7 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
     this.maxScale,
     this.initialIndex,
     @required this.galleryItems,
+    @required this.galleryPhotoSourceType,
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(initialPage: initialIndex);
 
@@ -22,6 +24,7 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
   final PageController pageController;
   final List<GalleryImageModel> galleryItems;
   final Axis scrollDirection;
+  final GalleryPhotoSourceTypeEnum galleryPhotoSourceType;
 
   @override
   State<StatefulWidget> createState() {
@@ -50,34 +53,15 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
       appBar: AppBar(),
       body: Container(
         decoration: widget.backgroundDecoration,
-        constraints: BoxConstraints.expand(
-          height: MediaQuery.of(context).size.height,
-        ),
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: <Widget>[
-            PhotoViewGallery.builder(
-              scrollPhysics: const BouncingScrollPhysics(),
-              builder: _buildItem,
-              itemCount: widget.galleryItems.length,
-              loadingBuilder: widget.loadingBuilder,
-              backgroundDecoration: widget.backgroundDecoration,
-              pageController: widget.pageController,
-              onPageChanged: onPageChanged,
-              scrollDirection: widget.scrollDirection,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Image ${currentIndex + 1}",
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 17.0,
-                  decoration: null,
-                ),
-              ),
-            )
-          ],
+        child: PhotoViewGallery.builder(
+          scrollPhysics: const BouncingScrollPhysics(),
+          builder: _buildItem,
+          itemCount: widget.galleryItems.length,
+          loadingBuilder: widget.loadingBuilder,
+          backgroundDecoration: widget.backgroundDecoration,
+          pageController: widget.pageController,
+          onPageChanged: onPageChanged,
+          scrollDirection: widget.scrollDirection,
         ),
       ),
     );
@@ -86,11 +70,22 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
     final GalleryImageModel item = widget.galleryItems[index];
     return PhotoViewGalleryPageOptions(
-      imageProvider: FileImage(item.file),
+      imageProvider: _getImageProvider(item),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 1.1,
       heroAttributes: PhotoViewHeroAttributes(tag: item.id),
     );
+  }
+
+  ImageProvider<dynamic> _getImageProvider(GalleryImageModel item) {
+    if (widget.galleryPhotoSourceType == GalleryPhotoSourceTypeEnum.file) {
+      return FileImage(item.file);
+    } else if (widget.galleryPhotoSourceType ==
+        GalleryPhotoSourceTypeEnum.url) {
+      return NetworkImage(item.url);
+    }
+
+    throw Exception('GalleryPhotoSourceType not found.');
   }
 }

@@ -4,6 +4,7 @@ import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/a
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/package_view/gallery_images/gallery_image_thumbnail.dart';
+import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 
 class ImageItems extends StatelessWidget {
   final AddTimeLineBloc addTimeLineBloc;
@@ -50,6 +51,7 @@ class ImageItems extends StatelessWidget {
     ExtendedNavigator.of(context).push(
       Routes.gallery_photo_view_wrapper,
       arguments: GalleryPhotoViewWrapperArguments(
+        galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.file,
         galleryItems: images,
         backgroundDecoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,

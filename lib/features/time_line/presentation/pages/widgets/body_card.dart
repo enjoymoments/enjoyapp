@@ -1,9 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/features/time_line/data/models/media_model.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/photo_item_loading.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
+import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
+import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 
 class BodyCard extends StatefulWidget {
   const BodyCard({Key key, @required this.item}) : super(key: key);
@@ -16,7 +22,13 @@ class BodyCard extends StatefulWidget {
 
 class _BodyCardState extends State<BodyCard> {
   int _current = 0;
+  List<GalleryImageModel> _galleryImages;
 
+  @override
+  void initState() {
+    _galleryImages = TimeLineItemModel.toGalleryImages(widget.item.medias);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -66,29 +78,52 @@ class _BodyCardState extends State<BodyCard> {
   }
 
   List<Widget> _buildPhotos() {
-    return widget.item.medias
-        .map(
-          (media) => Container(
-            width: SizeConfig.screenWidth,
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(
-                Radius.circular(5.0),
-              ),
-              child: Stack(
-                children: <Widget>[
-                  CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: media.url,
-                    width: SizeConfig.screenWidth,
-                    height: SizeConfig.screenHeight / 2,
-                    placeholder: (context, url) => PhotoItemLoading(),
-                  ),
-                ],
-              ),
+    List<Widget> widgets = [];
+    for (var i = 0; i < widget.item.medias.length; i++) {
+      var media = widget.item.medias[i];
+      widgets.add(_buildPhoto(media, i));
+    }
+
+    return widgets;
+  }
+
+  Widget _buildPhoto(MediaModel media, int index) {
+    return GestureDetector(
+      onTap: () {
+        ExtendedNavigator.of(context).push(
+          Routes.gallery_photo_view_wrapper,
+          arguments: GalleryPhotoViewWrapperArguments(
+            loadingBuilder: (BuildContext context, ImageChunkEvent event) => CustomCircularProgressIndicator(),
+            galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.url,
+            galleryItems: _galleryImages,
+            backgroundDecoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
             ),
+            initialIndex: index,
+            scrollDirection: Axis.horizontal,
           ),
-        )
-        .toList();
+        );
+      },
+      child: Container(
+        width: SizeConfig.screenWidth,
+        margin: EdgeInsets.all(5.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.0),
+          ),
+          child: Stack(
+            children: <Widget>[
+              CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: media.url,
+                width: SizeConfig.screenWidth,
+                height: SizeConfig.screenHeight / 2,
+                placeholder: (context, url) => PhotoItemLoading(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
