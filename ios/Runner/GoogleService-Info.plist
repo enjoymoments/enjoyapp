@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>852466867016-q41a75kp9bh2bku5l75ui1pm1mvti911.apps.googleusercontent.com</string>
+	<string>852466867016-q2nqi6nlf3gia1v9f96qndt628l8kgg1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.852466867016-q41a75kp9bh2bku5l75ui1pm1mvti911</string>
+	<string>com.googleusercontent.apps.852466867016-q2nqi6nlf3gia1v9f96qndt628l8kgg1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>852466867016-33lgqv0ojepm5fql8tgikaup6fc8qut6.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyANFBL7nKG6bFHGfD0OzSWqIdFxY27fvv4</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.mozin</string>
+	<string>com.codefactory.mozin</string>
 	<key>PROJECT_ID</key>
 	<string>mozin-2c81d</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:852466867016:ios:9d0a5d5888b80e5866317d</string>
+	<string>1:852466867016:ios:171900a88177cd7a66317d</string>
 	<key>DATABASE_URL</key>
 	<string>https://mozin-2c81d.firebaseio.com</string>
 </dict>
