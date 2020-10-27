@@ -42,6 +42,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       state.images.removeWhere((element) => element.id == event.media.id);
 
       yield state.copyWith(
+          isError: false,
           images: state.images,
           forceRefresh: StateUtils.generateRandomNumber());
     } catch (e) {
@@ -51,11 +52,11 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
 
   Stream<AddTimeLineState> mapSaveToState(SaveTimeLine event) async* {
     getItInstance<ScreenManagerBloc>()..add(QueueNewPost(event.images));
-    yield state.copyWith(isLoading: false, isSuccess: true);
+    yield state.copyWith(isLoading: false, isError: false, isSuccess: true);
   }
 
   Stream<AddTimeLineState> mapOpenCameraToState(OpenMediaEvent event) async* {
-    yield state.copyWith(isLoading: true);
+    yield state.copyWith(isLoading: true, isError: false);
 
     try {
       List<GalleryImageModel> images = state.images ?? [];
@@ -71,6 +72,12 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       } else if (event.source == ImageSource.gallery) {
         var files = await wrapperMediaService.getMedias();
         if (files != null) {
+          
+          if((files.length + state.images.length) > 10) {
+            yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Sua postagem deve conter no máximo 10 fotos.');
+            return;
+          }
+
           images.addAll(_transformFilesToImages(files));
         }
       }

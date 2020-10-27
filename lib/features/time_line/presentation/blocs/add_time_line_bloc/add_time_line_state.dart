@@ -48,7 +48,7 @@ class AddTimeLineState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh,
-      images: images,
+      images: images ?? this.images,
     );
   }
 
