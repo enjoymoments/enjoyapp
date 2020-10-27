@@ -61,30 +61,4 @@ class ImageItems extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _buildImages(BuildContext context) {
-  //   return BlocBuilder<ImageBloc, DefaultState>(
-  //     bloc: imageBloc,
-  //     builder: (BuildContext context, DefaultState state) {
-  //       if (state is Loading) {
-  //         return CustomCircularProgressIndicator();
-  //       }
-
-  //       if (state is LoadedImage) {
-  //         currentJoke.medias = state.images;
-  //         saveJoke(state.images);
-  //       }
-
-  //       if (currentJoke.medias != null) {
-  //         return Wrap(
-  //           children: currentJoke.medias.map<Widget>((image) {
-  //             return _buildCardImage(context, image.url);
-  //           }).toList(),
-  //         );
-  //       } else {
-  //         return SizedBox.shrink();
-  //       }
-  //     },
-  //   );
-  // }
 }
