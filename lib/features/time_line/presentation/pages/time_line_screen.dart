@@ -6,6 +6,7 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/tim
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class TimeLineScreen extends StatefulWidget {
   @override
@@ -20,11 +21,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   @override
   void initState() {
-    _timelineBloc = getItInstance<TimelineBloc>();
-
-    if (_timelineBloc.state.posts.isEmpty) {
-      _timelineBloc.add(LoadPosts());
-    }
+    _timelineBloc = getItInstance<TimelineBloc>()..add(VerifyAuthenticated());
 
     super.initState();
   }
@@ -38,6 +35,14 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
     return BlocBuilder<TimelineBloc, TimelineState>(
       cubit: _timelineBloc,
       builder: (context, state) {
+        if (state.unauthenticated) {
+          return Center(
+            child:
+                "Quer registrar seus momentos?\nFaça login e aproveite."
+                    .labelIntro(context),
+          );
+        }
+
         if (state.isLoading) {
           return _buildLoading();
         }

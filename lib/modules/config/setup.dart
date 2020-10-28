@@ -112,7 +112,7 @@ void _registerBlocs() {
       AuthenticationBloc(getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance
-      .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
+      .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));

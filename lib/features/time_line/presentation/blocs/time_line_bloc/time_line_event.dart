@@ -12,3 +12,5 @@ class DeletePost extends TimelineEvent {
 
   DeletePost(this.post);
 }
+
+class VerifyAuthenticated extends TimelineEvent {}
