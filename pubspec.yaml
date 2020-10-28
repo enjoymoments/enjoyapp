@@ -65,6 +65,7 @@ dependencies:
   flutter_launcher_icons: ^0.8.1
   firebase_crashlytics: ^0.1.4+1
   rxdart: ^0.24.1
+  firebase_analytics: ^6.0.2
 
 dev_dependencies:
   flutter_test:

@@ -21,6 +21,7 @@ import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
+import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
@@ -98,6 +99,8 @@ void _registerSingletonServices() {
       loggerRepository: getItInstance(),
       deviceInfoService: getItInstance(),
       userAppModel: getItInstance()));
+
+  getItInstance.registerLazySingleton<AnalyticsService>(() => AnalyticsService());
 }
 
 void _registerBlocs() {

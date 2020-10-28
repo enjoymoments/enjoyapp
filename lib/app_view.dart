@@ -4,6 +4,7 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authenti
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/theme.dart';
+import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 
 class AppView extends StatefulWidget {
   @override
@@ -32,6 +33,9 @@ class _AppViewState extends State<AppView> {
           return extendedNav;
         },
       ),
+      navigatorObservers: <NavigatorObserver>[
+        getItInstance<AnalyticsService>().getAnalyticsObserver(),
+      ],
     );
   }
 }
