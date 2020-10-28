@@ -8,9 +8,10 @@ class ScreenManagerEvent extends Equatable {
 }
 
 class QueueNewPost extends ScreenManagerEvent {
+  final String textPost;
   final List<GalleryImageModel> medias;
 
-  QueueNewPost(this.medias);
+  QueueNewPost(this.textPost, this.medias);
 }
 
 class QueueReset extends ScreenManagerEvent {}

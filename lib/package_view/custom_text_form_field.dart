@@ -7,17 +7,23 @@ class CustomTextFormField extends StatelessWidget {
     @required this.hintText,
     @required this.labelText,
     @required this.textInputType,
+    this.controller,
+    this.maxLines,
   }) : super(key: key);
 
   final Function(String) validate;
   final String hintText;
   final String labelText;
   final TextInputType textInputType;
+  final int maxLines;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: textInputType,
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
         labelText: labelText,

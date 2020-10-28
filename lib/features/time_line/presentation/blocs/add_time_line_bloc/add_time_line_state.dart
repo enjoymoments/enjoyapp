@@ -3,6 +3,7 @@ part of 'add_time_line_bloc.dart';
 class AddTimeLineState extends DefaultState {
   final List<GalleryImageModel> images;
   final int forceRefresh;
+  final String textPost;
 
   AddTimeLineState({
     bool isLoading,
@@ -12,6 +13,7 @@ class AddTimeLineState extends DefaultState {
     String errorMessage,
     this.images,
     this.forceRefresh,
+    this.textPost,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -29,6 +31,7 @@ class AddTimeLineState extends DefaultState {
       errorMessage: null,
       images: List(),
       forceRefresh: 0,
+      textPost: null,
     );
   }
 
@@ -40,6 +43,7 @@ class AddTimeLineState extends DefaultState {
     String errorMessage,
     List<GalleryImageModel> images,
     int forceRefresh,
+    String textPost,
   }) {
     return AddTimeLineState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +53,7 @@ class AddTimeLineState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh,
       images: images ?? this.images,
+      textPost: textPost ?? this.textPost,
     );
   }
 
@@ -61,5 +66,6 @@ class AddTimeLineState extends DefaultState {
         errorMessage,
         forceRefresh,
         images,
+        textPost,
       ];
 }

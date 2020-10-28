@@ -34,7 +34,7 @@ class UserAppModel extends Equatable {
 
   /// Empty user which represents an unauthenticated user.
   static const empty = UserAppModel(
-      id: '', autenticatorProviderId: '', email: '', name: null, photo: null);
+      id: '', autenticatorProviderId: '', email: '', name: '', photo: '');
 
   @override
   List<Object> get props => [email, id, name, photo];

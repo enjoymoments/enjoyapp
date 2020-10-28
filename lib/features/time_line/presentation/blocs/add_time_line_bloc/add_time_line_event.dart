@@ -4,6 +4,15 @@ abstract class AddTimeLineEvent extends Equatable {
   const AddTimeLineEvent();
 }
 
+class TextPost extends AddTimeLineEvent {
+  final String text;
+
+  TextPost(this.text);
+
+  @override
+  List<Object> get props => [text];
+}
+
 class OpenMediaEvent extends AddTimeLineEvent {
   final ImageSource source;
 
@@ -16,14 +25,11 @@ class OpenMediaEvent extends AddTimeLineEvent {
 }
 
 class SaveTimeLine extends AddTimeLineEvent {
-  final List<GalleryImageModel> images;
 
-  SaveTimeLine(this.images);
+  SaveTimeLine();
 
   @override
-  List<Object> get props => [
-        images,
-      ];
+  List<Object> get props => [];
 }
 
 class RemoveMedia extends AddTimeLineEvent {

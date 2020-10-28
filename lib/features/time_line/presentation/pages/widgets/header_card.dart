@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/package_view/custom_avatar_with_name.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class HeaderCard extends StatelessWidget {
   final Function(ActionHeaderEnum) callback;
@@ -19,15 +21,17 @@ class HeaderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            item.dateCreationFormatted.date(context),
-            IconButton(
-              icon: new Icon(Icons.more_horiz),
-              iconSize: Theme.of(context).iconTheme.size,
-              onPressed: () {
+            CustomAvatarWithName(
+              child: item.dateCreationFormatted.date(context),
+            ),
+            GestureDetector(
+              onTap: () {
                 showMaterialModalBottomSheet(
                   context: context,
                   builder: (context, scrollController) => CustomModalFit(
@@ -38,12 +42,24 @@ class HeaderCard extends StatelessWidget {
                   ),
                 );
               },
+              child: Icon(
+                Icons.more_horiz,
+                size: Theme.of(context).iconTheme.size,
+              ),
             ),
           ],
         ),
-        "Foi maravilhosa a viajem que fizemos, amei estar com você vivendo essa experiência."
-            .description(context),
+        SpacerBox.v8,
+        _buildTextPost(context),
       ],
     );
+  }
+
+  Widget _buildTextPost(BuildContext context) {
+    if (item.textPost != null && item.textPost.isNotEmpty) {
+      return item.textPost.description(context);
+    }
+
+    return SizedBox.shrink();
   }
 }

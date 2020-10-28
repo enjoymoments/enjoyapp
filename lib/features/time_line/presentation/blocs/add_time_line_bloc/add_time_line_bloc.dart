@@ -11,6 +11,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/utils.dart';
 import 'package:uuid/uuid.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'add_time_line_event.dart';
 part 'add_time_line_state.dart';
@@ -25,15 +26,37 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   final Uuid uuidService;
 
   @override
+  Stream<Transition<AddTimeLineEvent, AddTimeLineState>> transformEvents(
+    Stream<AddTimeLineEvent> events,
+    TransitionFunction<AddTimeLineEvent, AddTimeLineState> transitionFn,
+  ) {
+    final Stream<AddTimeLineEvent> nonDebounceStream =
+        events.where((AddTimeLineEvent event) {
+      return event is! TextPost;
+    });
+
+    final Stream<AddTimeLineEvent> debounceStream =
+        events.where((AddTimeLineEvent event) {
+      return event is TextPost;
+    }).debounceTime(const Duration(milliseconds: 300));
+
+    return super.transformEvents(
+        nonDebounceStream.mergeWith(<Stream<AddTimeLineEvent>>[debounceStream]),
+        transitionFn);
+  }
+
+  @override
   Stream<AddTimeLineState> mapEventToState(
     AddTimeLineEvent event,
   ) async* {
     if (event is OpenMediaEvent) {
       yield* mapOpenCameraToState(event);
     } else if (event is SaveTimeLine) {
-      yield* mapSaveToState(event);
+      yield* mapSaveToState();
     } else if (event is RemoveMedia) {
       yield* mapRemoveMediaToState(event);
+    } else if (event is TextPost) {
+      yield state.copyWith(textPost: event.text);   
     }
   }
 
@@ -50,8 +73,8 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     }
   }
 
-  Stream<AddTimeLineState> mapSaveToState(SaveTimeLine event) async* {
-    getItInstance<ScreenManagerBloc>()..add(QueueNewPost(event.images));
+  Stream<AddTimeLineState> mapSaveToState() async* {
+    getItInstance<ScreenManagerBloc>()..add(QueueNewPost(state.textPost, state.images));
     yield state.copyWith(isLoading: false, isError: false, isSuccess: true);
   }
 
@@ -72,9 +95,11 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       } else if (event.source == ImageSource.gallery) {
         var files = await wrapperMediaService.getMedias();
         if (files != null) {
-          
-          if((files.length + state.images.length) > 10) {
-            yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Sua postagem deve conter no máximo 10 fotos.');
+          if ((files.length + state.images.length) > 10) {
+            yield state.copyWith(
+                isLoading: false,
+                isError: true,
+                errorMessage: 'Sua postagem deve conter no máximo 10 fotos.');
             return;
           }
 

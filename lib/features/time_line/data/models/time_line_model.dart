@@ -5,11 +5,13 @@ import 'package:mozin/package_view/utils.dart';
 
 class TimeLineItemModel {
   String id;
+  String textPost;
   DateTime dateCreation;
   List<MediaModel> medias;
 
   TimeLineItemModel({
     this.id,
+    this.textPost,  
     this.dateCreation,
     this.medias,
   });
@@ -18,6 +20,7 @@ class TimeLineItemModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'textPost': textPost,
       "medias": medias != null ? _toJsonMedias() : [],
     };
   }
@@ -29,6 +32,7 @@ class TimeLineItemModel {
   static TimeLineItemModel fromEntity(TimeLineItemEntity entity) {
     return TimeLineItemModel(
       id: entity.id,
+      textPost: entity.textPost,
       dateCreation: entity.dateCreation,
       medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),
     );

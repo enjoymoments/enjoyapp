@@ -10,7 +10,9 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
   @override
@@ -18,6 +20,8 @@ class AddTimeLineScreen extends StatefulWidget {
 }
 
 class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
+  TextEditingController _descriptionController;
+
   AddTimeLineBloc _addTimeLineBloc;
   int _currentIndex = 0;
   List<GalleryImageModel> _images;
@@ -26,6 +30,11 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   void initState() {
     _images = [];
     _addTimeLineBloc = getItInstance<AddTimeLineBloc>();
+    _descriptionController = TextEditingController();
+    _descriptionController.addListener(() {
+      _addTimeLineBloc.add(TextPost(_descriptionController.text));
+    });
+
     super.initState();
   }
 
@@ -37,22 +46,34 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(),
-      bottomNavigationBar: _buildBottomMenu(),
+    return WillPopScope(
+      child: CustomScaffold(
+        child: _buildBody(),
+        appBar: _buildAppBar(),
+        bottomNavigationBar: _buildBottomMenu(),
+      ),
+      onWillPop: () async {
+        if (_images.length > 0 ||
+            (_descriptionController.text != null &&
+                _descriptionController.text.isNotEmpty)) {
+          return false;
+        }
+
+        return true;
+      },
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text('Adicionar'),
+      title: Text('Criar publicação'),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.save),
+          icon: Icon(Icons.check),
           onPressed: () {
-            if (_images.length > 0) {
-              _addTimeLineBloc.add(SaveTimeLine(_images));
+            if (_images.length > 0 || (_descriptionController.text != null &&
+                _descriptionController.text.isNotEmpty)) {
+              _addTimeLineBloc.add(SaveTimeLine());
             }
           },
         ),
@@ -65,7 +86,8 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
       cubit: _addTimeLineBloc,
       listener: (consumerContext, state) {
         if (state.isError) {
-          consumerContext.showSnackBar(state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
+          consumerContext.showSnackBar(
+              state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
         if (state.isSuccess) {
@@ -102,7 +124,15 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            "Selecione suas fotos".label(context),
+            CustomTextFormField(
+              controller: _descriptionController,
+              textInputType: TextInputType.visiblePassword,
+              hintText: 'No que você está pensando?',
+              labelText: 'No que você está pensando?',
+              maxLines: 5,
+              validate: (String value) {},
+            ),
+            SpacerBox.v16,
             images,
           ],
         ),
