@@ -27,6 +27,7 @@ class HeaderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CustomAvatarWithName(
+              name: item.author.name,
               backgroundImage: _getBackgroundImage(),
               child: item.dateCreationFormatted.date(context),
             ),
