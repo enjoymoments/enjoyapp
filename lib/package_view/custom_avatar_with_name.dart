@@ -35,7 +35,6 @@ class CustomAvatarWithName extends StatelessWidget {
 
   Widget _buildName(BuildContext context) {
     final UserAppModel _user = getItInstance<UserWrapper>().getUser;
-    return 'Felipe Augusto'.label(context);
-    //return _user.name.description(context);
+    return _user.name.label(context);
   }
 }
