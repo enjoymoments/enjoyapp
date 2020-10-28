@@ -78,6 +78,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       getItInstance.registerSingleton(_user);
       _settingsUser(_user);
 
+      //TODO:save info user in firestore 'users/XPTO'
+
       yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');

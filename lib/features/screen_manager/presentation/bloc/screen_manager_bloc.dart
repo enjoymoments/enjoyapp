@@ -56,6 +56,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       final transform = _transformTimeLineModel(keyValues);
       transform.textPost = event.textPost;
       
+      //TODO:create wrapper of user
       await this.timelineRepository.addTimeLineItem(temp_time_line, user.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
@@ -64,6 +65,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
       this.add(QueueReset());
     } catch (e) {
+      //TODO:not showing snacbar here. Not contains a 'Scaffold' in tree
       yield state.copyWith(isLoading: false, isFailure: true);
     }
   }
