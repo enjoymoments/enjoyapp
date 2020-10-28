@@ -6,7 +6,8 @@ import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.d
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 
 abstract class TimelineRemoteDataSource {
-  Future<String> addTimeLineItem(String timelineID, String userId, TimeLineItemModel model);
+  Future<String> addTimeLineItem(
+      String timelineID, String userId, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
 }
@@ -30,9 +31,7 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
 
     var map = model.toJson();
     map['dateCreation'] = DateTime.now();
-    map['author'] = _instance.firestore
-        .collection('users')
-        .doc(userId);
+    map['author'] = _instance.firestore.collection('users').doc(userId);
 
     await document.set(map);
     return Future.value(document.id);
@@ -48,12 +47,14 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
 
     var result = await collection.get();
 
-    return result.docs.map(
-      (item) {
-        return TimeLineItemModel.fromEntity(
-            TimeLineItemEntity.fromSnapshot(item));
-      },
-    ).toList();
+    var list = List<TimeLineItemModel>();
+
+    for (var item in result.docs) {
+      var snap = await TimeLineItemEntity.fromSnapshot(item);
+      list.add(TimeLineItemModel.fromEntity(snap));
+    }
+
+    return list;
   }
 
   @override

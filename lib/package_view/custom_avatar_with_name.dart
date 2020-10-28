@@ -6,15 +6,19 @@ import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class CustomAvatarWithName extends StatelessWidget {
+  final ImageProvider backgroundImage;
   final Widget child;
 
-  const CustomAvatarWithName({Key key, this.child}) : super(key: key);
+  const CustomAvatarWithName({Key key, this.child, this.backgroundImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomAvatar(),
+        CustomAvatar(
+          backgroundImage: backgroundImage,
+        ),
         SpacerBox.h8,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

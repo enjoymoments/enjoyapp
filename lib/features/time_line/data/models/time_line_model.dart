@@ -1,3 +1,4 @@
+import 'package:mozin/features/time_line/data/models/author_model.dart';
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
 import 'package:mozin/features/time_line/data/models/media_model.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
@@ -5,12 +6,14 @@ import 'package:mozin/package_view/utils.dart';
 
 class TimeLineItemModel {
   String id;
+  AuthorModel author;
   String textPost;
   DateTime dateCreation;
   List<MediaModel> medias;
 
   TimeLineItemModel({
     this.id,
+    this.author,
     this.textPost,  
     this.dateCreation,
     this.medias,
@@ -21,6 +24,7 @@ class TimeLineItemModel {
   Map<String, dynamic> toJson() {
     return {
       'textPost': textPost,
+      'author': author.toJson(),
       "medias": medias != null ? _toJsonMedias() : [],
     };
   }
@@ -32,6 +36,7 @@ class TimeLineItemModel {
   static TimeLineItemModel fromEntity(TimeLineItemEntity entity) {
     return TimeLineItemModel(
       id: entity.id,
+      author: AuthorModel.fromEntity(entity.author),
       textPost: entity.textPost,
       dateCreation: entity.dateCreation,
       medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),

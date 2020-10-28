@@ -28,6 +28,7 @@ class HeaderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CustomAvatarWithName(
+              backgroundImage: _getBackgroundImage(),
               child: item.dateCreationFormatted.date(context),
             ),
             GestureDetector(
@@ -53,6 +54,15 @@ class HeaderCard extends StatelessWidget {
         _buildTextPost(context),
       ],
     );
+  }
+
+  ImageProvider _getBackgroundImage() {
+    if (item.author != null &&
+        item.author.photo != null &&
+        item.author.photo.isNotEmpty) {
+      return NetworkImage(item.author.photo);
+    }
+    return null;
   }
 
   Widget _buildTextPost(BuildContext context) {

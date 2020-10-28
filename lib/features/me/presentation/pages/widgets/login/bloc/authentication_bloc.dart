@@ -78,8 +78,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       getItInstance.registerSingleton(_user);
       _settingsUser(_user);
 
-      //TODO:save info user in firestore 'users/XPTO'
-
       yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
@@ -111,6 +109,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   void _settingsUser(UserAppModel user) async {
     final _token = await _pushNotificationConfig.configureAsync();
 
-    this._userService.setTokensPushNotifications(user.id, user.email, _token);
+    this._userService.setTokensPushNotifications(user, _token);
   }
 }

@@ -3,12 +3,16 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 
 class CustomAvatar extends StatelessWidget {
+  final ImageProvider backgroundImage;
+
+  const CustomAvatar({Key key, this.backgroundImage}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 18,
       backgroundColor: Theme.of(context).primaryColor,
-      backgroundImage: _getImageAvatar(),
+      backgroundImage: backgroundImage ?? _getImageAvatar(),
     );
   }
 
