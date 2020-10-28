@@ -82,7 +82,6 @@ class AuthenticationBloc
 
       final _user = await _authenticationRepository.user.first;
 
-      getItInstance.registerSingleton(_user);
       _userWrapper.assignment(_user);
 
       _settingsUser(_user);
@@ -110,7 +109,6 @@ class AuthenticationBloc
 
   void _mapAuthenticationUserChangedToState(
       AuthenticationUserChanged event) async {
-    getItInstance.registerSingleton(event.user);
     _userWrapper.assignment(event.user);
 
     if (event.user != UserAppModel.empty) {
