@@ -6,7 +6,6 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/package_view/custom_avatar_with_name.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
 
 class HeaderCard extends StatelessWidget {
   final Function(ActionHeaderEnum) callback;
@@ -50,8 +49,6 @@ class HeaderCard extends StatelessWidget {
             ),
           ],
         ),
-        SpacerBox.v8,
-        _buildTextPost(context),
       ],
     );
   }
@@ -63,13 +60,5 @@ class HeaderCard extends StatelessWidget {
       return NetworkImage(item.author.photo);
     }
     return null;
-  }
-
-  Widget _buildTextPost(BuildContext context) {
-    if (item.textPost != null && item.textPost.isNotEmpty) {
-      return item.textPost.description(context);
-    }
-
-    return SizedBox.shrink();
   }
 }

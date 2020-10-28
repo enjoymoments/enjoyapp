@@ -23,6 +23,7 @@ import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart'
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
@@ -75,7 +76,7 @@ void _setupRemoteClientRepository() {
 }
 
 void _registerSingletonModels() {
-  getItInstance.registerSingleton(UserAppModel.empty);
+  getItInstance.registerSingleton<UserWrapper>(UserWrapper()..assignment(UserAppModel.empty));
   getItInstance.registerSingleton(
       FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
 }
@@ -98,7 +99,7 @@ void _registerSingletonServices() {
   getItInstance.registerLazySingleton<LoggerService>(() => LoggerService(
       loggerRepository: getItInstance(),
       deviceInfoService: getItInstance(),
-      userAppModel: getItInstance()));
+      userWrapper: getItInstance()));
 
   getItInstance.registerLazySingleton<AnalyticsService>(() => AnalyticsService());
 }
@@ -108,7 +109,7 @@ void _registerBlocs() {
       () => AddTimeLineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(() =>
-      AuthenticationBloc(getItInstance(), getItInstance(), getItInstance()));
+      AuthenticationBloc(getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance
       .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));

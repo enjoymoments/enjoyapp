@@ -8,10 +8,10 @@ import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
-import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/features/time_line/data/models/media_model.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:path/path.dart' as Path;
 
@@ -19,12 +19,12 @@ part 'screen_manager_event.dart';
 part 'screen_manager_state.dart';
 
 class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
-  ScreenManagerBloc(this.firebaseStorageService, this.user, this.timelineRepository)
+  ScreenManagerBloc(this.firebaseStorageService, this.userWrapper, this.timelineRepository)
       : super(ScreenManagerState.initial());
 
   final TimelineRepository timelineRepository;
   final FirebaseStorageService firebaseStorageService;
-  final UserAppModel user;
+  final UserWrapper userWrapper;
 
   @override
   Stream<ScreenManagerState> mapEventToState(
@@ -56,8 +56,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       final transform = _transformTimeLineModel(keyValues);
       transform.textPost = event.textPost;
       
-      //TODO:create wrapper of user
-      await this.timelineRepository.addTimeLineItem(temp_time_line, user.id, transform);
+      await this.timelineRepository.addTimeLineItem(temp_time_line, userWrapper.getUser.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 
@@ -82,7 +81,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       try {
         _listFutures.add(
           firebaseStorageService
-              .uploadFile(this.user.id, item.file, "${item.id}$extensionFile")
+              .uploadFile(userWrapper.getUser.id, item.file, "${item.id}$extensionFile")
               .then((value) {
             _listUrls.add(KeyValue<String, String>(key: item.id, value: value));
           }).catchError((onError) {

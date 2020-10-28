@@ -24,7 +24,6 @@ class TimeLineItemModel {
   Map<String, dynamic> toJson() {
     return {
       'textPost': textPost,
-      'author': author.toJson(),
       "medias": medias != null ? _toJsonMedias() : [],
     };
   }

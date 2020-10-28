@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -12,10 +13,14 @@ import 'package:mozin/package_view/blocs/default_state.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc(this._authenticationRepository, this._userService,
-      this._pushNotificationConfig)
-      : super(AuthenticationState.initial()) {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
+  AuthenticationBloc(
+    this._authenticationRepository,
+    this._userService,
+    this._pushNotificationConfig,
+    this._userWrapper,
+  ) : super(AuthenticationState.initial()) {
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AuthenticationUserChanged(user)),
     );
@@ -24,6 +29,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   final AuthenticationRepository _authenticationRepository;
   final UserService _userService;
   final PushNotificationConfig _pushNotificationConfig;
+  final UserWrapper _userWrapper;
 
   StreamSubscription<UserAppModel> _userSubscription;
 
@@ -52,7 +58,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     try {
       yield state.copyWith(isLoading: true);
 
-      var _user = getItInstance<UserAppModel>();
+      var _user = getItInstance<UserWrapper>().getUser;
 
       if (_user != UserAppModel.empty) {
         yield state.copyWith(isLoading: false, isSuccess: true);
@@ -61,7 +67,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
       yield state.copyWith(isLoading: false, unauthenticated: true);
     } catch (e) {
-      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 
@@ -76,11 +83,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       final _user = await _authenticationRepository.user.first;
 
       getItInstance.registerSingleton(_user);
+      _userWrapper.assignment(_user);
       _settingsUser(_user);
 
       yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
     } catch (e) {
-      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 
@@ -93,7 +102,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
       yield state.copyWith(isLoading: false, logoutSuccess: true);
     } catch (e) {
-      yield state.copyWith(isLoading: false, isError: true, errorMessage: 'Ops');
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
     }
   }
 

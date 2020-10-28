@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 class CustomAvatar extends StatelessWidget {
   final ImageProvider backgroundImage;
@@ -17,7 +18,7 @@ class CustomAvatar extends StatelessWidget {
   }
 
   ImageProvider _getImageAvatar() {
-    final UserAppModel _user = getItInstance<UserAppModel>();
+    final UserAppModel _user = getItInstance<UserWrapper>().getUser;
 
     if (_user.photo != null && _user.photo.isNotEmpty) {
       return NetworkImage(_user.photo);

@@ -10,6 +10,8 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
+import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class BodyCard extends StatefulWidget {
   const BodyCard({Key key, @required this.item}) : super(key: key);
@@ -29,6 +31,7 @@ class _BodyCardState extends State<BodyCard> {
     _galleryImages = TimeLineItemModel.toGalleryImages(widget.item.medias);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -37,7 +40,19 @@ class _BodyCardState extends State<BodyCard> {
 
   Widget _buildContent() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _buildTextPost(),
+        SpacerBox.v8,
+        ..._buildCarousel(),
+      ],
+    );
+  }
+
+  List<Widget> _buildCarousel() {
+    if (widget.item.medias.length > 0) {
+      return [
         CarouselSlider(
           items: _buildPhotos(),
           options: CarouselOptions(
@@ -51,8 +66,17 @@ class _BodyCardState extends State<BodyCard> {
               }),
         ),
         if (widget.item.medias.length > 1) _buildBulletPoints(),
-      ],
-    );
+      ];
+    }
+    return [];
+  }
+
+  Widget _buildTextPost() {
+    if (widget.item.textPost != null && widget.item.textPost.isNotEmpty) {
+      return widget.item.textPost.description(context);
+    }
+
+    return SizedBox.shrink();
   }
 
   Widget _buildBulletPoints() {
@@ -93,7 +117,8 @@ class _BodyCardState extends State<BodyCard> {
         ExtendedNavigator.of(context).push(
           Routes.gallery_photo_view_wrapper,
           arguments: GalleryPhotoViewWrapperArguments(
-            loadingBuilder: (BuildContext context, ImageChunkEvent event) => CustomCircularProgressIndicator(),
+            loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+                CustomCircularProgressIndicator(),
             galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.url,
             galleryItems: _galleryImages,
             backgroundDecoration: BoxDecoration(

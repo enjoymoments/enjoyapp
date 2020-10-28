@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    _user = getItInstance<UserAppModel>();
+    _user = getItInstance<UserWrapper>().getUser;
     super.initState();
   }
 
