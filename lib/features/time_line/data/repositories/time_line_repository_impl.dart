@@ -11,9 +11,9 @@ class TimelineRepositoryImpl implements TimelineRepository {
   final TimelineRemoteDataSource remoteDataSource;
 
   @override
-  Future<String> addTimeLineItem(String timelineID, TimeLineItemModel model) {
+  Future<String> addTimeLineItem(String timelineID, String userId, TimeLineItemModel model) {
     try {
-      return remoteDataSource.addTimeLineItem(timelineID, model);
+      return remoteDataSource.addTimeLineItem(timelineID, userId, model);
     } catch (e) {
       return Future.value(null);
     }

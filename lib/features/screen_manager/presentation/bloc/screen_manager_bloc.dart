@@ -56,7 +56,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       final transform = _transformTimeLineModel(keyValues);
       transform.textPost = event.textPost;
       
-      await this.timelineRepository.addTimeLineItem(temp_time_line, transform);
+      await this.timelineRepository.addTimeLineItem(temp_time_line, user.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 
