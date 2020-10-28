@@ -58,7 +58,7 @@ class AuthenticationBloc
     try {
       yield state.copyWith(isLoading: true);
 
-      var _user = getItInstance<UserWrapper>().getUser;
+      var _user = _userWrapper.getUser;
 
       if (_user != UserAppModel.empty) {
         yield state.copyWith(isLoading: false, isSuccess: true);
@@ -84,6 +84,7 @@ class AuthenticationBloc
 
       getItInstance.registerSingleton(_user);
       _userWrapper.assignment(_user);
+
       _settingsUser(_user);
 
       yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
@@ -110,6 +111,7 @@ class AuthenticationBloc
   void _mapAuthenticationUserChangedToState(
       AuthenticationUserChanged event) async {
     getItInstance.registerSingleton(event.user);
+    _userWrapper.assignment(event.user);
 
     if (event.user != UserAppModel.empty) {
       _settingsUser(event.user);
