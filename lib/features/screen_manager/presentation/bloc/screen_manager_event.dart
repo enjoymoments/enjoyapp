@@ -14,8 +14,6 @@ class QueueNewPost extends ScreenManagerEvent {
   QueueNewPost(this.textPost, this.medias);
 }
 
-class QueueReset extends ScreenManagerEvent {}
-
 class TapScreen extends ScreenManagerEvent {
   final DEFAULT_MENU_ENUM screenSelected;
 

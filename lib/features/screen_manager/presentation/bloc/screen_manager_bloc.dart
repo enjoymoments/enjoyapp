@@ -19,7 +19,8 @@ part 'screen_manager_event.dart';
 part 'screen_manager_state.dart';
 
 class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
-  ScreenManagerBloc(this.firebaseStorageService, this.userWrapper, this.timelineRepository)
+  ScreenManagerBloc(
+      this.firebaseStorageService, this.userWrapper, this.timelineRepository)
       : super(ScreenManagerState.initial());
 
   final TimelineRepository timelineRepository;
@@ -32,40 +33,34 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
   ) async* {
     if (event is QueueNewPost) {
       yield* mapSaveToState(event);
-    } else if (event is QueueReset) {
-      yield* mapQueueResetToState();
     } else if (event is TapScreen) {
       yield* mapTapScreenToState(event);
     }
   }
 
   Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
-   yield state.copyWith(currentScreen: event.screenSelected); 
-  }
-
-  Stream<ScreenManagerState> mapQueueResetToState() async* {
-    yield ScreenManagerState.initial();
+    yield state.copyWith(currentScreen: event.screenSelected);
   }
 
   Stream<ScreenManagerState> mapSaveToState(QueueNewPost event) async* {
-    yield state.copyWith(isLoading: true);
+    yield state.copyWith(isLoading: true, isFailure: false, isSuccess: false);
 
     try {
       final keyValues = await this._uploadMedias(event.medias);
 
       final transform = _transformTimeLineModel(keyValues);
       transform.textPost = event.textPost;
-      
-      await this.timelineRepository.addTimeLineItem(temp_time_line, userWrapper.getUser.id, transform);
+
+      await this
+          .timelineRepository
+          .addTimeLineItem(temp_time_line, userWrapper.getUser.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 
-      yield state.copyWith(isLoading: false, isSuccess: true);
-
-      this.add(QueueReset());
+      yield state.copyWith(isLoading: false, isSuccess: true, isFailure: false);
     } catch (e) {
       //TODO:not showing snacbar here. Not contains a 'Scaffold' in tree
-      yield state.copyWith(isLoading: false, isFailure: true);
+      yield state.copyWith(isLoading: false, isFailure: true, isSuccess: false);
     }
   }
 
@@ -81,7 +76,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       try {
         _listFutures.add(
           firebaseStorageService
-              .uploadFile(userWrapper.getUser.id, item.file, "${item.id}$extensionFile")
+              .uploadFile(
+                  userWrapper.getUser.id, item.file, "${item.id}$extensionFile")
               .then((value) {
             _listUrls.add(KeyValue<String, String>(key: item.id, value: value));
           }).catchError((onError) {
