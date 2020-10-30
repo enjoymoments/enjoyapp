@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class InterestCategoryItem extends StatefulWidget {
@@ -20,7 +22,8 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
 
   @override
   void initState() {
-    _isSelected = widget.categorie.selected != null && widget.categorie.selected;
+    _isSelected =
+        widget.categorie.selected != null && widget.categorie.selected;
     super.initState();
   }
 
@@ -46,9 +49,8 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.done,
-              size: 30,
+            CustomIcon(
+              icon: AppIcons.check,
               color: _getTextColor(),
             ),
             widget.categorie.name.label(

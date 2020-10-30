@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
+import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 
 class InterestMenu extends StatefulWidget {
   final Function(INTEREST_MENU_ENUM) onTap;
@@ -24,11 +26,11 @@ class _InterestMenuState extends State<InterestMenu> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: new Icon(Icons.search),
+          icon: CustomIcon(icon: AppIcons.search),
           title: new Text('Pesquisar'),
         ),
         BottomNavigationBarItem(
-          icon: new Icon(Icons.filter),
+          icon: CustomIcon(icon: AppIcons.filter),
           title: new Text('Mudar Filtro'),
         ),
       ],
