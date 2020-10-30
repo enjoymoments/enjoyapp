@@ -7,11 +7,12 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/home/presentation/pages/home_screen.dart';
 import 'package:mozin/features/more/presentation/pages/more_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
+import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/default_menu.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
-import 'package:mozin/package_view/extension.dart';
 
 class ScreenManager extends StatefulWidget {
   @override
@@ -29,15 +30,20 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return BlocBuilder<ScreenManagerBloc, ScreenManagerState>(
       cubit: _screenManagerBloc,
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
           child: _buildContent(state),
           appBar: _buildAppBar(state),
-          bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
-            _tapScreen(itemSelected);
-          }),
+          bottomNavigationBar: SizedBox(
+            child: DefaultMenu(onTap: (itemSelected) {
+              _tapScreen(itemSelected);
+            }),
+            height: SizeConfig.sizeByPixel(50),
+          ),
         );
       },
     );
@@ -80,7 +86,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return [
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: Icon(AppIcons.plus),
             onPressed: () {
               ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
             },

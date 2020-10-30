@@ -101,6 +101,9 @@ flutter:
     - family: ABeeZee
       fonts:
         - asset: assets/fonts/ABeeZee/ABeeZee-Regular.ttf
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/AppIcons.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

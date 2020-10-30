@@ -3,10 +3,10 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authenti
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 
-class GoogleLoginButton extends StatelessWidget {
+class FacebookLoginButton extends StatelessWidget {
   final AuthenticationBloc authenticationBloc;
 
-  const GoogleLoginButton({Key key, @required this.authenticationBloc})
+  const FacebookLoginButton({Key key, @required this.authenticationBloc})
       : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class GoogleLoginButton extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(40.0)),
       ),
       child: IconButton(
-        icon: Icon(AppIcons.google, color: theme.primaryColor),
+        icon: Icon(AppIcons.facebook_f, color: theme.primaryColor),
         onPressed: () {
           authenticationBloc.add(RequestGoogleLogin());
         },

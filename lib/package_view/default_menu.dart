@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {
@@ -12,9 +14,12 @@ class DefaultMenu extends StatefulWidget {
 
 class _DefaultMenuState extends State<DefaultMenu> {
   int _currentIndex = 0;
+  double _sizeIcon = 18;
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: _currentIndex,
@@ -24,17 +29,17 @@ class _DefaultMenuState extends State<DefaultMenu> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: new Icon(Icons.home),
-          title: new Text('Início'),
+          icon: Icon(AppIcons.home, size: _sizeIcon),
+          title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
-          icon: new Icon(Icons.linear_scale),
-          title: new Text('Linha'),
+          icon: Icon(AppIcons.people_carry, size: _sizeIcon),
+          title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
           icon: Container(
-            height: 45.0,
-            width: 45.0,
+            height: SizeConfig.sizeByPixel(35.0),
+            width: SizeConfig.sizeByPixel(35.0),
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () {
@@ -52,12 +57,12 @@ class _DefaultMenuState extends State<DefaultMenu> {
           title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          title: Text('Eu'),
+          icon: Icon(AppIcons.user, size: _sizeIcon),
+          title: SizedBox.shrink(),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu),
-          title: Text('Mais'),
+          icon: Icon(AppIcons.bell, size: _sizeIcon),
+          title: SizedBox.shrink(),
         ),
       ],
     );
