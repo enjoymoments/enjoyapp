@@ -59,6 +59,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Criar publicação',
+      iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
         if (_images.length > 0 ||
             (_descriptionController.text != null &&

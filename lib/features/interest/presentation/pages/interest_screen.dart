@@ -8,6 +8,7 @@ import 'package:mozin/features/interest/presentation/pages/widgets/filters/gener
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 
@@ -37,8 +38,10 @@ class _InterestScreenState extends State<InterestScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: new Text('Interesses'),
+    return CustomAppBar(
+      title: 'Interesses',
+      iconColors: Theme.of(context).backgroundColor,
+      onPressedBack: () => ExtendedNavigator.of(context).pop(),
     );
   }
 
