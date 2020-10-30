@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/builder_tabs.dart';
+import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -59,8 +60,10 @@ class PlaceItemDetails extends StatelessWidget {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: new Text('Sugestões'),
+    return CustomAppBar(
+      title: 'Sugestões',
+      iconColors: Theme.of(context).backgroundColor,
+      onPressedBack: () => Navigator.of(context).pop(),
     );
   }
 

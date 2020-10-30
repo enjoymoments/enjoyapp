@@ -6,6 +6,7 @@ import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
@@ -57,8 +58,10 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      title: new Text('Sugestões'),
+    return CustomAppBar(
+      title: 'Sugestões',
+      iconColors: Theme.of(context).backgroundColor,
+      onPressedBack: () => Navigator.of(context).pop(),
     );
   }
 }
