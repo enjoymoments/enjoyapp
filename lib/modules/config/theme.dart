@@ -11,7 +11,7 @@ ThemeData getTheme(BuildContext context) {
       ),
     ),
     iconTheme: IconThemeData(
-      size: 24.0,
+      size: 18.0,
       color: AppColors.iconsColor,
     ),
     hintColor: AppColors.hintColor,

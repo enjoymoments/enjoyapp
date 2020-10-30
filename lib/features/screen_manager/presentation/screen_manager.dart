@@ -9,6 +9,7 @@ import 'package:mozin/features/more/presentation/pages/more_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/default_menu.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
@@ -38,12 +39,9 @@ class _ScreenManagerState extends State<ScreenManager> {
         return CustomScaffold(
           child: _buildContent(state),
           appBar: _buildAppBar(state),
-          bottomNavigationBar: SizedBox(
-            child: DefaultMenu(onTap: (itemSelected) {
-              _tapScreen(itemSelected);
-            }),
-            height: SizeConfig.sizeByPixel(50),
-          ),
+          bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
+            _tapScreen(itemSelected);
+          }),
         );
       },
     );
@@ -86,7 +84,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return [
           IconButton(
-            icon: Icon(AppIcons.plus),
+            icon: CustomIcon(icon: AppIcons.plus),
             onPressed: () {
               ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
             },

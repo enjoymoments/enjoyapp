@@ -7,8 +7,10 @@ import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -46,33 +48,35 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      child: CustomScaffold(
-        child: _buildBody(),
-        appBar: _buildAppBar(),
-        bottomNavigationBar: _buildBottomMenu(),
-      ),
-      onWillPop: () async {
-        if (_images.length > 0 ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
-          return false;
-        }
-
-        return true;
-      },
+    return CustomScaffold(
+      child: _buildBody(),
+      appBar: _buildAppBar(),
+      bottomNavigationBar: _buildBottomMenu(),
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
       title: Text('Criar publicação'),
+      leading: IconButton(
+        icon: CustomIcon(icon: AppIcons.arrow_left),
+        onPressed: () {
+          if (_images.length > 0 ||
+              (_descriptionController.text != null &&
+                  _descriptionController.text.isNotEmpty)) {
+            return false;
+          }
+
+          Navigator.of(context).pop();
+        },
+      ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.check),
+          icon: CustomIcon(icon: AppIcons.check),
           onPressed: () {
-            if (_images.length > 0 || (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
+            if (_images.length > 0 ||
+                (_descriptionController.text != null &&
+                    _descriptionController.text.isNotEmpty)) {
               _addTimeLineBloc.add(SaveTimeLine());
             }
           },
@@ -153,11 +157,11 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: new Icon(Icons.camera_alt),
+          icon: CustomIcon(icon: AppIcons.camera),
           title: new Text('Câmera'),
         ),
         BottomNavigationBarItem(
-          icon: new Icon(Icons.camera_roll),
+          icon: CustomIcon(icon: AppIcons.film),
           title: new Text('Galeria'),
         ),
       ],

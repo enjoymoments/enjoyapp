@@ -38,8 +38,8 @@ class _DefaultMenuState extends State<DefaultMenu> {
         ),
         BottomNavigationBarItem(
           icon: Container(
-            height: SizeConfig.sizeByPixel(35.0),
-            width: SizeConfig.sizeByPixel(35.0),
+            height: SizeConfig.sizeByPixel(45.0),
+            width: SizeConfig.sizeByPixel(45.0),
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () {

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_avatar_with_name.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -43,10 +45,7 @@ class HeaderCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Icon(
-                Icons.more_horiz,
-                size: Theme.of(context).iconTheme.size,
-              ),
+              child: CustomIcon(icon: AppIcons.ellipsis_h),
             ),
           ],
         ),

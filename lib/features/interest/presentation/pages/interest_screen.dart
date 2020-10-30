@@ -7,6 +7,8 @@ import 'package:mozin/features/interest/presentation/pages/widgets/filters/categ
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/general_filters_screen.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 
 class InterestScreen extends StatefulWidget {
@@ -57,8 +59,8 @@ class _InterestScreenState extends State<InterestScreen> {
         'Pular',
         style: TextStyle(color: Theme.of(context).primaryColor),
       ),
-      next: Icon(
-        Icons.arrow_forward,
+      next: CustomIcon(
+        icon: AppIcons.arrow_right,
         color: Theme.of(context).primaryColor,
       ),
       done: Text(
