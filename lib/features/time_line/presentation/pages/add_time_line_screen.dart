@@ -8,6 +8,7 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
@@ -55,21 +56,18 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Criar publicação'),
-      leading: IconButton(
-        icon: CustomIcon(icon: AppIcons.arrow_left),
-        onPressed: () {
-          if (_images.length > 0 ||
-              (_descriptionController.text != null &&
-                  _descriptionController.text.isNotEmpty)) {
-            return false;
-          }
+  Widget _buildAppBar() {
+    return CustomAppBar(
+      title: 'Criar publicação',
+      onPressedBack: () {
+        if (_images.length > 0 ||
+            (_descriptionController.text != null &&
+                _descriptionController.text.isNotEmpty)) {
+          return false;
+        }
 
-          Navigator.of(context).pop();
-        },
-      ),
+        Navigator.of(context).pop();
+      },
       actions: <Widget>[
         IconButton(
           icon: CustomIcon(icon: AppIcons.check),
