@@ -30,11 +30,11 @@ class _DefaultMenuState extends State<DefaultMenu> {
       items: [
         BottomNavigationBarItem(
           icon: Icon(AppIcons.home, size: _sizeIcon),
-          title: SizedBox.shrink(),
+          title: Text('Início'),
         ),
         BottomNavigationBarItem(
           icon: Icon(AppIcons.people_carry, size: _sizeIcon),
-          title: SizedBox.shrink(),
+          title: Text('Casal'),
         ),
         BottomNavigationBarItem(
           icon: Container(
@@ -58,11 +58,11 @@ class _DefaultMenuState extends State<DefaultMenu> {
         ),
         BottomNavigationBarItem(
           icon: Icon(AppIcons.user, size: _sizeIcon),
-          title: SizedBox.shrink(),
+          title: Text('Eu'),
         ),
         BottomNavigationBarItem(
           icon: Icon(AppIcons.bell, size: _sizeIcon),
-          title: SizedBox.shrink(),
+          title: Text('Alertas'),
         ),
       ],
     );
