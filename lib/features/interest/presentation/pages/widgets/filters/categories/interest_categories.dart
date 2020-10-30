@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
+import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/categorie_item_loading.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_category_item.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -32,7 +32,11 @@ class InterestCategories extends StatelessWidget {
       cubit: interestBloc,
       builder: (context, state) {
         if (state.isLoading) {
-          return CustomCircularProgressIndicator();
+          return Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 30,
+            children: _generateItemsLoading(),
+          );
         }
 
         if (state.categories.isNotEmpty) {
@@ -53,9 +57,14 @@ class InterestCategories extends StatelessWidget {
       return InterestCategoryItem(
         categorie: element,
         callbackSelected: (bool selected) {
-          interestBloc.add(SelectCategorie(itemSelected: element, selected: selected));
+          interestBloc
+              .add(SelectCategorie(itemSelected: element, selected: selected));
         },
       );
     }).toList();
+  }
+
+  List<Widget> _generateItemsLoading() {
+    return List.generate(3, (index) => CategorieItemLoading());
   }
 }
