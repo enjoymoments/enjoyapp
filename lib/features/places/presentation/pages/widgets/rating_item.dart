@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
@@ -15,10 +17,7 @@ const RatingItem({Key key, this.mainAxisAlignment}) : super(key: key);
       children: [
         "4,3".description(context),
         SpacerBox.h5,
-        Icon(
-          Icons.star,
-          size: 10,
-        ),
+        CustomIcon(icon: AppIcons.star, size: 10),
         SpacerBox.h5,
         "(1.568)"
             .description(context),
