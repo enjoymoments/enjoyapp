@@ -1,29 +1,36 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 
 class LoggerRepository {
-  final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
+  final RemoteConfig remoteConfig;
+
+  LoggerRepository({this.remoteConfig});
 
   void addLog(LoggerModel model) {
-    // ignore: always_specify_types
-    _instance.firestore.collection('logger').doc().set({
-      'entryDate': DateTime.now(),
-      'message': model.message,
-      'login': model.login,
-      'error': model.error,
-      'extraInfo': model.extraInfo,
-      'appVersion': model.appVersion,
-      'appName': model.appName,
-      'packageName': model.packageName,
-      'deviceInfo': model.deviceInfo,
-    }).then((dynamic onValue) {
-      print('Success insert Log.');
-    }).catchError((dynamic onError) {
-      print('Falha ao salvar log $onError');
-    });
+    var _dio = Dio();
+    try {
+      var data = {
+        'message': model.message,
+        'login': model.login,
+        'error': model.error,
+        'extraInfo': model.extraInfo,
+        'appVersion': model.appVersion,
+        'appName': model.appName,
+        'packageName': model.packageName,
+        'deviceInfo': model.deviceInfo,
+      };
+
+      var url = remoteConfig.getString(url_functions);
+
+      _dio
+          .post('$url/writeLog', data: data)
+          .then((value) => print('Success insert Log.'))
+          .catchError((onError) => print('Fail insert log $onError'));
+    } finally {
+      _dio.close();
+    }
   }
 
   //TODO:review

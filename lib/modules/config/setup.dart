@@ -76,7 +76,8 @@ void _setupRemoteClientRepository() {
 }
 
 void _registerSingletonModels() {
-  getItInstance.registerSingleton<UserWrapper>(UserWrapper()..assignment(UserAppModel.empty));
+  getItInstance.registerSingleton<UserWrapper>(
+      UserWrapper()..assignment(UserAppModel.empty));
   getItInstance.registerSingleton(
       FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
 }
@@ -101,7 +102,8 @@ void _registerSingletonServices() {
       deviceInfoService: getItInstance(),
       userWrapper: getItInstance()));
 
-  getItInstance.registerLazySingleton<AnalyticsService>(() => AnalyticsService());
+  getItInstance
+      .registerLazySingleton<AnalyticsService>(() => AnalyticsService());
 }
 
 void _registerBlocs() {
@@ -109,10 +111,11 @@ void _registerBlocs() {
       () => AddTimeLineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<AuthenticationBloc>(() =>
-      AuthenticationBloc(getItInstance(), getItInstance(), getItInstance(), getItInstance()));
+      AuthenticationBloc(
+          getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
-  getItInstance
-      .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance(), getItInstance()));
+  getItInstance.registerLazySingleton<TimelineBloc>(
+      () => TimelineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
@@ -136,8 +139,8 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<UserRepository>(() => UserRepository());
 
-  getItInstance
-      .registerLazySingleton<LoggerRepository>(() => LoggerRepository());
+  getItInstance.registerLazySingleton<LoggerRepository>(
+      () => LoggerRepository(remoteConfig: getItInstance()));
 
   getItInstance.registerLazySingleton<InterestRepository>(
       () => InterestRepositoryImpl(remoteDataSource: getItInstance()));
