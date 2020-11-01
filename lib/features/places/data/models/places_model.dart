@@ -1,33 +1,16 @@
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/entities/places.dart';
 
 class PlacesModel extends Places {
-  
-  const PlacesModel();
-  // const PlacesModel(
-  //     {})
-  //     : super();
+  PlacesModel({List<PlaceModel> places})
+      : super(
+          places: places,
+        );
 
   factory PlacesModel.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> data = <String, dynamic>{};
-    data = json;
-    
     return PlacesModel(
-      
+      places: List<PlaceModel>.from(
+          json["places"].map((x) => PlaceModel.fromJson(x))),
     );
-  }
-
-  @override
-  String toString() {
-    return '''
-    ''';
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
-  }
-
-  PlacesModel copyWith() {
-    return PlacesModel();
   }
 }

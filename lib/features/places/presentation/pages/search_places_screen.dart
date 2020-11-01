@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
 import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -31,7 +33,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       child: _buildBody(),
       appBar: _buildAppBar(context),
       bottomNavigationBar: InterestMenu(onTap: (itemSelected) {
-        if(itemSelected == INTEREST_MENU_ENUM.CHANGE_FILTER) {
+        if (itemSelected == INTEREST_MENU_ENUM.CHANGE_FILTER) {
           //TODO:review this - route 'interest_screen' duplicate in tree
           ExtendedNavigator.of(context).push(Routes.interest_screen);
         }
@@ -40,19 +42,20 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   }
 
   Widget _buildBody() {
-    return SingleChildScrollView(
-      child: CustomContainer(
-        child: Column(
-          children: [
-            PlaceCardItem(),
-            SpacerBox.v8,
-            PlaceCardItem(),
-            SpacerBox.v8,
-            PlaceCardItem(),
-            SpacerBox.v8,
-            PlaceCardItem(),
-          ],
-        ),
+    return CustomContainer(
+      child: BlocBuilder<PlacesBloc, PlacesState>(
+        cubit: _placesBloc,
+        builder: (context, state) {
+          if (state.isLoading) {
+            return PlaceCardItemLoading();
+          }
+
+          if (state.model.places != null && state.model.places.length > 0) {
+            return _generateItems(state);
+          }
+
+          return SizedBox.shrink();
+        },
       ),
     );
   }
@@ -62,6 +65,20 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       title: 'Sugestões',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () => Navigator.of(context).pop(),
+    );
+  }
+
+  Widget _generateItems(PlacesState state) {
+    return ListView.separated(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: state.model.places.length,
+      itemBuilder: (context, index) {
+        var item = state.model.places[index];
+        return PlaceCardItem(
+          item: item,
+        );
+      },
+      separatorBuilder: (context, index) => SpacerBox.v16,
     );
   }
 }
