@@ -8,28 +8,16 @@ class PlaceCardItemLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Column(
-      children: [
-        ShimmerLoading(
-          width: SizeConfig.sizeByPixel(100),
-          height: SizeConfig.sizeByPixel(20),
-        ),
-        SpacerBox.v8,
-        ShimmerLoading(
-          width: SizeConfig.sizeByPixel(100),
-          height: SizeConfig.sizeByPixel(20),
-        ),
-        SpacerBox.v8,
-        ShimmerLoading(
-          width: SizeConfig.sizeByPixel(100),
-          height: SizeConfig.sizeByPixel(20),
-        ),
-        SpacerBox.v8,
-        ShimmerLoading(
-          width: SizeConfig.sizeByPixel(100),
-          height: SizeConfig.sizeByPixel(20),
-        ),
-      ],
+    return ListView.separated(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return ShimmerLoading(
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          height: SizeConfig.sizeByPixel(120),
+        );
+      },
+      separatorBuilder: (context, index) => SpacerBox.v16,
     );
   }
 }
