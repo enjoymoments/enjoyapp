@@ -28,13 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody() {
     return CustomContainer(
-      child: InkWell(
-        onTap: () {
-          ExtendedNavigator.of(context).push(Routes.day_one_screen);
-        },
-        child: Center(
-          child: _buildContent(),
-        ),
+      child: Center(
+        child: _buildContent(),
       ),
     );
   }

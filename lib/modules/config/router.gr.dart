@@ -9,7 +9,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/day_one/presentation/pages/day_one_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
@@ -29,7 +28,6 @@ class Routes {
   static const String place_item_details = '/place-item-details';
   static const String interest_screen = '/interest-screen';
   static const String add_time_line_screen = '/add-time-line-screen';
-  static const String day_one_screen = '/day-one-screen';
   static const String gallery_photo_view_wrapper =
       '/gallery-photo-view-wrapper';
   static const all = <String>{
@@ -40,7 +38,6 @@ class Routes {
     place_item_details,
     interest_screen,
     add_time_line_screen,
-    day_one_screen,
     gallery_photo_view_wrapper,
   };
 }
@@ -56,7 +53,6 @@ class Router extends RouterBase {
     RouteDef(Routes.place_item_details, page: PlaceItemDetails),
     RouteDef(Routes.interest_screen, page: InterestScreen),
     RouteDef(Routes.add_time_line_screen, page: AddTimeLineScreen),
-    RouteDef(Routes.day_one_screen, page: DayOneScreen),
     RouteDef(Routes.gallery_photo_view_wrapper, page: GalleryPhotoViewWrapper),
   ];
   @override
@@ -101,12 +97,6 @@ class Router extends RouterBase {
     AddTimeLineScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddTimeLineScreen(),
-        settings: data,
-      );
-    },
-    DayOneScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => DayOneScreen(),
         settings: data,
       );
     },
