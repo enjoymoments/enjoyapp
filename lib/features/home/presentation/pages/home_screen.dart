@@ -1,7 +1,6 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
-import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -28,9 +27,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody() {
     return CustomContainer(
-      child: Center(
-        child: _buildContent(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _buildAnimation(),
+          _buildContent(),
+        ],
       ),
+    );
+  }
+
+  Widget _buildAnimation() {
+    return Container(
+      height: 250,
+      child: FlareActor("assets/animations/welcome.flr",
+          alignment: Alignment.center,
+          fit: BoxFit.contain,
+          animation: "couple"),
     );
   }
 

@@ -66,6 +66,7 @@ dependencies:
   firebase_crashlytics: ^0.1.4+1
   rxdart: ^0.24.1
   firebase_analytics: ^6.0.2
+  flare_flutter: ^2.0.6
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/icons/
+    - assets/animations/
 
   fonts:
     - family: Abel

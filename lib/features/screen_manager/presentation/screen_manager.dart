@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/home/presentation/pages/home_screen.dart';
-import 'package:mozin/features/more/presentation/pages/more_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -72,7 +72,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.ME:
         return MeScreen();
       case DEFAULT_MENU_ENUM.MORE:
-        return MoreScreen();
+        return NotificationsScreen();
       case DEFAULT_MENU_ENUM.HOME:
       default:
         return HomeScreen();
