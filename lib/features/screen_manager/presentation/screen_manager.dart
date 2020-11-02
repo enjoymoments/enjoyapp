@@ -111,7 +111,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.ME:
         return 'Eu';
       case DEFAULT_MENU_ENUM.MORE:
-        return 'Mais';
+        return 'Alertas';
       default:
         return '';
     }

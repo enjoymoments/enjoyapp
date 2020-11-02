@@ -13,7 +13,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return CustomContainer(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildAnimation(),
           "Ops... ainda não está pronto.".labelIntro(context),
@@ -24,7 +25,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   Widget _buildAnimation() {
     return Container(
-      height: 250,
+      height: 200,
       child: FlareActor("assets/animations/watermelon.flr",
           alignment: Alignment.center,
           fit: BoxFit.contain,
