@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -27,23 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody() {
     return CustomContainer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _buildAnimation(),
-          _buildContent(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAnimation() {
-    return Container(
-      height: 250,
-      child: FlareActor("assets/animations/welcome.flr",
-          alignment: Alignment.center,
-          fit: BoxFit.contain,
-          animation: "couple"),
+      child: Center(child: _buildContent()),
     );
   }
 
