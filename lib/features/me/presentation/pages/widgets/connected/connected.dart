@@ -14,7 +14,6 @@ class Connected extends StatelessWidget {
     return CustomContainer(
       child: InkWell(
         onTap: () {
-          print('tocou');
           authenticationBloc.add(Logout());
         },
         child: Column(

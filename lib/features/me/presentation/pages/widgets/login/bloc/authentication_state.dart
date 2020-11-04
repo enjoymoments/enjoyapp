@@ -9,7 +9,6 @@ class AuthenticationState extends DefaultState {
     String errorMessage,
     this.unauthenticated,
     this.user,
-    this.logoutSuccess,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -20,7 +19,6 @@ class AuthenticationState extends DefaultState {
 
   final bool unauthenticated;
   final UserAppModel user;
-  final bool logoutSuccess;
 
   factory AuthenticationState.initial() {
     return AuthenticationState(
@@ -31,7 +29,6 @@ class AuthenticationState extends DefaultState {
       errorMessage: null,
       unauthenticated: false,
       user: null,
-      logoutSuccess: false,
     );
   }
 
@@ -43,7 +40,6 @@ class AuthenticationState extends DefaultState {
     String errorMessage,
     bool unauthenticated,
     UserAppModel user,
-    bool logoutSuccess,
   }) {
     return AuthenticationState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +49,6 @@ class AuthenticationState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       unauthenticated: unauthenticated ?? this.unauthenticated,
       user: user ?? this.user,
-      logoutSuccess: logoutSuccess ?? this.logoutSuccess,
     );
   }
 
@@ -66,6 +61,5 @@ class AuthenticationState extends DefaultState {
         errorMessage,
         unauthenticated,
         user,
-        logoutSuccess,
       ];
 }

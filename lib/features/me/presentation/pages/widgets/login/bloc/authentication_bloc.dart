@@ -61,7 +61,7 @@ class AuthenticationBloc
       var _user = _userWrapper.getUser;
 
       if (_user != UserAppModel.empty) {
-        yield state.copyWith(isLoading: false, isSuccess: true);
+        yield state.copyWith(isLoading: false, unauthenticated: false);
         return;
       }
 
@@ -86,7 +86,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, isSuccess: true, user: _user);
+      yield state.copyWith(isLoading: false, unauthenticated: false, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -98,9 +98,10 @@ class AuthenticationBloc
       yield state.copyWith(isLoading: true);
 
       await _authenticationRepository.logOut();
-      await resetInstances();
+      //TODO:revire this
+      //await resetInstances();
 
-      yield state.copyWith(isLoading: false, logoutSuccess: true);
+      yield state.copyWith(isLoading: false, unauthenticated: true);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
