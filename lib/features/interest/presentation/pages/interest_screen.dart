@@ -5,6 +5,7 @@ import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_categories_details.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_categories.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/general_filters_screen.dart';
+import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -13,6 +14,11 @@ import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 
 class InterestScreen extends StatefulWidget {
+  final bool isChangeFilter;
+
+  const InterestScreen({Key key, @required this.isChangeFilter})
+      : super(key: key);
+
   @override
   _InterestScreenState createState() => _InterestScreenState();
 }
@@ -84,7 +90,13 @@ class _InterestScreenState extends State<InterestScreen> {
 
   void _onIntroEnd(context) {
     ExtendedNavigator.of(context).pop();
-    ExtendedNavigator.of(context).push(Routes.search_places_screen);
+
+    if (widget.isChangeFilter != null && widget.isChangeFilter) {
+      getItInstance<PlacesBloc>()
+        ..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+    } else {
+      ExtendedNavigator.of(context).push(Routes.search_places_screen);
+    }
   }
 
   PageViewModel _selectCategories() {

@@ -14,7 +14,7 @@ class FilterChoosedModel {
         minDistance: 1.0,
         minTime: 1.0,
         maxPrice: 2.0,
-        maxDistance: 20,
+        maxDistance: 5.0,
         maxTime: 2.0,
       ),
     );

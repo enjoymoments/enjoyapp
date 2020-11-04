@@ -89,8 +89,12 @@ class Router extends RouterBase {
       );
     },
     InterestScreen: (data) {
+      final args = data.getArgs<InterestScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => InterestScreen(),
+        builder: (context) => InterestScreen(
+          key: args.key,
+          isChangeFilter: args.isChangeFilter,
+        ),
         settings: data,
       );
     },
@@ -123,6 +127,13 @@ class Router extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// InterestScreen arguments holder class
+class InterestScreenArguments {
+  final Key key;
+  final bool isChangeFilter;
+  InterestScreenArguments({this.key, @required this.isChangeFilter});
+}
 
 /// GalleryPhotoViewWrapper arguments holder class
 class GalleryPhotoViewWrapperArguments {
