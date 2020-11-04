@@ -35,7 +35,7 @@ class _MeScreenState extends State<MeScreen> {
 
         if (state.logoutSuccess) {
           getItInstance<ScreenManagerBloc>()
-            ..add(TapScreen(DEFAULT_MENU_ENUM.ME));
+            ..add(TapScreen(DEFAULT_MENU_ENUM.ME, context));
         }
       },
       builder: (BuildContext context, AuthenticationState state) {

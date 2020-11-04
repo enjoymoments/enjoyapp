@@ -40,20 +40,11 @@ class _ScreenManagerState extends State<ScreenManager> {
           child: _buildContent(state),
           appBar: _buildAppBar(state),
           bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
-            _tapScreen(itemSelected);
+            _screenManagerBloc.add(TapScreen(itemSelected, context));
           }),
         );
       },
     );
-  }
-
-  void _tapScreen(DEFAULT_MENU_ENUM itemSelected) {
-    if (itemSelected == DEFAULT_MENU_ENUM.SEARCH) {
-      ExtendedNavigator.of(context).push(Routes.interest_screen);
-      return;
-    }
-
-    _screenManagerBloc.add(TapScreen(itemSelected));
   }
 
   Widget _buildAppBar(ScreenManagerState state) {

@@ -118,7 +118,7 @@ void _registerBlocs() {
       () => TimelineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
-      ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance()));
+      ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestBloc>(() => InterestBloc(
       interestRepository: getItInstance(),

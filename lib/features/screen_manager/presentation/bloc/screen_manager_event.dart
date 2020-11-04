@@ -16,6 +16,7 @@ class QueueNewPost extends ScreenManagerEvent {
 
 class TapScreen extends ScreenManagerEvent {
   final DEFAULT_MENU_ENUM screenSelected;
+  final BuildContext context;
 
-  TapScreen(this.screenSelected);
+  TapScreen(this.screenSelected, this.context);
 }
