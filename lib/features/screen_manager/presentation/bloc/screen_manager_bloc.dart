@@ -52,9 +52,9 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
             key: bypass_interest_filter, value: bypass_interest_filter));
         ExtendedNavigator.of(event.context).push(Routes.interest_screen);
       }
+    } else {
+      yield state.copyWith(currentScreen: event.screenSelected);
     }
-
-    yield state.copyWith(currentScreen: event.screenSelected);
   }
 
   Stream<ScreenManagerState> mapSaveToState(QueueNewPost event) async* {
