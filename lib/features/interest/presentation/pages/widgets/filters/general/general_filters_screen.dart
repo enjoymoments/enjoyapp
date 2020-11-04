@@ -48,12 +48,12 @@ class GeneralFiltersScreen extends StatelessWidget {
     return CustomRangeFilter(
       typeRange: TypeRangeEnum.distance,
       title: 'Distância',
-      divisions: 10,
+      divisions: 20,
       min: 0,
-      max: 2.0,
+      max: 20,
       textStartRange: '0',
       prefixStartRange: 'Km',
-      textEndRange: '100',
+      textEndRange: '20',
       prefixEndRange: 'Km',
       selectedRanges: RangeValues(generalFilters.minDistance, generalFilters.maxDistance),
     );

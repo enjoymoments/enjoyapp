@@ -7,6 +7,7 @@ import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
+import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'places_event.dart';
@@ -25,11 +26,11 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     PlacesEvent event,
   ) async* {
     if (event is GetCurrentPosition) {
-      yield* mapGetCurrentPositionToState();
+      yield* mapGetCurrentPositionToState(event.filterChoosed);
     }
   }
 
-  Stream<PlacesState> mapGetCurrentPositionToState() async* {
+  Stream<PlacesState> mapGetCurrentPositionToState(FilterChoosedModel filterChoosed) async* {
     try {
       yield state.copyWith(isLoading: true, isError: false);
 
@@ -38,7 +39,7 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
 
       Either<PlacesModel, Exception> response =
           await _placesRepository.getPlaces(
-              position.latitude, position.longitude, 15000, 'restaurant');
+              position.latitude, position.longitude, _getRadius(filterChoosed), 'restaurant');
 
       yield response.fold((model) {
         return state.copyWith(
@@ -56,5 +57,9 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
+  }
+
+  int _getRadius(FilterChoosedModel filterChoosed) {
+    return (filterChoosed.generalFilters.maxDistance * 1000).toInt();
   }
 }

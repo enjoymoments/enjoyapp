@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
 import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
@@ -21,10 +22,12 @@ class SearchPlacesScreen extends StatefulWidget {
 
 class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   PlacesBloc _placesBloc;
+  InterestBloc _interestBloc;
 
   @override
   void initState() {
-    _placesBloc = getItInstance<PlacesBloc>()..add(GetCurrentPosition());
+    _interestBloc = getItInstance<InterestBloc>();
+    _placesBloc = getItInstance<PlacesBloc>()..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
     super.initState();
   }
 

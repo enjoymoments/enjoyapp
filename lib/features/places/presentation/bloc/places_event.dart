@@ -6,4 +6,8 @@ abstract class PlacesEvent extends Equatable {
   List<Object> get props => <Object>[];
 }
 
-class GetCurrentPosition extends PlacesEvent {}
+class GetCurrentPosition extends PlacesEvent {
+  final FilterChoosedModel filterChoosed;
+
+  GetCurrentPosition(this.filterChoosed);
+}
