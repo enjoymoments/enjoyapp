@@ -98,8 +98,7 @@ class AuthenticationBloc
       yield state.copyWith(isLoading: true);
 
       await _authenticationRepository.logOut();
-      //TODO:revire this
-      //await resetInstances();
+      await resetInstances();
 
       yield state.copyWith(isLoading: false, unauthenticated: true);
     } catch (e) {
