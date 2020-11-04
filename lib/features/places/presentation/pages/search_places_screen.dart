@@ -59,6 +59,10 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
             return Center(child: "Nada encontrado".labelIntro(context));
           }
 
+          if(state.isError) {
+            return Center(child: "Ops... houve um erro.\nTente novamente".labelIntro(context));
+          }
+
           return SizedBox.shrink();
         },
       ),
