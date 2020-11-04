@@ -12,6 +12,7 @@ import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class SearchPlacesScreen extends StatefulWidget {
   @override
@@ -52,6 +53,10 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
           if (state.model.places != null && state.model.places.length > 0) {
             return _generateItems(state);
+          }
+
+          if(state.model.places != null && state.model.places.length == 0) {
+            return Center(child: "Nada encontrado".labelIntro(context));
           }
 
           return SizedBox.shrink();
