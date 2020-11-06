@@ -18,7 +18,7 @@ class PlaceCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //ExtendedNavigator.of(context).push(Routes.place_item_details);
+        ExtendedNavigator.of(context).push(Routes.place_item_details, arguments: PlaceItemDetailsArguments(item: item));
       },
       child: Container(
         padding: const EdgeInsets.only(

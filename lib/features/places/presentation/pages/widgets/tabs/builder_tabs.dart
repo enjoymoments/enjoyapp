@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
@@ -7,6 +8,10 @@ import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class BuilderTabs extends StatefulWidget {
+  final PlaceModel item;
+
+  const BuilderTabs({Key key, @required this.item}) : super(key: key);
+  
   @override
   _BuilderTabsState createState() => _BuilderTabsState();
 }
@@ -70,7 +75,7 @@ class _BuilderTabsState extends State<BuilderTabs>
             controller: _nestedTabController,
             children: <Widget>[
               GeneralTabItem(),
-              RatingTabItem(),
+              RatingTabItem(item: widget.item,),
               PhotosTabItem(),
               Container(
                 decoration: BoxDecoration(

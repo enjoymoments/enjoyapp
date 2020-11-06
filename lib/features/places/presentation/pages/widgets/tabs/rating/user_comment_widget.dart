@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -6,6 +7,10 @@ import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class UserCommentWidget extends StatelessWidget {
+  final PlaceModel item;
+
+  const UserCommentWidget({Key key, @required this.item}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return CustomBorder(
@@ -19,7 +24,7 @@ class UserCommentWidget extends StatelessWidget {
             SpacerBox.v8,
             Row(
               children: [
-                RatingItem(),
+                RatingItem(item: item,),
                 SpacerBox.h8,
                 "Uma semana atrás".description(context, fontSize: 10),
               ],

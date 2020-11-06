@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
+import '../../features/places/data/models/place_model.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
@@ -83,8 +84,14 @@ class Router extends RouterBase {
       );
     },
     PlaceItemDetails: (data) {
+      final args = data.getArgs<PlaceItemDetailsArguments>(
+        orElse: () => PlaceItemDetailsArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => PlaceItemDetails(),
+        builder: (context) => PlaceItemDetails(
+          key: args.key,
+          item: args.item,
+        ),
         settings: data,
       );
     },
@@ -127,6 +134,13 @@ class Router extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// PlaceItemDetails arguments holder class
+class PlaceItemDetailsArguments {
+  final Key key;
+  final PlaceModel item;
+  PlaceItemDetailsArguments({this.key, this.item});
+}
 
 /// InterestScreen arguments holder class
 class InterestScreenArguments {
