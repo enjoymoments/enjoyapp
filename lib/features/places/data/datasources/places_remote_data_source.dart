@@ -39,6 +39,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
         vicinity
         priceLevel
         photoReferences
+        icon
       }
     }
     ''';

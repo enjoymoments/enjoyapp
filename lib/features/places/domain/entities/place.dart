@@ -10,6 +10,7 @@ class Place extends Equatable {
   final String vicinity;
   final int priceLevel;
   final List<String> photoReferences;
+  final String icon;
 
   Place({
     this.address,
@@ -21,6 +22,7 @@ class Place extends Equatable {
     this.vicinity,
     this.priceLevel,
     this.photoReferences,
+    this.icon,
   });
 
   @override
@@ -34,5 +36,6 @@ class Place extends Equatable {
         this.vicinity,
         this.priceLevel,
         this.photoReferences,
+        this.icon,
       ];
 }

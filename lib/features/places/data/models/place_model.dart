@@ -11,6 +11,7 @@ class PlaceModel extends Place {
     String vicinity,
     int priceLevel,
     List<String> photoReferences,
+    String icon,
   }) : super(
           address: address,
           name: name,
@@ -21,6 +22,7 @@ class PlaceModel extends Place {
           vicinity: vicinity,
           priceLevel: priceLevel,
           photoReferences: photoReferences,
+          icon: icon,
         );
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class PlaceModel extends Place {
       userRatingsTotal: json["userRatingsTotal"],
       vicinity: json["vicinity"],
       priceLevel: json["priceLevel"] == null ? null : json["priceLevel"],
+      icon: json["icon"],
       photoReferences: json["photoReferences"] != null ? List<String>.from(json["photoReferences"].map((x) => x)) : List(),
     );
   }
