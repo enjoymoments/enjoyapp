@@ -1,1 +1,1 @@
-enum LoggerTypeEnum {Error, Info}
+enum LoggerTypeEnum {Error, Info, Crashlytic}

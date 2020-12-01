@@ -20,6 +20,7 @@ class LoggerRepository {
         'appName': model.appName,
         'packageName': model.packageName,
         'deviceInfo': model.deviceInfo,
+        'type': model.typeError.index,
       };
 
       var url = remoteConfig.getString(url_functions);

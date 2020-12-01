@@ -1,6 +1,10 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/is_debug_mode.dart';
+import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
+import 'package:mozin/modules/shared/logger/models/logger_model.dart';
+import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
 void reportErrorsPlatform() {
   // This captures errors reported by the Flutter framework.
@@ -13,6 +17,7 @@ void reportErrorsPlatform() {
       // In production mode report to the application zone to report to
       // Crashlytics.
       Crashlytics.instance.recordFlutterError(details);
+      _recordLogging(details?.toString(), details?.stack?.toString());
     }
   };
 }
@@ -33,4 +38,29 @@ Future<void> reportError(dynamic error, dynamic stackTrace) async {
     error,
     stackTrace,
   );
+
+  _recordLogging(error?.toString(), stackTrace?.toString());
+}
+
+void _recordLogging(String error, String stackTrace) {
+  try {
+    final LoggerService _logger = getItInstance<LoggerService>();
+
+    _logger.addLogAsync(
+      LoggerModel(
+        typeError: LoggerTypeEnum.Crashlytic,
+        // ignore: always_specify_types
+        error: {
+          'body': error,
+        },
+        message: 'crashlytics',
+        // ignore: always_specify_types
+        extraInfo: {
+          'command': stackTrace,
+        },
+      ),
+    );
+  } catch (e) {
+    print('error in set logger crashlytics');
+  }
 }
