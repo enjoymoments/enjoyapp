@@ -84,6 +84,13 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.HOME:
       case DEFAULT_MENU_ENUM.SEARCH:
       case DEFAULT_MENU_ENUM.ME:
+      return [
+          IconButton(
+            icon: CustomIcon(icon: AppIcons.bars),
+            onPressed: () {
+            },
+          ),
+        ];
       case DEFAULT_MENU_ENUM.MORE:
         return [];
       default:
