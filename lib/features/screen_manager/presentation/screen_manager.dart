@@ -82,13 +82,14 @@ class _ScreenManagerState extends State<ScreenManager> {
           ),
         ];
       case DEFAULT_MENU_ENUM.HOME:
+        return [];
       case DEFAULT_MENU_ENUM.SEARCH:
+        return [];
       case DEFAULT_MENU_ENUM.ME:
-      return [
+        return [
           IconButton(
             icon: CustomIcon(icon: AppIcons.bars),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
         ];
       case DEFAULT_MENU_ENUM.MORE:
