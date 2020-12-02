@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
@@ -67,10 +70,19 @@ Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
 }
 
 void _setupRemoteClientRepository() {
+  Dio _dio = Dio();
+  (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+      (HttpClient client) {
+    client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    return client;
+  };
+
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(
-            dio: Dio(),
-            url: getItInstance<RemoteConfig>().getString(url_endpoint),
+            dio: _dio,
+            url:
+                'https://10.0.2.2:5001/graphql', //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -118,7 +130,8 @@ void _registerBlocs() {
       () => TimelineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
-      ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance(), getItInstance()));
+      ScreenManagerBloc(
+          getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestBloc>(() => InterestBloc(
       interestRepository: getItInstance(),
