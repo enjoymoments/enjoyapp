@@ -1,0 +1,1 @@
+enum PlaceDetailTabsEnum {general, rating, photo}

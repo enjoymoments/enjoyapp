@@ -5,7 +5,7 @@ import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_categories_details.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_categories.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/general_filters_screen.dart';
-import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
+import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';

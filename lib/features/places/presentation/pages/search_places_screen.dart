@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
-import 'package:mozin/features/places/presentation/bloc/places_bloc.dart';
+import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
