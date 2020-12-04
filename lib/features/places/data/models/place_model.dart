@@ -1,3 +1,4 @@
+import 'package:mozin/features/places/data/models/location_model.dart';
 import 'package:mozin/features/places/domain/entities/place.dart';
 
 class PlaceModel extends Place {
@@ -12,6 +13,7 @@ class PlaceModel extends Place {
     int priceLevel,
     List<String> photoReferences,
     String icon,
+    LocationModel location,
   }) : super(
           address: address,
           name: name,
@@ -23,6 +25,7 @@ class PlaceModel extends Place {
           priceLevel: priceLevel,
           photoReferences: photoReferences,
           icon: icon,
+          location: location,
         );
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +40,7 @@ class PlaceModel extends Place {
       priceLevel: json["priceLevel"] == null ? null : json["priceLevel"],
       icon: json["icon"],
       photoReferences: json["photoReferences"] != null ? List<String>.from(json["photoReferences"].map((x) => x)) : List(),
+      location: json['location'] != null ? LocationModel.fromJson(json['location']) : null,
     );
   }
 }

@@ -40,6 +40,10 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
         priceLevel
         photoReferences
         icon
+        location {
+          latitude
+          longitude
+        }
       }
     }
     ''';
