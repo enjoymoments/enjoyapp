@@ -14,7 +14,9 @@ class RatingTabItem extends StatelessWidget {
     return Column(
       children: [
         SpacerBox.v8,
-        PercentageWidget(),
+        PercentageWidget(
+          item: item,
+        ),
         SpacerBox.v16,
         ...item.reviews.map((e) {
           return UserCommentWidget(
