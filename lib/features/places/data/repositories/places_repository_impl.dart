@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/places/data/datasources/places_remote_data_source.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,17 @@ class PlacesRepositoryImpl implements PlacesRepository {
       return Left<PlacesModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<PlacesModel, Exception>(Exception('error'));
+    }
+  }
+
+  @override
+  Future<Either<PlaceModel, Exception>> getPlaceDetails(
+      PlaceModel place) async {
+    try {
+      var response = await remoteDataSource.getPlaceDetails(place);
+      return Left<PlaceModel, Exception>(response);
+    } on dynamic catch (e) {
+      return Right<PlaceModel, Exception>(Exception('error'));
     }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:mozin/features/places/data/models/location_model.dart';
+import 'package:mozin/features/places/data/models/review_model.dart';
 import 'package:mozin/features/places/domain/entities/place.dart';
+import 'package:mozin/features/places/domain/entities/review.dart';
 
 class PlaceModel extends Place {
   PlaceModel({
@@ -14,6 +16,8 @@ class PlaceModel extends Place {
     List<String> photoReferences,
     String icon,
     LocationModel location,
+    bool openNow,
+    List<Review> reviews,
   }) : super(
           address: address,
           name: name,
@@ -26,6 +30,8 @@ class PlaceModel extends Place {
           photoReferences: photoReferences,
           icon: icon,
           location: location,
+          openNow: openNow,
+          reviews: reviews,
         );
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) {
@@ -34,13 +40,30 @@ class PlaceModel extends Place {
       name: json["name"],
       placeId: json["placeId"],
       rating: json["rating"] != null ? json["rating"].toDouble() : 0,
-      types: json["types"] != null ? List<String>.from(json["types"].map((x) => x)) : List(),
+      types: json["types"] != null
+          ? List<String>.from(json["types"].map((x) => x))
+          : List(),
       userRatingsTotal: json["userRatingsTotal"],
       vicinity: json["vicinity"],
       priceLevel: json["priceLevel"] == null ? null : json["priceLevel"],
       icon: json["icon"],
-      photoReferences: json["photoReferences"] != null ? List<String>.from(json["photoReferences"].map((x) => x)) : List(),
-      location: json['location'] != null ? LocationModel.fromJson(json['location']) : null,
+      photoReferences: json["photoReferences"] != null
+          ? List<String>.from(json["photoReferences"].map((x) => x))
+          : List(),
+      location: json['location'] != null
+          ? LocationModel.fromJson(json['location'])
+          : null,
     );
+  }
+
+  factory PlaceModel.fromJsonComplement(
+      PlaceModel place, Map<String, dynamic> json) {
+    place.openNow = json['openNow'];
+    place.reviews = json["reviews"] != null
+        ? List<ReviewModel>.from(
+            json["reviews"].map((x) => ReviewModel.fromJson(x)))
+        : List();
+
+    return place;
   }
 }

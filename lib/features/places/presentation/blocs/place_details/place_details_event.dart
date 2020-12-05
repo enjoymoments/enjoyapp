@@ -7,8 +7,14 @@ abstract class PlaceDetailsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ChangeTabEvent extends PlaceDetailsEvent {
-  final int newTab;
+class LoadDetails extends PlaceDetailsEvent {
+  final PlaceModel item;
 
-  ChangeTabEvent(this.newTab);
+  LoadDetails(this.item);
+}
+
+class LoadPhotos extends PlaceDetailsEvent {
+  final PlaceModel item;
+
+  LoadPhotos(this.item);
 }

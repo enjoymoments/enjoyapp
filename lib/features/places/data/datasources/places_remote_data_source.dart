@@ -1,3 +1,4 @@
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 
@@ -7,6 +8,10 @@ abstract class PlacesRemoteDataSource {
     double longitude,
     int radius,
     String type,
+  );
+
+  Future<PlaceModel> getPlaceDetails(
+    PlaceModel place,
   );
 }
 
@@ -50,5 +55,29 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
 
     var result = await remoteClientRepository.query(_query);
     return PlacesModel.fromJson(result['data']);
+  }
+
+    @override
+  Future<PlaceModel> getPlaceDetails(
+    PlaceModel place,
+  ) async {
+    String _query = '''
+    query PlaceDetails {
+       placeDetails(placeId: "${place.placeId}") {
+        types
+        openNow
+        reviews {
+          authorName
+          relativeTimeDescription
+          profilePhotoUrl
+          rating
+          text
+        }
+      }
+    }
+    ''';
+
+    var result = await remoteClientRepository.query(_query);
+    return PlaceModel.fromJsonComplement(place, result['data']['placeDetails']);
   }
 }

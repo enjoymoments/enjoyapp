@@ -1,13 +1,14 @@
-part of 'place_details_bloc.dart';
+import 'package:mozin/features/places/domain/enums/place_detail_tabs_enum.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
 
-class PlaceDetailsState extends DefaultState {
-  PlaceDetailsState({
+class PlaceDetailsTabState extends DefaultState {
+  PlaceDetailsTabState({
     bool isLoading,
     bool isEmpty,
     bool isError,
     bool isSuccess,
     String errorMessage,
-    this.item,
+    this.currentTab,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -16,33 +17,34 @@ class PlaceDetailsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final PlaceModel item;
+  final PlaceDetailTabsEnum currentTab;
 
-  factory PlaceDetailsState.initial() {
-    return PlaceDetailsState(
+  factory PlaceDetailsTabState.initial() {
+    return PlaceDetailsTabState(
       isLoading: false,
       isSuccess: false,
       isEmpty: false,
       isError: false,
       errorMessage: null,
+      currentTab: PlaceDetailTabsEnum.general,
     );
   }
 
-  PlaceDetailsState copyWith({
+  PlaceDetailsTabState copyWith({
     bool isLoading,
     bool isEmpty,
     bool isError,
     bool isSuccess,
     String errorMessage,
-    PlaceModel item,
+    PlaceDetailTabsEnum currentTab,
   }) {
-    return PlaceDetailsState(
+    return PlaceDetailsTabState(
       isLoading: isLoading ?? this.isLoading,
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage ?? this.errorMessage,
-      item: item ?? this.item,
+      currentTab: currentTab ?? this.currentTab,
     );
   }
 
@@ -53,6 +55,6 @@ class PlaceDetailsState extends DefaultState {
         isError,
         isSuccess,
         errorMessage,
-        item,
+        currentTab,
       ];
 }
