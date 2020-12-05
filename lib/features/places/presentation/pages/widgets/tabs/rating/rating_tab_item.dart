@@ -8,7 +8,7 @@ class RatingTabItem extends StatelessWidget {
   final PlaceModel item;
 
   const RatingTabItem({Key key, @required this.item}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,11 +16,11 @@ class RatingTabItem extends StatelessWidget {
         SpacerBox.v8,
         PercentageWidget(),
         SpacerBox.v16,
-        UserCommentWidget(item: item,),
-        SpacerBox.v8,
-        UserCommentWidget(item: item,),
-        SpacerBox.v8,
-        UserCommentWidget(item: item,),
+        ...item.reviews.map((e) {
+          return UserCommentWidget(
+            review: e,
+          );
+        }).toList()
       ],
     );
   }
