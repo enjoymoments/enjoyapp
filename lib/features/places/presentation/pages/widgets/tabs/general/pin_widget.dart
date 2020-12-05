@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_modal_fit.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_border.dart';
@@ -9,6 +10,10 @@ import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class PinWidget extends StatelessWidget {
+  final PlaceModel item;
+
+  const PinWidget({Key key, @required this.item}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -28,9 +33,8 @@ class PinWidget extends StatelessWidget {
               ),
               SpacerBox.h8,
               Expanded(
-                child:
-                    "R. Doces lembranças, 123 - Vila Eternize, São Paulo - SP, 04310-040"
-                        .label(
+                child: item.formattedAddress
+                    .label(
                   context,
                 ),
               ),

@@ -35,6 +35,7 @@ class PlaceDetailsBloc extends Bloc<PlaceDetailsEvent, PlaceDetailsState> {
         await _placesRepository.getPlaceDetails(event.item);
 
     yield response.fold((item) {
+      event.item = item;
       return state.copyWith(
           isLoading: false, isError: false, isSuccess: true, item: item);
     }, (error) {

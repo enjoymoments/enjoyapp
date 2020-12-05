@@ -64,6 +64,8 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     String _query = '''
     query PlaceDetails {
        placeDetails(placeId: "${place.placeId}") {
+        formattedAddress
+        formattedPhoneNumber
         types
         openNow
         reviews {

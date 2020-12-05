@@ -8,7 +8,7 @@ abstract class PlaceDetailsEvent extends Equatable {
 }
 
 class LoadDetails extends PlaceDetailsEvent {
-  final PlaceModel item;
+  PlaceModel item;
 
   LoadDetails(this.item);
 }

@@ -1,12 +1,17 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class PlaceAvailableWidget extends StatelessWidget {
+  final PlaceModel item;
+  
   final ExpandableController controller = ExpandableController();
+
+  PlaceAvailableWidget({Key key, @required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class PlaceAvailableWidget extends StatelessWidget {
           color: Theme.of(context).primaryColor,
         ),
         SpacerBox.h8,
-        "Aberto".label(context, color: Theme.of(context).primaryColor),
+        (item.openNow ? "Aberto" : "Fechado").label(context, color: Theme.of(context).primaryColor),
         SpacerBox.h8,
         "Fecha às 22:30".label(context),
       ],
