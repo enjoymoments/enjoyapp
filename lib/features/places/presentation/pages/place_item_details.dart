@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/enums/place_detail_tabs_enum.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details/place_details_bloc.dart';
@@ -17,9 +18,13 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/pho
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_icon.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/shimmerLoading.dart';
@@ -239,6 +244,25 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       title: 'Sugestões',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () => Navigator.of(context).pop(),
+      actions: [
+        IconButton(
+          icon: CustomIcon(icon: AppIcons.bars),
+          onPressed: () {
+            showMaterialModalBottomSheet(
+              context: context,
+              builder: (context, scrollController) => CustomModalFit(
+                items: [
+                  CustomItemModalFit(
+                    text: 'Adicionar aos favoritos',
+                    iconData: Icons.star,
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -253,7 +277,9 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             item: widget.item,
           );
         } else if (state.currentTab == PlaceDetailTabsEnum.photo) {
-          return PhotosTabItem(placePhotosBloc: _placePhotosBloc,);
+          return PhotosTabItem(
+            placePhotosBloc: _placePhotosBloc,
+          );
         }
 
         return SizedBox.shrink();
