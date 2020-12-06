@@ -13,6 +13,10 @@ abstract class PlacesRemoteDataSource {
   Future<PlaceModel> getPlaceDetails(
     PlaceModel place,
   );
+
+  Future<String> getPlacePhoto(
+    String photoReference,
+  );
 }
 
 class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
@@ -57,7 +61,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     return PlacesModel.fromJson(result['data']);
   }
 
-    @override
+  @override
   Future<PlaceModel> getPlaceDetails(
     PlaceModel place,
   ) async {
@@ -81,5 +85,17 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
 
     var result = await remoteClientRepository.query(_query);
     return PlaceModel.fromJsonComplement(place, result['data']['placeDetails']);
+  }
+
+  @override
+  Future<String> getPlacePhoto(String photoReference) async {
+    String _query = '''
+    query placePhotos {
+      placePhoto(photoReference: "$photoReference")
+    }
+    ''';
+
+    var result = await remoteClientRepository.query(_query);
+    return result['data']['placePhoto'];
   }
 }

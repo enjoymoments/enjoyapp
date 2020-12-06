@@ -38,4 +38,13 @@ class PlacesRepositoryImpl implements PlacesRepository {
       return Right<PlaceModel, Exception>(Exception('error'));
     }
   }
+
+  @override
+  Future<String> getPlacePhoto(String photoReference) async {
+    try {
+      return remoteDataSource.getPlacePhoto(photoReference);
+    } on dynamic catch (e) {
+      return Future.value(null);
+    }
+  }
 }

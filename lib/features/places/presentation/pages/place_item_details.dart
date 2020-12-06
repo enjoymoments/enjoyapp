@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:mozin/features/places/presentation/blocs/place_details/place_det
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_event.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_state.dart';
+import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
@@ -48,15 +51,16 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   TabController _nestedTabController;
   PlaceDetailsTabBloc _placeDetailsTabBloc;
   PlaceDetailsBloc _placeDetailsBloc;
+  PlacePhotosBloc _placePhotosBloc;
 
   @override
   void initState() {
     super.initState();
 
     _placeDetailsTabBloc = getItInstance<PlaceDetailsTabBloc>();
+    _placePhotosBloc = getItInstance<PlacePhotosBloc>();
     _placeDetailsBloc = getItInstance<PlaceDetailsBloc>()
-      ..add(LoadDetails(widget.item))
-      ..add(LoadPhotos(widget.item));
+      ..add(LoadDetails(widget.item, _placePhotosBloc));
 
     _nestedTabController =
         new TabController(length: _tabsTitle.length, vsync: this);
@@ -70,6 +74,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _nestedTabController.dispose();
     _placeDetailsTabBloc.close();
     _placeDetailsBloc.close();
+    _placePhotosBloc.close();
   }
 
   _handleTabSelection() {
@@ -94,15 +99,14 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       child: CustomContainer(
         child: Column(
           children: [
-            BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
-              cubit: _placeDetailsBloc,
+            BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
+              cubit: _placePhotosBloc,
               builder: (context, state) {
                 if (state.isLoading) {
                   return _buildLoadingPhotos();
+                } else if (state.item?.photos != null) {
+                  return _buildCarousel(state.item.photos);
                 }
-                // else if (state.item != null) {
-                //   return _buildCarousel();
-                // }
 
                 return _buildLoadingPhotos();
               },
@@ -257,36 +261,35 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     );
   }
 
-  // TODO:in development
-  // Widget _buildCarousel() {
-  //   return CarouselSlider(
-  //     options: CarouselOptions(
-  //       aspectRatio: 2.0,
-  //       enlargeCenterPage: true,
-  //       enableInfiniteScroll: false,
-  //       initialPage: 2,
-  //     ),
-  //     items: _buildPhotos(),
-  //   );
-  // }
+  Widget _buildCarousel(List<Uint8List> images) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
+        enableInfiniteScroll: false,
+        initialPage: 2,
+      ),
+      items: _buildPhotos(images),
+    );
+  }
 
-  // List<Widget> _buildPhotos() {
-  //   return _imgList
-  //       .map(
-  //         (item) => Container(
-  //           child: Container(
-  //             margin: EdgeInsets.all(5.0),
-  //             child: ClipRRect(
-  //               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-  //               child: Stack(
-  //                 children: <Widget>[
-  //                   Image.network(item, fit: BoxFit.cover, width: 1000.0),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       )
-  //       .toList();
-  // }
+  List<Widget> _buildPhotos(List<Uint8List> images) {
+    return images
+        .map(
+          (item) => Container(
+            child: Container(
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.memory(item, fit: BoxFit.cover, width: 1000.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        )
+        .toList();
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:mozin/features/places/domain/entities/location.dart';
 import 'package:mozin/features/places/domain/entities/review.dart';
@@ -18,6 +20,7 @@ class Place extends Equatable {
   final Location location;
   bool openNow;
   List<Review> reviews;
+  List<Uint8List> photos;
 
   Place({
     this.address,
@@ -35,6 +38,7 @@ class Place extends Equatable {
     this.location,
     this.openNow,
     this.reviews,
+    this.photos,
   });
 
   @override
@@ -54,5 +58,6 @@ class Place extends Equatable {
         this.location,
         this.openNow,
         this.reviews,
+        this.photos,
       ];
 }

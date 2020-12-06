@@ -13,4 +13,6 @@ abstract class PlacesRepository {
   Future<Either<PlaceModel, Exception>> getPlaceDetails(
     PlaceModel place,
   );
+
+  Future<String> getPlacePhoto(String photoReference);
 }
