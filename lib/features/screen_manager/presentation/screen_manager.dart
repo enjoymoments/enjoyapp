@@ -131,6 +131,11 @@ class _ScreenManagerState extends State<ScreenManager> {
                       iconData: Icons.star,
                       onTap: () {},
                     ),
+                    CustomItemModalFit(
+                      text: 'Curtiu o Enjoy? Avalie-nos',
+                      iconData: Icons.thumb_up,
+                      onTap: () {},
+                    ),
                   ],
                 ),
               );
