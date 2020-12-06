@@ -43,7 +43,7 @@ class HeaderCard extends StatelessWidget {
                     items: [
                       CustomItemModalFit(
                         text: 'Deletar',
-                        iconData: Icons.delete,
+                        iconData: AppIcons.trash,
                         onTap: () {
                           callback(ActionHeaderEnum.DELETE);
                         },

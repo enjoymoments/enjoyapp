@@ -91,7 +91,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                   items: [
                     CustomItemModalFit(
                       text: 'Postagem',
-                      iconData: Icons.new_releases,
+                      iconData: AppIcons.keyboard,
                       onTap: () {
                         ExtendedNavigator.of(context)
                             .push(Routes.add_time_line_screen);
@@ -99,7 +99,7 @@ class _ScreenManagerState extends State<ScreenManager> {
                     ),
                     CustomItemModalFit(
                       text: 'Álbum',
-                      iconData: Icons.photo_album,
+                      iconData: AppIcons.folder,
                       onTap: () {},
                     ),
                   ],
@@ -123,17 +123,22 @@ class _ScreenManagerState extends State<ScreenManager> {
                   items: [
                     CustomItemModalFit(
                       text: 'Configurações',
-                      iconData: Icons.settings,
+                      iconData: AppIcons.cog,
                       onTap: () {},
                     ),
                     CustomItemModalFit(
                       text: 'Favoritos',
-                      iconData: Icons.star,
+                      iconData: AppIcons.star,
                       onTap: () {},
                     ),
                     CustomItemModalFit(
                       text: 'Curtiu o Enjoy? Avalie-nos',
-                      iconData: Icons.thumb_up,
+                      iconData: AppIcons.thumbs_up,
+                      onTap: () {},
+                    ),
+                    CustomItemModalFit(
+                      text: 'Facebook',
+                      iconData: AppIcons.facebook,
                       onTap: () {},
                     ),
                   ],

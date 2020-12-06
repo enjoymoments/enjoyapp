@@ -5,6 +5,7 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/body_card.da
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/header_card.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/spacer_box.dart';
@@ -46,14 +47,14 @@ class TimeLineItem extends StatelessWidget {
           items: [
             CustomItemModalFit(
               text: 'Sim',
-              iconData: Icons.done,
+              iconData: AppIcons.check,
               onTap: () {
                 timelineBloc.add(DeletePost(item));
               },
             ),
             CustomItemModalFit(
               text: 'Não',
-              iconData: Icons.close,
+              iconData: AppIcons.times,
               onTap: () {},
             ),
           ],

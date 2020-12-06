@@ -254,7 +254,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
                 items: [
                   CustomItemModalFit(
                     text: 'Adicionar aos favoritos',
-                    iconData: Icons.star,
+                    iconData: AppIcons.star,
                     onTap: () {},
                   ),
                 ],
