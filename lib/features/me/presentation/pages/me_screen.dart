@@ -43,8 +43,10 @@ class _MeScreenState extends State<MeScreen> {
         }
 
         if (state.unauthenticated) {
-          return SingleChildScrollView(
-            child: LoginScreen(),
+          return Center(
+            child: SingleChildScrollView(
+              child: LoginScreen(),
+            ),
           );
         }
 
