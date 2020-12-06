@@ -253,7 +253,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             item: widget.item,
           );
         } else if (state.currentTab == PlaceDetailTabsEnum.photo) {
-          return PhotosTabItem();
+          return PhotosTabItem(placePhotosBloc: _placePhotosBloc,);
         }
 
         return SizedBox.shrink();

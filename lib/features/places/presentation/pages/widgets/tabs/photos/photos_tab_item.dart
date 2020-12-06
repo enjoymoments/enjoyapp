@@ -1,20 +1,64 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photo_item_widget.dart';
+import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/shimmerLoading.dart';
 
 class PhotosTabItem extends StatelessWidget {
+  final PlacePhotosBloc placePhotosBloc;
+
+  const PhotosTabItem({Key key, @required this.placePhotosBloc})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
+      cubit: placePhotosBloc,
+      builder: (context, state) {
+        if (state.item?.photos != null) {
+          return _buildPhotos(state.item.photos);
+        }
+
+        return _buildLoadingPhotos();
+      },
+    );
+  }
+
+  Widget _buildPhotos(List<Uint8List> photos) {
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 10,
-      children: [
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-        PhotoItemWidget(item: 'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80'),
-      ],
+      children: photos.map((e) {
+        return PhotoItemWidget(
+          item: e,
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildLoadingPhotos() {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 10,
+      children: [0, 1, 2, 3]
+          .map(
+            (item) => Container(
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: ShimmerLoading(
+                    width: SizeConfig.sizeByPixel(150),
+                    height: SizeConfig.sizeByPixel(80),
+                  ),
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }

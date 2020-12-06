@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/config/size_config.dart';
 
 class PhotoItemWidget extends StatelessWidget {
-  final String item;
+  final Uint8List item;
 
   const PhotoItemWidget({Key key, @required this.item}) : super(key: key);
 
@@ -14,7 +17,7 @@ class PhotoItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
             children: <Widget>[
-              Image.network(item, fit: BoxFit.cover, width: 150.0),
+              Image.memory(item, fit: BoxFit.cover, width: SizeConfig.sizeByPixel(150)),
             ],
           ),
         ),
