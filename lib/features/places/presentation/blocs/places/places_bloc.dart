@@ -39,7 +39,7 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
 
       Either<PlacesModel, Exception> response =
           await _placesRepository.getPlaces(
-              position.latitude, position.longitude, _getRadius(filterChoosed), 'restaurant');
+              position.latitude, position.longitude, filterChoosed);
 
       yield response.fold((model) {
         return state.copyWith(
@@ -57,9 +57,5 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
-  }
-
-  int _getRadius(FilterChoosedModel filterChoosed) {
-    return (filterChoosed.generalFilters.maxDistance * 1000).toInt();
   }
 }

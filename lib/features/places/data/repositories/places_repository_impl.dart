@@ -4,6 +4,7 @@ import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 
 class PlacesRepositoryImpl implements PlacesRepository {
   PlacesRepositoryImpl({
@@ -16,12 +17,11 @@ class PlacesRepositoryImpl implements PlacesRepository {
   Future<Either<PlacesModel, Exception>> getPlaces(
     double latitude,
     double longitude,
-    int radius,
-    String type,
+    FilterChoosedModel filters,
   ) async {
     try {
       var response =
-          await remoteDataSource.getPlaces(latitude, longitude, radius, type);
+          await remoteDataSource.getPlaces(latitude, longitude, filters);
       return Left<PlacesModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<PlacesModel, Exception>(Exception('error'));
