@@ -8,6 +8,8 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/home/presentation/pages/home_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
@@ -73,6 +75,9 @@ class _ScreenManagerState extends State<ScreenManager> {
   List<Widget> _buildActionButtons(ScreenManagerState state) {
     switch (state.currentScreen) {
       case DEFAULT_MENU_ENUM.TIME_LINE:
+        if (_notAuthenticated()) {
+          return [];
+        }
         return [
           IconButton(
             icon: CustomIcon(icon: AppIcons.plus),
@@ -104,7 +109,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.HOME:
         return 'Início';
       case DEFAULT_MENU_ENUM.TIME_LINE:
-        return 'Linha';
+        return 'Casal';
       case DEFAULT_MENU_ENUM.SEARCH:
         return '';
       case DEFAULT_MENU_ENUM.ME:
@@ -114,5 +119,9 @@ class _ScreenManagerState extends State<ScreenManager> {
       default:
         return '';
     }
+  }
+
+  bool _notAuthenticated() {
+    return getItInstance<UserWrapper>().getUser == UserAppModel.empty;
   }
 }

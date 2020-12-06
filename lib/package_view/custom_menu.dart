@@ -45,7 +45,7 @@ class CustomMenu extends StatelessWidget {
           icon: Icon(Icons.line_style, size: 24.0),
           onPressed: () {},
         ),
-        Text('Linha'),
+        Text('Casal'),
       ],
     );
   }
