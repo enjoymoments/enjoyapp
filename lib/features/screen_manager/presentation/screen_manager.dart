@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
@@ -12,6 +13,8 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_icon.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/default_menu.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
@@ -94,7 +97,25 @@ class _ScreenManagerState extends State<ScreenManager> {
         return [
           IconButton(
             icon: CustomIcon(icon: AppIcons.bars),
-            onPressed: () {},
+            onPressed: () {
+              showMaterialModalBottomSheet(
+                context: context,
+                builder: (context, scrollController) => CustomModalFit(
+                  items: [
+                    CustomItemModalFit(
+                      text: 'Configurações',
+                      iconData: Icons.settings,
+                      onTap: () {},
+                    ),
+                    CustomItemModalFit(
+                      text: 'Favoritos',
+                      iconData: Icons.star,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ];
       case DEFAULT_MENU_ENUM.MORE:

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -6,6 +7,7 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_avatar_with_name.dart';
 import 'package:mozin/package_view/custom_icon.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -38,10 +40,15 @@ class HeaderCard extends StatelessWidget {
                 showMaterialModalBottomSheet(
                   context: context,
                   builder: (context, scrollController) => CustomModalFit(
-                    scrollController: scrollController,
-                    onTapDelete: () {
-                      callback(ActionHeaderEnum.DELETE);
-                    },
+                    items: [
+                      CustomItemModalFit(
+                        text: 'Deletar',
+                        iconData: Icons.delete,
+                        onTap: () {
+                          callback(ActionHeaderEnum.DELETE);
+                        },
+                      ),
+                    ],
                   ),
                 );
               },

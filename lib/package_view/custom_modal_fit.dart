@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
 
 class CustomModalFit extends StatelessWidget {
-  final ScrollController scrollController;
-  final Function onTapDelete;
+  final List<CustomItemModalFit> items;
 
   const CustomModalFit({
     Key key,
-    @required this.scrollController,
-    @required this.onTapDelete,
+    @required this.items,
   }) : super(key: key);
 
   @override
@@ -18,16 +17,7 @@ class CustomModalFit extends StatelessWidget {
         top: false,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              title: Text('Deletar'),
-              leading: Icon(Icons.delete),
-              onTap: () {
-                ExtendedNavigator.of(context).pop();
-                onTapDelete();
-              },
-            )
-          ],
+          children: items,
         ),
       ),
     );
