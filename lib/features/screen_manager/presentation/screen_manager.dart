@@ -137,6 +137,11 @@ class _ScreenManagerState extends State<ScreenManager> {
                       onTap: () {},
                     ),
                     CustomItemModalFit(
+                      text: 'Nosso Site',
+                      iconData: AppIcons.window_maximize,
+                      onTap: () {},
+                    ),
+                    CustomItemModalFit(
                       text: 'Configurações',
                       iconData: AppIcons.cog,
                       onTap: () {},
