@@ -51,9 +51,6 @@ class PlaceModel extends Place {
       vicinity: json["vicinity"],
       priceLevel: json["priceLevel"] == null ? null : json["priceLevel"],
       icon: json["icon"],
-      photoReferences: json["photoReferences"] != null
-          ? List<String>.from(json["photoReferences"].map((x) => x))
-          : List(),
       location: json['location'] != null
           ? LocationModel.fromJson(json['location'])
           : null,
@@ -65,6 +62,9 @@ class PlaceModel extends Place {
     place.formattedAddress = json['formattedAddress'];
     place.formattedPhoneNumber = json['formattedPhoneNumber'];
     place.openNow = json['openNow'];
+    place.photoReferences = json["photoReferences"] != null
+          ? List<String>.from(json["photoReferences"].map((x) => x))
+          : List();
     place.reviews = json["reviews"] != null
         ? List<ReviewModel>.from(
             json["reviews"].map((x) => ReviewModel.fromJson(x)))

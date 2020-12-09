@@ -52,7 +52,6 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
         userRatingsTotal
         vicinity
         priceLevel
-        photoReferences
         icon
         location {
           latitude
@@ -77,6 +76,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
         formattedPhoneNumber
         types
         openNow
+        photoReferences
         reviews {
           authorName
           relativeTimeDescription

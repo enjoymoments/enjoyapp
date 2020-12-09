@@ -15,7 +15,7 @@ class Place extends Equatable {
   final int userRatingsTotal;
   final String vicinity;
   final int priceLevel;
-  final List<String> photoReferences;
+  List<String> photoReferences;
   final String icon;
   final Location location;
   bool openNow;
