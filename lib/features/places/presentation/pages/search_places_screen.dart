@@ -24,10 +24,14 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   PlacesBloc _placesBloc;
   InterestBloc _interestBloc;
 
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
+
   @override
   void initState() {
     _interestBloc = getItInstance<InterestBloc>();
-    _placesBloc = getItInstance<PlacesBloc>()..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+    _placesBloc = getItInstance<PlacesBloc>()
+      ..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
     super.initState();
   }
 
@@ -38,7 +42,8 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       appBar: _buildAppBar(context),
       bottomNavigationBar: InterestMenu(onTap: (itemSelected) {
         if (itemSelected == INTEREST_MENU_ENUM.CHANGE_FILTER) {
-          ExtendedNavigator.of(context).push(Routes.interest_screen, arguments: InterestScreenArguments(isChangeFilter: true));
+          ExtendedNavigator.of(context).push(Routes.interest_screen,
+              arguments: InterestScreenArguments(isChangeFilter: true));
         }
       }),
     );
@@ -57,12 +62,14 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
             return _generateItems(state);
           }
 
-          if(state.model.places != null && state.model.places.length == 0) {
+          if (state.model.places != null && state.model.places.length == 0) {
             return Center(child: "Nada encontrado".labelIntro(context));
           }
 
-          if(state.isError) {
-            return Center(child: "Ops... houve um erro.\nTente novamente".labelIntro(context));
+          if (state.isError) {
+            return Center(
+                child: "Ops... houve um erro.\nTente novamente"
+                    .labelIntro(context));
           }
 
           return SizedBox.shrink();
@@ -80,16 +87,23 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   }
 
   Widget _generateItems(PlacesState state) {
-    return ListView.separated(
-      physics: const AlwaysScrollableScrollPhysics(),
-      itemCount: state.model.places.length,
-      itemBuilder: (context, index) {
-        var item = state.model.places[index];
-        return PlaceCardItem(
-          item: item,
-        );
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      color: Theme.of(context).primaryColor,
+      onRefresh: () async {
+        _placesBloc.add(GetCurrentPosition(_interestBloc.state.filtersSelected));
       },
-      separatorBuilder: (context, index) => SpacerBox.v16,
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: state.model.places.length,
+        itemBuilder: (context, index) {
+          var item = state.model.places[index];
+          return PlaceCardItem(
+            item: item,
+          );
+        },
+        separatorBuilder: (context, index) => SpacerBox.v16,
+      ),
     );
   }
 }
