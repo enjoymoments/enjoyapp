@@ -31,7 +31,7 @@ class InterestCategoryItemDetails extends StatelessWidget {
           ),
           Wrap(
             alignment: WrapAlignment.start,
-            spacing: 10,
+            spacing: SizeConfig.sizeByPixel(10),
             children: _generateItems(),
           ),
         ],

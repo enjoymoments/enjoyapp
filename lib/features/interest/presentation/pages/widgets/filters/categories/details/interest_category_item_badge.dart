@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class InterestCategoryItemBadge extends StatefulWidget {
@@ -38,13 +39,14 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
         setState(() {});
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 10.0),
+        margin: EdgeInsets.only(bottom: SizeConfig.sizeByPixel(10)),
         alignment: Alignment.center,
-        width: 95, //TODO:review
+        width: SizeConfig.sizeByPixel(95),
         decoration: myBoxDecoration(context),
         child: widget.item.name.label(
           context,
           color: _getTextColor(),
+          maxLines: 1
         ),
       ),
     );
