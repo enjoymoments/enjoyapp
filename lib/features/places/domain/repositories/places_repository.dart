@@ -14,5 +14,5 @@ abstract class PlacesRepository {
     PlaceModel place,
   );
 
-  Future<String> getPlacePhoto(String photoReference);
+  Future<String> getPlacePhoto(String placeId, String photoReference);
 }

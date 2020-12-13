@@ -35,7 +35,7 @@ class PlacePhotosBloc extends Bloc<PlacePhotosEvent, PlacePhotosState> {
 
     for (var photoReference in event.item.photoReferences) {
       _listFutures.add(
-        _placesRepository.getPlacePhoto(photoReference).then(
+        _placesRepository.getPlacePhoto(event.item.placeId, photoReference).then(
           (String value) {
             if (value != null) {
               var image = base64.decode(value);

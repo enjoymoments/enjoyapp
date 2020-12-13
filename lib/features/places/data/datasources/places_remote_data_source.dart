@@ -15,6 +15,7 @@ abstract class PlacesRemoteDataSource {
   );
 
   Future<String> getPlacePhoto(
+    String placeId,
     String photoReference,
   );
 }
@@ -93,10 +94,12 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
   }
 
   @override
-  Future<String> getPlacePhoto(String photoReference) async {
+  Future<String> getPlacePhoto(String placeId, String photoReference) async {
     String _query = '''
     query placePhotos {
-      placePhoto(photoReference: "$photoReference")
+      placePhoto(
+        placeId: "$placeId"
+        photoReference: "$photoReference")
     }
     ''';
 

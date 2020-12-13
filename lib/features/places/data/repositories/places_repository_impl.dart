@@ -40,9 +40,9 @@ class PlacesRepositoryImpl implements PlacesRepository {
   }
 
   @override
-  Future<String> getPlacePhoto(String photoReference) async {
+  Future<String> getPlacePhoto(String placeId, String photoReference) async {
     try {
-      return remoteDataSource.getPlacePhoto(photoReference);
+      return remoteDataSource.getPlacePhoto(placeId, photoReference);
     } on dynamic catch (e) {
       return Future.value(null);
     }
