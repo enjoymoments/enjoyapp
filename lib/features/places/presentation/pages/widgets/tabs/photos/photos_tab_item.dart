@@ -30,7 +30,7 @@ class PhotosTabItem extends StatelessWidget {
   Widget _buildPhotos(List<Uint8List> photos) {
     return Wrap(
       alignment: WrapAlignment.center,
-      spacing: 10,
+      spacing: SizeConfig.sizeByPixel(10),
       children: photos.map((e) {
         return PhotoItemWidget(
           item: e,
@@ -42,7 +42,7 @@ class PhotosTabItem extends StatelessWidget {
   Widget _buildLoadingPhotos() {
     return Wrap(
       alignment: WrapAlignment.center,
-      spacing: 10,
+      spacing: SizeConfig.sizeByPixel(10),
       children: [0, 1, 2, 3]
           .map(
             (item) => Container(

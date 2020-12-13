@@ -12,6 +12,7 @@ class PhotoItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
+        height: SizeConfig.sizeByPixel(100),
         margin: EdgeInsets.all(5.0),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
