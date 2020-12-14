@@ -29,6 +29,7 @@ class FilterChoosedWrapper {
   }
 
   void removeCategorie(CategoriesModel item) {
+    item.selected = false;
     _filterChoosed.removeCategorie(item);
   }
 
