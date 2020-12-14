@@ -61,19 +61,19 @@ class _InterestScreenState extends State<InterestScreen> {
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
-      showSkipButton: true,
+      showSkipButton: false,
       skipFlex: 0,
       nextFlex: 0,
-      skip: Text(
-        'Pular',
-        style: TextStyle(color: Theme.of(context).primaryColor),
-      ),
+      // skip: Text(
+      //   'Pular',
+      //   style: TextStyle(color: Theme.of(context).primaryColor),
+      // ),
       next: CustomIcon(
         icon: AppIcons.arrow_right,
         color: Theme.of(context).primaryColor,
       ),
       done: Text(
-        'Continuar',
+        'Filtrar',
         style: TextStyle(color: Theme.of(context).primaryColor),
       ),
       dotsDecorator: DotsDecorator(
