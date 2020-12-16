@@ -13,28 +13,24 @@ import 'package:mozin/features/places/presentation/blocs/place_details_tab/place
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_event.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_state.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/load_photos_in_memory.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
-import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_border.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:mozin/package_view/shimmerLoading.dart';
 import 'package:mozin/package_view/spacer_box.dart';
-import 'package:uuid/uuid.dart';
 
 class PlaceItemDetails extends StatefulWidget {
   final PlaceModel item;
@@ -305,62 +301,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
         enableInfiniteScroll: false,
         initialPage: 2,
       ),
-      items: _buildPhotos(images),
+      items: buildPhotos(context, images, SizeConfig.sizeByPixel(1000)),
     );
-  }
-
-  List<Widget> _buildPhotos(List<Uint8List> images) {
-    List<GalleryImageModel> _galleryImages = _transformGalleryModel(images);
-    List<Widget> _list = new List<Widget>();
-
-    for (var i = 0; i < images.length; i++) {
-      var item = images[i];
-
-      _list.add(
-        GestureDetector(
-          onTap: () {
-            ExtendedNavigator.of(context).push(
-              Routes.gallery_photo_view_wrapper,
-              arguments: GalleryPhotoViewWrapperArguments(
-                loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
-                    CustomCircularProgressIndicator(),
-                galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.memory,
-                galleryItems: _galleryImages,
-                backgroundDecoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                ),
-                initialIndex: i,
-                scrollDirection: Axis.horizontal,
-              ),
-            );
-          },
-          child: Container(
-            child: Container(
-              margin: EdgeInsets.all(5.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack(
-                  children: <Widget>[
-                    Image.memory(item, fit: BoxFit.cover, width: 1000.0),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return _list;
-  }
-
-  List<GalleryImageModel> _transformGalleryModel(List<Uint8List> images) {
-    var _uuid = getItInstance<Uuid>();
-
-    var _result = images.map((e) {
-      return GalleryImageModel(id: _uuid.v4(), byte: e);
-    }).toList();
-
-    return _result;
   }
 }
