@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
-import 'package:mozin/features/interest/presentation/pages/widgets/enums/interest_menu_enum.dart';
-import 'package:mozin/features/interest/presentation/pages/widgets/interest_menu.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -40,12 +40,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(context),
-      bottomNavigationBar: InterestMenu(onTap: (itemSelected) {
-        if (itemSelected == INTEREST_MENU_ENUM.CHANGE_FILTER) {
-          ExtendedNavigator.of(context).push(Routes.interest_screen,
-              arguments: InterestScreenArguments(isChangeFilter: true));
-        }
-      }),
+      bottomNavigationBar: null,
     );
   }
 
@@ -83,6 +78,15 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       title: 'Sugestões',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () => Navigator.of(context).pop(),
+      actions: [
+        IconButton(
+          icon: CustomIcon(icon: AppIcons.filter),
+          onPressed: () {
+            ExtendedNavigator.of(context).push(Routes.interest_screen,
+              arguments: InterestScreenArguments(isChangeFilter: true));
+          },
+        ),
+      ],
     );
   }
 
