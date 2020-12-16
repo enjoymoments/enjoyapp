@@ -246,6 +246,11 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       onPressedBack: () => Navigator.of(context).pop(),
       actions: [
         IconButton(
+          icon: CustomIcon(icon: AppIcons.star),
+          onPressed: () {
+          },
+        ),
+        IconButton(
           icon: CustomIcon(icon: AppIcons.bars),
           onPressed: () {
             showMaterialModalBottomSheet(
@@ -253,8 +258,8 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
               builder: (context, scrollController) => CustomModalFit(
                 items: [
                   CustomItemModalFit(
-                    text: 'Adicionar aos favoritos',
-                    iconData: AppIcons.star,
+                    text: 'Avaliar',
+                    iconData: AppIcons.reply,
                     onTap: () {},
                   ),
                 ],
