@@ -41,7 +41,9 @@ class AuthenticationBloc
       _mapAuthenticationUserChangedToState(event);
     } else if (event is RequestGoogleLogin) {
       yield* mapLogInWithGoogleToState(event);
-    } else if (event is Logout) {
+    } else if (event is RequestFacebookLogin){
+      yield* mapLogInWithFacebookToState(event);
+    }else if (event is Logout) {
       yield* mapLogoutToState();
     } else if (event is CheckAuthenticated) {
       yield* mapCheckAuthenticatedToState();
@@ -66,6 +68,27 @@ class AuthenticationBloc
       }
 
       yield state.copyWith(isLoading: false, unauthenticated: true);
+    } catch (e) {
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
+    }
+  }
+
+  Stream<AuthenticationState> mapLogInWithFacebookToState(
+    RequestFacebookLogin event,
+  ) async* {
+    try {
+      yield state.copyWith(isLoading: true);
+
+      await _authenticationRepository.logInWithFacebook();
+
+      final _user = await _authenticationRepository.user.first;
+
+      _userWrapper.assignment(_user);
+
+      _settingsUser(_user);
+
+      yield state.copyWith(isLoading: false, unauthenticated: false, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');

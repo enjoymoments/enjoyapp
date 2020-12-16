@@ -67,6 +67,7 @@ dependencies:
   rxdart: ^0.24.1
   firebase_analytics: ^6.0.2
   flare_flutter: ^2.0.6
+  flutter_facebook_auth: "^1.0.0"
 
 dev_dependencies:
   flutter_test:

@@ -48,10 +48,10 @@
               "client_type": 3
             },
             {
-              "client_id": "852466867016-q41a75kp9bh2bku5l75ui1pm1mvti911.apps.googleusercontent.com",
+              "client_id": "852466867016-q2nqi6nlf3gia1v9f96qndt628l8kgg1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.mozin"
+                "bundle_id": "com.codefactory.mozin"
               }
             }
           ]

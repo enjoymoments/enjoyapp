@@ -26,7 +26,7 @@ class FacebookLoginButton extends StatelessWidget {
       child: IconButton(
         icon: Icon(AppIcons.facebook_f, color: theme.primaryColor),
         onPressed: () {
-          authenticationBloc.add(RequestGoogleLogin());
+          authenticationBloc.add(RequestFacebookLogin());
         },
       ),
     );
