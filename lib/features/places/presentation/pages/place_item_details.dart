@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -16,19 +17,24 @@ import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dar
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_border.dart';
+import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:mozin/package_view/shimmerLoading.dart';
 import 'package:mozin/package_view/spacer_box.dart';
+import 'package:uuid/uuid.dart';
 
 class PlaceItemDetails extends StatefulWidget {
   final PlaceModel item;
@@ -247,8 +253,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       actions: [
         IconButton(
           icon: CustomIcon(icon: AppIcons.star),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: CustomIcon(icon: AppIcons.bars),
@@ -305,9 +310,31 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   }
 
   List<Widget> _buildPhotos(List<Uint8List> images) {
-    return images
-        .map(
-          (item) => Container(
+    List<GalleryImageModel> _galleryImages = _transformGalleryModel(images);
+    List<Widget> _list = new List<Widget>();
+
+    for (var i = 0; i < images.length; i++) {
+      var item = images[i];
+
+      _list.add(
+        GestureDetector(
+          onTap: () {
+            ExtendedNavigator.of(context).push(
+              Routes.gallery_photo_view_wrapper,
+              arguments: GalleryPhotoViewWrapperArguments(
+                loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+                    CustomCircularProgressIndicator(),
+                galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.memory,
+                galleryItems: _galleryImages,
+                backgroundDecoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                ),
+                initialIndex: i,
+                scrollDirection: Axis.horizontal,
+              ),
+            );
+          },
+          child: Container(
             child: Container(
               margin: EdgeInsets.all(5.0),
               child: ClipRRect(
@@ -320,7 +347,20 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
               ),
             ),
           ),
-        )
-        .toList();
+        ),
+      );
+    }
+
+    return _list;
+  }
+
+  List<GalleryImageModel> _transformGalleryModel(List<Uint8List> images) {
+    var _uuid = getItInstance<Uuid>();
+
+    var _result = images.map((e) {
+      return GalleryImageModel(id: _uuid.v4(), byte: e);
+    }).toList();
+
+    return _result;
   }
 }

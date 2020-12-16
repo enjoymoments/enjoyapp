@@ -41,6 +41,12 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    widget.pageController.dispose();
+    super.dispose();
+  }
+
   void onPageChanged(int index) {
     setState(() {
       currentIndex = index;
@@ -84,6 +90,9 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
     } else if (widget.galleryPhotoSourceType ==
         GalleryPhotoSourceTypeEnum.url) {
       return NetworkImage(item.url);
+    } else if (widget.galleryPhotoSourceType ==
+        GalleryPhotoSourceTypeEnum.memory) {
+      return MemoryImage(item.byte);
     }
 
     throw Exception('GalleryPhotoSourceType not found.');

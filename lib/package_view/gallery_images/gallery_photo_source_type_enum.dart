@@ -1,1 +1,1 @@
-enum GalleryPhotoSourceTypeEnum {file, url}
+enum GalleryPhotoSourceTypeEnum {file, url, memory}
