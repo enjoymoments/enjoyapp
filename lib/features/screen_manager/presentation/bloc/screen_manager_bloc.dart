@@ -50,7 +50,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       } else {
         localStorageService.put(KeyValue<String, String>(
             key: bypass_interest_filter, value: bypass_interest_filter));
-        ExtendedNavigator.of(event.context).push(Routes.interest_screen);
+        ExtendedNavigator.of(event.context).push(Routes.interest_screen,
+            arguments: InterestScreenArguments(isChangeFilter: false));
       }
     } else {
       yield state.copyWith(currentScreen: event.screenSelected);
