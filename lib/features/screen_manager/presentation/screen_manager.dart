@@ -122,11 +122,6 @@ class _ScreenManagerState extends State<ScreenManager> {
                 builder: (context, scrollController) => CustomModalFit(
                   items: [
                     CustomItemModalFit(
-                      text: 'Favoritos',
-                      iconData: AppIcons.star,
-                      onTap: () {},
-                    ),
-                    CustomItemModalFit(
                       text: 'Curtiu o Enjoy? Avalie-nos',
                       iconData: AppIcons.thumbs_up,
                       onTap: () {},

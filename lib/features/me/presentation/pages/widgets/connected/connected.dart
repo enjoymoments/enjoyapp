@@ -24,9 +24,9 @@ class Connected extends StatelessWidget {
           },
           child: Column(
             children: <Widget>[
-              SpacerBox.v24,
+              SpacerBox.v10,
               CustomAvatar(
-                radius: SizeConfig.sizeByPixel(45),
+                radius: SizeConfig.sizeByPixel(35),
               ),
               'Tiana Rosser'.title(context),
               'Bla bla bla Bla bla bla Bla bla bla'.label(context),
@@ -35,10 +35,11 @@ class Connected extends StatelessWidget {
                 color: Theme.of(context).hintColor,
                 height: SizeConfig.sizeByPixel(4),
               ),
-              SpacerBox.v16,
+              SpacerBox.v8,
               _buildLineInfo(context),
               SpacerBox.v16,
               _buildFavourites(context),
+              SpacerBox.v16,
             ],
           ),
         ),
@@ -72,65 +73,73 @@ class Connected extends StatelessWidget {
 
   Widget _buildFavourites(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         'Favoritos'.title(context, fontWeight: FontWeight.bold),
-        _buildFavouritesItem(),
+        SpacerBox.v8,
+        _buildFavouritesItem(context),
       ],
     );
   }
 
-  Widget _buildFavouritesItem() {
+  Widget _buildFavouritesItem(BuildContext context) {
     return CarouselSlider(
-      items: _buildCards(),
+      items: _buildCards(context),
       options: CarouselOptions(
-          autoPlay: false,
-          enableInfiniteScroll: false,
-          pageSnapping: false,
-          onPageChanged: (index, reason) {
-            // setState(() {
-            //   _current = index;
-            // });
-          }),
+        autoPlay: false,
+        viewportFraction: 0.5,
+        initialPage: 1,
+        enableInfiniteScroll: false,
+        pageSnapping: false,
+      ),
     );
   }
 
-  List<Widget> _buildCards() {
+  List<Widget> _buildCards(BuildContext context) {
     return List.generate(5, (index) {
       return Container(
-        height: SizeConfig.sizeByPixel(10),
         margin: EdgeInsets.all(5.0),
-        child: ClipRRect(
+        decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          child: Stack(
-            children: <Widget>[
-              Image.network(
-                  'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 0.2,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: CachedNetworkImage(
                   fit: BoxFit.cover,
-                  width: SizeConfig.sizeByPixel(100)),
-            ],
-          ),
+                  imageUrl:
+                      'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
+                  width: SizeConfig.sizeByPixel(150),
+                  height: SizeConfig.sizeByPixel(150),
+                ),
+              ),
+            ),
+            SpacerBox.v8,
+            Padding(
+              padding: EdgeInsets.only(left: SizeConfig.sizeByPixel(10), bottom: SizeConfig.sizeByPixel(10)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  "Outterwear".title(context, fontWeight: FontWeight.bold, fontSize: 14),
+                  '170+ items'.label(context, fontSize: 13),
+                ],
+              ),
+            ),
+          ],
         ),
       );
-      // return Container(
-      //   width: SizeConfig.screenWidth,
-      //   margin: EdgeInsets.all(5.0),
-      //   child: ClipRRect(
-      //     borderRadius: BorderRadius.all(
-      //       Radius.circular(5.0),
-      //     ),
-      //     child: Stack(
-      //       children: <Widget>[
-      //         CachedNetworkImage(
-      //           fit: BoxFit.cover,
-      //           imageUrl:
-      //               'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-      //           width: SizeConfig.screenWidth,
-      //           height: SizeConfig.screenHeight / 2,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // );
     });
   }
 }
