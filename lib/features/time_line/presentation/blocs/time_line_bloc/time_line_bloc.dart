@@ -52,7 +52,8 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
     try {
       if (state.posts.remove(event.post)) {
-        await this.timelineRepository.deletePost(temp_time_line, event.post.id);
+        var timelineId = await _getTimelineId();
+        await this.timelineRepository.deletePost(timelineId, event.post.id);
         yield state.copyWith(
           isLoading: false,
           isSuccess: true,
@@ -69,12 +70,27 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     yield state.copyWith(isLoading: true);
 
     try {
+      var timelineId = await _getTimelineId();
       final posts =
-          await this.timelineRepository.getPosts(temp_time_line, state.limit);
+          await this.timelineRepository.getPosts(timelineId, state.limit);
 
       yield state.copyWith(isLoading: false, isSuccess: true, posts: posts);
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
+  }
+
+  Future<String> _getTimelineId() async {
+    var user = userWrapper.getUser;
+    if (user.timelineId != null && user.timelineId != '') {
+      return user.timelineId;
+    }
+
+    var _timelineId = await this.timelineRepository.getTimeLineId(user.id);
+    var newInstance = user.copyWith(_timelineId);
+
+    userWrapper.assignment(newInstance);
+
+    return _timelineId;
   }
 }

@@ -10,6 +10,7 @@ abstract class TimelineRemoteDataSource {
       String timelineID, String userId, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
+  Future<String> getTimeLineId(String userId);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
@@ -66,5 +67,17 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
       'timelineID': timelineID,
       'postID': postID,
     });
+  }
+
+  @override
+  Future<String> getTimeLineId(String userId) async {
+    var url = remoteConfig.getString(url_functions);
+
+    var _result = await remoteClientRepository.dio
+        .delete('$url/getTimelineId', queryParameters: {
+      'userId': userId,
+    });
+
+    return _result.data;
   }
 }

@@ -14,25 +14,34 @@ class UserAppModel extends Equatable {
     @required this.email,
     @required this.name,
     @required this.photo,
+    this.timelineId,
   })  : assert(email != null),
         assert(autenticatorProviderId != null),
         assert(id != null);
 
-  /// The current user's email address.
   final String email;
 
-  /// The current user's id.
   final String id;
 
   final String autenticatorProviderId;
 
-  /// The current user's name (display name).
   final String name;
 
-  /// Url for the current user's photo.
   final String photo;
 
-  /// Empty user which represents an unauthenticated user.
+  final String timelineId;
+
+  UserAppModel copyWith(String timelineId) {
+    return UserAppModel(
+      id: this.id,
+      autenticatorProviderId: this.autenticatorProviderId,
+      email: this.email,
+      name: this.name,
+      photo: this.photo,
+      timelineId: timelineId,
+    );
+  }
+
   static const empty = UserAppModel(
       id: '', autenticatorProviderId: '', email: '', name: '', photo: '');
 

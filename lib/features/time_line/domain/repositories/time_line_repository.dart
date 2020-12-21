@@ -4,4 +4,5 @@ abstract class TimelineRepository {
   Future<String> addTimeLineItem(String timelineID, String userId, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
+  Future<String> getTimeLineId(String userId);
 }

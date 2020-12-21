@@ -36,4 +36,13 @@ class TimelineRepositoryImpl implements TimelineRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<String> getTimeLineId(String userId) {
+    try {
+      return remoteDataSource.getTimeLineId(userId);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
