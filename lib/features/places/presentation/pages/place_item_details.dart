@@ -16,6 +16,7 @@ import 'package:mozin/features/places/presentation/blocs/place_photos/place_phot
 import 'package:mozin/features/places/presentation/pages/widgets/load_photos_in_memory.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/general_tab_item.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_open/cubit/gpsopen_cubit.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -59,6 +60,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   PlaceDetailsTabBloc _placeDetailsTabBloc;
   PlaceDetailsBloc _placeDetailsBloc;
   PlacePhotosBloc _placePhotosBloc;
+  GpsOpenCubit _gpsOpenCubit;
 
   @override
   void initState() {
@@ -68,6 +70,15 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _placePhotosBloc = getItInstance<PlacePhotosBloc>();
     _placeDetailsBloc = getItInstance<PlaceDetailsBloc>()
       ..add(LoadDetails(widget.item, _placePhotosBloc));
+
+    _gpsOpenCubit = getItInstance<GpsOpenCubit>()
+      ..getElements(
+        context,
+        widget.item.name,
+        widget.item.formattedAddress,
+        widget.item.location.latitude,
+        widget.item.location.longitude,
+      );
 
     _nestedTabController =
         new TabController(length: _tabsTitle.length, vsync: this);
@@ -82,6 +93,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _placeDetailsTabBloc.close();
     _placeDetailsBloc.close();
     _placePhotosBloc.close();
+    _gpsOpenCubit.close();
   }
 
   _handleTabSelection() {
@@ -277,7 +289,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       cubit: _placeDetailsTabBloc,
       builder: (context, state) {
         if (state.currentTab == PlaceDetailTabsEnum.general) {
-          return GeneralTabItem(item: widget.item);
+          return GeneralTabItem(item: widget.item, gpsOpenCubit: _gpsOpenCubit,);
         } else if (state.currentTab == PlaceDetailTabsEnum.rating) {
           return RatingTabItem(
             item: widget.item,

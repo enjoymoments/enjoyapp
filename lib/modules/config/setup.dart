@@ -18,6 +18,7 @@ import 'package:mozin/features/places/presentation/blocs/place_details/place_det
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_open/cubit/gpsopen_cubit.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
 import 'package:mozin/features/time_line/data/repositories/time_line_repository_impl.dart';
@@ -86,8 +87,8 @@ void _setupRemoteClientRepository() {
             dio: _dio,
             url:
                 //'https://localhost:5001/graphql',
-                //'https://10.0.2.2:5001/graphql',
-                'https://7f97fbadedcd.ngrok.io/graphql',
+                'https://10.0.2.2:5001/graphql',
+                //'https://7f97fbadedcd.ngrok.io/graphql',
             //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
@@ -156,6 +157,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<PlacePhotosBloc>(
       () => PlacePhotosBloc(placesRepository: getItInstance()));
+
+  getItInstance.registerFactory<GpsOpenCubit>(
+      () => GpsOpenCubit());    
 }
 
 void _registerSingletonRepositories() {
