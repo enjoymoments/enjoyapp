@@ -33,7 +33,6 @@ class _DefaultMenuState extends State<DefaultMenu> {
           title: Text('Início'),
         ),
         BottomNavigationBarItem(
-          //icon: Icon(AppIcons.people_carry, size: _sizeIcon),
           icon: Icon(AppIcons.seedling, size: _sizeIcon),
           title: Text('Casal'),
         ),

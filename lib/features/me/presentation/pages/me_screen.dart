@@ -6,7 +6,6 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
-import 'package:mozin/package_view/extension.dart';
 
 class MeScreen extends StatefulWidget {
   @override
@@ -25,13 +24,8 @@ class _MeScreenState extends State<MeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       cubit: _authenticationBloc,
-      listener: (BuildContext context, AuthenticationState state) {
-        if (state is Error) {
-          context.showSnackBar('message');
-        }
-      },
       builder: (BuildContext context, AuthenticationState state) {
         if (state.isLoading) {
           return CustomCircularProgressIndicator();
