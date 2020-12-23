@@ -1,47 +1,42 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class Connected extends StatelessWidget {
-  final AuthenticationBloc authenticationBloc;
+  final UserAppModel user;
 
-  const Connected({Key key, @required this.authenticationBloc})
+  const Connected({Key key, @required this.user})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: CustomContainer(
-        child: InkWell(
-          onTap: () {
-            //authenticationBloc.add(Logout());
-          },
-          child: Column(
-            children: <Widget>[
-              SpacerBox.v10,
-              CustomAvatar(
-                radius: SizeConfig.sizeByPixel(35),
-              ),
-              'Tiana Rosser'.title(context),
-              'Bla bla bla Bla bla bla Bla bla bla'.label(context),
-              SpacerBox.v16,
-              Divider(
-                color: Theme.of(context).hintColor,
-                height: SizeConfig.sizeByPixel(4),
-              ),
-              SpacerBox.v8,
-              _buildLineInfo(context),
-              SpacerBox.v16,
-              _buildFavourites(context),
-              SpacerBox.v16,
-            ],
-          ),
+        child: Column(
+          children: <Widget>[
+            SpacerBox.v10,
+            CustomAvatar(
+              radius: SizeConfig.sizeByPixel(35),
+            ),
+            user.name.title(context),
+            'Bla bla bla Bla bla bla Bla bla bla'.label(context),
+            SpacerBox.v16,
+            Divider(
+              color: Theme.of(context).hintColor,
+              height: SizeConfig.sizeByPixel(4),
+            ),
+            SpacerBox.v8,
+            _buildLineInfo(context),
+            SpacerBox.v16,
+            _buildFavourites(context),
+            SpacerBox.v16,
+          ],
         ),
       ),
     );

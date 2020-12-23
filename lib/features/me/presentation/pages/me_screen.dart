@@ -4,6 +4,7 @@ import 'package:mozin/features/me/presentation/pages/widgets/connected/connected
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -38,7 +39,7 @@ class _MeScreenState extends State<MeScreen> {
 
         if (!state.unauthenticated) {
           return Connected(
-            authenticationBloc: _authenticationBloc,
+            user: getItInstance<UserWrapper>().getUser,
           );
         }
 
