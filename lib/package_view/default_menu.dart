@@ -61,8 +61,8 @@ class _DefaultMenuState extends State<DefaultMenu> {
           title: Text('Eu'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(AppIcons.bell, size: _sizeIcon),
-          title: Text('Alertas'),
+          icon: Icon(AppIcons.chart_pie, size: _sizeIcon),
+          title: Text('Dados'),
         ),
       ],
     );

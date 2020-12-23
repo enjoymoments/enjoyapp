@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
+import '../../features/notifications/presentation/pages/notifications_screen.dart';
 import '../../features/places/data/models/place_model.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
@@ -31,6 +32,7 @@ class Routes {
   static const String add_time_line_screen = '/add-time-line-screen';
   static const String gallery_photo_view_wrapper =
       '/gallery-photo-view-wrapper';
+  static const String notification = '/notifications-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -40,6 +42,7 @@ class Routes {
     interest_screen,
     add_time_line_screen,
     gallery_photo_view_wrapper,
+    notification,
   };
 }
 
@@ -55,6 +58,7 @@ class Router extends RouterBase {
     RouteDef(Routes.interest_screen, page: InterestScreen),
     RouteDef(Routes.add_time_line_screen, page: AddTimeLineScreen),
     RouteDef(Routes.gallery_photo_view_wrapper, page: GalleryPhotoViewWrapper),
+    RouteDef(Routes.notification, page: NotificationsScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -84,9 +88,7 @@ class Router extends RouterBase {
       );
     },
     PlaceItemDetails: (data) {
-      final args = data.getArgs<PlaceItemDetailsArguments>(
-        orElse: () => PlaceItemDetailsArguments(),
-      );
+      final args = data.getArgs<PlaceItemDetailsArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => PlaceItemDetails(
           key: args.key,
@@ -128,6 +130,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    NotificationsScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => NotificationsScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -139,7 +147,7 @@ class Router extends RouterBase {
 class PlaceItemDetailsArguments {
   final Key key;
   final PlaceModel item;
-  PlaceItemDetailsArguments({this.key, this.item});
+  PlaceItemDetailsArguments({this.key, @required this.item});
 }
 
 /// InterestScreen arguments holder class

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
+import 'package:mozin/features/monitoring/presentation/pages/monitoring_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -68,8 +68,8 @@ class _ScreenManagerState extends State<ScreenManager> {
         return TimeLineScreen();
       case DEFAULT_MENU_ENUM.ME:
         return MeScreen();
-      case DEFAULT_MENU_ENUM.MORE:
-        return NotificationsScreen();
+      case DEFAULT_MENU_ENUM.MONITORING:
+        return MonitoringScreen();
       case DEFAULT_MENU_ENUM.HOME:
       default:
         return HomeScreen();
@@ -110,7 +110,15 @@ class _ScreenManagerState extends State<ScreenManager> {
           ),
         ];
       case DEFAULT_MENU_ENUM.HOME:
-        return [];
+        return [
+          IconButton(
+            icon: CustomIcon(icon: AppIcons.bell),
+            onPressed: () {
+              ExtendedNavigator.of(context)
+                            .push(Routes.notification);
+            },
+          ),
+        ];
       case DEFAULT_MENU_ENUM.SEARCH:
         return [];
       case DEFAULT_MENU_ENUM.ME:
@@ -127,7 +135,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             },
           ),
         ];
-      case DEFAULT_MENU_ENUM.MORE:
+      case DEFAULT_MENU_ENUM.MONITORING:
         return [];
       default:
         return [];
@@ -144,8 +152,8 @@ class _ScreenManagerState extends State<ScreenManager> {
         return '';
       case DEFAULT_MENU_ENUM.ME:
         return 'Eu';
-      case DEFAULT_MENU_ENUM.MORE:
-        return 'Alertas';
+      case DEFAULT_MENU_ENUM.MONITORING:
+        return 'Dados';
       default:
         return '';
     }
