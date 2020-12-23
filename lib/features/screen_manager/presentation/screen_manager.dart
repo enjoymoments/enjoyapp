@@ -193,7 +193,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       _result.add(
         CustomItemModalFit(
           text: 'Sair',
-          iconData: AppIcons.outdent,
+          iconData: AppIcons.window_close,
           onTap: () {
             getItInstance<AuthenticationBloc>()..add(Logout());
           },
