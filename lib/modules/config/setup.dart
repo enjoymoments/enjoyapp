@@ -10,6 +10,7 @@ import 'package:mozin/features/interest/data/repositories/interest_repository_im
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/places/data/datasources/places_remote_data_source.dart';
 import 'package:mozin/features/places/data/repositories/places_repository_impl.dart';
@@ -160,6 +161,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<GpsOpenCubit>(
       () => GpsOpenCubit());    
+
+  getItInstance.registerFactory<ConnectedCubit>(
+      () => ConnectedCubit());    
 }
 
 void _registerSingletonRepositories() {

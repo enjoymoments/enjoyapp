@@ -1,18 +1,65 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/connected/connected_tab_enum.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
+import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class Connected extends StatelessWidget {
+class Connected extends StatefulWidget {
   final UserAppModel user;
 
-  const Connected({Key key, @required this.user})
-      : super(key: key);
+  const Connected({Key key, @required this.user}) : super(key: key);
+
+  @override
+  _ConnectedState createState() => _ConnectedState();
+}
+
+class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
+  List<Widget> _tabsTitle = [
+    Tab(
+      text: "Álbums",
+    ),
+    Tab(
+      text: "Lugares",
+    ),
+    Tab(
+      text: "Fotos",
+    ),
+  ];
+
+  TabController _nestedTabController;
+  ConnectedCubit _connectedCubit;
+
+  @override
+  void initState() {
+    _connectedCubit = getItInstance<ConnectedCubit>();
+    _nestedTabController =
+        new TabController(length: _tabsTitle.length, vsync: this);
+
+    _nestedTabController.addListener(_handleTabSelection);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _connectedCubit.close();
+    super.dispose();
+  }
+
+  _handleTabSelection() {
+    if (_nestedTabController.indexIsChanging) {
+      _connectedCubit.changeTab(_nestedTabController.index);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +68,68 @@ class Connected extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SpacerBox.v10,
-            CustomAvatar(
-              radius: SizeConfig.sizeByPixel(35),
-            ),
-            user.name.title(context),
-            'Bla bla bla Bla bla bla Bla bla bla'.label(context),
+            _buildHeader(),
             SpacerBox.v16,
             Divider(
               color: Theme.of(context).hintColor,
               height: SizeConfig.sizeByPixel(4),
             ),
+            SpacerBox.v16,
+            CustomBorder(
+              height: SizeConfig.sizeByPixel(34),
+              child: Center(
+                child: TabBar(
+                  controller: _nestedTabController,
+                  indicatorColor: Theme.of(context).primaryColor,
+                  labelColor: Theme.of(context).primaryColor,
+                  unselectedLabelColor: Theme.of(context).iconTheme.color,
+                  isScrollable: true,
+                  tabs: _tabsTitle,
+                ),
+              ),
+            ),
             SpacerBox.v8,
-            _buildLineInfo(context),
-            SpacerBox.v16,
-            _buildFavourites(context),
-            SpacerBox.v16,
+            _buildContentTab(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildContentTab() {
+    return BlocBuilder<ConnectedCubit, ConnectedState>(
+      cubit: _connectedCubit,
+      builder: (context, state) {
+        if (state.connectedTabEnum == ConnectedTabEnum.ALBUM) {
+          return _buildFavouritesItem(context);
+        } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
+          return SizedBox.shrink();
+        } else if (state.connectedTabEnum == ConnectedTabEnum.PHOTO) {
+          return SizedBox.shrink();
+        }
+
+        return SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      children: [
+        CustomAvatar(
+          radius: SizeConfig.sizeByPixel(35),
+        ),
+        SpacerBox.h16,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            widget.user.name.title(context),
+            SpacerBox.v10,
+            _buildLineInfo(context),
+          ],
+        ),
+      ],
     );
   }
 
@@ -62,17 +153,6 @@ class Connected extends StatelessWidget {
         title.title(context, fontWeight: FontWeight.bold),
         SpacerBox.v4,
         description.label(context),
-      ],
-    );
-  }
-
-  Widget _buildFavourites(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        'Favoritos'.title(context, fontWeight: FontWeight.bold),
-        SpacerBox.v8,
-        _buildFavouritesItem(context),
       ],
     );
   }
@@ -123,11 +203,14 @@ class Connected extends StatelessWidget {
             ),
             SpacerBox.v8,
             Padding(
-              padding: EdgeInsets.only(left: SizeConfig.sizeByPixel(10), bottom: SizeConfig.sizeByPixel(10)),
+              padding: EdgeInsets.only(
+                  left: SizeConfig.sizeByPixel(10),
+                  bottom: SizeConfig.sizeByPixel(10)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  "Outterwear".title(context, fontWeight: FontWeight.bold, fontSize: 14),
+                  "Outterwear".title(context,
+                      fontWeight: FontWeight.bold, fontSize: 14),
                   '170+ items'.label(context, fontSize: 13),
                 ],
               ),
