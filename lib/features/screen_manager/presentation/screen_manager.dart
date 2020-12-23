@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
@@ -120,33 +121,7 @@ class _ScreenManagerState extends State<ScreenManager> {
               showMaterialModalBottomSheet(
                 context: context,
                 builder: (context, scrollController) => CustomModalFit(
-                  items: [
-                    CustomItemModalFit(
-                      text: 'Curtiu o Enjoy? Avalie-nos',
-                      iconData: AppIcons.thumbs_up,
-                      onTap: () {},
-                    ),
-                    CustomItemModalFit(
-                      text: 'Facebook',
-                      iconData: AppIcons.facebook,
-                      onTap: () {},
-                    ),
-                    CustomItemModalFit(
-                      text: 'Nosso Site',
-                      iconData: AppIcons.window_maximize,
-                      onTap: () {},
-                    ),
-                    CustomItemModalFit(
-                      text: 'Configurações',
-                      iconData: AppIcons.cog,
-                      onTap: () {},
-                    ),
-                    CustomItemModalFit(
-                      text: 'Reportar um problema',
-                      iconData: AppIcons.bug,
-                      onTap: () {},
-                    ),
-                  ],
+                  items: _getItemsModalFit(),
                 ),
               );
             },
@@ -177,6 +152,55 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   bool _notAuthenticated() {
-    return getItInstance<UserWrapper>().getUser == UserAppModel.empty;
+    if (getItInstance.isRegistered<UserWrapper>() &&
+        (getItInstance<UserWrapper>().getUser == UserAppModel.empty)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  List<Widget> _getItemsModalFit() {
+    var _result = [
+      CustomItemModalFit(
+        text: 'Curtiu o Enjoy? Avalie-nos',
+        iconData: AppIcons.thumbs_up,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Facebook',
+        iconData: AppIcons.facebook,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Nosso Site',
+        iconData: AppIcons.window_maximize,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Configurações',
+        iconData: AppIcons.cog,
+        onTap: () {},
+      ),
+      CustomItemModalFit(
+        text: 'Reportar um problema',
+        iconData: AppIcons.bug,
+        onTap: () {},
+      ),
+    ];
+
+    if (!_notAuthenticated()) {
+      _result.add(
+        CustomItemModalFit(
+          text: 'Sair',
+          iconData: AppIcons.outdent,
+          onTap: () {
+            getItInstance<AuthenticationBloc>()..add(Logout());
+          },
+        ),
+      );
+    }
+
+    return _result;
   }
 }
