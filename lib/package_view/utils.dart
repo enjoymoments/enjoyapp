@@ -11,7 +11,6 @@ class StateUtils  {
 
 class DateUtils {
   static String dateFormat(DateTime date) {
-    //TODO:review
-    return DateFormat('dd/MM/yyyy').format(date);
+    return DateFormat('dd/MM/yyyy -').add_Hm().format(date);
   }
 }
