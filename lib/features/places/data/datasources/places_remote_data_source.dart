@@ -43,27 +43,30 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     String formattedParams = _placeParams(latitude, longitude, filters);
 
     String _query = '''
-    query Places {
-      places($formattedParams) {
-        address
-        name
-        placeId
-        rating
-        types
-        userRatingsTotal
-        vicinity
-        priceLevel
-        icon
-        location {
-          latitude
-          longitude
+    query Interests {
+      search($formattedParams) {
+        interests {
+          address
+          name
+          placeId
+          rating
+          types
+          userRatingsTotal
+          vicinity
+          priceLevel
+          icon
+          location {
+            latitude
+            longitude
+          }
         }
       }
     }
     ''';
 
     var result = await remoteClientRepository.query(_query);
-    return PlacesModel.fromJson(result['data']);
+    //TODO:review this - fixed to places
+    return PlacesModel.fromJson(result['data']['search'][0]);
   }
 
   @override
