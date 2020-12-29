@@ -7,6 +7,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -58,13 +59,29 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           }
 
           if (state.model.places != null && state.model.places.length == 0) {
-            return Center(child: "Nada encontrado".labelIntro(context));
+            return _generateContent(
+              SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Container(
+                  child: Center(child: "Nada encontrado".labelIntro(context)),
+                  height: SizeConfig.screenHeight / 1.5,
+                ),
+              ),
+            );
           }
 
           if (state.isError) {
-            return Center(
-                child: "Ops... houve um erro.\nTente novamente"
-                    .labelIntro(context));
+            return _generateContent(
+              SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Container(
+                  child: Center(
+                      child: "Ops... houve um erro.\nTente novamente"
+                          .labelIntro(context)),
+                  height: SizeConfig.screenHeight / 1.5,
+                ),
+              ),
+            );
           }
 
           return SizedBox.shrink();
@@ -83,7 +100,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           icon: CustomIcon(icon: AppIcons.filter),
           onPressed: () {
             ExtendedNavigator.of(context).push(Routes.interest_screen,
-              arguments: InterestScreenArguments(isChangeFilter: true));
+                arguments: InterestScreenArguments(isChangeFilter: true));
           },
         ),
       ],
@@ -91,13 +108,8 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   }
 
   Widget _generateItems(PlacesState state) {
-    return RefreshIndicator(
-      key: _refreshIndicatorKey,
-      color: Theme.of(context).primaryColor,
-      onRefresh: () async {
-        _placesBloc.add(GetCurrentPosition(_interestBloc.state.filtersSelected));
-      },
-      child: ListView.separated(
+    return _generateContent(
+      ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
         itemCount: state.model.places.length,
         itemBuilder: (context, index) {
@@ -108,6 +120,18 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
         },
         separatorBuilder: (context, index) => SpacerBox.v16,
       ),
+    );
+  }
+
+  Widget _generateContent(Widget child) {
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      color: Theme.of(context).primaryColor,
+      onRefresh: () async {
+        _placesBloc
+            .add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+      },
+      child: child,
     );
   }
 }
