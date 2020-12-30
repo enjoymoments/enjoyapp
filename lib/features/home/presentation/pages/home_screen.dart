@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildContent() {
-    if (_user.id == null || _user.id.isEmpty) {
+    if (_user == UserAppModel.empty) {
       return "Olá,\nSeja bem vindo".labelIntro(context);
     }
 

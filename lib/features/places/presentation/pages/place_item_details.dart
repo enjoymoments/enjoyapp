@@ -5,7 +5,6 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/enums/place_detail_tabs_enum.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details/place_details_bloc.dart';
@@ -21,13 +20,13 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/pho
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/shimmerLoading.dart';
@@ -61,11 +60,13 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   PlaceDetailsBloc _placeDetailsBloc;
   PlacePhotosBloc _placePhotosBloc;
   GpsOpenCubit _gpsOpenCubit;
+  UserAppModel _user;
 
   @override
   void initState() {
     super.initState();
 
+    _user = getItInstance<UserWrapper>().getUser;
     _placeDetailsTabBloc = getItInstance<PlaceDetailsTabBloc>();
     _placePhotosBloc = getItInstance<PlacePhotosBloc>();
     _placeDetailsBloc = getItInstance<PlaceDetailsBloc>()
@@ -259,29 +260,20 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () => Navigator.of(context).pop(),
       actions: [
-        IconButton(
-          icon: CustomIcon(icon: AppIcons.star),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: CustomIcon(icon: AppIcons.bars),
-          onPressed: () {
-            showMaterialModalBottomSheet(
-              context: context,
-              builder: (context, scrollController) => CustomModalFit(
-                items: [
-                  CustomItemModalFit(
-                    text: 'Avaliar',
-                    iconData: AppIcons.reply,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+        _buildIconStar(),
       ],
     );
+  }
+
+  Widget _buildIconStar() {
+    if (_user != UserAppModel.empty) {
+      return IconButton(
+        icon: CustomIcon(icon: AppIcons.star),
+        onPressed: () {},
+      );
+    }
+
+    return SizedBox.shrink();
   }
 
   Widget _buildContentTab() {
@@ -289,7 +281,10 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       cubit: _placeDetailsTabBloc,
       builder: (context, state) {
         if (state.currentTab == PlaceDetailTabsEnum.general) {
-          return GeneralTabItem(item: widget.item, gpsOpenCubit: _gpsOpenCubit,);
+          return GeneralTabItem(
+            item: widget.item,
+            gpsOpenCubit: _gpsOpenCubit,
+          );
         } else if (state.currentTab == PlaceDetailTabsEnum.rating) {
           return RatingTabItem(
             item: widget.item,
