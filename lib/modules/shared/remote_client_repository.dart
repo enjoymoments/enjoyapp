@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
@@ -16,27 +18,40 @@ class RemoteClientRepository {
   });
 
   Future<dynamic> query(String doc, {Map<String, dynamic> variables}) async {
-    Options _opt = _getOptions();
+    Options _opt = await _getOptions();
 
     var jsonMap = {'query': doc, 'variables': variables};
 
     Response response =
         await dio.post(url, data: jsonMap, options: _opt).catchError((onError) {
       _logger(onError, jsonMap);
+      throw onError;
     });
 
     return response.data;
   }
 
-  Options _getOptions() {
+  Future<Options> _getOptions() async {
     return Options(
       contentType: 'application/json',
-      headers: _getHeaders(),
+      headers: await _getHeaders(),
     );
   }
 
-  Map<String, dynamic> _getHeaders() {
-    return {'Accept': '*/*'};
+  Future<Map<String, dynamic>> _getHeaders() async {
+    var _authenticationRepository = getItInstance<AuthenticationRepository>();
+    var _token = await _authenticationRepository.getToken();
+
+    if (_token != null) {
+      return {
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + _token,
+      };
+    }
+
+    return {
+      'Accept': '*/*',
+    };
   }
 
   void _logger(dynamic onError, Map<String, dynamic> jsonMap) {

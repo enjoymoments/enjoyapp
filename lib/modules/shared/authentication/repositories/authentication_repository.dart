@@ -33,6 +33,17 @@ class AuthenticationRepository {
     });
   }
 
+  /// Get token user.
+  ///
+  /// Throws a [GetToken] if an exception occurs.
+  Future<String> getToken() async {
+    try {
+      return await _firebaseAuth.currentUser?.getIdToken();
+    } on Exception {
+      throw GetToken();
+    }
+  }
+
   /// Creates a new user with the provided [email] and [password].
   ///
   /// Throws a [SignUpFailure] if an exception occurs.
