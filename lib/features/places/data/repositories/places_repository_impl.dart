@@ -24,7 +24,7 @@ class PlacesRepositoryImpl implements PlacesRepository {
           await remoteDataSource.getPlaces(latitude, longitude, filters);
       return Left<PlacesModel, Exception>(response);
     } on dynamic catch (e) {
-      return Right<PlacesModel, Exception>(Exception('error'));
+      return Right<PlacesModel, Exception>(e);
     }
   }
 
@@ -35,7 +35,7 @@ class PlacesRepositoryImpl implements PlacesRepository {
       var response = await remoteDataSource.getPlaceDetails(place);
       return Left<PlaceModel, Exception>(response);
     } on dynamic catch (e) {
-      return Right<PlaceModel, Exception>(Exception('error'));
+      return Right<PlaceModel, Exception>(e);
     }
   }
 
