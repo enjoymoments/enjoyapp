@@ -5,6 +5,9 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_event.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_state.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/enums/place_detail_tabs_enum.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details/place_details_bloc.dart';
@@ -20,6 +23,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/pho
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -60,6 +64,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   PlaceDetailsBloc _placeDetailsBloc;
   PlacePhotosBloc _placePhotosBloc;
   GpsOpenCubit _gpsOpenCubit;
+  FavoriteInterestsBloc _favoriteInterestsBloc;
   UserAppModel _user;
 
   @override
@@ -67,6 +72,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     super.initState();
 
     _user = getItInstance<UserWrapper>().getUser;
+    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>();
     _placeDetailsTabBloc = getItInstance<PlaceDetailsTabBloc>();
     _placePhotosBloc = getItInstance<PlacePhotosBloc>();
     _placeDetailsBloc = getItInstance<PlaceDetailsBloc>()
@@ -95,6 +101,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _placeDetailsBloc.close();
     _placePhotosBloc.close();
     _gpsOpenCubit.close();
+    _favoriteInterestsBloc.close();
   }
 
   _handleTabSelection() {
@@ -119,6 +126,15 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       child: CustomContainer(
         child: Column(
           children: [
+            BlocListener<FavoriteInterestsBloc, FavoriteInterestsState>(
+              cubit: _favoriteInterestsBloc,
+              listener: (context, state) {
+                if(state.isError) {
+                  context.showSnackBar('Ops... houve um erro. Tente novamente');
+                }
+              },
+              child: SizedBox.shrink(),
+            ),
             BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
               cubit: _placePhotosBloc,
               builder: (context, state) {
@@ -269,7 +285,9 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     if (_user != UserAppModel.empty) {
       return IconButton(
         icon: CustomIcon(icon: AppIcons.star),
-        onPressed: () {},
+        onPressed: () {
+          _favoriteInterestsBloc.add(AddFavoriteInterestEvent(widget.item.placeId, InterestEnum.Place));
+        },
       );
     }
 
