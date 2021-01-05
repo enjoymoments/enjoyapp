@@ -23,7 +23,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/pho
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/enums.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -76,7 +76,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _placeDetailsTabBloc = getItInstance<PlaceDetailsTabBloc>();
     _placePhotosBloc = getItInstance<PlacePhotosBloc>();
     _placeDetailsBloc = getItInstance<PlaceDetailsBloc>()
-      ..add(LoadDetails(widget.item, _placePhotosBloc));
+      ..add(LoadDetails(widget.item, _favoriteInterestsBloc, _placePhotosBloc));
 
     _gpsOpenCubit = getItInstance<GpsOpenCubit>()
       ..getElements(
@@ -129,7 +129,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             BlocListener<FavoriteInterestsBloc, FavoriteInterestsState>(
               cubit: _favoriteInterestsBloc,
               listener: (context, state) {
-                if(state.isError) {
+                if (state.isError) {
                   context.showSnackBar('Ops... houve um erro. Tente novamente');
                 }
               },
@@ -283,10 +283,20 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
 
   Widget _buildIconStar() {
     if (_user != UserAppModel.empty) {
-      return IconButton(
-        icon: CustomIcon(icon: AppIcons.star),
-        onPressed: () {
-          _favoriteInterestsBloc.add(AddFavoriteInterestEvent(widget.item.placeId, InterestEnum.Place));
+      return BlocBuilder<FavoriteInterestsBloc, FavoriteInterestsState>(
+        cubit: _favoriteInterestsBloc,
+        builder: (context, state) {
+          return IconButton(
+            icon: CustomIcon(
+                icon: AppIcons.star,
+                color: state.favoriteAdded
+                    ? Theme.of(context).accentIconTheme.color
+                    : Theme.of(context).appBarTheme.iconTheme.color),
+            onPressed: () {
+              _favoriteInterestsBloc.add(ChangeFavoriteInterestEvent(
+                  widget.item.placeId, widget.item, InterestEnum.Place));
+            },
+          );
         },
       );
     }

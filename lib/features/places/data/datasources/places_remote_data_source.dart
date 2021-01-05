@@ -45,7 +45,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     String _query = '''
     query Interests {
       search($formattedParams) {
-        interests {
+        places {
           address
           name
           placeId
@@ -65,8 +65,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     ''';
 
     var result = await remoteClientRepository.query(_query);
-    //TODO:review this - fixed to places
-    return PlacesModel.fromJson(result['data']['search'][0]);
+    return PlacesModel.fromJson(result['data']['search']);
   }
 
   @override
@@ -76,6 +75,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     String _query = '''
     query PlaceDetails {
        placeDetails(placeId: "${place.placeId}") {
+        favorited
         formattedAddress
         formattedPhoneNumber
         types

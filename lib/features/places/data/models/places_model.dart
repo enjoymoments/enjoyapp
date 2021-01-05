@@ -10,7 +10,7 @@ class PlacesModel extends Places {
   factory PlacesModel.fromJson(Map<String, dynamic> json) {
     return PlacesModel(
       places: List<PlaceModel>.from(
-          json["interests"].map((x) => PlaceModel.fromJson(x))),
+          json["places"].map((x) => PlaceModel.fromJson(x))),
     );
   }
 }

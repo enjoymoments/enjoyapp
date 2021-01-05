@@ -8,6 +8,7 @@ class FavoriteInterestsState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     this.forceRefresh,
+    this.favoriteAdded,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -17,6 +18,7 @@ class FavoriteInterestsState extends DefaultState {
         );
 
   final int forceRefresh;
+  final bool favoriteAdded;
 
   factory FavoriteInterestsState.initial() {
     return FavoriteInterestsState(
@@ -26,6 +28,7 @@ class FavoriteInterestsState extends DefaultState {
       isError: false,
       errorMessage: null,
       forceRefresh: null,
+      favoriteAdded: false,
     );
   }
 
@@ -36,6 +39,7 @@ class FavoriteInterestsState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     int forceRefresh,
+    bool favoriteAdded,
   }) {
     return FavoriteInterestsState(
       isLoading: isLoading ?? this.isLoading,
@@ -44,6 +48,7 @@ class FavoriteInterestsState extends DefaultState {
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh ?? this.forceRefresh,
+      favoriteAdded: favoriteAdded ?? this.favoriteAdded,
     );
   }
 
@@ -55,5 +60,6 @@ class FavoriteInterestsState extends DefaultState {
         isSuccess,
         errorMessage,
         forceRefresh,
+        favoriteAdded,
       ];
 }

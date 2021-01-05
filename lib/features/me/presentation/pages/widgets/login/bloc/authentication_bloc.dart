@@ -139,9 +139,11 @@ class AuthenticationBloc
     }
   }
 
+  //TODO:review this, invoked many times
   void _settingsUser(UserAppModel user) async {
     final _token = await _pushNotificationConfig.configureAsync();
 
     this._userService.setTokensPushNotifications(user, _token);
+    this._userService.getFavoriteInterests();
   }
 }

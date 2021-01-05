@@ -9,6 +9,7 @@ class Place extends Equatable {
   String formattedAddress;
   String formattedPhoneNumber;
   final String name;
+  bool favorited;
   final String placeId;
   final double rating;
   final List<String> types;
@@ -27,6 +28,7 @@ class Place extends Equatable {
     this.formattedAddress,
     this.formattedPhoneNumber,
     this.name,
+    this.favorited,
     this.placeId,
     this.rating,
     this.types,
@@ -47,6 +49,7 @@ class Place extends Equatable {
         this.formattedAddress,
         this.formattedPhoneNumber,
         this.name,
+        this.favorited,
         this.placeId,
         this.rating,
         this.types,

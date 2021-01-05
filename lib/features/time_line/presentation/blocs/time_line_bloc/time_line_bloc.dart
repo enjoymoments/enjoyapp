@@ -87,7 +87,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     }
 
     var _timelineId = await this.timelineRepository.getTimeLineId(user.id);
-    var newInstance = user.copyWith(_timelineId);
+    var newInstance = user.copyWith(timelineId:_timelineId);
 
     userWrapper.assignment(newInstance);
 
