@@ -63,11 +63,11 @@ class AuthenticationBloc
       var _user = _userWrapper.getUser;
 
       if (_user != UserAppModel.empty) {
-        yield state.copyWith(isLoading: false, unauthenticated: false);
+        yield state.copyWith(isLoading: false, authenticated: true);
         return;
       }
 
-      yield state.copyWith(isLoading: false, unauthenticated: true);
+      yield state.copyWith(isLoading: false, authenticated: false);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -88,7 +88,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, unauthenticated: false, user: _user);
+      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -109,7 +109,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, unauthenticated: false, user: _user);
+      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -118,12 +118,10 @@ class AuthenticationBloc
 
   Stream<AuthenticationState> mapLogoutToState() async* {
     try {
-      yield state.copyWith(isLoading: true);
-
       await _authenticationRepository.logOut();
       await resetInstances();
 
-      yield state.copyWith(isLoading: false, unauthenticated: true);
+      yield state.copyWith(isLoading: false, authenticated: false);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');

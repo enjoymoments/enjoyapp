@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/connected.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/me_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 
 class MeScreen extends StatefulWidget {
   @override
@@ -28,16 +28,16 @@ class _MeScreenState extends State<MeScreen> {
       cubit: _authenticationBloc,
       builder: (BuildContext context, AuthenticationState state) {
         if (state.isLoading) {
-          return CustomCircularProgressIndicator();
+          return MeLoading();
         }
 
-        if (!state.unauthenticated) {
+        if (state.authenticated) {
           return Connected(
             user: getItInstance<UserWrapper>().getUser,
           );
         }
 
-        if (state.unauthenticated) {
+        if (!state.authenticated) {
           return Center(
             child: SingleChildScrollView(
               child: LoginScreen(),
@@ -45,7 +45,7 @@ class _MeScreenState extends State<MeScreen> {
           );
         }
 
-        return SizedBox.shrink();
+        return MeLoading();
       },
     );
   }
