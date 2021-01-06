@@ -20,7 +20,7 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
           await remoteDataSource.addFavoriteInterest(interestId, interestType);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e);
+      return Right<bool, Exception>(e is Exception ? e : Exception('error in add favorite interests'));
     }
   }
 
@@ -30,7 +30,7 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
       var response = await remoteDataSource.getFavoriteInterests();
       return Left<InterestType, Exception>(response);
     } on dynamic catch (e) {
-      return Right<InterestType, Exception>(e);
+      return Right<InterestType, Exception>(e is Exception ? e : Exception('error in get favorite interests'));
     }
   }
 
@@ -41,7 +41,7 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
       var response = await remoteDataSource.removeFavoriteInterest(interestId);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e);
+      return Right<bool, Exception>(e is Exception ? e : Exception('error in remove favorite interests'));
     }
   }
 }
