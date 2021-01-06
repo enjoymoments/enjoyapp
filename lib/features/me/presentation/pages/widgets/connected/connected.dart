@@ -25,7 +25,7 @@ class Connected extends StatefulWidget {
 class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
   List<Widget> _tabsTitle = [
     Tab(
-      text: "Álbums",
+      text: "Álbuns",
     ),
     Tab(
       text: "Lugares",
