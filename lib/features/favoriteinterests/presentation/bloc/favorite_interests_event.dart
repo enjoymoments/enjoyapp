@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:mozin/modules/shared/enums.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 
 abstract class FavoriteInterestsEvent extends Equatable {
   const FavoriteInterestsEvent();
@@ -7,10 +7,16 @@ abstract class FavoriteInterestsEvent extends Equatable {
   List<Object> get props => <Object>[];
 }
 
-class AddFavoriteInterestEvent extends FavoriteInterestsEvent {
+class ChangeFavoriteInterestEvent extends FavoriteInterestsEvent {
   final String interestId;
   final InterestEnum interestType;
+  final dynamic data;
 
-  AddFavoriteInterestEvent(this.interestId, this.interestType);
+  ChangeFavoriteInterestEvent(this.interestId, this.data, this.interestType);
 }
 
+class SetFavoriteItem extends FavoriteInterestsEvent {
+  final bool favoriteAdded;
+
+  SetFavoriteItem(this.favoriteAdded);
+}

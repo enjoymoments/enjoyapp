@@ -10,6 +10,7 @@ abstract class PlaceDetailsEvent extends Equatable {
 class LoadDetails extends PlaceDetailsEvent {
   PlaceModel item;
   PlacePhotosBloc placePhotosBloc;
+  FavoriteInterestsBloc favoriteInterestsBloc;
 
-  LoadDetails(this.item, this.placePhotosBloc);
+  LoadDetails(this.item, this.favoriteInterestsBloc, this.placePhotosBloc);
 }

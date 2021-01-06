@@ -9,6 +9,7 @@ class PlaceModel extends Place {
     String formattedAddress,
     String formattedPhoneNumber,
     String name,
+    bool favorited,
     String placeId,
     double rating,
     List<String> types,
@@ -25,6 +26,7 @@ class PlaceModel extends Place {
           formattedAddress: formattedAddress,
           formattedPhoneNumber: formattedPhoneNumber,
           name: name,
+          favorited: favorited,
           placeId: placeId,
           rating: rating,
           types: types,
@@ -59,12 +61,13 @@ class PlaceModel extends Place {
 
   factory PlaceModel.fromJsonComplement(
       PlaceModel place, Map<String, dynamic> json) {
+    place.favorited = json['favorited'];
     place.formattedAddress = json['formattedAddress'];
     place.formattedPhoneNumber = json['formattedPhoneNumber'];
     place.openNow = json['openNow'];
     place.photoReferences = json["photoReferences"] != null
-          ? List<String>.from(json["photoReferences"].map((x) => x))
-          : List();
+        ? List<String>.from(json["photoReferences"].map((x) => x))
+        : List();
     place.reviews = json["reviews"] != null
         ? List<ReviewModel>.from(
             json["reviews"].map((x) => ReviewModel.fromJson(x)))

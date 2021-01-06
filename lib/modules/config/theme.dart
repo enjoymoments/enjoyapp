@@ -14,6 +14,9 @@ ThemeData getTheme(BuildContext context) {
       size: 18.0,
       color: AppColors.iconsColor,
     ),
+    accentIconTheme: IconThemeData(
+      color: AppColors.attentionColor,
+    ),
     hintColor: AppColors.hintColor,
     bottomAppBarColor: AppColors.menuColor,
     primaryColor: AppColors.primary,

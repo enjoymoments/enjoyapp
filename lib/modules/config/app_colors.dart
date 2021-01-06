@@ -6,4 +6,5 @@ class AppColors {
   static const menuColor = Color(0xFFfafafa);
   static const iconsColor = Color(0xFF737373);
   static const hintColor = Color(0xFFE4E4E4);
+  static const attentionColor = Color(0xFFf3c353); 
 }
