@@ -62,21 +62,25 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   Future<void> deletePost(String timelineID, String postID) async {
     var url = remoteConfig.getString(url_functions);
 
+    var _options = await remoteClientRepository.getOptions();
+
     await remoteClientRepository.dio
-        .delete('$url/deleteTimeLineItem', queryParameters: {
+        .post('$url/deleteTimeLineItem', data: {
       'timelineID': timelineID,
       'postID': postID,
-    });
+    }, options: _options);
   }
 
   @override
   Future<String> getTimeLineId(String userId) async {
     var url = remoteConfig.getString(url_functions);
 
+    var _options = await remoteClientRepository.getOptions();
+
     var _result = await remoteClientRepository.dio
-        .delete('$url/getTimelineId', queryParameters: {
-      'userId': userId,
-    });
+        .post('$url/getTimelineId', data: {
+      'id': userId,
+    }, options: _options);
 
     return _result.data;
   }

@@ -18,7 +18,7 @@ class RemoteClientRepository {
   });
 
   Future<dynamic> query(String doc, {Map<String, dynamic> variables}) async {
-    Options _opt = await _getOptions();
+    Options _opt = await getOptions();
 
     var jsonMap = {'query': doc, 'variables': variables};
 
@@ -31,7 +31,7 @@ class RemoteClientRepository {
     return response.data;
   }
 
-  Future<Options> _getOptions() async {
+  Future<Options> getOptions() async {
     return Options(
       contentType: 'application/json',
       headers: await _getHeaders(),
