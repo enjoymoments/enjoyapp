@@ -20,6 +20,7 @@ import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/default_menu.dart';
 import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScreenManager extends StatefulWidget {
   @override
@@ -178,12 +179,16 @@ class _ScreenManagerState extends State<ScreenManager> {
       CustomItemModalFit(
         text: 'Facebook',
         iconData: AppIcons.facebook,
-        onTap: () {},
+        onTap: () {
+          _launchURL('https://www.facebook.com/Enjoy-108714310939674');
+        },
       ),
       CustomItemModalFit(
         text: 'Nosso Site',
         iconData: AppIcons.window_maximize,
-        onTap: () {},
+        onTap: () {
+          _launchURL('https://mozin-2c81d.web.app/');
+        },
       ),
       CustomItemModalFit(
         text: 'Configurações',
@@ -211,4 +216,12 @@ class _ScreenManagerState extends State<ScreenManager> {
 
     return _result;
   }
+
+  void _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 }
