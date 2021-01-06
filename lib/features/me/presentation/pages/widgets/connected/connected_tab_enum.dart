@@ -1,1 +1,1 @@
-enum ConnectedTabEnum {ALBUM, PLACE, PHOTO}
+enum ConnectedTabEnum {ALBUM, PLACE}

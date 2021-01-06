@@ -30,9 +30,6 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
     Tab(
       text: "Lugares",
     ),
-    Tab(
-      text: "Fotos",
-    ),
   ];
 
   TabController _nestedTabController;
@@ -104,8 +101,6 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
           return SizedBox.shrink();
         } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
           return _buildFavouritesItem(state.favoriteInterests.places);
-        } else if (state.connectedTabEnum == ConnectedTabEnum.PHOTO) {
-          return SizedBox.shrink();
         }
 
         return SizedBox.shrink();
