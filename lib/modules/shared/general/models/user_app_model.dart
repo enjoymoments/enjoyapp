@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:mozin/modules/shared/general/interest_type.dart';
 
 /// {@template user}
 /// User model
@@ -8,13 +9,14 @@ import 'package:meta/meta.dart';
 /// {@endtemplate}
 class UserAppModel extends Equatable {
   /// {@macro user}
-  const UserAppModel({
+   const UserAppModel({
     @required this.id,
     @required this.autenticatorProviderId,
     @required this.email,
     @required this.name,
     @required this.photo,
     this.timelineId,
+    this.favoriteInterests,
   })  : assert(email != null),
         assert(autenticatorProviderId != null),
         assert(id != null);
@@ -31,20 +33,36 @@ class UserAppModel extends Equatable {
 
   final String timelineId;
 
-  UserAppModel copyWith(String timelineId) {
+  final InterestType favoriteInterests;
+
+  UserAppModel copyWith({
+    String timelineId,
+    InterestType favoriteInterests,
+  }) {
     return UserAppModel(
       id: this.id,
       autenticatorProviderId: this.autenticatorProviderId,
       email: this.email,
       name: this.name,
       photo: this.photo,
-      timelineId: timelineId,
+      timelineId: timelineId ?? this.timelineId,
+      favoriteInterests: favoriteInterests ?? this.favoriteInterests,
     );
   }
 
   static const empty = UserAppModel(
-      id: '', autenticatorProviderId: '', email: '', name: '', photo: '');
+    id: '',
+    autenticatorProviderId: '',
+    email: '',
+    name: '',
+    photo: '',
+  );
 
   @override
-  List<Object> get props => [email, id, name, photo];
+  List<Object> get props => [
+        email,
+        id,
+        name,
+        photo,
+      ];
 }

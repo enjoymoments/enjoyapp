@@ -34,8 +34,7 @@ class UserService implements UserInterface {
     var response = await _favoriteInterests.getFavoriteInterests();
 
     response.fold((model) {
-      _user.favoriteInterests = model;
-      _userWrapper.assignment(_user);
+      _userWrapper.assignment(_user.copyWith(favoriteInterests: model));
     }, (error) {});
   }
 
