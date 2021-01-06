@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/connected_tab_enum.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
@@ -101,9 +101,9 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
       cubit: _connectedCubit,
       builder: (context, state) {
         if (state.connectedTabEnum == ConnectedTabEnum.ALBUM) {
-          return _buildFavouritesItem(context);
-        } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
           return SizedBox.shrink();
+        } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
+          return _buildFavouritesItem(state.favoriteInterests.places);
         } else if (state.connectedTabEnum == ConnectedTabEnum.PHOTO) {
           return SizedBox.shrink();
         }
@@ -157,67 +157,20 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildFavouritesItem(BuildContext context) {
-    return CarouselSlider(
-      items: _buildCards(context),
-      options: CarouselOptions(
-        autoPlay: false,
-        viewportFraction: 0.5,
-        initialPage: 1,
-        enableInfiniteScroll: false,
-        pageSnapping: false,
-      ),
-    );
-  }
-
-  List<Widget> _buildCards(BuildContext context) {
-    return List.generate(5, (index) {
-      return Container(
-        margin: EdgeInsets.all(5.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 0.2,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl:
-                      'https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U',
-                  width: SizeConfig.sizeByPixel(150),
-                  height: SizeConfig.sizeByPixel(150),
+  Widget _buildFavouritesItem(List<PlaceModel> places) {
+    return Column(
+      children: [
+        ...places
+            .map(
+              (item) => Padding(
+                padding: EdgeInsets.only(top: SizeConfig.sizeByPixel(8)),
+                child: PlaceCardItem(
+                  item: item,
                 ),
               ),
-            ),
-            SpacerBox.v8,
-            Padding(
-              padding: EdgeInsets.only(
-                  left: SizeConfig.sizeByPixel(10),
-                  bottom: SizeConfig.sizeByPixel(10)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  "Outterwear".title(context,
-                      fontWeight: FontWeight.bold, fontSize: 14),
-                  '170+ items'.label(context, fontSize: 13),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+            )
+            .toList(),
+      ],
+    );
   }
 }
