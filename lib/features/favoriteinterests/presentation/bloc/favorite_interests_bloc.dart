@@ -41,6 +41,8 @@ class FavoriteInterestsBloc
     var _indexItem = _user.favoriteInterests.places.indexWhere((element) => element.placeId == event.interestId);
     var _favoriteAdded = !(_indexItem != -1);
 
+    yield state.copyWith(favoriteAdded: _favoriteAdded);
+
     if (_indexItem != -1) {
       response = await _favoriteInterestsRepository.removeFavoriteInterest(
           event.interestId);
@@ -56,7 +58,6 @@ class FavoriteInterestsBloc
         isLoading: false,
         isError: false,
         isSuccess: true,
-        favoriteAdded: _favoriteAdded,
         forceRefresh: StateUtils.generateRandomNumber(),
       );
     }, (error) {
