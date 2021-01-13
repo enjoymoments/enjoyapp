@@ -62,8 +62,10 @@ class FavoriteInterestsRemoteDataSourceImpl
     ''';
 
     var result = await remoteClientRepository.query(_query);
-    return InterestType(
-        places: PlacesModel.fromJson(result['data']['getFavoriteInterest']).places);
+    //TODO:review this
+    // return InterestType(
+    //     places: PlacesModel.fromJson(result['data']['getFavoriteInterest']).places);
+    return InterestType();
   }
 
   @override

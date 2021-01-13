@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/categories/categories_places.dart';
+import 'package:mozin/features/places/presentation/pages/widgets/categories/category_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
@@ -55,7 +57,9 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           }
 
           if (state.model.places != null && state.model.places.length > 0) {
-            return _generateItems(state);
+            return CategoriesPlaces(
+              places: state.model.places,
+            );
           }
 
           if (state.model.places != null && state.model.places.length == 0) {
@@ -107,6 +111,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
     );
   }
 
+  //TODO:review this
   Widget _generateItems(PlacesState state) {
     return _generateContent(
       ListView.separated(
@@ -114,9 +119,12 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
         itemCount: state.model.places.length,
         itemBuilder: (context, index) {
           var item = state.model.places[index];
-          return PlaceCardItem(
-            item: item,
-          );
+          //item.subCategories
+          //TODO:review this
+          // return PlaceCardItem(
+          //   item: item,
+          // );
+          return SizedBox.shrink();
         },
         separatorBuilder: (context, index) => SpacerBox.v16,
       ),
