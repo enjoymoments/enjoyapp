@@ -34,6 +34,12 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
   }
 
   @override
+  void dispose() {
+    _nestedTabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _buildTabs();
   }
