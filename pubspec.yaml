@@ -33,7 +33,7 @@ dependencies:
   cloud_firestore: ^0.14.0+2
   firebase_storage: ^4.0.0
   cached_network_image: ^2.3.3
-  flutter_bloc: ^6.0.1
+  flutter_bloc: ^6.1.1
   equatable: ^1.1.1
   introduction_screen: ^1.0.9
   auto_size_text: ^2.1.0

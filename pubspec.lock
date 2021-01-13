@@ -63,7 +63,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.1"
+    version: "6.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -453,7 +453,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.1"
+    version: "6.1.1"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -827,7 +827,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.2+3"
   pub_semver:
     dependency: transitive
     description:
