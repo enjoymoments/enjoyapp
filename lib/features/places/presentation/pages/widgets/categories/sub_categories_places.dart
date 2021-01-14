@@ -40,6 +40,16 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
   }
 
   @override
+  void didUpdateWidget(SubCategoriesPlaces oldWidget) {
+    _nestedTabController.removeListener(_handleTabSelection);
+    _nestedTabController =
+        new TabController(length: widget.subCategories.length, vsync: this);
+    _nestedTabController.addListener(_handleTabSelection);
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _buildTabs();
   }
@@ -62,7 +72,8 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
 
   void _handleTabSelection() {
     if (_nestedTabController.indexIsChanging) {
-      widget.categoriesPlacesCubit.subCategorySelected(widget.subCategories[_nestedTabController.index].data);
+      widget.categoriesPlacesCubit.subCategorySelected(
+          widget.subCategories[_nestedTabController.index].data);
     }
   }
 }

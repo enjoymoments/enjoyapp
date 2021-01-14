@@ -10,14 +10,26 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
   CategoriesPlacesCubit() : super(CategoriesPlacesState.initial());
 
   void loadPrimary(List<PlacesCategory> places) {
-    emit(state.copyWith(places: places));
-
     var _categoryInitial = places[0];
-    emit(state.copyWith(
-        categorySelected: _categoryInitial,
-        tabsTitle: _buildTabsTitle(_categoryInitial)));
 
-    emit(state.copyWith(content: _categoryInitial.subCategories[0].data));
+    emit(
+      state.copyWith(
+        places: places,
+        categorySelected: _categoryInitial,
+        tabsTitle: _buildTabsTitle(_categoryInitial),
+        content: _categoryInitial.subCategories[0].data,
+      ),
+    );
+  }
+
+  void categorySelected(PlacesCategory category) {
+    emit(
+      state.copyWith(
+        categorySelected: category,
+        tabsTitle: _buildTabsTitle(category),
+        content: category.subCategories[0].data,
+      ),
+    );
   }
 
   void subCategorySelected(List<PlaceModel> data) {

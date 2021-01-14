@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/categories_places.dart';
-import 'package:mozin/features/places/presentation/pages/widgets/categories/category_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
-import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
@@ -15,7 +13,6 @@ import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
 
 class SearchPlacesScreen extends StatefulWidget {
@@ -108,26 +105,6 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           },
         ),
       ],
-    );
-  }
-
-  //TODO:review this
-  Widget _generateItems(PlacesState state) {
-    return _generateContent(
-      ListView.separated(
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: state.model.places.length,
-        itemBuilder: (context, index) {
-          var item = state.model.places[index];
-          //item.subCategories
-          //TODO:review this
-          // return PlaceCardItem(
-          //   item: item,
-          // );
-          return SizedBox.shrink();
-        },
-        separatorBuilder: (context, index) => SpacerBox.v16,
-      ),
     );
   }
 
