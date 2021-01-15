@@ -57,7 +57,8 @@ class _InterestScreenState extends State<InterestScreen> {
       pages: [
         _selectCategories(),
         _selectCategoriesDetails(),
-        _selectedGeneralFilters(),
+        //TODO:in development
+        //_selectedGeneralFilters(),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
