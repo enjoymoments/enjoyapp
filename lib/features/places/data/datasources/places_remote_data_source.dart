@@ -46,8 +46,10 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     query Interests {
       search($formattedParams) {
         places {
+          categoryId
           categoryName
           subCategories {
+            subCategoryId
             subCategoryName
               data {
                 address
