@@ -100,7 +100,8 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
         if (state.connectedTabEnum == ConnectedTabEnum.ALBUM) {
           return SizedBox.shrink();
         } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
-          return _buildFavouritesItem(state.favoriteInterests.places);
+          //TODO:in developement
+          //return _buildFavouritesItem(state.favoriteInterests.places);
         }
 
         return SizedBox.shrink();

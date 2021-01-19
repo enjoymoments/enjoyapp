@@ -43,29 +43,36 @@ class FavoriteInterestsRemoteDataSourceImpl
     query getFavoriteInterest {
       getFavoriteInterest {
         places {
-          address
-          name
-          placeId
-          rating
-          types
-          userRatingsTotal
-          vicinity
-          priceLevel
-          icon
-          location {
-            latitude
-            longitude
-          }
+          categoryId
+          categoryName
+          subCategories {
+            subCategoryId
+            subCategoryName
+              data {
+                address
+                name
+                placeId
+                rating
+                types
+                userRatingsTotal
+                vicinity
+                priceLevel
+                icon
+                location {
+                  latitude
+                  longitude
+                }
+              }
+            }
         }
       }
     }
     ''';
 
     var result = await remoteClientRepository.query(_query);
-    //TODO:review this
-    // return InterestType(
-    //     places: PlacesModel.fromJson(result['data']['getFavoriteInterest']).places);
-    return InterestType();
+    return InterestType(
+        places:
+            PlacesModel.fromJson(result['data']['getFavoriteInterest']).places);
   }
 
   @override

@@ -21,7 +21,8 @@ class UserService implements UserInterface {
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
-    _user.favoriteInterests.places.add(model);
+    //TODO:in developement
+    //_user.favoriteInterests.places.add(model);
     _userWrapper.assignment(_user);
   }
 

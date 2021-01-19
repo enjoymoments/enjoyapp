@@ -23,50 +23,51 @@ class FavoriteInterestsBloc
   Stream<FavoriteInterestsState> mapEventToState(
     FavoriteInterestsEvent event,
   ) async* {
-    if (event is ChangeFavoriteInterestEvent) {
-      yield* mapChangeFavoriteInterestToState(event);
+    if (event is AddPlaceToFavorite) {
+      yield* mapAddPlaceToFavoriteToState(event);
     } else if (event is SetFavoriteItem) {
       yield state.copyWith(favoriteAdded: event.favoriteAdded);
     }
   }
 
-  Stream<FavoriteInterestsState> mapChangeFavoriteInterestToState(
-    ChangeFavoriteInterestEvent event,
+  Stream<FavoriteInterestsState> mapAddPlaceToFavoriteToState(
+    AddPlaceToFavorite event,
   ) async* {
     Either<bool, Exception> response;
     var _userService = getItInstance<UserService>();
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
-    var _indexItem = _user.favoriteInterests.places.indexWhere((element) => element.placeId == event.interestId);
-    var _favoriteAdded = !(_indexItem != -1);
+    //TODO:in developement
+    //var _indexItem = _user.favoriteInterests.places.indexWhere((element) => element.categoryId == event.categoryId && element.subCategories.an);
+    //var _favoriteAdded = !(_indexItem != -1);
 
-    yield state.copyWith(favoriteAdded: _favoriteAdded);
+    // yield state.copyWith(favoriteAdded: _favoriteAdded);
 
-    if (_indexItem != -1) {
-      response = await _favoriteInterestsRepository.removeFavoriteInterest(
-          event.interestId);
-      _userService.removeFavoriteInterest(_indexItem);
-    } else {
-      response = await _favoriteInterestsRepository.addFavoriteInterest(
-          event.interestId, event.interestType);
-      _userService.addFavoriteInterest(event.data);
-    }
+    // if (_indexItem != -1) {
+    //   // response = await _favoriteInterestsRepository.removeFavoriteInterest(
+    //   //     event.interestId);
+    //   // _userService.removeFavoriteInterest(_indexItem);
+    // } else {
+    //   // response = await _favoriteInterestsRepository.addFavoriteInterest(
+    //   //     event.interestId, event.interestType);
+    //   // _userService.addFavoriteInterest(event.data);
+    // }
 
-    yield response.fold((model) {
-      return state.copyWith(
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-        forceRefresh: StateUtils.generateRandomNumber(),
-      );
-    }, (error) {
-      return state.copyWith(
-        isLoading: false,
-        isError: true,
-        isSuccess: false,
-        forceRefresh: StateUtils.generateRandomNumber(),
-      );
-    });
+    // yield response.fold((model) {
+    //   return state.copyWith(
+    //     isLoading: false,
+    //     isError: false,
+    //     isSuccess: true,
+    //     forceRefresh: StateUtils.generateRandomNumber(),
+    //   );
+    // }, (error) {
+    //   return state.copyWith(
+    //     isLoading: false,
+    //     isError: true,
+    //     isSuccess: false,
+    //     forceRefresh: StateUtils.generateRandomNumber(),
+    //   );
+    // });
   }
 }

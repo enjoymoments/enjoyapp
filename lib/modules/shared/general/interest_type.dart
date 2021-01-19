@@ -1,7 +1,7 @@
-import 'package:mozin/features/places/data/models/place_model.dart';
+import 'package:mozin/features/places/data/models/places_category_model.dart';
 
 class InterestType {
- final List<PlaceModel> places;
+ final List<PlacesCategoryModel> places;
 
   InterestType({this.places});
 }
