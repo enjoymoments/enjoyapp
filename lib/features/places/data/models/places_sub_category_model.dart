@@ -12,12 +12,12 @@ class PlacesSubCategoryModel extends PlacesSubCategory {
           subCategoryId: subCategoryId,
         );
 
-  factory PlacesSubCategoryModel.fromJson(Map<String, dynamic> json) {
+  factory PlacesSubCategoryModel.fromJson(String categoryId, Map<String, dynamic> json) {
     return PlacesSubCategoryModel(
       subCategoryId: json['subCategoryId'],
       subCategoryName: json['subCategoryName'],
       data: List<PlaceModel>.from(
-        json["data"].map((x) => PlaceModel.fromJson(x)),
+        json["data"].map((x) => PlaceModel.fromJson(categoryId, json['subCategoryId'], x)),
       ),
     );
   }

@@ -14,13 +14,22 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
 
   @override
   Future<Either<bool, Exception>> addFavoriteInterest(
-      String interestId, InterestEnum interestType) async {
+    String interestId,
+    String categoryId,
+    String subCategoryId,
+    InterestEnum interestType,
+  ) async {
     try {
-      var response =
-          await remoteDataSource.addFavoriteInterest(interestId, interestType);
+      var response = await remoteDataSource.addFavoriteInterest(
+        interestId,
+        categoryId,
+        subCategoryId,
+        interestType,
+      );
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e is Exception ? e : Exception('error in add favorite interests'));
+      return Right<bool, Exception>(
+          e is Exception ? e : Exception('error in add favorite interests'));
     }
   }
 
@@ -30,7 +39,8 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
       var response = await remoteDataSource.getFavoriteInterests();
       return Left<InterestType, Exception>(response);
     } on dynamic catch (e) {
-      return Right<InterestType, Exception>(e is Exception ? e : Exception('error in get favorite interests'));
+      return Right<InterestType, Exception>(
+          e is Exception ? e : Exception('error in get favorite interests'));
     }
   }
 
@@ -41,7 +51,8 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
       var response = await remoteDataSource.removeFavoriteInterest(interestId);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e is Exception ? e : Exception('error in remove favorite interests'));
+      return Right<bool, Exception>(
+          e is Exception ? e : Exception('error in remove favorite interests'));
     }
   }
 }

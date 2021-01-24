@@ -5,6 +5,8 @@ import 'package:mozin/features/places/domain/entities/review.dart';
 
 class PlaceModel extends Place {
   PlaceModel({
+    this.categoryId,
+    this.subCategoryId,
     String address,
     String formattedAddress,
     String formattedPhoneNumber,
@@ -40,8 +42,13 @@ class PlaceModel extends Place {
           reviews: reviews,
         );
 
-  factory PlaceModel.fromJson(Map<String, dynamic> json) {
+  final String categoryId;
+  final String subCategoryId;
+
+  factory PlaceModel.fromJson(String categoryId, String subCategoryId, Map<String, dynamic> json) {
     return PlaceModel(
+      categoryId: categoryId,
+      subCategoryId: subCategoryId,
       address: json["address"],
       name: json["name"],
       placeId: json["placeId"],

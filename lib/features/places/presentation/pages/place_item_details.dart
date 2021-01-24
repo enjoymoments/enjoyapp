@@ -293,9 +293,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
                     ? Theme.of(context).accentIconTheme.color
                     : Theme.of(context).appBarTheme.iconTheme.color),
             onPressed: () {
-              //TODO:in developement
-              // _favoriteInterestsBloc.add(ChangeFavoriteInterestEvent(
-              //     widget.item.placeId, widget.item, InterestEnum.Place));
+              _favoriteInterestsBloc.add(AddPlaceToFavorite(widget.item));
             },
           );
         },

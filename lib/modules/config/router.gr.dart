@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../features/notifications/presentation/pages/notifications_screen.dart';
@@ -33,6 +34,7 @@ class Routes {
   static const String gallery_photo_view_wrapper =
       '/gallery-photo-view-wrapper';
   static const String notification = '/notifications-screen';
+  static const String favorite_interests = '/favorite-interests-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -43,6 +45,7 @@ class Routes {
     add_time_line_screen,
     gallery_photo_view_wrapper,
     notification,
+    favorite_interests,
   };
 }
 
@@ -59,6 +62,7 @@ class Router extends RouterBase {
     RouteDef(Routes.add_time_line_screen, page: AddTimeLineScreen),
     RouteDef(Routes.gallery_photo_view_wrapper, page: GalleryPhotoViewWrapper),
     RouteDef(Routes.notification, page: NotificationsScreen),
+    RouteDef(Routes.favorite_interests, page: FavoriteInterestsScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -133,6 +137,12 @@ class Router extends RouterBase {
     NotificationsScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => NotificationsScreen(),
+        settings: data,
+      );
+    },
+    FavoriteInterestsScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => FavoriteInterestsScreen(),
         settings: data,
       );
     },

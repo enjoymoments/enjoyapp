@@ -1,62 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/connected/connected_tab_enum.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
-import 'package:mozin/features/places/data/models/place_model.dart';
-import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
-import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
-import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class Connected extends StatefulWidget {
+class Connected extends StatelessWidget {
   final UserAppModel user;
 
   const Connected({Key key, @required this.user}) : super(key: key);
-
-  @override
-  _ConnectedState createState() => _ConnectedState();
-}
-
-class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
-  List<Widget> _tabsTitle = [
-    Tab(
-      text: "Álbuns",
-    ),
-    Tab(
-      text: "Lugares",
-    ),
-  ];
-
-  TabController _nestedTabController;
-  ConnectedCubit _connectedCubit;
-
-  @override
-  void initState() {
-    _connectedCubit = getItInstance<ConnectedCubit>();
-    _nestedTabController =
-        new TabController(length: _tabsTitle.length, vsync: this);
-
-    _nestedTabController.addListener(_handleTabSelection);
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _connectedCubit.close();
-    super.dispose();
-  }
-
-  _handleTabSelection() {
-    if (_nestedTabController.indexIsChanging) {
-      _connectedCubit.changeTab(_nestedTabController.index);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,51 +20,21 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
         child: Column(
           children: <Widget>[
             SpacerBox.v10,
-            _buildHeader(),
+            _buildHeader(context),
             SpacerBox.v16,
             Divider(
               color: Theme.of(context).hintColor,
               height: SizeConfig.sizeByPixel(4),
             ),
             SpacerBox.v16,
-            CustomBorder(
-              height: SizeConfig.sizeByPixel(34),
-              child: Center(
-                child: TabBar(
-                  controller: _nestedTabController,
-                  indicatorColor: Theme.of(context).primaryColor,
-                  labelColor: Theme.of(context).primaryColor,
-                  unselectedLabelColor: Theme.of(context).iconTheme.color,
-                  isScrollable: true,
-                  tabs: _tabsTitle,
-                ),
-              ),
-            ),
-            SpacerBox.v8,
-            _buildContentTab(),
+            _buildFavouritesItem(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildContentTab() {
-    return BlocBuilder<ConnectedCubit, ConnectedState>(
-      cubit: _connectedCubit,
-      builder: (context, state) {
-        if (state.connectedTabEnum == ConnectedTabEnum.ALBUM) {
-          return SizedBox.shrink();
-        } else if (state.connectedTabEnum == ConnectedTabEnum.PLACE) {
-          //TODO:in developement
-          //return _buildFavouritesItem(state.favoriteInterests.places);
-        }
-
-        return SizedBox.shrink();
-      },
-    );
-  }
-
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       children: [
         CustomAvatar(
@@ -120,7 +45,7 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            widget.user.name.title(context),
+            user.name.title(context),
             SpacerBox.v10,
             _buildLineInfo(context),
           ],
@@ -135,9 +60,9 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
       children: [
         _buildItemLineInfo(context, '438', 'Posts'),
         SpacerBox.h43,
-        _buildItemLineInfo(context, '298', 'Following'),
+        _buildItemLineInfo(context, '298', 'Fotos'),
         SpacerBox.h43,
-        _buildItemLineInfo(context, '321K', 'Followers'),
+        _buildItemLineInfo(context, '321', 'Marcações'),
       ],
     );
   }
@@ -153,20 +78,35 @@ class _ConnectedState extends State<Connected> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildFavouritesItem(List<PlaceModel> places) {
-    return Column(
+  Widget _buildFavouritesItem(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 30,
       children: [
-        ...places
-            .map(
-              (item) => Padding(
-                padding: EdgeInsets.only(top: SizeConfig.sizeByPixel(8)),
-                child: PlaceCardItem(
-                  item: item,
-                ),
-              ),
-            )
-            .toList(),
+        _generateItem(context, Routes.favorite_interests, 'Álbuns'),
+        _generateItem(context, Routes.favorite_interests, 'Favoritos'),
       ],
+    );
+  }
+
+  Widget _generateItem(BuildContext context, String routeName, String name) {
+    return GestureDetector(
+      onTap: () {
+        ExtendedNavigator.of(context).push(routeName);
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: SizeConfig.sizeByPixel(140),
+        height: SizeConfig.sizeByPixel(120),
+        decoration: BoxDecoration(
+          color: Theme.of(context).hintColor,
+          border: Border.all(color: Colors.transparent),
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        ),
+        child: name.label(
+          context,
+        ),
+      ),
     );
   }
 }

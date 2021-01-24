@@ -1,3 +1,4 @@
+import 'package:mozin/modules/shared/general/interest_type.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 
 class FavoriteInterestsState extends DefaultState {
@@ -9,6 +10,7 @@ class FavoriteInterestsState extends DefaultState {
     String errorMessage,
     this.forceRefresh,
     this.favoriteAdded,
+    this.favoriteInterests,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,6 +21,7 @@ class FavoriteInterestsState extends DefaultState {
 
   final int forceRefresh;
   final bool favoriteAdded;
+  final InterestType favoriteInterests;
 
   factory FavoriteInterestsState.initial() {
     return FavoriteInterestsState(
@@ -29,6 +32,7 @@ class FavoriteInterestsState extends DefaultState {
       errorMessage: null,
       forceRefresh: null,
       favoriteAdded: false,
+      favoriteInterests: null,
     );
   }
 
@@ -40,6 +44,7 @@ class FavoriteInterestsState extends DefaultState {
     String errorMessage,
     int forceRefresh,
     bool favoriteAdded,
+    InterestType favoriteInterests,
   }) {
     return FavoriteInterestsState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +54,7 @@ class FavoriteInterestsState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       favoriteAdded: favoriteAdded ?? this.favoriteAdded,
+      favoriteInterests: favoriteInterests ?? this.favoriteInterests,
     );
   }
 
@@ -61,5 +67,6 @@ class FavoriteInterestsState extends DefaultState {
         errorMessage,
         forceRefresh,
         favoriteAdded,
+        favoriteInterests,
       ];
 }

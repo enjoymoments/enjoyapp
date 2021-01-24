@@ -18,12 +18,11 @@ class UserService implements UserInterface {
 
   @override
   void addFavoriteInterest(PlaceModel model) {
-    var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
-
-    //TODO:in developement
+    //var _userWrapper = getItInstance<UserWrapper>();
+    //var _user = _userWrapper.getUser;
+    
     //_user.favoriteInterests.places.add(model);
-    _userWrapper.assignment(_user);
+    //_userWrapper.assignment(_user);
   }
 
   @override
@@ -41,10 +40,10 @@ class UserService implements UserInterface {
 
   @override
   void removeFavoriteInterest(int index) {
-    var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
+    // var _userWrapper = getItInstance<UserWrapper>();
+    // var _user = _userWrapper.getUser;
 
-    _user.favoriteInterests.places.removeAt(index);
-    _userWrapper.assignment(_user);
+    // _user.favoriteInterests.places.removeAt(index);
+    // _userWrapper.assignment(_user);
   }
 }

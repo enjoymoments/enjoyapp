@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 
 abstract class FavoriteInterestsEvent extends Equatable {
   const FavoriteInterestsEvent();
@@ -7,14 +8,10 @@ abstract class FavoriteInterestsEvent extends Equatable {
 }
 
 class AddPlaceToFavorite extends FavoriteInterestsEvent {
-  final String categoryId;
-  final String subCategoryId;
-  final dynamic data;
+  final PlaceModel place;
 
   AddPlaceToFavorite(
-    this.categoryId,
-    this.subCategoryId,
-    this.data,
+    this.place,
   );
 }
 
@@ -23,3 +20,5 @@ class SetFavoriteItem extends FavoriteInterestsEvent {
 
   SetFavoriteItem(this.favoriteAdded);
 }
+
+class LoadFavoriteInterests extends FavoriteInterestsEvent {}

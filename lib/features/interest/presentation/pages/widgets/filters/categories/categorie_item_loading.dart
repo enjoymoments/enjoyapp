@@ -15,12 +15,12 @@ class CategorieItemLoading extends StatelessWidget {
         children: [
           ShimmerLoading(
             width: SizeConfig.sizeByPixel(130),
-            height: SizeConfig.sizeByPixel(60),
+            height: SizeConfig.sizeByPixel(90),
           ),
           SpacerBox.h43,
           ShimmerLoading(
             width: SizeConfig.sizeByPixel(130),
-            height: SizeConfig.sizeByPixel(60),
+            height: SizeConfig.sizeByPixel(90),
           ),
         ],
       ),

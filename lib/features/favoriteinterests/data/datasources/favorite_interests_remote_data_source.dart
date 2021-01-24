@@ -6,6 +6,8 @@ import 'package:mozin/modules/shared/remote_client_repository.dart';
 abstract class FavoriteInterestsRemoteDataSource {
   Future<bool> addFavoriteInterest(
     String interestId,
+    String categoryId,
+    String subCategoryId,
     InterestEnum interestType,
   );
 
@@ -25,11 +27,21 @@ class FavoriteInterestsRemoteDataSourceImpl
   @override
   Future<bool> addFavoriteInterest(
     String interestId,
+    String categoryId,
+    String subCategoryId,
     InterestEnum interestType,
   ) async {
+    //TODO:review this
     String _query = '''
     mutation addFavoriteInterest {
-       addFavoriteInterest(interest: {interestType: PLACE, interestId: "$interestId" })
+       addFavoriteInterest(interest: 
+        {
+          interestId: "$interestId"
+          interestType: PLACE
+          categoryId: "$categoryId"
+          subCategoryId:"$subCategoryId"
+        }
+      )
     }
     ''';
 
