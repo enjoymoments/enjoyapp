@@ -19,7 +19,7 @@ class ScreenManagerState extends Equatable {
       isLoading: false,
       isSuccess: false,
       isFailure: false,
-      currentScreen: DEFAULT_MENU_ENUM.HOME,
+      currentScreen: DEFAULT_MENU_ENUM.CALENDAR,
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mozin/app_view.dart';
 import 'package:mozin/modules/config/crashlytics.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -15,7 +16,7 @@ void main() async {
   reportErrorsPlatform();
 
   runZonedGuarded<Future<void>>(() async {
-    runApp(AppView());
+    initializeDateFormatting().then((_) => runApp(AppView()));
   }, (Object error, StackTrace stackTrace) {
     reportError(error, stackTrace);
   });

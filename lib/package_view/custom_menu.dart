@@ -30,7 +30,7 @@ class CustomMenu extends StatelessWidget {
           icon: Icon(Icons.home, size: 24.0),
           onPressed: () {},
         ),
-        Text('Início'),
+        Text('Calendário'),
       ],
     );
   }

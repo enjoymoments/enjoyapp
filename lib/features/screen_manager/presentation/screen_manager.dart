@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/monitoring/presentation/pages/monitoring_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/features/home/presentation/pages/home_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
@@ -71,9 +71,9 @@ class _ScreenManagerState extends State<ScreenManager> {
         return MeScreen();
       case DEFAULT_MENU_ENUM.MONITORING:
         return MonitoringScreen();
-      case DEFAULT_MENU_ENUM.HOME:
+      case DEFAULT_MENU_ENUM.CALENDAR:
       default:
-        return HomeScreen();
+        return CalendarScreen();
     }
   }
 
@@ -110,7 +110,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             },
           ),
         ];
-      case DEFAULT_MENU_ENUM.HOME:
+      case DEFAULT_MENU_ENUM.CALENDAR:
         return [
           IconButton(
             icon: CustomIcon(icon: AppIcons.bell),
@@ -145,8 +145,8 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   String _getStringbyScreen(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DEFAULT_MENU_ENUM.HOME:
-        return 'Início';
+      case DEFAULT_MENU_ENUM.CALENDAR:
+        return 'Calendário';
       case DEFAULT_MENU_ENUM.TIME_LINE:
         return 'Casal';
       case DEFAULT_MENU_ENUM.SEARCH:

@@ -69,6 +69,7 @@ dependencies:
   flare_flutter: ^2.0.6
   flutter_facebook_auth: "^1.0.0"
   map_launcher: ^1.0.0
+  table_calendar: ^2.3.3
 
 dev_dependencies:
   flutter_test:
