@@ -6,9 +6,16 @@ import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_inte
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_state.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
+import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/package_view/utils.dart';
+
+class MapItemFavorite {
+  int indexCategory;
+  int indexSubCategory;
+  int indexItem;
+}
 
 class FavoriteInterestsBloc
     extends Bloc<FavoriteInterestsEvent, FavoriteInterestsState> {
@@ -50,31 +57,9 @@ class FavoriteInterestsBloc
     var _userService = getItInstance<UserService>();
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
-    int _indexItem = -1;
 
-    for (var indexCategory = 0;
-        indexCategory < _user.favoriteInterests.places.length;
-        indexCategory++) {
-      var _categoryItem = _user.favoriteInterests.places[indexCategory];
-
-      if (_categoryItem.categoryId == event.place.categoryId) {
-        for (var indexSubCategory = 0;
-            indexSubCategory < _categoryItem.subCategories.length;
-            indexSubCategory++) {
-          var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
-
-          if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
-            _indexItem = _subCategoryItem.data.indexWhere(
-                (element) => element.placeId == event.place.placeId);
-          }
-        }
-      }
-    }
-
-    // var _indexItem = _user.favoriteInterests.places.indexWhere((element) =>
-    //     element.categoryId == event.place.categoryId &&
-    //     element.subCategories.any((subCategogy) =>
-    //         subCategogy.subCategoryId == event.place.subCategoryId));
+    MapItemFavorite _mapItemFavorite = MapItemFavorite();
+    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event);
 
     var _favoriteAdded = !(_indexItem != -1);
 
@@ -84,7 +69,11 @@ class FavoriteInterestsBloc
       response = await _favoriteInterestsRepository
           .removeFavoriteInterest(event.place.placeId);
 
-      _userService.removeFavoriteInterest(_indexItem);
+      _userService.removeFavoriteInterest(
+        indexCategory: _mapItemFavorite.indexCategory,
+        indexSubCategory: _mapItemFavorite.indexSubCategory,
+        indexItem: _mapItemFavorite.indexItem,
+      );
     } else {
       response = await _favoriteInterestsRepository.addFavoriteInterest(
         event.place.placeId,
@@ -111,5 +100,40 @@ class FavoriteInterestsBloc
         forceRefresh: StateUtils.generateRandomNumber(),
       );
     });
+  }
+
+  int _getIndexItem(
+    UserAppModel user,
+    MapItemFavorite mapItemFavorite,
+    AddPlaceToFavorite event,
+  ) {
+    for (var indexCategory = 0;
+        indexCategory < user.favoriteInterests.places.length;
+        indexCategory++) {
+      var _categoryItem = user.favoriteInterests.places[indexCategory];
+
+      if (_categoryItem.categoryId == event.place.categoryId) {
+        for (var indexSubCategory = 0;
+            indexSubCategory < _categoryItem.subCategories.length;
+            indexSubCategory++) {
+          var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
+
+          if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
+            var _indexItem = _subCategoryItem.data.indexWhere(
+                (element) => element.placeId == event.place.placeId);
+
+            if (_indexItem != -1) {
+              mapItemFavorite.indexCategory = indexCategory;
+              mapItemFavorite.indexSubCategory = indexSubCategory;
+              mapItemFavorite.indexItem = _indexItem;
+
+              return _indexItem;
+            }
+          }
+        }
+      }
+    }
+
+    return -1;
   }
 }

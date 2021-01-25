@@ -17,7 +17,7 @@ class PlacesCategoryModel extends PlacesCategory {
       categoryId: json['categoryId'],
       categoryName: json['categoryName'],
       subCategories: List<PlacesSubCategoryModel>.from(
-        json["subCategories"].map((x) => PlacesSubCategoryModel.fromJson(json['categoryId'], x)),
+        json["subCategories"].map((x) => PlacesSubCategoryModel.fromJson(json['categoryId'], json['categoryName'], x)),
       ),
     );
   }

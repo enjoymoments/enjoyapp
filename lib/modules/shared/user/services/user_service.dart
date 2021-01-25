@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
+import 'package:mozin/features/places/data/models/places_category_model.dart';
+import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -18,11 +21,47 @@ class UserService implements UserInterface {
 
   @override
   void addFavoriteInterest(PlaceModel model) {
-    //var _userWrapper = getItInstance<UserWrapper>();
-    //var _user = _userWrapper.getUser;
-    
-    //_user.favoriteInterests.places.add(model);
-    //_userWrapper.assignment(_user);
+    var _userWrapper = getItInstance<UserWrapper>();
+    var _user = _userWrapper.getUser;
+
+    var _categoryExist = _user.favoriteInterests.places
+        .indexWhere((element) => element.categoryId == model.categoryId);
+
+    if (_categoryExist != -1) {
+      var _subCategoryExist = _user
+          .favoriteInterests.places[_categoryExist].subCategories
+          .indexWhere(
+              (element) => element.subCategoryId == model.subCategoryId);
+      if (_subCategoryExist != -1) {
+        _user.favoriteInterests.places[_categoryExist].subCategories[_subCategoryExist].data.add(model);
+      } else {
+        _user.favoriteInterests.places[_categoryExist].subCategories.add(
+          PlacesSubCategoryModel(
+            subCategoryId: model.subCategoryId,
+            subCategoryName: model.subCategoryName,
+            data: List<PlaceModel>.from([model]),
+          ),
+        );
+      }
+    } else {
+      _user.favoriteInterests.places.add(
+        PlacesCategoryModel(
+          categoryId: model.categoryId,
+          categoryName: model.catgoryName,
+          subCategories: List<PlacesSubCategoryModel>.from(
+            [
+              PlacesSubCategoryModel(
+                subCategoryId: model.subCategoryId,
+                subCategoryName: model.subCategoryId,
+                data: List<PlaceModel>.from([model]),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    _userWrapper.assignment(_user);
   }
 
   @override
@@ -39,11 +78,11 @@ class UserService implements UserInterface {
   }
 
   @override
-  void removeFavoriteInterest(int index) {
-    // var _userWrapper = getItInstance<UserWrapper>();
-    // var _user = _userWrapper.getUser;
+  void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem}) {
+    var _userWrapper = getItInstance<UserWrapper>();
+    var _user = _userWrapper.getUser;
 
-    // _user.favoriteInterests.places.removeAt(index);
-    // _userWrapper.assignment(_user);
+    _user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].data.removeAt(indexItem);
+    _userWrapper.assignment(_user);
   }
 }
