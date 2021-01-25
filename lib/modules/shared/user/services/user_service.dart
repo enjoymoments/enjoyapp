@@ -83,6 +83,15 @@ class UserService implements UserInterface {
     var _user = _userWrapper.getUser;
 
     _user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].data.removeAt(indexItem);
+
+    if(_user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].data.length == 0) {
+      _user.favoriteInterests.places[indexCategory].subCategories.removeAt(indexSubCategory);
+    }
+
+    if(_user.favoriteInterests.places[indexCategory].subCategories.length == 0) { 
+      _user.favoriteInterests.places.removeAt(indexCategory);
+    }
+
     _userWrapper.assignment(_user);
   }
 }
