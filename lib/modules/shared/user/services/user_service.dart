@@ -47,12 +47,12 @@ class UserService implements UserInterface {
       _user.favoriteInterests.places.add(
         PlacesCategoryModel(
           categoryId: model.categoryId,
-          categoryName: model.catgoryName,
+          categoryName: model.categoryName,
           subCategories: List<PlacesSubCategoryModel>.from(
             [
               PlacesSubCategoryModel(
                 subCategoryId: model.subCategoryId,
-                subCategoryName: model.subCategoryId,
+                subCategoryName: model.subCategoryName,
                 data: List<PlaceModel>.from([model]),
               ),
             ],

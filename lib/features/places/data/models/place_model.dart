@@ -6,7 +6,7 @@ import 'package:mozin/features/places/domain/entities/review.dart';
 class PlaceModel extends Place {
   PlaceModel({
     this.categoryId,
-    this.catgoryName,
+    this.categoryName,
     this.subCategoryId,
     this.subCategoryName,
     String address,
@@ -45,7 +45,7 @@ class PlaceModel extends Place {
         );
 
   final String categoryId;
-  final String catgoryName;
+  final String categoryName;
   final String subCategoryId;
   final String subCategoryName;
 
@@ -58,7 +58,7 @@ class PlaceModel extends Place {
   ) {
     return PlaceModel(
       categoryId: categoryId,
-      catgoryName: categoryName,
+      categoryName: categoryName,
       subCategoryId: subCategoryId,
       subCategoryName: subCategoryName,
       address: json["address"],
