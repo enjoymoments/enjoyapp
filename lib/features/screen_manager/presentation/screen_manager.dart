@@ -113,10 +113,8 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DEFAULT_MENU_ENUM.CALENDAR:
         return [
           IconButton(
-            icon: CustomIcon(icon: AppIcons.bell),
+            icon: CustomIcon(icon: AppIcons.plus),
             onPressed: () {
-              ExtendedNavigator.of(context)
-                            .push(Routes.notification);
             },
           ),
         ];
@@ -124,6 +122,13 @@ class _ScreenManagerState extends State<ScreenManager> {
         return [];
       case DEFAULT_MENU_ENUM.ME:
         return [
+          IconButton(
+            icon: CustomIcon(icon: AppIcons.bell),
+            onPressed: () {
+              ExtendedNavigator.of(context)
+                            .push(Routes.notification);
+            },
+          ),
           IconButton(
             icon: CustomIcon(icon: AppIcons.bars),
             onPressed: () {
