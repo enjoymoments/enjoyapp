@@ -43,7 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           'Olá,\n${_user.name}'.labelIntro(context),
           SpacerBox.v16,
-          _generateItem(context, Routes.calendar, 'Calendário'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _generateItem(context, Routes.calendar, 'Calendário'),
+              SpacerBox.h16,
+              _generateItem(context, Routes.calendar, 'Sugestões'),
+            ],
+          ),
         ],
       ),
     );
