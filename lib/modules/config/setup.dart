@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/data/datasources/favorite_interests_remote_data_source.dart';
 import 'package:mozin/features/favoriteinterests/data/repositories/favorite_interests_repository_impl.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
@@ -174,6 +175,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<CategoriesPlacesCubit>(
       () => CategoriesPlacesCubit());        
+
+  getItInstance.registerFactory<AddCalendarCubit>(
+      () => AddCalendarCubit());        
 }
 
 void _registerSingletonRepositories() {

@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  //TODO:review this
+  //TODO:review this - create widget
   Widget _generateItem(BuildContext context, String routeName, String name) {
     return GestureDetector(
       onTap: () {

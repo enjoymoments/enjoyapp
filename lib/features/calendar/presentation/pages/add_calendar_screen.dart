@@ -2,9 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
+import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -15,6 +18,7 @@ import 'package:mozin/package_view/custom_dialog.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
+import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
@@ -26,17 +30,15 @@ class AddCalendarScreen extends StatefulWidget {
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
   TextEditingController _descriptionController;
 
-  AddTimeLineBloc _addTimeLineBloc;
+  AddCalendarCubit _addCalendarCubit;
   int _currentIndex = 0;
-  List<GalleryImageModel> _images;
 
   @override
   void initState() {
-    _images = [];
-    _addTimeLineBloc = getItInstance<AddTimeLineBloc>();
+    _addCalendarCubit = getItInstance<AddCalendarCubit>();
     _descriptionController = TextEditingController();
     _descriptionController.addListener(() {
-      _addTimeLineBloc.add(TextPost(_descriptionController.text));
+      //_addTimeLineBloc.add(TextPost(_descriptionController.text));
     });
 
     super.initState();
@@ -44,7 +46,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   @override
   void dispose() {
-    _addTimeLineBloc.close();
+    _addCalendarCubit.close();
     super.dispose();
   }
 
@@ -53,33 +55,26 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(),
-      bottomNavigationBar: _buildBottomMenu(),
+      bottomNavigationBar: null,
     );
   }
 
   Widget _buildAppBar() {
     return CustomAppBar(
-      title: 'Criar publicação',
+      title: 'Criar evento',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        if (_images.length > 0 ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
-          _discardPost(context);
-          return;
-        }
-
-        Navigator.of(context).pop();
+        _discardPost(context);
       },
       actions: <Widget>[
         IconButton(
           icon: CustomIcon(icon: AppIcons.check),
           onPressed: () {
-            if (_images.length > 0 ||
-                (_descriptionController.text != null &&
-                    _descriptionController.text.isNotEmpty)) {
-              _addTimeLineBloc.add(SaveTimeLine());
-            }
+            // if (_images.length > 0 ||
+            //     (_descriptionController.text != null &&
+            //         _descriptionController.text.isNotEmpty)) {
+            //   _addTimeLineBloc.add(SaveTimeLine());
+            // }
           },
         ),
       ],
@@ -115,42 +110,40 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
-      cubit: _addTimeLineBloc,
+    return BlocConsumer<AddCalendarCubit, AddCalendarState>(
+      cubit: _addCalendarCubit,
       listener: (consumerContext, state) {
-        if (state.isError) {
-          consumerContext.showSnackBar(
-              state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
-        }
+        // if (state.isError) {
+        //   consumerContext.showSnackBar(
+        //       state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
+        // }
 
-        if (state.isSuccess) {
-          getItInstance<TimelineBloc>()..add(LoadPosts());
-          ExtendedNavigator.of(context).pop();
-        }
+        // if (state.isSuccess) {
+        //   getItInstance<TimelineBloc>()..add(LoadPosts());
+        //   ExtendedNavigator.of(context).pop();
+        // }
       },
       builder: (context, state) {
-        if (state.isLoading) {
-          return CustomCircularProgressIndicator();
-        }
+        // if (state.isLoading) {
+        //   return CustomCircularProgressIndicator();
+        // }
 
-        if (state.images != null && state.images.length > 0) {
-          _images = state.images;
-          return _buildContent(
-            ImageItems(
-              addTimeLineBloc: _addTimeLineBloc,
-              images: state.images,
-            ),
-          );
-        }
+        // if (state.images != null && state.images.length > 0) {
+        //   _images = state.images;
+        //   return _buildContent(
+        //     ImageItems(
+        //       addTimeLineBloc: _addTimeLineBloc,
+        //       images: state.images,
+        //     ),
+        //   );
+        // }
 
-        return _buildContent(
-          SizedBox.shrink(),
-        );
+        return _buildContent();
       },
     );
   }
 
-  Widget _buildContent(Widget images) {
+  Widget _buildContent() {
     return SingleChildScrollView(
       child: CustomContainer(
         child: Column(
@@ -159,41 +152,69 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
           children: <Widget>[
             CustomTextFormField(
               controller: _descriptionController,
-              textInputType: TextInputType.visiblePassword,
-              hintText: 'No que você está pensando?',
-              labelText: 'No que você está pensando?',
-              maxLines: 5,
+              textInputType: TextInputType.text,
+              hintText: 'Título do evento',
+              labelText: 'Título do evento',
+              maxLines: 1,
               validate: (String value) {},
             ),
+            SpacerBox.v34,
+            CustomTile(
+              iconStart: AppIcons.calendar_day,
+              iconEnd: AppIcons.angle_right,
+              title: "Data",
+              description: "12/08/1994",
+              onTap: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime(1994, 8, 12),
+                  firstDate: DateTime(1940, 1, 1),
+                  lastDate: DateTime.now().add(
+                    Duration(days: 30),
+                  ),
+                );
+              },
+            ),
             SpacerBox.v16,
-            images,
+            Divider(
+              color: Theme.of(context).hintColor,
+              height: SizeConfig.sizeByPixel(4),
+            ),
+            SpacerBox.v16,
+            CustomTile(
+              iconStart: AppIcons.clock,
+              iconEnd: AppIcons.angle_right,
+              title: "Hora",
+              description: "21:00",
+              onTap: () {
+                showTimePicker(context: context, initialTime: TimeOfDay.now());
+              },
+            ),
+            SpacerBox.v16,
+            Divider(
+              color: Theme.of(context).hintColor,
+              height: SizeConfig.sizeByPixel(4),
+            ),
+            SpacerBox.v16,
+            CustomTile(
+              iconStart: AppIcons.tasks,
+              iconEnd: AppIcons.angle_right,
+              title: "Atividades",
+              description:
+                  "Escolha aqui quais tipos de atividades pretende realizar",
+              onTap: () {
+                ExtendedNavigator.of(context)
+                            .push(Routes.add_activity,arguments: AddActivityScreenArguments(addCalendarCubit: _addCalendarCubit));
+              },
+            ),
+            SpacerBox.v16,
+            Divider(
+              color: Theme.of(context).hintColor,
+              height: SizeConfig.sizeByPixel(4),
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBottomMenu() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _currentIndex,
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-
-        _addTimeLineBloc.add(OpenMediaEvent(ImageSource.values[index]));
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: CustomIcon(icon: AppIcons.camera),
-          title: new Text('Câmera'),
-        ),
-        BottomNavigationBarItem(
-          icon: CustomIcon(icon: AppIcons.film),
-          title: new Text('Galeria'),
-        ),
-      ],
     );
   }
 }

@@ -9,6 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/calendar/presentation/cubit/add_calendar_cubit.dart';
+import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
 import '../../features/calendar/presentation/pages/calendar_screen.dart';
 import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
@@ -39,6 +41,7 @@ class Routes {
   static const String favorite_interests = '/favorite-interests-screen';
   static const String calendar = '/calendar-screen';
   static const String add_calendar = '/add-calendar-screen';
+  static const String add_activity = '/add-activity-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -52,6 +55,7 @@ class Routes {
     favorite_interests,
     calendar,
     add_calendar,
+    add_activity,
   };
 }
 
@@ -71,6 +75,7 @@ class Router extends RouterBase {
     RouteDef(Routes.favorite_interests, page: FavoriteInterestsScreen),
     RouteDef(Routes.calendar, page: CalendarScreen),
     RouteDef(Routes.add_calendar, page: AddCalendarScreen),
+    RouteDef(Routes.add_activity, page: AddActivityScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -166,6 +171,18 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    AddActivityScreen: (data) {
+      final args = data.getArgs<AddActivityScreenArguments>(
+        orElse: () => AddActivityScreenArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddActivityScreen(
+          key: args.key,
+          addCalendarCubit: args.addCalendarCubit,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -206,4 +223,11 @@ class GalleryPhotoViewWrapperArguments {
       @required this.galleryItems,
       @required this.galleryPhotoSourceType,
       this.scrollDirection = Axis.horizontal});
+}
+
+/// AddActivityScreen arguments holder class
+class AddActivityScreenArguments {
+  final Key key;
+  final AddCalendarCubit addCalendarCubit;
+  AddActivityScreenArguments({this.key, this.addCalendarCubit});
 }
