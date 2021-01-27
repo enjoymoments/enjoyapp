@@ -195,9 +195,12 @@ class _ScreenManagerState extends State<ScreenManager> {
         onTap: () {},
       ),
       CustomItemModalFit(
-        text: 'Reportar um problema',
-        iconData: AppIcons.bug,
-        onTap: () {},
+        text: 'Ajude-nos a melhorar o app',
+        iconData: AppIcons.assistive_listening_systems,
+        onTap: () {
+          ExtendedNavigator.of(context)
+                            .push(Routes.feedback);
+        },
       ),
     ];
 

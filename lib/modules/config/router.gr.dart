@@ -14,6 +14,7 @@ import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
 import '../../features/calendar/presentation/pages/calendar_screen.dart';
 import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
+import '../../features/feedback/presentation/pages/feedback_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../features/notifications/presentation/pages/notifications_screen.dart';
@@ -42,6 +43,7 @@ class Routes {
   static const String calendar = '/calendar-screen';
   static const String add_calendar = '/add-calendar-screen';
   static const String add_activity = '/add-activity-screen';
+  static const String feedback = '/feedback-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -56,6 +58,7 @@ class Routes {
     calendar,
     add_calendar,
     add_activity,
+    feedback,
   };
 }
 
@@ -76,6 +79,7 @@ class Router extends RouterBase {
     RouteDef(Routes.calendar, page: CalendarScreen),
     RouteDef(Routes.add_calendar, page: AddCalendarScreen),
     RouteDef(Routes.add_activity, page: AddActivityScreen),
+    RouteDef(Routes.feedback, page: FeedbackScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -172,14 +176,18 @@ class Router extends RouterBase {
       );
     },
     AddActivityScreen: (data) {
-      final args = data.getArgs<AddActivityScreenArguments>(
-        orElse: () => AddActivityScreenArguments(),
-      );
+      final args = data.getArgs<AddActivityScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddActivityScreen(
           key: args.key,
           addCalendarCubit: args.addCalendarCubit,
         ),
+        settings: data,
+      );
+    },
+    FeedbackScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => FeedbackScreen(),
         settings: data,
       );
     },
@@ -229,5 +237,5 @@ class GalleryPhotoViewWrapperArguments {
 class AddActivityScreenArguments {
   final Key key;
   final AddCalendarCubit addCalendarCubit;
-  AddActivityScreenArguments({this.key, this.addCalendarCubit});
+  AddActivityScreenArguments({this.key, @required this.addCalendarCubit});
 }
