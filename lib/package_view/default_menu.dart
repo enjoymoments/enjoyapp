@@ -29,8 +29,8 @@ class _DefaultMenuState extends State<DefaultMenu> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: Icon(AppIcons.calendar, size: _sizeIcon),
-          title: Text('Calendário'),
+          icon: Icon(AppIcons.home, size: _sizeIcon),
+          title: Text('Início'),
         ),
         BottomNavigationBarItem(
           icon: Icon(AppIcons.seedling, size: _sizeIcon),

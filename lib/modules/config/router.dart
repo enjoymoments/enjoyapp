@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
 import 'package:mozin/features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
 import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
@@ -23,6 +24,7 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'gallery_photo_view_wrapper', page: GalleryPhotoViewWrapper,),
     MaterialRoute(name: 'notification', page: NotificationsScreen,),
     MaterialRoute(name: 'favorite_interests', page: FavoriteInterestsScreen,),
+    MaterialRoute(name: 'calendar', page: CalendarScreen,),
   ],
 )
 class $Router {}
