@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:mozin/package_view/extension.dart';
 
 // Example holidays
 final Map<DateTime, List> _holidays = {
@@ -266,20 +269,28 @@ class _CalendarContentState extends State<CalendarContent>
   }
 
   List<Widget> _buildEventList() {
-    return _selectedEvents
-        .map(
-          (event) => Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 0.8),
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: ListTile(
-              title: Text(event.toString()),
-              onTap: () => print('$event tapped!'),
-            ),
+    return _selectedEvents.map(
+      (event) {
+        return Container(
+          width: SizeConfig.screenWidth,
+          margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              "Title event".title(context),
+              SpacerBox.v4,
+              "Bla bla bla".description(context),
+              SpacerBox.v4,
+              "20:00 H".label(context),
+              SpacerBox.v8,
+              Divider(
+                color: Theme.of(context).hintColor,
+                height: SizeConfig.sizeByPixel(4),
+              ),
+            ],
           ),
-        )
-        .toList();
+        );
+      },
+    ).toList();
   }
 }
