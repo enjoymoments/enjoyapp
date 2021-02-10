@@ -1,17 +1,17 @@
-import 'package:mozin/features/calendar/domain/entities/calendar.dart';
+import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 
-class CalendarModel extends Calendar {
+class AddTaskCalendarModel extends AddTaskCalendar {
   
-  const CalendarModel();
+  const AddTaskCalendarModel();
   // const CalendarModel(
   //     {})
   //     : super();
 
-  factory CalendarModel.fromJson(Map<String, dynamic> json) {
+  factory AddTaskCalendarModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};
     data = json;
     
-    return CalendarModel(
+    return AddTaskCalendarModel(
       
     );
   }
@@ -27,7 +27,7 @@ class CalendarModel extends Calendar {
     return data;
   }
 
-  CalendarModel copyWith() {
-    return CalendarModel();
+  AddTaskCalendarModel copyWith() {
+    return AddTaskCalendarModel();
   }
 }
