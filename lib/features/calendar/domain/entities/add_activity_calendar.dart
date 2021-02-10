@@ -7,7 +7,7 @@ class AddActivityCalendar extends Equatable {
   });
 
   final String sessionId;
-  final DateTime activityId;
+  final String activityId;
 
   @override
   List<Object> get props => <Object>[
