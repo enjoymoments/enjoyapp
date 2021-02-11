@@ -4,15 +4,18 @@ class ActivityItemModel extends ActivityItem {
   const ActivityItemModel({
     String id,
     String name,
+    int codePoint,
   }) : super(
           id: id,
           name: name,
+          codePoint: codePoint
         );
 
   factory ActivityItemModel.fromJson(Map<String, dynamic> json) {
     return ActivityItemModel(
       id: json['id'],
       name: json['name'],
+      codePoint: json['codePoint'],
     );
   }
 

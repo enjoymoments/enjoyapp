@@ -20,6 +20,7 @@ class ActivityRemoteDataSourceImpl implements ActivityRemoteDataSource {
         activities {
           id
           name
+          codePoint
         }
       }
     }
