@@ -210,7 +210,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           text: 'Sair',
           iconData: AppIcons.window_close,
           onTap: () {
-            getItInstance<AuthenticationBloc>()..add(Logout());
+            root<AuthenticationBloc>()..add(Logout());
           },
         ),
       );

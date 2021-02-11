@@ -21,11 +21,11 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GoogleLoginButton(
-                authenticationBloc: getItInstance<AuthenticationBloc>(),
+                authenticationBloc: root<AuthenticationBloc>(),
               ),
               SpacerBox.h16,
               FacebookLoginButton(
-                authenticationBloc: getItInstance<AuthenticationBloc>(),
+                authenticationBloc: root<AuthenticationBloc>(),
               ),
             ],
           ),

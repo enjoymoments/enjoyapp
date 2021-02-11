@@ -16,7 +16,7 @@ class _AppViewState extends State<AppView> {
 
   @override
   void initState() {
-    _authenticationBloc = getItInstance<AuthenticationBloc>();
+    _authenticationBloc = root<AuthenticationBloc>();
     super.initState();
   }
 

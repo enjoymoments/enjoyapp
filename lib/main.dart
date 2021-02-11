@@ -11,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await setup();
+  setupRoot();
 
   // This captures errors reported by the Flutter framework. (exceptions that occur when calling native code)
   reportErrorsPlatform();

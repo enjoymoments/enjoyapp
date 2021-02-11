@@ -15,21 +15,16 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc(
-    this._authenticationRepository,
-    this._userService,
-    this._pushNotificationConfig,
-    this._userWrapper,
-  ) : super(AuthenticationState.initial()) {
+  AuthenticationBloc() : super(AuthenticationState.initial()) {
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AuthenticationUserChanged(user)),
     );
   }
 
-  final AuthenticationRepository _authenticationRepository;
-  final UserService _userService;
-  final PushNotificationConfig _pushNotificationConfig;
-  final UserWrapper _userWrapper;
+  get _authenticationRepository => getItInstance<AuthenticationRepository>();
+  get _userService => getItInstance<UserService>();
+  get _pushNotificationConfig => getItInstance<PushNotificationConfig>();
+  get _userWrapper => getItInstance<UserWrapper>();
 
   StreamSubscription<UserAppModel> _userSubscription;
 
@@ -41,9 +36,9 @@ class AuthenticationBloc
       _mapAuthenticationUserChangedToState(event);
     } else if (event is RequestGoogleLogin) {
       yield* mapLogInWithGoogleToState(event);
-    } else if (event is RequestFacebookLogin){
+    } else if (event is RequestFacebookLogin) {
       yield* mapLogInWithFacebookToState(event);
-    }else if (event is Logout) {
+    } else if (event is Logout) {
       yield* mapLogoutToState();
     } else if (event is CheckAuthenticated) {
       yield* mapCheckAuthenticatedToState();
@@ -141,7 +136,7 @@ class AuthenticationBloc
   void _settingsUser(UserAppModel user) async {
     final _token = await _pushNotificationConfig.configureAsync();
 
-    this._userService.setTokensPushNotifications(user, _token);
-    this._userService.getFavoriteInterests();
+    _userService.setTokensPushNotifications(user, _token);
+    _userService.getFavoriteInterests();
   }
 }

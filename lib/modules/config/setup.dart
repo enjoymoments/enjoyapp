@@ -56,6 +56,13 @@ import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 GetIt getItInstance = GetIt.instance;
+GetIt root = GetIt.asNewInstance();
+
+void setupRoot() {
+  root.registerLazySingleton<AuthenticationBloc>(
+    () => AuthenticationBloc(),
+  );
+}
 
 Future setup() async {
   getItInstance.allowReassignment = true;
@@ -137,10 +144,6 @@ void _registerSingletonServices() {
 void _registerBlocs() {
   getItInstance.registerFactory<AddTimeLineBloc>(
       () => AddTimeLineBloc(getItInstance(), getItInstance()));
-
-  getItInstance.registerLazySingleton<AuthenticationBloc>(() =>
-      AuthenticationBloc(
-          getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<TimelineBloc>(
       () => TimelineBloc(getItInstance(), getItInstance()));

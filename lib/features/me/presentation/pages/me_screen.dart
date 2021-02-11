@@ -17,7 +17,7 @@ class _MeScreenState extends State<MeScreen> {
 
   @override
   void initState() {
-    _authenticationBloc = getItInstance<AuthenticationBloc>()
+    _authenticationBloc = root<AuthenticationBloc>()
       ..add(CheckAuthenticated());
     super.initState();
   }
