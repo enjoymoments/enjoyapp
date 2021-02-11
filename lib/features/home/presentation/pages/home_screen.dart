@@ -6,6 +6,7 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
@@ -37,42 +38,69 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          'Olá,\n${_user.name}'.labelIntro(context),
-          SpacerBox.v16,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _generateItem(context, Routes.calendar, 'Calendário'),
-              SpacerBox.h16,
-              _generateItem(context, Routes.calendar, 'Sugestões'),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _generateItem(
+          context,
+          Icons.calendar_today,
+          Routes.calendar,
+          'Calendário',
+          'Bla blablablablabla',
+        ),
+        SpacerBox.v16,
+        _generateItem(
+          context,
+          Icons.new_releases,
+          Routes.calendar,
+          'Sugestões',
+          'Bla blablablabla labla labla',
+        ),
+      ],
     );
   }
 
   //TODO:review this - create widget
-  Widget _generateItem(BuildContext context, String routeName, String name) {
+  Widget _generateItem(
+    BuildContext context,
+    IconData iconData,
+    String routeName,
+    String name,
+    String description,
+  ) {
     return GestureDetector(
       onTap: () {
         ExtendedNavigator.of(context).push(routeName);
       },
       child: Container(
-        alignment: Alignment.center,
-        width: SizeConfig.sizeByPixel(140),
-        height: SizeConfig.sizeByPixel(120),
+        width: SizeConfig.screenWidth,
+        height: SizeConfig.sizeByPixel(70),
         decoration: BoxDecoration(
           color: Theme.of(context).hintColor,
           border: Border.all(color: Colors.transparent),
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
-        child: name.label(
-          context,
+        child: Padding(
+          padding: EdgeInsets.all(SizeConfig.sizeByPixel(8.0)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CustomIcon(
+                    icon: iconData,
+                  ),
+                  SpacerBox.h8,
+                  name.title(
+                    context,
+                  ),
+                ],
+              ),
+              SpacerBox.v8,
+              description.description(context),
+            ],
+          ),
         ),
       ),
     );
