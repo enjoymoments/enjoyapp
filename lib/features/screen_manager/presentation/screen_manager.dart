@@ -119,8 +119,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           IconButton(
             icon: CustomIcon(icon: AppIcons.bell),
             onPressed: () {
-              ExtendedNavigator.of(context)
-                            .push(Routes.notification);
+              ExtendedNavigator.of(context).push(Routes.notification);
             },
           ),
           IconButton(
@@ -176,31 +175,44 @@ class _ScreenManagerState extends State<ScreenManager> {
         onTap: () {},
       ),
       CustomItemModalFit(
-        text: 'Facebook',
-        iconData: AppIcons.facebook,
+        text: 'Mais sobre nós',
+        iconData: AppIcons.info_circle,
         onTap: () {
-          _launchURL('https://www.facebook.com/Enjoy-108714310939674');
+          showMaterialModalBottomSheet(
+            context: context,
+            builder: (context, scrollController) => CustomModalFit(
+              items: [
+                CustomItemModalFit(
+                  text: 'Facebook',
+                  iconData: AppIcons.facebook,
+                  onTap: () {
+                    _launchURL(
+                        'https://www.facebook.com/Enjoy-108714310939674');
+                  },
+                ),
+                CustomItemModalFit(
+                  text: 'Site',
+                  iconData: AppIcons.window_maximize,
+                  onTap: () {
+                    _launchURL('https://mozin-2c81d.web.app/');
+                  },
+                ),
+              ],
+            ),
+          );
         },
       ),
       CustomItemModalFit(
-        text: 'Nosso Site',
-        iconData: AppIcons.window_maximize,
+        text: 'Ajude-nos a melhorar o app',
+        iconData: AppIcons.assistive_listening_systems,
         onTap: () {
-          _launchURL('https://mozin-2c81d.web.app/');
+          ExtendedNavigator.of(context).push(Routes.feedback);
         },
       ),
       CustomItemModalFit(
         text: 'Configurações',
         iconData: AppIcons.cog,
         onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Ajude-nos a melhorar o app',
-        iconData: AppIcons.assistive_listening_systems,
-        onTap: () {
-          ExtendedNavigator.of(context)
-                            .push(Routes.feedback);
-        },
       ),
     ];
 
@@ -220,10 +232,10 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
 }
