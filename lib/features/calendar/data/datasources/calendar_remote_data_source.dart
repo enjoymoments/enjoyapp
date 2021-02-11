@@ -1,11 +1,11 @@
-import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
+import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 
 abstract class CalendarRemoteDataSource {
   Future<bool> addTaskInCalendar(AddTaskCalendar model);
   Future<bool> removeTaskInCalendar(String taskId);
-  Future<List<TaskCalendarModel>> getTasksInCalendar();
+  Future<List<GroupedYearCalendarModel>> getTasksInCalendar();
 }
 
 class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
@@ -45,16 +45,22 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<List<TaskCalendarModel>> getTasksInCalendar() async {
+  Future<List<GroupedYearCalendarModel>> getTasksInCalendar() async {
     String _query = '''
     query getTasksUserCalendar {
       getTasksUserCalendar {
-        taskId
-        title
-        dateTime
-        activities {
-          sessionId
-          activityId
+        year
+        months {
+          month
+          tasks {
+            taskId
+            title
+            dateTime
+            activities {
+              sessionId
+              activityId
+            }
+          }
         }
       }
     }
@@ -62,9 +68,9 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
 
     var result = await remoteClientRepository.query(_query);
 
-    List<TaskCalendarModel> _list = List<TaskCalendarModel>();
+    List<GroupedYearCalendarModel> _list = List<GroupedYearCalendarModel>();
 
-    result['data'].map((e) => _list.add(TaskCalendarModel.fromJson(e)));
+    result['data'].map((e) => _list.add(GroupedYearCalendarModel.fromJson(e)));
 
     return _list;
   }

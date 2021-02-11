@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';
+import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
-import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +24,13 @@ class CalendarRepositoryImpl implements CalendarRepository {
   }
 
   @override
-  Future<Either<List<TaskCalendarModel>, Exception>>
+  Future<Either<List<GroupedYearCalendarModel>, Exception>>
       getTasksInCalendar() async {
     try {
       var response = await remoteDataSource.getTasksInCalendar();
-      return Left<List<TaskCalendarModel>, Exception>(response);
+      return Left<List<GroupedYearCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<TaskCalendarModel>, Exception>(e);
+      return Right<List<GroupedYearCalendarModel>, Exception>(e);
     }
   }
 
