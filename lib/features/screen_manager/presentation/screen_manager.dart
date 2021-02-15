@@ -183,6 +183,13 @@ class _ScreenManagerState extends State<ScreenManager> {
             builder: (context, scrollController) => CustomModalFit(
               items: [
                 CustomItemModalFit(
+                  text: 'Instagram',
+                  iconData: AppIcons.instagram,
+                  onTap: () {
+                    _launchURL('https://www.instagram.com/myenjoymoments/');
+                  },
+                ),
+                CustomItemModalFit(
                   text: 'Facebook',
                   iconData: AppIcons.facebook,
                   onTap: () {
