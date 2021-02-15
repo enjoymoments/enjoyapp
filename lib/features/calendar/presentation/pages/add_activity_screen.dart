@@ -5,9 +5,8 @@ import 'package:mozin/features/calendar/data/models/activity_model.dart';
 import 'package:mozin/features/calendar/domain/entities/activity_item.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/features/calendar/presentation/pages/widgets/activity_icon.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
@@ -97,37 +96,11 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
         Wrap(
           children: section.activities.buildWithBetweenSpace<ActivityItem>(
             builderItem: (e) {
-              return _buildIcon(e);
+              return ActivityIcon(item: e);
             },
             space: SpacerBox.h16,
           ),
         ),
-      ],
-    );
-  }
-
-  //TODO:review this - create widget
-  Widget _buildIcon(ActivityItem item) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SpacerBox.v8,
-        Container(
-          width: SizeConfig.sizeByPixel(50.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: Theme.of(context).primaryColor,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(40.0)),
-          ),
-          child: IconButton(
-            icon: Icon(AppIcons.google, color: Theme.of(context).primaryColor),
-            onPressed: () {},
-          ),
-        ),
-        item.name.description(context),
       ],
     );
   }
