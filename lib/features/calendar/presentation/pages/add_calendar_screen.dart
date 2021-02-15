@@ -1,20 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
-import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
-import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_dialog.dart';
+import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
@@ -28,18 +23,25 @@ class AddCalendarScreen extends StatefulWidget {
 }
 
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
+  Future<TimeOfDay> _selectedTime;
+  Future<DateTime> _selectedDate;
+
+  TextEditingController _titleController;
   TextEditingController _descriptionController;
 
   AddCalendarCubit _addCalendarCubit;
-  int _currentIndex = 0;
+  AddActivityCubit _activityCubit;
 
   @override
   void initState() {
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
+    _activityCubit = getItInstance<AddActivityCubit>()..getActivities();
+
+    _titleController = TextEditingController();
     _descriptionController = TextEditingController();
-    _descriptionController.addListener(() {
-      //_addTimeLineBloc.add(TextPost(_descriptionController.text));
-    });
+
+    _titleController.addListener(() {});
+    _descriptionController.addListener(() {});
 
     super.initState();
   }
@@ -47,6 +49,11 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   @override
   void dispose() {
     _addCalendarCubit.close();
+    _activityCubit.close();
+
+    _titleController.dispose();
+    _descriptionController.dispose();
+
     super.dispose();
   }
 
@@ -69,13 +76,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       actions: <Widget>[
         IconButton(
           icon: CustomIcon(icon: AppIcons.check),
-          onPressed: () {
-            // if (_images.length > 0 ||
-            //     (_descriptionController.text != null &&
-            //         _descriptionController.text.isNotEmpty)) {
-            //   _addTimeLineBloc.add(SaveTimeLine());
-            // }
-          },
+          onPressed: () {},
         ),
       ],
     );
@@ -113,37 +114,24 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     return BlocConsumer<AddCalendarCubit, AddCalendarState>(
       cubit: _addCalendarCubit,
       listener: (consumerContext, state) {
-        // if (state.isError) {
-        //   consumerContext.showSnackBar(
-        //       state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
-        // }
+        if (state.isError) {
+          consumerContext.showSnackBar(
+              state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
+        }
 
-        // if (state.isSuccess) {
-        //   getItInstance<TimelineBloc>()..add(LoadPosts());
-        //   ExtendedNavigator.of(context).pop();
-        // }
+        if (state.isSuccess) {
+          //TODO:calendar reload here
+          //getItInstance<TimelineBloc>()..add(LoadPosts());
+          ExtendedNavigator.of(context).pop();
+        }
       },
       builder: (context, state) {
-        // if (state.isLoading) {
-        //   return CustomCircularProgressIndicator();
-        // }
-
-        // if (state.images != null && state.images.length > 0) {
-        //   _images = state.images;
-        //   return _buildContent(
-        //     ImageItems(
-        //       addTimeLineBloc: _addTimeLineBloc,
-        //       images: state.images,
-        //     ),
-        //   );
-        // }
-
-        return _buildContent();
+        return _buildContent(state);
       },
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(AddCalendarState state) {
     return SingleChildScrollView(
       child: CustomContainer(
         child: Column(
@@ -151,12 +139,33 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CustomTextFormField(
-              controller: _descriptionController,
+              controller: _titleController,
               textInputType: TextInputType.text,
               hintText: 'Título do evento',
               labelText: 'Título do evento',
               maxLines: 1,
-              validate: (String value) {},
+              validate: (String value) {
+                if (value == null || value == "") {
+                  return 'Informe o título';
+                }
+
+                return null;
+              },
+            ),
+            SpacerBox.v16,
+            CustomTextFormField(
+              controller: _descriptionController,
+              textInputType: TextInputType.text,
+              hintText: 'Descrição do evento',
+              labelText: 'Descrição do evento',
+              maxLines: 4,
+              validate: (String value) {
+                if (value == null || value == "") {
+                  return 'Informe a descrição';
+                }
+
+                return null;
+              },
             ),
             SpacerBox.v34,
             CustomTile(
@@ -165,7 +174,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               title: "Data",
               description: "12/08/1994",
               onTap: () {
-                showDatePicker(
+                _selectedDate = showDatePicker(
                   context: context,
                   initialDate: DateTime(1994, 8, 12),
                   firstDate: DateTime(1940, 1, 1),
@@ -176,10 +185,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               },
             ),
             SpacerBox.v16,
-            Divider(
-              color: Theme.of(context).hintColor,
-              height: SizeConfig.sizeByPixel(4),
-            ),
+            CustomDivider(),
             SpacerBox.v16,
             CustomTile(
               iconStart: AppIcons.clock,
@@ -187,14 +193,12 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               title: "Hora",
               description: "21:00",
               onTap: () {
-                showTimePicker(context: context, initialTime: TimeOfDay.now());
+                _selectedTime = showTimePicker(
+                    context: context, initialTime: TimeOfDay.now());
               },
             ),
             SpacerBox.v16,
-            Divider(
-              color: Theme.of(context).hintColor,
-              height: SizeConfig.sizeByPixel(4),
-            ),
+            CustomDivider(),
             SpacerBox.v16,
             CustomTile(
               iconStart: AppIcons.tasks,
@@ -203,15 +207,17 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               description:
                   "Escolha aqui quais tipos de atividades pretende realizar",
               onTap: () {
-                ExtendedNavigator.of(context)
-                            .push(Routes.add_activity,arguments: AddActivityScreenArguments(addCalendarCubit: _addCalendarCubit));
+                ExtendedNavigator.of(context).push(
+                  Routes.add_activity,
+                  arguments: AddActivityScreenArguments(
+                    addCalendarCubit: _addCalendarCubit,
+                    activityCubit: _activityCubit,
+                  ),
+                );
               },
             ),
             SpacerBox.v16,
-            Divider(
-              color: Theme.of(context).hintColor,
-              height: SizeConfig.sizeByPixel(4),
-            ),
+            CustomDivider(),
           ],
         ),
       ),

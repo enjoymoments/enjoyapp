@@ -14,7 +14,7 @@ class AddActivityCubit extends Cubit<AddActivityState> {
 
   final ActivityRepository _activityRepository;
 
-  void geActivities() async {
+  void getActivities() async {
     var response = await _activityRepository.getActivities();
     response.fold((activities) {
       return emit(state.copyWith(isLoading: false, activities: activities));

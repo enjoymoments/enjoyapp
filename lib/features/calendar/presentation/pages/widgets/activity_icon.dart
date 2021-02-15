@@ -6,8 +6,13 @@ import 'package:mozin/package_view/extension.dart';
 
 class ActivityIcon extends StatefulWidget {
   final ActivityItemModel item;
+  final Function(ActivityItemModel item) onPressed;
 
-  const ActivityIcon({Key key, @required this.item}) : super(key: key);
+  const ActivityIcon({
+    Key key,
+    @required this.onPressed,
+    @required this.item,
+  }) : super(key: key);
   @override
   _ActivityIconState createState() => _ActivityIconState();
 }
@@ -38,6 +43,7 @@ class _ActivityIconState extends State<ActivityIcon> {
             onPressed: () {
               setState(() {
                 widget.item.isSelected = !widget.item.isSelected;
+                widget.onPressed(widget.item);
               });
             },
           ),

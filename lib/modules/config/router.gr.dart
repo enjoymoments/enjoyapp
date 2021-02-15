@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
@@ -181,6 +182,7 @@ class Router extends RouterBase {
         builder: (context) => AddActivityScreen(
           key: args.key,
           addCalendarCubit: args.addCalendarCubit,
+          activityCubit: args.activityCubit,
         ),
         settings: data,
       );
@@ -237,5 +239,9 @@ class GalleryPhotoViewWrapperArguments {
 class AddActivityScreenArguments {
   final Key key;
   final AddCalendarCubit addCalendarCubit;
-  AddActivityScreenArguments({this.key, @required this.addCalendarCubit});
+  final AddActivityCubit activityCubit;
+  AddActivityScreenArguments(
+      {this.key,
+      @required this.addCalendarCubit,
+      @required this.activityCubit});
 }
