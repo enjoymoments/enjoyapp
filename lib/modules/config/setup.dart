@@ -5,8 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/calendar/data/datasources/activity_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';
+import 'package:mozin/features/calendar/data/repositories/activity_repository_impl.dart';
 import 'package:mozin/features/calendar/data/repositories/calendar_repository_impl.dart';
+import 'package:mozin/features/calendar/domain/repositories/activity_repository.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/data/datasources/favorite_interests_remote_data_source.dart';
@@ -209,6 +212,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<CalendarRepository>(
       () => CalendarRepositoryImpl(remoteDataSource: getItInstance())); 
+
+  getItInstance.registerLazySingleton<ActivityRepository>(
+      () => ActivityRepositoryImpl(remoteDataSource: getItInstance())); 
 }
 
 void _registerSingletonDataSources() {
@@ -226,6 +232,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<CalendarRemoteDataSource>(
       () => CalendarRemoteDataSourceImpl(getItInstance()));    
+  
+  getItInstance.registerLazySingleton<ActivityRemoteDataSource>(
+      () => ActivityRemoteDataSourceImpl(getItInstance()));    
 }
 
 Future<LocalStorageService> _setupHive() async {
