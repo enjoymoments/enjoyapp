@@ -6,6 +6,7 @@ import 'package:mozin/features/calendar/domain/entities/activity_item.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/activity_icon.dart';
+import 'package:mozin/features/calendar/presentation/pages/widgets/activity_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -65,7 +66,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
           return _buildContent(state.activities);
         }
 
-        return SizedBox.shrink();
+        return ActivityLoading();
       },
     );
   }
