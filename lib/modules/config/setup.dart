@@ -11,7 +11,8 @@ import 'package:mozin/features/calendar/data/repositories/activity_repository_im
 import 'package:mozin/features/calendar/data/repositories/calendar_repository_impl.dart';
 import 'package:mozin/features/calendar/domain/repositories/activity_repository.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
-import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/data/datasources/favorite_interests_remote_data_source.dart';
 import 'package:mozin/features/favoriteinterests/data/repositories/favorite_interests_repository_impl.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
@@ -106,9 +107,9 @@ void _setupRemoteClientRepository() {
       () => RemoteClientRepository(
             dio: _dio,
             url:
-                //'https://localhost:5001/graphql',
+                'https://localhost:5001/graphql',
                 //'https://10.0.2.2:5001/graphql',
-                getItInstance<RemoteConfig>().getString(url_endpoint),
+                //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -187,6 +188,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<AddCalendarCubit>(
       () => AddCalendarCubit());        
+
+  getItInstance.registerFactory<AddActivityCubit>(
+      () => AddActivityCubit(activityRepository: getItInstance()));            
 }
 
 void _registerSingletonRepositories() {

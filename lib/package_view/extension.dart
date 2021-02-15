@@ -1,6 +1,22 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+extension ListWidget on List {
+  List<Widget> buildWithBetweenSpace<T>({
+    @required Widget Function(T item) builderItem,
+    @required Widget space,
+  }) {
+    List<Widget> _result = List<Widget>();
+
+    for (var item in this) {
+      _result.add(builderItem(item));
+      _result.add(space);
+    }
+
+    return _result;
+  }
+}
+
 extension Snackbar on BuildContext {
   void showSnackBar(String message) {
     Scaffold.of(this)

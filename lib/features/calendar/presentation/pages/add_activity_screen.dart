@@ -1,23 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
-import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
-import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
+import 'package:mozin/features/calendar/data/models/activity_model.dart';
+import 'package:mozin/features/calendar/domain/entities/activity_item.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_dialog.dart';
-import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/custom_text_form_field.dart';
-import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
@@ -32,17 +25,18 @@ class AddActivityScreen extends StatefulWidget {
 }
 
 class _AddActivityScreenState extends State<AddActivityScreen> {
-  TextEditingController _descriptionController;
-  int _currentIndex = 0;
+  AddActivityCubit _activityCubit;
 
   @override
   void initState() {
-    _descriptionController = TextEditingController();
-    _descriptionController.addListener(() {
-      //_addTimeLineBloc.add(TextPost(_descriptionController.text));
-    });
-
+    _activityCubit = getItInstance<AddActivityCubit>()..geActivities();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _activityCubit.close();
+    super.dispose();
   }
 
   @override
@@ -65,87 +59,55 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<AddCalendarCubit, AddCalendarState>(
-      cubit: widget.addCalendarCubit,
-      listener: (consumerContext, state) {
-        // if (state.isError) {
-        //   consumerContext.showSnackBar(
-        //       state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
-        // }
-
-        // if (state.isSuccess) {
-        //   getItInstance<TimelineBloc>()..add(LoadPosts());
-        //   ExtendedNavigator.of(context).pop();
-        // }
-      },
+    return BlocBuilder<AddActivityCubit, AddActivityState>(
+      cubit: _activityCubit,
       builder: (context, state) {
-        // if (state.isLoading) {
-        //   return CustomCircularProgressIndicator();
-        // }
+        if (state.activities != null && state.activities.length > 0) {
+          return _buildContent(state.activities);
+        }
 
-        // if (state.images != null && state.images.length > 0) {
-        //   _images = state.images;
-        //   return _buildContent(
-        //     ImageItems(
-        //       addTimeLineBloc: _addTimeLineBloc,
-        //       images: state.images,
-        //     ),
-        //   );
-        // }
-
-        return _buildContent();
+        return SizedBox.shrink();
       },
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(List<ActivityModel> activities) {
     return SingleChildScrollView(
       child: CustomContainer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildSection(),
-            SpacerBox.v34,
-            _buildSection(),
-            SpacerBox.v34,
-            _buildSection(),
-            SpacerBox.v34,
-          ],
+          children: activities.buildWithBetweenSpace<ActivityModel>(
+            builderItem: (e) {
+              return _buildSection(e);
+            },
+            space: SpacerBox.v34,
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSection() {
+  Widget _buildSection(ActivityModel section) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "Lazer".label(context),
+        section.sessionName.label(context),
         Wrap(
-          children: [
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-            SpacerBox.h16,
-            _buildIcon(),
-          ],
+          children: section.activities.buildWithBetweenSpace<ActivityItem>(
+            builderItem: (e) {
+              return _buildIcon(e);
+            },
+            space: SpacerBox.h16,
+          ),
         ),
       ],
     );
   }
 
   //TODO:review this - create widget
-  Widget _buildIcon() {
+  Widget _buildIcon(ActivityItem item) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -165,7 +127,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
             onPressed: () {},
           ),
         ),
-        "Atividade".description(context),
+        item.name.description(context),
       ],
     );
   }

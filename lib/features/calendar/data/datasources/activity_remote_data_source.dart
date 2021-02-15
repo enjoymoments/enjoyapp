@@ -30,9 +30,10 @@ class ActivityRemoteDataSourceImpl implements ActivityRemoteDataSource {
 
     List<ActivityModel> _list = List<ActivityModel>();
 
-    result['data'].map((e) => _list.add(ActivityModel.fromJson(e)));
+    for (var e in result['data']['getActivities']) {
+      _list.add(ActivityModel.fromJson(e));
+    }
 
     return _list;
   }
-  
 }

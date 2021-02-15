@@ -9,7 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/calendar/presentation/cubit/add_calendar_cubit.dart';
+import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
 import '../../features/calendar/presentation/pages/calendar_screen.dart';

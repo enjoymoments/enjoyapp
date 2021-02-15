@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mozin/features/calendar/presentation/cubit/add_calendar_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
