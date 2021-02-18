@@ -68,10 +68,10 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: activities.buildWithBetweenSpace<ActivityModel>(
+            space: SpacerBox.v34,
             builderItem: (e) {
               return _buildSection(e);
             },
-            space: SpacerBox.v34,
           ),
         ),
       ),
@@ -86,6 +86,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
         section.sessionName.label(context),
         Wrap(
           children: section.activities.buildWithBetweenSpace<ActivityItemModel>(
+            space: SpacerBox.h16,
             builderItem: (e) {
               return ActivityIcon(
                 item: e,
@@ -94,15 +95,14 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                     widget.addCalendarCubit.addActivity(
                         AddActivityCalendarModel(
                             sessionId: section.id, activityId: item.id));
+                  } else {
+                    widget.addCalendarCubit.removeActivity(
+                        AddActivityCalendarModel(
+                            sessionId: section.id, activityId: item.id));
                   }
-
-                  widget.addCalendarCubit.removeActivity(
-                      AddActivityCalendarModel(
-                          sessionId: section.id, activityId: item.id));
                 },
               );
             },
-            space: SpacerBox.h16,
           ),
         ),
       ],
