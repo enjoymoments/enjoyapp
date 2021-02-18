@@ -3,7 +3,7 @@ import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.da
 
 class AddTaskCalendar extends Equatable {
   
-  const AddTaskCalendar({
+  AddTaskCalendar({
     this.taskId,
     this.title,
     this.dateTime,
@@ -13,7 +13,7 @@ class AddTaskCalendar extends Equatable {
   final String taskId;
   final String title;
   final DateTime dateTime; 
-  final List<AddActivityCalendar> activities;
+  List<AddActivityCalendar> activities;
 
   @override
   List<Object> get props => <Object>[

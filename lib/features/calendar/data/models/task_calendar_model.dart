@@ -2,7 +2,7 @@ import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 
 class TaskCalendarModel extends AddTaskCalendar {
-  const TaskCalendarModel({
+  TaskCalendarModel({
     String taskId,
     String title,
     DateTime dateTime,
