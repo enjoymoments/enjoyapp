@@ -30,7 +30,8 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     }
   }
 
-  Stream<PlacesState> mapGetCurrentPositionToState(FilterChoosedModel filterChoosed) async* {
+  Stream<PlacesState> mapGetCurrentPositionToState(
+      FilterChoosedModel filterChoosed) async* {
     try {
       yield state.copyWith(isLoading: true, isError: false);
 
@@ -39,7 +40,11 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
 
       Either<PlacesModel, Exception> response =
           await _placesRepository.getPlaces(
-              position.latitude, position.longitude, filterChoosed);
+              position.latitude
+              ,
+              position.longitude
+              ,
+              filterChoosed);
 
       yield response.fold((model) {
         return state.copyWith(
@@ -58,4 +63,39 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
       yield state.copyWith(isLoading: false, isError: true);
     }
   }
+
+  //TODO:for test
+  // Stream<PlacesState> mapGetCurrentPositionToState(
+  //     FilterChoosedModel filterChoosed) async* {
+  //   try {
+  //     yield state.copyWith(isLoading: true, isError: false);
+
+  //     // Position position = await Geolocator.getCurrentPosition(
+  //     //     desiredAccuracy: LocationAccuracy.best);
+
+  //     Either<PlacesModel, Exception> response =
+  //         await _placesRepository.getPlaces(
+  //             -23.6322975 //position.latitude
+  //             ,
+  //             -46.6395946 //,position.longitude
+  //             ,
+  //             filterChoosed);
+
+  //     yield response.fold((model) {
+  //       return state.copyWith(
+  //           isLoading: false, isError: false, isSuccess: true, model: model);
+  //     }, (error) {
+  //       return state.copyWith(
+  //           isLoading: false, isError: true, isSuccess: false);
+  //     });
+  //   } on TimeoutException {
+  //     yield state.copyWith(isLoading: false, isError: true, errorMessage: '');
+  //   } on PermissionDeniedException {
+  //     yield state.copyWith(isLoading: false, isError: true, errorMessage: '');
+  //   } on LocationServiceDisabledException {
+  //     yield state.copyWith(isLoading: false, isError: true, errorMessage: '');
+  //   } catch (e) {
+  //     yield state.copyWith(isLoading: false, isError: true);
+  //   }
+  // }
 }
