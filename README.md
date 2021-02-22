@@ -17,3 +17,8 @@ $ chmod +x gca.sh
 ```yaml
 $ ./gca.sh hello mozin
 ```
+
+## Build Release
+```yaml
+flutter clean && flutter build apk --release
+```

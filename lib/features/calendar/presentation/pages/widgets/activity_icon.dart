@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/activity_item_model.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -36,8 +37,12 @@ class _ActivityIconState extends State<ActivityIcon> {
           ),
           child: IconButton(
             icon: Icon(
-              IconData(widget.item.codePoint,
-                  fontFamily: 'AppIcons', fontPackage: null),
+              //TODO:for test
+              Icons.ac_unit,
+              // widget.item.codePoint == null
+              //     ? AppIcons.trailer
+              //     : IconData(widget.item.codePoint,
+              //         fontFamily: 'AppIcons', fontPackage: null),
               color: _getIconColor(),
             ),
             onPressed: () {
