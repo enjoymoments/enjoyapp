@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
+import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 
@@ -19,7 +19,18 @@ class CalendarCubit extends Cubit<CalendarState> {
 
     _response.fold(
       (value) {
-        emit(state.copyWith(model: value));
+        Map<DateTime, List> _events = {};
+
+        for (var item in value) {
+          _events[item.date] = item.tasks;
+        }
+
+        emit(
+          state.copyWith(
+            events: _events,
+            model: value,
+          ),
+        );
       },
       (error) {
         emit(state.copyWith(

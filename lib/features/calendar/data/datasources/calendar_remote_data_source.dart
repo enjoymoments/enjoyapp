@@ -1,3 +1,4 @@
+import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
@@ -5,7 +6,9 @@ import 'package:mozin/modules/shared/remote_client_repository.dart';
 abstract class CalendarRemoteDataSource {
   Future<bool> addTaskInCalendar(AddTaskCalendar model);
   Future<bool> removeTaskInCalendar(String taskId);
-  Future<List<GroupedYearCalendarModel>> getTasksInCalendar();
+  Future<List<GroupedDateCalendarModel>> getTasksInCalendar();
+  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear();
+  
 }
 
 class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
@@ -45,10 +48,10 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<List<GroupedYearCalendarModel>> getTasksInCalendar() async {
+  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear() async {
     String _query = '''
-    query getTasksUserCalendar {
-      getTasksUserCalendar {
+    query getTasksUserCalendarGroupedByYear {
+      getTasksUserCalendarGroupedByYear {
         year
         months {
           month
@@ -70,7 +73,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
 
     List<GroupedYearCalendarModel> _list = List<GroupedYearCalendarModel>();
 
-    for (var e in result['data']['getTasksUserCalendar']) {
+    for (var e in result['data']['getTasksUserCalendarGroupedByYear']) {
       _list.add(GroupedYearCalendarModel.fromJson(e));
     }
 
@@ -88,5 +91,35 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     var result = await remoteClientRepository.query(_query);
 
     return result['data'];
+  }
+
+  @override
+  Future<List<GroupedDateCalendarModel>> getTasksInCalendar() async {
+    String _query = '''
+    query getTasksUserCalendar {
+      getTasksUserCalendar {
+        date
+        tasks {
+          taskId
+          title
+          dateTime
+          activities {
+            sessionId
+            activityId
+          }
+        }
+      }
+    }
+    ''';
+
+    var result = await remoteClientRepository.query(_query);
+
+    List<GroupedDateCalendarModel> _list = List<GroupedDateCalendarModel>();
+
+    for (var e in result['data']['getTasksUserCalendar']) {
+      _list.add(GroupedDateCalendarModel.fromJson(e));
+    }
+
+    return _list;
   }
 }

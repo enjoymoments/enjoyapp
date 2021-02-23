@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -10,13 +11,13 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:mozin/package_view/extension.dart';
 
 // Example holidays
-final Map<DateTime, List> _holidays = {
-  DateTime(2020, 1, 1): ['New Year\'s Day'],
-  DateTime(2020, 1, 6): ['Epiphany'],
-  DateTime(2020, 2, 14): ['Valentine\'s Day'],
-  DateTime(2020, 4, 21): ['Easter Sunday'],
-  DateTime(2020, 4, 22): ['Easter Monday'],
-};
+// final Map<DateTime, List> _holidays = {
+//   DateTime(2020, 1, 1): ['New Year\'s Day'],
+//   DateTime(2020, 1, 6): ['Epiphany'],
+//   DateTime(2020, 2, 14): ['Valentine\'s Day'],
+//   DateTime(2020, 4, 21): ['Easter Sunday'],
+//   DateTime(2020, 4, 22): ['Easter Monday'],
+// };
 
 class CalendarContent extends StatefulWidget {
   @override
@@ -25,8 +26,8 @@ class CalendarContent extends StatefulWidget {
 
 class _CalendarContentState extends State<CalendarContent>
     with TickerProviderStateMixin {
+  
   CalendarCubit _calendarCubit;
-  Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
@@ -35,63 +36,10 @@ class _CalendarContentState extends State<CalendarContent>
   void initState() {
     super.initState();
     _calendarCubit = getItInstance<CalendarCubit>()..loadTasks();
-    final _selectedDay = DateTime.now();
 
-    _events = {
-      _selectedDay.subtract(Duration(days: 30)): [
-        'Event A0',
-        'Event B0',
-        'Event C0'
-      ],
-      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-      _selectedDay.subtract(Duration(days: 20)): [
-        'Event A2',
-        'Event B2',
-        'Event C2',
-        'Event D2'
-      ],
-      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
-      _selectedDay.subtract(Duration(days: 10)): [
-        'Event A4',
-        'Event B4',
-        'Event C4'
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        'Event A5',
-        'Event B5',
-        'Event C5'
-      ],
-      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      _selectedDay.add(Duration(days: 1)): [
-        'Event A8',
-        'Event B8',
-        'Event C8',
-        'Event D8'
-      ],
-      _selectedDay.add(Duration(days: 3)):
-          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-      _selectedDay.add(Duration(days: 7)): [
-        'Event A10',
-        'Event B10',
-        'Event C10'
-      ],
-      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
-      _selectedDay.add(Duration(days: 17)): [
-        'Event A12',
-        'Event B12',
-        'Event C12',
-        'Event D12'
-      ],
-      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
-      _selectedDay.add(Duration(days: 26)): [
-        'Event A14',
-        'Event B14',
-        'Event C14'
-      ],
-    };
-
-    _selectedEvents = _events[_selectedDay] ?? [];
+    //TODO:review this
+    //_selectedEvents = state.events[DateTime.now()] ?? [];
+    _selectedEvents = [];
 
     _calendarController = CalendarController();
 
@@ -114,7 +62,7 @@ class _CalendarContentState extends State<CalendarContent>
               return Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  _buildTableCalendarWithBuilders(),
+                  _buildTableCalendarWithBuilders(state),
                   const SizedBox(height: 8.0),
                   ..._buildEventList(),
                 ],
@@ -152,12 +100,13 @@ class _CalendarContentState extends State<CalendarContent>
     print('CALLBACK: _onCalendarCreated');
   }
 
-  Widget _buildTableCalendarWithBuilders() {
+  Widget _buildTableCalendarWithBuilders(CalendarState state) {
     return TableCalendar(
       locale: 'pt_BR',
       calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
+      events: state.events,
+      //TODO:review this
+      //holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -285,13 +234,14 @@ class _CalendarContentState extends State<CalendarContent>
   List<Widget> _buildEventList() {
     return _selectedEvents.map(
       (event) {
+        var _eventCast = event as TaskCalendarModel;
         return Container(
           width: SizeConfig.screenWidth,
           margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              "Title event".title(context),
+              _eventCast.title.title(context),
               SpacerBox.v4,
               "Bla bla bla".description(context),
               SpacerBox.v4,
