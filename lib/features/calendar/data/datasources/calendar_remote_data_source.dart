@@ -70,7 +70,9 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
 
     List<GroupedYearCalendarModel> _list = List<GroupedYearCalendarModel>();
 
-    result['data'].map((e) => _list.add(GroupedYearCalendarModel.fromJson(e)));
+    for (var e in result['data']['getTasksUserCalendar']) {
+      _list.add(GroupedYearCalendarModel.fromJson(e));
+    }
 
     return _list;
   }

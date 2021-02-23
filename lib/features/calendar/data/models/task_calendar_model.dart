@@ -26,7 +26,7 @@ class TaskCalendarModel extends AddTaskCalendar {
     return TaskCalendarModel(
       taskId: json['taskId'],
       title: json['title'],
-      dateTime: json['dateTime'],
+      dateTime: DateTime.tryParse(json['dateTime']),
       activities: listActivities,
     );
   }

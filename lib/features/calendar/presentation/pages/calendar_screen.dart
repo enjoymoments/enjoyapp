@@ -7,42 +7,28 @@ import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 
-class CalendarScreen extends StatefulWidget {
-  @override
-  _CalendarScreenState createState() => _CalendarScreenState();
-}
-
-class _CalendarScreenState extends State<CalendarScreen> {
-
+class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: CalendarContent(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       bottomNavigationBar: null,
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Calendário',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        // if (_images.length > 0 ||
-        //     (_descriptionController.text != null &&
-        //         _descriptionController.text.isNotEmpty)) {
-        //   _discardPost(context);
-        //   return;
-        // }
-
         Navigator.of(context).pop();
       },
       actions: <Widget>[
         IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context)
-                            .push(Routes.add_calendar);
+            ExtendedNavigator.of(context).push(Routes.add_calendar);
           },
         ),
       ],

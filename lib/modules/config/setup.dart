@@ -13,6 +13,7 @@ import 'package:mozin/features/calendar/domain/repositories/activity_repository.
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/data/datasources/favorite_interests_remote_data_source.dart';
 import 'package:mozin/features/favoriteinterests/data/repositories/favorite_interests_repository_impl.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
@@ -109,7 +110,8 @@ void _setupRemoteClientRepository() {
             url:
                 //'https://localhost:5001/graphql',
                 //'https://10.0.2.2:5001/graphql',
-                getItInstance<RemoteConfig>().getString(url_endpoint),
+                //getItInstance<RemoteConfig>().getString(url_endpoint),
+                'https://d54b51acfe24.ngrok.io/graphql',
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -191,6 +193,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<AddActivityCubit>(
       () => AddActivityCubit(activityRepository: getItInstance()));            
+      
+  getItInstance.registerLazySingleton<CalendarCubit>(
+      () => CalendarCubit(calendarRepository: getItInstance()));
 }
 
 void _registerSingletonRepositories() {

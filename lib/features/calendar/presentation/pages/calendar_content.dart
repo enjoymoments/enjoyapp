@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
+import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
@@ -21,6 +25,7 @@ class CalendarContent extends StatefulWidget {
 
 class _CalendarContentState extends State<CalendarContent>
     with TickerProviderStateMixin {
+  CalendarCubit _calendarCubit;
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
@@ -29,7 +34,7 @@ class _CalendarContentState extends State<CalendarContent>
   @override
   void initState() {
     super.initState();
-
+    _calendarCubit = getItInstance<CalendarCubit>()..loadTasks();
     final _selectedDay = DateTime.now();
 
     _events = {
@@ -102,13 +107,22 @@ class _CalendarContentState extends State<CalendarContent>
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: CustomContainer(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            _buildTableCalendarWithBuilders(),
-            const SizedBox(height: 8.0),
-            ..._buildEventList(),
-          ],
+        child: BlocBuilder<CalendarCubit, CalendarState>(
+          cubit: _calendarCubit,
+          builder: (context, state) {
+            if (state.model.length > 0) {
+              return Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  _buildTableCalendarWithBuilders(),
+                  const SizedBox(height: 8.0),
+                  ..._buildEventList(),
+                ],
+              );
+            }
+
+            return CalendarContentLoading();
+          },
         ),
       ),
     );

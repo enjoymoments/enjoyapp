@@ -1,0 +1,32 @@
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
+import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
+import 'package:mozin/package_view/blocs/default_state.dart';
+
+part 'calendar_state.dart';
+
+class CalendarCubit extends Cubit<CalendarState> {
+  CalendarCubit({@required CalendarRepository calendarRepository})
+      : assert(calendarRepository != null),
+        _calendarRepository = calendarRepository,
+        super(CalendarState.initial());
+
+  final CalendarRepository _calendarRepository;
+
+  void loadTasks() async {
+    var _response = await _calendarRepository.getTasksInCalendar();
+
+    _response.fold(
+      (value) {
+        emit(state.copyWith(model: value));
+      },
+      (error) {
+        emit(state.copyWith(
+            isError: true,
+            isSuccess: false,
+            errorMessage: 'Ops... houve um erro. Tente novamente!'));
+      },
+    );
+  }
+}
