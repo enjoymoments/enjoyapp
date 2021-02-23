@@ -187,7 +187,7 @@ void _registerBlocs() {
       () => CategoriesPlacesCubit());        
 
   getItInstance.registerFactory<AddCalendarCubit>(
-      () => AddCalendarCubit());        
+      () => AddCalendarCubit(calendarRepository: getItInstance()));        
 
   getItInstance.registerFactory<AddActivityCubit>(
       () => AddActivityCubit(activityRepository: getItInstance()));            

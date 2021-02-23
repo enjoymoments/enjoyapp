@@ -1,46 +1,108 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
+import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/utils.dart';
 
 part 'add_calendar_state.dart';
 
 class AddCalendarCubit extends Cubit<AddCalendarState> {
-  AddCalendarCubit() : super(AddCalendarState.initial());
+  AddCalendarCubit({@required CalendarRepository calendarRepository})
+      : assert(calendarRepository != null),
+        _calendarRepository = calendarRepository,
+        super(AddCalendarState.initial());
+
+  final CalendarRepository _calendarRepository;
 
   void addActivity(AddActivityCalendarModel model) {
-    state.activities.add(model);
-    emit(state.copyWith(activities: state.activities));
+    state.model.activities.add(model);
+    emit(state.copyWith(
+      model: state.model,
+      isError: false,
+      errorMessage: '',
+    ));
   }
 
   void removeActivity(AddActivityCalendarModel model) {
-    state.activities.remove(model);
-    emit(state.copyWith(activities: state.activities));
+    state.model.activities.remove(model);
+    emit(state.copyWith(
+      model: state.model,
+      isError: false,
+      errorMessage: '',
+    ));
   }
 
-  //TODO:in test
-  void validateFields(TaskCalendarModel model) {
-    if (model.title == null || model.title == "") {
-      emit(state.copyWith(isError: true, errorMessage: 'Informe o título'));
-      return;
-    }
+  void setModel({
+    String title,
+    String description,
+    DateTime datetime,
+  }) {
+    state.model.title = title ?? state.model.title;
+    state.model.dateTime = datetime ?? state.model.dateTime;
 
-    DateTime _dateTimeParse = DateTime.tryParse(model.dateTime.toUtc().toString());
-    if (_dateTimeParse == null) {
-      emit(state.copyWith(isError: true, errorMessage: 'Informe a data e hora'));
-      return;
-    }
-
-    if (state.activities.length == 0) {
-      emit(state.copyWith(isError: true, errorMessage: 'Selecione ao menos uma atividade'));
-      return;
-    }
-
-    model.activities = state.activities;
-    save();
+    emit(
+      state.copyWith(
+        model: state.model,
+        isError: false,
+        errorMessage: '',
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ),
+    );
   }
 
   void save() {
-    emit(state.copyWith(isError: false, isSuccess: true));
+    if (state.model.title == null || state.model.title == "") {
+      emit(state.copyWith(
+        isError: true,
+        errorMessage: 'Informe o título',
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+      return;
+    }
+
+    if (state.model.dateTime == null) {
+      emit(state.copyWith(
+        isError: true,
+        errorMessage: 'Informe a data e hora',
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+      return;
+    }
+
+    if (state.model.activities.length == 0) {
+      emit(state.copyWith(
+        isError: true,
+        errorMessage: 'Selecione ao menos uma atividade',
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+      return;
+    }
+
+    sendRequest();
+  }
+
+  void sendRequest() async {
+    var _response = await _calendarRepository.addTaskInCalendar(state.model);
+
+    _response.fold(
+      (value) {
+        if (value) {
+          emit(state.copyWith(isError: false, isSuccess: true));
+        } else {
+          emit(state.copyWith(
+              isError: true,
+              isSuccess: false,
+              errorMessage: 'Ops... houve um erro. Tente novamente!'));
+        }
+      },
+      (error) {
+        emit(state.copyWith(
+            isError: true,
+            isSuccess: false,
+            errorMessage: 'Ops... houve um erro. Tente novamente!'));
+      },
+    );
   }
 }

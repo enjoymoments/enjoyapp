@@ -23,8 +23,8 @@ class AddCalendarScreen extends StatefulWidget {
 }
 
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
-  Future<TimeOfDay> _selectedTime;
-  Future<DateTime> _selectedDate;
+  TimeOfDay _selectedTime;
+  DateTime _selectedDate;
 
   TextEditingController _titleController;
   TextEditingController _descriptionController;
@@ -39,9 +39,6 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
     _titleController = TextEditingController();
     _descriptionController = TextEditingController();
-
-    _titleController.addListener(() {});
-    _descriptionController.addListener(() {});
 
     super.initState();
   }
@@ -76,10 +73,26 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       actions: <Widget>[
         IconButton(
           icon: CustomIcon(icon: AppIcons.check),
-          onPressed: () {},
+          onPressed: () {
+            save();
+          },
         ),
       ],
     );
+  }
+
+  void save() {
+    final DateTime _datetimeFormatted = _selectedDate != null
+        ? _selectedDate.setTimeOfDay(_selectedTime)
+        : null;
+
+    _addCalendarCubit.setModel(
+      title: _titleController.text,
+      description: _descriptionController.text,
+      datetime: _datetimeFormatted,
+    );
+
+    _addCalendarCubit.save();
   }
 
   void _discardPost(BuildContext context) async {
@@ -144,13 +157,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               hintText: 'Título do evento',
               labelText: 'Título do evento',
               maxLines: 1,
-              validate: (String value) {
-                if (value == null || value == "") {
-                  return 'Informe o título';
-                }
-
-                return null;
-              },
+              validate: (String value) => null,
             ),
             SpacerBox.v16,
             CustomTextFormField(
@@ -159,29 +166,28 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               hintText: 'Descrição do evento',
               labelText: 'Descrição do evento',
               maxLines: 4,
-              validate: (String value) {
-                if (value == null || value == "") {
-                  return 'Informe a descrição';
-                }
-
-                return null;
-              },
+              validate: (String value) => null,
             ),
             SpacerBox.v34,
             CustomTile(
               iconStart: AppIcons.calendar_day,
               iconEnd: AppIcons.angle_right,
               title: "Data",
-              description: "12/08/1994",
+              description: state.model.dateTime.dateOnlyFormat(),
               onTap: () {
-                _selectedDate = showDatePicker(
+                showDatePicker(
                   context: context,
-                  initialDate: DateTime(1994, 8, 12),
+                  initialDate: state.model.dateTime,
                   firstDate: DateTime(1940, 1, 1),
                   lastDate: DateTime.now().add(
-                    Duration(days: 30),
+                    Duration(days: 365),
                   ),
-                );
+                ).then((value) {
+                  _selectedDate = _selectedTime != null ? value.setTimeOfDay(_selectedTime) : value;
+                  _addCalendarCubit.setModel(
+                    datetime: _selectedDate,
+                  );
+                });
               },
             ),
             SpacerBox.v16,
@@ -191,10 +197,17 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               iconStart: AppIcons.clock,
               iconEnd: AppIcons.angle_right,
               title: "Hora",
-              description: "21:00",
+              description: state.model.dateTime.formattedHourMinute(),
               onTap: () {
-                _selectedTime = showTimePicker(
-                    context: context, initialTime: TimeOfDay.now());
+                showTimePicker(
+                  context: context,
+                  initialTime: state.model.dateTime.timeOfDayFromDateTime(),
+                ).then((value) {
+                  _selectedTime = value;
+                  _addCalendarCubit.setModel(
+                    datetime: state.model.dateTime.setTimeOfDay(value),
+                  );
+                });
               },
             ),
             SpacerBox.v16,

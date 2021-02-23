@@ -7,7 +7,8 @@ class AddCalendarState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
-    this.activities,
+    this.forceRefresh,
+    this.model,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -16,7 +17,8 @@ class AddCalendarState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<AddActivityCalendarModel> activities;
+  final TaskCalendarModel model;
+  final int forceRefresh;
 
   factory AddCalendarState.initial() {
     return AddCalendarState(
@@ -25,7 +27,11 @@ class AddCalendarState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      activities: List(),
+      model: TaskCalendarModel(
+        activities: List(),
+        dateTime: DateTime.now(),
+      ),
+      forceRefresh: null,
     );
   }
 
@@ -35,7 +41,8 @@ class AddCalendarState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
-    List<AddActivityCalendarModel> activities,
+    TaskCalendarModel model,
+    int forceRefresh,
   }) {
     return AddCalendarState(
       isLoading: isLoading ?? this.isLoading,
@@ -43,7 +50,8 @@ class AddCalendarState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      activities: activities ?? this.activities,
+      model: model ?? this.model,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
@@ -54,6 +62,7 @@ class AddCalendarState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
-        activities,
+        model,
+        forceRefresh,
       ];
 }

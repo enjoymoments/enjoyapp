@@ -11,8 +11,8 @@ class AddTaskCalendar extends Equatable {
   });
 
   final String taskId;
-  final String title;
-  final DateTime dateTime; 
+  String title;
+  DateTime dateTime; 
   List<AddActivityCalendar> activities;
 
   @override

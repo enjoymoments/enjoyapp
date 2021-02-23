@@ -41,7 +41,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     ''';
 
     var result = await remoteClientRepository.query(_query);
-    return result['data'];
+    return result['data']['addTaskInCalendar'];
   }
 
   @override

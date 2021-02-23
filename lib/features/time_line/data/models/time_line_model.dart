@@ -2,7 +2,7 @@ import 'package:mozin/features/time_line/data/models/author_model.dart';
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
 import 'package:mozin/features/time_line/data/models/media_model.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class TimeLineItemModel {
   String id;
@@ -19,7 +19,7 @@ class TimeLineItemModel {
     this.medias,
   });
 
-  String get dateCreationFormatted => DateUtils.dateFormat(dateCreation);
+  String get dateCreationFormatted => dateCreation.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation);
 
   Map<String, dynamic> toJson() {
     return {
