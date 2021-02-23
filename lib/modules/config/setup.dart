@@ -110,8 +110,7 @@ void _setupRemoteClientRepository() {
             url:
                 //'https://localhost:5001/graphql',
                 //'https://10.0.2.2:5001/graphql',
-                //getItInstance<RemoteConfig>().getString(url_endpoint),
-                'https://d54b51acfe24.ngrok.io/graphql',
+                getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
