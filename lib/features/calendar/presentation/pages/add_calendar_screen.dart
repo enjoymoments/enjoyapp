@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
+import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -133,8 +134,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
         }
 
         if (state.isSuccess) {
-          //TODO:calendar reload here
-          //getItInstance<TimelineBloc>()..add(LoadPosts());
+          getItInstance<CalendarCubit>()..loadTasks();
           ExtendedNavigator.of(context).pop();
         }
       },
