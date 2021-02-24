@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/extension.dart';
 
 part 'calendar_state.dart';
 
@@ -13,6 +14,10 @@ class CalendarCubit extends Cubit<CalendarState> {
         super(CalendarState.initial());
 
   final CalendarRepository _calendarRepository;
+
+  void selectedEvents(List selectedEventsParameter) {
+    emit(state.copyWith(selectedEvents: selectedEventsParameter));
+  }
 
   void loadTasks() async {
     var _response = await _calendarRepository.getTasksInCalendar();
@@ -29,6 +34,7 @@ class CalendarCubit extends Cubit<CalendarState> {
           state.copyWith(
             events: _events,
             model: value,
+            selectedEvents: _events[DateTime.now().clearTime()] ?? []
           ),
         );
       },

@@ -10,15 +10,6 @@ import 'package:mozin/package_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:mozin/package_view/extension.dart';
 
-// Example holidays
-// final Map<DateTime, List> _holidays = {
-//   DateTime(2020, 1, 1): ['New Year\'s Day'],
-//   DateTime(2020, 1, 6): ['Epiphany'],
-//   DateTime(2020, 2, 14): ['Valentine\'s Day'],
-//   DateTime(2020, 4, 21): ['Easter Sunday'],
-//   DateTime(2020, 4, 22): ['Easter Monday'],
-// };
-
 class CalendarContent extends StatefulWidget {
   @override
   _CalendarContentState createState() => _CalendarContentState();
@@ -26,9 +17,7 @@ class CalendarContent extends StatefulWidget {
 
 class _CalendarContentState extends State<CalendarContent>
     with TickerProviderStateMixin {
-  
   CalendarCubit _calendarCubit;
-  List _selectedEvents;
   AnimationController _animationController;
   CalendarController _calendarController;
 
@@ -36,10 +25,6 @@ class _CalendarContentState extends State<CalendarContent>
   void initState() {
     super.initState();
     _calendarCubit = getItInstance<CalendarCubit>()..loadTasks();
-
-    //TODO:review this
-    //_selectedEvents = state.events[DateTime.now()] ?? [];
-    _selectedEvents = [];
 
     _calendarController = CalendarController();
 
@@ -63,8 +48,8 @@ class _CalendarContentState extends State<CalendarContent>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   _buildTableCalendarWithBuilders(state),
-                  const SizedBox(height: 8.0),
-                  ..._buildEventList(),
+                  SpacerBox.v8,
+                  ..._buildEventList(state),
                 ],
               );
             }
@@ -81,23 +66,6 @@ class _CalendarContentState extends State<CalendarContent>
     _animationController.dispose();
     _calendarController.dispose();
     super.dispose();
-  }
-
-  void _onDaySelected(DateTime day, List events, List holidays) {
-    print('CALLBACK: _onDaySelected');
-    setState(() {
-      _selectedEvents = events;
-    });
-  }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onVisibleDaysChanged');
-  }
-
-  void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onCalendarCreated');
   }
 
   Widget _buildTableCalendarWithBuilders(CalendarState state) {
@@ -139,7 +107,7 @@ class _CalendarContentState extends State<CalendarContent>
             child: Container(
               margin: const EdgeInsets.all(4.0),
               padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Theme.of(context).hintColor, //Colors.deepOrange[300],
+              color: Theme.of(context).hintColor,
               width: 100,
               height: 100,
               child: Text(
@@ -153,7 +121,7 @@ class _CalendarContentState extends State<CalendarContent>
           return Container(
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Theme.of(context).primaryColor, //Colors.amber[400],
+            color: Theme.of(context).primaryColor,
             width: 100,
             height: 100,
             child: Text(
@@ -190,11 +158,9 @@ class _CalendarContentState extends State<CalendarContent>
         },
       ),
       onDaySelected: (date, events, holidays) {
-        _onDaySelected(date, events, holidays);
+        _calendarCubit.selectedEvents(events);
         _animationController.forward(from: 0.0);
       },
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
     );
   }
 
@@ -231,8 +197,8 @@ class _CalendarContentState extends State<CalendarContent>
     );
   }
 
-  List<Widget> _buildEventList() {
-    return _selectedEvents.map(
+  List<Widget> _buildEventList(CalendarState state) {
+    return state.selectedEvents.map(
       (event) {
         var _eventCast = event as TaskCalendarModel;
         return Container(
@@ -245,7 +211,7 @@ class _CalendarContentState extends State<CalendarContent>
               SpacerBox.v4,
               "Bla bla bla".description(context),
               SpacerBox.v4,
-              "20:00 H".label(context),
+              _eventCast.dateTime.formattedHourMinute().label(context),
               SpacerBox.v8,
               Divider(
                 color: Theme.of(context).hintColor,

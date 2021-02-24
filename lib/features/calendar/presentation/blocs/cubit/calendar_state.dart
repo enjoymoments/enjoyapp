@@ -9,6 +9,7 @@ class CalendarState extends DefaultState {
     String errorMessage,
     this.model,
     this.events,
+    this.selectedEvents,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,6 +20,7 @@ class CalendarState extends DefaultState {
 
   final List<GroupedDateCalendarModel> model;
   final Map<DateTime, List> events;
+  final List selectedEvents;
 
   factory CalendarState.initial() {
     return CalendarState(
@@ -29,6 +31,7 @@ class CalendarState extends DefaultState {
       errorMessage: null,
       model: List(),
       events: {},
+      selectedEvents: List(),
     );
   }
 
@@ -40,6 +43,7 @@ class CalendarState extends DefaultState {
     String errorMessage,
     List<GroupedDateCalendarModel> model,
     Map<DateTime, List> events,
+    List selectedEvents,
   }) {
     return CalendarState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +53,7 @@ class CalendarState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       model: model ?? this.model,
       events: events ?? this.events,
+      selectedEvents: selectedEvents ?? this.selectedEvents,
     );
   }
 
@@ -61,5 +66,6 @@ class CalendarState extends DefaultState {
         errorMessage,
         model,
         events,
+        selectedEvents,
       ];
 }
