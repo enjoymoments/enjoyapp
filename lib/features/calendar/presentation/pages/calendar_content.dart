@@ -5,6 +5,7 @@ import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.
 import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -73,8 +74,6 @@ class _CalendarContentState extends State<CalendarContent>
       locale: 'pt_BR',
       calendarController: _calendarController,
       events: state.events,
-      //TODO:review this
-      //holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -85,50 +84,72 @@ class _CalendarContentState extends State<CalendarContent>
       },
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekendStyle:
-            TextStyle().copyWith(color: Theme.of(context).primaryColor),
-        holidayStyle:
-            TextStyle().copyWith(color: Theme.of(context).primaryColor),
+        weekdayStyle:
+            Theme.of(context).textTheme.headline5.copyWith(fontSize: 16),
+        weekendStyle: Theme.of(context)
+            .textTheme
+            .headline5
+            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
+        holidayStyle: Theme.of(context)
+            .textTheme
+            .headline5
+            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle:
-            TextStyle().copyWith(color: Theme.of(context).primaryColor),
+        weekdayStyle:
+            Theme.of(context).textTheme.headline5.copyWith(fontSize: 16),
+        weekendStyle: Theme.of(context)
+            .textTheme
+            .headline5
+            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
         formatButtonVisible: false,
-        titleTextStyle:
-            TextStyle().copyWith(color: Theme.of(context).primaryColor),
+        leftChevronIcon: Icon(
+          AppIcons.chevron_left,
+          color: Theme.of(context).iconTheme.color,
+          size: Theme.of(context).iconTheme.size,
+        ),
+        rightChevronIcon: Icon(
+          AppIcons.chevron_right,
+          color: Theme.of(context).iconTheme.color,
+          size: Theme.of(context).iconTheme.size,
+        ),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .headline6
+            .copyWith(color: Theme.of(context).primaryColor),
       ),
       builders: CalendarBuilders(
         selectedDayBuilder: (context, date, _) {
           return FadeTransition(
             opacity: Tween(begin: 0.0, end: 1.0).animate(_animationController),
             child: Container(
-              margin: const EdgeInsets.all(4.0),
-              padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Theme.of(context).hintColor,
-              width: 100,
-              height: 100,
-              child: Text(
-                '${date.day}',
-                style: TextStyle().copyWith(fontSize: 16.0),
+              margin: EdgeInsets.all(SizeConfig.sizeByPixel(4.0)),
+              padding: EdgeInsets.only(
+                top: SizeConfig.sizeByPixel(5.0),
+                left: SizeConfig.sizeByPixel(6.0),
               ),
+              color: Theme.of(context).hintColor,
+              width: SizeConfig.sizeByPixel(100),
+              height: SizeConfig.sizeByPixel(100),
+              child: '${date.day}'.label(context),
             ),
           );
         },
         todayDayBuilder: (context, date, _) {
           return Container(
-            margin: const EdgeInsets.all(4.0),
-            padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Theme.of(context).primaryColor,
-            width: 100,
-            height: 100,
-            child: Text(
-              '${date.day}',
-              style: TextStyle(color: Theme.of(context).backgroundColor)
-                  .copyWith(fontSize: 16.0),
+            margin: EdgeInsets.all(SizeConfig.sizeByPixel(4.0)),
+            padding: EdgeInsets.only(
+              top: SizeConfig.sizeByPixel(5.0),
+              left: SizeConfig.sizeByPixel(6.0),
             ),
+            color: Theme.of(context).primaryColor,
+            width: SizeConfig.sizeByPixel(100),
+            height: SizeConfig.sizeByPixel(100),
+            child: '${date.day}'
+                .label(context, color: Theme.of(context).backgroundColor),
           );
         },
         markersBuilder: (context, date, events, holidays) {
@@ -173,8 +194,8 @@ class _CalendarContentState extends State<CalendarContent>
             ? Theme.of(context).hintColor
             : Theme.of(context).primaryColor,
       ),
-      width: 16.0,
-      height: 16.0,
+      width: SizeConfig.sizeByPixel(16.0),
+      height: SizeConfig.sizeByPixel(16.0),
       child: Center(
         child: Text(
           '${events.length}',
@@ -192,7 +213,7 @@ class _CalendarContentState extends State<CalendarContent>
   Widget _buildHolidaysMarker() {
     return Icon(
       Icons.add_box,
-      size: 20.0,
+      size: SizeConfig.sizeByPixel(20.0),
       color: Colors.blueGrey[800],
     );
   }
