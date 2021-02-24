@@ -7,6 +7,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -222,23 +223,42 @@ class _CalendarContentState extends State<CalendarContent>
     return state.selectedEvents.map(
       (event) {
         var _eventCast = event as TaskCalendarModel;
-        return Container(
-          width: SizeConfig.screenWidth,
-          margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _eventCast.title.title(context),
-              SpacerBox.v4,
-              "Bla bla bla".description(context),
-              SpacerBox.v4,
-              _eventCast.dateTime.formattedHourMinute().label(context),
-              SpacerBox.v8,
-              Divider(
-                color: Theme.of(context).hintColor,
-                height: SizeConfig.sizeByPixel(4),
-              ),
-            ],
+        return InkWell(
+          onTap: () {
+            
+          },
+          child: Container(
+            width: SizeConfig.screenWidth,
+            margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _eventCast.title.title(context),
+                        SpacerBox.v4,
+                        "Bla bla bla".description(context),
+                        SpacerBox.v4,
+                        _eventCast.dateTime
+                            .formattedHourMinute()
+                            .label(context),
+                      ],
+                    ),
+                    CustomIcon(
+                      icon: AppIcons.angle_right,
+                    ),
+                  ],
+                ),
+                SpacerBox.v16,
+                Divider(
+                  color: Theme.of(context).hintColor,
+                  height: SizeConfig.sizeByPixel(4),
+                ),
+              ],
+            ),
           ),
         );
       },
