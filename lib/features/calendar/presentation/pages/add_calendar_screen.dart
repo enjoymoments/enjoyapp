@@ -69,7 +69,14 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       title: 'Criar evento',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        _discardPost(context);
+        if ((_titleController.text != null &&
+                _titleController.text.isNotEmpty) ||
+            (_descriptionController.text != null &&
+                _descriptionController.text.isNotEmpty)) {
+          _discardPost(context);
+        } else {
+          ExtendedNavigator.of(context).pop();
+        }
       },
       actions: <Widget>[
         IconButton(
@@ -183,7 +190,9 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
                     Duration(days: 365),
                   ),
                 ).then((value) {
-                  _selectedDate = _selectedTime != null ? value.setTimeOfDay(_selectedTime) : value;
+                  _selectedDate = _selectedTime != null
+                      ? value.setTimeOfDay(_selectedTime)
+                      : value;
                   _addCalendarCubit.setModel(
                     datetime: _selectedDate,
                   );
