@@ -224,9 +224,7 @@ class _CalendarContentState extends State<CalendarContent>
       (event) {
         var _eventCast = event as TaskCalendarModel;
         return InkWell(
-          onTap: () {
-            
-          },
+          onTap: () {},
           child: Container(
             width: SizeConfig.screenWidth,
             margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
@@ -240,8 +238,7 @@ class _CalendarContentState extends State<CalendarContent>
                       children: [
                         _eventCast.title.title(context),
                         SpacerBox.v4,
-                        "Bla bla bla".description(context),
-                        SpacerBox.v4,
+                        ..._buildDescription(_eventCast),
                         _eventCast.dateTime
                             .formattedHourMinute()
                             .label(context),
@@ -263,5 +260,16 @@ class _CalendarContentState extends State<CalendarContent>
         );
       },
     ).toList();
+  }
+
+  List<Widget> _buildDescription(TaskCalendarModel eventCast) {
+    if (eventCast.description != null && eventCast.description.isNotEmpty) {
+      return [
+        eventCast.description.description(context),
+        SpacerBox.v4,
+      ];
+    }
+
+    return [];
   }
 }

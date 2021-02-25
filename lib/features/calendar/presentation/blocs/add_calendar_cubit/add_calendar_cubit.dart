@@ -41,6 +41,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }) {
     state.model.title = title ?? state.model.title;
     state.model.dateTime = datetime ?? state.model.dateTime;
+    state.model.description = description ?? state.model.description;
 
     emit(
       state.copyWith(
