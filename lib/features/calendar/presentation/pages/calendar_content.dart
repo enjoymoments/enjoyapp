@@ -45,7 +45,7 @@ class _CalendarContentState extends State<CalendarContent>
         child: BlocBuilder<CalendarCubit, CalendarState>(
           cubit: _calendarCubit,
           builder: (context, state) {
-            if (state.model.length > 0) {
+            if (state.model != null) {
               return Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [

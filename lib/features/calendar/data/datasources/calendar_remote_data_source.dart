@@ -37,6 +37,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     mutation addTask {
       addTaskInCalendar(task:{
         title: "${model.title}"
+        description: "${model.description}"
         dateTime: "${model.dateTime}"
         activities: [$_activitiesFormated]
       })
@@ -58,6 +59,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
           tasks {
             taskId
             title
+            description
             dateTime
             activities {
               sessionId
@@ -102,6 +104,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
         tasks {
           taskId
           title
+          description
           dateTime
           activities {
             sessionId
