@@ -26,23 +26,20 @@ class CustomTile extends StatelessWidget {
         onTap();
       },
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              CustomIcon(
-                icon: iconStart,
-              ),
-              SpacerBox.h16,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  title.label(context),
-                  description.description(context),
-                ],
-              ),
-            ],
+          CustomIcon(
+            icon: iconStart,
+          ),
+          SpacerBox.h16,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                title.label(context),
+                description.description(context),
+              ],
+            ),
           ),
           CustomIcon(
             icon: iconEnd,

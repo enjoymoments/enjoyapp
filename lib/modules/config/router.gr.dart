@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/calendar/data/models/task_calendar_model.dart';
 import '../../features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import '../../features/calendar/presentation/pages/add_activity_screen.dart';
@@ -171,8 +172,14 @@ class Router extends RouterBase {
       );
     },
     AddCalendarScreen: (data) {
+      final args = data.getArgs<AddCalendarScreenArguments>(
+        orElse: () => AddCalendarScreenArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddCalendarScreen(),
+        builder: (context) => AddCalendarScreen(
+          key: args.key,
+          taskModel: args.taskModel,
+        ),
         settings: data,
       );
     },
@@ -233,6 +240,13 @@ class GalleryPhotoViewWrapperArguments {
       @required this.galleryItems,
       @required this.galleryPhotoSourceType,
       this.scrollDirection = Axis.horizontal});
+}
+
+/// AddCalendarScreen arguments holder class
+class AddCalendarScreenArguments {
+  final Key key;
+  final TaskCalendarModel taskModel;
+  AddCalendarScreenArguments({this.key, this.taskModel});
 }
 
 /// AddActivityScreen arguments holder class

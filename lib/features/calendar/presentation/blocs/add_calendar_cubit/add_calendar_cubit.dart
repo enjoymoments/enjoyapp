@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
+import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/utils.dart';
@@ -38,10 +39,12 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
     String title,
     String description,
     DateTime datetime,
+    List<AddActivityCalendar> activities,
   }) {
     state.model.title = title ?? state.model.title;
     state.model.dateTime = datetime ?? state.model.dateTime;
     state.model.description = description ?? state.model.description;
+    state.model.activities = activities ?? state.model.activities;
 
     emit(
       state.copyWith(

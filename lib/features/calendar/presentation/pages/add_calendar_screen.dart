@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -16,9 +18,14 @@ import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/rounded_loading_button.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class AddCalendarScreen extends StatefulWidget {
+  final TaskCalendarModel taskModel;
+
+  const AddCalendarScreen({Key key, this.taskModel}) : super(key: key);
+
   @override
   _AddCalendarScreenState createState() => _AddCalendarScreenState();
 }
@@ -29,6 +36,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   TextEditingController _titleController;
   TextEditingController _descriptionController;
+  RoundedLoadingButtonController _actionButtoncontroller;
 
   AddCalendarCubit _addCalendarCubit;
   AddActivityCubit _activityCubit;
@@ -38,8 +46,11 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
     _activityCubit = getItInstance<AddActivityCubit>()..getActivities();
 
+    _actionButtoncontroller = RoundedLoadingButtonController();
     _titleController = TextEditingController();
     _descriptionController = TextEditingController();
+
+    _initValues();
 
     super.initState();
   }
@@ -64,27 +75,37 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     );
   }
 
+  void _initValues() {
+    if (widget.taskModel != null) {
+      _addCalendarCubit.setModel(
+        title: widget.taskModel.title,
+        description: widget.taskModel.description,
+        datetime: widget.taskModel.dateTime,
+        activities: widget.taskModel.activities,
+      );
+
+      _titleController.text = widget.taskModel.title;
+      _descriptionController.text = widget.taskModel.description;
+    }
+  }
+
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Criar evento',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        if ((_titleController.text != null &&
-                _titleController.text.isNotEmpty) ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
+        if (widget.taskModel == null &&
+            ((_titleController.text != null &&
+                    _titleController.text.isNotEmpty) ||
+                (_descriptionController.text != null &&
+                    _descriptionController.text.isNotEmpty))) {
           _discardPost(context);
         } else {
           ExtendedNavigator.of(context).pop();
         }
       },
       actions: <Widget>[
-        IconButton(
-          icon: CustomIcon(icon: AppIcons.check),
-          onPressed: () {
-            save();
-          },
-        ),
+        _buildActionButton(),
       ],
     );
   }
@@ -131,10 +152,35 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     simpleDialog(context, 'Remover', content, true, actions);
   }
 
+  Widget _buildActionButton() {
+    if (widget.taskModel != null) {
+      return _buildActionButtonConfig(AppIcons.trash, () {});
+    }
+
+    return _buildActionButtonConfig(AppIcons.check, save);
+  }
+
+  Widget _buildActionButtonConfig(IconData icon, void Function() callback) {
+    return RoundedLoadingButton(
+      width: SizeConfig.sizeByPixel(50),
+      controller: _actionButtoncontroller,
+      child: CustomIcon(
+        icon: icon,
+        color: Theme.of(context).appBarTheme.iconTheme.color,
+      ),
+      onPressed: () {
+        _actionButtoncontroller.start();
+        callback();
+      },
+    );
+  }
+
   Widget _buildBody() {
     return BlocConsumer<AddCalendarCubit, AddCalendarState>(
       cubit: _addCalendarCubit,
       listener: (consumerContext, state) {
+        _actionButtoncontroller.stop();
+
         if (state.isError) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');

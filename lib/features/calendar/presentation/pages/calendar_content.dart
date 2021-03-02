@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -224,7 +226,10 @@ class _CalendarContentState extends State<CalendarContent>
       (event) {
         var _eventCast = event as TaskCalendarModel;
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            ExtendedNavigator.of(context).push(Routes.add_calendar,
+                arguments: AddCalendarScreenArguments(taskModel: _eventCast));
+          },
           child: Container(
             width: SizeConfig.screenWidth,
             margin: EdgeInsets.symmetric(vertical: SpacerBox.v8.height),
