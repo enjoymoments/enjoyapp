@@ -94,80 +94,20 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
   Animation _squeezeAnimation;
   Animation _bounceAnimation;
   Animation _borderAnimation;
+  ThemeData _theme;
 
   final _state = BehaviorSubject<LoadingState>.seeded(LoadingState.idle);
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
-    var _check = Container(
-        alignment: FractionalOffset.center,
-        decoration: new BoxDecoration(
-          color: widget.successColor ?? theme.primaryColor,
-          borderRadius:
-              new BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
-        ),
-        width: _bounceAnimation.value,
-        height: _bounceAnimation.value,
-        child: _bounceAnimation.value > 20
-            ? Icon(
-                Icons.check,
-                color: widget.valueColor,
-              )
-            : null);
-
-    var _cross = Container(
-        alignment: FractionalOffset.center,
-        decoration: new BoxDecoration(
-          color: widget.errorColor,
-          borderRadius:
-              new BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
-        ),
-        width: _bounceAnimation.value,
-        height: _bounceAnimation.value,
-        child: _bounceAnimation.value > 20
-            ? Icon(
-                Icons.close,
-                color: widget.valueColor,
-              )
-            : null);
-
-    var _loader = SizedBox(
-        height: widget.loaderSize,
-        width: widget.loaderSize,
-        child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),
-            strokeWidth: widget.loaderStrokeWidth));
-
-    var childStream = StreamBuilder(
-      stream: _state,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return AnimatedSwitcher(
-            duration: Duration(milliseconds: 200),
-            child:
-                snapshot.data == LoadingState.loading ? _loader : widget.child);
-      },
-    );
-
-    var _btn = ButtonTheme(
-        shape: RoundedRectangleBorder(borderRadius: _borderAnimation.value),
-        minWidth: _squeezeAnimation.value,
-        height: widget.height,
-        child: RaisedButton(
-            padding: EdgeInsets.all(0),
-            child: childStream,
-            color: widget.color,
-            disabledColor: widget.disabledColor,
-            elevation: widget.elevation,
-            onPressed: widget.onPressed == null ? null : _btnPressed));
+    _theme = Theme.of(context);
 
     return Container(
-        height: widget.height,
-        child: Center(
-            child: _state.value == LoadingState.error
-                ? _cross
-                : _state.value == LoadingState.success ? _check : _btn));
+      height: widget.height,
+      child: Center(
+        child: _buildState(),
+      ),
+    );
   }
 
   @override
@@ -223,6 +163,97 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
     _borderController.dispose();
     _state.close();
     super.dispose();
+  }
+
+  Widget _buildState() {
+    if (_state.value == LoadingState.error) {
+      return _buildError();
+    } else if (_state.value == LoadingState.success) {
+      return _buildSuccess();
+    }
+
+    return _buildButton();
+  }
+
+  Widget _buildButton() {
+    return ButtonTheme(
+      shape: RoundedRectangleBorder(borderRadius: _borderAnimation.value),
+      minWidth: _squeezeAnimation.value,
+      height: widget.height,
+      child: IconButton(
+        padding: EdgeInsets.all(0),
+        icon: _buildAnimatedSwitcher(),
+        color: widget.color,
+        disabledColor: widget.disabledColor,
+        onPressed: widget.onPressed == null ? null : _btnPressed,
+      ),
+    );
+  }
+
+  Widget _buildSuccess() {
+    return Container(
+        alignment: FractionalOffset.center,
+        decoration: new BoxDecoration(
+          color: widget.successColor ?? _theme.primaryColor,
+          borderRadius:
+              new BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
+        ),
+        width: _bounceAnimation.value,
+        height: _bounceAnimation.value,
+        child: _bounceAnimation.value > 20
+            ? Icon(
+                Icons.check,
+                color: widget.valueColor,
+              )
+            : null);
+  }
+
+  Widget _buildError() {
+    return Container(
+        alignment: FractionalOffset.center,
+        decoration: new BoxDecoration(
+          color: widget.errorColor,
+          borderRadius:
+              new BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
+        ),
+        width: _bounceAnimation.value,
+        height: _bounceAnimation.value,
+        child: _bounceAnimation.value > 20
+            ? Icon(
+                Icons.close,
+                color: widget.valueColor,
+              )
+            : null);
+  }
+
+  Widget _buildAnimatedSwitcher() {
+    return StreamBuilder(
+      stream: _state,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return AnimatedSwitcher(
+          duration: Duration(milliseconds: 200),
+          child: _buildAnimatedSwitcherItem(snapshot),
+        );
+      },
+    );
+  }
+
+  Widget _buildAnimatedSwitcherItem(AsyncSnapshot snapshot) {
+    if (snapshot.data == LoadingState.loading) {
+      return _buildLoader();
+    }
+
+    return widget.child;
+  }
+
+  Widget _buildLoader() {
+    return SizedBox(
+      height: widget.loaderSize,
+      width: widget.loaderSize,
+      child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),
+          strokeWidth: widget.loaderStrokeWidth),
+    );
   }
 
   _btnPressed() async {
