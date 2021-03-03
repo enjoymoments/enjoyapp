@@ -11,7 +11,7 @@ class AddTaskCalendar extends Equatable {
     this.activities,
   });
 
-  final String taskId;
+  String taskId;
   String title;
   String description;
   DateTime dateTime; 

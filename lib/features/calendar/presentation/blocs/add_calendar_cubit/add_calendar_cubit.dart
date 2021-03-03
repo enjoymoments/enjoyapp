@@ -36,11 +36,13 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }
 
   void setModel({
+    String taskId,
     String title,
     String description,
     DateTime datetime,
     List<AddActivityCalendar> activities,
   }) {
+    state.model.taskId = taskId ?? state.model.taskId;
     state.model.title = title ?? state.model.title;
     state.model.dateTime = datetime ?? state.model.dateTime;
     state.model.description = description ?? state.model.description;
@@ -87,25 +89,77 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
     sendRequest();
   }
 
+  void remove() async {
+    var _response =
+        await _calendarRepository.removeTaskInCalendar(state.model.taskId);
+
+    _response.fold(
+      (value) {
+        if (value) {
+          emit(
+            state.copyWith(
+              isError: false,
+              isSuccess: true,
+              forceRefresh: StateUtils.generateRandomNumber(),
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              isError: true,
+              isSuccess: false,
+              errorMessage: 'Ops... houve um erro. Tente novamente!',
+              forceRefresh: StateUtils.generateRandomNumber(),
+            ),
+          );
+        }
+      },
+      (error) {
+        emit(
+          state.copyWith(
+            isError: true,
+            isSuccess: false,
+            errorMessage: 'Ops... houve um erro. Tente novamente!',
+            forceRefresh: StateUtils.generateRandomNumber(),
+          ),
+        );
+      },
+    );
+  }
+
   void sendRequest() async {
     var _response = await _calendarRepository.addTaskInCalendar(state.model);
 
     _response.fold(
       (value) {
         if (value) {
-          emit(state.copyWith(isError: false, isSuccess: true));
+          emit(
+            state.copyWith(
+              isError: false,
+              isSuccess: true,
+              forceRefresh: StateUtils.generateRandomNumber(),
+            ),
+          );
         } else {
-          emit(state.copyWith(
+          emit(
+            state.copyWith(
               isError: true,
               isSuccess: false,
-              errorMessage: 'Ops... houve um erro. Tente novamente!'));
+              errorMessage: 'Ops... houve um erro. Tente novamente!',
+              forceRefresh: StateUtils.generateRandomNumber(),
+            ),
+          );
         }
       },
       (error) {
-        emit(state.copyWith(
+        emit(
+          state.copyWith(
             isError: true,
             isSuccess: false,
-            errorMessage: 'Ops... houve um erro. Tente novamente!'));
+            errorMessage: 'Ops... houve um erro. Tente novamente!',
+            forceRefresh: StateUtils.generateRandomNumber(),
+          ),
+        );
       },
     );
   }

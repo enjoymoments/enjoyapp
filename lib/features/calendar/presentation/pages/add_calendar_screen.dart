@@ -78,6 +78,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   void _initValues() {
     if (widget.taskModel != null) {
       _addCalendarCubit.setModel(
+        taskId: widget.taskModel.taskId,
         title: widget.taskModel.title,
         description: widget.taskModel.description,
         datetime: widget.taskModel.dateTime,
@@ -124,6 +125,35 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     _addCalendarCubit.save();
   }
 
+  void remove() {
+    var content = Text('Deseja excluir?');
+
+    var actions = [
+      FlatButton(
+        child: Text(
+          'Não',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+        onPressed: () {
+          _actionButtoncontroller.stop();
+          ExtendedNavigator.of(context).pop();
+        },
+      ),
+      FlatButton(
+        child: Text(
+          'Sim',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+        onPressed: () {
+          ExtendedNavigator.of(context).pop();
+          _addCalendarCubit.remove();
+        },
+      ),
+    ];
+
+    simpleDialog(context, 'Remover', content, false, actions);
+  }
+
   void _discardPost(BuildContext context) async {
     var content = Text('Deseja descartar?');
 
@@ -154,7 +184,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   Widget _buildActionButton() {
     if (widget.taskModel != null) {
-      return _buildActionButtonConfig(AppIcons.trash, () {});
+      return _buildActionButtonConfig(AppIcons.trash, remove);
     }
 
     return _buildActionButtonConfig(AppIcons.check, save);

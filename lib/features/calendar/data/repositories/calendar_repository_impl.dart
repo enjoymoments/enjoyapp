@@ -20,7 +20,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
       var response = await remoteDataSource.addTaskInCalendar(model);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e);
+      return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
   }
 
@@ -31,7 +31,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
       var response = await remoteDataSource.getTasksInCalendar();
       return Left<List<GroupedDateCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<GroupedDateCalendarModel>, Exception>(e);
+      return Right<List<GroupedDateCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
   }
 
@@ -41,7 +41,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
       var response = await remoteDataSource.removeTaskInCalendar(taskId);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e);
+      return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
   }
 
@@ -52,7 +52,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
       var response = await remoteDataSource.getTasksUserCalendarGroupedByYear();
       return Left<List<GroupedYearCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<GroupedYearCalendarModel>, Exception>(e);
+      return Right<List<GroupedYearCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
   }
 }
