@@ -19,6 +19,14 @@ class ActivityIcon extends StatefulWidget {
 }
 
 class _ActivityIconState extends State<ActivityIcon> {
+  ActivityItemModel _item;
+
+  @override
+  void initState() {
+    _item = widget.item;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,21 +47,21 @@ class _ActivityIconState extends State<ActivityIcon> {
             icon: Icon(
               //TODO:for test
               Icons.ac_unit,
-              // widget.item.codePoint == null
+              // _item.codePoint == null
               //     ? AppIcons.trailer
-              //     : IconData(widget.item.codePoint,
+              //     : IconData(_item.codePoint,
               //         fontFamily: 'AppIcons', fontPackage: null),
               color: _getIconColor(),
             ),
             onPressed: () {
+              _item = _item.copyWith(isSelected: !_item.isSelected);
               setState(() {
-                widget.item.isSelected = !widget.item.isSelected;
-                widget.onPressed(widget.item);
+                widget.onPressed(_item);
               });
             },
           ),
         ),
-        widget.item.name.description(
+        _item.name.description(
           context,
         ),
       ],
@@ -61,13 +69,13 @@ class _ActivityIconState extends State<ActivityIcon> {
   }
 
   Color _getBackgroundColor() {
-    return widget.item.isSelected
+    return _item.isSelected
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
   }
 
   Color _getIconColor() {
-    if (widget.item.isSelected) {
+    if (_item.isSelected) {
       return Theme.of(context).backgroundColor;
     }
 

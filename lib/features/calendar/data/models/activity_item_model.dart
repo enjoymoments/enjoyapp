@@ -5,14 +5,13 @@ class ActivityItemModel extends ActivityItem {
     String id,
     String name,
     int codePoint,
-    this.isSelected,
+    bool isSelected,
   }) : super(
           id: id,
           name: name,
-          codePoint: codePoint
+          codePoint: codePoint,
+          isSelected: isSelected,
         );
-
-  bool isSelected;
 
   factory ActivityItemModel.fromJson(Map<String, dynamic> json) {
     return ActivityItemModel(
@@ -34,7 +33,17 @@ class ActivityItemModel extends ActivityItem {
     return data;
   }
 
-  ActivityItemModel copyWith() {
-    return ActivityItemModel();
+  ActivityItemModel copyWith({
+    String id,
+    String name,
+    int codePoint,
+    bool isSelected,
+  }) {
+    return ActivityItemModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      codePoint: codePoint ?? this.codePoint,
+      isSelected: isSelected ?? this.isSelected,
+    );
   }
 }

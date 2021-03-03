@@ -44,7 +44,8 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   @override
   void initState() {
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
-    _activityCubit = getItInstance<AddActivityCubit>()..getActivities();
+    _activityCubit = getItInstance<AddActivityCubit>()
+      ..getActivities();
 
     _actionButtoncontroller = RoundedLoadingButtonController();
     _titleController = TextEditingController();
@@ -88,27 +89,6 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       _titleController.text = widget.taskModel.title;
       _descriptionController.text = widget.taskModel.description;
     }
-  }
-
-  Widget _buildAppBar() {
-    return CustomAppBar(
-      title: 'Criar evento',
-      iconColors: Theme.of(context).backgroundColor,
-      onPressedBack: () {
-        if (widget.taskModel == null &&
-            ((_titleController.text != null &&
-                    _titleController.text.isNotEmpty) ||
-                (_descriptionController.text != null &&
-                    _descriptionController.text.isNotEmpty))) {
-          _discardPost(context);
-        } else {
-          ExtendedNavigator.of(context).pop();
-        }
-      },
-      actions: <Widget>[
-        _buildActionButton(),
-      ],
-    );
   }
 
   void save() {
@@ -180,6 +160,27 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     ];
 
     simpleDialog(context, 'Remover', content, true, actions);
+  }
+
+  Widget _buildAppBar() {
+    return CustomAppBar(
+      title: 'Criar evento',
+      iconColors: Theme.of(context).backgroundColor,
+      onPressedBack: () {
+        if (widget.taskModel == null &&
+            ((_titleController.text != null &&
+                    _titleController.text.isNotEmpty) ||
+                (_descriptionController.text != null &&
+                    _descriptionController.text.isNotEmpty))) {
+          _discardPost(context);
+        } else {
+          ExtendedNavigator.of(context).pop();
+        }
+      },
+      actions: <Widget>[
+        _buildActionButton(),
+      ],
+    );
   }
 
   Widget _buildActionButton() {
@@ -305,6 +306,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               description:
                   "Escolha aqui quais tipos de atividades pretende realizar",
               onTap: () {
+                _activityCubit.setSeleted(widget.taskModel.activities);
                 ExtendedNavigator.of(context).push(
                   Routes.add_activity,
                   arguments: AddActivityScreenArguments(

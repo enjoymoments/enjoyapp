@@ -14,31 +14,26 @@ import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class AddActivityScreen extends StatefulWidget {
+class AddActivityScreen extends StatelessWidget {
   final AddActivityCubit activityCubit;
   final AddCalendarCubit addCalendarCubit;
 
   const AddActivityScreen({
     Key key,
-    @required this.addCalendarCubit,
     @required this.activityCubit,
+    @required this.addCalendarCubit,
   }) : super(key: key);
 
-  @override
-  _AddActivityScreenState createState() => _AddActivityScreenState();
-}
-
-class _AddActivityScreenState extends State<AddActivityScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       bottomNavigationBar: null,
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Tipos de atividades',
       iconColors: Theme.of(context).backgroundColor,
@@ -50,10 +45,10 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
 
   Widget _buildBody() {
     return BlocBuilder<AddActivityCubit, AddActivityState>(
-      cubit: widget.activityCubit,
+      cubit: activityCubit,
       builder: (context, state) {
         if (state.activities != null && state.activities.length > 0) {
-          return _buildContent(state.activities);
+          return _buildContent(context, state.activities);
         }
 
         return ActivityLoading();
@@ -61,7 +56,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     );
   }
 
-  Widget _buildContent(List<ActivityModel> activities) {
+  Widget _buildContent(BuildContext context, List<ActivityModel> activities) {
     return SingleChildScrollView(
       child: CustomContainer(
         child: Column(
@@ -70,7 +65,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
           children: activities.buildWithBetweenSpace<ActivityModel>(
             space: SpacerBox.v34,
             builderItem: (e) {
-              return _buildSection(e);
+              return _buildSection(context, e);
             },
           ),
         ),
@@ -78,7 +73,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     );
   }
 
-  Widget _buildSection(ActivityModel section) {
+  Widget _buildSection(BuildContext context, ActivityModel section) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,11 +87,11 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 item: e,
                 onPressed: (ActivityItemModel item) {
                   if (item.isSelected) {
-                    widget.addCalendarCubit.addActivity(
+                    addCalendarCubit.addActivity(
                         AddActivityCalendarModel(
                             sessionId: section.id, activityId: item.id));
                   } else {
-                    widget.addCalendarCubit.removeActivity(
+                    addCalendarCubit.removeActivity(
                         AddActivityCalendarModel(
                             sessionId: section.id, activityId: item.id));
                   }
