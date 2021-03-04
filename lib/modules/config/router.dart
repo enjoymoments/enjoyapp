@@ -33,8 +33,8 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'add_calendar', page: AddCalendarScreen,),
     MaterialRoute(name: 'add_activity', page: AddActivityScreen,),
     MaterialRoute(name: 'feedback', page: FeedbackScreen,),
-    MaterialRoute(name: 'albums_screen', page: AlbumsPage,),
-    MaterialRoute(name: 'add_albums_screen', page: AddAlbumsPage,),
+    MaterialRoute(name: 'albums_screen', page: AlbumsScreen,),
+    MaterialRoute(name: 'add_albums_screen', page: AddAlbumsScreen,),
   ],
 )
 class $Router {}

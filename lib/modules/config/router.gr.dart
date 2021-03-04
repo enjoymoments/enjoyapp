@@ -48,8 +48,8 @@ class Routes {
   static const String add_calendar = '/add-calendar-screen';
   static const String add_activity = '/add-activity-screen';
   static const String feedback = '/feedback-screen';
-  static const String albums_screen = '/albums-page';
-  static const String add_albums_screen = '/add-albums-page';
+  static const String albums_screen = '/albums-screen';
+  static const String add_albums_screen = '/add-albums-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -88,8 +88,8 @@ class Router extends RouterBase {
     RouteDef(Routes.add_calendar, page: AddCalendarScreen),
     RouteDef(Routes.add_activity, page: AddActivityScreen),
     RouteDef(Routes.feedback, page: FeedbackScreen),
-    RouteDef(Routes.albums_screen, page: AlbumsPage),
-    RouteDef(Routes.add_albums_screen, page: AddAlbumsPage),
+    RouteDef(Routes.albums_screen, page: AlbumsScreen),
+    RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -208,15 +208,15 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    AlbumsPage: (data) {
+    AlbumsScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AlbumsPage(),
+        builder: (context) => AlbumsScreen(),
         settings: data,
       );
     },
-    AddAlbumsPage: (data) {
+    AddAlbumsScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddAlbumsPage(),
+        builder: (context) => AddAlbumsScreen(),
         settings: data,
       );
     },
