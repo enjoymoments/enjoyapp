@@ -306,7 +306,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               description:
                   "Escolha aqui quais tipos de atividades pretende realizar",
               onTap: () {
-                _activityCubit.setSeleted(widget.taskModel.activities);
+                _activityCubit.setSeleted(widget.taskModel?.activities);
                 ExtendedNavigator.of(context).push(
                   Routes.add_activity,
                   arguments: AddActivityScreenArguments(
