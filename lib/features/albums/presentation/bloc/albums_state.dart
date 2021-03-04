@@ -1,4 +1,4 @@
-part of 'albums_bloc.dart';
+part of 'albums_cubit.dart';
 
 class AlbumsState extends DefaultState {
   AlbumsState({

@@ -8,7 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
-import 'package:mozin/features/albums/presentation/bloc/albums_bloc.dart';
+import 'package:mozin/features/albums/presentation/bloc/albums_cubit.dart';
 import 'package:mozin/features/calendar/data/datasources/activity_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/repositories/activity_repository_impl.dart';
