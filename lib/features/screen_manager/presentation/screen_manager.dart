@@ -198,6 +198,14 @@ class _ScreenManagerState extends State<ScreenManager> {
                   },
                 ),
                 CustomItemModalFit(
+                  text: 'Linkedin',
+                  iconData: AppIcons.linkedin,
+                  onTap: () {
+                    _launchURL(
+                        'https://www.linkedin.com/company/enjoy-moments/');
+                  },
+                ),
+                CustomItemModalFit(
                   text: 'Site',
                   iconData: AppIcons.window_maximize,
                   onTap: () {
