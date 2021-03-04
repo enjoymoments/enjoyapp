@@ -15,12 +15,12 @@ import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class AddAlbumsPage extends StatefulWidget {
+class AddAlbumsScreen extends StatefulWidget {
   @override
-  _AddAlbumsPageState createState() => _AddAlbumsPageState();
+  _AddAlbumsScreenState createState() => _AddAlbumsScreenState();
 }
 
-class _AddAlbumsPageState extends State<AddAlbumsPage> {
+class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   
   TextEditingController _descriptionController;
 
