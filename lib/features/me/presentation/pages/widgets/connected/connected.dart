@@ -83,7 +83,7 @@ class Connected extends StatelessWidget {
       alignment: WrapAlignment.center,
       spacing: 30,
       children: [
-        _generateItem(context, Routes.favorite_interests, 'Álbuns'),
+        _generateItem(context, Routes.albums_screen, 'Álbuns'),
         _generateItem(context, Routes.favorite_interests, 'Favoritos'),
       ],
     );

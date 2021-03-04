@@ -9,6 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/albums/presentation/pages/add_albums_screen.dart';
+import '../../features/albums/presentation/pages/albums_screen.dart';
 import '../../features/calendar/data/models/task_calendar_model.dart';
 import '../../features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
@@ -46,6 +48,8 @@ class Routes {
   static const String add_calendar = '/add-calendar-screen';
   static const String add_activity = '/add-activity-screen';
   static const String feedback = '/feedback-screen';
+  static const String albums_screen = '/albums-page';
+  static const String add_albums_screen = '/add-albums-page';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -61,6 +65,8 @@ class Routes {
     add_calendar,
     add_activity,
     feedback,
+    albums_screen,
+    add_albums_screen,
   };
 }
 
@@ -82,6 +88,8 @@ class Router extends RouterBase {
     RouteDef(Routes.add_calendar, page: AddCalendarScreen),
     RouteDef(Routes.add_activity, page: AddActivityScreen),
     RouteDef(Routes.feedback, page: FeedbackScreen),
+    RouteDef(Routes.albums_screen, page: AlbumsPage),
+    RouteDef(Routes.add_albums_screen, page: AddAlbumsPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -188,8 +196,8 @@ class Router extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddActivityScreen(
           key: args.key,
-          addCalendarCubit: args.addCalendarCubit,
           activityCubit: args.activityCubit,
+          addCalendarCubit: args.addCalendarCubit,
         ),
         settings: data,
       );
@@ -197,6 +205,18 @@ class Router extends RouterBase {
     FeedbackScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => FeedbackScreen(),
+        settings: data,
+      );
+    },
+    AlbumsPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AlbumsPage(),
+        settings: data,
+      );
+    },
+    AddAlbumsPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddAlbumsPage(),
         settings: data,
       );
     },
@@ -252,10 +272,10 @@ class AddCalendarScreenArguments {
 /// AddActivityScreen arguments holder class
 class AddActivityScreenArguments {
   final Key key;
-  final AddCalendarCubit addCalendarCubit;
   final AddActivityCubit activityCubit;
+  final AddCalendarCubit addCalendarCubit;
   AddActivityScreenArguments(
       {this.key,
-      @required this.addCalendarCubit,
-      @required this.activityCubit});
+      @required this.activityCubit,
+      @required this.addCalendarCubit});
 }

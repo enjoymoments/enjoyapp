@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:mozin/features/albums/presentation/pages/add_albums_screen.dart';
+import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_activity_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_calendar_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
@@ -31,6 +33,8 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'add_calendar', page: AddCalendarScreen,),
     MaterialRoute(name: 'add_activity', page: AddActivityScreen,),
     MaterialRoute(name: 'feedback', page: FeedbackScreen,),
+    MaterialRoute(name: 'albums_screen', page: AlbumsPage,),
+    MaterialRoute(name: 'add_albums_screen', page: AddAlbumsPage,),
   ],
 )
 class $Router {}

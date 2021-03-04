@@ -102,7 +102,10 @@ class _ScreenManagerState extends State<ScreenManager> {
                     CustomItemModalFit(
                       text: 'Álbum',
                       iconData: AppIcons.folder,
-                      onTap: () {},
+                      onTap: () {
+                        ExtendedNavigator.of(context)
+                            .push(Routes.add_albums_screen);
+                      },
                     ),
                   ],
                 ),
