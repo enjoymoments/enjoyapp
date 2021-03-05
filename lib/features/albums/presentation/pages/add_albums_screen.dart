@@ -103,7 +103,9 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
           _images = state.images;
           return _buildContent(
             ImageItems(
-              onRemoveCallback: (model) {},
+              onRemoveCallback: (model) {
+                _addAlbumCubit.mapRemoveMediaToState(model.id);
+              },
               images: state.images,
             ),
           );

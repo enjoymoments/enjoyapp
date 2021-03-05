@@ -263,7 +263,7 @@ void _registerSingletonDataSources() {
       () => ActivityRemoteDataSourceImpl(getItInstance()));    
 
   getItInstance.registerLazySingleton<AlbumsRemoteDataSource>(
-      () => AlbumsRemoteDataSourceImpl(getItInstance()));        
+      () => AlbumsRemoteDataSourceImpl(getItInstance(), getItInstance()));        
 }
 
 Future<LocalStorageService> _setupHive() async {

@@ -10,7 +10,7 @@ import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
-import 'package:mozin/features/time_line/data/models/media_model.dart';
+import 'package:mozin/modules/shared/general/models/media_model.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';

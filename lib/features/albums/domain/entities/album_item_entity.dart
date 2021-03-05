@@ -1,40 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mozin/features/time_line/domain/entities/author_entity.dart';
 import 'package:mozin/modules/shared/general/entities/media_entity.dart';
 
-class TimeLineItemEntity extends Equatable {
+class AlbumItemEntity extends Equatable {
   final String id;
-  final AuthorEntity author;
-  final String textPost;
+  final String titleAlbum;
   final DateTime dateCreation;
   final List<MediaEntity> medias;
 
-  const TimeLineItemEntity(
-      this.id, this.author, this.textPost, this.dateCreation, this.medias);
+  const AlbumItemEntity(
+      this.id, this.titleAlbum, this.dateCreation, this.medias);
 
-  static Future<TimeLineItemEntity> fromSnapshot(DocumentSnapshot snap) async {
-    var _author = await _toAuthor(snap);
-    
-    return TimeLineItemEntity(
+  static Future<AlbumItemEntity> fromSnapshot(DocumentSnapshot snap) async {
+    return AlbumItemEntity(
       snap.id,
-      _author,
-      snap.data()['textPost'],
+      snap.data()['titleAlbum'],
       snap.data()['dateCreation'] != null
           ? DateTime.parse(snap.data()['dateCreation'].toDate().toString())
           : null,
       _toEntity(snap.data()['medias']),
     );
-  }
-
-  static Future<AuthorEntity> _toAuthor(DocumentSnapshot snap) async {
-    DocumentReference documentAuthor = snap.get('author');
-    if (documentAuthor != null) {
-      var _author = await documentAuthor.get();
-      return AuthorEntity.fromSnapshot(_author.data());
-    }
-
-    return null;
   }
 
   static List<MediaEntity> _toEntity(Iterable field) {
@@ -52,7 +37,6 @@ class TimeLineItemEntity extends Equatable {
   @override
   List<Object> get props => [
         id,
-        textPost,
         dateCreation,
         medias,
       ];

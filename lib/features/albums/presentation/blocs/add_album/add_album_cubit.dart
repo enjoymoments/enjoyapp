@@ -5,6 +5,7 @@ import 'package:mozin/features/albums/domain/repositories/albums_repository.dart
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/utils.dart';
 
 part 'add_album_state.dart';
 
@@ -20,6 +21,19 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
 
   final AlbumsRepository _albumsRepository;
   final WrapperMediaService _wrapperMediaService;
+
+  void mapRemoveMediaToState(String mediaId) {
+    try {
+      state.images.removeWhere((element) => element.id == mediaId);
+
+      emit(state.copyWith(
+          isError: false,
+          images: state.images,
+          forceRefresh: StateUtils.generateRandomNumber()));
+    } catch (e) {
+      emit(state.copyWith(isError: true));
+    }
+  }
 
   void mapOpenCameraToState(ImageSource source) async {
     emit(state.copyWith(isLoading: true, isError: false));
