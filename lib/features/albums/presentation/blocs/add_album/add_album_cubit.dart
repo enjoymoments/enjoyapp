@@ -20,6 +20,7 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
   final WrapperMediaService _wrapperMediaService;
 
   void mapSaveToState() async {
+    //TODO:album
     getItInstance<ScreenManagerBloc>()..add(QueueNewAlbum('test', state.images));
     emit(state.copyWith(isLoading: false, isError: false, isSuccess: true));
   }

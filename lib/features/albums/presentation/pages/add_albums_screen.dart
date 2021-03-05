@@ -85,13 +85,14 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
       cubit: _addAlbumCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
-        
+
         if (state.isError) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
         if (state.isSuccess) {
+          //TODO:album
           //getItInstance<TimelineBloc>()..add(LoadPosts());
           ExtendedNavigator.of(context).pop();
         }
@@ -121,6 +122,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   }
 
   Widget _buildActionButton() {
+    //TODO:album
     // if (widget.taskModel != null) {
     //   return _buildActionButtonConfig(AppIcons.trash, remove);
     // }

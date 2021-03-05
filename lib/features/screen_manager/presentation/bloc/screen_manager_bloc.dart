@@ -131,6 +131,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
           .albumsRepository
           .addAlbum(user.id, transform);
 
+      //TODO:album
       //getItInstance<TimelineBloc>()..add(LoadPosts());
 
       yield state.copyWith(isLoading: false, isSuccess: true, isFailure: false);
