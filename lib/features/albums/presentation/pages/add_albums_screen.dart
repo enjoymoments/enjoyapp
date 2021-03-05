@@ -84,6 +84,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     return BlocConsumer<AddAlbumCubit, AddAlbumState>(
       cubit: _addAlbumCubit,
       listener: (consumerContext, state) {
+        _actionButtoncontroller.stop();
+        
         if (state.isError) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
@@ -123,7 +125,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     //   return _buildActionButtonConfig(AppIcons.trash, remove);
     // }
 
-    return _buildActionButtonConfig(AppIcons.check, () {});
+    return _buildActionButtonConfig(AppIcons.check, save);
   }
 
   Widget _buildActionButtonConfig(IconData icon, void Function() callback) {
@@ -135,8 +137,12 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
         color: Theme.of(context).appBarTheme.iconTheme.color,
       ),
       onPressed: () {
-        _actionButtoncontroller.start();
-        callback();
+        if (_images.length > 0 ||
+            (_descriptionController.text != null &&
+                _descriptionController.text.isNotEmpty)) {
+          _actionButtoncontroller.start();
+          callback();
+        }
       },
     );
   }
@@ -214,5 +220,9 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     ];
 
     simpleDialog(context, 'Remover', content, true, actions);
+  }
+
+  void save() {
+    _addAlbumCubit.mapSaveToState();
   }
 }

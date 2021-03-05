@@ -164,7 +164,7 @@ void _registerBlocs() {
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(
-          getItInstance(), getItInstance(), getItInstance(), getItInstance()));
+          getItInstance(), getItInstance(), getItInstance(), getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestBloc>(() => InterestBloc(
       interestRepository: getItInstance(),
@@ -209,7 +209,7 @@ void _registerBlocs() {
       () => AlbumsCubit(albumsRepository: getItInstance()));                
 
   getItInstance.registerFactory<AddAlbumCubit>(
-      () => AddAlbumCubit(albumsRepository: getItInstance(), wrapperMediaService: getItInstance()));                    
+      () => AddAlbumCubit(wrapperMediaService: getItInstance()));                    
 }
 
 void _registerSingletonRepositories() {

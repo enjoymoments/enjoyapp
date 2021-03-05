@@ -6,14 +6,18 @@ class ScreenManagerEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-
 class QueueNewPost extends ScreenManagerEvent {
   final String textPost;
   final List<GalleryImageModel> medias;
 
   QueueNewPost(this.textPost, this.medias);
 }
+class QueueNewAlbum extends ScreenManagerEvent {
+  final String titleAlbum;
+  final List<GalleryImageModel> medias;
 
+  QueueNewAlbum(this.titleAlbum, this.medias);
+}
 class TapScreen extends ScreenManagerEvent {
   final DEFAULT_MENU_ENUM screenSelected;
   final BuildContext context;

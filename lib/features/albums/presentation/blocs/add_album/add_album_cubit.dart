@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
@@ -11,16 +12,17 @@ part 'add_album_state.dart';
 
 class AddAlbumCubit extends Cubit<AddAlbumState> {
   AddAlbumCubit({
-    @required AlbumsRepository albumsRepository,
     @required WrapperMediaService wrapperMediaService,
-  })  : assert(albumsRepository != null),
-        _albumsRepository = albumsRepository,
-        assert(wrapperMediaService != null),
+  })  : assert(wrapperMediaService != null),
         _wrapperMediaService = wrapperMediaService,
         super(AddAlbumState.initial());
 
-  final AlbumsRepository _albumsRepository;
   final WrapperMediaService _wrapperMediaService;
+
+  void mapSaveToState() async {
+    getItInstance<ScreenManagerBloc>()..add(QueueNewAlbum('test', state.images));
+    emit(state.copyWith(isLoading: false, isError: false, isSuccess: true));
+  }
 
   void mapRemoveMediaToState(String mediaId) {
     try {
