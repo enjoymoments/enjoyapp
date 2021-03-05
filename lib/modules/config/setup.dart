@@ -8,7 +8,8 @@ import 'package:hive/hive.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
-import 'package:mozin/features/albums/presentation/bloc/albums_cubit.dart';
+import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
+import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
 import 'package:mozin/features/calendar/data/datasources/activity_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/repositories/activity_repository_impl.dart';
@@ -112,9 +113,9 @@ void _setupRemoteClientRepository() {
       () => RemoteClientRepository(
             dio: _dio,
             url:
-                //'https://localhost:5001/graphql',
+                'https://localhost:5001/graphql',
                 //'https://10.0.2.2:5001/graphql',
-                getItInstance<RemoteConfig>().getString(url_endpoint),
+                //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -128,7 +129,11 @@ void _registerSingletonModels() {
 
 void _registerSingletonServices() {
   getItInstance
-      .registerLazySingleton<WrapperMediaService>(() => WrapperMediaService());
+      .registerLazySingleton<WrapperMediaService>(() => WrapperMediaService(
+        uuidService: getItInstance(),
+        firebaseStorageService: getItInstance(),
+        userWrapper: getItInstance()
+      ));
   getItInstance.registerLazySingleton<Uuid>(() => Uuid());
   getItInstance.registerLazySingleton<FirebaseStorageService>(
       () => FirebaseStorageService());
@@ -152,7 +157,7 @@ void _registerSingletonServices() {
 
 void _registerBlocs() {
   getItInstance.registerFactory<AddTimeLineBloc>(
-      () => AddTimeLineBloc(getItInstance(), getItInstance()));
+      () => AddTimeLineBloc(getItInstance()));
 
   getItInstance.registerLazySingleton<TimelineBloc>(
       () => TimelineBloc(getItInstance(), getItInstance()));
@@ -202,6 +207,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<AlbumsCubit>(
       () => AlbumsCubit(albumsRepository: getItInstance()));                
+
+  getItInstance.registerFactory<AddAlbumCubit>(
+      () => AddAlbumCubit(albumsRepository: getItInstance(), wrapperMediaService: getItInstance()));                    
 }
 
 void _registerSingletonRepositories() {

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/custom_dialog.dart';
 import 'package:vibration/vibration.dart';
@@ -9,12 +8,12 @@ class GalleryImageThumbnail extends StatelessWidget {
   const GalleryImageThumbnail({
     Key key,
     @required this.galleryImageModel,
-    @required this.addTimeLineBloc,
+    @required this.onRemoveCallback,
     @required this.onTap,
   }) : super(key: key);
 
   final GalleryImageModel galleryImageModel;
-  final AddTimeLineBloc addTimeLineBloc;
+  final Function(GalleryImageModel galleryImageModel) onRemoveCallback;
   final GestureTapCallback onTap;
 
   @override
@@ -72,7 +71,7 @@ class GalleryImageThumbnail extends StatelessWidget {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         onPressed: () {
-          addTimeLineBloc.add(RemoveMedia(galleryImageModel));
+          onRemoveCallback(galleryImageModel);
           ExtendedNavigator.of(context).pop();
         },
       ),

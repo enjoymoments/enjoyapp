@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -10,7 +9,6 @@ import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/utils.dart';
-import 'package:uuid/uuid.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'add_time_line_event.dart';
@@ -19,11 +17,9 @@ part 'add_time_line_state.dart';
 class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   AddTimeLineBloc(
     this.wrapperMediaService,
-    this.uuidService,
   ) : super(AddTimeLineState.initial());
 
   final WrapperMediaService wrapperMediaService;
-  final Uuid uuidService;
 
   @override
   Stream<Transition<AddTimeLineEvent, AddTimeLineState>> transformEvents(
@@ -89,7 +85,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
         if (file != null) {
           images
             ..addAll([
-              GalleryImageModel(id: uuidService.v4(), file: file, index: 0)
+              GalleryImageModel(id: wrapperMediaService.generateUUIDv4(), file: file, index: 0)
             ]);
         }
       } else if (event.source == ImageSource.gallery) {
@@ -103,7 +99,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
             return;
           }
 
-          images.addAll(_transformFilesToImages(files));
+          images.addAll(wrapperMediaService.transformFilesToImages(files));
         }
       }
 
@@ -111,20 +107,5 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
-  }
-
-  List<GalleryImageModel> _transformFilesToImages(List<File> files) {
-    final List<GalleryImageModel> galleryItems = [];
-
-    for (var i = 0; i < files.length; i++) {
-      var item = files[i];
-      galleryItems.add(GalleryImageModel(
-        id: uuidService.v4(),
-        index: i,
-        file: item,
-      ));
-    }
-
-    return galleryItems;
   }
 }

@@ -87,29 +87,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           IconButton(
             icon: CustomIcon(icon: AppIcons.plus),
             onPressed: () {
-              showMaterialModalBottomSheet(
-                context: context,
-                builder: (context, scrollController) => CustomModalFit(
-                  items: [
-                    CustomItemModalFit(
-                      text: 'Postagem',
-                      iconData: AppIcons.keyboard,
-                      onTap: () {
-                        ExtendedNavigator.of(context)
-                            .push(Routes.add_time_line_screen);
-                      },
-                    ),
-                    CustomItemModalFit(
-                      text: 'Álbum',
-                      iconData: AppIcons.folder,
-                      onTap: () {
-                        ExtendedNavigator.of(context)
-                            .push(Routes.add_albums_screen);
-                      },
-                    ),
-                  ],
-                ),
-              );
+              ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
             },
           ),
         ];

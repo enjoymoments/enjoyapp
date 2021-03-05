@@ -137,7 +137,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _images = state.images;
           return _buildContent(
             ImageItems(
-              addTimeLineBloc: _addTimeLineBloc,
+              onRemoveCallback:(model) {
+                _addTimeLineBloc.add(RemoveMedia(model));
+              },
               images: state.images,
             ),
           );
