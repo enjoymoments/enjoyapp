@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
@@ -89,24 +90,40 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
         //   );
         // }
 
-        return _buildEmpty();
+        return CustomContainer(
+          child: _buildAlbumItem(),
+        );
       },
     );
   }
 
   Widget _buildEmpty() {
-    return CustomContainer(
-      child: Center(
-        child: "Opa... vamos adicionar o primeiro álbum ?".labelIntro(context),
-      ),
+    return Center(
+      child: "Opa... vamos adicionar o primeiro álbum ?".labelIntro(context),
     );
   }
 
-  Widget _buildContent() {
-    return SingleChildScrollView(
-      child: CustomContainer(
-        child: Column(
-          children: [],
+  Widget _buildAlbumItem() {
+    return GestureDetector(
+      child: Container(
+        child: Align(
+          alignment: Alignment.center,
+          child: "Hello World"
+              .labelIntro(context, color: Theme.of(context).backgroundColor),
+        ),
+        height: SizeConfig.sizeByPixel(150),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Theme.of(context).hintColor),
+          image: DecorationImage(
+            //TODO:review this - maybe use a another image for opacity
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.2),
+              BlendMode.darken,
+            ),
+            image: AssetImage('assets/images/default_avatar.png'),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

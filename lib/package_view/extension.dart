@@ -135,10 +135,14 @@ extension Texts on String {
     );
   }
 
-  Widget labelIntro(BuildContext context) {
+  Widget labelIntro(
+    BuildContext context, {
+    Color color,
+  }) {
     return AutoSizeText(
       this,
-      style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 28),
+      style: TextStyle(
+          color: color ?? Theme.of(context).primaryColor, fontSize: 28),
       textAlign: TextAlign.center,
     );
   }
