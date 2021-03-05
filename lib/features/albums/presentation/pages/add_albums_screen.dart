@@ -25,7 +25,7 @@ class AddAlbumsScreen extends StatefulWidget {
 }
 
 class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
-  TextEditingController _descriptionController;
+  TextEditingController _titleController;
   RoundedLoadingButtonController _actionButtoncontroller;
 
   AddAlbumCubit _addAlbumCubit;
@@ -39,8 +39,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     _actionButtoncontroller = RoundedLoadingButtonController();
     _images = [];
 
-    _descriptionController = TextEditingController();
-    _descriptionController.addListener(() {});
+    _titleController = TextEditingController();
 
     super.initState();
   }
@@ -48,6 +47,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   @override
   void dispose() {
     _addAlbumCubit.close();
+    _titleController.dispose();
     super.dispose();
   }
 
@@ -66,8 +66,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
         if (_images.length > 0 ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
+            (_titleController.text != null &&
+                _titleController.text.isNotEmpty)) {
           _discardPost(context);
           return;
         }
@@ -140,8 +140,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
       ),
       onPressed: () {
         if (_images.length > 0 ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
+            (_titleController.text != null &&
+                _titleController.text.isNotEmpty)) {
           _actionButtoncontroller.start();
           callback();
         }
@@ -157,7 +157,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CustomTextFormField(
-              controller: _descriptionController,
+              controller: _titleController,
               textInputType: TextInputType.visiblePassword,
               hintText: 'Título do álbum',
               labelText: 'Título do álbum',
@@ -225,6 +225,6 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   }
 
   void save() {
-    _addAlbumCubit.mapSaveToState();
+    _addAlbumCubit.mapSaveToState(_titleController.text);
   }
 }
