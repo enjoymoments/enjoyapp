@@ -206,7 +206,7 @@ void _registerBlocs() {
       () => CalendarCubit(calendarRepository: getItInstance()));
 
   getItInstance.registerFactory<AlbumsCubit>(
-      () => AlbumsCubit(albumsRepository: getItInstance()));                
+      () => AlbumsCubit(albumsRepository: getItInstance(), userWrapper: getItInstance()));                
 
   getItInstance.registerFactory<AddAlbumCubit>(
       () => AddAlbumCubit(wrapperMediaService: getItInstance()));                    

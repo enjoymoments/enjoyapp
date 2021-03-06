@@ -7,6 +7,8 @@ class AlbumsState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
+    this.albums,
+    this.forceRefresh,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -15,6 +17,9 @@ class AlbumsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
+  final List<AlbumItemModel> albums;
+  final int forceRefresh;
+
   factory AlbumsState.initial() {
     return AlbumsState(
       isSuccess: false,
@@ -22,6 +27,8 @@ class AlbumsState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
+      albums: List(),
+      forceRefresh: null,
     );
   }
 
@@ -31,6 +38,8 @@ class AlbumsState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
+    List<AlbumItemModel> albums,
+    int forceRefresh,
   }) {
     return AlbumsState(
       isLoading: isLoading ?? this.isLoading,
@@ -38,6 +47,8 @@ class AlbumsState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
+      albums: albums ?? this.albums,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
@@ -48,5 +59,7 @@ class AlbumsState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
+        albums,
+        forceRefresh,
       ];
 }

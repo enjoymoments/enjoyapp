@@ -1,17 +1,20 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
+import 'package:mozin/features/albums/presentation/pages/widgets/albums_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/spacer_box.dart';
 
 class AlbumsScreen extends StatefulWidget {
   @override
@@ -20,10 +23,12 @@ class AlbumsScreen extends StatefulWidget {
 
 class _AlbumsScreenState extends State<AlbumsScreen> {
   AlbumsCubit _albumsCubit;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
-    _albumsCubit = getItInstance<AlbumsCubit>();
+    _albumsCubit = getItInstance<AlbumsCubit>()..mapGetAllAlbums();
 
     super.initState();
   }
@@ -69,30 +74,19 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
-
-        if (state.isSuccess) {
-          //getItInstance<TimelineBloc>()..add(LoadPosts());
-          ExtendedNavigator.of(context).pop();
-        }
       },
       builder: (context, state) {
         if (state.isLoading) {
-          return CustomCircularProgressIndicator();
+          return AlbumsLoading();
         }
 
-        // if (state.images != null && state.images.length > 0) {
-        //   _images = state.images;
-        //   return _buildContent(
-        //     ImageItems(
-        //       addTimeLineBloc: _addTimeLineBloc,
-        //       images: state.images,
-        //     ),
-        //   );
-        // }
+        if (state.albums != null && state.albums.length > 0) {
+          return CustomContainer(
+            child: _buildAlbums(state),
+          );
+        }
 
-        return CustomContainer(
-          child: _buildAlbumItem(),
-        );
+        return _buildEmpty();
       },
     );
   }
@@ -103,28 +97,51 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
     );
   }
 
-  Widget _buildAlbumItem() {
+  Widget _buildAlbums(AlbumsState state) {
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      color: Theme.of(context).primaryColor,
+      onRefresh: () async {
+        _albumsCubit.mapGetAllAlbums();
+      },
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        separatorBuilder: (context, index) => SpacerBox.h8,
+        itemCount: state.albums.length,
+        itemBuilder: (context, index) => _buildAlbumItem(state.albums[index]),
+      ),
+    );
+  }
+
+  Widget _buildAlbumItem(AlbumItemModel album) {
     return GestureDetector(
-      child: Container(
-        child: Align(
-          alignment: Alignment.center,
-          child: "Hello World"
-              .labelIntro(context, color: Theme.of(context).backgroundColor),
-        ),
-        height: SizeConfig.sizeByPixel(150),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Theme.of(context).hintColor),
-          image: DecorationImage(
-            //TODO:review this - maybe use a another image for opacity
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.2),
-              BlendMode.darken,
+      onTap: () {},
+      child: CachedNetworkImage(
+        imageUrl: album.medias[0].url,
+        fit: BoxFit.cover,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            child: Align(
+              alignment: Alignment.center,
+              child: album.titleAlbum.labelIntro(context,
+                  color: Theme.of(context).backgroundColor),
             ),
-            image: AssetImage('assets/images/default_avatar.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
+            height: SizeConfig.sizeByPixel(150),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Theme.of(context).hintColor),
+              image: DecorationImage(
+                //TODO:review this - maybe use a another image for opacity
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.2),
+                  BlendMode.darken,
+                ),
+                image: imageProvider,
+                fit: BoxFit.cover,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
