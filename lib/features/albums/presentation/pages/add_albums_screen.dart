@@ -2,11 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
+import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
@@ -20,6 +22,10 @@ import 'package:mozin/package_view/rounded_loading_button.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class AddAlbumsScreen extends StatefulWidget {
+  const AddAlbumsScreen({Key key, this.album}) : super(key: key);
+
+  final AlbumItemModel album;
+
   @override
   _AddAlbumsScreenState createState() => _AddAlbumsScreenState();
 }
@@ -30,7 +36,9 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
 
   AddAlbumCubit _addAlbumCubit;
   int _currentIndex = 0;
-  List<GalleryImageModel> _images;
+  List<BaseImageModel> _images;
+
+  bool get isNewItem => widget.album == null;
 
   @override
   void initState() {
@@ -40,6 +48,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     _images = [];
 
     _titleController = TextEditingController();
+
+    initValues();
 
     super.initState();
   }
@@ -56,8 +66,15 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(),
-      bottomNavigationBar: _buildBottomMenu(),
+      bottomNavigationBar: isNewItem ? _buildBottomMenu() : null,
     );
+  }
+
+  void initValues() {
+    if (!isNewItem) {
+      _titleController.text = widget.album.titleAlbum;
+      _addAlbumCubit.setAlbum(widget.album);
+    }
   }
 
   Widget _buildAppBar() {
@@ -65,9 +82,10 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
       title: 'Criar Álbum',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        if (_images.length > 0 ||
-            (_titleController.text != null &&
-                _titleController.text.isNotEmpty)) {
+        if (isNewItem &&
+            (_images.length > 0 ||
+                (_titleController.text != null &&
+                    _titleController.text.isNotEmpty))) {
           _discardPost(context);
           return;
         }
@@ -92,8 +110,6 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
         }
 
         if (state.isSuccess) {
-          //TODO:album
-          //getItInstance<TimelineBloc>()..add(LoadPosts());
           ExtendedNavigator.of(context).pop();
         }
       },
@@ -102,14 +118,14 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
           return CustomCircularProgressIndicator();
         }
 
-        if (state.images != null && state.images.length > 0) {
-          _images = state.images;
+        if (state.allImages != null && state.allImages.length > 0) {
+          _images = state.allImages;
           return _buildContent(
-            ImageItems(
-              onRemoveCallback: (model) {
-                _addAlbumCubit.mapRemoveMediaToState(model.id);
-              },
-              images: state.images,
+            Column(
+              children: [
+                _buildAlbumImages(state),
+                _buildNewImages(state),
+              ],
             ),
           );
         }
@@ -121,11 +137,38 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
+  Widget _buildAlbumImages(AddAlbumState state) {
+    if (state.album != null && state.album.medias.length > 0) {
+      return ImageItems(
+        sourceType: SourceTypeEnum.Url,
+        onRemoveCallback: (model) {
+          _addAlbumCubit.mapRemoveMediaToState(model);
+        },
+        images: state.album.medias.toGalleryImages(),
+      );
+    }
+
+    return SizedBox.shrink();
+  }
+
+  Widget _buildNewImages(AddAlbumState state) {
+    if (state.newImages.length > 0) {
+      return ImageItems(
+        sourceType: SourceTypeEnum.File,
+        onRemoveCallback: (model) {
+          _addAlbumCubit.mapRemoveMediaToState(model);
+        },
+        images: state.newImages,
+      );
+    }
+
+    return SizedBox.shrink();
+  }
+
   Widget _buildActionButton() {
-    //TODO:album
-    // if (widget.taskModel != null) {
-    //   return _buildActionButtonConfig(AppIcons.trash, remove);
-    // }
+    if (!isNewItem) {
+      return _buildActionButtonConfig(AppIcons.trash, remove);
+    }
 
     return _buildActionButtonConfig(AppIcons.check, save);
   }
@@ -194,6 +237,35 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
         ),
       ],
     );
+  }
+
+  void remove() {
+    var content = Text('Deseja excluir?');
+
+    var actions = [
+      FlatButton(
+        child: Text(
+          'Não',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+        onPressed: () {
+          _actionButtoncontroller.stop();
+          ExtendedNavigator.of(context).pop();
+        },
+      ),
+      FlatButton(
+        child: Text(
+          'Sim',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+        onPressed: () {
+          ExtendedNavigator.of(context).pop();
+          //_addCalendarCubit.remove();
+        },
+      ),
+    ];
+
+    simpleDialog(context, 'Remover', content, false, actions);
   }
 
   void _discardPost(BuildContext context) async {

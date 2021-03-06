@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/general/models/media_model.dart';
 
 extension DateTimeExtension on DateTime {
   DateTime setTimeOfDay(TimeOfDay time) {
@@ -145,5 +147,25 @@ extension Texts on String {
           color: color ?? Theme.of(context).primaryColor, fontSize: 28),
       textAlign: TextAlign.center,
     );
+  }
+}
+
+extension ImageToGallery on List<MediaModel> {
+  List<GalleryImageModel> toGalleryImages() {
+    final List<GalleryImageModel> galleryItems = [];
+
+    for (var i = 0; i < this.length; i++) {
+      var item = this[i];
+      galleryItems.add(
+        GalleryImageModel(
+          id: item.id,
+          index: i,
+          //file: item,
+          url: item.url,
+        ),
+      );
+    }
+
+    return galleryItems;
   }
 }

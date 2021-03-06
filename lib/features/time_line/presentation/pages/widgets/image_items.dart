@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/package_view/gallery_images/gallery_image_thumbnail.dart';
@@ -8,11 +9,13 @@ import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum
 class ImageItems extends StatelessWidget {
   final Function(GalleryImageModel galleryImageModel) onRemoveCallback;
   final List<GalleryImageModel> images;
+  final SourceTypeEnum sourceType;
 
   ImageItems({
     Key key,
     @required this.images,
     @required this.onRemoveCallback,
+    @required this.sourceType,
   }) : super(key: key);
 
   @override
@@ -38,6 +41,7 @@ class ImageItems extends StatelessWidget {
     GalleryImageModel image,
   ) {
     return GalleryImageThumbnail(
+      sourceType: sourceType,
       galleryImageModel: image,
       onRemoveCallback: (model) {
         onRemoveCallback(model);
@@ -52,7 +56,7 @@ class ImageItems extends StatelessWidget {
     ExtendedNavigator.of(context).push(
       Routes.gallery_photo_view_wrapper,
       arguments: GalleryPhotoViewWrapperArguments(
-        galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.file,
+        galleryPhotoSourceType: _sourceType(),
         galleryItems: images,
         backgroundDecoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
@@ -61,5 +65,15 @@ class ImageItems extends StatelessWidget {
         scrollDirection: Axis.horizontal,
       ),
     );
+  }
+
+  GalleryPhotoSourceTypeEnum _sourceType() {
+    if(sourceType == SourceTypeEnum.File) {
+      return GalleryPhotoSourceTypeEnum.file;
+    } else if (sourceType == SourceTypeEnum.Url) {
+      return GalleryPhotoSourceTypeEnum.url;
+    }
+
+    return null;
   }
 }

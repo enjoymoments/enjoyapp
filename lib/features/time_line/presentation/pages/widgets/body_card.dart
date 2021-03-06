@@ -28,7 +28,7 @@ class _BodyCardState extends State<BodyCard> {
 
   @override
   void initState() {
-    _galleryImages = TimeLineItemModel.toGalleryImages(widget.item.medias);
+    _galleryImages = widget.item.medias.toGalleryImages();
     super.initState();
   }
 

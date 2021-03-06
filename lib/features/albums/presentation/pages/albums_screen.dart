@@ -106,7 +106,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
       },
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
-        separatorBuilder: (context, index) => SpacerBox.h8,
+        separatorBuilder: (context, index) => SpacerBox.v16,
         itemCount: state.albums.length,
         itemBuilder: (context, index) => _buildAlbumItem(state.albums[index]),
       ),
@@ -115,7 +115,9 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
 
   Widget _buildAlbumItem(AlbumItemModel album) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        ExtendedNavigator.of(context).push(Routes.add_albums_screen, arguments: AddAlbumsScreenArguments(album: album));
+      },
       child: CachedNetworkImage(
         imageUrl: album.medias[0].url,
         fit: BoxFit.cover,

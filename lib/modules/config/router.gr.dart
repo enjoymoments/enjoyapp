@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/albums/data/models/album_item_model.dart';
 import '../../features/albums/presentation/pages/add_albums_screen.dart';
 import '../../features/albums/presentation/pages/albums_screen.dart';
 import '../../features/calendar/data/models/task_calendar_model.dart';
@@ -215,8 +216,14 @@ class Router extends RouterBase {
       );
     },
     AddAlbumsScreen: (data) {
+      final args = data.getArgs<AddAlbumsScreenArguments>(
+        orElse: () => AddAlbumsScreenArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddAlbumsScreen(),
+        builder: (context) => AddAlbumsScreen(
+          key: args.key,
+          album: args.album,
+        ),
         settings: data,
       );
     },
@@ -278,4 +285,11 @@ class AddActivityScreenArguments {
       {this.key,
       @required this.activityCubit,
       @required this.addCalendarCubit});
+}
+
+/// AddAlbumsScreen arguments holder class
+class AddAlbumsScreenArguments {
+  final Key key;
+  final AlbumItemModel album;
+  AddAlbumsScreenArguments({this.key, this.album});
 }

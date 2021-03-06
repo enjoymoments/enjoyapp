@@ -2,16 +2,17 @@ import 'dart:io';
 
 import 'dart:typed_data';
 
-class GalleryImageModel {
+import 'package:mozin/modules/shared/general/models/base_image_model.dart';
+
+class GalleryImageModel extends BaseImageModel {
   GalleryImageModel({
-    this.id,
+    String id,
     this.index,
     this.file,
     this.url,
     this.byte,
-  });
+  }) : super(id: id);
 
-  final String id;
   final int index;
   final File file;
   final String url;

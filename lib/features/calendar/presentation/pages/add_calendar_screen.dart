@@ -41,6 +41,8 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   AddCalendarCubit _addCalendarCubit;
   AddActivityCubit _activityCubit;
 
+  bool get isNewItem => widget.taskModel == null;
+
   @override
   void initState() {
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
@@ -77,7 +79,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void _initValues() {
-    if (widget.taskModel != null) {
+    if (!isNewItem) {
       _addCalendarCubit.setModel(
         taskId: widget.taskModel.taskId,
         title: widget.taskModel.title,
@@ -167,7 +169,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       title: 'Criar evento',
       iconColors: Theme.of(context).backgroundColor,
       onPressedBack: () {
-        if (widget.taskModel == null &&
+        if (isNewItem &&
             ((_titleController.text != null &&
                     _titleController.text.isNotEmpty) ||
                 (_descriptionController.text != null &&
@@ -184,7 +186,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   Widget _buildActionButton() {
-    if (widget.taskModel != null) {
+    if (!isNewItem) {
       return _buildActionButtonConfig(AppIcons.trash, remove);
     }
 

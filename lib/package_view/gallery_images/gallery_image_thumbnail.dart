@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/package_view/custom_dialog.dart';
 import 'package:vibration/vibration.dart';
@@ -10,11 +12,13 @@ class GalleryImageThumbnail extends StatelessWidget {
     @required this.galleryImageModel,
     @required this.onRemoveCallback,
     @required this.onTap,
+    @required this.sourceType,
   }) : super(key: key);
 
   final GalleryImageModel galleryImageModel;
   final Function(GalleryImageModel galleryImageModel) onRemoveCallback;
   final GestureTapCallback onTap;
+  final SourceTypeEnum sourceType;
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +36,7 @@ class GalleryImageThumbnail extends StatelessWidget {
             child: Card(
               semanticContainer: true,
               clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Image.file(
-                galleryImageModel.file,
-                fit: BoxFit.fill,
-              ),
+              child: _buildImage(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
@@ -46,6 +47,22 @@ class GalleryImageThumbnail extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildImage() {
+    if (sourceType == SourceTypeEnum.File) {
+      return Image.file(
+        galleryImageModel.file,
+        fit: BoxFit.fill,
+      );
+    } else if (sourceType == SourceTypeEnum.Url) {
+      return CachedNetworkImage(
+        imageUrl: galleryImageModel.url,
+        fit: BoxFit.fill,
+      );
+    }
+
+    return null;
   }
 
   void _removeMedia(BuildContext context) async {

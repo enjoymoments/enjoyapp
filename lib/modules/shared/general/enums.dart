@@ -40,3 +40,23 @@ class MediaTypeEnum extends Enum<int> {
   @override
   String toString() => value.toString();
 }
+
+class SourceTypeEnum extends Enum<int> {
+  factory SourceTypeEnum(final int value) {
+    if (value == 1) {
+      return SourceTypeEnum.File;
+    } else if (value == 2) {
+      return SourceTypeEnum.Url;
+    }
+
+    return null;
+  }
+
+  const SourceTypeEnum._fromValue(final int value) : super._fromValue(value);
+
+  static const SourceTypeEnum File = SourceTypeEnum._fromValue(1);
+  static const SourceTypeEnum Url = SourceTypeEnum._fromValue(2);
+
+  @override
+  String toString() => value.toString();
+}

@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -137,6 +138,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _images = state.images;
           return _buildContent(
             ImageItems(
+              sourceType: SourceTypeEnum.File,
               onRemoveCallback:(model) {
                 _addTimeLineBloc.add(RemoveMedia(model));
               },
