@@ -34,9 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildContent() {
     if (_user == UserAppModel.empty) {
-      return Center(
-        child: "Olá,\nSeja bem vindo".labelIntro(context),
-      );
+      return _buildCardHelpMe();
     }
 
     return Column(
@@ -50,14 +48,18 @@ class _HomeScreenState extends State<HomeScreen> {
           'O que pretende fazer nos próximos dias ?',
         ),
         SpacerBox.v16,
-        _generateItem(
-          context,
-          AppIcons.assistive_listening_systems,
-          Routes.feedback,
-          'Ajude-nos a melhorar o app',
-          'Nos diga sugestões ou melhorias',
-        ),
+        _buildCardHelpMe(),
       ],
+    );
+  }
+
+  Widget _buildCardHelpMe() {
+    return _generateItem(
+      context,
+      AppIcons.assistive_listening_systems,
+      Routes.feedback,
+      'Ajude-nos a melhorar o app',
+      'Nos diga sugestões ou melhorias',
     );
   }
 
