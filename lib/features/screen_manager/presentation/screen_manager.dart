@@ -10,6 +10,7 @@ import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -17,9 +18,9 @@ import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/default_menu.dart';
-import 'package:mozin/package_view/enum/default_menu_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
+import 'package:mozin/package_view/fab/fab_bottom_app_bar.dart';
+import 'package:mozin/package_view/fab/layout.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScreenManager extends StatefulWidget {
@@ -46,11 +47,66 @@ class _ScreenManagerState extends State<ScreenManager> {
         return CustomScaffold(
           child: _buildContent(state),
           appBar: _buildAppBar(state),
-          bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
-            _screenManagerBloc.add(TapScreen(itemSelected, context));
-          }),
+
+          //In test
+          floatingActionButton: _buildFab(context),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: FABBottomAppBar(
+            centerItemText: '',
+            color: Theme.of(context).iconTheme.color,
+            selectedColor: Theme.of(context).primaryColor,
+            iconSize: 18,
+            notchedShape: CircularNotchedRectangle(),
+            onTabSelected: (index) {
+              _screenManagerBloc
+                  .add(TapScreen(DefaultMenuEnum(index), context));
+            },
+            items: [
+              FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
+              FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
+              FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
+              FABBottomAppBarItem(iconData: AppIcons.chart_pie, text: 'Dados'),
+            ],
+          ),
+          //Before
+          // bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
+          //   _screenManagerBloc.add(TapScreen(itemSelected, context));
+          // }),
         );
       },
+    );
+  }
+
+  Widget _buildFab(BuildContext context) {
+    //TODO: in development
+    //final icons = [Icons.sms, Icons.mail, Icons.phone];
+
+    return AnchoredOverlay(
+      showOverlay: true,
+      overlayBuilder: (context, offset) {
+        //TODO: in development
+        // return CenterAbout(
+        //   position: Offset(offset.dx, offset.dy - icons.length * 35.0),
+        //   child: FabWithIcons(
+        //     icons: icons,
+        //     onIconTapped: (index) {},
+        //   ),
+        // );
+        return SizedBox.shrink();
+      },
+      child: FloatingActionButton(
+        onPressed: () {
+          _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
+        },
+        tooltip: 'Increment',
+        child: Image.asset(
+          'assets/icons/icon.png',
+          fit: BoxFit.fill,
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 2.0,
+      ),
     );
   }
 
@@ -65,13 +121,13 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   Widget _buildContent(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DEFAULT_MENU_ENUM.TIME_LINE:
+      case DefaultMenuEnum.TimeLine:
         return TimeLineScreen();
-      case DEFAULT_MENU_ENUM.ME:
+      case DefaultMenuEnum.Me:
         return MeScreen();
-      case DEFAULT_MENU_ENUM.MONITORING:
+      case DefaultMenuEnum.Monitoring:
         return MonitoringScreen();
-      case DEFAULT_MENU_ENUM.HOME:
+      case DefaultMenuEnum.Home:
       default:
         return HomeScreen();
     }
@@ -79,7 +135,7 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   List<Widget> _buildActionButtons(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DEFAULT_MENU_ENUM.TIME_LINE:
+      case DefaultMenuEnum.TimeLine:
         if (_notAuthenticated()) {
           return [];
         }
@@ -91,11 +147,11 @@ class _ScreenManagerState extends State<ScreenManager> {
             },
           ),
         ];
-      case DEFAULT_MENU_ENUM.HOME:
+      case DefaultMenuEnum.Home:
         return [];
-      case DEFAULT_MENU_ENUM.SEARCH:
+      case DefaultMenuEnum.Search:
         return [];
-      case DEFAULT_MENU_ENUM.ME:
+      case DefaultMenuEnum.Me:
         return [
           IconButton(
             icon: CustomIcon(icon: AppIcons.bell),
@@ -115,7 +171,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             },
           ),
         ];
-      case DEFAULT_MENU_ENUM.MONITORING:
+      case DefaultMenuEnum.Monitoring:
         return [];
       default:
         return [];
@@ -124,15 +180,15 @@ class _ScreenManagerState extends State<ScreenManager> {
 
   String _getStringbyScreen(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DEFAULT_MENU_ENUM.HOME:
+      case DefaultMenuEnum.Home:
         return 'Início';
-      case DEFAULT_MENU_ENUM.TIME_LINE:
+      case DefaultMenuEnum.TimeLine:
         return 'Casal';
-      case DEFAULT_MENU_ENUM.SEARCH:
+      case DefaultMenuEnum.Search:
         return '';
-      case DEFAULT_MENU_ENUM.ME:
+      case DefaultMenuEnum.Me:
         return 'Eu';
-      case DEFAULT_MENU_ENUM.MONITORING:
+      case DefaultMenuEnum.Monitoring:
         return 'Dados';
       default:
         return '';

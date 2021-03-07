@@ -4,6 +4,8 @@ class CustomScaffold extends StatelessWidget {
   final Widget child;
   final AppBar appBar;
   final Widget bottomNavigationBar;
+  final Widget floatingActionButton;
+  final FloatingActionButtonLocation floatingActionButtonLocation;
   final Color backgroundColor;
 
   CustomScaffold({
@@ -12,6 +14,8 @@ class CustomScaffold extends StatelessWidget {
     @required this.appBar,
     @required this.bottomNavigationBar,
     this.backgroundColor,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
   }) : super(key: key);
 
   @override
@@ -21,6 +25,8 @@ class CustomScaffold extends StatelessWidget {
       appBar: appBar,
       body: child,
       bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/enum/default_menu_enum.dart';
 
 class DefaultMenu extends StatefulWidget {
-  final Function(DEFAULT_MENU_ENUM) onTap;
+  final Function(DefaultMenuEnum) onTap;
 
   const DefaultMenu({Key key, this.onTap}) : super(key: key);
 
@@ -25,7 +25,7 @@ class _DefaultMenuState extends State<DefaultMenu> {
       currentIndex: _currentIndex,
       onTap: (index) {
         _currentIndex = index;
-        widget.onTap(DEFAULT_MENU_ENUM.values[_currentIndex]);
+        widget.onTap(DefaultMenuEnum(_currentIndex));
       },
       items: [
         BottomNavigationBarItem(
@@ -43,7 +43,7 @@ class _DefaultMenuState extends State<DefaultMenu> {
             child: FittedBox(
               child: FloatingActionButton(
                 onPressed: () {
-                  widget.onTap(DEFAULT_MENU_ENUM.SEARCH);
+                  widget.onTap(DefaultMenuEnum.Search);
                 },
                 child: Image.asset(
                   'assets/icons/icon.png',

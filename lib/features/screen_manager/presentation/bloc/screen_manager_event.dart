@@ -19,7 +19,7 @@ class QueueNewAlbum extends ScreenManagerEvent {
   QueueNewAlbum(this.titleAlbum, this.medias);
 }
 class TapScreen extends ScreenManagerEvent {
-  final DEFAULT_MENU_ENUM screenSelected;
+  final DefaultMenuEnum screenSelected;
   final BuildContext context;
 
   TapScreen(this.screenSelected, this.context);

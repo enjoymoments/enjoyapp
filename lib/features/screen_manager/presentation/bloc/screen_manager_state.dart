@@ -5,7 +5,7 @@ class ScreenManagerState extends Equatable {
   final bool isLoading;
   final bool isSuccess;
   final bool isFailure;
-  final DEFAULT_MENU_ENUM currentScreen;
+  final DefaultMenuEnum currentScreen;
 
   ScreenManagerState({
     this.isLoading,
@@ -19,7 +19,7 @@ class ScreenManagerState extends Equatable {
       isLoading: false,
       isSuccess: false,
       isFailure: false,
-      currentScreen: DEFAULT_MENU_ENUM.HOME,
+      currentScreen: DefaultMenuEnum.Home,
     );
   }
 
@@ -27,7 +27,7 @@ class ScreenManagerState extends Equatable {
     bool isLoading,
     bool isSuccess,
     bool isFailure,
-    DEFAULT_MENU_ENUM currentScreen,
+    DefaultMenuEnum currentScreen,
   }) {
     return ScreenManagerState(
       isLoading: isLoading ?? this.isLoading,

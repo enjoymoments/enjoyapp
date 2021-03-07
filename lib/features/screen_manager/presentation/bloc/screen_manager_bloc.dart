@@ -10,6 +10,7 @@ import 'package:mozin/features/time_line/domain/repositories/time_line_repositor
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
@@ -18,7 +19,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
-import 'package:mozin/package_view/enum/default_menu_enum.dart';
 
 part 'screen_manager_event.dart';
 part 'screen_manager_state.dart';
@@ -54,7 +54,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
   }
 
   Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
-    if (event.screenSelected == DEFAULT_MENU_ENUM.SEARCH) {
+    if (event.screenSelected == DefaultMenuEnum.Search) {
       if (localStorageService.containsKey(bypass_interest_filter)) {
         ExtendedNavigator.of(event.context).push(Routes.search_places_screen);
       } else {
