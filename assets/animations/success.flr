@@ -798,7 +798,7 @@
 					"name": "Untitled",
 					"fps": 60,
 					"duration": 2,
-					"isLooping": true,
+					"isLooping": false,
 					"keyed": [
 						{
 							"component": 0,
