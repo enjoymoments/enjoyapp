@@ -5,6 +5,7 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -43,18 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         _generateItem(
           context,
-          Icons.calendar_today,
+          AppIcons.calendar_day,
           Routes.calendar,
           'Calendário',
-          'Bla blablablablabla',
+          'O que pretende fazer nos próximos dias ?',
         ),
         SpacerBox.v16,
         _generateItem(
           context,
-          Icons.new_releases,
-          Routes.calendar,
-          'Sugestões',
-          'Bla blablablabla labla labla',
+          AppIcons.assistive_listening_systems,
+          Routes.feedback,
+          'Ajude-nos a melhorar o app',
+          'Nos diga sugestões ou melhorias',
         ),
       ],
     );
@@ -98,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SpacerBox.v8,
-              description.description(context),
+              Expanded(
+                child: description.description(context),
+              ),
             ],
           ),
         ),

@@ -199,13 +199,6 @@ class _ScreenManagerState extends State<ScreenManager> {
         },
       ),
       CustomItemModalFit(
-        text: 'Ajude-nos a melhorar o app',
-        iconData: AppIcons.assistive_listening_systems,
-        onTap: () {
-          ExtendedNavigator.of(context).push(Routes.feedback);
-        },
-      ),
-      CustomItemModalFit(
         text: 'Configurações',
         iconData: AppIcons.cog,
         onTap: () {},
