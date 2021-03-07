@@ -18,6 +18,7 @@ import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calend
 import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
 import '../../features/calendar/presentation/pages/calendar_screen.dart';
+import '../../features/configuration/presentation/pages/configuration_screen.dart';
 import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import '../../features/feedback/presentation/pages/feedback_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
@@ -53,6 +54,7 @@ class Routes {
   static const String albums_screen = '/albums-screen';
   static const String add_albums_screen = '/add-albums-screen';
   static const String success_screen = '/custom-success-screen';
+  static const String configuration_screen = '/configuration-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -71,6 +73,7 @@ class Routes {
     albums_screen,
     add_albums_screen,
     success_screen,
+    configuration_screen,
   };
 }
 
@@ -95,6 +98,7 @@ class Router extends RouterBase {
     RouteDef(Routes.albums_screen, page: AlbumsScreen),
     RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
     RouteDef(Routes.success_screen, page: CustomSuccessScreen),
+    RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -234,6 +238,12 @@ class Router extends RouterBase {
     CustomSuccessScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => CustomSuccessScreen(),
+        settings: data,
+      );
+    },
+    ConfigurationScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ConfigurationScreen(),
         settings: data,
       );
     },

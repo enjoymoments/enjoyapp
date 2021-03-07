@@ -4,6 +4,7 @@ import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_activity_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_calendar_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
+import 'package:mozin/features/configuration/presentation/pages/configuration_screen.dart';
 import 'package:mozin/features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import 'package:mozin/features/feedback/presentation/pages/feedback_screen.dart';
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
@@ -37,6 +38,7 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'albums_screen', page: AlbumsScreen,),
     MaterialRoute(name: 'add_albums_screen', page: AddAlbumsScreen,),
     MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
+    MaterialRoute(name: 'configuration_screen', page: ConfigurationScreen,),
   ],
 )
 class $Router {}
