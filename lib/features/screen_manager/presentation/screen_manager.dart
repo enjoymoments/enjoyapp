@@ -59,8 +59,8 @@ class _ScreenManagerState extends State<ScreenManager> {
             iconSize: 18,
             notchedShape: CircularNotchedRectangle(),
             onTabSelected: (index) {
-              _screenManagerBloc
-                  .add(TapScreen(DefaultMenuEnum(index, ignoreSearch: true), context));
+              _screenManagerBloc.add(TapScreen(
+                  DefaultMenuEnum(index, ignoreSearch: true), context));
             },
             items: [
               FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
@@ -79,35 +79,46 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   Widget _buildFab(BuildContext context) {
-    //TODO: in development
-    //final icons = [Icons.sms, Icons.mail, Icons.phone];
-
-    return AnchoredOverlay(
-      showOverlay: true,
-      overlayBuilder: (context, offset) {
-        //TODO: in development
-        // return CenterAbout(
-        //   position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-        //   child: FabWithIcons(
-        //     icons: icons,
-        //     onIconTapped: (index) {},
-        //   ),
-        // );
-        return SizedBox.shrink();
+    return FloatingActionButton(
+      onPressed: () {
+        _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
       },
-      child: FloatingActionButton(
-        onPressed: () {
-          _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
-        },
-        tooltip: 'Increment',
-        child: Image.asset(
-          'assets/icons/icon.png',
-          fit: BoxFit.fill,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 2.0,
+      tooltip: 'Increment',
+      child: Image.asset(
+        'assets/icons/icon.png',
+        fit: BoxFit.fill,
       ),
+      backgroundColor: Theme.of(context).primaryColor,
+      elevation: 2.0,
     );
+
+    //TODO: in development
+    // final icons = [Icons.sms, Icons.mail, Icons.phone];
+
+    // return AnchoredOverlay(
+    //   showOverlay: true,
+    //   overlayBuilder: (context, offset) {
+    //     return CenterAbout(
+    //       position: Offset(offset.dx, offset.dy - icons.length * 35.0),
+    //       child: FabWithIcons(
+    //         icons: icons,
+    //         onIconTapped: (index) {},
+    //       ),
+    //     );
+    //   },
+    //   child: FloatingActionButton(
+    //     onPressed: () {
+    //       _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
+    //     },
+    //     tooltip: 'Increment',
+    //     child: Image.asset(
+    //       'assets/icons/icon.png',
+    //       fit: BoxFit.fill,
+    //     ),
+    //     backgroundColor: Theme.of(context).primaryColor,
+    //     elevation: 2.0,
+    //   ),
+    // );
   }
 
   Widget _buildAppBar(ScreenManagerState state) {
