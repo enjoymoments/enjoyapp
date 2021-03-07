@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       AppIcons.assistive_listening_systems,
       Routes.feedback,
       'Ajude-nos a melhorar o app',
-      'Nos diga sugestões ou melhorias',
+      'Compartilhe algum problema, sugestão ou melhoria',
     );
   }
 

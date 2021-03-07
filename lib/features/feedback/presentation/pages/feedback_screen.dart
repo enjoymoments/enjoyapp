@@ -96,7 +96,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             _CustomTile(
               selected: _feedbackType == _FeedbackType.bug,
               title: 'Quero relatar um problema',
-              description: 'bla bla bla',
+              description: 'Descreva o que está ocorrendo, assim vamos poder te ajudar',
               iconStart: AppIcons.bug,
               onTap: (selected) {
                 setState(() {
@@ -108,7 +108,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             _CustomTile(
               selected: _feedbackType == _FeedbackType.improvement,
               title: 'Tenho uma sugestão ou elogio',
-              description: 'bla bla bla',
+              description: 'Manda aquela ideia ou elogio pra gente imprimir e colar na geladeira de tanta alegria',
               iconStart: AppIcons.star,
               onTap: (selected) {
                 setState(() {
