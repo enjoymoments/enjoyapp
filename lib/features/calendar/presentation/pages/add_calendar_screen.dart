@@ -167,7 +167,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Criar evento',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         if (isNewItem &&
             ((_titleController.text != null &&

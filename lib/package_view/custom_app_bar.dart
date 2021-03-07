@@ -5,14 +5,14 @@ import 'package:mozin/package_view/custom_icon.dart';
  class CustomAppBar extends AppBar {
   CustomAppBar({
     Key key,
+    @required BuildContext context,
     @required String title,
-    @required Color iconColors,
     @required void Function() onPressedBack,
     List<Widget> actions,
   }) : super(
             title: Text(title),
             leading: IconButton(
-              icon: CustomIcon(icon: AppIcons.arrow_left, color: iconColors),
+              icon: CustomIcon(icon: AppIcons.arrow_left, color: Theme.of(context).appBarTheme.iconTheme.color),
               onPressed: onPressedBack,
             ),
             actions: actions);

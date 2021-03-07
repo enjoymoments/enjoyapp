@@ -51,7 +51,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Todos os álbums',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         Navigator.of(context).pop();
       },

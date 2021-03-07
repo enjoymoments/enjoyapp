@@ -57,7 +57,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Ajude-nos a melhorar o app',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         Navigator.of(context).pop();
       },

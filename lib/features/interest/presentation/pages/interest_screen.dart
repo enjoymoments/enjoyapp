@@ -46,7 +46,7 @@ class _InterestScreenState extends State<InterestScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Interesses',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () => ExtendedNavigator.of(context).pop(),
     );
   }

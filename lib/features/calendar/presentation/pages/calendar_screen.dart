@@ -20,7 +20,7 @@ class CalendarScreen extends StatelessWidget {
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Calendário',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         Navigator.of(context).pop();
       },

@@ -84,7 +84,7 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Favoritos',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () => Navigator.of(context).pop(),
     );
   }

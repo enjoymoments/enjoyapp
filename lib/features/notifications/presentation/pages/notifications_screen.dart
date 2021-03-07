@@ -31,7 +31,7 @@ class NotificationsScreen extends StatelessWidget {
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Alertas',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () => ExtendedNavigator.of(context).pop(),
     );
   }

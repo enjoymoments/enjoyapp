@@ -80,7 +80,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   Widget _buildAppBar() {
     return CustomAppBar(
       title: 'Criar Álbum',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         if (isNewItem &&
             (_images.length > 0 ||

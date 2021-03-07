@@ -273,7 +273,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Sugestões',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () => Navigator.of(context).pop(),
       actions: [
         _buildIconStar(),

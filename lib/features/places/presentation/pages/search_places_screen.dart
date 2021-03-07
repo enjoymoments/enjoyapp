@@ -94,7 +94,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   AppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Sugestões',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () => Navigator.of(context).pop(),
       actions: [
         IconButton(

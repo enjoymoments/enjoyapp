@@ -36,7 +36,7 @@ class AddActivityScreen extends StatelessWidget {
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: 'Tipos de atividades',
-      iconColors: Theme.of(context).backgroundColor,
+      context: context,
       onPressedBack: () {
         ExtendedNavigator.of(context).pop();
       },

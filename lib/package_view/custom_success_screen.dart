@@ -22,7 +22,7 @@ class CustomSuccessScreen extends StatelessWidget {
         Navigator.of(context).pop();
       },
       actions: <Widget>[],
-      iconColors: null,
+      context: context,
     );
   }
 
