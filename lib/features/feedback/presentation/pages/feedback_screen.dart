@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/feedback/data/models/feedback_model.dart';
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -78,7 +79,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         }
 
         if (state.isSuccess) {
-          ExtendedNavigator.of(context).pop();
+          ExtendedNavigator.of(context).popAndPush(Routes.success_screen);
         }
       },
       builder: (context, state) {

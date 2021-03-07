@@ -28,6 +28,7 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
+import '../../package_view/custom_success_screen.dart';
 import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import '../../package_view/onboading_screen.dart';
@@ -51,6 +52,7 @@ class Routes {
   static const String feedback = '/feedback-screen';
   static const String albums_screen = '/albums-screen';
   static const String add_albums_screen = '/add-albums-screen';
+  static const String success_screen = '/custom-success-screen';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -68,6 +70,7 @@ class Routes {
     feedback,
     albums_screen,
     add_albums_screen,
+    success_screen,
   };
 }
 
@@ -91,6 +94,7 @@ class Router extends RouterBase {
     RouteDef(Routes.feedback, page: FeedbackScreen),
     RouteDef(Routes.albums_screen, page: AlbumsScreen),
     RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
+    RouteDef(Routes.success_screen, page: CustomSuccessScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -224,6 +228,12 @@ class Router extends RouterBase {
           key: args.key,
           album: args.album,
         ),
+        settings: data,
+      );
+    },
+    CustomSuccessScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => CustomSuccessScreen(),
         settings: data,
       );
     },

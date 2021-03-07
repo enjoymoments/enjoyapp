@@ -5,23 +5,17 @@ import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
-
-class NotificationsScreen extends StatefulWidget {
-  @override
-  _NotificationsScreenState createState() => _NotificationsScreenState();
-}
-
-class _NotificationsScreenState extends State<NotificationsScreen> {
+class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      child: _buildBody(),
+      child: _buildBody(context),
       appBar: _buildAppBar(context),
       bottomNavigationBar: null,
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(BuildContext context) {
     return CustomContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

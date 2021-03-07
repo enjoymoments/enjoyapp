@@ -9,6 +9,7 @@ import 'package:mozin/features/feedback/presentation/pages/feedback_screen.dart'
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
 import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
+import 'package:mozin/package_view/custom_success_screen.dart';
 import 'package:mozin/package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import 'package:mozin/package_view/onboading_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
@@ -35,6 +36,7 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'feedback', page: FeedbackScreen,),
     MaterialRoute(name: 'albums_screen', page: AlbumsScreen,),
     MaterialRoute(name: 'add_albums_screen', page: AddAlbumsScreen,),
+    MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
   ],
 )
 class $Router {}
