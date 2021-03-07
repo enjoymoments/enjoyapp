@@ -60,7 +60,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             notchedShape: CircularNotchedRectangle(),
             onTabSelected: (index) {
               _screenManagerBloc
-                  .add(TapScreen(DefaultMenuEnum(index), context));
+                  .add(TapScreen(DefaultMenuEnum(index, ignoreSearch: true), context));
             },
             items: [
               FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),

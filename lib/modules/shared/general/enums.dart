@@ -62,17 +62,29 @@ class SourceTypeEnum extends Enum<int> {
 }
 
 class DefaultMenuEnum extends Enum<int> {
-  factory DefaultMenuEnum(final int value) {
-    if (value == 0) {
-      return DefaultMenuEnum.Home;
-    } else if (value == 1) {
-      return DefaultMenuEnum.TimeLine;
-    } else if (value == 2) {
-      return DefaultMenuEnum.Search;
-    } else if (value == 3) {
-      return DefaultMenuEnum.Me;
-    } else if (value == 4) {
-      return DefaultMenuEnum.Monitoring;
+  factory DefaultMenuEnum(final int value, {bool ignoreSearch}) {
+    if (ignoreSearch) {
+      if (value == 0) {
+        return DefaultMenuEnum.Home;
+      } else if (value == 1) {
+        return DefaultMenuEnum.TimeLine;
+      } else if (value == 2) {
+        return DefaultMenuEnum.Me;
+      } else if (value == 3) {
+        return DefaultMenuEnum.Monitoring;
+      }
+    } else {
+      if (value == 0) {
+        return DefaultMenuEnum.Home;
+      } else if (value == 1) {
+        return DefaultMenuEnum.TimeLine;
+      } else if (value == 2) {
+        return DefaultMenuEnum.Search;
+      } else if (value == 3) {
+        return DefaultMenuEnum.Me;
+      } else if (value == 4) {
+        return DefaultMenuEnum.Monitoring;
+      }
     }
 
     return null;
