@@ -28,15 +28,13 @@ class CustomSuccessScreen extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     return CustomContainer(
-      child: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildAnimation(),
-            "Muito obrigado pelo feedback !!!".labelIntro(context),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildAnimation(),
+          "Muito obrigado pelo feedback !!!".labelIntro(context),
+        ],
       ),
     );
   }
