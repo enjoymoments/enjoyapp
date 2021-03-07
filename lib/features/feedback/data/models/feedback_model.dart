@@ -2,10 +2,11 @@ import 'package:mozin/features/feedback/domain/entities/feedback.dart';
 
 class FeedbackModel extends Feedback {
   
-  const FeedbackModel();
-  // const FeedbackModel(
-  //     {})
-  //     : super();
+  FeedbackModel({this.description, this.userEmail, this.feedbackType});
+
+  String description;
+  String userEmail;
+  int feedbackType;
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};
@@ -23,8 +24,11 @@ class FeedbackModel extends Feedback {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
+    return {
+      'description': description,
+      'userEmail': userEmail,
+      'feedbackType': feedbackType,
+    };
   }
 
   FeedbackModel copyWith() {

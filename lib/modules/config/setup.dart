@@ -23,6 +23,10 @@ import 'package:mozin/features/favoriteinterests/data/datasources/favorite_inter
 import 'package:mozin/features/favoriteinterests/data/repositories/favorite_interests_repository_impl.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
+import 'package:mozin/features/feedback/data/datasources/feedback_remote_data_source.dart';
+import 'package:mozin/features/feedback/data/repositories/feedback_repository_impl.dart';
+import 'package:mozin/features/feedback/domain/repositories/feedback_repository.dart';
+import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
 import 'package:mozin/features/interest/data/datasources/interest_remote_data_source.dart';
 import 'package:mozin/features/interest/data/repositories/interest_repository_impl.dart';
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
@@ -210,6 +214,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<AddAlbumCubit>(
       () => AddAlbumCubit(wrapperMediaService: getItInstance()));                    
+
+  getItInstance.registerFactory<FeedbackCubit>(
+      () => FeedbackCubit(feedbackRepository: getItInstance(), userWrapper: getItInstance()));                        
 }
 
 void _registerSingletonRepositories() {
@@ -241,6 +248,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<AlbumsRepository>(
       () => AlbumsRepositoryImpl(remoteDataSource: getItInstance())); 
+
+  getItInstance.registerLazySingleton<FeedbackRepository>(
+      () => FeedbackRepositoryImpl(remoteDataSource: getItInstance())); 
 }
 
 void _registerSingletonDataSources() {
@@ -264,6 +274,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<AlbumsRemoteDataSource>(
       () => AlbumsRemoteDataSourceImpl(getItInstance(), getItInstance()));        
+
+  getItInstance.registerLazySingleton<FeedbackRemoteDataSource>(
+      () => FeedbackRemoteDataSourceImpl(getItInstance()));        
 }
 
 Future<LocalStorageService> _setupHive() async {
