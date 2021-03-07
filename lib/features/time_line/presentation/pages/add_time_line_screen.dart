@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -17,6 +18,7 @@ import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/package_view/rounded_loading_button.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
@@ -26,6 +28,7 @@ class AddTimeLineScreen extends StatefulWidget {
 
 class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   TextEditingController _descriptionController;
+  RoundedLoadingButtonController _actionButtoncontroller;
 
   AddTimeLineBloc _addTimeLineBloc;
   int _currentIndex = 0;
@@ -34,6 +37,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   @override
   void initState() {
     _images = [];
+    _actionButtoncontroller = RoundedLoadingButtonController();
     _addTimeLineBloc = getItInstance<AddTimeLineBloc>();
     _descriptionController = TextEditingController();
     _descriptionController.addListener(() {
@@ -73,14 +77,21 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         Navigator.of(context).pop();
       },
       actions: <Widget>[
-        IconButton(
-          icon: CustomIcon(icon: AppIcons.check),
+        RoundedLoadingButton(
+          width: SizeConfig.sizeByPixel(50),
+          controller: _actionButtoncontroller,
+          child: CustomIcon(
+            icon: AppIcons.check,
+            color: Theme.of(context).appBarTheme.iconTheme.color,
+          ),
           onPressed: () {
             if (_images.length > 0 ||
                 (_descriptionController.text != null &&
                     _descriptionController.text.isNotEmpty)) {
               _addTimeLineBloc.add(SaveTimeLine());
             }
+
+            _actionButtoncontroller.stop();
           },
         ),
       ],
@@ -119,6 +130,8 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
     return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
       cubit: _addTimeLineBloc,
       listener: (consumerContext, state) {
+        _actionButtoncontroller.stop();
+
         if (state.isError) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
@@ -139,7 +152,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           return _buildContent(
             ImageItems(
               sourceType: SourceTypeEnum.File,
-              onRemoveCallback:(model) {
+              onRemoveCallback: (model) {
                 _addTimeLineBloc.add(RemoveMedia(model));
               },
               images: state.images,

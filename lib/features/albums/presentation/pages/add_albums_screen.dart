@@ -185,7 +185,6 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
         if (_images.length > 0 ||
             (_titleController.text != null &&
                 _titleController.text.isNotEmpty)) {
-          _actionButtoncontroller.start();
           callback();
         }
       },

@@ -140,7 +140,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         color: Theme.of(context).appBarTheme.iconTheme.color,
       ),
       onPressed: () {
-        _actionButtoncontroller.start();
         save();
       },
     );

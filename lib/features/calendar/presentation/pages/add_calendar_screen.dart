@@ -202,7 +202,6 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
         color: Theme.of(context).appBarTheme.iconTheme.color,
       ),
       onPressed: () {
-        _actionButtoncontroller.start();
         callback();
       },
     );
