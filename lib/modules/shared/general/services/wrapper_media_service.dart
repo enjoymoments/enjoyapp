@@ -24,10 +24,13 @@ class WrapperMediaService {
     return uuidService.v4();
   }
 
-  Future<List<File>> getMedias({FileType fileType = FileType.image}) async {
-    return await FilePicker.getMultiFile(
+  Future<List<PlatformFile>> getMedias({FileType fileType = FileType.image}) async {
+    FilePickerResult _result = await FilePicker.platform.pickFiles(
       type: fileType,
+      allowMultiple: true
     );
+    
+    return _result.files;
   }
 
   Future<File> openCamera() async {
@@ -36,7 +39,7 @@ class WrapperMediaService {
     return file != null ? File(file.path) : null;
   }
 
-  List<GalleryImageModel> transformFilesToImages(List<File> files) {
+  List<GalleryImageModel> transformFilesToImages(List<PlatformFile> files) {
     final List<GalleryImageModel> galleryItems = [];
 
     for (var i = 0; i < files.length; i++) {
@@ -44,7 +47,8 @@ class WrapperMediaService {
       galleryItems.add(GalleryImageModel(
         id: uuidService.v4(),
         index: i,
-        file: item,
+        //TODO:review this
+        //file: item,
       ));
     }
 

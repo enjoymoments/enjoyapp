@@ -97,10 +97,9 @@ Future setup() async {
 }
 
 Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
-  final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  final RemoteConfig remoteConfig = RemoteConfig.instance;
   await remoteConfig.setDefaults(getRemoteConfigDefault());
-  await remoteConfig.fetch();
-  await remoteConfig.activateFetched();
+  await remoteConfig.fetchAndActivate();
   return remoteConfig;
 }
 

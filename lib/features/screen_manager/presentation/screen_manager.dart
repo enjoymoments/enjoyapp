@@ -175,7 +175,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             onPressed: () {
               showMaterialModalBottomSheet(
                 context: context,
-                builder: (context, scrollController) => CustomModalFit(
+                builder: (context) => CustomModalFit(
                   items: _getItemsModalFit(),
                 ),
               );
@@ -228,7 +228,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         onTap: () {
           showMaterialModalBottomSheet(
             context: context,
-            builder: (context, scrollController) => CustomModalFit(
+            builder: (context) => CustomModalFit(
               items: [
                 CustomItemModalFit(
                   text: 'Instagram',

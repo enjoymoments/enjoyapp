@@ -39,7 +39,7 @@ class HeaderCard extends StatelessWidget {
               onTap: () {
                 showMaterialModalBottomSheet(
                   context: context,
-                  builder: (context, scrollController) => CustomModalFit(
+                  builder: (context) => CustomModalFit(
                     items: [
                       CustomItemModalFit(
                         text: 'Deletar',
