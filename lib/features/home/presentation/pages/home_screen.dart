@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildContent() {
     if (_user == UserAppModel.empty) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildCardHelpMe(),
           SpacerBox.v16,
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _generateItem(
           context,
