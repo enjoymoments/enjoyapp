@@ -167,7 +167,7 @@ class _ScreenManagerState extends State<ScreenManager> {
           IconButton(
             icon: CustomIcon(icon: AppIcons.bell),
             onPressed: () {
-              ExtendedNavigator.of(context).push(Routes.notification);
+              ExtendedNavigator.of(context).push(Routes.notification_screen);
             },
           ),
           IconButton(

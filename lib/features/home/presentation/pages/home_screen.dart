@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _generateItem(
           context,
           AppIcons.calendar_day,
-          Routes.calendar,
+          Routes.calendar_screen,
           'Calendário',
           'O que pretende fazer nos próximos dias ?',
         ),
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return _generateItem(
       context,
       AppIcons.assistive_listening_systems,
-      Routes.feedback,
+      Routes.feedback_screen,
       'Ajude-nos a melhorar o app',
       'Compartilhe algum problema, sugestão ou melhoria',
     );

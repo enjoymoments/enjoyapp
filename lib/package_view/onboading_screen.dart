@@ -12,7 +12,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager, (route) => false);
+    ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager_screen, (route) => false);
   }
 
   @override
