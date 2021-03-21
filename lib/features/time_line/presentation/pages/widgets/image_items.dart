@@ -54,7 +54,7 @@ class ImageItems extends StatelessWidget {
 
   void open(BuildContext context, final int index) {
     ExtendedNavigator.of(context).push(
-      Routes.gallery_photo_view_wrapper,
+      Routes.gallery_photo_view_wrapper_screen,
       arguments: GalleryPhotoViewWrapperArguments(
         galleryPhotoSourceType: _sourceType(),
         galleryItems: images,

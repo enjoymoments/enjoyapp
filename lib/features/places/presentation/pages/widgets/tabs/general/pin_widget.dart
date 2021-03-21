@@ -22,7 +22,7 @@ class PinWidget extends StatelessWidget {
       onTap: () {
         showMaterialModalBottomSheet(
           context: context,
-          builder: (context, scrollController) => GpsModalFit(
+          builder: (context) => GpsModalFit(
             gpsOpenCubit: gpsOpenCubit,
           ),
         );

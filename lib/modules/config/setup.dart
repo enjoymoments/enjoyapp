@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:mozin/features/ads/data/repositories/ads_repository_impl.dart';
+import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
@@ -27,6 +29,7 @@ import 'package:mozin/features/feedback/data/datasources/feedback_remote_data_so
 import 'package:mozin/features/feedback/data/repositories/feedback_repository_impl.dart';
 import 'package:mozin/features/feedback/domain/repositories/feedback_repository.dart';
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
+import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/interest/data/datasources/interest_remote_data_source.dart';
 import 'package:mozin/features/interest/data/repositories/interest_repository_impl.dart';
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
@@ -76,6 +79,10 @@ void setupRoot() {
   root.registerLazySingleton<AuthenticationBloc>(
     () => AuthenticationBloc(),
   );
+
+  root.registerLazySingleton<AdsRepository>(
+    () => AdsRepositoryImpl(),
+  );
 }
 
 Future setup() async {
@@ -97,10 +104,9 @@ Future setup() async {
 }
 
 Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
-  final RemoteConfig remoteConfig = await RemoteConfig.instance;
+  final RemoteConfig remoteConfig = RemoteConfig.instance;
   await remoteConfig.setDefaults(getRemoteConfigDefault());
-  await remoteConfig.fetch();
-  await remoteConfig.activateFetched();
+  await remoteConfig.fetchAndActivate();
   return remoteConfig;
 }
 
@@ -217,6 +223,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<FeedbackCubit>(
       () => FeedbackCubit(feedbackRepository: getItInstance(), userWrapper: getItInstance()));                        
+
+  getItInstance.registerFactory<HomeCubit>(
+      () => HomeCubit(adsRepository: root<AdsRepository>()));                        
 }
 
 void _registerSingletonRepositories() {

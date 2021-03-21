@@ -38,7 +38,7 @@ class _IntroScreenState extends State<IntroScreen> {
         } else if (state.redirectOnboarding) {
           ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.onboarding_screen, (route) => false);
         } else if (state.redirectHome) {
-          ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager, (route) => false);
+          ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager_screen, (route) => false);
         }
       },
       builder: (BuildContext context, IntroState state) {

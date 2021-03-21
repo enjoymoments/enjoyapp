@@ -115,7 +115,7 @@ class _BodyCardState extends State<BodyCard> {
     return GestureDetector(
       onTap: () {
         ExtendedNavigator.of(context).push(
-          Routes.gallery_photo_view_wrapper,
+          Routes.gallery_photo_view_wrapper_screen,
           arguments: GalleryPhotoViewWrapperArguments(
             loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
                 CustomCircularProgressIndicator(),

@@ -309,7 +309,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               onTap: () {
                 _activityCubit.setSeleted(widget.taskModel?.activities);
                 ExtendedNavigator.of(context).push(
-                  Routes.add_activity,
+                  Routes.add_activity_screen,
                   arguments: AddActivityScreenArguments(
                     addCalendarCubit: _addCalendarCubit,
                     activityCubit: _activityCubit,

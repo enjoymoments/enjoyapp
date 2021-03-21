@@ -227,7 +227,7 @@ class _CalendarContentState extends State<CalendarContent>
         var _eventCast = event as TaskCalendarModel;
         return InkWell(
           onTap: () {
-            ExtendedNavigator.of(context).push(Routes.add_calendar,
+            ExtendedNavigator.of(context).push(Routes.add_calendar_screen,
                 arguments: AddCalendarScreenArguments(taskModel: _eventCast));
           },
           child: Container(

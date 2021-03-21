@@ -21,7 +21,7 @@ List<Widget> buildPhotos(BuildContext context, List<Uint8List> images, double im
       GestureDetector(
         onTap: () {
           ExtendedNavigator.of(context).push(
-            Routes.gallery_photo_view_wrapper,
+            Routes.gallery_photo_view_wrapper_screen,
             arguments: GalleryPhotoViewWrapperArguments(
               loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
                   CustomCircularProgressIndicator(),

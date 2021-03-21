@@ -164,18 +164,19 @@ class _ScreenManagerState extends State<ScreenManager> {
         return [];
       case DefaultMenuEnum.Me:
         return [
-          IconButton(
-            icon: CustomIcon(icon: AppIcons.bell),
-            onPressed: () {
-              ExtendedNavigator.of(context).push(Routes.notification);
-            },
-          ),
+          //TODO:in development
+          // IconButton(
+          //   icon: CustomIcon(icon: AppIcons.bell),
+          //   onPressed: () {
+          //     ExtendedNavigator.of(context).push(Routes.notification_screen);
+          //   },
+          // ),
           IconButton(
             icon: CustomIcon(icon: AppIcons.bars),
             onPressed: () {
               showMaterialModalBottomSheet(
                 context: context,
-                builder: (context, scrollController) => CustomModalFit(
+                builder: (context) => CustomModalFit(
                   items: _getItemsModalFit(),
                 ),
               );
@@ -228,7 +229,7 @@ class _ScreenManagerState extends State<ScreenManager> {
         onTap: () {
           showMaterialModalBottomSheet(
             context: context,
-            builder: (context, scrollController) => CustomModalFit(
+            builder: (context) => CustomModalFit(
               items: [
                 CustomItemModalFit(
                   text: 'Instagram',

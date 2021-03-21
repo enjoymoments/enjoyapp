@@ -28,7 +28,7 @@ class CalendarScreen extends StatelessWidget {
         IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.add_calendar);
+            ExtendedNavigator.of(context).push(Routes.add_calendar_screen);
           },
         ),
       ],

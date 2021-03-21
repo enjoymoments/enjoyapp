@@ -11,6 +11,10 @@
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5039935894572150~6680679953"/>
+
         <meta-data android:name="com.facebook.sdk.ApplicationId"
           android:value="@string/facebook_app_id"/>
 

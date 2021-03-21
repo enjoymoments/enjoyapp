@@ -20,7 +20,7 @@ class PhoneWidget extends StatelessWidget {
       onTap: () {
         showMaterialModalBottomSheet(
           context: context,
-          builder: (context, scrollController) => PhoneModalFit(
+          builder: (context) => PhoneModalFit(
             phoneNumber: item.formattedPhoneNumber,
           ),
         );

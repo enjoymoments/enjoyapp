@@ -34,46 +34,49 @@ import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import '../../package_view/onboading_screen.dart';
 import '../shared/general/models/gallery_image_model.dart';
+import 'router.dart';
 
 class Routes {
   static const String intro_screen = '/';
-  static const String screen_manager = '/screen-manager';
+  static const String screen_manager_screen = '/screen-manager';
   static const String onboarding_screen = '/on-boarding-screen';
   static const String search_places_screen = '/search-places-screen';
-  static const String place_item_details = '/place-item-details';
+  static const String place_item_details_screen = '/place-item-details';
   static const String interest_screen = '/interest-screen';
   static const String add_time_line_screen = '/add-time-line-screen';
-  static const String gallery_photo_view_wrapper =
+  static const String gallery_photo_view_wrapper_screen =
       '/gallery-photo-view-wrapper';
-  static const String notification = '/notifications-screen';
-  static const String favorite_interests = '/favorite-interests-screen';
-  static const String calendar = '/calendar-screen';
-  static const String add_calendar = '/add-calendar-screen';
-  static const String add_activity = '/add-activity-screen';
-  static const String feedback = '/feedback-screen';
+  static const String notification_screen = '/notifications-screen';
+  static const String favorite_interests_screen = '/favorite-interests-screen';
+  static const String calendar_screen = '/calendar-screen';
+  static const String add_calendar_screen = '/add-calendar-screen';
+  static const String add_activity_screen = '/add-activity-screen';
+  static const String feedback_screen = '/feedback-screen';
   static const String albums_screen = '/albums-screen';
   static const String add_albums_screen = '/add-albums-screen';
   static const String success_screen = '/custom-success-screen';
   static const String configuration_screen = '/configuration-screen';
+  static const String home_partial = '/home-partial';
   static const all = <String>{
     intro_screen,
-    screen_manager,
+    screen_manager_screen,
     onboarding_screen,
     search_places_screen,
-    place_item_details,
+    place_item_details_screen,
     interest_screen,
     add_time_line_screen,
-    gallery_photo_view_wrapper,
-    notification,
-    favorite_interests,
-    calendar,
-    add_calendar,
-    add_activity,
-    feedback,
+    gallery_photo_view_wrapper_screen,
+    notification_screen,
+    favorite_interests_screen,
+    calendar_screen,
+    add_calendar_screen,
+    add_activity_screen,
+    feedback_screen,
     albums_screen,
     add_albums_screen,
     success_screen,
     configuration_screen,
+    home_partial,
   };
 }
 
@@ -82,23 +85,25 @@ class Router extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.intro_screen, page: IntroScreen),
-    RouteDef(Routes.screen_manager, page: ScreenManager),
+    RouteDef(Routes.screen_manager_screen, page: ScreenManager),
     RouteDef(Routes.onboarding_screen, page: OnBoardingScreen),
     RouteDef(Routes.search_places_screen, page: SearchPlacesScreen),
-    RouteDef(Routes.place_item_details, page: PlaceItemDetails),
+    RouteDef(Routes.place_item_details_screen, page: PlaceItemDetails),
     RouteDef(Routes.interest_screen, page: InterestScreen),
     RouteDef(Routes.add_time_line_screen, page: AddTimeLineScreen),
-    RouteDef(Routes.gallery_photo_view_wrapper, page: GalleryPhotoViewWrapper),
-    RouteDef(Routes.notification, page: NotificationsScreen),
-    RouteDef(Routes.favorite_interests, page: FavoriteInterestsScreen),
-    RouteDef(Routes.calendar, page: CalendarScreen),
-    RouteDef(Routes.add_calendar, page: AddCalendarScreen),
-    RouteDef(Routes.add_activity, page: AddActivityScreen),
-    RouteDef(Routes.feedback, page: FeedbackScreen),
+    RouteDef(Routes.gallery_photo_view_wrapper_screen,
+        page: GalleryPhotoViewWrapper),
+    RouteDef(Routes.notification_screen, page: NotificationsScreen),
+    RouteDef(Routes.favorite_interests_screen, page: FavoriteInterestsScreen),
+    RouteDef(Routes.calendar_screen, page: CalendarScreen),
+    RouteDef(Routes.add_calendar_screen, page: AddCalendarScreen),
+    RouteDef(Routes.add_activity_screen, page: AddActivityScreen),
+    RouteDef(Routes.feedback_screen, page: FeedbackScreen),
     RouteDef(Routes.albums_screen, page: AlbumsScreen),
     RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
     RouteDef(Routes.success_screen, page: CustomSuccessScreen),
     RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
+    RouteDef(Routes.home_partial, page: HomePartial),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -244,6 +249,12 @@ class Router extends RouterBase {
     ConfigurationScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => ConfigurationScreen(),
+        settings: data,
+      );
+    },
+    HomePartial: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomePartial(),
         settings: data,
       );
     },
