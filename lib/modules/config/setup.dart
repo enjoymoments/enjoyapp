@@ -198,7 +198,7 @@ void _registerBlocs() {
       () => GpsOpenCubit());    
 
   getItInstance.registerFactory<ConnectedCubit>(
-      () => ConnectedCubit());    
+      () => ConnectedCubit(adsRepository: root<AdsRepository>()));    
 
   getItInstance.registerFactory<FavoriteInterestsBloc>(
       () => FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));    

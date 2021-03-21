@@ -1,28 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/connected/connected_tab_enum.dart';
-import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/general/interest_type.dart';
-import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'connected_state.dart';
 
 class ConnectedCubit extends Cubit<ConnectedState> {
-  ConnectedCubit() : super(ConnectedState.initial());
+  ConnectedCubit({
+    @required AdsRepository adsRepository,
+  })  : assert(adsRepository != null),
+        _adsRepository = adsRepository,
+        super(ConnectedState.initial());
 
-  void changeTab(int nextTab) {
-    var _favoriteInterests;
+  final AdsRepository _adsRepository;
 
-    if (ConnectedTabEnum.values[nextTab] == ConnectedTabEnum.PLACE) {
-      var _userWrapper = getItInstance<UserWrapper>();
-      var _user = _userWrapper.getUser;
-      _favoriteInterests = _user.favoriteInterests;
-    }
-
-    emit(state.copyWith(
-      connectedTabEnum: ConnectedTabEnum.values[nextTab],
-      favoriteInterests: _favoriteInterests,
-    ));
+  void loadAds() async {
+    var response =
+        await _adsRepository.getAdsByScreen(Routes.configuration_screen);
+    response.fold((ads) {
+      return emit(state.copyWith(isLoading: false, ads: ads));
+    }, (exception) {
+      return emit(state.copyWith(isLoading: false, isError: true));
+    });
   }
 }

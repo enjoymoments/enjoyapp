@@ -58,8 +58,8 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
             );
           }
 
-          if (state.favoriteInterests != null &&
-              state.favoriteInterests.places.length == 0) {
+          if (state.favoriteInterests == null ||
+              state.favoriteInterests?.places?.length == 0) {
             return Container(
               child: Center(child: "Nada encontrado".labelIntro(context)),
               height: SizeConfig.screenHeight / 1.5,

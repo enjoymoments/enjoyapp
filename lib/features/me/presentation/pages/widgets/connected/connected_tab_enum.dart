@@ -1,1 +1,0 @@
-enum ConnectedTabEnum {ALBUM, PLACE}

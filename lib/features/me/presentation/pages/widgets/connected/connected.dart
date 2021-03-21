@@ -1,17 +1,26 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/ads/presentation/pages/banners/banner_add_widget.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel user;
+  final ConnectedCubit connectedCubit;
 
-  const Connected({Key key, @required this.user}) : super(key: key);
+  const Connected({
+    Key key,
+    @required this.user,
+    @required this.connectedCubit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +31,9 @@ class Connected extends StatelessWidget {
             SpacerBox.v10,
             _buildHeader(context),
             SpacerBox.v16,
-            Divider(
-              color: Theme.of(context).hintColor,
-              height: SizeConfig.sizeByPixel(4),
-            ),
+            CustomDivider(),
             SpacerBox.v16,
-            _buildFavouritesItem(context),
+            _buildCards(context),
           ],
         ),
       ),
@@ -78,14 +84,29 @@ class Connected extends StatelessWidget {
     );
   }
 
-  Widget _buildFavouritesItem(BuildContext context) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      spacing: 30,
-      children: [
-        _generateItem(context, Routes.albums_screen, 'Álbuns'),
-        _generateItem(context, Routes.favorite_interests_screen, 'Favoritos'),
-      ],
+  Widget _buildCards(BuildContext context) {
+    return BlocBuilder<ConnectedCubit, ConnectedState>(
+      cubit: connectedCubit,
+      builder: (context, state) {
+        return Column(
+          children: [
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 30,
+              children: [
+                _generateItem(context, Routes.albums_screen, 'Álbuns'),
+                _generateItem(
+                    context, Routes.favorite_interests_screen, 'Favoritos'),
+              ],
+            ),
+            SpacerBox.v16,
+            if (state.ads != null && state.ads.length > 0)
+              BannerAdWidget(
+                bannerAd: state.ads[0],
+              ),
+          ],
+        );
+      },
     );
   }
 

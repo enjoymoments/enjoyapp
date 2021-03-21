@@ -7,8 +7,7 @@ class ConnectedState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
-    @required this.connectedTabEnum,
-    this.favoriteInterests,
+    this.ads,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -17,8 +16,7 @@ class ConnectedState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final ConnectedTabEnum connectedTabEnum;
-  final InterestType favoriteInterests;
+  final List<BannerAd> ads;
 
   factory ConnectedState.initial() {
     return ConnectedState(
@@ -27,8 +25,7 @@ class ConnectedState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      connectedTabEnum: ConnectedTabEnum.ALBUM,
-      favoriteInterests: null,
+      ads: List(),
     );
   }
 
@@ -38,8 +35,7 @@ class ConnectedState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
-    ConnectedTabEnum connectedTabEnum,
-    InterestType favoriteInterests,
+    List<BannerAd> ads,
   }) {
     return ConnectedState(
       isLoading: isLoading ?? this.isLoading,
@@ -47,8 +43,7 @@ class ConnectedState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      connectedTabEnum: connectedTabEnum ?? this.connectedTabEnum,
-      favoriteInterests: favoriteInterests ?? this.favoriteInterests,
+      ads: ads ?? this.ads,
     );
   }
 
@@ -59,7 +54,6 @@ class ConnectedState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
-        connectedTabEnum,
-        favoriteInterests,
+        ads,
       ];
 }
