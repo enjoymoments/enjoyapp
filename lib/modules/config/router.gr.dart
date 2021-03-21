@@ -57,6 +57,7 @@ class Routes {
   static const String success_screen = '/custom-success-screen';
   static const String configuration_screen = '/configuration-screen';
   static const String home_partial = '/home-partial';
+  static const String me_authenticated_partial = '/me-authenticated-partial';
   static const all = <String>{
     intro_screen,
     screen_manager_screen,
@@ -77,6 +78,7 @@ class Routes {
     success_screen,
     configuration_screen,
     home_partial,
+    me_authenticated_partial,
   };
 }
 
@@ -104,6 +106,7 @@ class Router extends RouterBase {
     RouteDef(Routes.success_screen, page: CustomSuccessScreen),
     RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
     RouteDef(Routes.home_partial, page: HomePartial),
+    RouteDef(Routes.me_authenticated_partial, page: MeAuthenticatedPartial),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -255,6 +258,12 @@ class Router extends RouterBase {
     HomePartial: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => HomePartial(),
+        settings: data,
+      );
+    },
+    MeAuthenticatedPartial: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MeAuthenticatedPartial(),
         settings: data,
       );
     },

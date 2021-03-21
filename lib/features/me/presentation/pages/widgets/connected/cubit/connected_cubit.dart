@@ -18,7 +18,7 @@ class ConnectedCubit extends Cubit<ConnectedState> {
 
   void loadAds() async {
     var response =
-        await _adsRepository.getAdsByScreen(Routes.configuration_screen);
+        await _adsRepository.getAdsByScreen(Routes.me_authenticated_partial);
     response.fold((ads) {
       return emit(state.copyWith(isLoading: false, ads: ads));
     }, (exception) {

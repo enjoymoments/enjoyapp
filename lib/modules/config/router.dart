@@ -41,11 +41,20 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
     MaterialRoute(name: 'configuration_screen', page: ConfigurationScreen,),
     MaterialRoute(name: 'home_partial', page: HomePartial,),
+    MaterialRoute(name: 'me_authenticated_partial', page: MeAuthenticatedPartial,),
   ],
 )
 class $Router {}
 
 class HomePartial extends Widget {
+  @override
+  Element createElement() {
+    // TODO: implement createElement
+    throw UnimplementedError();
+  }
+}
+
+class MeAuthenticatedPartial extends Widget {
   @override
   Element createElement() {
     // TODO: implement createElement
