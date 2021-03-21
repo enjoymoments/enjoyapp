@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mozin/features/ads/presentation/pages/banner/banner_add.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/ads/presentation/pages/banners/banner_add_widget.dart';
+import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
@@ -20,28 +21,44 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   UserAppModel _user;
+  HomeCubit _homeCubit;
 
   @override
   void initState() {
     _user = getItInstance<UserWrapper>().getUser;
+    _homeCubit = getItInstance<HomeCubit>()..loadAds();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _homeCubit.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      child: _buildContent(),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        cubit: _homeCubit,
+        builder: (context, state) {
+          return _buildContent(state);
+        },
+      ),
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(HomeState state) {
     if (_user == UserAppModel.empty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildCardHelpMe(),
           SpacerBox.v16,
-          BannerAdWidget(AdSize.banner),
+          if (state.ads != null && state.ads.length > 0)
+            BannerAdWidget(
+              bannerAd: state.ads[0],
+            ),
         ],
       );
     }
@@ -59,7 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
         SpacerBox.v16,
         _buildCardHelpMe(),
         SpacerBox.v16,
-        BannerAdWidget(AdSize.banner),
+        if (state.ads != null && state.ads.length > 0)
+            BannerAdWidget(
+              bannerAd: state.ads[0],
+            ),
       ],
     );
   }
