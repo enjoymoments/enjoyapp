@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
   final AdsRepository _adsRepository;
 
   void loadAds() async {
-    var response = await _adsRepository.getAdsByScreen(Routes.add_calendar);
+    var response = await _adsRepository.getAdsByScreen(Routes.home_partial);
     response.fold((ads) {
       return emit(state.copyWith(isLoading: false, ads: ads));
     }, (exception) {

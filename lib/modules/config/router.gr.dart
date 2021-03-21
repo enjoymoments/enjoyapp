@@ -34,6 +34,7 @@ import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import '../../package_view/onboading_screen.dart';
 import '../shared/general/models/gallery_image_model.dart';
+import 'router.dart';
 
 class Routes {
   static const String intro_screen = '/';
@@ -55,6 +56,7 @@ class Routes {
   static const String add_albums_screen = '/add-albums-screen';
   static const String success_screen = '/custom-success-screen';
   static const String configuration_screen = '/configuration-screen';
+  static const String home_partial = '/home-partial';
   static const all = <String>{
     intro_screen,
     screen_manager,
@@ -74,6 +76,7 @@ class Routes {
     add_albums_screen,
     success_screen,
     configuration_screen,
+    home_partial,
   };
 }
 
@@ -99,6 +102,7 @@ class Router extends RouterBase {
     RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
     RouteDef(Routes.success_screen, page: CustomSuccessScreen),
     RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
+    RouteDef(Routes.home_partial, page: HomePartial),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -244,6 +248,12 @@ class Router extends RouterBase {
     ConfigurationScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => ConfigurationScreen(),
+        settings: data,
+      );
+    },
+    HomePartial: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomePartial(),
         settings: data,
       );
     },

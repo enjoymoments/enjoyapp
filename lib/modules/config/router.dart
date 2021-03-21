@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/presentation/pages/add_albums_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_activity_screen.dart';
@@ -39,6 +40,15 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'add_albums_screen', page: AddAlbumsScreen,),
     MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
     MaterialRoute(name: 'configuration_screen', page: ConfigurationScreen,),
+    MaterialRoute(name: 'home_partial', page: HomePartial,),
   ],
 )
 class $Router {}
+
+class HomePartial extends Widget {
+  @override
+  Element createElement() {
+    // TODO: implement createElement
+    throw UnimplementedError();
+  }
+}
