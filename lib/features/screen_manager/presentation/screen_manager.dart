@@ -164,12 +164,13 @@ class _ScreenManagerState extends State<ScreenManager> {
         return [];
       case DefaultMenuEnum.Me:
         return [
-          IconButton(
-            icon: CustomIcon(icon: AppIcons.bell),
-            onPressed: () {
-              ExtendedNavigator.of(context).push(Routes.notification_screen);
-            },
-          ),
+          //TODO:in development
+          // IconButton(
+          //   icon: CustomIcon(icon: AppIcons.bell),
+          //   onPressed: () {
+          //     ExtendedNavigator.of(context).push(Routes.notification_screen);
+          //   },
+          // ),
           IconButton(
             icon: CustomIcon(icon: AppIcons.bars),
             onPressed: () {
