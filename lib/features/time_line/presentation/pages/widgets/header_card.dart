@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_avatar_with_name.dart';
 import 'package:mozin/package_view/custom_icon.dart';
@@ -35,7 +36,7 @@ class HeaderCard extends StatelessWidget {
               backgroundImage: _getBackgroundImage(),
               child: item.dateCreationFormatted.date(context),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 showMaterialModalBottomSheet(
                   context: context,
@@ -52,7 +53,12 @@ class HeaderCard extends StatelessWidget {
                   ),
                 );
               },
-              child: CustomIcon(icon: AppIcons.ellipsis_h),
+              child: Container(
+                width: SizeConfig.sizeByPixel(60),
+                height: SizeConfig.sizeByPixel(30),
+                alignment: Alignment.centerRight,
+                child: CustomIcon(icon: AppIcons.ellipsis_h),
+              ),
             ),
           ],
         ),
