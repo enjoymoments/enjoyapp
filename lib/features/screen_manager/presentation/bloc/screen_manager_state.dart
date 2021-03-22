@@ -6,12 +6,14 @@ class ScreenManagerState extends Equatable {
   final bool isSuccess;
   final bool isFailure;
   final DefaultMenuEnum currentScreen;
+  final Map<DefaultMenuEnum, Widget> contents;
 
   ScreenManagerState({
     this.isLoading,
     this.isSuccess,
     this.isFailure,
     this.currentScreen,
+    this.contents,
   });
 
   factory ScreenManagerState.initial() {
@@ -20,6 +22,9 @@ class ScreenManagerState extends Equatable {
       isSuccess: false,
       isFailure: false,
       currentScreen: DefaultMenuEnum.Home,
+      contents: {
+        DefaultMenuEnum.Home: HomeScreen(),
+      },
     );
   }
 
@@ -28,12 +33,14 @@ class ScreenManagerState extends Equatable {
     bool isSuccess,
     bool isFailure,
     DefaultMenuEnum currentScreen,
+    Map<DefaultMenuEnum, Widget> contents,
   }) {
     return ScreenManagerState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
       currentScreen: currentScreen ?? this.currentScreen,
+      contents: contents ?? this.contents,
     );
   }
 
@@ -43,5 +50,6 @@ class ScreenManagerState extends Equatable {
         isSuccess,
         isFailure,
         currentScreen,
+        contents,
       ];
 }

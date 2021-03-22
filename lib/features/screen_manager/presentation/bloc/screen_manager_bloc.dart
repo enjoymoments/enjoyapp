@@ -6,8 +6,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
+import 'package:mozin/features/home/presentation/pages/home_screen.dart';
+import 'package:mozin/features/me/presentation/pages/me_screen.dart';
+import 'package:mozin/features/monitoring/presentation/pages/monitoring_screen.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
@@ -64,7 +68,11 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
             arguments: InterestScreenArguments(isChangeFilter: false));
       }
     } else {
-      yield state.copyWith(currentScreen: event.screenSelected);
+      var _contents = state.contents;
+      _instanceScreens(_contents, event);
+
+      yield state.copyWith(
+          currentScreen: event.screenSelected, contents: _contents);
     }
   }
 
@@ -127,9 +135,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
       final user = userWrapper.getUser;
 
-      await this
-          .albumsRepository
-          .addAlbum(user.id, transform);
+      await this.albumsRepository.addAlbum(user.id, transform);
 
       //TODO:album
       //getItInstance<TimelineBloc>()..add(LoadPosts());
@@ -138,6 +144,27 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     } catch (e) {
       //TODO:not showing snacbar here. Not contains a 'Scaffold' in tree
       yield state.copyWith(isLoading: false, isFailure: true, isSuccess: false);
+    }
+  }
+
+  void _instanceScreens(
+      Map<DefaultMenuEnum, Widget> contents, TapScreen event) {
+    if (state.contents[event.screenSelected] == null) {
+      switch (event.screenSelected) {
+        case DefaultMenuEnum.TimeLine:
+          contents[DefaultMenuEnum.TimeLine] = TimeLineScreen();
+          break;
+        case DefaultMenuEnum.Me:
+          contents[DefaultMenuEnum.Me] = MeScreen();
+          break;
+        case DefaultMenuEnum.Monitoring:
+          contents[DefaultMenuEnum.Monitoring] = MonitoringScreen();
+          break;
+        case DefaultMenuEnum.Home:
+        default:
+          contents[DefaultMenuEnum.Home] = HomeScreen();
+          break;
+      }
     }
   }
 }

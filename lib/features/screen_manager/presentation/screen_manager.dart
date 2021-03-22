@@ -131,17 +131,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   }
 
   Widget _buildContent(ScreenManagerState state) {
-    switch (state.currentScreen) {
-      case DefaultMenuEnum.TimeLine:
-        return TimeLineScreen();
-      case DefaultMenuEnum.Me:
-        return MeScreen();
-      case DefaultMenuEnum.Monitoring:
-        return MonitoringScreen();
-      case DefaultMenuEnum.Home:
-      default:
-        return HomeScreen();
-    }
+    return state.contents[state.currentScreen];
   }
 
   List<Widget> _buildActionButtons(ScreenManagerState state) {
