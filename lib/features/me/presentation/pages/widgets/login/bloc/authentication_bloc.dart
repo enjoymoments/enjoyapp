@@ -21,12 +21,14 @@ class AuthenticationBloc
     );
   }
 
-  get _authenticationRepository => getItInstance<AuthenticationRepository>();
-  get _userService => getItInstance<UserService>();
-  get _pushNotificationConfig => getItInstance<PushNotificationConfig>();
-  get _userWrapper => getItInstance<UserWrapper>();
+  AuthenticationRepository get _authenticationRepository => getItInstance<AuthenticationRepository>();
+  UserService get _userService => getItInstance<UserService>();
+  PushNotificationConfig get _pushNotificationConfig => getItInstance<PushNotificationConfig>();
+  UserWrapper get _userWrapper => getItInstance<UserWrapper>();
 
   StreamSubscription<UserAppModel> _userSubscription;
+
+  bool _settingsExecute = false;
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -127,16 +129,18 @@ class AuthenticationBloc
       AuthenticationUserChanged event) async {
     _userWrapper.assignment(event.user);
 
-    if (event.user != UserAppModel.empty) {
+    //_settingsExecute - avoids running too often
+    if (_settingsExecute == false && event.user != UserAppModel.empty) {
       _settingsUser(event.user);
+      _settingsExecute = true;
     }
   }
 
-  //TODO:review this, invoked many times
   void _settingsUser(UserAppModel user) async {
     final _token = await _pushNotificationConfig.configureAsync();
 
     _userService.setTokensPushNotifications(user, _token);
     _userService.getFavoriteInterests();
+    _userService.setUserInfo();
   }
 }

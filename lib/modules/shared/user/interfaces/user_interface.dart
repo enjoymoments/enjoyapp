@@ -8,4 +8,5 @@ abstract class UserInterface {
   Future getFavoriteInterests();
   void addFavoriteInterest(PlaceModel model);
   void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
+  void setUserInfo();
 }

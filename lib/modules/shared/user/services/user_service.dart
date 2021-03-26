@@ -94,4 +94,9 @@ class UserService implements UserInterface {
 
     _userWrapper.assignment(_user);
   }
+
+  @override
+  void setUserInfo() {
+    userRepository.setUserInfo();
+  }
 }

@@ -65,6 +65,7 @@ import 'package:mozin/modules/shared/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/device_info_service.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
+import 'package:mozin/modules/shared/user/datasources/user_remote_data_source.dart';
 import 'package:mozin/modules/shared/user/repositories/user_repository.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
@@ -123,9 +124,9 @@ void _setupRemoteClientRepository() {
       () => RemoteClientRepository(
             dio: _dio,
             url:
-                //'https://localhost:5001/graphql',
+                'https://localhost:5001/graphql',
                 //'https://10.0.2.2:5001/graphql',
-                getItInstance<RemoteConfig>().getString(url_endpoint),
+                //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -235,7 +236,7 @@ void _registerSingletonRepositories() {
   getItInstance.registerLazySingleton<TimelineRepository>(
       () => TimelineRepositoryImpl(remoteDataSource: getItInstance()));
 
-  getItInstance.registerLazySingleton<UserRepository>(() => UserRepository());
+  getItInstance.registerLazySingleton<UserRepository>(() => UserRepository(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<LoggerRepository>(
       () => LoggerRepository(remoteConfig: getItInstance()));
@@ -286,6 +287,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<FeedbackRemoteDataSource>(
       () => FeedbackRemoteDataSourceImpl(getItInstance()));        
+
+  getItInstance.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(getItInstance()));        
 }
 
 Future<LocalStorageService> _setupHive() async {
