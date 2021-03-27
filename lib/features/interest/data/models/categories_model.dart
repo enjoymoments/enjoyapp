@@ -27,6 +27,7 @@ class CategoriesModel extends Categories {
     return CategoriesModel(
       id: json['id'],
       name: json['name'],
+      selected: json['selected'],
       subCategories: listSubCategories,
     );
   }
@@ -47,6 +48,7 @@ class CategoriesModel extends Categories {
 
     data['id'] = this.id;
     data['name'] = this.name;
+    data['selected'] = selected;
     data['subCategories'] = listSubCategories;
 
     return data;

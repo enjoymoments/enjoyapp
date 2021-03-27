@@ -60,4 +60,28 @@ class FilterChoosedModel {
         .firstWhere((element) => element.id == item.id);
     subCategorieFilter.selected = false;
   }
+
+  Map<String, dynamic> toJson(List<dynamic> _categories) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+
+    data['generalFilters'] = this.generalFilters.toJson();
+    data['categories'] = _categories;
+
+    return data;
+  }
+
+  factory FilterChoosedModel.fromJson(Map<String, dynamic> json) {
+    var listCategories = <CategoriesModel>[];
+
+    if (json['categories'] != null) {
+      json['categories'].forEach((dynamic v) {
+        listCategories.add(CategoriesModel.fromJson(v));
+      });
+    }
+
+    return FilterChoosedModel(
+      generalFilters: GeneralFilterModel.fromJson(json['generalFilters']),
+      categories: listCategories,
+    );
+  }
 }

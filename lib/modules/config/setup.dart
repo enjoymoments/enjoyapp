@@ -135,7 +135,9 @@ void _registerSingletonModels() {
   getItInstance.registerSingleton<UserWrapper>(
       UserWrapper()..assignment(UserAppModel.empty));
   getItInstance.registerSingleton(
-      FilterChoosedWrapper()..assignment(FilterChoosedModel.initial()));
+      FilterChoosedWrapper(
+        localStorageService: getItInstance(),
+      )..init());
 }
 
 void _registerSingletonServices() {

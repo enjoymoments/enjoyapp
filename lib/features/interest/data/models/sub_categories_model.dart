@@ -16,6 +16,7 @@ class SubCategoriesModel extends SubCategories {
     return SubCategoriesModel(
       id: json['id'],
       name: json['name'],
+      selected: json['selected'],
     );
   }
 
@@ -29,6 +30,7 @@ class SubCategoriesModel extends SubCategories {
     final Map<String, dynamic> data = <String, dynamic>{
       'id': this.id,
       'name': this.name,
+      'selected': selected,
     };
     return data;
   }
