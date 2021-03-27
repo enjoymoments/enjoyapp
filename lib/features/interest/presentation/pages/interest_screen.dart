@@ -94,7 +94,7 @@ class _InterestScreenState extends State<InterestScreen> {
 
     if (widget.isChangeFilter != null && widget.isChangeFilter) {
       getItInstance<PlacesBloc>()
-        ..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+        ..add(GetCurrentPosition());
     } else {
       ExtendedNavigator.of(context).push(Routes.search_places_screen);
     }
@@ -118,12 +118,13 @@ class _InterestScreenState extends State<InterestScreen> {
     );
   }
 
-  PageViewModel _selectedGeneralFilters() {
-    return PageViewModel(
-      titleWidget: SizedBox.shrink(),
-      bodyWidget: GeneralFiltersScreen(
-        generalFilters: _interestBloc.state.filtersSelected.generalFilters,
-      ),
-    );
-  }
+  //TODO:in development
+  // PageViewModel _selectedGeneralFilters() {
+  //   return PageViewModel(
+  //     titleWidget: SizedBox.shrink(),
+  //     bodyWidget: GeneralFiltersScreen(
+  //       generalFilters: _interestBloc.state.filtersSelected.generalFilters,
+  //     ),
+  //   );
+  // }
 }

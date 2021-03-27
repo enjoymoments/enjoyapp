@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_category_item_details.dart';
+import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -31,7 +33,7 @@ class InterestCategoriesDetails extends StatelessWidget {
   }
 
   List<Widget> _buildCards() {
-    return interestBloc.state.filtersSelected.categories.map((element) {
+    return getItInstance<FilterChoosedWrapper>().getFilterChoosed.categories.map((element) {
       return InterestCategoryItemDetails(
         item: element,
         callbackSelected: (bool selected, SubCategoriesModel item) {

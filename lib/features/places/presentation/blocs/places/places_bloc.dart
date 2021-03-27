@@ -7,44 +7,43 @@ import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
-import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
+import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 
 part 'places_event.dart';
 part 'places_state.dart';
 
 class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
-  PlacesBloc({@required PlacesRepository placesRepository})
-      : assert(placesRepository != null),
+  PlacesBloc({
+    @required PlacesRepository placesRepository,
+    @required FilterChoosedWrapper filterChoosedWrapper,
+  })  : assert(placesRepository != null),
         _placesRepository = placesRepository,
+        assert(filterChoosedWrapper != null),
+        _filterChoosedWrapper = filterChoosedWrapper,
         super(PlacesState.initial());
 
   final PlacesRepository _placesRepository;
+  final FilterChoosedWrapper _filterChoosedWrapper;
 
   @override
   Stream<PlacesState> mapEventToState(
     PlacesEvent event,
   ) async* {
     if (event is GetCurrentPosition) {
-      yield* mapGetCurrentPositionToState(event.filterChoosed);
+      yield* mapGetCurrentPositionToState();
     }
   }
 
-  Stream<PlacesState> mapGetCurrentPositionToState(
-      FilterChoosedModel filterChoosed) async* {
+  Stream<PlacesState> mapGetCurrentPositionToState() async* {
     try {
       yield state.copyWith(isLoading: true, isError: false);
 
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
 
-      Either<PlacesModel, Exception> response =
-          await _placesRepository.getPlaces(
-              position.latitude
-              ,
-              position.longitude
-              ,
-              filterChoosed);
+      Either<PlacesModel, Exception> response = await _placesRepository
+          .getPlaces(position.latitude, position.longitude, _filterChoosedWrapper.getFilterChoosed);
 
       yield response.fold((model) {
         return state.copyWith(

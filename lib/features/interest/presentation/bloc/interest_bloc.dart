@@ -7,6 +7,7 @@ import 'package:mozin/features/interest/domain/repositories/interest_repository.
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/package_view/utils.dart';
 
 part 'interest_event.dart';
 part 'interest_state.dart';
@@ -49,7 +50,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     _filterChoosedWrapper.changeTime(event.minTime, event.maxTime);
 
     yield state.copyWith(
-        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+        forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapChangeDistanceToState(
@@ -58,7 +59,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     _filterChoosedWrapper.changeDistance(event.minDistance, event.maxDistance);
 
     yield state.copyWith(
-        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+        forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapChangePriceToState(
@@ -67,7 +68,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     _filterChoosedWrapper.changePrice(event.minPrice, event.maxPrice);
 
     yield state.copyWith(
-        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+        forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapSelectSubCategorieToState(
@@ -79,7 +80,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
 
     yield state.copyWith(
-        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+        forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapSelectCategorieToState(
@@ -91,7 +92,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
 
     yield state.copyWith(
-        filtersSelected: _filterChoosedWrapper.getFilterChoosed);
+        forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {

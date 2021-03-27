@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/categories_places.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
@@ -22,16 +21,14 @@ class SearchPlacesScreen extends StatefulWidget {
 
 class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   PlacesBloc _placesBloc;
-  InterestBloc _interestBloc;
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
-    _interestBloc = getItInstance<InterestBloc>();
     _placesBloc = getItInstance<PlacesBloc>()
-      ..add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+      ..add(GetCurrentPosition());
     super.initState();
   }
 
@@ -114,7 +111,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       color: Theme.of(context).primaryColor,
       onRefresh: () async {
         _placesBloc
-            .add(GetCurrentPosition(_interestBloc.state.filtersSelected));
+            .add(GetCurrentPosition());
       },
       child: child,
     );
