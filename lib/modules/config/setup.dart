@@ -54,7 +54,6 @@ import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/a
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
-import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -123,10 +122,9 @@ void _setupRemoteClientRepository() {
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(
             dio: _dio,
-            url:
-                'https://localhost:5001/graphql',
-                //'https://10.0.2.2:5001/graphql',
-                //getItInstance<RemoteConfig>().getString(url_endpoint),
+            url: 'https://localhost:5001/graphql',
+            //'https://10.0.2.2:5001/graphql',
+            //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -134,19 +132,17 @@ void _setupRemoteClientRepository() {
 void _registerSingletonModels() {
   getItInstance.registerSingleton<UserWrapper>(
       UserWrapper()..assignment(UserAppModel.empty));
-  getItInstance.registerSingleton(
-      FilterChoosedWrapper(
-        localStorageService: getItInstance(),
-      )..init());
+  getItInstance.registerSingleton(FilterChoosedWrapper(
+    localStorageService: getItInstance(),
+  )..init());
 }
 
 void _registerSingletonServices() {
-  getItInstance
-      .registerLazySingleton<WrapperMediaService>(() => WrapperMediaService(
-        uuidService: getItInstance(),
-        firebaseStorageService: getItInstance(),
-        userWrapper: getItInstance()
-      ));
+  getItInstance.registerLazySingleton<WrapperMediaService>(() =>
+      WrapperMediaService(
+          uuidService: getItInstance(),
+          firebaseStorageService: getItInstance(),
+          userWrapper: getItInstance()));
   getItInstance.registerLazySingleton<Uuid>(() => Uuid());
   getItInstance.registerLazySingleton<FirebaseStorageService>(
       () => FirebaseStorageService());
@@ -169,66 +165,65 @@ void _registerSingletonServices() {
 }
 
 void _registerBlocs() {
-  getItInstance.registerFactory<AddTimeLineBloc>(
-      () => AddTimeLineBloc(getItInstance()));
+  getItInstance
+      .registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(getItInstance()));
 
   getItInstance.registerLazySingleton<TimelineBloc>(
       () => TimelineBloc(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
-      ScreenManagerBloc(
-          getItInstance(), getItInstance(), getItInstance(), getItInstance(), getItInstance()));
+      ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance(),
+          getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<InterestBloc>(() => InterestBloc(
       interestRepository: getItInstance(),
       filterChoosedWrapper: getItInstance()));
 
   getItInstance.registerLazySingleton<PlacesBloc>(
-      () => PlacesBloc(placesRepository: getItInstance()));
+      () => PlacesBloc(placesRepository: getItInstance(), filterChoosedWrapper: getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 
   getItInstance.registerFactory<PlaceDetailsBloc>(
       () => PlaceDetailsBloc(placesRepository: getItInstance()));
-      
+
   getItInstance
       .registerFactory<PlaceDetailsTabBloc>(() => PlaceDetailsTabBloc());
 
   getItInstance.registerFactory<PlacePhotosBloc>(
       () => PlacePhotosBloc(placesRepository: getItInstance()));
 
-  getItInstance.registerFactory<GpsOpenCubit>(
-      () => GpsOpenCubit());    
+  getItInstance.registerFactory<GpsOpenCubit>(() => GpsOpenCubit());
 
   getItInstance.registerFactory<ConnectedCubit>(
-      () => ConnectedCubit(adsRepository: root<AdsRepository>()));    
+      () => ConnectedCubit(adsRepository: root<AdsRepository>()));
 
-  getItInstance.registerFactory<FavoriteInterestsBloc>(
-      () => FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));    
+  getItInstance.registerFactory<FavoriteInterestsBloc>(() =>
+      FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));
 
-  getItInstance.registerFactory<CategoriesPlacesCubit>(
-      () => CategoriesPlacesCubit());        
+  getItInstance
+      .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit());
 
   getItInstance.registerFactory<AddCalendarCubit>(
-      () => AddCalendarCubit(calendarRepository: getItInstance()));        
+      () => AddCalendarCubit(calendarRepository: getItInstance()));
 
   getItInstance.registerFactory<AddActivityCubit>(
-      () => AddActivityCubit(activityRepository: getItInstance()));            
-      
+      () => AddActivityCubit(activityRepository: getItInstance()));
+
   getItInstance.registerLazySingleton<CalendarCubit>(
       () => CalendarCubit(calendarRepository: getItInstance()));
 
-  getItInstance.registerFactory<AlbumsCubit>(
-      () => AlbumsCubit(albumsRepository: getItInstance(), userWrapper: getItInstance()));                
+  getItInstance.registerFactory<AlbumsCubit>(() => AlbumsCubit(
+      albumsRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<AddAlbumCubit>(
-      () => AddAlbumCubit(wrapperMediaService: getItInstance()));                    
+      () => AddAlbumCubit(wrapperMediaService: getItInstance()));
 
-  getItInstance.registerFactory<FeedbackCubit>(
-      () => FeedbackCubit(feedbackRepository: getItInstance(), userWrapper: getItInstance()));                        
+  getItInstance.registerFactory<FeedbackCubit>(() => FeedbackCubit(
+      feedbackRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<HomeCubit>(
-      () => HomeCubit(adsRepository: root<AdsRepository>()));                        
+      () => HomeCubit(adsRepository: root<AdsRepository>()));
 }
 
 void _registerSingletonRepositories() {
@@ -238,7 +233,8 @@ void _registerSingletonRepositories() {
   getItInstance.registerLazySingleton<TimelineRepository>(
       () => TimelineRepositoryImpl(remoteDataSource: getItInstance()));
 
-  getItInstance.registerLazySingleton<UserRepository>(() => UserRepository(remoteDataSource: getItInstance()));
+  getItInstance.registerLazySingleton<UserRepository>(
+      () => UserRepository(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<LoggerRepository>(
       () => LoggerRepository(remoteConfig: getItInstance()));
@@ -250,19 +246,19 @@ void _registerSingletonRepositories() {
       () => PlacesRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<FavoriteInterestsRepository>(
-      () => FavoriteInterestsRepositoryImpl(remoteDataSource: getItInstance())); 
+      () => FavoriteInterestsRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<CalendarRepository>(
-      () => CalendarRepositoryImpl(remoteDataSource: getItInstance())); 
+      () => CalendarRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<ActivityRepository>(
-      () => ActivityRepositoryImpl(remoteDataSource: getItInstance())); 
+      () => ActivityRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<AlbumsRepository>(
-      () => AlbumsRepositoryImpl(remoteDataSource: getItInstance())); 
+      () => AlbumsRepositoryImpl(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<FeedbackRepository>(
-      () => FeedbackRepositoryImpl(remoteDataSource: getItInstance())); 
+      () => FeedbackRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
@@ -276,22 +272,22 @@ void _registerSingletonDataSources() {
       () => PlacesRemoteDataSourceImpl(getItInstance()));
 
   getItInstance.registerLazySingleton<FavoriteInterestsRemoteDataSource>(
-      () => FavoriteInterestsRemoteDataSourceImpl(getItInstance()));    
+      () => FavoriteInterestsRemoteDataSourceImpl(getItInstance()));
 
   getItInstance.registerLazySingleton<CalendarRemoteDataSource>(
-      () => CalendarRemoteDataSourceImpl(getItInstance()));    
-  
+      () => CalendarRemoteDataSourceImpl(getItInstance()));
+
   getItInstance.registerLazySingleton<ActivityRemoteDataSource>(
-      () => ActivityRemoteDataSourceImpl(getItInstance()));    
+      () => ActivityRemoteDataSourceImpl(getItInstance()));
 
   getItInstance.registerLazySingleton<AlbumsRemoteDataSource>(
-      () => AlbumsRemoteDataSourceImpl(getItInstance(), getItInstance()));        
+      () => AlbumsRemoteDataSourceImpl(getItInstance(), getItInstance()));
 
   getItInstance.registerLazySingleton<FeedbackRemoteDataSource>(
-      () => FeedbackRemoteDataSourceImpl(getItInstance()));        
+      () => FeedbackRemoteDataSourceImpl(getItInstance()));
 
   getItInstance.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSourceImpl(getItInstance()));        
+      () => UserRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {
