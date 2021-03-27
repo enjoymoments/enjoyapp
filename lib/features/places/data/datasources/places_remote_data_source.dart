@@ -27,6 +27,7 @@ const List<String> nonStringValuesKeysAccount = <String>[
   'maxDistance',
   'minTime',
   'maxTime',
+  'categories',
 ];
 
 class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
@@ -155,23 +156,34 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     }
 
     if (filters.categories != null && filters.categories.length > 0) {
-      String _concat = '';
-
-      for (var categorie in filters.categories) {
-        if(categorie.subCategories == null || categorie.subCategories.length == 0) {
-          _concat += '${categorie.id};';
-          continue;
-        }
-
-        for (var subCategorie in categorie.subCategories) {
-          _concat += '${categorie.id}/${subCategorie.id};';
-        }
-      }
-
-      params['categories'] = _concat;
+      params['categories'] = _formatCategories(filters);
     }
 
     return _formatParams(params);
+  }
+
+  String _formatCategories(FilterChoosedModel filters) {
+    List<Map<String, dynamic>> _categories = List<Map<String, dynamic>>();
+
+    for (var categorie in filters.categories) {
+      Map<String, dynamic> _mapSubCategorie = {};
+
+      for (var subCategorie in categorie.subCategories) {
+        _mapSubCategorie[subCategorie.id] = subCategorie.id;
+      }
+
+      Map<String, dynamic> _categorie = {};
+      _categorie['id'] = '"${categorie.id}"';
+      var _subCategoriesFormatted = _mapSubCategorie.entries
+          .map((e) => '{id: "${e.value}"}')
+          .toList()
+          .join(', ');
+
+      _categorie['subCategories'] = '[$_subCategoriesFormatted]';
+      _categories.add(_categorie);
+    }
+
+    return '[${_categories.toList().join(', ')}]';
   }
 
   String _formatParams(Map<String, dynamic> params) {
