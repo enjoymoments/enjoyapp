@@ -1,3 +1,4 @@
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
@@ -169,7 +170,11 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
       Map<String, dynamic> _mapSubCategorie = {};
 
       for (var subCategorie in categorie.subCategories) {
-        _mapSubCategorie[subCategorie.id] = subCategorie.id;
+        if (subCategorie is SubCategoriesModel) {
+          if (subCategorie.selected != null && subCategorie.selected) {
+            _mapSubCategorie[subCategorie.id] = subCategorie.id;
+          }
+        }
       }
 
       Map<String, dynamic> _categorie = {};
