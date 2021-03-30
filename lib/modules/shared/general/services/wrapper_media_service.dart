@@ -30,7 +30,7 @@ class WrapperMediaService {
       allowMultiple: true
     );
     
-    return _result.files;
+    return _result?.files ?? [];
   }
 
   Future<File> openCamera() async {
@@ -47,8 +47,7 @@ class WrapperMediaService {
       galleryItems.add(GalleryImageModel(
         id: uuidService.v4(),
         index: i,
-        //TODO:review this
-        //file: item,
+        file: File(item.path),
       ));
     }
 
