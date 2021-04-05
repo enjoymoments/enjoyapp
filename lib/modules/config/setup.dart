@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/features/ads/data/repositories/ads_repository_impl.dart';
 import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
+import 'package:mozin/features/ads/presentation/bloc/ads_cubit.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
@@ -122,7 +123,8 @@ void _setupRemoteClientRepository() {
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(
             dio: _dio,
-            url: 'https://localhost:5001/graphql',
+            url: 
+            'https://localhost:5001/graphql',
             //'https://10.0.2.2:5001/graphql',
             //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
@@ -196,13 +198,13 @@ void _registerBlocs() {
   getItInstance.registerFactory<GpsOpenCubit>(() => GpsOpenCubit());
 
   getItInstance.registerFactory<ConnectedCubit>(
-      () => ConnectedCubit(adsRepository: root<AdsRepository>()));
+      () => ConnectedCubit());
 
   getItInstance.registerFactory<FavoriteInterestsBloc>(() =>
       FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));
 
   getItInstance
-      .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit());
+      .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit(adsRepository: root<AdsRepository>()));
 
   getItInstance.registerFactory<AddCalendarCubit>(
       () => AddCalendarCubit(calendarRepository: getItInstance()));
@@ -223,7 +225,10 @@ void _registerBlocs() {
       feedbackRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<HomeCubit>(
-      () => HomeCubit(adsRepository: root<AdsRepository>()));
+      () => HomeCubit());
+
+  getItInstance.registerFactory<AdsCubit>(
+      () => AdsCubit(adsRepository: root<AdsRepository>()));
 }
 
 void _registerSingletonRepositories() {

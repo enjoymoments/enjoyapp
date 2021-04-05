@@ -7,7 +7,6 @@ class ConnectedState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
-    this.ads,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -16,8 +15,6 @@ class ConnectedState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<BannerAd> ads;
-
   factory ConnectedState.initial() {
     return ConnectedState(
       isSuccess: false,
@@ -25,7 +22,6 @@ class ConnectedState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      ads: List(),
     );
   }
 
@@ -35,7 +31,6 @@ class ConnectedState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
-    List<BannerAd> ads,
   }) {
     return ConnectedState(
       isLoading: isLoading ?? this.isLoading,
@@ -43,7 +38,6 @@ class ConnectedState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      ads: ads ?? this.ads,
     );
   }
 
@@ -54,6 +48,5 @@ class ConnectedState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
-        ads,
       ];
 }

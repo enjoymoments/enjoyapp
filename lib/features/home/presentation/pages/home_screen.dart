@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _user = getItInstance<UserWrapper>().getUser;
-    _homeCubit = getItInstance<HomeCubit>()..loadAds();
+    _homeCubit = getItInstance<HomeCubit>();
     super.initState();
   }
 
@@ -55,10 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           _buildCardHelpMe(),
           SpacerBox.v16,
-          if (state.ads != null && state.ads.length > 0)
-            BannerAdWidget(
-              bannerAd: state.ads[0],
-            ),
+          BannerAdWidget(
+            screenName: Routes.home_partial,
+          ),
         ],
       );
     }
@@ -76,10 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
         SpacerBox.v16,
         _buildCardHelpMe(),
         SpacerBox.v16,
-        if (state.ads != null && state.ads.length > 0)
-            BannerAdWidget(
-              bannerAd: state.ads[0],
-            ),
+        BannerAdWidget(
+            screenName: Routes.home_partial,
+        ),
       ],
     );
   }

@@ -1,12 +1,13 @@
-part of 'home_cubit.dart';
+part of 'ads_cubit.dart';
 
-class HomeState extends DefaultState {
-  HomeState({
+class AdsState extends DefaultState {
+  AdsState({
     bool isLoading,
     bool isEmpty,
     bool isError,
     bool isSuccess,
     String errorMessage,
+    this.ads,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -15,29 +16,34 @@ class HomeState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  factory HomeState.initial() {
-    return HomeState(
+  final List<BannerAd> ads;
+
+  factory AdsState.initial() {
+    return AdsState(
       isSuccess: false,
       isEmpty: false,
       isError: false,
       isLoading: false,
       errorMessage: null,
+      ads: List(),
     );
   }
 
-  HomeState copyWith({
+  AdsState copyWith({
     bool isLoading,
     bool isSuccess,
     bool isEmpty,
     bool isError,
     String errorMessage,
+    List<BannerAd> ads,
   }) {
-    return HomeState(
+    return AdsState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
+      ads: ads ?? this.ads,
     );
   }
 
@@ -48,5 +54,6 @@ class HomeState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
+        ads,
       ];
 }
