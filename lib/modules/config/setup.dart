@@ -204,7 +204,7 @@ void _registerBlocs() {
       FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));
 
   getItInstance
-      .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit(adsRepository: root<AdsRepository>()));
+      .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit());
 
   getItInstance.registerFactory<AddCalendarCubit>(
       () => AddCalendarCubit(calendarRepository: getItInstance()));

@@ -15,8 +15,12 @@ class AdsCubit extends Cubit<AdsState> {
 
   final AdsRepository _adsRepository;
 
-  void loadBanner({@required String screenName}) async {
-    var response = await _adsRepository.getAdsByScreen(screenName: screenName);
+  void loadBanner({@required String screenName, int count = 1}) async {
+    var response = await _adsRepository.getAdsByScreen(
+      screenName: screenName,
+      count: count,
+    );
+
     response.fold((ads) {
       return emit(state.copyWith(isLoading: false, ads: ads));
     }, (exception) {
