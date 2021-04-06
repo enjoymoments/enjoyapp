@@ -25,7 +25,7 @@ class AuthenticationState extends DefaultState {
       isSuccess: false,
       isEmpty: false,
       isError: false,
-      isLoading: false,
+      isLoading: true,
       errorMessage: null,
       authenticated: false,
       user: null,

@@ -55,6 +55,8 @@ class AuthenticationBloc
 
   Stream<AuthenticationState> mapCheckAuthenticatedToState() async* {
     try {
+      await Future<void>.delayed(Duration(milliseconds: 350));
+
       yield state.copyWith(isLoading: true);
 
       var _user = _userWrapper.getUser;
