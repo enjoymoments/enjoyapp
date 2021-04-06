@@ -102,8 +102,6 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   }
 
   Widget _buildContentTabs() {
-    const int _adsMax = 6;
-
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
       cubit: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
@@ -111,33 +109,11 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
       },
       builder: (context, state) {
         if (state.content.length > 0) {
-          int _indexAds = -1;
-
           return Expanded(
             child: ListView.separated(
               itemCount: state.content.length,
               itemBuilder: (context, index) {
                 var item = state.content[index];
-                _indexAds = _indexAds == (_adsMax - 1) ? 0 : _indexAds;
-
-                if ((index > 0 && (index % 3) == 0) &&
-                    (_indexAds >= -1 && _indexAds < _adsMax)) {
-                  _indexAds++;
-                  return Column(
-                    children: [
-                      BannerAdMultipleWidget(
-                        screenName: Routes.search_places_screen,
-                        generate: _adsMax,
-                        indexAds: _indexAds,
-                      ),
-                      SpacerBox.v16,
-                      PlaceCardItem(
-                        item: item,
-                      ),
-                    ],
-                  );
-                }
-
                 return PlaceCardItem(
                   item: item,
                 );

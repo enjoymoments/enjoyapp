@@ -9,11 +9,13 @@ class BannerAdMultipleWidget extends StatefulWidget {
     @required this.screenName,
     @required this.generate,
     @required this.indexAds,
+    @required this.adsReset,
   });
 
   final String screenName;
   final int generate;
   final int indexAds;
+  final bool adsReset;
 
   @override
   _BannerAdMultipleWidgetState createState() => _BannerAdMultipleWidgetState();
@@ -24,9 +26,13 @@ class _BannerAdMultipleWidgetState extends State<BannerAdMultipleWidget> {
 
   @override
   void initState() {
-    _adsCubit = getItInstance<AdsCubit>()
-      ..loadBanner(screenName: widget.screenName, count: widget.generate);
     super.initState();
+    _adsCubit = getItInstance<AdsCubit>()
+      ..loadBanner(
+        screenName: widget.screenName,
+        count: widget.generate,
+        adsReset: widget.adsReset,
+      );
   }
 
   @override
@@ -43,7 +49,8 @@ class _BannerAdMultipleWidgetState extends State<BannerAdMultipleWidget> {
       child: BlocBuilder<AdsCubit, AdsState>(
         cubit: _adsCubit,
         builder: (context, state) {
-          if (state.ads.length > 0) return AdWidget(ad: state.ads[widget.indexAds]);
+          if (state.ads.length > 0)
+            return AdWidget(ad: state.ads[widget.indexAds]);
 
           return SizedBox.shrink();
         },

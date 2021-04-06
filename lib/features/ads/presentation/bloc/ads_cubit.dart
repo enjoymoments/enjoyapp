@@ -15,10 +15,15 @@ class AdsCubit extends Cubit<AdsState> {
 
   final AdsRepository _adsRepository;
 
-  void loadBanner({@required String screenName, int count = 1}) async {
+  void loadBanner({
+    @required String screenName,
+    int count = 1,
+    bool adsReset = false,
+  }) async {
     var response = await _adsRepository.getAdsByScreen(
       screenName: screenName,
       count: count,
+      reset: adsReset,
     );
 
     response.fold((ads) {
