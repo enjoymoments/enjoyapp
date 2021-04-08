@@ -28,33 +28,37 @@ class PhotosTabItem extends StatelessWidget {
   }
 
   Widget _buildPhotos(BuildContext context, List<Uint8List> photos) {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      spacing: SizeConfig.sizeByPixel(10),
-      children: buildPhotos(context, photos, SizeConfig.sizeByPixel(150)),
+    return Container(
+      alignment: Alignment.center,
+      child: Wrap(
+        spacing: SizeConfig.sizeByPixel(10),
+        children: buildPhotos(context, photos, SizeConfig.sizeByPixel(150)),
+      ),
     );
   }
 
   Widget _buildLoadingPhotos() {
-    return Wrap(
-      alignment: WrapAlignment.center,
-      spacing: SizeConfig.sizeByPixel(10),
-      children: [0, 1, 2, 3]
-          .map(
-            (item) => Container(
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: ShimmerLoading(
-                    width: SizeConfig.sizeByPixel(150),
-                    height: SizeConfig.sizeByPixel(80),
+    return Container(
+      alignment: Alignment.center,
+      child: Wrap(
+        spacing: SizeConfig.sizeByPixel(10),
+        children: [0, 1, 2, 3]
+            .map(
+              (item) => Container(
+                child: Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    child: ShimmerLoading(
+                      width: SizeConfig.sizeByPixel(150),
+                      height: SizeConfig.sizeByPixel(80),
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 }
