@@ -66,7 +66,7 @@ class _ScreenManagerState extends State<ScreenManager> {
               FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
               FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
-              FABBottomAppBarItem(iconData: AppIcons.chart_pie, text: 'Dados'),
+              FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
             ],
           ),
           //Before
@@ -173,7 +173,7 @@ class _ScreenManagerState extends State<ScreenManager> {
             },
           ),
         ];
-      case DefaultMenuEnum.Monitoring:
+      case DefaultMenuEnum.Alert:
         return [];
       default:
         return [];
@@ -190,8 +190,8 @@ class _ScreenManagerState extends State<ScreenManager> {
         return '';
       case DefaultMenuEnum.Me:
         return 'Eu';
-      case DefaultMenuEnum.Monitoring:
-        return 'Dados';
+      case DefaultMenuEnum.Alert:
+        return 'Alertas';
       default:
         return '';
     }

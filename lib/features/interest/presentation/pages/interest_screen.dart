@@ -48,6 +48,7 @@ class _InterestScreenState extends State<InterestScreen> {
       title: 'Interesses',
       context: context,
       onPressedBack: () => ExtendedNavigator.of(context).pop(),
+      automaticallyImplyLeading: false,
     );
   }
 

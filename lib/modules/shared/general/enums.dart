@@ -71,7 +71,7 @@ class DefaultMenuEnum extends Enum<int> {
       } else if (value == 2) {
         return DefaultMenuEnum.Me;
       } else if (value == 3) {
-        return DefaultMenuEnum.Monitoring;
+        return DefaultMenuEnum.Alert;
       }
     } else {
       if (value == 0) {
@@ -83,7 +83,7 @@ class DefaultMenuEnum extends Enum<int> {
       } else if (value == 3) {
         return DefaultMenuEnum.Me;
       } else if (value == 4) {
-        return DefaultMenuEnum.Monitoring;
+        return DefaultMenuEnum.Alert;
       }
     }
 
@@ -96,7 +96,7 @@ class DefaultMenuEnum extends Enum<int> {
   static const DefaultMenuEnum TimeLine = DefaultMenuEnum._fromValue(1);
   static const DefaultMenuEnum Search = DefaultMenuEnum._fromValue(2);
   static const DefaultMenuEnum Me = DefaultMenuEnum._fromValue(3);
-  static const DefaultMenuEnum Monitoring = DefaultMenuEnum._fromValue(4);
+  static const DefaultMenuEnum Alert = DefaultMenuEnum._fromValue(4);
 
   @override
   String toString() => value.toString();

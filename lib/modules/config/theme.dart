@@ -9,6 +9,7 @@ ThemeData getTheme(BuildContext context) {
       iconTheme: IconThemeData(
         color: AppColors.secundary,
       ),
+      brightness: Brightness.dark,
     ),
     iconTheme: IconThemeData(
       size: 18.0,

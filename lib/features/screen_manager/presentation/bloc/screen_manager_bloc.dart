@@ -8,7 +8,7 @@ import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/home/presentation/pages/home_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
-import 'package:mozin/features/monitoring/presentation/pages/monitoring_screen.dart';
+import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
@@ -157,8 +157,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
         case DefaultMenuEnum.Me:
           contents[DefaultMenuEnum.Me] = MeScreen();
           break;
-        case DefaultMenuEnum.Monitoring:
-          contents[DefaultMenuEnum.Monitoring] = MonitoringScreen();
+        case DefaultMenuEnum.Alert:
+          contents[DefaultMenuEnum.Alert] = NotificationsScreen();
           break;
         case DefaultMenuEnum.Home:
         default:
