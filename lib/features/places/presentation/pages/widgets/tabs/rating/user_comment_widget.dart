@@ -47,7 +47,7 @@ class UserCommentWidget extends StatelessWidget {
             SpacerBox.v4,
             review.text.label(
               context,
-              maxLines: 3,
+              withoutAutoSize: true,
             ),
           ],
         ),
