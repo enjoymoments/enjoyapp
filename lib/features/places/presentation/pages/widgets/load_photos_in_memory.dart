@@ -10,45 +10,20 @@ import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:uuid/uuid.dart';
 
-List<Widget> buildPhotos(BuildContext context, List<Uint8List> images, double imageWidth) {
+List<Widget> buildPhotos(
+    BuildContext context, List<Uint8List> images, double imageWidth) {
   List<GalleryImageModel> _galleryImages = _transformGalleryModel(images);
   List<Widget> _list = new List<Widget>();
 
   for (var i = 0; i < images.length; i++) {
     var item = images[i];
 
-    _list.add(
-      GestureDetector(
-        onTap: () {
-          ExtendedNavigator.of(context).push(
-            Routes.gallery_photo_view_wrapper_screen,
-            arguments: GalleryPhotoViewWrapperArguments(
-              loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
-                  CustomCircularProgressIndicator(),
-              galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.memory,
-              galleryItems: _galleryImages,
-              backgroundDecoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-              ),
-              initialIndex: i,
-              scrollDirection: Axis.horizontal,
-            ),
-          );
-        },
-        child: Container(
-          height: SizeConfig.sizeByPixel(100),
-          margin: EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Stack(
-              children: <Widget>[
-                Image.memory(item, fit: BoxFit.cover, width: imageWidth),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    _list.add(LoadPhotoItem(
+      galleryImages: _galleryImages,
+      index: i,
+      item: item,
+      imageWidth: imageWidth,
+    ));
   }
 
   return _list;
@@ -62,4 +37,53 @@ List<GalleryImageModel> _transformGalleryModel(List<Uint8List> images) {
   }).toList();
 
   return _result;
+}
+
+class LoadPhotoItem extends StatelessWidget {
+  final List<GalleryImageModel> galleryImages;
+  final int index;
+  final Uint8List item;
+  final double imageWidth;
+
+  const LoadPhotoItem({
+    Key key,
+    @required this.galleryImages,
+    @required this.index,
+    @required this.item,
+    @required this.imageWidth,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        ExtendedNavigator.of(context).push(
+          Routes.gallery_photo_view_wrapper_screen,
+          arguments: GalleryPhotoViewWrapperArguments(
+            loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+                CustomCircularProgressIndicator(),
+            galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.memory,
+            galleryItems: galleryImages,
+            backgroundDecoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+            ),
+            initialIndex: index,
+            scrollDirection: Axis.horizontal,
+          ),
+        );
+      },
+      child: Container(
+        height: SizeConfig.sizeByPixel(100),
+        margin: EdgeInsets.all(5.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          child: Stack(
+            children: <Widget>[
+              Image.memory(item, fit: BoxFit.cover, width: imageWidth),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

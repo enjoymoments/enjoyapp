@@ -119,12 +119,25 @@ extension Texts on String {
 
   Widget label(
     BuildContext context, {
+    bool withoutAutoSize = false,
     double fontSize = 16,
     Color color,
     int maxLines = 2,
     double letterSpacing,
     FontWeight fontWeight,
   }) {
+    if (withoutAutoSize == true) {
+      return Text(
+        this,
+        style: Theme.of(context).textTheme.headline5.copyWith(
+              fontSize: fontSize,
+              color: color,
+              letterSpacing: letterSpacing,
+              fontWeight: fontWeight,
+            ),
+      );
+    }
+
     return AutoSizeText(
       this,
       maxLines: maxLines,
