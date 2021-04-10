@@ -11,21 +11,17 @@ class UserAppModel extends Equatable {
   /// {@macro user}
    const UserAppModel({
     @required this.id,
-    @required this.autenticatorProviderId,
     @required this.email,
     @required this.name,
     @required this.photo,
     this.timelineId,
     this.favoriteInterests,
   })  : assert(email != null),
-        assert(autenticatorProviderId != null),
         assert(id != null);
 
   final String email;
 
   final String id;
-
-  final String autenticatorProviderId;
 
   final String name;
 
@@ -41,7 +37,6 @@ class UserAppModel extends Equatable {
   }) {
     return UserAppModel(
       id: this.id,
-      autenticatorProviderId: this.autenticatorProviderId,
       email: this.email,
       name: this.name,
       photo: this.photo,
@@ -52,7 +47,6 @@ class UserAppModel extends Equatable {
 
   static const empty = UserAppModel(
     id: '',
-    autenticatorProviderId: '',
     email: '',
     name: '',
     photo: '',
