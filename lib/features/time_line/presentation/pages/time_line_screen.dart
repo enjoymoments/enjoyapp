@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_avatar.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/time_line_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
 
@@ -37,9 +39,8 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       builder: (context, state) {
         if (state.unauthenticated) {
           return Center(
-            child:
-                "Quer registrar seus momentos?\nFaça login e aproveite."
-                    .labelIntro(context),
+            child: "Quer registrar seus momentos?\nFaça login e aproveite."
+                .labelIntro(context),
           );
         }
 
@@ -58,10 +59,15 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: state.posts.length,
-                itemBuilder: (context, index) => TimeLineItem(
-                  item: state.posts[index],
-                  timelineBloc: _timelineBloc,
-                ),
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return _buildFirstItem(state, index);
+                  }
+                  return TimeLineItem(
+                    item: state.posts[index],
+                    timelineBloc: _timelineBloc,
+                  );
+                },
               ),
             ),
           );
@@ -69,6 +75,24 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
         return SizedBox.shrink();
       },
+    );
+  }
+
+  Widget _buildFirstItem(TimelineState state, int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TimeLineAvatar(
+          name: 'Você',
+        ),
+        SpacerBox.v2,
+        CustomDivider(),
+        SpacerBox.v16,
+        TimeLineItem(
+          item: state.posts[index],
+          timelineBloc: _timelineBloc,
+        ),
+      ],
     );
   }
 
