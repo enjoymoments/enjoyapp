@@ -143,6 +143,12 @@ class AuthenticationBloc
 
     _userService.setTokensPushNotifications(user, _token);
     _userService.getFavoriteInterests();
-    _userService.setUserInfo();
+    _userService.setUserInfo().then((response) {
+      response.fold((value) {
+        if(value != null) {
+          _userWrapper.assignment(user.copyWith(internalId: value));
+        }
+      }, (error) => null);
+    });
   }
 }

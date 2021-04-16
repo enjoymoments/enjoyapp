@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
@@ -96,7 +97,7 @@ class UserService implements UserInterface {
   }
 
   @override
-  void setUserInfo() {
-    userRepository.setUserInfo();
+  Future<Either<String, Exception>> setUserInfo() {
+    return userRepository.setUserInfo();
   }
 }

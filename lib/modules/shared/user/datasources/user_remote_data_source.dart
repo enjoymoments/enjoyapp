@@ -1,7 +1,7 @@
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 
 abstract class UserRemoteDataSource {
-  Future<bool> setUserInfo();
+  Future<String> setUserInfo();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -10,7 +10,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final RemoteClientRepository remoteClientRepository;
 
   @override
-  Future<bool> setUserInfo() async {
+  Future<String> setUserInfo() async {
     String _mutation = '''
     mutation userInfo {
       userInfo

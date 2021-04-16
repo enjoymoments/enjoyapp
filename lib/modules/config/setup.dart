@@ -36,6 +36,10 @@ import 'package:mozin/features/interest/data/repositories/interest_repository_im
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
+import 'package:mozin/features/invite/data/datasources/invite_remote_data_source.dart';
+import 'package:mozin/features/invite/data/repositories/invite_repository_impl.dart';
+import 'package:mozin/features/invite/domain/repositories/invite_repository.dart';
+import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
 import 'package:mozin/features/places/data/datasources/places_remote_data_source.dart';
@@ -229,6 +233,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<AdsCubit>(
       () => AdsCubit(adsRepository: root<AdsRepository>()));
+
+  getItInstance.registerFactory<InviteCubit>(
+      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance()));
 }
 
 void _registerSingletonRepositories() {
@@ -264,6 +271,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<FeedbackRepository>(
       () => FeedbackRepositoryImpl(remoteDataSource: getItInstance()));
+
+  getItInstance.registerLazySingleton<InviteRepository>(
+      () => InviteRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
@@ -293,6 +303,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getItInstance()));
+
+  getItInstance.registerLazySingleton<InviteRemoteDataSource>(
+      () => InviteRemoteDataSourceImpl(remoteClientRepository: getItInstance(), remoteConfig: getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {

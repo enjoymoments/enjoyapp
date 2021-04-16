@@ -322,7 +322,7 @@ packages:
       name: firebase
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.1"
   firebase_analytics:
     dependency: "direct main"
     description:
@@ -393,6 +393,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4+1"
+  firebase_dynamic_links:
+    dependency: "direct main"
+    description:
+      name: firebase_dynamic_links
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.0"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -610,7 +617,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0"
+    version: "0.13.1"
   http_multi_server:
     dependency: transitive
     description:
@@ -869,7 +876,7 @@ packages:
       name: process
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.0"
+    version: "4.1.1"
   provider:
     dependency: transitive
     description:

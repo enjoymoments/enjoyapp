@@ -23,6 +23,7 @@ import '../../features/favoriteinterests/presentation/pages/favorite_interests_s
 import '../../features/feedback/presentation/pages/feedback_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
+import '../../features/invite/presentation/pages/invite_screen.dart';
 import '../../features/notifications/presentation/pages/notifications_screen.dart';
 import '../../features/places/data/models/place_model.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
@@ -58,6 +59,7 @@ class Routes {
   static const String configuration_screen = '/configuration-screen';
   static const String home_partial = '/home-partial';
   static const String me_authenticated_partial = '/me-authenticated-partial';
+  static const String invite_screen = '/invite-screen';
   static const all = <String>{
     intro_screen,
     screen_manager_screen,
@@ -79,6 +81,7 @@ class Routes {
     configuration_screen,
     home_partial,
     me_authenticated_partial,
+    invite_screen,
   };
 }
 
@@ -107,6 +110,7 @@ class Router extends RouterBase {
     RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
     RouteDef(Routes.home_partial, page: HomePartial),
     RouteDef(Routes.me_authenticated_partial, page: MeAuthenticatedPartial),
+    RouteDef(Routes.invite_screen, page: InviteScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -264,6 +268,12 @@ class Router extends RouterBase {
     MeAuthenticatedPartial: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => MeAuthenticatedPartial(),
+        settings: data,
+      );
+    },
+    InviteScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => InviteScreen(),
         settings: data,
       );
     },

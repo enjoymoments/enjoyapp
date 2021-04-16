@@ -36,12 +36,12 @@ class UserRepository {
     });
   }
 
-  Future<Either<bool, Exception>> setUserInfo() async {
+  Future<Either<String, Exception>> setUserInfo() async {
     try {
       var response = await remoteDataSource.setUserInfo();
-      return Left<bool, Exception>(response);
+      return Left<String, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>(e);
+      return Right<String, Exception>(e);
     }
   }
 }

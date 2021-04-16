@@ -16,12 +16,15 @@ class UserAppModel extends Equatable {
     @required this.photo,
     this.timelineId,
     this.favoriteInterests,
+    this.internalId,
   })  : assert(email != null),
         assert(id != null);
 
   final String email;
 
   final String id;
+
+  final String internalId;
 
   final String name;
 
@@ -34,6 +37,7 @@ class UserAppModel extends Equatable {
   UserAppModel copyWith({
     String timelineId,
     InterestType favoriteInterests,
+    String internalId
   }) {
     return UserAppModel(
       id: this.id,
@@ -42,6 +46,7 @@ class UserAppModel extends Equatable {
       photo: this.photo,
       timelineId: timelineId ?? this.timelineId,
       favoriteInterests: favoriteInterests ?? this.favoriteInterests,
+      internalId: internalId ?? this.internalId,
     );
   }
 
@@ -50,6 +55,7 @@ class UserAppModel extends Equatable {
     email: '',
     name: '',
     photo: '',
+    internalId: '',
   );
 
   @override
@@ -58,5 +64,6 @@ class UserAppModel extends Equatable {
         id,
         name,
         photo,
+        internalId,
       ];
 }
