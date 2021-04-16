@@ -3,32 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_container.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_content.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
-import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 
-class CardInvite extends StatefulWidget {
-  @override
-  _CardInviteState createState() => _CardInviteState();
-}
-
-class _CardInviteState extends State<CardInvite> {
-  InviteCubit _inviteCubit;
-  InviteState _state;
-
-  @override
-  void initState() {
-    _inviteCubit = getItInstance<InviteCubit>();
-    super.initState();
-  }
+class CardInvite extends StatelessWidget {
+  const CardInvite({Key key, @required this.inviteCubit}) : super(key: key);
+  final InviteCubit inviteCubit;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (_state != null && !_state.isLoading) {
-          _inviteCubit.generateShareUrl();
-        }
+        inviteCubit.generateShareUrl();
       },
       child: CardContainer(
         child: _buildContent(),
@@ -38,10 +24,9 @@ class _CardInviteState extends State<CardInvite> {
 
   Widget _buildContent() {
     return BlocConsumer<InviteCubit, InviteState>(
-      cubit: _inviteCubit,
+      cubit: inviteCubit,
       listener: (consumerContext, state) {},
       builder: (context, state) {
-        _state = state;
         return AnimatedSwitcher(
           duration: Duration(milliseconds: 200),
           child: _buildState(state),

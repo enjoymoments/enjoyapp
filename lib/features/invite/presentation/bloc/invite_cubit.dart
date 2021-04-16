@@ -26,6 +26,10 @@ class InviteCubit extends Cubit<InviteState> {
   final ShareService _shareService;
 
   void generateShareUrl() async {
+    if(state.isLoading) {
+      return;
+    }
+    
     emit(state.copyWith(isLoading: true));
     var _user = _userWrapper.getUser;
     //TODO:share review this
@@ -34,7 +38,7 @@ class InviteCubit extends Cubit<InviteState> {
 
     response.fold((model) {
       _shareService.share(model);
-      
+
       emit(state.copyWith(
         isLoading: false,
         isError: false,

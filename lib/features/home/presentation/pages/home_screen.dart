@@ -4,6 +4,7 @@ import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.d
 import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/generate_card.dart';
+import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -20,11 +21,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   UserAppModel _user;
   HomeCubit _homeCubit;
+  InviteCubit _inviteCubit;
 
   @override
   void initState() {
     _user = getItInstance<UserWrapper>().getUser;
     _homeCubit = getItInstance<HomeCubit>();
+    _inviteCubit = getItInstance<InviteCubit>();
     super.initState();
   }
 
@@ -70,23 +73,25 @@ class _HomeScreenState extends State<HomeScreen> {
         _buildCardInvite(),
         SpacerBox.v16,
         BannerAdWidget(
-            screenName: Routes.home_partial,
+          screenName: Routes.home_partial,
         ),
       ],
     );
   }
 
   Widget _buildCardInvite() {
-    return CardInvite();
+    return CardInvite(
+      inviteCubit: _inviteCubit,
+    );
   }
 
   Widget _buildCardCalendar() {
     return GenerateCard(
-          iconData: AppIcons.calendar_day,
-          routeName: Routes.calendar_screen,
-          name: 'Calendário',
-          description: 'O que pretende fazer nos próximos dias ?',
-        );
+      iconData: AppIcons.calendar_day,
+      routeName: Routes.calendar_screen,
+      name: 'Calendário',
+      description: 'O que pretende fazer nos próximos dias ?',
+    );
   }
 
   Widget _buildCardHelpMe() {
