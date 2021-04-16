@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
       iconData: AppIcons.calendar_day,
       routeName: Routes.calendar_screen,
       name: 'Calendário',
-      description: 'O que pretende fazer nos próximos dias ?',
+      description: 'O que você tem feito ou pretende fazer nos próximos dias ?',
     );
   }
 

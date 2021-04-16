@@ -55,7 +55,7 @@ class CardInvite extends StatelessWidget {
   Widget _buildState(InviteState state) {
     if (!state.isLoading) {
       return CardContent(
-        iconData: AppIcons.inbox,
+        iconData: AppIcons.paper_plane,
         name: 'Convidar meu par',
         description: 'O que pretende fazer nos próximos dias ?',
       );

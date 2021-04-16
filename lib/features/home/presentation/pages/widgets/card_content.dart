@@ -33,9 +33,7 @@ class CardContent extends StatelessWidget {
           ],
         ),
         SpacerBox.v8,
-        Expanded(
-          child: description.description(context),
-        ),
+        description.description(context, maxLines: 3),
       ],
     );
   }

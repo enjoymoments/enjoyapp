@@ -10,7 +10,6 @@ class CardContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: SizeConfig.screenWidth,
-      height: SizeConfig.sizeByPixel(70),
       decoration: BoxDecoration(
         color: Theme.of(context).hintColor,
         border: Border.all(color: Colors.transparent),
