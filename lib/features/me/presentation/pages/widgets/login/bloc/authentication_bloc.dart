@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -133,6 +134,7 @@ class AuthenticationBloc
 
     //_settingsExecute - avoids running too often
     if (_settingsExecute == false && event.user != UserAppModel.empty) {
+      getItInstance<ScreenManagerBloc>()..add(SubscribeActionListener());
       _settingsUser(event.user);
       _settingsExecute = true;
     }

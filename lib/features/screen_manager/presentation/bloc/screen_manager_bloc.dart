@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
@@ -14,6 +15,7 @@ import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
 import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
@@ -34,7 +36,9 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     this.wrapperMediaService,
     this.userWrapper,
     this.localStorageService,
-  ) : super(ScreenManagerState.initial());
+  ) : super(ScreenManagerState.initial()) {
+    _subscribeActionListener();
+  }
 
   final TimelineRepository timelineRepository;
   final AlbumsRepository albumsRepository;
@@ -43,6 +47,14 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   final UserWrapper userWrapper;
   final LocalStorageService localStorageService;
+
+  StreamSubscription<DocumentSnapshot> _actionSubscription;
+
+  @override
+  Future<void> close() {
+    _unsubscribeActionListener();
+    return super.close();
+  }
 
   @override
   Stream<ScreenManagerState> mapEventToState(
@@ -54,6 +66,13 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       yield* albumSave(event);
     } else if (event is TapScreen) {
       yield* mapTapScreenToState(event);
+    } else if (event is SubscribeActionListener) {
+      _subscribeActionListener();
+    } else if (event is UnsubscribeActionListener) {
+      _unsubscribeActionListener();
+    } else if (event is ActionListener) {
+      var _test = event.action.data();
+      print('test');
     }
   }
 
@@ -166,5 +185,23 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
           break;
       }
     }
+  }
+
+  void _subscribeActionListener() {
+    var _instance = new FirestoreInstanceProvider();
+    var _user = userWrapper.getUser;
+
+    if (userWrapper.authenticated && _actionSubscription == null) {
+      _actionSubscription = _instance.firestore
+          .doc('actionListener/${_user.id}')
+          .snapshots()
+          .listen(
+            (action) => add(ActionListener(action)),
+          );
+    }
+  }
+
+  void _unsubscribeActionListener() {
+    _actionSubscription?.cancel();
   }
 }

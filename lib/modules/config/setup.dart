@@ -322,6 +322,8 @@ Future<LocalStorageService> _setupHive() async {
 
 Future<void> resetInstances() async {
   await getItInstance<LocalStorageService>().clearAll();
+  getItInstance<ScreenManagerBloc>()..add(UnsubscribeActionListener());
+  
   getItInstance.reset();
 
   await setup();
