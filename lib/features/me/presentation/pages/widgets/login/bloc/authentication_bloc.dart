@@ -146,7 +146,7 @@ class AuthenticationBloc
     _userService.setUserInfo().then((response) {
       response.fold((value) {
         if(value != null) {
-          _userWrapper.assignment(user.copyWith(internalId: value));
+          _userWrapper.setInternalId(value);
         }
       }, (error) => null);
     });

@@ -138,7 +138,7 @@ void _setupRemoteClientRepository() {
 
 void _registerSingletonModels() {
   getItInstance.registerSingleton<UserWrapper>(
-      UserWrapper()..assignment(UserAppModel.empty));
+      UserWrapper(localStorageService: getItInstance())..assignment(UserAppModel.empty));
   getItInstance.registerSingleton(FilterChoosedWrapper(
     localStorageService: getItInstance(),
   )..init());
@@ -321,6 +321,7 @@ Future<LocalStorageService> _setupHive() async {
 }
 
 Future<void> resetInstances() async {
+  await getItInstance<LocalStorageService>().clearAll();
   getItInstance.reset();
 
   await setup();

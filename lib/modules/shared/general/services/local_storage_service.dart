@@ -18,4 +18,8 @@ class LocalStorageService {
   bool containsKey(String key) {
     return box.containsKey(key);
   }
+
+  Future<int> clearAll() {
+    return box.clear();
+  }
 }
