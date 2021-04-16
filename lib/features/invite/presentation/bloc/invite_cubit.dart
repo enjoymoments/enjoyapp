@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/invite/domain/repositories/invite_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/utils.dart';
 
@@ -11,14 +12,18 @@ class InviteCubit extends Cubit<InviteState> {
   InviteCubit({
     @required InviteRepository inviteRepository,
     @required UserWrapper userWrapper,
+    @required ShareService shareService,
   })  : assert(userWrapper != null),
         _userWrapper = userWrapper,
         assert(inviteRepository != null),
         _inviteRepository = inviteRepository,
+        assert(shareService != null),
+        _shareService = shareService,
         super(InviteState.initial());
 
   final InviteRepository _inviteRepository;
   final UserWrapper _userWrapper;
+  final ShareService _shareService;
 
   void generateShareUrl() async {
     emit(state.copyWith(isLoading: true));
@@ -28,6 +33,8 @@ class InviteCubit extends Cubit<InviteState> {
     var response = await _inviteRepository.generateShareUrl('6076373d4d0050bd520ba74b'); 
 
     response.fold((model) {
+      _shareService.share(model);
+      
       emit(state.copyWith(
         isLoading: false,
         isError: false,

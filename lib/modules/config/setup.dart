@@ -62,6 +62,7 @@ import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart'
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
@@ -168,6 +169,9 @@ void _registerSingletonServices() {
 
   getItInstance
       .registerLazySingleton<AnalyticsService>(() => AnalyticsService());
+
+  getItInstance
+      .registerLazySingleton<ShareService>(() => ShareService());
 }
 
 void _registerBlocs() {
@@ -235,7 +239,7 @@ void _registerBlocs() {
       () => AdsCubit(adsRepository: root<AdsRepository>()));
 
   getItInstance.registerFactory<InviteCubit>(
-      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance()));
+      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance()));
 }
 
 void _registerSingletonRepositories() {
