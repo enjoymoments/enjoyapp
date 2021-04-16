@@ -25,12 +25,24 @@ class InviteCubit extends Cubit<InviteState> {
   final UserWrapper _userWrapper;
   final ShareService _shareService;
 
+  void verifyLoadedUserInternalId() async {
+    var _internalId = await _userWrapper.getInternalId();
+    if (_internalId != null) {
+      emit(state.copyWith(
+        isLoading: false,
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+    }
+  }
+
   void generateShareUrl() async {
     if (state.isLoading) {
       return;
     }
 
     emit(state.copyWith(isLoading: true));
+
+    await Future<void>.delayed(Duration(milliseconds: 750));
 
     var _shareUrl = await _userWrapper.getShareUrl();
     if (_shareUrl != null) {

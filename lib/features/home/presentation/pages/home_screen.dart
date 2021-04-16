@@ -6,7 +6,6 @@ import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart'
 import 'package:mozin/features/home/presentation/pages/widgets/generate_card.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -19,15 +18,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  UserAppModel _user;
+  UserWrapper _userWrapper;
   HomeCubit _homeCubit;
   InviteCubit _inviteCubit;
 
   @override
   void initState() {
-    _user = getItInstance<UserWrapper>().getUser;
+    _userWrapper = getItInstance<UserWrapper>();
     _homeCubit = getItInstance<HomeCubit>();
-    _inviteCubit = getItInstance<InviteCubit>();
+    if (_userWrapper.authenticated) {
+      _inviteCubit = getItInstance<InviteCubit>()..verifyLoadedUserInternalId();
+    }
+
     super.initState();
   }
 
@@ -50,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildContent(HomeState state) {
-    if (_user == UserAppModel.empty) {
+    if (!_userWrapper.authenticated) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

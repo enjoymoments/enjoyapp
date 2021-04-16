@@ -25,7 +25,7 @@ class InviteState extends DefaultState {
       isSuccess: false,
       isEmpty: false,
       isError: false,
-      isLoading: false,
+      isLoading: true,
       errorMessage: null,
       forceRefresh: null,
       shareUrl: null,

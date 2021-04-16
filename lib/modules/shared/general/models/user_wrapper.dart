@@ -12,6 +12,8 @@ class UserWrapper {
   UserAppModel _user;
 
   UserAppModel get getUser => _user;
+  bool get authenticated => _user != UserAppModel.empty;
+  
   static String _internalId = "internal_id";
   static String _shareUrl = "share_url";
 
