@@ -36,6 +36,10 @@ class UserRepository {
     });
   }
 
+  Future setActionListener(UserAppModel user) async {
+    await _instance.firestore.collection('actionListener').doc(user.id).set({}, SetOptions(merge: true));
+  }
+
   Future<Either<String, Exception>> setUserInfo() async {
     try {
       var response = await remoteDataSource.setUserInfo();

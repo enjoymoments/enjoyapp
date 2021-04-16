@@ -100,4 +100,9 @@ class UserService implements UserInterface {
   Future<Either<String, Exception>> setUserInfo() {
     return userRepository.setUserInfo();
   }
+
+  @override
+  Future setActionListener(UserAppModel user) {
+    return userRepository.setActionListener(user);
+  }
 }

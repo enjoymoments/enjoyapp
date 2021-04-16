@@ -145,6 +145,7 @@ class AuthenticationBloc
 
     _userService.setTokensPushNotifications(user, _token);
     _userService.getFavoriteInterests();
+    _userService.setActionListener(user);
     _userService.setUserInfo().then((response) {
       response.fold((value) {
         if(value != null) {
