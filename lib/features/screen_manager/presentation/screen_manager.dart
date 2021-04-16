@@ -256,13 +256,6 @@ class _ScreenManagerState extends State<ScreenManager> {
           );
         },
       ),
-      CustomItemModalFit(
-        text: 'Configurações',
-        iconData: AppIcons.cog,
-        onTap: () {
-          ExtendedNavigator.of(context).push(Routes.configuration_screen);
-        },
-      ),
     ];
 
     if (!_notAuthenticated()) {

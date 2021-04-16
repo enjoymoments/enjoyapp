@@ -4,9 +4,11 @@ import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.d
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
+import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
@@ -26,9 +28,7 @@ class Connected extends StatelessWidget {
           children: <Widget>[
             SpacerBox.v10,
             _buildHeader(context),
-            SpacerBox.v16,
-            CustomDivider(),
-            SpacerBox.v16,
+            SpacerBox.v30,
             _buildCards(context),
           ],
         ),
@@ -40,42 +40,10 @@ class Connected extends StatelessWidget {
     return Row(
       children: [
         CustomAvatar(
-          radius: SizeConfig.sizeByPixel(35),
+          radius: SizeConfig.sizeByPixel(25),
         ),
         SpacerBox.h16,
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            user.name.title(context),
-            SpacerBox.v10,
-            _buildLineInfo(context),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLineInfo(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildItemLineInfo(context, '438', 'Posts'),
-        SpacerBox.h43,
-        _buildItemLineInfo(context, '298', 'Fotos'),
-        SpacerBox.h43,
-        _buildItemLineInfo(context, '321', 'Marcações'),
-      ],
-    );
-  }
-
-  Widget _buildItemLineInfo(
-      BuildContext context, String title, String description) {
-    return Column(
-      children: [
-        title.title(context, fontWeight: FontWeight.bold),
-        SpacerBox.v4,
-        description.label(context),
+        user.name.title(context),
       ],
     );
   }
@@ -83,16 +51,37 @@ class Connected extends StatelessWidget {
   Widget _buildCards(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 30,
-          children: [
-            _generateItem(context, Routes.albums_screen, 'Álbuns'),
-            _generateItem(
-                context, Routes.favorite_interests_screen, 'Favoritos'),
-          ],
+        CustomTile(
+          title: 'Álbuns',
+          description: 'Meus álbums pessoais',
+          iconStart: AppIcons.camera_retro,
+          iconEnd: AppIcons.angle_right,
+          onTap: () {
+            ExtendedNavigator.of(context).push(Routes.albums_screen);
+          },
         ),
-        SpacerBox.v16,
+        ..._divider(),
+        CustomTile(
+          title: 'Favoritos',
+          description: 'Meus lugares favoritos',
+          iconStart: AppIcons.star,
+          iconEnd: AppIcons.angle_right,
+          onTap: () {
+            ExtendedNavigator.of(context)
+                .push(Routes.favorite_interests_screen);
+          },
+        ),
+        ..._divider(),
+        CustomTile(
+          title: 'Configurações',
+          description: 'Minhas configurações',
+          iconStart: AppIcons.cog,
+          iconEnd: AppIcons.angle_right,
+          onTap: () {
+            ExtendedNavigator.of(context).push(Routes.configuration_screen);
+          },
+        ),
+        ..._divider(),
         BannerAdWidget(
           screenName: Routes.me_authenticated_partial,
         ),
@@ -100,24 +89,11 @@ class Connected extends StatelessWidget {
     );
   }
 
-  Widget _generateItem(BuildContext context, String routeName, String name) {
-    return GestureDetector(
-      onTap: () {
-        ExtendedNavigator.of(context).push(routeName);
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: SizeConfig.sizeByPixel(140),
-        height: SizeConfig.sizeByPixel(120),
-        decoration: BoxDecoration(
-          color: Theme.of(context).hintColor,
-          border: Border.all(color: Colors.transparent),
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        ),
-        child: name.label(
-          context,
-        ),
-      ),
-    );
+  List<Widget> _divider() {
+    return [
+      SpacerBox.v14,
+      CustomDivider(),
+      SpacerBox.v14,
+    ];
   }
 }
