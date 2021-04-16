@@ -8,7 +8,8 @@ abstract class InviteRemoteDataSource {
 }
 
 class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
-  InviteRemoteDataSourceImpl({@required this.remoteClientRepository, @required this.remoteConfig});
+  InviteRemoteDataSourceImpl(
+      {@required this.remoteClientRepository, @required this.remoteConfig});
 
   final RemoteClientRepository remoteClientRepository;
   final RemoteConfig remoteConfig;
@@ -17,12 +18,12 @@ class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
   Future<String> generateShareUrl(String userInternalId) async {
     var url = remoteConfig.getString(url_functions);
 
-    var _options = await remoteClientRepository.getOptions();
-
-    var _response = await remoteClientRepository.dio
-        .post('$url/generateShareUrl', data: {
-      'path': userInternalId,
-    }, options: _options);
+    var _response = await remoteClientRepository.post(
+      '$url/generateShareUrl',
+      data: {
+        'path': userInternalId,
+      },
+    );
 
     return _response.data;
   }
