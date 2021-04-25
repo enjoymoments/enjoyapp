@@ -108,7 +108,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             _CustomTile(
               selected: _feedbackType == _FeedbackType.improvement,
               title: 'Tenho uma sugestão ou elogio',
-              description: 'Manda aquela ideia ou elogio pra gente imprimir e colar na geladeira de tanta alegria',
+              description: 'Aquela ideia ou elogio pra gente imprimir e colar na geladeira de tanta alegria',
               iconStart: AppIcons.star,
               onTap: (selected) {
                 setState(() {
