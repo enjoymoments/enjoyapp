@@ -153,26 +153,7 @@ class _ScreenManagerState extends State<ScreenManager> {
       case DefaultMenuEnum.Search:
         return [];
       case DefaultMenuEnum.Me:
-        return [
-          //TODO:in development
-          // IconButton(
-          //   icon: CustomIcon(icon: AppIcons.bell),
-          //   onPressed: () {
-          //     ExtendedNavigator.of(context).push(Routes.notification_screen);
-          //   },
-          // ),
-          IconButton(
-            icon: CustomIcon(icon: AppIcons.bars),
-            onPressed: () {
-              showMaterialModalBottomSheet(
-                context: context,
-                builder: (context) => CustomModalFit(
-                  items: _getItemsModalFit(),
-                ),
-              );
-            },
-          ),
-        ];
+        return [];
       case DefaultMenuEnum.Alert:
         return [];
       default:
@@ -204,80 +185,5 @@ class _ScreenManagerState extends State<ScreenManager> {
     }
 
     return false;
-  }
-
-  List<Widget> _getItemsModalFit() {
-    var _result = [
-      CustomItemModalFit(
-        text: 'Curtiu o Enjoy? Avalie-nos',
-        iconData: AppIcons.thumbs_up,
-        onTap: () {},
-      ),
-      CustomItemModalFit(
-        text: 'Mais sobre nós',
-        iconData: AppIcons.info_circle,
-        onTap: () {
-          showMaterialModalBottomSheet(
-            context: context,
-            builder: (context) => CustomModalFit(
-              items: [
-                CustomItemModalFit(
-                  text: 'Instagram',
-                  iconData: AppIcons.instagram,
-                  onTap: () {
-                    _launchURL('https://www.instagram.com/myenjoymoments/');
-                  },
-                ),
-                CustomItemModalFit(
-                  text: 'Facebook',
-                  iconData: AppIcons.facebook,
-                  onTap: () {
-                    _launchURL(
-                        'https://www.facebook.com/Enjoy-108714310939674');
-                  },
-                ),
-                CustomItemModalFit(
-                  text: 'Linkedin',
-                  iconData: AppIcons.linkedin,
-                  onTap: () {
-                    _launchURL(
-                        'https://www.linkedin.com/company/enjoy-moments/');
-                  },
-                ),
-                CustomItemModalFit(
-                  text: 'Site',
-                  iconData: AppIcons.window_maximize,
-                  onTap: () {
-                    _launchURL('https://mozin-2c81d.web.app/');
-                  },
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    ];
-
-    if (!_notAuthenticated()) {
-      _result.add(
-        CustomItemModalFit(
-          text: 'Sair',
-          iconData: AppIcons.window_close,
-          onTap: () {
-            root<AuthenticationBloc>()..add(Logout());
-          },
-        ),
-      );
-    }
-
-    return _result;
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }
