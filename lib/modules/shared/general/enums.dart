@@ -101,3 +101,20 @@ class DefaultMenuEnum extends Enum<int> {
   @override
   String toString() => value.toString();
 }
+
+class DynamicLinksTypeEnum extends Enum<String> {
+  factory DynamicLinksTypeEnum(final String value) {
+    if (value == 'sync') {
+      return DynamicLinksTypeEnum.Sync;
+    }
+
+    return null;
+  }
+
+  const DynamicLinksTypeEnum._fromValue(final String value) : super._fromValue(value);
+
+  static const DynamicLinksTypeEnum Sync = DynamicLinksTypeEnum._fromValue('sync');
+
+  @override
+  String toString() => value.toString();
+}

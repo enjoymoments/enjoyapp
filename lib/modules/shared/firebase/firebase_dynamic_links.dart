@@ -1,4 +1,6 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:mozin/modules/config/router_external_resolver.dart';
+import 'package:mozin/modules/config/setup.dart';
 
 //TODO:share review this
 class ConfigureFirebaseDynamicLinks {
@@ -7,10 +9,9 @@ class ConfigureFirebaseDynamicLinks {
         onSuccess: (PendingDynamicLinkData dynamicLink) async {
       final Uri deepLink = dynamicLink?.link;
 
-      print(deepLink.path);
       if (deepLink != null) {
-        print(deepLink.path);
-        // Navigator.pushNamed(context, deepLink.path);
+        //TODO:review this
+        getItInstance<RouterExternalResolver>().resolver(null, path: deepLink.path);
       }
     }, onError: (OnLinkErrorException e) async {
       print('onLinkError');
@@ -23,7 +24,6 @@ class ConfigureFirebaseDynamicLinks {
 
     if (deepLink != null) {
       print(deepLink.path);
-      //Navigator.pushNamed(context, deepLink.path);
     }
   }
 }

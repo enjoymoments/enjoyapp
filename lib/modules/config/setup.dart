@@ -57,6 +57,7 @@ import 'package:mozin/features/time_line/data/repositories/time_line_repository_
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
@@ -130,8 +131,8 @@ void _setupRemoteClientRepository() {
             dio: _dio,
             url: 
             //'https://localhost:5001/graphql',
-            //'https://10.0.2.2:5001/graphql',
-            getItInstance<RemoteConfig>().getString(url_endpoint),
+            'https://10.0.2.2:5001/graphql',
+            //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -172,6 +173,9 @@ void _registerSingletonServices() {
 
   getItInstance
       .registerLazySingleton<ShareService>(() => ShareService());
+
+  getItInstance
+      .registerLazySingleton<RouterExternalResolver>(() => RouterExternalResolver());    
 }
 
 void _registerBlocs() {
