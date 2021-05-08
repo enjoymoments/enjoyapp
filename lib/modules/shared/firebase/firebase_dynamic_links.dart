@@ -2,7 +2,6 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/config/setup.dart';
 
-//TODO:share review this
 class ConfigureFirebaseDynamicLinks {
   void initDynamicLinks() async {
     FirebaseDynamicLinks.instance.onLink(

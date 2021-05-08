@@ -26,10 +26,6 @@ class InviteCubit extends Cubit<InviteState> {
   final UserWrapper _userWrapper;
   final ShareService _shareService;
 
-  void syncUser(String fromUserId) {
-    print('sync ' + fromUserId);
-  }
-
   void verifyLoadedUserInternalId() async {
     var _internalId = await _userWrapper.getInternalId();
     if (_internalId != null) {

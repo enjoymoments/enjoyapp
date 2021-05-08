@@ -118,3 +118,26 @@ class DynamicLinksTypeEnum extends Enum<String> {
   @override
   String toString() => value.toString();
 }
+
+class NotificationTypeEnum extends Enum<String> {
+  factory NotificationTypeEnum(final String value) {
+    if (value == 'CREATE_POST') {
+      return NotificationTypeEnum.CreatePost;
+    } else if (value == 'CREATE_ITEM_CALENDAR') {
+      return NotificationTypeEnum.CreateItemCalendar;
+    } else if (value == 'SYNC_COUPLE') {
+      return NotificationTypeEnum.SyncCouple;
+    }
+
+    return null;
+  }
+
+  const NotificationTypeEnum._fromValue(final String value) : super._fromValue(value);
+
+  static const NotificationTypeEnum CreatePost = NotificationTypeEnum._fromValue('CREATE_POST');
+  static const NotificationTypeEnum CreateItemCalendar = NotificationTypeEnum._fromValue('CREATE_ITEM_CALENDAR');
+  static const NotificationTypeEnum SyncCouple = NotificationTypeEnum._fromValue('SYNC_COUPLE');
+
+  @override
+  String toString() => value.toString();
+}

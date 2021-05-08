@@ -57,6 +57,10 @@ import 'package:mozin/features/time_line/data/repositories/time_line_repository_
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/features/user_action/data/datasources/user_action_remote_data_source.dart';
+import 'package:mozin/features/user_action/data/repositories/user_action_repository_impl.dart';
+import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';
+import 'package:mozin/features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
 import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
@@ -244,6 +248,8 @@ void _registerBlocs() {
 
   getItInstance.registerLazySingleton<InviteCubit>(
       () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance()));
+
+  getItInstance.registerLazySingleton<UserActionCubit>(() => UserActionCubit(userActionRepository: getItInstance()));
 }
 
 void _registerSingletonRepositories() {
@@ -282,6 +288,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<InviteRepository>(
       () => InviteRepositoryImpl(remoteDataSource: getItInstance()));
+
+  getItInstance.registerLazySingleton<UserActionRepository>(
+      () => UserActionRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
@@ -314,6 +323,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<InviteRemoteDataSource>(
       () => InviteRemoteDataSourceImpl(remoteClientRepository: getItInstance(), remoteConfig: getItInstance()));
+
+  getItInstance.registerLazySingleton<UserActionRemoteDataSource>(
+      () => UserActionRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {
