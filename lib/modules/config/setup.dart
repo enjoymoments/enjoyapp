@@ -65,6 +65,7 @@ import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
+import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/share_service.dart';
@@ -180,6 +181,9 @@ void _registerSingletonServices() {
 
   getItInstance
       .registerLazySingleton<RouterExternalResolver>(() => RouterExternalResolver());    
+
+  getItInstance
+      .registerLazySingleton<ConfigureFirebaseDynamicLinks>(() => ConfigureFirebaseDynamicLinks());        
 }
 
 void _registerBlocs() {

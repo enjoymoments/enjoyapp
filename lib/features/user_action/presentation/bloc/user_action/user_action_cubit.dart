@@ -30,8 +30,8 @@ class UserActionCubit extends Cubit<UserActionState> {
     _response.fold((model) {
       emit(state.copyWith(
         isLoading: false,
-        isError: false,
-        isSuccess: true,
+        isError: !model.isSuccess,
+        isSuccess: model.isSuccess,
       ));
     }, (error) {
       emit(state.copyWith(

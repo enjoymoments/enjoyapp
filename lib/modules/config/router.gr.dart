@@ -30,6 +30,7 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
+import '../../features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
 import '../../package_view/custom_success_screen.dart';
 import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
@@ -272,8 +273,12 @@ class Router extends RouterBase {
       );
     },
     InviteScreen: (data) {
+      final args = data.getArgs<InviteScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => InviteScreen(),
+        builder: (context) => InviteScreen(
+          key: args.key,
+          userActionCubit: args.userActionCubit,
+        ),
         settings: data,
       );
     },
@@ -342,4 +347,11 @@ class AddAlbumsScreenArguments {
   final Key key;
   final AlbumItemModel album;
   AddAlbumsScreenArguments({this.key, this.album});
+}
+
+/// InviteScreen arguments holder class
+class InviteScreenArguments {
+  final Key key;
+  final UserActionCubit userActionCubit;
+  InviteScreenArguments({this.key, @required this.userActionCubit});
 }

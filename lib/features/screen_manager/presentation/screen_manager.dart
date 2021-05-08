@@ -10,6 +10,7 @@ import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -35,6 +36,13 @@ class _ScreenManagerState extends State<ScreenManager> {
   void initState() {
     _screenManagerBloc = getItInstance<ScreenManagerBloc>();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    getItInstance<ConfigureFirebaseDynamicLinks>()..initDynamicLinks(context);
+
+    super.didChangeDependencies();
   }
 
   @override
