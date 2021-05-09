@@ -32,9 +32,22 @@ class InviteScreen extends StatelessWidget {
       appBar: _buildAppBar(context),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: ButtonDefault(
-          text: 'Sim',
-          onTap: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ButtonDefault(
+              text: 'Sim',
+              width: SizeConfig.sizeByPixel(100),
+              onTap: () {},
+            ),
+            SpacerBox.h16,
+            ButtonDefault(
+              text: 'Não',
+              width: SizeConfig.sizeByPixel(100),
+              swipeColors: true,
+              onTap: () {},
+            ),
+          ],
         ),
       ),
     );
@@ -95,24 +108,21 @@ class InviteScreen extends StatelessWidget {
         title: 'Curtiu o Enjoy? Avalie-nos',
         description: 'Dá aquela 5 estrelas pra gente ;)',
         iconStart: AppIcons.thumbs_up,
-        onTap: () {
-        },
+        onTap: () {},
       ),
       ..._divider(),
       CustomTile(
         title: 'Curtiu o Enjoy? Avalie-nos',
         description: 'Dá aquela 5 estrelas pra gente ;)',
         iconStart: AppIcons.thumbs_up,
-        onTap: () {
-        },
+        onTap: () {},
       ),
       ..._divider(),
       CustomTile(
         title: 'Curtiu o Enjoy? Avalie-nos',
         description: 'Dá aquela 5 estrelas pra gente ;)',
         iconStart: AppIcons.thumbs_up,
-        onTap: () {
-        },
+        onTap: () {},
       ),
     ];
   }
@@ -142,10 +152,16 @@ class ButtonDefault extends StatelessWidget {
     Key key,
     @required this.text,
     @required this.onTap,
+    this.width,
+    this.height,
+    this.swipeColors,
   }) : super(key: key);
 
   final String text;
   final Function onTap;
+  final double width;
+  final double height;
+  final bool swipeColors;
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +170,12 @@ class ButtonDefault extends StatelessWidget {
 
   Widget _buildButton(BuildContext context) {
     final ButtonStyle _raisedButtonStyle = ElevatedButton.styleFrom(
-      primary: Theme.of(context).primaryColor,
-      minimumSize: Size(SizeConfig.screenWidth, 50),
-      shape: const RoundedRectangleBorder(
+      primary: swipeColors == true
+          ? Theme.of(context).backgroundColor
+          : Theme.of(context).primaryColor,
+      minimumSize: Size(width ?? SizeConfig.screenWidth, height ?? 50),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Theme.of(context).primaryColor),
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
     );
@@ -166,7 +185,10 @@ class ButtonDefault extends StatelessWidget {
       onPressed: () {
         onTap();
       },
-      child: text.title(context, color: Theme.of(context).backgroundColor),
+      child: text.title(context,
+          color: swipeColors == true
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).backgroundColor),
     );
   }
 }
