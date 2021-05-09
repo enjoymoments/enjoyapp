@@ -13,10 +13,10 @@ class CustomTile extends StatelessWidget {
   const CustomTile({
     Key key,
     @required this.iconStart,
-    @required this.iconEnd,
     @required this.title,
     @required this.description,
     @required this.onTap,
+    this.iconEnd,
   }) : super(key: key);
 
   @override
@@ -41,9 +41,11 @@ class CustomTile extends StatelessWidget {
               ],
             ),
           ),
-          CustomIcon(
-            icon: iconEnd,
-          ),
+          iconEnd != null
+              ? CustomIcon(
+                  icon: iconEnd,
+                )
+              : SizedBox.shrink(),
         ],
       ),
     );
