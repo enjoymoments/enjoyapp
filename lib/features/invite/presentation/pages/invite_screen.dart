@@ -31,11 +31,6 @@ class InviteScreen extends StatelessWidget {
     return BlocConsumer<UserActionCubit, UserActionState>(
       cubit: userActionCubit,
       listener: (consumerContext, state) {
-        if (state.isError) {
-          consumerContext.showSnackBar(
-              state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
-        }
-
         if (state.isSuccess) {
           ExtendedNavigator.of(context).pop();
         }
@@ -43,6 +38,16 @@ class InviteScreen extends StatelessWidget {
       builder: (BuildContext context, UserActionState state) {
         if (state.isLoading) {
           return InviteScreenLoading();
+        }
+
+        if (state.isError) {
+          return CustomScaffold(
+            child: Center(
+              child: 'Ops, houve um erro. Tente novamente'.labelIntro(context),
+            ),
+            appBar: _buildAppBar(context),
+            bottomNavigationBar: null,
+          );
         }
 
         return CustomScaffold(
