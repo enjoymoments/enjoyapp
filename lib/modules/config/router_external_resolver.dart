@@ -15,8 +15,8 @@ class RouterExternalResolver {
 
     if (_routeName == DynamicLinksTypeEnum.Sync.value) {
       var _userActionCubit = getItInstance<UserActionCubit>();
-
-      _userActionCubit.syncUser(_routeSplit[2]);
+      //TODO:review this
+      ///_userActionCubit.syncUser(_routeSplit[2]);
 
       ExtendedNavigator.of(context).push(Routes.invite_screen,
           arguments: InviteScreenArguments(userActionCubit: _userActionCubit));
