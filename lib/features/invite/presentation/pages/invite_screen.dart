@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/invite/presentation/pages/widgets/invite_screen_loading.dart';
 import 'package:mozin/features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
@@ -23,34 +24,7 @@ class InviteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: SingleChildScrollView(
-        child: CustomContainer(
-          child: _buildChild(context),
-        ),
-      ),
-      appBar: _buildAppBar(context),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ButtonDefault(
-              text: 'Sim',
-              width: SizeConfig.sizeByPixel(100),
-              onTap: () {},
-            ),
-            SpacerBox.h16,
-            ButtonDefault(
-              text: 'Não',
-              width: SizeConfig.sizeByPixel(100),
-              swipeColors: true,
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
-    );
+    return _buildChild(context);
   }
 
   Widget _buildChild(BuildContext context) {
@@ -67,13 +41,48 @@ class InviteScreen extends StatelessWidget {
         }
       },
       builder: (BuildContext context, UserActionState state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildContent(context),
-          ],
+        if (state.isLoading) {
+          return InviteScreenLoading();
+        }
+
+        return CustomScaffold(
+          child: SingleChildScrollView(
+            child: CustomContainer(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildContent(context),
+                ],
+              ),
+            ),
+          ),
+          appBar: _buildAppBar(context),
+          bottomNavigationBar: _buildButtons(),
         );
       },
+    );
+  }
+
+  Widget _buildButtons() {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ButtonDefault(
+            text: 'Sim',
+            width: SizeConfig.sizeByPixel(100),
+            onTap: () {},
+          ),
+          SpacerBox.h16,
+          ButtonDefault(
+            text: 'Não',
+            width: SizeConfig.sizeByPixel(100),
+            swipeColors: true,
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 
@@ -140,7 +149,7 @@ class InviteScreen extends StatelessWidget {
       title: 'Convite',
       context: context,
       onPressedBack: () {
-        Navigator.of(context).pop();
+        ExtendedNavigator.of(context).pop();
       },
       actions: <Widget>[],
     );
