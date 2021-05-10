@@ -147,9 +147,10 @@ class AuthenticationBloc
     _userService.getFavoriteInterests();
     _userService.setActionListener(user);
     _userService.setUserInfo().then((response) {
-      response.fold((value) {
-        if(value != null) {
-          _userWrapper.setInternalId(value);
+      response.fold((model) {
+        if(model != null) {
+          _userWrapper.setInternalId(model.userInternalId);
+          _userWrapper.setCoupleId(model.coupleId);
         }
       }, (error) => null);
     });

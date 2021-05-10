@@ -75,6 +75,10 @@ class InviteCubit extends Cubit<InviteState> {
     );
 
     _response.fold((model) {
+      if (model.isSuccess) {
+        _userWrapper.setCoupleId(model.data);
+      }
+
       emit(state.copyWith(
         isLoading: false,
         isError: !model.isSuccess,

@@ -16,6 +16,7 @@ class UserWrapper {
   
   static String _internalId = "internal_id";
   static String _shareUrl = "share_url";
+  static String _coupleId = "couple_id";
 
   void assignment(UserAppModel newUser) {
     _user = newUser;
@@ -39,5 +40,15 @@ class UserWrapper {
 
   Future<String> getShareUrl() {
     return _localStorageService.get<String, String>(_shareUrl);
+  }
+
+  void setCoupleId(String coupleId) {
+    _localStorageService.put(
+      KeyValue<String, String>(key: _coupleId, value: coupleId),
+    );
+  }
+
+  Future<String> getCoupleId() {
+    return _localStorageService.get<String, String>(_coupleId);
   }
 }

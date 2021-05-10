@@ -1,7 +1,8 @@
 import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/user/models/user_info_model.dart';
 
 abstract class UserRemoteDataSource {
-  Future<String> setUserInfo();
+  Future<UserInfoModel> setUserInfo();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -10,14 +11,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final RemoteClientRepository remoteClientRepository;
 
   @override
-  Future<String> setUserInfo() async {
+  Future<UserInfoModel> setUserInfo() async {
     String _mutation = '''
     mutation userInfo {
-      userInfo
+      userInfo {
+        coupleId
+        userInternalId
+      }
     }
     ''';
 
     var result = await remoteClientRepository.query(_mutation);
-    return result['data']['userInfo'];
+    return UserInfoModel.fromJson(result['data']['userInfo']);
   }
 }

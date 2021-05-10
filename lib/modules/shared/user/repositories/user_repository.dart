@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/user/datasources/user_remote_data_source.dart';
+import 'package:mozin/modules/shared/user/models/user_info_model.dart';
 
 class UserRepository {
   UserRepository({
@@ -40,12 +41,12 @@ class UserRepository {
     await _instance.firestore.collection('actionListener').doc(user.id).set({}, SetOptions(merge: true));
   }
 
-  Future<Either<String, Exception>> setUserInfo() async {
+  Future<Either<UserInfoModel, Exception>> setUserInfo() async {
     try {
       var response = await remoteDataSource.setUserInfo();
-      return Left<String, Exception>(response);
+      return Left<UserInfoModel, Exception>(response);
     } on dynamic catch (e) {
-      return Right<String, Exception>(e);
+      return Right<UserInfoModel, Exception>(e);
     }
   }
 }
