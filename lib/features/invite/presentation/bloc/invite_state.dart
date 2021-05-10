@@ -9,6 +9,7 @@ class InviteState extends DefaultState {
     String errorMessage,
     this.forceRefresh,
     this.shareUrl,
+    this.userSyncInfoModel,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,6 +20,7 @@ class InviteState extends DefaultState {
 
   final int forceRefresh;
   final String shareUrl;
+  final UserSyncInfoModel userSyncInfoModel;
 
   factory InviteState.initial() {
     return InviteState(
@@ -29,6 +31,7 @@ class InviteState extends DefaultState {
       errorMessage: null,
       forceRefresh: null,
       shareUrl: null,
+      userSyncInfoModel: null,
     );
   }
 
@@ -40,6 +43,7 @@ class InviteState extends DefaultState {
     String errorMessage,
     int forceRefresh,
     String shareUrl,
+    UserSyncInfoModel userSyncInfoModel
   }) {
     return InviteState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +53,7 @@ class InviteState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       shareUrl: shareUrl ?? this.shareUrl,
+      userSyncInfoModel: userSyncInfoModel ?? this.userSyncInfoModel,
     );
   }
 
@@ -61,5 +66,6 @@ class InviteState extends DefaultState {
         errorMessage,
         forceRefresh,
         shareUrl,
+        userSyncInfoModel,
       ];
 }

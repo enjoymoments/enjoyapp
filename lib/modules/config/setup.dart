@@ -251,7 +251,7 @@ void _registerBlocs() {
       () => AdsCubit(adsRepository: root<AdsRepository>()));
 
   getItInstance.registerLazySingleton<InviteCubit>(
-      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance()));
+      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance(), userActionRepository: getItInstance()));
 
   getItInstance.registerLazySingleton<UserActionCubit>(() => UserActionCubit(userActionRepository: getItInstance()));
 }

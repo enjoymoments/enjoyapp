@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/invite/presentation/pages/widgets/invite_screen_loading.dart';
-import 'package:mozin/features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
@@ -17,10 +17,10 @@ import 'package:mozin/package_view/spacer_box.dart';
 class InviteScreen extends StatelessWidget {
   const InviteScreen({
     Key key,
-    @required this.userActionCubit,
+    @required this.inviteCubit,
   }) : super(key: key);
 
-  final UserActionCubit userActionCubit;
+  final InviteCubit inviteCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,14 @@ class InviteScreen extends StatelessWidget {
   }
 
   Widget _buildChild(BuildContext context) {
-    return BlocConsumer<UserActionCubit, UserActionState>(
-      cubit: userActionCubit,
+    return BlocConsumer<InviteCubit, InviteState>(
+      cubit: inviteCubit,
       listener: (consumerContext, state) {
         if (state.isSuccess) {
           ExtendedNavigator.of(context).pop();
         }
       },
-      builder: (BuildContext context, UserActionState state) {
+      builder: (BuildContext context, InviteState state) {
         if (state.isLoading) {
           return InviteScreenLoading();
         }
@@ -56,7 +56,7 @@ class InviteScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildContent(context),
+                  _buildContent(context, state),
                 ],
               ),
             ),
@@ -91,7 +91,7 @@ class InviteScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, InviteState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,9 +99,10 @@ class InviteScreen extends StatelessWidget {
           children: [
             CustomAvatar(
               radius: 40,
+              backgroundImage: NetworkImage(state.userSyncInfoModel.photo),
             ),
             SpacerBox.h16,
-            'FELIPE AUGUSTO'
+            state.userSyncInfoModel.name
                 .title(context, color: Theme.of(context).primaryColor),
           ],
         ),

@@ -1,8 +1,28 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
+
+extension NavigatorStateExtension on ExtendedNavigatorState {
+  void pushNamedIfNotCurrent(String routeName, {Object arguments}) {
+    if (!isCurrent(routeName)) {
+      push(routeName, arguments: arguments);
+    }
+  }
+
+  bool isCurrent(String routeName) {
+    bool isCurrent = false;
+    popUntil((route) {
+      if (route.settings.name == routeName) {
+        isCurrent = true;
+      }
+      return true;
+    });
+    return isCurrent;
+  }
+}
 
 extension DateTimeExtension on DateTime {
   DateTime setTimeOfDay(TimeOfDay time) {

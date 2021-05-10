@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
+import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
+import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
@@ -14,12 +15,11 @@ class RouterExternalResolver {
     var _routeName = _routeSplit[1];
 
     if (_routeName == DynamicLinksTypeEnum.Sync.value) {
-      var _userActionCubit = getItInstance<UserActionCubit>();
-      //TODO:review this
-      ///_userActionCubit.syncUser(_routeSplit[2]);
+      var _inviteCubit = getItInstance<InviteCubit>();
+      _inviteCubit.getUserSyncInfo(_routeSplit[2]);
 
-      ExtendedNavigator.of(context).push(Routes.invite_screen,
-          arguments: InviteScreenArguments(userActionCubit: _userActionCubit));
+      ExtendedNavigator.of(context).pushNamedIfNotCurrent(Routes.invite_screen,
+          arguments: InviteScreenArguments(inviteCubit: _inviteCubit));
       return;
     }
     //TODO:review this
