@@ -62,13 +62,13 @@ class InviteScreen extends StatelessWidget {
             ),
           ),
           appBar: _buildAppBar(context),
-          bottomNavigationBar: _buildButtons(),
+          bottomNavigationBar: _buildButtons(context),
         );
       },
     );
   }
 
-  Widget _buildButtons() {
+  Widget _buildButtons(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Row(
@@ -77,14 +77,18 @@ class InviteScreen extends StatelessWidget {
           ButtonDefault(
             text: 'Sim',
             width: SizeConfig.sizeByPixel(100),
-            onTap: () {},
+            onTap: () {
+              inviteCubit.syncUser();
+            },
           ),
           SpacerBox.h16,
           ButtonDefault(
             text: 'Não',
             width: SizeConfig.sizeByPixel(100),
             swipeColors: true,
-            onTap: () {},
+            onTap: () {
+              ExtendedNavigator.of(context).pop();
+            },
           ),
         ],
       ),

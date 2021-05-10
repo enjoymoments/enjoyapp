@@ -60,7 +60,7 @@ class InviteCubit extends Cubit<InviteState> {
     });
   }
 
-  void syncUser(String fromUserId) async {
+  void syncUser() async {
     emit(state.copyWith(
       isLoading: true,
       forceRefresh: StateUtils.generateRandomNumber(),
@@ -70,7 +70,7 @@ class InviteCubit extends Cubit<InviteState> {
         await _userActionRepository.addUserAction(
       model: UserActionModel(
         notificationType: NotificationTypeEnum.SyncCouple,
-        data: fromUserId,
+        data: state.userSyncInfoModel.userSyncInfoId,
       ),
     );
 
