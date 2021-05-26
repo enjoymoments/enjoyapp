@@ -10,6 +10,7 @@ class InviteState extends DefaultState {
     this.forceRefresh,
     this.shareUrl,
     this.userSyncInfoModel,
+    this.showCardInvite,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -21,6 +22,7 @@ class InviteState extends DefaultState {
   final int forceRefresh;
   final String shareUrl;
   final UserSyncInfoModel userSyncInfoModel;
+  final bool showCardInvite;
 
   factory InviteState.initial() {
     return InviteState(
@@ -32,6 +34,7 @@ class InviteState extends DefaultState {
       forceRefresh: null,
       shareUrl: null,
       userSyncInfoModel: null,
+      showCardInvite: false,
     );
   }
 
@@ -43,7 +46,8 @@ class InviteState extends DefaultState {
     String errorMessage,
     int forceRefresh,
     String shareUrl,
-    UserSyncInfoModel userSyncInfoModel
+    UserSyncInfoModel userSyncInfoModel,
+    bool showCardInvite,
   }) {
     return InviteState(
       isLoading: isLoading ?? this.isLoading,
@@ -54,6 +58,7 @@ class InviteState extends DefaultState {
       forceRefresh: forceRefresh ?? this.forceRefresh,
       shareUrl: shareUrl ?? this.shareUrl,
       userSyncInfoModel: userSyncInfoModel ?? this.userSyncInfoModel,
+      showCardInvite: showCardInvite ?? this.showCardInvite,
     );
   }
 
@@ -67,5 +72,6 @@ class InviteState extends DefaultState {
         forceRefresh,
         shareUrl,
         userSyncInfoModel,
+        showCardInvite,
       ];
 }

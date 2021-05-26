@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
 import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
+import 'package:mozin/features/home/presentation/pages/widgets/card_container.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/generate_card.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
@@ -41,12 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomContainer(
-      child: BlocBuilder<HomeCubit, HomeState>(
-        cubit: _homeCubit,
-        builder: (context, state) {
-          return _buildContent(state);
-        },
+    return SingleChildScrollView(
+      child: CustomContainer(
+        child: BlocBuilder<HomeCubit, HomeState>(
+          cubit: _homeCubit,
+          builder: (context, state) {
+            return _buildContent(state);
+          },
+        ),
       ),
     );
   }
@@ -82,8 +85,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCardInvite() {
-    return CardInvite(
-      inviteCubit: _inviteCubit,
+    return BlocBuilder<InviteCubit, InviteState>(
+      cubit: _inviteCubit,
+      builder: (context, state) {
+        if (!state.showCardInvite) {
+          return SizedBox.shrink();
+        }
+
+        return GestureDetector(
+          onTap: () {
+            _inviteCubit.generateShareUrl();
+          },
+          child: CardContainer(
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 200),
+              child: CardInvite(
+                isLoading: state.isLoading,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 

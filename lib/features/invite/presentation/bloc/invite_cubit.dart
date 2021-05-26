@@ -95,10 +95,14 @@ class InviteCubit extends Cubit<InviteState> {
 
   void verifyLoadedUserInternalId() async {
     var _internalId = await _userWrapper.getInternalId();
+    
     if (_internalId != null) {
+      var _coupleId = await _userWrapper.getCoupleId();
+
       emit(state.copyWith(
         isLoading: false,
         forceRefresh: StateUtils.generateRandomNumber(),
+        showCardInvite: _coupleId == null,
       ));
     }
   }
