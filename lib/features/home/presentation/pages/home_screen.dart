@@ -4,10 +4,12 @@ import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.d
 import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_container.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart';
+import 'package:mozin/features/home/presentation/pages/widgets/feature_card.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/generate_card.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -71,11 +73,21 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildCardCalendar(),
+        _buildCardInvite(),
         SpacerBox.v16,
         _buildCardHelpMe(),
-        SpacerBox.v16,
-        _buildCardInvite(),
+        SpacerBox.v8,
+        Container(
+          width: SizeConfig.screenWidth,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              _buildCardCalendar(),
+              _buildCardMusics(),
+              _buildCardSchedule(),
+            ],
+          ),
+        ),
         SpacerBox.v16,
         BannerAdWidget(
           screenName: Routes.home_partial,
@@ -109,21 +121,39 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardCalendar() {
-    return GenerateCard(
-      iconData: AppIcons.calendar_day,
-      routeName: Routes.calendar_screen,
-      name: 'Calendário',
-      description: 'O que você tem feito ou pretende fazer nos próximos dias ?',
-    );
-  }
-
   Widget _buildCardHelpMe() {
     return GenerateCard(
       iconData: AppIcons.assistive_listening_systems,
       routeName: Routes.feedback_screen,
       name: 'Ajude-nos a melhorar o app',
       description: 'Compartilhe algum problema, sugestão ou melhoria',
+    );
+  }
+
+  Widget _buildCardMusics() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.music,
+      routeName: Routes.calendar_screen,
+      name: 'Músicas',
+    );
+  }
+
+  Widget _buildCardSchedule() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.clock,
+      routeName: Routes.calendar_screen,
+      name: 'Cronograma',
+    );
+  }
+
+  Widget _buildCardCalendar() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.calendar_day,
+      routeName: Routes.calendar_screen,
+      name: 'Calendário',
     );
   }
 }

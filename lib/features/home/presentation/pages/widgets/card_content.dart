@@ -32,9 +32,19 @@ class CardContent extends StatelessWidget {
             ),
           ],
         ),
-        SpacerBox.v8,
-        description.description(context, maxLines: 3),
+        ..._buildDescription(context),
       ],
     );
+  }
+
+  List<Widget> _buildDescription(BuildContext context) {
+    if (description != null) {
+      return [
+        SpacerBox.v8,
+        description.description(context, maxLines: 3),
+      ];
+    }
+
+    return null;
   }
 }

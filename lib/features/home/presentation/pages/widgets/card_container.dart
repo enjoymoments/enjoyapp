@@ -3,13 +3,18 @@ import 'package:mozin/modules/config/size_config.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget child;
+  final double width;
 
-  const CardContainer({Key key, @required this.child}) : super(key: key);
+  const CardContainer({
+    Key key,
+    @required this.child,
+    this.width,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.screenWidth,
+      width: width ?? SizeConfig.screenWidth,
       decoration: BoxDecoration(
         color: Theme.of(context).hintColor,
         border: Border.all(color: Colors.transparent),
