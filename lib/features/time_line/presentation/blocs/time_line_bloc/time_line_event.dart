@@ -14,3 +14,9 @@ class DeletePost extends TimelineEvent {
 }
 
 class VerifyAuthenticated extends TimelineEvent {}
+
+class SelectedTimeline extends TimelineEvent {
+  final GetTimeLineModel timeline;
+
+  SelectedTimeline(this.timeline);
+}

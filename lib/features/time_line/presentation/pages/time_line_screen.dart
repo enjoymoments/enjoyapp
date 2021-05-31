@@ -32,7 +32,30 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody();
+    return Column(
+      children: [
+        _buildTimeLines(),
+        CustomDivider(),
+        Expanded(
+          child: _buildBody(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimeLines() {
+    return CustomContainer(
+      customMargin: EdgeInsets.only(top: 15, left: 15, right: 15),
+      child: BlocBuilder<TimelineBloc, TimelineState>(
+        cubit: _timelineBloc,
+        builder: (context, state) {
+          if (state.timelines.isNotEmpty) {
+            return _buildTimelinesContent(state);
+          }
+          return SizedBox.shrink();
+        },
+      ),
+    );
   }
 
   Widget _buildBody() {
@@ -41,9 +64,9 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       builder: (context, state) {
         if (state.unauthenticated) {
           return Center(
-            child: "Quer registrar seus momentos?\nFaça login e aproveite."
-                .labelIntro(context),
-          );
+              child: "Quer registrar seus momentos?\nFaça login e aproveite."
+                  .labelIntro(context),
+            );
         }
 
         if (state.isLoading) {
@@ -62,9 +85,6 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: state.posts.length,
                 itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return _buildFirstItem(state, index);
-                  }
                   return TimeLineItem(
                     item: state.posts[index],
                     timelineBloc: _timelineBloc,
@@ -75,28 +95,17 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
           );
         }
 
-        //TODO:create empty state here
-        return SizedBox.shrink();
+        return CustomContainer(
+                  child: Center(
+              child: "Que tal criar a primeira postagem?"
+                  .labelIntro(context),
+            ),
+        );
       },
     );
   }
 
-  Widget _buildFirstItem(TimelineState state, int index) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildTimelines(state),
-        CustomDivider(),
-        SpacerBox.v16,
-        TimeLineItem(
-          item: state.posts[index],
-          timelineBloc: _timelineBloc,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTimelines(TimelineState state) {
+  Widget _buildTimelinesContent(TimelineState state) {
     return Container(
       height: SizeConfig.sizeByPixel(70),
       child: ListView.separated(
@@ -106,11 +115,17 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
         itemBuilder: (context, index) {
           var _item = state.timelines[index];
 
-          return TimeLineAvatar(
-            name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
-            backgroundImage: _item.type == TimeLineTypeEnum.Personal
-                ? null
-                : AssetImage('assets/images/default_avatar.png'),
+          return InkWell(
+            onTap: () {
+              _timelineBloc.add(SelectedTimeline(_item));
+            },
+            child: TimeLineAvatar(
+              selected: state.timelineSelected.id == _item.id,
+              name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
+              backgroundImage: _item.type == TimeLineTypeEnum.Personal
+                  ? null
+                  : AssetImage('assets/images/default_avatar.png'),
+            ),
           );
         },
         separatorBuilder: (context, index) => SpacerBox.h16,

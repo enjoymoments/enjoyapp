@@ -6,11 +6,13 @@ import 'package:mozin/package_view/extension.dart';
 class TimeLineAvatar extends StatelessWidget {
   final ImageProvider backgroundImage;
   final String name;
+  final bool selected;
 
   const TimeLineAvatar({
     Key key,
     @required this.name,
     this.backgroundImage,
+    @required this.selected,
   }) : super(key: key);
 
   @override
@@ -21,8 +23,16 @@ class TimeLineAvatar extends StatelessWidget {
           backgroundImage: backgroundImage,
         ),
         SpacerBox.v4,
-        name.label(context),
+        _buildLabel(context),
       ],
     );
+  }
+
+  Widget _buildLabel(BuildContext context) {
+    if(selected) {
+      return name.label(context, color: Theme.of(context).primaryColor);
+    }
+
+    return name.label(context);
   }
 }

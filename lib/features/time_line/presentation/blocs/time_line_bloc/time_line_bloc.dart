@@ -33,7 +33,19 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
       yield* mapDeletePostToState(event);
     } else if (event is VerifyAuthenticated) {
       yield* mapVerifyAuthenticatedToState(event);
+    } else if (event is SelectedTimeline) {
+      mapSelectedTimelineToState(event);
     }
+  }
+
+  void mapSelectedTimelineToState(
+      SelectedTimeline event) {
+    var _user = userWrapper.getUser;
+
+    var _newInstance = _user.copyWith(timelineSelected: event.timeline);
+    userWrapper.assignment(_newInstance);
+
+    this.add(LoadPosts());
   }
 
   Stream<TimelineState> mapVerifyAuthenticatedToState(
@@ -53,7 +65,6 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
     try {
       if (state.posts.remove(event.post)) {
-        
         var user = userWrapper.getUser;
         if (user.timelineSelected == null) {
           await _updateInstanceUserWithTimelines(user);
