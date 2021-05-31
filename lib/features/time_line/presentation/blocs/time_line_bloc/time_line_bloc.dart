@@ -34,16 +34,21 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     } else if (event is VerifyAuthenticated) {
       yield* mapVerifyAuthenticatedToState(event);
     } else if (event is SelectedTimeline) {
-      mapSelectedTimelineToState(event);
+      yield* mapSelectedTimelineToState(event);
     }
   }
 
-  void mapSelectedTimelineToState(
-      SelectedTimeline event) {
+  Stream<TimelineState> mapSelectedTimelineToState(
+      SelectedTimeline event) async* {
     var _user = userWrapper.getUser;
 
     var _newInstance = _user.copyWith(timelineSelected: event.timeline);
     userWrapper.assignment(_newInstance);
+
+    yield state.copyWith(
+      forceRefresh: StateUtils.generateRandomNumber(),
+      timelineSelected: event.timeline,
+    );
 
     this.add(LoadPosts());
   }
