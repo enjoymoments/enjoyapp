@@ -117,7 +117,9 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
           return InkWell(
             onTap: () {
-              _timelineBloc.add(SelectedTimeline(_item));
+              if(state.timelineSelected.id != _item.id) {
+                _timelineBloc.add(SelectedTimeline(_item));
+              }
             },
             child: TimeLineAvatar(
               selected: state.timelineSelected.id == _item.id,

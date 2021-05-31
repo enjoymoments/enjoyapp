@@ -109,6 +109,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
         posts: posts,
         timelines: user.timelines,
         timelineSelected: user.timelineSelected,
+        forceRefresh: StateUtils.generateRandomNumber(),
       );
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
