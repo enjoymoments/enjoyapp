@@ -53,8 +53,15 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
     try {
       if (state.posts.remove(event.post)) {
-        var timelineId = await _getTimelineId();
-        await this.timelineRepository.deletePost(timelineId, event.post.id);
+        
+        var user = userWrapper.getUser;
+        if (user.timelineSelected == null) {
+          await _updateInstanceUserWithTimelines(user);
+        }
+
+        await this
+            .timelineRepository
+            .deletePost(user.timelineSelected.id, event.post.id);
         yield state.copyWith(
           isLoading: false,
           isSuccess: true,
@@ -71,49 +78,50 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      var timelineId = await _getTimelineId();
-      final posts =
-          await this.timelineRepository.getPosts(timelineId, state.limit);
+      var user = userWrapper.getUser;
+      if (user.timelineSelected == null) {
+        await _updateInstanceUserWithTimelines(user);
+      }
 
-      yield state.copyWith(isLoading: false, isSuccess: true, posts: posts);
+      final posts = await this
+          .timelineRepository
+          .getPosts(user.timelineSelected.id, state.limit);
+
+      yield state.copyWith(
+        isLoading: false,
+        isSuccess: true,
+        posts: posts,
+        timelines: user.timelines,
+        timelineSelected: user.timelineSelected,
+      );
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
     }
   }
 
-  Future<String> _getTimelineId() async {
-    var user = userWrapper.getUser;
-    if (user.timelineSelected != null) {
-      return user.timelineSelected.id;
-    }
-
+  Future<void> _updateInstanceUserWithTimelines(UserAppModel user) async {
     var _timelines = await this.timelineRepository.getTimelines(user.id);
     UserAppModel newInstance;
-    var _timelineId;
 
     if (_timelines != null && _timelines.length > 0) {
       var _element = _timelines.firstWhere(
           (element) => element.type == TimeLineTypeEnum.Personal,
           orElse: () => null);
 
-      _timelineId = _element?.id;
-
       newInstance =
           user.copyWith(timelines: _timelines, timelineSelected: _element);
     } else {
-      _timelineId = await this
+      var _newTimelineId = await this
           .timelineRepository
           .setTimeline([user.id], TimeLineTypeEnum.Personal);
 
       var _newTimeline =
-          GetTimeLineModel(id: _timelineId, type: TimeLineTypeEnum.Personal);
+          GetTimeLineModel(id: _newTimelineId, type: TimeLineTypeEnum.Personal);
 
       newInstance = user
           .copyWith(timelines: [_newTimeline], timelineSelected: _newTimeline);
     }
 
     userWrapper.assignment(newInstance);
-
-    return _timelineId;
   }
 }

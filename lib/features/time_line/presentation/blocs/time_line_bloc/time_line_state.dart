@@ -11,6 +11,8 @@ class TimelineState extends DefaultState {
     this.forceRefresh,
     this.limit,
     this.unauthenticated,
+    this.timelines,
+    this.timelineSelected
   }): super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -30,6 +32,8 @@ class TimelineState extends DefaultState {
       forceRefresh: 0,
       limit: 10,
       unauthenticated: false,
+      timelines: [],
+      timelineSelected: null,
     );
   }
 
@@ -43,6 +47,8 @@ class TimelineState extends DefaultState {
     int forceRefresh,
     int limit,
     bool unauthenticated,
+    List<GetTimeLineModel> timelines,
+    GetTimeLineModel timelineSelected,
   }) {
     return TimelineState(
       isLoading: isLoading ?? this.isLoading,
@@ -54,6 +60,8 @@ class TimelineState extends DefaultState {
       forceRefresh: forceRefresh ?? this.forceRefresh,
       limit: limit ?? this.limit,
       unauthenticated: unauthenticated ?? this.unauthenticated,
+      timelines: timelines ?? this.timelines,
+      timelineSelected: timelineSelected ?? this.timelineSelected,
     );
   }
 
@@ -61,6 +69,8 @@ class TimelineState extends DefaultState {
   final int forceRefresh;
   final int limit;
   final bool unauthenticated;
+  final List<GetTimeLineModel> timelines;
+  final GetTimeLineModel timelineSelected;
 
   @override
   List<Object> get props => [
@@ -73,5 +83,7 @@ class TimelineState extends DefaultState {
         forceRefresh,
         limit,
         unauthenticated,
+        timelines,
+        timelineSelected,
       ];
 }

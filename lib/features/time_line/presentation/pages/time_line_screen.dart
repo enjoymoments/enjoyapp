@@ -5,6 +5,8 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_av
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/time_line_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/spacer_box.dart';
@@ -83,10 +85,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TimeLineAvatar(
-          name: 'Você',
-        ),
-        SpacerBox.v2,
+        _buildTimelines(state),
         CustomDivider(),
         SpacerBox.v16,
         TimeLineItem(
@@ -94,6 +93,28 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
           timelineBloc: _timelineBloc,
         ),
       ],
+    );
+  }
+
+  Widget _buildTimelines(TimelineState state) {
+    return Container(
+      height: SizeConfig.sizeByPixel(70),
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: state.timelines.length,
+        itemBuilder: (context, index) {
+          var _item = state.timelines[index];
+
+          return TimeLineAvatar(
+            name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
+            backgroundImage: _item.type == TimeLineTypeEnum.Personal
+                ? null
+                : AssetImage('assets/images/default_avatar.png'),
+          );
+        },
+        separatorBuilder: (context, index) => SpacerBox.h16,
+      ),
     );
   }
 
