@@ -120,7 +120,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
       await this
           .timelineRepository
-          .addTimeLineItem(user.timelineId, user.id, transform);
+          .addTimeLineItem(user.timelineSelected.id, user.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 

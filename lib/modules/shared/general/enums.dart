@@ -141,3 +141,23 @@ class NotificationTypeEnum extends Enum<String> {
   @override
   String toString() => value.toString();
 }
+
+class TimeLineTypeEnum extends Enum<int> {
+  factory TimeLineTypeEnum(final int value) {
+    if (value == 1) {
+      return TimeLineTypeEnum.Personal;
+    } else if (value == 2) {
+      return TimeLineTypeEnum.Couple;
+    }
+
+    return null;
+  }
+
+  const TimeLineTypeEnum._fromValue(final int value) : super._fromValue(value);
+
+  static const TimeLineTypeEnum Personal = TimeLineTypeEnum._fromValue(1);
+  static const TimeLineTypeEnum Couple = TimeLineTypeEnum._fromValue(2);
+
+  @override
+  String toString() => value.toString();
+}

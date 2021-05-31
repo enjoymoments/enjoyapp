@@ -1,7 +1,9 @@
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
+import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 
 class TimelineRepositoryImpl implements TimelineRepository {
   TimelineRepositoryImpl({
@@ -11,7 +13,8 @@ class TimelineRepositoryImpl implements TimelineRepository {
   final TimelineRemoteDataSource remoteDataSource;
 
   @override
-  Future<String> addTimeLineItem(String timelineID, String userId, TimeLineItemModel model) {
+  Future<String> addTimeLineItem(
+      String timelineID, String userId, TimeLineItemModel model) {
     try {
       return remoteDataSource.addTimeLineItem(timelineID, userId, model);
     } catch (e) {
@@ -38,9 +41,18 @@ class TimelineRepositoryImpl implements TimelineRepository {
   }
 
   @override
-  Future<String> getTimeLineId(String userId) {
+  Future<List<GetTimeLineModel>> getTimelines(String userId) {
     try {
-      return remoteDataSource.getTimeLineId(userId);
+      return remoteDataSource.getTimelines(userId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<String> setTimeline(List<String> users, TimeLineTypeEnum type) {
+    try {
+      return remoteDataSource.setTimeline(users, type);
     } catch (e) {
       rethrow;
     }

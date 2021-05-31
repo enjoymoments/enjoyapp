@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/modules/shared/general/interest_type.dart';
 
 /// {@template user}
@@ -14,7 +15,8 @@ class UserAppModel extends Equatable {
     @required this.email,
     @required this.name,
     @required this.photo,
-    this.timelineId,
+    this.timelines,
+    this.timelineSelected,
     this.favoriteInterests,
   })  : assert(email != null),
         assert(id != null);
@@ -27,12 +29,14 @@ class UserAppModel extends Equatable {
 
   final String photo;
 
-  final String timelineId;
+  final List<GetTimeLineModel> timelines;
+  final GetTimeLineModel timelineSelected;
 
   final InterestType favoriteInterests;
 
   UserAppModel copyWith({
-    String timelineId,
+    List<GetTimeLineModel> timelines,
+    GetTimeLineModel timelineSelected,
     InterestType favoriteInterests,
   }) {
     return UserAppModel(
@@ -40,7 +44,8 @@ class UserAppModel extends Equatable {
       email: this.email,
       name: this.name,
       photo: this.photo,
-      timelineId: timelineId ?? this.timelineId,
+      timelines: timelines ?? this.timelines,
+      timelineSelected: timelineSelected ?? this.timelineSelected,
       favoriteInterests: favoriteInterests ?? this.favoriteInterests,
     );
   }

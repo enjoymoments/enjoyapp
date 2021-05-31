@@ -18,25 +18,6 @@ class UserWrapper {
   static String _shareUrl = "share_url";
   static String _coupleId = "couple_id";
 
-  List<String> _timeLines;
-  String _timeLineSelected;
-
-  String getTimeLineSelected() {
-    return _timeLineSelected;
-  }
-
-  void setTimeLineSelected(String value) {
-    _timeLineSelected = value;
-  }
-
-  List<String> getTimeLines() {
-    return _timeLines;
-  }
-
-  void setTimeLines(List<String> values) {
-    _timeLines = values;
-  }
-
   void assignment(UserAppModel newUser) {
     _user = newUser;
   }

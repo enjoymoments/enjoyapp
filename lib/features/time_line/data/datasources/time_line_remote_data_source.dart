@@ -1,6 +1,8 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
@@ -10,7 +12,8 @@ abstract class TimelineRemoteDataSource {
       String timelineID, String userId, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
-  Future<String> getTimeLineId(String userId);
+  Future<List<GetTimeLineModel>> getTimelines(String userId);
+  Future<String> setTimeline(List<String> users, TimeLineTypeEnum type);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
@@ -69,12 +72,31 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   }
 
   @override
-  Future<String> getTimeLineId(String userId) async {
+  Future<List<GetTimeLineModel>> getTimelines(String userId) async {
     var url = remoteConfig.getString(url_functions);
 
     var _result =
-        await remoteClientRepository.post('$url/getTimelineId', data: {
+        await remoteClientRepository.post('$url/getTimelines', data: {
       'id': userId,
+    });
+
+    var list = <GetTimeLineModel>[];
+
+    for (var item in _result.data) {
+      list.add(GetTimeLineModel.fromJson(item));
+    }
+
+    return list;
+  }
+
+  @override
+  Future<String> setTimeline(List<String> users, TimeLineTypeEnum type) async {
+    var url = remoteConfig.getString(url_functions);
+
+    var _result =
+        await remoteClientRepository.post('$url/setTimeline', data: {
+      'users': users,
+      'type': type.value
     });
 
     return _result.data;
