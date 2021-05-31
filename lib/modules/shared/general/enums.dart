@@ -81,9 +81,9 @@ class DefaultMenuEnum extends Enum<int> {
       } else if (value == 2) {
         return DefaultMenuEnum.Search;
       } else if (value == 3) {
-        return DefaultMenuEnum.Me;
-      } else if (value == 4) {
         return DefaultMenuEnum.Alert;
+      } else if (value == 4) {
+        return DefaultMenuEnum.Me;
       }
     }
 

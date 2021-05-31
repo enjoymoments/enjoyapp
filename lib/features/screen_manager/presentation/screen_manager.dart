@@ -1,14 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:mozin/features/home/presentation/pages/home_screen.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
-import 'package:mozin/features/monitoring/presentation/pages/monitoring_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
@@ -16,13 +11,8 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
 import 'package:mozin/package_view/fab/fab_bottom_app_bar.dart';
-import 'package:mozin/package_view/fab/layout.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ScreenManager extends StatefulWidget {
   @override
@@ -56,27 +46,29 @@ class _ScreenManagerState extends State<ScreenManager> {
           child: _buildContent(state),
           appBar: _buildAppBar(state),
 
-          //In test
-          floatingActionButton: _buildFab(context),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          //TODO:experimenal
+          // floatingActionButton: _buildFab(context),
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: FABBottomAppBar(
-            centerItemText: '',
-            color: Theme.of(context).iconTheme.color,
-            selectedColor: Theme.of(context).primaryColor,
-            iconSize: 18,
-            notchedShape: CircularNotchedRectangle(),
-            onTabSelected: (index) {
-              _screenManagerBloc.add(TapScreen(
-                  DefaultMenuEnum(index, ignoreSearch: true), context));
-            },
-            items: [
-              FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
-              FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
-              FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
-              FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
-            ],
-          ),
+              centerItemText: '',
+              height: SizeConfig.sizeByPixel(50),
+              color: Theme.of(context).iconTheme.color,
+              selectedColor: Theme.of(context).primaryColor,
+              iconSize: Theme.of(context).iconTheme.size,
+              notchedShape: CircularNotchedRectangle(),
+              onTabSelected: (index) {
+                _screenManagerBloc.add(TapScreen(
+                    DefaultMenuEnum(index, ignoreSearch: false), context));
+              },
+              items: [
+                FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
+                FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
+                FABBottomAppBarItem(iconData: AppIcons.search, text: 'Casal'),
+                FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
+                FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
+              ],
+            ),
           //Before
           // bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
           //   _screenManagerBloc.add(TapScreen(itemSelected, context));

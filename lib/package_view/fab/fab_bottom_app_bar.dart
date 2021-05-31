@@ -20,7 +20,7 @@ class FABBottomAppBar extends StatefulWidget {
     this.notchedShape,
     this.onTabSelected,
   }) {
-    assert(this.items.length == 2 || this.items.length == 4);
+    assert(this.items.length == 2 || this.items.length == 5);
   }
   final List<FABBottomAppBarItem> items;
   final String centerItemText;
@@ -55,7 +55,9 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
         onPressed: _updateIndex,
       );
     });
-    items.insert(items.length >> 1, _buildMiddleTabItem());
+
+    //TODO:experimenal
+    //items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
       shape: widget.notchedShape,
@@ -68,24 +70,25 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     );
   }
 
-  Widget _buildMiddleTabItem() {
-    return Expanded(
-      child: SizedBox(
-        height: widget.height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: widget.iconSize),
-            Text(
-              widget.centerItemText ?? '',
-              style: TextStyle(color: widget.color),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  //TODO:experimenal
+  // Widget _buildMiddleTabItem() {
+  //   return Expanded(
+  //     child: SizedBox(
+  //       height: widget.height,
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           SizedBox(height: widget.iconSize),
+  //           Text(
+  //             widget.centerItemText ?? '',
+  //             style: TextStyle(color: widget.color),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildTabItem({
     FABBottomAppBarItem item,
@@ -100,17 +103,19 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () => onPressed(index),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
-                Text(
-                  item.text,
-                  style: TextStyle(color: color),
-                )
-              ],
-            ),
+            child: Icon(item.iconData, color: color, size: widget.iconSize),
+            //TODO:experimenal
+            // Column(
+            //   mainAxisSize: MainAxisSize.min,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: <Widget>[
+            //     Icon(item.iconData, color: color, size: widget.iconSize),
+            //     Text(
+            //       item.text,
+            //       style: TextStyle(color: color),
+            //     )
+            //   ],
+            // ),
           ),
         ),
       ),
