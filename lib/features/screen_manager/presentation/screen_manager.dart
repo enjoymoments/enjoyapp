@@ -43,32 +43,51 @@ class _ScreenManagerState extends State<ScreenManager> {
       cubit: _screenManagerBloc,
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
+          extendBody: true,
           child: _buildContent(state),
           appBar: _buildAppBar(state),
-
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Theme.of(context).bottomAppBarColor,
+            onPressed: () {
+              _screenManagerBloc
+                  .add(TapScreen(DefaultMenuEnum.Search, context));
+            },
+            child: Icon(
+              AppIcons.search,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            tooltip: 'search',
+          ),
+          //TODO:experimenal
+          // bottomNavigationBar: _DemoBottomAppBar(
+          //   fabLocation: _fabLocation,
+          //   //shape: null,
+          // ),
           //TODO:experimenal
           // floatingActionButton: _buildFab(context),
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: FABBottomAppBar(
-              centerItemText: '',
-              height: SizeConfig.sizeByPixel(50),
-              color: Theme.of(context).iconTheme.color,
-              selectedColor: Theme.of(context).primaryColor,
-              iconSize: Theme.of(context).iconTheme.size,
-              notchedShape: CircularNotchedRectangle(),
-              onTabSelected: (index) {
-                _screenManagerBloc.add(TapScreen(
-                    DefaultMenuEnum(index, ignoreSearch: false), context));
-              },
-              items: [
-                FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
-                FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
-                FABBottomAppBarItem(iconData: AppIcons.search, text: 'Pesquisar'),
-                FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
-                FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
-              ],
-            ),
+            centerItemText: '',
+            height: SizeConfig.sizeByPixel(50),
+            color: Theme.of(context).iconTheme.color,
+            selectedColor: Theme.of(context).primaryColor,
+            iconSize: Theme.of(context).iconTheme.size,
+            notchedShape: CircularNotchedRectangle(),
+            onTabSelected: (index) {
+              _screenManagerBloc.add(
+                TapScreen(DefaultMenuEnum(index, ignoreSearch: true), context),
+              );
+            },
+            items: [
+              FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
+              FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
+              FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
+              FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
+            ],
+          ),
+          //TODO:experimenal
           //Before
           // bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
           //   _screenManagerBloc.add(TapScreen(itemSelected, context));
@@ -78,6 +97,7 @@ class _ScreenManagerState extends State<ScreenManager> {
     );
   }
 
+  //TODO:experimenal
   Widget _buildFab(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {

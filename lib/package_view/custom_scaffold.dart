@@ -7,6 +7,7 @@ class CustomScaffold extends StatelessWidget {
   final Widget floatingActionButton;
   final FloatingActionButtonLocation floatingActionButtonLocation;
   final Color backgroundColor;
+  final bool extendBody;
 
   CustomScaffold({
     Key key,
@@ -16,11 +17,13 @@ class CustomScaffold extends StatelessWidget {
     this.backgroundColor,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
+    this.extendBody = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: extendBody,
       backgroundColor: backgroundColor ?? Theme.of(context).backgroundColor,
       appBar: appBar,
       body: child,

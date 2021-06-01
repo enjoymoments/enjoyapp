@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class FABBottomAppBarItem {
@@ -20,7 +18,7 @@ class FABBottomAppBar extends StatefulWidget {
     this.notchedShape,
     this.onTabSelected,
   }) {
-    assert(this.items.length == 2 || this.items.length == 5);
+    assert(this.items.length == 2 || this.items.length == 4);
   }
   final List<FABBottomAppBarItem> items;
   final String centerItemText;
@@ -58,16 +56,40 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
 
     //TODO:experimenal
     //items.insert(items.length >> 1, _buildMiddleTabItem());
+    items.insert(items.length >> 1, Spacer());
 
     return BottomAppBar(
-      shape: widget.notchedShape,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: items,
-      ),
+      shape: const CircularNotchedRectangle(),
       color: widget.backgroundColor,
+      child: IconTheme(
+        data: IconThemeData(color: Colors.yellow),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: items,
+        ),
+      ),
     );
+
+    //TODO:experimenal
+    // return Container(
+    //   margin: EdgeInsets.all(10),
+    //   //color: Colors.transparent,
+    //   child: ClipRRect(
+    //     borderRadius: BorderRadius.all(
+    //       Radius.circular(25),
+    //     ),
+    //     child: BottomAppBar(
+    //       shape: widget.notchedShape,
+    //       child: Row(
+    //         mainAxisSize: MainAxisSize.max,
+    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //         children: items,
+    //       ),
+    //       color: widget.backgroundColor,
+    //     ),
+    //   ),
+    // );
   }
 
   //TODO:experimenal
