@@ -43,7 +43,6 @@ class _ScreenManagerState extends State<ScreenManager> {
       cubit: _screenManagerBloc,
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
-          extendBody: true,
           child: _buildContent(state),
           appBar: _buildAppBar(state),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
