@@ -69,9 +69,9 @@ class DefaultMenuEnum extends Enum<int> {
       } else if (value == 1) {
         return DefaultMenuEnum.TimeLine;
       } else if (value == 2) {
-        return DefaultMenuEnum.Me;
-      } else if (value == 3) {
         return DefaultMenuEnum.Alert;
+      } else if (value == 3) {
+        return DefaultMenuEnum.Me;
       }
     } else {
       if (value == 0) {
