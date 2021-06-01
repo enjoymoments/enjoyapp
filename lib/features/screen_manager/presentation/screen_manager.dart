@@ -64,7 +64,7 @@ class _ScreenManagerState extends State<ScreenManager> {
               items: [
                 FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
                 FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
-                FABBottomAppBarItem(iconData: AppIcons.search, text: 'Casal'),
+                FABBottomAppBarItem(iconData: AppIcons.search, text: 'Pesquisar'),
                 FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
                 FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
               ],

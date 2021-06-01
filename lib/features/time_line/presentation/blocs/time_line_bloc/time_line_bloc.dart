@@ -72,7 +72,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
       if (state.posts.remove(event.post)) {
         var user = userWrapper.getUser;
         if (user.timelineSelected == null) {
-          await _updateInstanceUserWithTimelines(user);
+          user = await _updateInstanceUserWithTimelines(user);
         }
 
         await this
@@ -96,7 +96,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     try {
       var user = userWrapper.getUser;
       if (user.timelineSelected == null) {
-        await _updateInstanceUserWithTimelines(user);
+        user = await _updateInstanceUserWithTimelines(user);
       }
 
       final posts = await this
@@ -116,7 +116,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     }
   }
 
-  Future<void> _updateInstanceUserWithTimelines(UserAppModel user) async {
+  Future<UserAppModel> _updateInstanceUserWithTimelines(UserAppModel user) async {
     var _timelines = await this.timelineRepository.getTimelines(user.id);
     UserAppModel newInstance;
 
@@ -140,5 +140,6 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     }
 
     userWrapper.assignment(newInstance);
+    return newInstance;
   }
 }

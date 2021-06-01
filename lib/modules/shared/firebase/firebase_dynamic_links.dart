@@ -10,7 +10,6 @@ class ConfigureFirebaseDynamicLinks {
       final Uri deepLink = dynamicLink?.link;
 
       if (deepLink != null) {
-        //TODO:review this
         getItInstance<RouterExternalResolver>().resolver(context, path: deepLink.path);
       }
     }, onError: (OnLinkErrorException e) async {
