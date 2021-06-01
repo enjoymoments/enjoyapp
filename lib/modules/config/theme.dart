@@ -19,7 +19,11 @@ ThemeData getTheme(BuildContext context) {
       color: AppColors.attentionColor,
     ),
     hintColor: AppColors.hintColor,
-    bottomAppBarColor: AppColors.menuColor,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      unselectedItemColor: AppColors.menuIconsColor,
+      selectedItemColor: AppColors.secundary,
+      backgroundColor: AppColors.menuColor
+    ),
     primaryColor: AppColors.primary,
     backgroundColor: AppColors.secundary,
     textTheme: TextTheme(

@@ -47,14 +47,14 @@ class _ScreenManagerState extends State<ScreenManager> {
           appBar: _buildAppBar(state),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Theme.of(context).bottomAppBarColor,
+            backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             onPressed: () {
               _screenManagerBloc
                   .add(TapScreen(DefaultMenuEnum.Search, context));
             },
             child: Icon(
               AppIcons.search,
-              color: Theme.of(context).iconTheme.color,
+              color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
             ),
             tooltip: 'search',
           ),
@@ -68,11 +68,12 @@ class _ScreenManagerState extends State<ScreenManager> {
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: FABBottomAppBar(
+            backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+            selectedColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+            iconSize: Theme.of(context).iconTheme.size,
             centerItemText: '',
             height: SizeConfig.sizeByPixel(50),
-            color: Theme.of(context).iconTheme.color,
-            selectedColor: Theme.of(context).primaryColor,
-            iconSize: Theme.of(context).iconTheme.size,
             notchedShape: CircularNotchedRectangle(),
             onTabSelected: (index) {
               _screenManagerBloc.add(
