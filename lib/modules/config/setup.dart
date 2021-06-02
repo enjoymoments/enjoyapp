@@ -136,8 +136,8 @@ void _setupRemoteClientRepository() {
             dio: _dio,
             url: 
             //'https://localhost:5001/graphql',
-            'https://10.0.2.2:5001/graphql',
-            //getItInstance<RemoteConfig>().getString(url_endpoint),
+            //'https://10.0.2.2:5001/graphql',
+            getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
