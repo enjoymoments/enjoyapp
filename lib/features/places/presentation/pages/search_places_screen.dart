@@ -61,7 +61,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
               SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 child: Container(
-                  child: Center(child: "Nada encontrado".labelIntro(context)),
+                  child: Center(child: "Ops...\n não encontramos nada".labelIntro(context)),
                   height: SizeConfig.screenHeight / 1.5,
                 ),
               ),
