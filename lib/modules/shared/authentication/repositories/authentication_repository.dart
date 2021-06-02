@@ -5,6 +5,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mozin/modules/shared/authentication/exceptions/authentication_exceptions.dart';
 import 'package:mozin/modules/shared/authentication/utils/authentication_extensions.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
+import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
+import 'package:mozin/modules/shared/logger/models/logger_model.dart';
+import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
 /// {@template authentication_repository}
 /// Repository which manages user authentication.
@@ -15,13 +18,16 @@ class AuthenticationRepository {
     FirebaseAuth firebaseAuth,
     GoogleSignIn googleSignIn,
     FacebookAuth facebookAuth,
+    @required LoggerService loggerService,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
-        _facebookAuth = facebookAuth ?? FacebookAuth.instance;
+        _facebookAuth = facebookAuth ?? FacebookAuth.instance,
+        _loggerService = loggerService;
 
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;
+  final LoggerService _loggerService;
 
   /// Stream of [UserAppModel] which will emit the current user when
   /// the authentication state changes.
@@ -44,24 +50,6 @@ class AuthenticationRepository {
     }
   }
 
-  /// Creates a new user with the provided [email] and [password].
-  ///
-  /// Throws a [SignUpFailure] if an exception occurs.
-  Future<void> signUp({
-    @required String email,
-    @required String password,
-  }) async {
-    assert(email != null && password != null);
-    try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on Exception {
-      throw SignUpFailure();
-    }
-  }
-
   /// Starts the Sign In with Google Flow.
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
@@ -74,8 +62,9 @@ class AuthenticationRepository {
         idToken: googleAuth.idToken,
       );
       await _firebaseAuth.signInWithCredential(credential);
-    } on Exception {
-      throw LogInWithGoogleFailure();
+    } catch (e) {
+      _logger(e, null);
+      throw LogInWithGoogleFailure(e);
     }
   }
 
@@ -86,26 +75,9 @@ class AuthenticationRepository {
           FacebookAuthProvider.credential(facebookUser.token);
 
       await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-    } on Exception {
-      throw LogInWithGoogleFailure();
-    }
-  }
-
-  /// Signs in with the provided [email] and [password].
-  ///
-  /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
-  Future<void> logInWithEmailAndPassword({
-    @required String email,
-    @required String password,
-  }) async {
-    assert(email != null && password != null);
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on Exception {
-      throw LogInWithEmailAndPasswordFailure();
+    } catch (e) {
+      _logger(e, null);
+      throw LogInWithFacebookFailure(e);
     }
   }
 
@@ -123,5 +95,22 @@ class AuthenticationRepository {
     } on Exception {
       throw LogOutFailure();
     }
+  }
+
+  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
+    _loggerService.addLogAsync(
+      LoggerModel(
+        typeError: LoggerTypeEnum.Error,
+        // ignore: always_specify_types
+        error: {
+          'body:': onError?.toString(),
+        },
+        message: onError.message,
+        // ignore: always_specify_types
+        extraInfo: {
+          'query': jsonMap,
+        },
+      ),
+    );
   }
 }

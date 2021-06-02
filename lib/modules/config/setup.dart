@@ -258,7 +258,7 @@ void _registerBlocs() {
 
 void _registerSingletonRepositories() {
   getItInstance.registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticationRepository());
+      () => AuthenticationRepository(loggerService: getItInstance()));
 
   getItInstance.registerLazySingleton<TimelineRepository>(
       () => TimelineRepositoryImpl(remoteDataSource: getItInstance()));
