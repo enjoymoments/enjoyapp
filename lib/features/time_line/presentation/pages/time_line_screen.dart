@@ -32,29 +32,27 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildTimeLines(),
-        CustomDivider(),
-        Expanded(
-          child: _buildBody(),
-        ),
-      ],
+    return CustomContainer(
+      child: Column(
+        children: [
+          _buildTimeLines(),
+          Expanded(
+            child: _buildBody(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildTimeLines() {
-    return CustomContainer(
-      customMargin: EdgeInsets.only(top: 15, left: 15, right: 15),
-      child: BlocBuilder<TimelineBloc, TimelineState>(
-        cubit: _timelineBloc,
-        builder: (context, state) {
-          if (state.timelines.isNotEmpty) {
-            return _buildTimelinesContent(state);
-          }
-          return SizedBox.shrink();
-        },
-      ),
+    return BlocBuilder<TimelineBloc, TimelineState>(
+      cubit: _timelineBloc,
+      builder: (context, state) {
+        if (state.timelines.isNotEmpty) {
+          return _buildTimelinesContent(state);
+        }
+        return SizedBox.shrink();
+      },
     );
   }
 
@@ -64,9 +62,9 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
       builder: (context, state) {
         if (state.unauthenticated) {
           return Center(
-              child: "Quer registrar seus momentos?\nFaça login e aproveite."
-                  .labelIntro(context),
-            );
+            child: "Quer registrar seus momentos?\nFaça login e aproveite."
+                .labelIntro(context),
+          );
         }
 
         if (state.isLoading) {
@@ -74,64 +72,66 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
         }
 
         if (state.posts.isNotEmpty) {
-          return CustomContainer(
-            child: RefreshIndicator(
-              key: _refreshIndicatorKey,
-              color: Theme.of(context).primaryColor,
-              onRefresh: () async {
-                _timelineBloc.add(LoadPosts());
+          return RefreshIndicator(
+            key: _refreshIndicatorKey,
+            color: Theme.of(context).primaryColor,
+            onRefresh: () async {
+              _timelineBloc.add(LoadPosts());
+            },
+            child: ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: state.posts.length,
+              separatorBuilder: (context, index) => SpacerBox.v16,
+              itemBuilder: (context, index) {
+                return TimeLineItem(
+                  item: state.posts[index],
+                  timelineBloc: _timelineBloc,
+                );
               },
-              child: ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: state.posts.length,
-                itemBuilder: (context, index) {
-                  return TimeLineItem(
-                    item: state.posts[index],
-                    timelineBloc: _timelineBloc,
-                  );
-                },
-              ),
             ),
           );
         }
 
-        return CustomContainer(
-                  child: Center(
-              child: "Que tal criar a primeira postagem?"
-                  .labelIntro(context),
-            ),
+        return Center(
+          child: "Que tal criar a primeira postagem?".labelIntro(context),
         );
       },
     );
   }
 
   Widget _buildTimelinesContent(TimelineState state) {
-    return Container(
-      height: SizeConfig.sizeByPixel(70),
-      child: ListView.separated(
-        physics: const AlwaysScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: state.timelines.length,
-        itemBuilder: (context, index) {
-          var _item = state.timelines[index];
+    return Column(
+      children: [
+        Container(
+          height: SizeConfig.sizeByPixel(65),
+          child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: state.timelines.length,
+            itemBuilder: (context, index) {
+              var _item = state.timelines[index];
 
-          return InkWell(
-            onTap: () {
-              if(state.timelineSelected.id != _item.id) {
-                _timelineBloc.add(SelectedTimeline(_item));
-              }
+              return InkWell(
+                onTap: () {
+                  if (state.timelineSelected.id != _item.id) {
+                    _timelineBloc.add(SelectedTimeline(_item));
+                  }
+                },
+                child: TimeLineAvatar(
+                  selected: state.timelineSelected.id == _item.id,
+                  name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
+                  backgroundImage: _item.type == TimeLineTypeEnum.Personal
+                      ? null
+                      : AssetImage('assets/images/default_avatar.png'),
+                ),
+              );
             },
-            child: TimeLineAvatar(
-              selected: state.timelineSelected.id == _item.id,
-              name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
-              backgroundImage: _item.type == TimeLineTypeEnum.Personal
-                  ? null
-                  : AssetImage('assets/images/default_avatar.png'),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => SpacerBox.h16,
-      ),
+            separatorBuilder: (context, index) => SpacerBox.h16,
+          ),
+        ),
+        CustomDivider(),
+        SpacerBox.v8,
+      ],
     );
   }
 

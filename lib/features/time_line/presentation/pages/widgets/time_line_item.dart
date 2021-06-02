@@ -23,7 +23,6 @@ class TimeLineItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SpacerBox.v4,
         HeaderCard(
           item: item,
           callback: (action) {
@@ -34,7 +33,6 @@ class TimeLineItem extends StatelessWidget {
         BodyCard(item: item),
         //TODO:review
         //FooterCard(),
-        SpacerBox.v4,
       ],
     );
   }
