@@ -21,7 +21,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       key: introKey,
       pages: [
         _buildItem('Conheça o Enjoy',
-            'O app para tirar o casal da rotina e criar experiênias incriveis'),
+            'O app para deixar a rotina do casal mais interessante'),
         _buildItem('Compartilhe fotos',
             'Construa uma linha do tempo contendo todas as suas memórias'),
       ],
