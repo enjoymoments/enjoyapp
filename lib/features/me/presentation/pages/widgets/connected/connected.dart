@@ -138,16 +138,17 @@ class Connected extends StatelessWidget {
           },
         ),
         ..._divider(),
-        CustomTile(
-          title: 'Configurações',
-          description: 'Minhas configurações',
-          iconStart: AppIcons.cog,
-          iconEnd: AppIcons.angle_right,
-          onTap: () {
-            ExtendedNavigator.of(context).push(Routes.configuration_screen);
-          },
-        ),
-        ..._divider(),
+        //TODO:in development
+        // CustomTile(
+        //   title: 'Configurações',
+        //   description: 'Minhas configurações',
+        //   iconStart: AppIcons.cog,
+        //   iconEnd: AppIcons.angle_right,
+        //   onTap: () {
+        //     ExtendedNavigator.of(context).push(Routes.configuration_screen);
+        //   },
+        // ),
+        // ..._divider(),
         BannerAdWidget(
           screenName: Routes.me_authenticated_partial,
         ),
