@@ -26,7 +26,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       return;
     }
 
-    if (!state.initRequest || (byPass != null && byPass)) {
+    if (state.notifications.length == 0 || (byPass != null && byPass)) {
       emit(state.copyWith(
         isLoading: true,
         notAutenticated: false,
@@ -41,7 +41,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
           isError: false,
           isSuccess: true,
           notifications: model,
-          initRequest: true,
           notAutenticated: false,
         ));
       }, (error) {
@@ -49,7 +48,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
           isLoading: false,
           isError: true,
           isSuccess: false,
-          initRequest: true,
           notAutenticated: false,
         ));
       });

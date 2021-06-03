@@ -8,7 +8,6 @@ class NotificationsState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     this.notifications,
-    this.initRequest,
     this.notAutenticated,
   }) : super(
           isLoading: isLoading,
@@ -19,7 +18,6 @@ class NotificationsState extends DefaultState {
         );
 
   final List<NotificationsModel> notifications;
-  final bool initRequest;
   final bool notAutenticated;
 
   factory NotificationsState.initial() {
@@ -30,7 +28,6 @@ class NotificationsState extends DefaultState {
       isLoading: true,
       errorMessage: null,
       notifications: [],
-      initRequest: false,
       notAutenticated: null,
     );
   }
@@ -42,7 +39,6 @@ class NotificationsState extends DefaultState {
     bool isError,
     String errorMessage,
     List<NotificationsModel> notifications,
-    bool initRequest,
     bool notAutenticated,
   }) {
     return NotificationsState(
@@ -52,7 +48,6 @@ class NotificationsState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       notifications: notifications ?? this.notifications,
-      initRequest: initRequest ?? this.initRequest,
       notAutenticated: notAutenticated ?? this.notAutenticated,
     );
   }
@@ -65,7 +60,6 @@ class NotificationsState extends DefaultState {
         isError,
         errorMessage,
         notifications,
-        initRequest,
         notAutenticated,
       ];
 }
