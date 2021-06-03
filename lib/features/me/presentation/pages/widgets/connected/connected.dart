@@ -8,6 +8,8 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
+import 'package:mozin/modules/shared/general/services/stores_service.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
 import 'package:mozin/package_view/custom_container.dart';
@@ -17,7 +19,6 @@ import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel user;
@@ -93,14 +94,14 @@ class Connected extends StatelessWidget {
                     text: 'Instagram',
                     iconData: AppIcons.instagram,
                     onTap: () {
-                      _launchURL('https://www.instagram.com/myenjoymoments/');
+                      LaunchUrlService.launchURL('https://www.instagram.com/myenjoymoments/');
                     },
                   ),
                   CustomItemModalFit(
                     text: 'Facebook',
                     iconData: AppIcons.facebook,
                     onTap: () {
-                      _launchURL(
+                      LaunchUrlService.launchURL(
                           'https://www.facebook.com/Enjoy-108714310939674');
                     },
                   ),
@@ -108,7 +109,7 @@ class Connected extends StatelessWidget {
                     text: 'Linkedin',
                     iconData: AppIcons.linkedin,
                     onTap: () {
-                      _launchURL(
+                      LaunchUrlService.launchURL(
                           'https://www.linkedin.com/company/enjoy-moments/');
                     },
                   ),
@@ -116,7 +117,7 @@ class Connected extends StatelessWidget {
                     text: 'Site',
                     iconData: AppIcons.window_maximize,
                     onTap: () {
-                      _launchURL('https://enjoymoments.com.br');
+                      LaunchUrlService.launchURL('https://enjoymoments.com.br');
                     },
                   ),
                 ],
@@ -131,7 +132,9 @@ class Connected extends StatelessWidget {
           iconStart: AppIcons.thumbs_up,
           iconEnd: AppIcons.angle_right,
           onTap: () {
-            ExtendedNavigator.of(context).push(Routes.configuration_screen);
+            StoresService.redirectToStore(() {
+              context.showSnackBar('Ops... em breve nas lojas');
+            });
           },
         ),
         ..._divider(),
@@ -187,13 +190,5 @@ class Connected extends StatelessWidget {
     }
 
     return false;
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }
