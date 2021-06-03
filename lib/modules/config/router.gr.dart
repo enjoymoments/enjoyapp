@@ -249,8 +249,12 @@ class Router extends RouterBase {
       );
     },
     CustomSuccessScreen: (data) {
+      final args = data.getArgs<CustomSuccessScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => CustomSuccessScreen(),
+        builder: (context) => CustomSuccessScreen(
+          key: args.key,
+          child: args.child,
+        ),
         settings: data,
       );
     },
@@ -347,6 +351,13 @@ class AddAlbumsScreenArguments {
   final Key key;
   final AlbumItemModel album;
   AddAlbumsScreenArguments({this.key, this.album});
+}
+
+/// CustomSuccessScreen arguments holder class
+class CustomSuccessScreenArguments {
+  final Key key;
+  final Widget child;
+  CustomSuccessScreenArguments({this.key, @required this.child});
 }
 
 /// InviteScreen arguments holder class

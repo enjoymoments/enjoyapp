@@ -9,6 +9,7 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_gif.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
@@ -79,7 +80,20 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         }
 
         if (state.isSuccess) {
-          ExtendedNavigator.of(context).popAndPush(Routes.success_screen);
+          ExtendedNavigator.of(context).popAndPush(
+            Routes.success_screen,
+            arguments: CustomSuccessScreenArguments(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  "Muito obrigado pelo feedback !!!".labelIntro(context),
+                  SpacerBox.v24,
+                  CustomGif(path: 'assets/images/thanks.webp'),
+                ],
+              ),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -96,7 +110,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             _CustomTile(
               selected: _feedbackType == _FeedbackType.bug,
               title: 'Quero relatar um problema',
-              description: 'Descreva o que está ocorrendo, assim vamos poder te ajudar',
+              description:
+                  'Descreva o que está ocorrendo, assim vamos poder te ajudar',
               iconStart: AppIcons.bug,
               onTap: (selected) {
                 setState(() {
@@ -108,7 +123,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             _CustomTile(
               selected: _feedbackType == _FeedbackType.improvement,
               title: 'Tenho uma sugestão ou elogio',
-              description: 'Aquela ideia ou elogio pra gente imprimir e colar na geladeira de tanta alegria',
+              description:
+                  'Aquela ideia ou elogio pra gente imprimir e colar na geladeira de tanta alegria',
               iconStart: AppIcons.star,
               onTap: (selected) {
                 setState(() {

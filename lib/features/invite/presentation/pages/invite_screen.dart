@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/invite/presentation/pages/widgets/invite_screen_loading.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
+import 'package:mozin/package_view/custom_gif.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_tile.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -25,6 +27,23 @@ class InviteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildChild(context);
+  }  
+
+  void _redirectSuccessScreen(BuildContext context) {
+    ExtendedNavigator.of(context).popAndPush(
+      Routes.success_screen,
+      arguments: CustomSuccessScreenArguments(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            'YEEAAAHHHH\nNovo casal na área !!!'.labelIntro(context),
+            SpacerBox.v24,
+            CustomGif(path: 'assets/images/party.webp'),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildChild(BuildContext context) {
@@ -32,7 +51,7 @@ class InviteScreen extends StatelessWidget {
       cubit: inviteCubit,
       listener: (consumerContext, state) {
         if (state.isSuccess) {
-          ExtendedNavigator.of(context).pop();
+          _redirectSuccessScreen(context);
         }
       },
       builder: (BuildContext context, InviteState state) {
@@ -43,7 +62,8 @@ class InviteScreen extends StatelessWidget {
         if (state.isError) {
           return CustomScaffold(
             child: Center(
-              child: 'Ops, houve um erro. Tente novamente'.labelIntro(context),
+              child:
+                  'Ops...\n houve um erro. Tente novamente'.labelIntro(context),
             ),
             appBar: _buildAppBar(context),
             bottomNavigationBar: null,
