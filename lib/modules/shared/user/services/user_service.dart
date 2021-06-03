@@ -106,4 +106,13 @@ class UserService implements UserInterface {
   Future setActionListener(UserAppModel user) {
     return userRepository.setActionListener(user);
   }
+
+  bool notAuthenticated() {
+    if (getItInstance.isRegistered<UserWrapper>() &&
+        (getItInstance<UserWrapper>().getUser == UserAppModel.empty)) {
+      return true;
+    }
+
+    return false;
+  }
 }

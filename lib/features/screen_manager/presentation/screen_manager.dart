@@ -7,8 +7,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin/modules/shared/general/models/user_app_model.dart';
-import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
@@ -157,7 +156,7 @@ class _ScreenManagerState extends State<ScreenManager> {
   List<Widget> _buildActionButtons(ScreenManagerState state) {
     switch (state.currentScreen) {
       case DefaultMenuEnum.TimeLine:
-        if (_notAuthenticated()) {
+        if (getItInstance<UserService>().notAuthenticated()) {
           return [];
         }
         return [
@@ -196,14 +195,5 @@ class _ScreenManagerState extends State<ScreenManager> {
       default:
         return '';
     }
-  }
-
-  bool _notAuthenticated() {
-    if (getItInstance.isRegistered<UserWrapper>() &&
-        (getItInstance<UserWrapper>().getUser == UserAppModel.empty)) {
-      return true;
-    }
-
-    return false;
   }
 }

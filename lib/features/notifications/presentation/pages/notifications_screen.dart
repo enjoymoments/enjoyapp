@@ -1,18 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/custom_avatar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/notifications/presentation/bloc/notifications_cubit.dart';
+import 'package:mozin/features/notifications/presentation/pages/widgets/notification_item.dart';
+import 'package:mozin/features/notifications/presentation/pages/widgets/notifications_not_autenticated.dart';
+import 'package:mozin/features/notifications/presentation/pages/widgets/notifications_loading.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/extension.dart';
+
 import 'package:mozin/package_view/spacer_box.dart';
 
-class NotificationsScreen extends StatelessWidget {
+class NotificationsScreen extends StatefulWidget {
+  @override
+  _NotificationsScreenState createState() => _NotificationsScreenState();
+}
+
+class _NotificationsScreenState extends State<NotificationsScreen> {
+  NotificationsCubit _notificationsCubit;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
+
+  @override
+  void initState() {
+    _notificationsCubit = getItInstance<NotificationsCubit>()
+      ..getNotifications();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      child: ListView.separated(
-        separatorBuilder: (context, index) => _buildSeparator(),
-        itemCount: 5,
-        itemBuilder: (context, index) => _buildNotificationItem(context),
+      child: RefreshIndicator(
+        key: _refreshIndicatorKey,
+        color: Theme.of(context).primaryColor,
+        onRefresh: () async {
+          _notificationsCubit.getNotifications(byPass: true);
+        },
+        child: BlocBuilder<NotificationsCubit, NotificationsState>(
+          cubit: _notificationsCubit,
+          builder: (BuildContext context, NotificationsState state) {
+            if (state.notAutenticated == null || state.notAutenticated) {
+              return NotificationsNotAutenticated();
+            }
+
+            if (state.isLoading) {
+              return NotificationsLoading();
+            }
+
+            if (state.notifications.length > 0) {
+              return ListView.separated(
+                separatorBuilder: (context, index) => _buildSeparator(),
+                itemCount: state.notifications.length,
+                itemBuilder: (context, index) => NotificationItem(
+                  item: state.notifications[index],
+                ),
+              );
+            }
+
+            return Center(
+                child: "Ops...\n não encontramos nada".labelIntro(context));
+          },
+        ),
       ),
     );
   }
@@ -24,27 +74,6 @@ class NotificationsScreen extends StatelessWidget {
         CustomDivider(),
         SpacerBox.v16,
       ],
-    );
-  }
-
-  Widget _buildNotificationItem(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print('tapped');
-      },
-      child: Row(
-        children: [
-          CustomAvatar(),
-          SpacerBox.h16,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              'Joice adicionou uma nova foto'.title(context),
-              '2 minutos atrás'.description(context),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }

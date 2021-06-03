@@ -42,6 +42,10 @@ import 'package:mozin/features/invite/domain/repositories/invite_repository.dart
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/notifications/data/datasources/notifications_remote_data_source.dart';
+import 'package:mozin/features/notifications/data/repositories/notifications_repository_impl.dart';
+import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
+import 'package:mozin/features/notifications/presentation/bloc/notifications_cubit.dart';
 import 'package:mozin/features/places/data/datasources/places_remote_data_source.dart';
 import 'package:mozin/features/places/data/repositories/places_repository_impl.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
@@ -254,6 +258,8 @@ void _registerBlocs() {
       () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance(), userActionRepository: getItInstance()));
 
   getItInstance.registerLazySingleton<UserActionCubit>(() => UserActionCubit(userActionRepository: getItInstance()));
+
+  getItInstance.registerLazySingleton<NotificationsCubit>(() => NotificationsCubit(notificationsRepository: getItInstance())); 
 }
 
 void _registerSingletonRepositories() {
@@ -295,6 +301,9 @@ void _registerSingletonRepositories() {
 
   getItInstance.registerLazySingleton<UserActionRepository>(
       () => UserActionRepositoryImpl(remoteDataSource: getItInstance()));
+
+  getItInstance.registerLazySingleton<NotificationsRepository>(
+      () => NotificationsRepositoryImpl(remoteDataSource: getItInstance()));
 }
 
 void _registerSingletonDataSources() {
@@ -330,6 +339,9 @@ void _registerSingletonDataSources() {
 
   getItInstance.registerLazySingleton<UserActionRemoteDataSource>(
       () => UserActionRemoteDataSourceImpl(getItInstance()));
+
+  getItInstance.registerLazySingleton<NotificationsRemoteDataSource>(
+      () => NotificationsRemoteDataSourceImpl(getItInstance()));
 }
 
 Future<LocalStorageService> _setupHive() async {
