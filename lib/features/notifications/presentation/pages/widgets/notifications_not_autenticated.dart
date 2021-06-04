@@ -12,7 +12,7 @@ class NotificationsNotAutenticated extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildAnimation(),
-        "Eita... sem o login, não conseguimos trazer nada pra você"
+        "Eita... sem o login, não conseguimos trazer nada por aqui"
             .labelIntro(context),
       ],
     );
