@@ -22,3 +22,8 @@ $ ./gca.sh hello mozin
 ```yaml
 flutter clean && flutter build apk --release
 ```
+
+## Generate icon
+```yaml
+flutter pub run flutter_launcher_icons:main
+```
