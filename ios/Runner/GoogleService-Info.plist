@@ -7,7 +7,7 @@
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.852466867016-q2nqi6nlf3gia1v9f96qndt628l8kgg1</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>852466867016-33lgqv0ojepm5fql8tgikaup6fc8qut6.apps.googleusercontent.com</string>
+	<string>852466867016-5sjmdu52ns347bm1cfkdc20stdvv31k0.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyANFBL7nKG6bFHGfD0OzSWqIdFxY27fvv4</string>
 	<key>GCM_SENDER_ID</key>
@@ -34,5 +34,7 @@
 	<string>1:852466867016:ios:171900a88177cd7a66317d</string>
 	<key>DATABASE_URL</key>
 	<string>https://mozin-2c81d.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-5039935894572150~2741983685</string>
 </dict>
 </plist>
