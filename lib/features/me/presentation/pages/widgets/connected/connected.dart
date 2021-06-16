@@ -60,27 +60,6 @@ class Connected extends StatelessWidget {
     return Column(
       children: [
         CustomTile(
-          title: 'Álbuns',
-          description: 'Meus álbums pessoais',
-          iconStart: AppIcons.camera_retro,
-          iconEnd: AppIcons.angle_right,
-          onTap: () {
-            ExtendedNavigator.of(context).push(Routes.albums_screen);
-          },
-        ),
-        ..._divider(),
-        CustomTile(
-          title: 'Favoritos',
-          description: 'Meus lugares favoritos',
-          iconStart: AppIcons.star,
-          iconEnd: AppIcons.angle_right,
-          onTap: () {
-            ExtendedNavigator.of(context)
-                .push(Routes.favorite_interests_screen);
-          },
-        ),
-        ..._divider(),
-        CustomTile(
           title: 'Mais sobre nós',
           description: 'Redes sociais',
           iconStart: AppIcons.info_circle,

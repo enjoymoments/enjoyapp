@@ -85,6 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCardCalendar(),
               _buildCardMusics(),
               _buildCardSchedule(),
+              _buildCardAlbuns(),
+              _buildCardFavorites(),
             ],
           ),
         ),
@@ -154,6 +156,24 @@ class _HomeScreenState extends State<HomeScreen> {
       iconData: AppIcons.calendar_day,
       routeName: Routes.calendar_screen,
       name: 'Calendário',
+    );
+  }
+
+  Widget _buildCardAlbuns() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.camera_retro,
+      routeName: Routes.albums_screen,
+      name: 'Álbuns',
+    );
+  }
+
+  Widget _buildCardFavorites() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.star,
+      routeName: Routes.favorite_interests_screen,
+      name: 'Favoritos',
     );
   }
 }
