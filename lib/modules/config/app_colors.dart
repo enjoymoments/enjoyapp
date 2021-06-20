@@ -8,6 +8,7 @@ class AppColors {
   static const menuIconsColor = Color(0xFFd1d1d1);
 
   static const iconsColor = Color(0xFF737373);
+  static const disabledColor = Color(0xFFb5b5b5);
   static const hintColor = Color(0xFFE4E4E4);
   
   static const attentionColor = Color(0xFFf3c353); 

@@ -29,8 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _userWrapper = getItInstance<UserWrapper>();
     _homeCubit = getItInstance<HomeCubit>();
+    _inviteCubit = getItInstance<InviteCubit>();
+    
     if (_userWrapper.authenticated) {
-      _inviteCubit = getItInstance<InviteCubit>()..verifyLoadedUserInternalId();
+      _inviteCubit.verifyLoadedUserInternalId();
     }
 
     super.initState();
@@ -57,18 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildContent(HomeState state) {
-    if (!_userWrapper.authenticated) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildCardHelpMe(),
-          SpacerBox.v16,
-          BannerAdWidget(
-            screenName: Routes.home_partial,
-          ),
-        ],
-      );
-    }
+    final bool _autenticated = _userWrapper.authenticated;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,11 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
-              _buildCardCalendar(),
+              _buildCardCalendar(_autenticated),
               _buildCardMusics(),
-              _buildCardSchedule(),
-              _buildCardAlbuns(),
-              _buildCardFavorites(),
+              _buildCardSchedule(_autenticated),
+              _buildCardAlbuns(_autenticated),
+              _buildCardFavorites(_autenticated),
             ],
           ),
         ),
@@ -141,39 +132,55 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardSchedule() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.clock,
-      routeName: Routes.calendar_screen,
-      name: 'Cronograma',
+  Widget _buildCardSchedule(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: !autenticated,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.clock,
+        routeName: Routes.calendar_screen,
+        name: 'Cronograma',
+        disabled: !autenticated,
+      ),
     );
   }
 
-  Widget _buildCardCalendar() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.calendar_day,
-      routeName: Routes.calendar_screen,
-      name: 'Calendário',
+  Widget _buildCardCalendar(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: !autenticated,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.calendar_day,
+        routeName: Routes.calendar_screen,
+        name: 'Calendário',
+        disabled: !autenticated,
+      ),
     );
   }
 
-  Widget _buildCardAlbuns() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.camera_retro,
-      routeName: Routes.albums_screen,
-      name: 'Álbuns',
+  Widget _buildCardAlbuns(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: !autenticated,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.camera_retro,
+        routeName: Routes.albums_screen,
+        name: 'Álbuns',
+        disabled: !autenticated,
+      ),
     );
   }
 
-  Widget _buildCardFavorites() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.star,
-      routeName: Routes.favorite_interests_screen,
-      name: 'Favoritos',
+  Widget _buildCardFavorites(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: !autenticated,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.star,
+        routeName: Routes.favorite_interests_screen,
+        name: 'Favoritos',
+        disabled: !autenticated,
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:mozin/modules/config/app_colors.dart';
 ThemeData getTheme(BuildContext context) {
   return ThemeData(
     fontFamily: 'Abel',
+    disabledColor: AppColors.disabledColor,
     appBarTheme: AppBarTheme(
       color: AppColors.primary,
       iconTheme: IconThemeData(

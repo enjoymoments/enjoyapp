@@ -11,6 +11,7 @@ class FeatureCard extends StatelessWidget {
   final String routeName;
   final String name;
   final double width;
+  final bool disabled;
 
   const FeatureCard({
     Key key,
@@ -18,6 +19,7 @@ class FeatureCard extends StatelessWidget {
     @required this.routeName,
     @required this.name,
     this.width,
+    this.disabled = false,
   }) : super(key: key);
 
   @override
@@ -37,10 +39,12 @@ class FeatureCard extends StatelessWidget {
             children: [
               CustomIcon(
                 icon: iconData,
+                color: disabled ? Theme.of(context).disabledColor : null,
               ),
               SpacerBox.v8,
               name.description(
                 context,
+                color: disabled ? Theme.of(context).disabledColor : null,
               ),
             ],
           ),
