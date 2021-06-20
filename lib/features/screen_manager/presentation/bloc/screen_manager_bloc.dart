@@ -66,14 +66,16 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       yield* albumSave(event);
     } else if (event is TapScreen) {
       yield* mapTapScreenToState(event);
-    } else if (event is SubscribeActionListener) {
-      _subscribeActionListener();
-    } else if (event is UnsubscribeActionListener) {
-      _unsubscribeActionListener();
-    } else if (event is ActionListener) {
-      var _test = event.action.data();
-      print('test');
-    }
+    } 
+    //TOOD:in test
+    // else if (event is SubscribeActionListener) {
+    //   _subscribeActionListener();
+    // } else if (event is UnsubscribeActionListener) {
+    //   _unsubscribeActionListener();
+    // } else if (event is ActionListener) {
+    //   var _test = event.action.data();
+    //   print('test');
+    // }
   }
 
   Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
