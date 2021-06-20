@@ -75,7 +75,7 @@ class RemoteClientRepository {
         typeError: LoggerTypeEnum.Error,
         // ignore: always_specify_types
         error: {
-          'body:': onError?.toString(),
+          'body': onError?.toString(),
         },
         message: onError.message,
         // ignore: always_specify_types
