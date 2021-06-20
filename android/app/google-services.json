@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "852466867016-rsh0b60gs34k5h08b2t9p4m0pdo455qp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codefactory.mozin",
+            "certificate_hash": "ac411ae8de2e0a4ddc18996664ff15effa6fae3a"
+          }
+        },
+        {
           "client_id": "852466867016-m36abse11p6ui6hf53dkansf1ufi5id3.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -51,12 +59,14 @@
               "client_id": "852466867016-q2nqi6nlf3gia1v9f96qndt628l8kgg1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.codefactory.mozin"
+                "bundle_id": "com.codefactory.mozin",
+                "app_store_id": "1570943140"
               }
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-5039935894572150~6680679953"
     }
   ],
   "configuration_version": "1"
