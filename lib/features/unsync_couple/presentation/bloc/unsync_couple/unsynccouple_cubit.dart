@@ -21,6 +21,10 @@ class UnsyncCoupleCubit extends Cubit<UnsyncCoupleState> {
   final UserActionRepository _userActionRepository;
 
   void unsyncCouple() async {
+    emit(state.copyWith(
+      isLoading: true,
+    ));
+
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 

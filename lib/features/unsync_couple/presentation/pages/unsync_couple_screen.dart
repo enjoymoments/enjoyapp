@@ -112,7 +112,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
             text: 'Sim',
             width: SizeConfig.sizeByPixel(100),
             onTap: () {
-              
+              _unsyncCoupleCubit.unsyncCouple();
             },
           ),
           SpacerBox.h16,
