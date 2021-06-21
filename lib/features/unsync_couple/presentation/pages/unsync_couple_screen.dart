@@ -9,6 +9,7 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_avatar.dart';
+import 'package:mozin/package_view/custom_button_default.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/custom_gif.dart';
@@ -92,9 +93,9 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            'YEEAAAHHHH\nNovo casal na área !!!'.labelIntro(context),
+            'OK, tudo certo !'.labelIntro(context),
             SpacerBox.v24,
-            CustomGif(path: 'assets/images/party.webp'),
+            CustomGif(path: 'assets/images/thanks.webp'),
           ],
         ),
       ),
@@ -107,7 +108,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ButtonDefault(
+          CustomButtonDefault(
             text: 'Sim',
             width: SizeConfig.sizeByPixel(100),
             onTap: () {
@@ -115,7 +116,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
             },
           ),
           SpacerBox.h16,
-          ButtonDefault(
+          CustomButtonDefault(
             text: 'Não',
             width: SizeConfig.sizeByPixel(100),
             swipeColors: true,
@@ -189,58 +190,12 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: 'Convite',
+      title: 'Desvincular',
       context: context,
       onPressedBack: () {
         ExtendedNavigator.of(context).pop();
       },
       actions: <Widget>[],
-    );
-  }
-}
-
-class ButtonDefault extends StatelessWidget {
-  const ButtonDefault({
-    Key key,
-    @required this.text,
-    @required this.onTap,
-    this.width,
-    this.height,
-    this.swipeColors,
-  }) : super(key: key);
-
-  final String text;
-  final Function onTap;
-  final double width;
-  final double height;
-  final bool swipeColors;
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildButton(context);
-  }
-
-  Widget _buildButton(BuildContext context) {
-    final ButtonStyle _raisedButtonStyle = ElevatedButton.styleFrom(
-      primary: swipeColors == true
-          ? Theme.of(context).backgroundColor
-          : Theme.of(context).primaryColor,
-      minimumSize: Size(width ?? SizeConfig.screenWidth, height ?? 50),
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-    );
-
-    return ElevatedButton(
-      style: _raisedButtonStyle,
-      onPressed: () {
-        onTap();
-      },
-      child: text.title(context,
-          color: swipeColors == true
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).backgroundColor),
     );
   }
 }
