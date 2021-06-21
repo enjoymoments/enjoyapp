@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/facebook_login_button.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/modules/config/setup.dart';

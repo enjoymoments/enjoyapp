@@ -82,6 +82,8 @@ class AuthenticationBloc
 
       await _authenticationRepository.logInWithFacebook();
 
+      var token = await _authenticationRepository.getToken();
+
       final _user = await _authenticationRepository.user.first;
 
       _userWrapper.assignment(_user);

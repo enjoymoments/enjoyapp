@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart' as rt;
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/theme.dart';
