@@ -40,8 +40,9 @@ import 'package:mozin/features/invite/data/datasources/invite_remote_data_source
 import 'package:mozin/features/invite/data/repositories/invite_repository_impl.dart';
 import 'package:mozin/features/invite/domain/repositories/invite_repository.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/connected/cubit/connected_cubit.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/connected/connected_cubit.dart';
+import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/features/notifications/data/datasources/notifications_remote_data_source.dart';
 import 'package:mozin/features/notifications/data/repositories/notifications_repository_impl.dart';
 import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
@@ -261,6 +262,9 @@ void _registerBlocs() {
   getItInstance.registerLazySingleton<UserActionCubit>(() => UserActionCubit(userActionRepository: getItInstance()));
 
   getItInstance.registerLazySingleton<NotificationsCubit>(() => NotificationsCubit(notificationsRepository: getItInstance())); 
+
+  getItInstance.registerFactory<UnsyncOptionCubit>(
+      () => UnsyncOptionCubit());
 }
 
 void _registerSingletonRepositories() {

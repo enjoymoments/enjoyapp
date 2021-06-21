@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/connected/connected.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/login_screen.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/me_loading.dart';
@@ -14,13 +15,20 @@ class MeScreen extends StatefulWidget {
 
 class _MeScreenState extends State<MeScreen> {
   AuthenticationBloc _authenticationBloc;
+  UnsyncOptionCubit _unsyncOptionCubit;
 
   @override
   void initState() {
-    _authenticationBloc = root<AuthenticationBloc>()
-      ..add(CheckAuthenticated());
-    
+    _unsyncOptionCubit = getItInstance<UnsyncOptionCubit>()..existCoupleId();
+    _authenticationBloc = root<AuthenticationBloc>()..add(CheckAuthenticated());
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _unsyncOptionCubit.close();
+    super.dispose();
   }
 
   @override
@@ -35,6 +43,7 @@ class _MeScreenState extends State<MeScreen> {
         if (state.authenticated) {
           return Connected(
             user: getItInstance<UserWrapper>().getUser,
+            unsyncOptionCubit: _unsyncOptionCubit,
           );
         }
 

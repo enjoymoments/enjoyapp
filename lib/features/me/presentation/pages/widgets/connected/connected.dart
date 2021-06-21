@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
-import 'package:mozin/features/me/presentation/pages/widgets/login/bloc/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
@@ -22,10 +24,12 @@ import 'package:mozin/package_view/spacer_box.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel user;
+  final UnsyncOptionCubit unsyncOptionCubit;
 
   const Connected({
     Key key,
     @required this.user,
+    @required this.unsyncOptionCubit,
   }) : super(key: key);
 
   @override
@@ -73,7 +77,8 @@ class Connected extends StatelessWidget {
                     text: 'Instagram',
                     iconData: AppIcons.instagram,
                     onTap: () {
-                      LaunchUrlService.launchURL('https://www.instagram.com/myenjoymoments/');
+                      LaunchUrlService.launchURL(
+                          'https://www.instagram.com/myenjoymoments/');
                     },
                   ),
                   CustomItemModalFit(
@@ -117,6 +122,7 @@ class Connected extends StatelessWidget {
           },
         ),
         ..._divider(),
+        _buildUnsyncCouple(),
         //TODO:in development
         // CustomTile(
         //   title: 'Configurações',
@@ -170,5 +176,33 @@ class Connected extends StatelessWidget {
     }
 
     return false;
+  }
+
+  Widget _buildUnsyncCouple() {
+    return BlocBuilder<UnsyncOptionCubit, UnsyncOptionState>(
+      cubit: unsyncOptionCubit,
+      builder: (context, state) {
+        if (state.existCoupleId) {
+          return Column(
+            children: [
+              CustomTile(
+                title: 'Desvincular com o meu par',
+                description: 'Cansei, não quero mais',
+                iconStart: AppIcons.undo,
+                iconEnd: AppIcons.angle_right,
+                onTap: () {
+                  StoresService.redirectToStore(() {
+                    context.showSnackBar('Ops... em breve nas lojas');
+                  });
+                },
+              ),
+              ..._divider(),
+            ],
+          );
+        }
+
+        return SizedBox.shrink();
+      },
+    );
   }
 }
