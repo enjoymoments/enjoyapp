@@ -127,6 +127,8 @@ class NotificationTypeEnum extends Enum<String> {
       return NotificationTypeEnum.CreateItemCalendar;
     } else if (value == 'SYNC_COUPLE') {
       return NotificationTypeEnum.SyncCouple;
+    } else if (value == 'UNSYNC_COUPLE') {
+      return NotificationTypeEnum.UnsyncCouple;
     }
 
     return null;
@@ -137,6 +139,7 @@ class NotificationTypeEnum extends Enum<String> {
   static const NotificationTypeEnum CreatePost = NotificationTypeEnum._fromValue('CREATE_POST');
   static const NotificationTypeEnum CreateItemCalendar = NotificationTypeEnum._fromValue('CREATE_ITEM_CALENDAR');
   static const NotificationTypeEnum SyncCouple = NotificationTypeEnum._fromValue('SYNC_COUPLE');
+  static const NotificationTypeEnum UnsyncCouple = NotificationTypeEnum._fromValue('UNSYNC_COUPLE');
 
   @override
   String toString() => value.toString();
