@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _userWrapper = getItInstance<UserWrapper>();
     _homeCubit = getItInstance<HomeCubit>();
     _inviteCubit = getItInstance<InviteCubit>();
-    
+
     if (_userWrapper.authenticated) {
       _inviteCubit.verifyLoadedUserInternalId();
     }
@@ -65,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildCardInvite(),
-        SpacerBox.v16,
         _buildCardHelpMe(),
         SpacerBox.v8,
         Container(
@@ -77,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCardMusics(),
               _buildCardSchedule(_autenticated),
               _buildCardAlbuns(_autenticated),
+              _buildCardRandom(_autenticated),
               _buildCardFavorites(_autenticated),
             ],
           ),
@@ -97,18 +97,23 @@ class _HomeScreenState extends State<HomeScreen> {
           return SizedBox.shrink();
         }
 
-        return GestureDetector(
-          onTap: () {
-            _inviteCubit.generateShareUrl();
-          },
-          child: CardContainer(
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 200),
-              child: CardInvite(
-                isLoading: state.isLoading,
+        return Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                _inviteCubit.generateShareUrl();
+              },
+              child: CardContainer(
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  child: CardInvite(
+                    isLoading: state.isLoading,
+                  ),
+                ),
               ),
             ),
-          ),
+            SpacerBox.v16
+          ],
         );
       },
     );
@@ -124,23 +129,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCardMusics() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.music,
-      routeName: Routes.calendar_screen,
-      name: 'Músicas',
+    return AbsorbPointer(
+      absorbing: true,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.music,
+        routeName: Routes.calendar_screen,
+        name: 'Músicas',
+        disabled: true,
+      ),
     );
   }
 
   Widget _buildCardSchedule(bool autenticated) {
     return AbsorbPointer(
-      absorbing: !autenticated,
+      absorbing: true,
       child: FeatureCard(
         width: SizeConfig.sizeByPixel(100),
         iconData: AppIcons.clock,
         routeName: Routes.calendar_screen,
         name: 'Cronograma',
-        disabled: !autenticated,
+        disabled: true,
       ),
     );
   }
@@ -180,6 +189,19 @@ class _HomeScreenState extends State<HomeScreen> {
         routeName: Routes.favorite_interests_screen,
         name: 'Favoritos',
         disabled: !autenticated,
+      ),
+    );
+  }
+
+  Widget _buildCardRandom(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: true,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.random,
+        routeName: Routes.albums_screen,
+        name: 'Aleatório',
+        disabled: true,
       ),
     );
   }
