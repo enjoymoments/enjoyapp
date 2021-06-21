@@ -31,6 +31,7 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
+import '../../features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
 import '../../package_view/custom_success_screen.dart';
 import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
@@ -61,6 +62,7 @@ class Routes {
   static const String home_partial = '/home-partial';
   static const String me_authenticated_partial = '/me-authenticated-partial';
   static const String invite_screen = '/invite-screen';
+  static const String unsync_couple_screen = '/unsync-couple-screen';
   static const all = <String>{
     intro_screen,
     screen_manager_screen,
@@ -83,6 +85,7 @@ class Routes {
     home_partial,
     me_authenticated_partial,
     invite_screen,
+    unsync_couple_screen,
   };
 }
 
@@ -112,6 +115,7 @@ class Router extends RouterBase {
     RouteDef(Routes.home_partial, page: HomePartial),
     RouteDef(Routes.me_authenticated_partial, page: MeAuthenticatedPartial),
     RouteDef(Routes.invite_screen, page: InviteScreen),
+    RouteDef(Routes.unsync_couple_screen, page: UnsyncCoupleScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -283,6 +287,12 @@ class Router extends RouterBase {
           key: args.key,
           inviteCubit: args.inviteCubit,
         ),
+        settings: data,
+      );
+    },
+    UnsyncCoupleScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const UnsyncCoupleScreen(),
         settings: data,
       );
     },

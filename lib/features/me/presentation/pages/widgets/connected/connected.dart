@@ -191,9 +191,7 @@ class Connected extends StatelessWidget {
                 iconStart: AppIcons.undo,
                 iconEnd: AppIcons.angle_right,
                 onTap: () {
-                  StoresService.redirectToStore(() {
-                    context.showSnackBar('Ops... em breve nas lojas');
-                  });
+                  ExtendedNavigator.of(context).push(Routes.unsync_couple_screen);
                 },
               ),
               ..._divider(),

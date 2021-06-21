@@ -12,6 +12,7 @@ import 'package:mozin/features/interest/presentation/pages/interest_screen.dart'
 import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
 import 'package:mozin/features/invite/presentation/pages/invite_screen.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
+import 'package:mozin/features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
 import 'package:mozin/package_view/custom_success_screen.dart';
 import 'package:mozin/package_view/gallery_images/gallery_photo_view_wrapper.dart';
 import 'package:mozin/package_view/onboading_screen.dart';
@@ -44,6 +45,7 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'home_partial', page: HomePartial,),
     MaterialRoute(name: 'me_authenticated_partial', page: MeAuthenticatedPartial,),
     MaterialRoute(name: 'invite_screen', page: InviteScreen,),
+    MaterialRoute(name: 'unsync_couple_screen', page: UnsyncCoupleScreen,),
   ],
 )
 class $Router {}

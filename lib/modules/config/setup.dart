@@ -62,6 +62,7 @@ import 'package:mozin/features/time_line/data/repositories/time_line_repository_
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/features/unsync_couple/presentation/bloc/unsync_couple/unsynccouple_cubit.dart';
 import 'package:mozin/features/user_action/data/datasources/user_action_remote_data_source.dart';
 import 'package:mozin/features/user_action/data/repositories/user_action_repository_impl.dart';
 import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';
@@ -265,6 +266,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<UnsyncOptionCubit>(
       () => UnsyncOptionCubit());
+
+  getItInstance.registerFactory<UnsyncCoupleCubit>(
+      () => UnsyncCoupleCubit());    
 }
 
 void _registerSingletonRepositories() {
