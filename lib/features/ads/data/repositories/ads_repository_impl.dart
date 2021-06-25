@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
+import 'package:mozin/modules/config/is_debug_mode.dart';
 
 class AdsRepositoryImpl implements AdsRepository {
   Map<String, List<BannerAd>> _adsByScreen = {};
@@ -52,7 +55,7 @@ class AdsRepositoryImpl implements AdsRepository {
 
   Future<BannerAd> _generateBanner({AdSize size}) async {
     var _bannerAd = BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: _getAdUnitId(),
       request: AdRequest(),
       size: size ?? AdSize.banner,
       listener: AdListener(
@@ -71,5 +74,20 @@ class AdsRepositoryImpl implements AdsRepository {
     await _bannerAd?.load();
 
     return _bannerAd;
+  }
+
+  String _getAdUnitId() {
+    if (isInDebugMode) {
+      return BannerAd.testAdUnitId;
+    }
+
+    //TODO:remote config in here ?
+    if (Platform.isAndroid) {
+      return 'ca-app-pub-5039935894572150/4110356931';
+    } else if (Platform.isIOS) {
+      return 'ca-app-pub-5039935894572150/7537825425';
+    }
+
+    return null;
   }
 }
