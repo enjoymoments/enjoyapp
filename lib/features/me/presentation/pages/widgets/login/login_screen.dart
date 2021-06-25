@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/apple_login_button.dart';
@@ -28,14 +30,23 @@ class LoginScreen extends StatelessWidget {
               FacebookLoginButton(
                 authenticationBloc: root<AuthenticationBloc>(),
               ),
-              SpacerBox.h16,
-              AppleLoginButton(
-                authenticationBloc: root<AuthenticationBloc>(),
-              ),
+              ..._buildAppleSigning(),
             ],
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildAppleSigning() {
+    if (Platform.isIOS) {
+      return [
+        SpacerBox.h16,
+        AppleLoginButton(
+          authenticationBloc: root<AuthenticationBloc>(),
+        ),
+      ];
+    }
+    return [];
   }
 }
