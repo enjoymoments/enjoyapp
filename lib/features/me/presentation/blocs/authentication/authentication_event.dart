@@ -11,6 +11,8 @@ class RequestGoogleLogin extends AuthenticationEvent {}
 
 class RequestFacebookLogin extends AuthenticationEvent {}
 
+class RequestAppleLogin extends AuthenticationEvent {}
+
 class Logout extends AuthenticationEvent {}
 
 class CheckAuthenticated extends AuthenticationEvent {}

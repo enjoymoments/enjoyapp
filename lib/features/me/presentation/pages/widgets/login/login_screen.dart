@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/apple_login_button.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/facebook_login_button.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -25,6 +26,10 @@ class LoginScreen extends StatelessWidget {
               ),
               SpacerBox.h16,
               FacebookLoginButton(
+                authenticationBloc: root<AuthenticationBloc>(),
+              ),
+              SpacerBox.h16,
+              AppleLoginButton(
                 authenticationBloc: root<AuthenticationBloc>(),
               ),
             ],

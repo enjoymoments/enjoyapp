@@ -8,6 +8,7 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// {@template authentication_repository}
 /// Repository which manages user authentication.
@@ -78,6 +79,23 @@ class AuthenticationRepository {
     } catch (e) {
       _logger(e, null);
       throw LogInWithFacebookFailure(e);
+    }
+  }
+
+    Future<void> logInWithApple() async {
+    try {
+      final AuthorizationCredentialAppleID appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+      
+      //await _firebaseAuth.signInWithCredential(appleCredential);
+      print('test');
+    } catch (e) {
+      _logger(e, null);
+      throw LogInWithAppleFailure(e);
     }
   }
 

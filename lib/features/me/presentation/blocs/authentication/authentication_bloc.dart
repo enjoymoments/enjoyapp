@@ -41,6 +41,8 @@ class AuthenticationBloc
       yield* mapLogInWithGoogleToState(event);
     } else if (event is RequestFacebookLogin) {
       yield* mapLogInWithFacebookToState(event);
+    } else if (event is RequestAppleLogin) {
+      yield* mapLogInWithAppleToState(event);
     } else if (event is Logout) {
       yield* mapLogoutToState();
     } else if (event is CheckAuthenticated) {
@@ -74,6 +76,27 @@ class AuthenticationBloc
     }
   }
 
+    Stream<AuthenticationState> mapLogInWithAppleToState(
+    RequestAppleLogin event,
+  ) async* {
+    try {
+      yield state.copyWith(isLoading: true);
+
+      await _authenticationRepository.logInWithApple();
+
+      final _user = await _authenticationRepository.user.first;
+
+      _userWrapper.assignment(_user);
+
+      _settingsUser(_user);
+
+      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
+    } catch (e) {
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
+    }
+  }
+
   Stream<AuthenticationState> mapLogInWithFacebookToState(
     RequestFacebookLogin event,
   ) async* {
@@ -81,8 +104,6 @@ class AuthenticationBloc
       yield state.copyWith(isLoading: true);
 
       await _authenticationRepository.logInWithFacebook();
-
-      var token = await _authenticationRepository.getToken();
 
       final _user = await _authenticationRepository.user.first;
 

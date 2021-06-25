@@ -11,6 +11,12 @@ class LogInWithFacebookFailure implements Exception {
   LogInWithFacebookFailure(this.exception);
 }
 
+class LogInWithAppleFailure implements Exception {
+  final dynamic exception;
+
+  LogInWithAppleFailure(this.exception);
+}
+
 /// Thrown during the logout process if a failure occurs.
 class LogOutFailure implements Exception {}
 
