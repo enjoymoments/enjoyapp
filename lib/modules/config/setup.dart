@@ -268,7 +268,7 @@ void _registerBlocs() {
       () => UnsyncOptionCubit());
 
   getItInstance.registerFactory<UnsyncCoupleCubit>(
-      () => UnsyncCoupleCubit());    
+      () => UnsyncCoupleCubit(userActionRepository: getItInstance()));    
 }
 
 void _registerSingletonRepositories() {
