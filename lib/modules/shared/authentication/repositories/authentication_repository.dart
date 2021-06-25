@@ -82,17 +82,23 @@ class AuthenticationRepository {
     }
   }
 
-    Future<void> logInWithApple() async {
+  Future<void> logInWithApple() async {
     try {
-      final AuthorizationCredentialAppleID appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-      
-      //await _firebaseAuth.signInWithCredential(appleCredential);
-      print('test');
+      final AuthorizationCredentialAppleID appleIdCredential =
+          await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oAuthProvider = OAuthProvider('apple.com');
+      final OAuthCredential credential = oAuthProvider.credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode,
+      );
+
+      await _firebaseAuth.signInWithCredential(credential);
     } catch (e) {
       _logger(e, null);
       throw LogInWithAppleFailure(e);
