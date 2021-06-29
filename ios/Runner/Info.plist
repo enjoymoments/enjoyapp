@@ -61,13 +61,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Example usage description</string>
+	<string>Enjoy utilizará a câmera para entregar uma experiência melhor de usabilidade do app.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs access to location when in the background.</string>
+	<string>Enjoy utilizará a localização para entregar uma experiência melhor de usabilidade do app.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>Enjoy utilizará a localização para entregar uma experiência melhor de usabilidade do app.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Example usage description</string>
+	<string>Enjoy utilizará a biblioteca para entregar uma experiência melhor de usabilidade do app.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
