@@ -38,7 +38,8 @@ class UserRepository {
   }
 
   Future setActionListener(UserAppModel user) async {
-    await _instance.firestore.collection('actionListener').doc(user.id).set({}, SetOptions(merge: true));
+    //TODO:temporary
+    //await _instance.firestore.collection('actionListener').doc(user.id).set({}, SetOptions(merge: true));
   }
 
   Future<Either<UserInfoModel, Exception>> setUserInfo() async {

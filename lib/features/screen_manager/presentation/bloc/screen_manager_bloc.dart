@@ -37,7 +37,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     this.userWrapper,
     this.localStorageService,
   ) : super(ScreenManagerState.initial()) {
-    _subscribeActionListener();
+    //TODO:temporary
+    //_subscribeActionListener();
   }
 
   final TimelineRepository timelineRepository;
@@ -52,7 +53,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   @override
   Future<void> close() {
-    _unsubscribeActionListener();
+    //TODO:temporary
+    //_unsubscribeActionListener();
     return super.close();
   }
 
@@ -189,21 +191,22 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     }
   }
 
-  void _subscribeActionListener() {
-    var _instance = new FirestoreInstanceProvider();
-    var _user = userWrapper.getUser;
+  //TODO:temporary
+  // void _subscribeActionListener() {
+  //   var _instance = new FirestoreInstanceProvider();
+  //   var _user = userWrapper.getUser;
 
-    if (userWrapper.authenticated && _actionSubscription == null) {
-      _actionSubscription = _instance.firestore
-          .doc('actionListener/${_user.id}')
-          .snapshots()
-          .listen(
-            (action) => add(ActionListener(action)),
-          );
-    }
-  }
+  //   if (userWrapper.authenticated && _actionSubscription == null) {
+  //     _actionSubscription = _instance.firestore
+  //         .doc('actionListener/${_user.id}')
+  //         .snapshots()
+  //         .listen(
+  //           (action) => add(ActionListener(action)),
+  //         );
+  //   }
+  // }
 
-  void _unsubscribeActionListener() {
-    _actionSubscription?.cancel();
-  }
+  // void _unsubscribeActionListener() {
+  //   _actionSubscription?.cancel();
+  // }
 }
