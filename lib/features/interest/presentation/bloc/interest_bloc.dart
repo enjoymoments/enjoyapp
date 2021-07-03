@@ -44,42 +44,36 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
   }
 
-  Stream<InterestState> mapChangeTimeToState(
-      ChangeTime event) async* {
-    
+  Stream<InterestState> mapChangeTimeToState(ChangeTime event) async* {
     _filterChoosedWrapper.changeTime(event.minTime, event.maxTime);
 
-    yield state.copyWith(
-        forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
   }
 
-  Stream<InterestState> mapChangeDistanceToState(
-      ChangeDistance event) async* {
-    
+  Stream<InterestState> mapChangeDistanceToState(ChangeDistance event) async* {
     _filterChoosedWrapper.changeDistance(event.minDistance, event.maxDistance);
 
-    yield state.copyWith(
-        forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
   }
 
-  Stream<InterestState> mapChangePriceToState(
-      ChangePrice event) async* {
-    
+  Stream<InterestState> mapChangePriceToState(ChangePrice event) async* {
     _filterChoosedWrapper.changePrice(event.minPrice, event.maxPrice);
 
-    yield state.copyWith(
-        forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
   }
 
   Stream<InterestState> mapSelectSubCategorieToState(
       SelectSubCategorie event) async* {
     if (event.selected) {
-      _filterChoosedWrapper.insertSubCategorie(event.categorie, event.itemSelected);
+      _filterChoosedWrapper.insertSubCategorie(
+          event.categorie, event.itemSelected);
     } else {
-      _filterChoosedWrapper.removeSubCategorie(event.categorie, event.itemSelected);
+      _filterChoosedWrapper.removeSubCategorie(
+          event.categorie, event.itemSelected);
     }
 
     yield state.copyWith(
+        showNextButtonSubCategories: _getShowNextButtonSubCategories(),
         forceRefresh: StateUtils.generateRandomNumber());
   }
 
@@ -92,6 +86,9 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     }
 
     yield state.copyWith(
+        showNextButtonCategories:
+            _filterChoosedWrapper.getFilterChoosed.categories.length > 0,
+        showNextButtonSubCategories: _getShowNextButtonSubCategories(),
         forceRefresh: StateUtils.generateRandomNumber());
   }
 
@@ -101,7 +98,14 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
     final response = await _interestRepository.getCategories();
     yield response.fold((categories) {
       _loadCategoriesSelected(categories);
-      return state.copyWith(isLoading: false, categories: categories);
+
+      return state.copyWith(
+        isLoading: false,
+        categories: categories,
+        showNextButtonCategories:
+            _filterChoosedWrapper.getFilterChoosed.categories.length > 0,
+        showNextButtonSubCategories: _getShowNextButtonSubCategories(),
+      );
     }, (exception) {
       return state.copyWith(isLoading: false, isError: true);
     });
@@ -120,5 +124,20 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
         element.selected = true;
       }
     });
+  }
+
+  bool _getShowNextButtonSubCategories() {
+    if (_filterChoosedWrapper.getFilterChoosed.categories.length > 0) {
+      final CategoriesModel _exist =
+          _filterChoosedWrapper.getFilterChoosed.categories.firstWhere(
+              (element) => element.subCategories.any((sub) {
+                    var _cast = sub as SubCategoriesModel;
+                    return (_cast.selected ?? false) == true;
+                  }),
+              orElse: () => null);
+      return _exist != null;
+    }
+
+    return false;
   }
 }

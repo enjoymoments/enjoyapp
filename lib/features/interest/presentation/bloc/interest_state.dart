@@ -9,6 +9,8 @@ class InterestState extends DefaultState {
     String errorMessage,
     this.categories,
     this.forceRefresh,
+    this.showNextButtonCategories,
+    this.showNextButtonSubCategories,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,6 +21,8 @@ class InterestState extends DefaultState {
 
   final List<CategoriesModel> categories;
   final int forceRefresh;
+  final bool showNextButtonCategories;
+  final bool showNextButtonSubCategories;
 
   factory InterestState.initial() {
     return InterestState(
@@ -29,6 +33,8 @@ class InterestState extends DefaultState {
       errorMessage: null,
       categories: List(),
       forceRefresh: null,
+      showNextButtonCategories: false,
+      showNextButtonSubCategories: false,
     );
   }
 
@@ -40,6 +46,8 @@ class InterestState extends DefaultState {
     String errorMessage,
     List<CategoriesModel> categories,
     int forceRefresh,
+    bool showNextButtonCategories,
+    bool showNextButtonSubCategories,
   }) {
     return InterestState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,6 +57,8 @@ class InterestState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       categories: categories ?? this.categories,
       forceRefresh: forceRefresh ?? this.forceRefresh,
+      showNextButtonCategories: showNextButtonCategories ?? this.showNextButtonCategories,
+      showNextButtonSubCategories: showNextButtonSubCategories ?? this.showNextButtonSubCategories,
     );
   }
 
@@ -61,5 +71,7 @@ class InterestState extends DefaultState {
         errorMessage,
         categories,
         forceRefresh,
+        showNextButtonCategories,
+        showNextButtonSubCategories,
       ];
 }

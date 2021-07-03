@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/categorie_item_loading.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_category_item.dart';
@@ -28,32 +27,27 @@ class InterestCategories extends StatelessWidget {
   }
 
   Widget _buildCards() {
-    return BlocBuilder<InterestBloc, InterestState>(
-      cubit: interestBloc,
-      builder: (context, state) {
-        if (state.isLoading) {
-          return Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 30,
-            children: _generateItemsLoading(),
-          );
-        }
+    if (interestBloc.state.isLoading) {
+      return Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 30,
+        children: _generateItemsLoading(),
+      );
+    }
 
-        if (state.categories.isNotEmpty) {
-          return Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 30,
-            children: _generateItems(state),
-          );
-        }
+    if (interestBloc.state.categories.isNotEmpty) {
+      return Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 30,
+        children: _generateItems(),
+      );
+    }
 
-        return SizedBox.shrink();
-      },
-    );
+    return SizedBox.shrink();
   }
 
-  List<Widget> _generateItems(InterestState state) {
-    return state.categories.map((element) {
+  List<Widget> _generateItems() {
+    return interestBloc.state.categories.map((element) {
       return InterestCategoryItem(
         categorie: element,
         callbackSelected: (bool selected) {

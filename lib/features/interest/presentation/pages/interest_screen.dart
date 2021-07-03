@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_categories_details.dart';
@@ -53,51 +54,57 @@ class _InterestScreenState extends State<InterestScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return IntroductionScreen(
-      key: introKey,
-      pages: [
-        _selectCategories(),
-        _selectCategoriesDetails(),
-        //TODO:in development
-        //_selectedGeneralFilters(),
-      ],
-      onDone: () => _onIntroEnd(context),
-      //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
-      showSkipButton: false,
-      skipFlex: 0,
-      nextFlex: 0,
-      // skip: Text(
-      //   'Pular',
-      //   style: TextStyle(color: Theme.of(context).primaryColor),
-      // ),
-      next: CustomIcon(
-        icon: AppIcons.arrow_right,
-        color: Theme.of(context).primaryColor,
-      ),
-      done: Text(
-        'Filtrar',
-        style: TextStyle(color: Theme.of(context).primaryColor),
-      ),
-      dotsDecorator: DotsDecorator(
-        size: Size(10.0, 10.0),
-        color: Theme.of(context).primaryColor,
-        activeSize: Size(22.0, 10.0),
-        activeColor: Color(0xFFFCBA03),
-        activeShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
-        ),
-      ),
+    return BlocBuilder<InterestBloc, InterestState>(
+      cubit: _interestBloc,
+      builder: (context, state) {
+        return IntroductionScreen(
+          key: introKey,
+          pages: [
+            _selectCategories(),
+            _selectCategoriesDetails(),
+            //TODO:in development
+            //_selectedGeneralFilters(),
+          ],
+          onDone: () => _onIntroEnd(context, state),
+          freeze: !state.showNextButtonCategories,
+          showSkipButton: false,
+          showNextButton: state.showNextButtonCategories,
+          skipFlex: 0,
+          nextFlex: 0,
+          next: CustomIcon(
+            icon: AppIcons.arrow_right,
+            color: Theme.of(context).primaryColor,
+          ),
+          done: Text(
+            'Filtrar',
+            style: TextStyle(
+                color: state.showNextButtonSubCategories
+                    ? Theme.of(context).primaryColor
+                    : Theme.of(context).disabledColor),
+          ),
+          dotsDecorator: DotsDecorator(
+            size: Size(10.0, 10.0),
+            color: Theme.of(context).primaryColor,
+            activeSize: Size(22.0, 10.0),
+            activeColor: Color(0xFFFCBA03),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  void _onIntroEnd(context) {
-    ExtendedNavigator.of(context).pop();
+  void _onIntroEnd(context, InterestState state) {
+    if (state.showNextButtonSubCategories) {
+      ExtendedNavigator.of(context).pop();
 
-    if (widget.isChangeFilter != null && widget.isChangeFilter) {
-      getItInstance<PlacesBloc>()
-        ..add(GetCurrentPosition());
-    } else {
-      ExtendedNavigator.of(context).push(Routes.search_places_screen);
+      if (widget.isChangeFilter != null && widget.isChangeFilter) {
+        getItInstance<PlacesBloc>()..add(GetCurrentPosition());
+      } else {
+        ExtendedNavigator.of(context).push(Routes.search_places_screen);
+      }
     }
   }
 
