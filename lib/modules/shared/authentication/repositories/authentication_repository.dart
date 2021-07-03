@@ -46,7 +46,8 @@ class AuthenticationRepository {
   Future<String> getToken() async {
     try {
       return await _firebaseAuth.currentUser?.getIdToken();
-    } on Exception {
+    } catch (e) {
+      _logger(e, null);
       throw GetToken();
     }
   }
@@ -116,7 +117,8 @@ class AuthenticationRepository {
         _googleSignIn.signOut(),
         _facebookAuth.logOut(),
       ]);
-    } on Exception {
+    } catch (e) {
+      _logger(e, null);
       throw LogOutFailure();
     }
   }
