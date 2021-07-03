@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
 import 'package:mozin/modules/config/is_debug_mode.dart';
+import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
+import 'package:mozin/modules/shared/logger/models/logger_model.dart';
+import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
 class AdsRepositoryImpl implements AdsRepository {
   Map<String, List<BannerAd>> _adsByScreen = {};
@@ -27,6 +31,7 @@ class AdsRepositoryImpl implements AdsRepository {
 
       return Left<List<BannerAd>, Exception>(_adsByScreen[screenName]);
     } on dynamic catch (e) {
+      _logger(e, null);
       return Right<List<BannerAd>, Exception>(
           (e is Exception) ? e : Exception(e.toString()));
     }
@@ -64,6 +69,7 @@ class AdsRepositoryImpl implements AdsRepository {
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           print('$BannerAd failedToLoad: $error');
+          _logger(Exception('$error'), null);
         },
         onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
         onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
@@ -89,5 +95,22 @@ class AdsRepositoryImpl implements AdsRepository {
     }
 
     return null;
+  }
+
+  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
+    getItInstance<LoggerService>()..addLogAsync(
+      LoggerModel(
+        typeError: LoggerTypeEnum.Error,
+        // ignore: always_specify_types
+        error: {
+          'body': onError?.toString(),
+        },
+        message: onError?.message,
+        // ignore: always_specify_types
+        extraInfo: {
+          'query': jsonMap,
+        },
+      ),
+    );
   }
 }
