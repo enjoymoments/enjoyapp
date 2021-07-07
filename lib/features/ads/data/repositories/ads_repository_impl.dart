@@ -83,9 +83,9 @@ class AdsRepositoryImpl implements AdsRepository {
   }
 
   String _getAdUnitId() {
-    if (isInDebugMode) {
-      return BannerAd.testAdUnitId;
-    }
+    // if (isInDebugMode) {
+    //   return BannerAd.testAdUnitId;
+    // }
 
     //TODO:remote config in here ?
     if (Platform.isAndroid) {
