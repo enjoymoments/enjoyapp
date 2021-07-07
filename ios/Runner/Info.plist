@@ -61,13 +61,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Enjoy utilizará a câmera para entregar uma experiência melhor de usabilidade do app.</string>
+	<string>Você poderá utilizar a câmera para tirar fotos e compartilhar apenas com o seu par.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Enjoy utilizará a localização para entregar uma experiência melhor de usabilidade do app.</string>
+	<string>Enjoy utilizará a localização para entregar as melhores sugestões próximas a você.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Enjoy utilizará a localização para entregar uma experiência melhor de usabilidade do app.</string>
+	<string>Enjoy utilizará a localização para entregar as melhores sugestões próximas a você.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Enjoy utilizará a biblioteca para entregar uma experiência melhor de usabilidade do app.</string>
+	<string>Você poderá utilizar a biblioteca para compartilhar apenas com o seu par.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
