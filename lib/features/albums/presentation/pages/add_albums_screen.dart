@@ -182,10 +182,12 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
         color: Theme.of(context).appBarTheme.iconTheme.color,
       ),
       onPressed: () {
-        if (_images.length > 0 ||
+        if (_images.length > 0 &&
             (_titleController.text != null &&
                 _titleController.text.isNotEmpty)) {
           callback();
+        } else {
+          _actionButtoncontroller.stop();
         }
       },
     );
