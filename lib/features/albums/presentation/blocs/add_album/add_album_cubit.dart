@@ -26,6 +26,26 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
   }
 
   void mapSaveToState(String titleAlbum) async {
+    if (titleAlbum == null || titleAlbum.isEmpty) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+        errorMessage: "Informe um título para o álbum",
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+      return;
+    }
+
+    if (state.newImages == null || state.newImages.length == 0) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+        errorMessage: "Informe ao menos uma imagem",
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+      return;
+    }
+
     getItInstance<ScreenManagerBloc>()
       ..add(QueueNewAlbum(titleAlbum, state.newImages));
     emit(state.copyWith(isLoading: false, isError: false, isSuccess: true));
