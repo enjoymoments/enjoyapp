@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/package_view/custom_dialog.dart';
+import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:vibration/vibration.dart';
 
 class GalleryImageThumbnail extends StatelessWidget {
@@ -70,30 +73,25 @@ class GalleryImageThumbnail extends StatelessWidget {
       Vibration.vibrate(duration: 50);
     }
 
-    var content = Text('Tem certeza?');
-
-    var actions = [
-      FlatButton(
-        child: Text(
-          'Não',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-        },
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero remover',
+            iconData: AppIcons.ad,
+            onTap: () {
+            },
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero remover',
+            iconData: AppIcons.trash,
+            onTap: () {
+              onRemoveCallback(galleryImageModel);
+            },
+          ),
+        ],
       ),
-      FlatButton(
-        child: Text(
-          'Sim',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          onRemoveCallback(galleryImageModel);
-          ExtendedNavigator.of(context).pop();
-        },
-      ),
-    ];
-
-    simpleDialog(context, 'Remover', content, true, actions);
+    );
   }
 }

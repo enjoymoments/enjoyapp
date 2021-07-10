@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
@@ -13,8 +14,9 @@ import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_dialog.dart';
 import 'package:mozin/package_view/custom_icon.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -99,31 +101,26 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   }
 
   void _discardPost(BuildContext context) async {
-    var content = Text('Deseja descartar?');
-
-    var actions = [
-      FlatButton(
-        child: Text(
-          'Não',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-        },
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero descartar',
+            iconData: AppIcons.ad,
+            onTap: () {
+            },
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero descartar',
+            iconData: AppIcons.trash,
+            onTap: () {
+              ExtendedNavigator.of(context).pop();
+            },
+          ),
+        ],
       ),
-      FlatButton(
-        child: Text(
-          'Sim',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-          ExtendedNavigator.of(context).pop();
-        },
-      ),
-    ];
-
-    simpleDialog(context, 'Remover', content, true, actions);
+    );
   }
 
   Widget _buildBody() {

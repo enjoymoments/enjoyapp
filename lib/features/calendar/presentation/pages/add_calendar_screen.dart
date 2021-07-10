@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
@@ -11,9 +12,10 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_dialog.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/custom_icon.dart';
+import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
 import 'package:mozin/package_view/custom_tile.dart';
@@ -108,60 +110,50 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void remove() {
-    var content = Text('Deseja excluir?');
-
-    var actions = [
-      FlatButton(
-        child: Text(
-          'Não',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          _actionButtoncontroller.stop();
-          ExtendedNavigator.of(context).pop();
-        },
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero deletar',
+            iconData: AppIcons.ad,
+            onTap: () {
+              _actionButtoncontroller.stop();
+            },
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero deletar',
+            iconData: AppIcons.trash,
+            onTap: () {
+              _addCalendarCubit.remove();
+            },
+          ),
+        ],
       ),
-      FlatButton(
-        child: Text(
-          'Sim',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-          _addCalendarCubit.remove();
-        },
-      ),
-    ];
-
-    simpleDialog(context, 'Remover', content, false, actions);
+    );
   }
 
   void _discardPost(BuildContext context) async {
-    var content = Text('Deseja descartar?');
-
-    var actions = [
-      FlatButton(
-        child: Text(
-          'Não',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-        },
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero descartar',
+            iconData: AppIcons.ad,
+            onTap: () {
+            },
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero descartar',
+            iconData: AppIcons.trash,
+            onTap: () {
+              ExtendedNavigator.of(context).pop();
+            },
+          ),
+        ],
       ),
-      FlatButton(
-        child: Text(
-          'Sim',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        onPressed: () {
-          ExtendedNavigator.of(context).pop();
-          ExtendedNavigator.of(context).pop();
-        },
-      ),
-    ];
-
-    simpleDialog(context, 'Remover', content, true, actions);
+    );
   }
 
   Widget _buildAppBar() {
