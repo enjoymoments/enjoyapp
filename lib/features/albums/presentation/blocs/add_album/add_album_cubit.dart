@@ -62,7 +62,11 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
     emit(state.copyWith(isLoading: true, isError: false));
 
     try {
-      List<BaseImageModel> _allImages = [];
+      List<GalleryImageModel> _allImages = [];
+
+      if (state.allImages.length > 0) {
+        _allImages.addAll(state.allImages);
+      }
 
       if (source == ImageSource.camera) {
         var file = await _wrapperMediaService.openCamera();
