@@ -246,7 +246,7 @@ void _registerBlocs() {
       albumsRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<AddAlbumCubit>(
-      () => AddAlbumCubit(wrapperMediaService: getItInstance()));
+      () => AddAlbumCubit(wrapperMediaService: getItInstance(), albumsRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<FeedbackCubit>(() => FeedbackCubit(
       feedbackRepository: getItInstance(), userWrapper: getItInstance()));

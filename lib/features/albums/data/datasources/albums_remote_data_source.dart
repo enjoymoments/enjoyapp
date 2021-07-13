@@ -1,12 +1,14 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/entities/album_item_entity.dart';
+import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/remote_client_repository.dart';
 
 abstract class AlbumsRemoteDataSource {
   Future<String> addAlbum(String userId, AlbumItemModel model);
   Future<List<AlbumItemModel>> getAlbums(String userId, int limit);
+  Future<bool> deleteAlbum(String userId, String albumId);
 }
 
 class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
@@ -52,16 +54,16 @@ class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
     return list;
   }
 
-  // @override
-  // Future<void> deletePost(String timelineID, String postID) async {
-  //   var url = remoteConfig.getString(url_functions);
+  @override
+  Future<bool> deleteAlbum(String userId, String albumId) async {
+    var url = remoteConfig.getString(url_functions);
 
-  //   var _options = await remoteClientRepository.getOptions();
+    await remoteClientRepository
+        .post('$url/deleteAlbum', data: {
+      'albumID': albumId,
+      'id': userId,
+    });
 
-  //   await remoteClientRepository.dio
-  //       .post('$url/deleteTimeLineItem', data: {
-  //     'timelineID': timelineID,
-  //     'postID': postID,
-  //   }, options: _options);
-  // }
+    return true;
+  }
 }

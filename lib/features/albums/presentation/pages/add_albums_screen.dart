@@ -169,7 +169,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
 
   Widget _buildActionButton() {
     if (!isNewItem) {
-      return _buildActionButtonConfig(AppIcons.trash, remove);
+      return _buildActionButtonConfig(AppIcons.ellipsis_h, options);
     }
 
     return _buildActionButtonConfig(AppIcons.check, save);
@@ -236,9 +236,35 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
+  void options() {
+    showMaterialModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Editar álbum',
+            iconData: AppIcons.edit,
+            onTap: () {
+              _actionButtoncontroller.stop();
+            },
+          ),
+          CustomItemModalFit(
+            text: 'Deletar álbum',
+            iconData: AppIcons.trash,
+            onTap: () {
+              remove();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   void remove() {
     showMaterialModalBottomSheet(
       context: context,
+      isDismissible: false,
       builder: (context) => CustomModalFit(
         items: [
           CustomItemModalFit(
@@ -251,7 +277,9 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
           CustomItemModalFit(
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
-            onTap: () {},
+            onTap: () {
+              _addAlbumCubit.deleteAlbum(widget.album);
+            },
           ),
         ],
       ),

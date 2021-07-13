@@ -1,11 +1,14 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
+import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/package_view/blocs/default_state.dart';
 import 'package:mozin/package_view/utils.dart';
@@ -15,11 +18,40 @@ part 'add_album_state.dart';
 class AddAlbumCubit extends Cubit<AddAlbumState> {
   AddAlbumCubit({
     @required WrapperMediaService wrapperMediaService,
+    @required AlbumsRepository albumsRepository,
+    @required UserWrapper userWrapper,
   })  : assert(wrapperMediaService != null),
         _wrapperMediaService = wrapperMediaService,
+        assert(albumsRepository != null),
+        _albumsRepository = albumsRepository,
+        assert(userWrapper != null),
+        _userWrapper = userWrapper,
         super(AddAlbumState.initial());
 
   final WrapperMediaService _wrapperMediaService;
+  final AlbumsRepository _albumsRepository;
+  final UserWrapper _userWrapper;
+
+  void deleteAlbum(AlbumItemModel item) async {
+    var _user = _userWrapper.getUser;
+    Either<bool, Exception> _response = await _albumsRepository.deleteAlbum(_user.id, item.id);
+
+    _response.fold((success) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: false,
+        isSuccess: true,
+        errorMessage: "Ops... houve um erro. Tente novamente"
+      ));
+    }, (error) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+        errorMessage: "Ops... houve um erro. Tente novamente",
+        forceRefresh: StateUtils.generateRandomNumber(),
+      ));
+    });
+  }
 
   void setAlbum(AlbumItemModel album) {
     emit(state.copyWith(album: album, allImages: album.medias));

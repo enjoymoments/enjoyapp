@@ -32,4 +32,14 @@ class AlbumsRepositoryImpl implements AlbumsRepository {
       return Right<List<AlbumItemModel>, Exception>(e);
     }
   }
+
+  @override
+  Future<Either<bool, Exception>> deleteAlbum(String userId, String albumId) async {
+    try {
+      var response = await remoteDataSource.deleteAlbum(userId, albumId);
+      return Left<bool, Exception>(response);
+    } on dynamic catch (e) {
+      return Right<bool, Exception>(e);
+    }
+  }
 }
