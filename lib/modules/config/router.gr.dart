@@ -10,8 +10,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/albums/data/models/album_item_model.dart';
-import '../../features/albums/presentation/pages/add_albums_screen.dart';
+import '../../features/albums/presentation/pages/add_album_screen.dart';
 import '../../features/albums/presentation/pages/albums_screen.dart';
+import '../../features/albums/presentation/pages/edit_album_screen.dart';
 import '../../features/calendar/data/models/task_calendar_model.dart';
 import '../../features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
@@ -56,7 +57,8 @@ class Routes {
   static const String add_activity_screen = '/add-activity-screen';
   static const String feedback_screen = '/feedback-screen';
   static const String albums_screen = '/albums-screen';
-  static const String add_albums_screen = '/add-albums-screen';
+  static const String add_albums_screen = '/add-album-screen';
+  static const String edit_albums_screen = '/edit-album-screen';
   static const String success_screen = '/custom-success-screen';
   static const String configuration_screen = '/configuration-screen';
   static const String home_partial = '/home-partial';
@@ -80,6 +82,7 @@ class Routes {
     feedback_screen,
     albums_screen,
     add_albums_screen,
+    edit_albums_screen,
     success_screen,
     configuration_screen,
     home_partial,
@@ -109,7 +112,8 @@ class Router extends RouterBase {
     RouteDef(Routes.add_activity_screen, page: AddActivityScreen),
     RouteDef(Routes.feedback_screen, page: FeedbackScreen),
     RouteDef(Routes.albums_screen, page: AlbumsScreen),
-    RouteDef(Routes.add_albums_screen, page: AddAlbumsScreen),
+    RouteDef(Routes.add_albums_screen, page: AddAlbumScreen),
+    RouteDef(Routes.edit_albums_screen, page: EditAlbumScreen),
     RouteDef(Routes.success_screen, page: CustomSuccessScreen),
     RouteDef(Routes.configuration_screen, page: ConfigurationScreen),
     RouteDef(Routes.home_partial, page: HomePartial),
@@ -240,12 +244,16 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    AddAlbumsScreen: (data) {
-      final args = data.getArgs<AddAlbumsScreenArguments>(
-        orElse: () => AddAlbumsScreenArguments(),
-      );
+    AddAlbumScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddAlbumsScreen(
+        builder: (context) => const AddAlbumScreen(),
+        settings: data,
+      );
+    },
+    EditAlbumScreen: (data) {
+      final args = data.getArgs<EditAlbumScreenArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => EditAlbumScreen(
           key: args.key,
           album: args.album,
         ),
@@ -356,11 +364,11 @@ class AddActivityScreenArguments {
       @required this.addCalendarCubit});
 }
 
-/// AddAlbumsScreen arguments holder class
-class AddAlbumsScreenArguments {
+/// EditAlbumScreen arguments holder class
+class EditAlbumScreenArguments {
   final Key key;
   final AlbumItemModel album;
-  AddAlbumsScreenArguments({this.key, this.album});
+  EditAlbumScreenArguments({this.key, @required this.album});
 }
 
 /// CustomSuccessScreen arguments holder class

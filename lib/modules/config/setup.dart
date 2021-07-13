@@ -13,6 +13,7 @@ import 'package:mozin/features/albums/data/repositories/albums_repository_impl.d
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
 import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
+import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
 import 'package:mozin/features/calendar/data/datasources/activity_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/repositories/activity_repository_impl.dart';
@@ -246,7 +247,10 @@ void _registerBlocs() {
       albumsRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<AddAlbumCubit>(
-      () => AddAlbumCubit(wrapperMediaService: getItInstance(), albumsRepository: getItInstance(), userWrapper: getItInstance()));
+      () => AddAlbumCubit(wrapperMediaService: getItInstance()));
+
+  getItInstance.registerFactory<EditAlbumCubit>(
+      () => EditAlbumCubit(wrapperMediaService: getItInstance(), albumsRepository: getItInstance(), userWrapper: getItInstance()));
 
   getItInstance.registerFactory<FeedbackCubit>(() => FeedbackCubit(
       feedbackRepository: getItInstance(), userWrapper: getItInstance()));

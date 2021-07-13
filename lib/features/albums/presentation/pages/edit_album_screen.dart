@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
-import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
+import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
@@ -19,32 +18,32 @@ import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/custom_text_form_field.dart';
-import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/rounded_loading_button.dart';
+import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
-class AddAlbumsScreen extends StatefulWidget {
-  const AddAlbumsScreen({Key key, this.album}) : super(key: key);
+class EditAlbumScreen extends StatefulWidget {
+  const EditAlbumScreen({Key key, @required this.album}) : super(key: key);
 
   final AlbumItemModel album;
 
   @override
-  _AddAlbumsScreenState createState() => _AddAlbumsScreenState();
+  _EditAlbumScreenState createState() => _EditAlbumScreenState();
 }
 
-class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
+class _EditAlbumScreenState extends State<EditAlbumScreen> {
   TextEditingController _titleController;
   RoundedLoadingButtonController _actionButtoncontroller;
 
-  AddAlbumCubit _addAlbumCubit;
+  EditAlbumCubit _editAlbumCubit;
   int _currentIndex = 0;
   List<BaseImageModel> _images;
 
-  bool get isNewItem => widget.album == null;
+  bool get readOnlyMode => true;
 
   @override
   void initState() {
-    _addAlbumCubit = getItInstance<AddAlbumCubit>();
+    _editAlbumCubit = getItInstance<EditAlbumCubit>();
 
     _actionButtoncontroller = RoundedLoadingButtonController();
     _images = [];
@@ -58,7 +57,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
 
   @override
   void dispose() {
-    _addAlbumCubit.close();
+    _editAlbumCubit.close();
     _titleController.dispose();
     super.dispose();
   }
@@ -68,15 +67,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     return CustomScaffold(
       child: _buildBody(),
       appBar: _buildAppBar(),
-      bottomNavigationBar: isNewItem ? _buildBottomMenu() : null,
+      bottomNavigationBar: null,
     );
-  }
-
-  void initValues() {
-    if (!isNewItem) {
-      _titleController.text = widget.album.titleAlbum;
-      _addAlbumCubit.setAlbum(widget.album);
-    }
   }
 
   Widget _buildAppBar() {
@@ -84,13 +76,12 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
       title: 'Criar Álbum',
       context: context,
       onPressedBack: () {
-        if (isNewItem &&
-            (_images.length > 0 ||
-                (_titleController.text != null &&
-                    _titleController.text.isNotEmpty))) {
-          _discardPost(context);
-          return;
-        }
+        // if (_images.length > 0 ||
+        //     (_titleController.text != null &&
+        //         _titleController.text.isNotEmpty)) {
+        //   _discardPost(context);
+        //   return;
+        // }
 
         Navigator.of(context).pop();
       },
@@ -101,8 +92,8 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<AddAlbumCubit, AddAlbumState>(
-      cubit: _addAlbumCubit,
+    return BlocConsumer<EditAlbumCubit, EditAlbumState>(
+      cubit: _editAlbumCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 
@@ -139,12 +130,12 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
-  Widget _buildAlbumImages(AddAlbumState state) {
+  Widget _buildAlbumImages(EditAlbumState state) {
     if (state.album != null && state.album.medias.length > 0) {
       return ImageItems(
         sourceType: SourceTypeEnum.Url,
         onRemoveCallback: (model) {
-          _addAlbumCubit.mapRemoveMediaToState(model);
+          _editAlbumCubit.mapRemoveMediaToState(model);
         },
         images: state.album.medias.toGalleryImages(),
       );
@@ -153,12 +144,12 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     return SizedBox.shrink();
   }
 
-  Widget _buildNewImages(AddAlbumState state) {
+  Widget _buildNewImages(EditAlbumState state) {
     if (state.newImages.length > 0) {
       return ImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
-          _addAlbumCubit.mapRemoveMediaToState(model);
+          _editAlbumCubit.mapRemoveMediaToState(model);
         },
         images: state.newImages,
       );
@@ -168,11 +159,11 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
   }
 
   Widget _buildActionButton() {
-    if (!isNewItem) {
-      return _buildActionButtonConfig(AppIcons.ellipsis_h, options);
+    if (readOnlyMode) {
+      return _buildActionButtonConfig(AppIcons.ellipsis_h, _options);
     }
 
-    return _buildActionButtonConfig(AppIcons.check, save);
+    return _buildActionButtonConfig(AppIcons.check, _save);
   }
 
   Widget _buildActionButtonConfig(IconData icon, void Function() callback) {
@@ -212,31 +203,31 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
-  Widget _buildBottomMenu() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _currentIndex,
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
+  // Widget _buildBottomMenu() {
+  //   return BottomNavigationBar(
+  //     type: BottomNavigationBarType.fixed,
+  //     currentIndex: _currentIndex,
+  //     onTap: (index) {
+  //       setState(() {
+  //         _currentIndex = index;
+  //       });
 
-        _addAlbumCubit.mapOpenCameraToState(ImageSource.values[index]);
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: CustomIcon(icon: AppIcons.camera),
-          title: new Text('Câmera'),
-        ),
-        BottomNavigationBarItem(
-          icon: CustomIcon(icon: AppIcons.film),
-          title: new Text('Galeria'),
-        ),
-      ],
-    );
-  }
+  //       _addAlbumCubit.mapOpenCameraToState(ImageSource.values[index]);
+  //     },
+  //     items: [
+  //       BottomNavigationBarItem(
+  //         icon: CustomIcon(icon: AppIcons.camera),
+  //         title: new Text('Câmera'),
+  //       ),
+  //       BottomNavigationBarItem(
+  //         icon: CustomIcon(icon: AppIcons.film),
+  //         title: new Text('Galeria'),
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  void options() {
+  void _options() {
     showMaterialModalBottomSheet(
       context: context,
       isDismissible: false,
@@ -253,7 +244,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
             text: 'Deletar álbum',
             iconData: AppIcons.trash,
             onTap: () {
-              remove();
+              _remove();
             },
           ),
         ],
@@ -261,7 +252,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
-  void remove() {
+  void _remove() {
     showMaterialModalBottomSheet(
       context: context,
       isDismissible: false,
@@ -278,12 +269,17 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              _addAlbumCubit.deleteAlbum(widget.album);
+              _editAlbumCubit.deleteAlbum(widget.album);
             },
           ),
         ],
       ),
     );
+  }
+
+  void initValues() {
+    _titleController.text = widget.album.titleAlbum;
+    _editAlbumCubit.setAlbum(widget.album);
   }
 
   void _discardPost(BuildContext context) async {
@@ -294,8 +290,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
           CustomItemModalFit(
             text: 'Não quero descartar',
             iconData: AppIcons.ad,
-            onTap: () {
-            },
+            onTap: () {},
           ),
           CustomItemModalFit(
             text: 'Sim, quero descartar',
@@ -309,7 +304,7 @@ class _AddAlbumsScreenState extends State<AddAlbumsScreen> {
     );
   }
 
-  void save() {
-    _addAlbumCubit.mapSaveToState(_titleController.text);
+  void _save() {
+    _editAlbumCubit.mapSaveToState(_titleController.text);
   }
 }

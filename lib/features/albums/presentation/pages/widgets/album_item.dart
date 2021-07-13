@@ -16,8 +16,8 @@ class AlbumItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.add_albums_screen,
-            arguments: AddAlbumsScreenArguments(album: album));
+        ExtendedNavigator.of(context).push(Routes.edit_albums_screen,
+            arguments: EditAlbumScreenArguments(album: album));
       },
       child: CachedNetworkImage(
         imageUrl: album.medias[0].url,

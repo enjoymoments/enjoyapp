@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/albums/presentation/pages/add_albums_screen.dart';
+import 'package:mozin/features/albums/presentation/pages/add_album_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
+import 'package:mozin/features/albums/presentation/pages/edit_album_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_activity_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_calendar_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
@@ -39,7 +40,8 @@ import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen
     MaterialRoute(name: 'add_activity_screen', page: AddActivityScreen,),
     MaterialRoute(name: 'feedback_screen', page: FeedbackScreen,),
     MaterialRoute(name: 'albums_screen', page: AlbumsScreen,),
-    MaterialRoute(name: 'add_albums_screen', page: AddAlbumsScreen,),
+    MaterialRoute(name: 'add_albums_screen', page: AddAlbumScreen,),
+    MaterialRoute(name: 'edit_albums_screen', page: EditAlbumScreen,),
     MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
     MaterialRoute(name: 'configuration_screen', page: ConfigurationScreen,),
     MaterialRoute(name: 'home_partial', page: HomePartial,),
