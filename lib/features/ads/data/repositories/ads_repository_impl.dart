@@ -91,7 +91,7 @@ class AdsRepositoryImpl implements AdsRepository {
     if (Platform.isAndroid) {
       return 'ca-app-pub-5039935894572150/4110356931';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-5039935894572150/7537825425';
+      return 'ca-app-pub-5039935894572150/1152090839';
     }
 
     return null;
