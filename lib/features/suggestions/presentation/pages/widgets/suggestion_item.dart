@@ -43,7 +43,7 @@ class SuggestionItem extends StatelessWidget {
     );
   }
 
-    Widget _buildDislike(BuildContext context) {
+  Widget _buildDislike(BuildContext context) {
     return InkWell(
       onTap: () {},
       child: Row(
