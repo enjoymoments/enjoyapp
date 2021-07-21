@@ -78,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCardAlbuns(_autenticated),
               _buildCardSuggestions(),
               _buildCardFavorites(_autenticated),
+              _buildCardSites(_autenticated),
             ],
           ),
         ),
@@ -200,6 +201,19 @@ class _HomeScreenState extends State<HomeScreen> {
       routeName: Routes.suggestions_screen,
       name: 'Sugestões',
       disabled: false,
+    );
+  }
+
+    Widget _buildCardSites(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: true,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.broadcast_tower,
+        routeName: Routes.calendar_screen,
+        name: 'Sites',
+        disabled: true,
+      ),
     );
   }
 }
