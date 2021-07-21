@@ -13,7 +13,9 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -62,29 +64,62 @@ class _HomeScreenState extends State<HomeScreen> {
     final bool _autenticated = _userWrapper.authenticated;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildCardInvite(),
         _buildCardHelpMe(),
-        SpacerBox.v8,
+        SpacerBox.v16,
+        _buildPersonalSection(context, _autenticated),
+        SpacerBox.v16,
+        _buildAnotherSection(context, _autenticated),
+        SpacerBox.v16,
+        Center(
+          child: BannerAdWidget(
+            screenName: Routes.home_partial,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPersonalSection(BuildContext context, bool _autenticated) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Meu".title(context),
+        CustomDivider(),
         Container(
           width: SizeConfig.screenWidth,
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
               _buildCardCalendar(_autenticated),
-              _buildCardMusics(),
-              _buildCardSchedule(_autenticated),
               _buildCardAlbuns(_autenticated),
-              _buildCardSuggestions(),
               _buildCardFavorites(_autenticated),
-              _buildCardSites(_autenticated),
+              _buildCardSchedule(_autenticated),
             ],
           ),
         ),
-        SpacerBox.v16,
-        BannerAdWidget(
-          screenName: Routes.home_partial,
+      ],
+    );
+  }
+
+  Widget _buildAnotherSection(BuildContext context, bool _autenticated) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Outros".title(context),
+        CustomDivider(),
+        Container(
+          width: SizeConfig.screenWidth,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              _buildCardSuggestions(),
+              _buildCardMusics(),
+              _buildCardSites(_autenticated),
+            ],
+          ),
         ),
       ],
     );
@@ -204,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-    Widget _buildCardSites(bool autenticated) {
+  Widget _buildCardSites(bool autenticated) {
     return AbsorbPointer(
       absorbing: true,
       child: FeatureCard(

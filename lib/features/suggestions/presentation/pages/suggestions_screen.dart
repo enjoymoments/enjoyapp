@@ -8,7 +8,6 @@ import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class SuggestionsScreen extends StatefulWidget {
