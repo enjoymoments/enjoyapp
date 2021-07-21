@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCardMusics(),
               _buildCardSchedule(_autenticated),
               _buildCardAlbuns(_autenticated),
-              _buildCardRandom(_autenticated),
+              _buildCardSuggestions(),
               _buildCardFavorites(_autenticated),
             ],
           ),
@@ -193,16 +193,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardRandom(bool autenticated) {
-    return AbsorbPointer(
-      absorbing: true,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.random,
-        routeName: Routes.albums_screen,
-        name: 'Aleatório',
-        disabled: true,
-      ),
+  Widget _buildCardSuggestions() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.random,
+      routeName: Routes.suggestions_screen,
+      name: 'Sugestões',
+      disabled: false,
     );
   }
 }

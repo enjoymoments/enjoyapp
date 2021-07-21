@@ -58,6 +58,7 @@ import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart
 import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_open/cubit/gpsopen_cubit.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
+import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
 import 'package:mozin/features/time_line/data/repositories/time_line_repository_impl.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
@@ -273,6 +274,9 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<UnsyncCoupleCubit>(
       () => UnsyncCoupleCubit(userActionRepository: getItInstance()));    
+
+  getItInstance.registerFactory<SuggestionsCubit>(
+      () => SuggestionsCubit());    
 }
 
 void _registerSingletonRepositories() {
