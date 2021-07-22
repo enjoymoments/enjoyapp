@@ -78,7 +78,7 @@ extension Snackbar on BuildContext {
 
 extension Texts on String {
   Widget description(BuildContext context,
-          {double fontSize = 14,
+          {double fontSize = 18,
           TextAlign textAlign,
           int maxLines,
           Color color,
@@ -140,7 +140,7 @@ extension Texts on String {
   Widget label(
     BuildContext context, {
     bool withoutAutoSize = false,
-    double fontSize = 16,
+    double fontSize = 18,
     Color color,
     int maxLines = 2,
     double letterSpacing,
