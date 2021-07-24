@@ -16,10 +16,17 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
 
   final SuggestionsRepository _suggestionsRepository;
 
+  void remove(String id) {
+    _suggestionsRepository.removeSuggestions(
+        model: SuggestionsModel(id:id));
+        
+    getSuggestions();
+  }
+
   void save(String title, String description) {
     _suggestionsRepository.addSuggestion(
         model: SuggestionsModel(title: title, description: description));
-        
+
     emit(state.copyWith(
       isSuccess: true,
     ));

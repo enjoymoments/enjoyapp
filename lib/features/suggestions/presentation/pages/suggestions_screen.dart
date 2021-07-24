@@ -74,6 +74,7 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
                 itemCount: state.suggestions.length,
                 itemBuilder: (context, index) => SuggestionItem(
                   item: state.suggestions[index],
+                  suggestionsCubit: _suggestionsCubit,
                 ),
               );
             }

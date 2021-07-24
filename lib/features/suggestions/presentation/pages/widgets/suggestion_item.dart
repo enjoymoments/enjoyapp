@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
+import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/AppIcons.dart';
+import 'package:mozin/package_view/custom_font_size.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_item_modal_fit.dart';
 import 'package:mozin/package_view/custom_modal_fit.dart';
@@ -10,9 +12,14 @@ import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class SuggestionItem extends StatelessWidget {
-  const SuggestionItem({Key key, @required this.item}) : super(key: key);
+  const SuggestionItem({
+    Key key,
+    @required this.item,
+    @required this.suggestionsCubit,
+  }) : super(key: key);
 
   final SuggestionsModel item;
+  final SuggestionsCubit suggestionsCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +62,7 @@ class SuggestionItem extends StatelessWidget {
                 text: 'Deletar',
                 iconData: AppIcons.trash,
                 onTap: () {
+                  confirmRemove(context);
                 },
               ),
             ],
@@ -77,10 +85,10 @@ class SuggestionItem extends StatelessWidget {
         children: [
           CustomIcon(
             icon: AppIcons.thumbs_up,
-            size: 15,
+            size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.like.toString().label(context, fontSize: 16),
+          item.like.toString().label(context, fontSize: CustomFontSize.f16),
         ],
       ),
     );
@@ -93,10 +101,32 @@ class SuggestionItem extends StatelessWidget {
         children: [
           CustomIcon(
             icon: AppIcons.thumbs_down,
-            size: 15,
+            size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.dislike.toString().label(context, fontSize: 16),
+          item.dislike.toString().label(context, fontSize: CustomFontSize.f16),
+        ],
+      ),
+    );
+  }
+
+  void confirmRemove(BuildContext context) {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero deletar',
+            iconData: AppIcons.ad,
+            onTap: () {},
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero deletar',
+            iconData: AppIcons.trash,
+            onTap: () {
+              suggestionsCubit.remove(item.id);
+            },
+          ),
         ],
       ),
     );
