@@ -43,6 +43,7 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
         description
         like
         dislike
+        moreOptionsEnable
       }
     }
     ''';

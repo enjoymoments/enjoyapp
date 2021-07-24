@@ -52,6 +52,10 @@ class SuggestionItem extends StatelessWidget {
   }
 
   Widget _buildOptions(BuildContext context) {
+    if (!item.moreOptionsEnable) {
+      return SizedBox.shrink();
+    }
+
     return InkWell(
       onTap: () {
         showMaterialModalBottomSheet(

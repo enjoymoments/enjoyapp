@@ -7,12 +7,14 @@ class SuggestionsModel extends Suggestions {
     String id,
     int like,
     int dislike,
+    bool moreOptionsEnable,
   }) : super(
           title: title,
           description: description,
           id: id,
           like: like,
           dislike: dislike,
+          moreOptionsEnable: moreOptionsEnable,
         );
 
   factory SuggestionsModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class SuggestionsModel extends Suggestions {
       description: json['description'],
       like: json['like'],
       dislike: json['dislike'],
+      moreOptionsEnable: json['moreOptionsEnable'],
     );
   }
 
