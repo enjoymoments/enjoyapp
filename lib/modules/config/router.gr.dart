@@ -31,6 +31,7 @@ import '../../features/places/data/models/place_model.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/screen_manager.dart';
+import '../../features/suggestions/presentation/pages/add_suggestion_screen.dart';
 import '../../features/suggestions/presentation/pages/suggestions_screen.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
 import '../../features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
@@ -67,6 +68,7 @@ class Routes {
   static const String invite_screen = '/invite-screen';
   static const String unsync_couple_screen = '/unsync-couple-screen';
   static const String suggestions_screen = '/suggestions-screen';
+  static const String add_suggestions_screen = '/add-suggestion-screen';
   static const all = <String>{
     intro_screen,
     screen_manager_screen,
@@ -92,6 +94,7 @@ class Routes {
     invite_screen,
     unsync_couple_screen,
     suggestions_screen,
+    add_suggestions_screen,
   };
 }
 
@@ -124,6 +127,7 @@ class Router extends RouterBase {
     RouteDef(Routes.invite_screen, page: InviteScreen),
     RouteDef(Routes.unsync_couple_screen, page: UnsyncCoupleScreen),
     RouteDef(Routes.suggestions_screen, page: SuggestionsScreen),
+    RouteDef(Routes.add_suggestions_screen, page: AddSuggestionScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -311,6 +315,12 @@ class Router extends RouterBase {
     SuggestionsScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SuggestionsScreen(),
+        settings: data,
+      );
+    },
+    AddSuggestionScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddSuggestionScreen(),
         settings: data,
       );
     },

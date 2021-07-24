@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_item.dart';
 import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_loading.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
+import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -91,6 +94,14 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
       title: 'Sugestões',
       context: context,
       onPressedBack: () => ExtendedNavigator.of(context).pop(),
+      actions: [
+        IconButton(
+          icon: CustomIcon(icon: AppIcons.plus),
+          onPressed: () {
+            ExtendedNavigator.of(context).push(Routes.add_suggestions_screen);
+          },
+        ),
+      ]
     );
   }
 
