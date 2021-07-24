@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_item.dart';
+import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_container.dart';
 import 'package:mozin/package_view/custom_divider.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/spacer_box.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class SuggestionsScreen extends StatefulWidget {
   @override
@@ -23,7 +25,7 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
 
   @override
   void initState() {
-    _suggestionsCubit = getItInstance<SuggestionsCubit>();
+    _suggestionsCubit = getItInstance<SuggestionsCubit>()..getSuggestions();
     super.initState();
   }
 
@@ -48,17 +50,39 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
         key: _refreshIndicatorKey,
         color: Theme.of(context).primaryColor,
         onRefresh: () async {},
-        child: BlocBuilder<SuggestionsCubit, SuggestionsState>(
+        child: BlocConsumer<SuggestionsCubit, SuggestionsState>(
           cubit: _suggestionsCubit,
+          listener: (BuildContext consumerContext, SuggestionsState state) {
+            if (state.isError) {
+              consumerContext.showSnackBar(
+                  state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
+            }
+          },
           builder: (BuildContext context, SuggestionsState state) {
-            return ListView.separated(
-              separatorBuilder: (context, index) => _buildSeparator(),
-              itemCount: 20,
-              itemBuilder: (context, index) => SuggestionItem(),
-            );
+            if (state.isLoading) {
+              return SuggestionLoading();
+            }
+
+            if (state.suggestions.length > 0) {
+              return ListView.separated(
+                separatorBuilder: (context, index) => _buildSeparator(),
+                itemCount: state.suggestions.length,
+                itemBuilder: (context, index) => SuggestionItem(
+                  item: state.suggestions[index],
+                ),
+              );
+            }
+
+            return _buildEmpty();
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildEmpty() {
+    return Center(
+      child: "Ops...\n não encontramos nada".labelIntro(context),
     );
   }
 

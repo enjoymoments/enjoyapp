@@ -7,6 +7,7 @@ class SuggestionsState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
+    this.suggestions,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -15,6 +16,8 @@ class SuggestionsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
+  final List<SuggestionsModel> suggestions;
+
   factory SuggestionsState.initial() {
     return SuggestionsState(
       isSuccess: false,
@@ -22,6 +25,7 @@ class SuggestionsState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
+      suggestions: [],
     );
   }
 
@@ -31,6 +35,7 @@ class SuggestionsState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
+    List<SuggestionsModel> suggestions,
   }) {
     return SuggestionsState(
       isLoading: isLoading ?? this.isLoading,
@@ -38,6 +43,7 @@ class SuggestionsState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
+      suggestions: suggestions ?? this.suggestions,
     );
   }
 
@@ -48,5 +54,6 @@ class SuggestionsState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
+        suggestions,
       ];
 }

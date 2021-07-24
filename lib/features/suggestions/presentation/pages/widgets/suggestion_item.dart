@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/extension.dart';
 import 'package:mozin/package_view/spacer_box.dart';
 
 class SuggestionItem extends StatelessWidget {
-  const SuggestionItem({Key key}) : super(key: key);
+  const SuggestionItem({Key key, @required this.item}) : super(key: key);
+
+  final SuggestionsModel item;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        'item.message'.title(context),
+        item.title.title(context),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            'item.dateCreationFormatted'.description(context),
+            item.description.description(context),
             Row(
               children: [
                 _buildLike(context),
@@ -37,7 +40,7 @@ class SuggestionItem extends StatelessWidget {
         children: [
           CustomIcon(icon: AppIcons.thumbs_up),
           SpacerBox.h5,
-          "12".label(context),
+          item.like.toString().label(context),
         ],
       ),
     );
@@ -50,7 +53,7 @@ class SuggestionItem extends StatelessWidget {
         children: [
           CustomIcon(icon: AppIcons.thumbs_down),
           SpacerBox.h5,
-          "12".label(context),
+          item.dislike.toString().label(context),
         ],
       ),
     );
