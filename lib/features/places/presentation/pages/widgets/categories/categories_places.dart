@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_multiple_widget.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/sub_categories_places.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
-import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/custom_quadrant.dart';
@@ -60,7 +58,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
       builder: (context, state) {
         if (state.places.length > 0) {
           return Container(
-            height: SizeConfig.sizeByPixel(30),
+            height: SizeConfig.sizeByPixel(35),
             child: ListView.separated(
               separatorBuilder: (context, index) => SpacerBox.h8,
               scrollDirection: Axis.horizontal,

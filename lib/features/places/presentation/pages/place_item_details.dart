@@ -23,13 +23,13 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/pho
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/package_view/AppIcons.dart';
 import 'package:mozin/package_view/custom_app_bar.dart';
 import 'package:mozin/package_view/custom_border.dart';
 import 'package:mozin/package_view/custom_container.dart';
+import 'package:mozin/package_view/custom_font_size.dart';
 import 'package:mozin/package_view/custom_icon.dart';
 import 'package:mozin/package_view/custom_scaffold.dart';
 import 'package:mozin/package_view/extension.dart';
@@ -261,6 +261,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
               unselectedLabelColor: Theme.of(context).iconTheme.color,
               isScrollable: true,
               tabs: _tabsTitle,
+              labelStyle: TextStyle(fontSize: CustomFontSize.f16),
             ),
           ),
         ),

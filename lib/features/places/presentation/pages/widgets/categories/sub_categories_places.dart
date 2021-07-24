@@ -3,6 +3,7 @@ import 'package:mozin/features/places/data/models/places_sub_category_model.dart
 import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/custom_border.dart';
+import 'package:mozin/package_view/custom_font_size.dart';
 
 class SubCategoriesPlaces extends StatefulWidget {
   const SubCategoriesPlaces({
@@ -65,6 +66,7 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
           unselectedLabelColor: Theme.of(context).iconTheme.color,
           isScrollable: true,
           tabs: widget.tabstitle,
+          labelStyle: TextStyle(fontSize: CustomFontSize.f16),
         ),
       ),
     );
