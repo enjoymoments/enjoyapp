@@ -77,6 +77,17 @@ extension Snackbar on BuildContext {
 }
 
 extension Texts on String {
+  Widget iconWithLabel(
+    BuildContext context, {
+    Color color,
+    double fontSize = 18,
+  }) {
+    return Text(
+      this,
+      style: TextStyle(color: color, fontSize: fontSize),
+    );
+  }
+
   Widget description(BuildContext context,
           {double fontSize = 18,
           TextAlign textAlign,
@@ -89,7 +100,7 @@ extension Texts on String {
         this,
         textAlign: textAlign,
         maxLines: maxLines,
-        style: Theme.of(context).textTheme.headline3.copyWith(
+        style: Theme.of(context).textTheme.headline4.copyWith(
             fontSize: fontSize,
             decoration: decoration,
             color: color ?? Theme.of(context).textTheme.headline5.color,
@@ -119,7 +130,7 @@ extension Texts on String {
 
   Widget title(
     BuildContext context, {
-    double fontSize,
+    double fontSize = 22,
     Color color,
     int maxLines,
     double letterSpacing,
@@ -128,7 +139,7 @@ extension Texts on String {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline6.copyWith(
+      style: Theme.of(context).textTheme.headline5.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,
@@ -140,7 +151,7 @@ extension Texts on String {
   Widget label(
     BuildContext context, {
     bool withoutAutoSize = false,
-    double fontSize = 18,
+    double fontSize = 20,
     Color color,
     int maxLines = 2,
     double letterSpacing,

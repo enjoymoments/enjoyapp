@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/package_view/extension.dart';
 
 class FABBottomAppBarItem {
   FABBottomAppBarItem({this.iconData, this.text});
@@ -133,10 +134,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(item.iconData, color: color, size: widget.iconSize),
-                Text(
-                  item.text,
-                  style: TextStyle(color: color),
-                )
+                item.text.iconWithLabel(context, color:color),
               ],
             ),
           ),

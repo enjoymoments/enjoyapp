@@ -147,11 +147,11 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
       items: [
         BottomNavigationBarItem(
           icon: CustomIcon(icon: AppIcons.camera),
-          title: new Text('Câmera'),
+          title: 'Câmera'.iconWithLabel(context),
         ),
         BottomNavigationBarItem(
           icon: CustomIcon(icon: AppIcons.film),
-          title: new Text('Galeria'),
+          title: 'Galeria'.iconWithLabel(context),
         ),
       ],
     );
