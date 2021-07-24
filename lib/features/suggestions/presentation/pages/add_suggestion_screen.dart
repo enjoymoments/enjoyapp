@@ -27,6 +27,7 @@ class AddSuggestionScreen extends StatefulWidget {
 
 class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   TextEditingController _titleController;
+  TextEditingController _descriptionController;
   RoundedLoadingButtonController _actionButtoncontroller;
   SuggestionsCubit _suggestionsCubit;
 
@@ -37,6 +38,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
     _actionButtoncontroller = RoundedLoadingButtonController();
 
     _titleController = TextEditingController();
+    _descriptionController = TextEditingController();
 
     super.initState();
   }
@@ -45,6 +47,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   void dispose() {
     _suggestionsCubit.close();
     _titleController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -92,12 +95,20 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
             CustomTextFormField(
               controller: _titleController,
               textInputType: TextInputType.visiblePassword,
-              hintText: 'Título do álbum',
-              labelText: 'Título do álbum',
+              hintText: 'Título',
+              labelText: 'Título',
               maxLines: 1,
               validate: (String value) {},
             ),
             SpacerBox.v16,
+            CustomTextFormField(
+              controller: _descriptionController,
+              textInputType: TextInputType.visiblePassword,
+              hintText: 'Descrição',
+              labelText: 'Descrição',
+              maxLines: 20,
+              validate: (String value) {},
+            ),
           ],
         ),
       ),
@@ -139,7 +150,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   }
 
   void _save() {
-    //_addAlbumCubit.mapSaveToState(_titleController.text);
+    _suggestionsCubit.save(_titleController.text, _descriptionController.text);
   }
 
   void _discardPost(BuildContext context) async {

@@ -16,28 +16,36 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
 
   final SuggestionsRepository _suggestionsRepository;
 
+  void save(String title, String description) {
+    _suggestionsRepository.addSuggestion(
+        model: SuggestionsModel(title: title, description: description));
+        
+    emit(state.copyWith(
+      isSuccess: true,
+    ));
+  }
+
   void getSuggestions() async {
+    emit(state.copyWith(
+      isLoading: true,
+    ));
+
+    Either<List<SuggestionsModel>, Exception> _response =
+        await _suggestionsRepository.getSuggestions();
+
+    _response.fold((model) {
       emit(state.copyWith(
-        isLoading: true,
+        isLoading: false,
+        isError: false,
+        isSuccess: true,
+        suggestions: model,
       ));
-
-      Either<List<SuggestionsModel>, Exception> _response =
-          await _suggestionsRepository.getSuggestions();
-
-      _response.fold((model) {
-        emit(state.copyWith(
-          isLoading: false,
-          isError: false,
-          isSuccess: true,
-          suggestions: model,
-        ));
-      }, (error) {
-        emit(state.copyWith(
-          isLoading: false,
-          isError: true,
-          isSuccess: false,
-        ));
-      });
-    
+    }, (error) {
+      emit(state.copyWith(
+        isLoading: false,
+        isError: true,
+        isSuccess: false,
+      ));
+    });
   }
 }

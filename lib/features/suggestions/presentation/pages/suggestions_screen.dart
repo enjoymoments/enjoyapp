@@ -52,7 +52,9 @@ class _SuggestionsScreenState extends State<SuggestionsScreen> {
       child: RefreshIndicator(
         key: _refreshIndicatorKey,
         color: Theme.of(context).primaryColor,
-        onRefresh: () async {},
+        onRefresh: () async {
+          _suggestionsCubit.getSuggestions();
+        },
         child: BlocConsumer<SuggestionsCubit, SuggestionsState>(
           cubit: _suggestionsCubit,
           listener: (BuildContext consumerContext, SuggestionsState state) {
