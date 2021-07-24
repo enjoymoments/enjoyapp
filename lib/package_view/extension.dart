@@ -80,7 +80,7 @@ extension Texts on String {
   Widget iconWithLabel(
     BuildContext context, {
     Color color,
-    double fontSize = 18,
+    double fontSize = 16,
   }) {
     return Text(
       this,
