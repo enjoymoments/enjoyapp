@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
+import 'package:mozin/features/ads/domain/repositories/ads_banner_repository.dart';
 import 'package:mozin/modules/config/is_debug_mode.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
-class AdsRepositoryImpl implements AdsRepository {
+class AdsBannerRepositoryImpl implements AdsBannerRepository {
   Map<String, List<BannerAd>> _adsByScreen = {};
 
   @override
