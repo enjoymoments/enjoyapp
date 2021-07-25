@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
+import 'package:mozin/package_view/custom_font_size.dart';
 
 extension NavigatorStateExtension on ExtendedNavigatorState {
   void pushNamedIfNotCurrent(String routeName, {Object arguments}) {
@@ -80,7 +81,7 @@ extension Texts on String {
   Widget iconWithLabel(
     BuildContext context, {
     Color color,
-    double fontSize = 16,
+    double fontSize = CustomFontSize.f16,
   }) {
     return Text(
       this,
@@ -89,7 +90,7 @@ extension Texts on String {
   }
 
   Widget description(BuildContext context,
-          {double fontSize = 18,
+          {double fontSize = CustomFontSize.f18,
           TextAlign textAlign,
           int maxLines,
           Color color,
@@ -110,7 +111,7 @@ extension Texts on String {
 
   Widget date(
     BuildContext context, {
-    double fontSize = 13,
+    double fontSize = CustomFontSize.f13,
     Color color,
     int maxLines,
     double letterSpacing,
@@ -130,7 +131,7 @@ extension Texts on String {
 
   Widget title(
     BuildContext context, {
-    double fontSize = 22,
+    double fontSize = CustomFontSize.f22,
     Color color,
     int maxLines,
     double letterSpacing,
@@ -151,7 +152,7 @@ extension Texts on String {
   Widget label(
     BuildContext context, {
     bool withoutAutoSize = false,
-    double fontSize = 20,
+    double fontSize = CustomFontSize.f20,
     Color color,
     int maxLines = 2,
     double letterSpacing,

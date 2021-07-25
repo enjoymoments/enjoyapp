@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/package_view/custom_font_size.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -9,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     @required this.textInputType,
     this.controller,
     this.maxLines,
+    this.maxLength = 100,
   }) : super(key: key);
 
   final Function(String) validate;
@@ -17,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType textInputType;
   final int maxLines;
   final TextEditingController controller;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +27,14 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: textInputType,
       maxLines: maxLines,
+      maxLength: maxLength,
+      style: TextStyle(fontSize: CustomFontSize.f20),
       decoration: InputDecoration(
         hintText: hintText,
+        counterStyle: TextStyle(color: Theme.of(context).primaryColor),
         labelText: labelText,
         labelStyle: TextStyle(
-          fontSize: 17,
+          fontSize: CustomFontSize.f22,
         ),
         fillColor: Theme.of(context).backgroundColor,
         filled: true,

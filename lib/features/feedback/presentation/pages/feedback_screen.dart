@@ -138,7 +138,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               textInputType: TextInputType.text,
               hintText: 'Diga lá',
               labelText: 'Diga lá',
-              maxLines: 18,
+              maxLines: 10,
               validate: (String value) => null,
             ),
           ],
