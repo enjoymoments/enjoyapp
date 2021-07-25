@@ -38,15 +38,16 @@ class SuggestionItem extends StatelessWidget {
             Expanded(child: item.description.description(context)),
           ],
         ),
-        SpacerBox.v8,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildLike(context),
-            SpacerBox.h43,
-            _buildDislike(context),
-          ],
-        ),
+        //TODO:review this
+        // SpacerBox.v8,
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     _buildLike(context),
+        //     SpacerBox.h43,
+        //     _buildDislike(context),
+        //   ],
+        // ),
       ],
     );
   }
