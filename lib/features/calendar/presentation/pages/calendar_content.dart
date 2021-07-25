@@ -87,24 +87,22 @@ class _CalendarContentState extends State<CalendarContent>
       },
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekdayStyle:
-            Theme.of(context).textTheme.headline5.copyWith(fontSize: 16),
+        weekdayStyle: Theme.of(context).textTheme.headline5,
         weekendStyle: Theme.of(context)
             .textTheme
             .headline5
-            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
+            .copyWith(color: Theme.of(context).primaryColor),
         holidayStyle: Theme.of(context)
             .textTheme
             .headline5
-            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
+            .copyWith(color: Theme.of(context).primaryColor),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekdayStyle:
-            Theme.of(context).textTheme.headline5.copyWith(fontSize: 16),
+        weekdayStyle: Theme.of(context).textTheme.headline5,
         weekendStyle: Theme.of(context)
             .textTheme
             .headline5
-            .copyWith(fontSize: 16, color: Theme.of(context).primaryColor),
+            .copyWith(color: Theme.of(context).primaryColor),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -121,7 +119,7 @@ class _CalendarContentState extends State<CalendarContent>
         ),
         titleTextStyle: Theme.of(context)
             .textTheme
-            .headline6
+            .headline5
             .copyWith(color: Theme.of(context).primaryColor),
       ),
       builders: CalendarBuilders(
