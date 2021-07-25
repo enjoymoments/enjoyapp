@@ -106,7 +106,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
               textInputType: TextInputType.visiblePassword,
               hintText: 'Descrição',
               labelText: 'Descrição',
-              maxLines: 20,
+              maxLines: 10,
               validate: (String value) {},
             ),
           ],
