@@ -27,7 +27,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   @override
   void initState() {
-    _categoriesPlacesAds = CategoriesPlacesAds()..init();
+    _categoriesPlacesAds = CategoriesPlacesAds();
     _categoriesPlacesCubit = getItInstance<CategoriesPlacesCubit>()
       ..loadPrimary(widget.places);
 
@@ -153,11 +153,53 @@ class AdsBannerConfig {
   int lastIndex;
 }
 
-class CategoriesPlacesAds {
-  Map<AdsBannerType, AdsBannerConfig> _ads = {};
+abstract class AdsBase {
+  Map<AdsBannerType, AdsBannerConfig> ads = {};
 
+  void init();
+  List<Widget> buildBanner();
+  List<Widget> buildPublisherBanner();
+
+  List<Widget> showAd(AdsBannerType type, int currentIndex) {
+    switch (type) {
+      case AdsBannerType.banner:
+        AdsBannerConfig _config = ads[AdsBannerType.banner];
+        if (_config.initialIndex == currentIndex ||
+            _config.lastIndex != null &&
+                ((_config.lastIndex == currentIndex) ||
+                    ((_config.lastIndex + _config.skipAt) == currentIndex))) {
+          _config.lastIndex = currentIndex;
+          return buildBanner();
+        }
+        break;
+      case AdsBannerType.publisherBanner:
+        AdsBannerConfig _config = ads[AdsBannerType.publisherBanner];
+
+        if (_config.initialIndex == currentIndex ||
+            _config.lastIndex != null &&
+                ((_config.lastIndex == currentIndex) ||
+                    ((_config.lastIndex + _config.skipAt) == currentIndex))) {
+          _config.lastIndex = currentIndex;
+
+          return buildPublisherBanner();
+        }
+        break;
+      default:
+        return [SpacerBox.v16];
+    }
+
+    return [SpacerBox.v16];
+  }
+}
+
+class CategoriesPlacesAds extends AdsBase {
+  CategoriesPlacesAds() {
+    init();
+  }
+
+  @override
   void init() {
-    _ads = {
+    ads = {
       AdsBannerType.banner: AdsBannerConfig(
         type: AdsBannerType.banner,
         initialIndex: 2,
@@ -171,45 +213,29 @@ class CategoriesPlacesAds {
     };
   }
 
-  List<Widget> showAd(AdsBannerType type, int currentIndex) {
-    if (type == AdsBannerType.banner) {
-      AdsBannerConfig _config = _ads[AdsBannerType.banner];
+  @override
+  List<Widget> buildBanner() {
+    return [
+      SpacerBox.v16,
+      BannerAdWidget(
+        screenName: Routes.search_places_screen,
+        itemCount: 1,
+        indexRender: 0,
+      ),
+      SpacerBox.v16,
+    ];
+  }
 
-      if (_config.initialIndex == currentIndex ||
-          _config.lastIndex != null &&
-              (_config.lastIndex + _config.skipAt) == currentIndex) {
-        _config.lastIndex = currentIndex;
-
-        return [
-          SpacerBox.v16,
-          BannerAdWidget(
-            screenName: Routes.search_places_screen,
-            itemCount: 1,
-            indexRender: 0,
-          ),
-          SpacerBox.v16,
-        ];
-      }
-    } else if (type == AdsBannerType.publisherBanner) {
-      AdsBannerConfig _config = _ads[AdsBannerType.publisherBanner];
-
-      if (_config.initialIndex == currentIndex ||
-          _config.lastIndex != null &&
-              (_config.lastIndex + _config.skipAt) == currentIndex) {
-        _config.lastIndex = currentIndex;
-
-        return [
-          SpacerBox.v16,
-          PublisherBannerAdWidget(
-            screenName: Routes.search_places_screen,
-            itemCount: 1,
-            indexRender: 0,
-          ),
-          SpacerBox.v16,
-        ];
-      }
-    }
-
-    return [SpacerBox.v16];
+  @override
+  List<Widget> buildPublisherBanner() {
+    return [
+      SpacerBox.v16,
+      PublisherBannerAdWidget(
+        screenName: Routes.search_places_screen,
+        itemCount: 1,
+        indexRender: 0,
+      ),
+      SpacerBox.v16,
+    ];
   }
 }
