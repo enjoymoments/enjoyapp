@@ -168,6 +168,7 @@ abstract class AdsBase {
             _config.lastIndex != null &&
                 ((_config.lastIndex == currentIndex) ||
                     ((_config.lastIndex + _config.skipAt) == currentIndex))) {
+                      
           _config.lastIndex = currentIndex;
           return buildBanner();
         }
@@ -179,8 +180,8 @@ abstract class AdsBase {
             _config.lastIndex != null &&
                 ((_config.lastIndex == currentIndex) ||
                     ((_config.lastIndex + _config.skipAt) == currentIndex))) {
-          _config.lastIndex = currentIndex;
 
+          _config.lastIndex = currentIndex;
           return buildPublisherBanner();
         }
         break;
