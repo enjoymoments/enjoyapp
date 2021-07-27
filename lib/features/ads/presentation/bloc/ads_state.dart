@@ -7,7 +7,8 @@ class AdsState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
-    this.ads,
+    this.banners,
+    this.publisherBanners,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -16,7 +17,8 @@ class AdsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<BannerAd> ads;
+  final List<BannerAd> banners;
+  final List<PublisherBannerAd> publisherBanners;
 
   factory AdsState.initial() {
     return AdsState(
@@ -25,7 +27,8 @@ class AdsState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      ads: List(),
+      banners: [],
+      publisherBanners: [],
     );
   }
 
@@ -35,7 +38,8 @@ class AdsState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
-    List<BannerAd> ads,
+    List<BannerAd> banners,
+    List<PublisherBannerAd> publisherBanners,
   }) {
     return AdsState(
       isLoading: isLoading ?? this.isLoading,
@@ -43,7 +47,8 @@ class AdsState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      ads: ads ?? this.ads,
+      banners: banners ?? this.banners,
+      publisherBanners: publisherBanners ?? this.publisherBanners,
     );
   }
 
@@ -54,6 +59,7 @@ class AdsState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
-        ads,
+        banners,
+        publisherBanners,
       ];
 }

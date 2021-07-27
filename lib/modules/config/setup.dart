@@ -5,8 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-import 'package:mozin/features/ads/data/repositories/ads_repository_impl.dart';
-import 'package:mozin/features/ads/domain/repositories/ads_repository.dart';
+import 'package:mozin/features/ads/data/repositories/ads_banner_repository_impl.dart';
+import 'package:mozin/features/ads/data/repositories/ads_publisher_banner_repository_impl.dart';
+import 'package:mozin/features/ads/domain/repositories/ads_banner_repository.dart';
+import 'package:mozin/features/ads/domain/repositories/ads_publisher_banner_repository.dart';
 import 'package:mozin/features/ads/presentation/bloc/ads_cubit.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
@@ -103,9 +105,18 @@ void setupRoot() {
     () => AuthenticationBloc(),
   );
 
-  root.registerLazySingleton<AdsRepository>(
-    () => AdsRepositoryImpl(),
+  root.registerLazySingleton<AdsBannerRepository>(
+    () => AdsBannerRepositoryImpl(),
   );
+
+  root.registerLazySingleton<AdsPublisherBannerRepository>(
+    () => AdsPublisherBannerRepositoryImpl(),
+  );
+
+  root.registerFactory<AdsCubit>(() => AdsCubit(
+        adsBannerRepository: root<AdsBannerRepository>(),
+        adsPublisherBannerRepository: root<AdsPublisherBannerRepository>(),
+      ));
 }
 
 Future setup() async {
@@ -145,7 +156,7 @@ void _setupRemoteClientRepository() {
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(
             dio: _dio,
-            url: 
+            url:
             //'http://enjoyapi.com.br/graphql/',
             //'https://localhost:5001/graphql',
             //'https://10.0.2.2:5001/graphql',
@@ -156,7 +167,8 @@ void _setupRemoteClientRepository() {
 
 void _registerSingletonModels() {
   getItInstance.registerSingleton<UserWrapper>(
-      UserWrapper(localStorageService: getItInstance())..assignment(UserAppModel.empty));
+      UserWrapper(localStorageService: getItInstance())
+        ..assignment(UserAppModel.empty));
   getItInstance.registerSingleton(FilterChoosedWrapper(
     localStorageService: getItInstance(),
   )..init());
@@ -188,14 +200,13 @@ void _registerSingletonServices() {
   getItInstance
       .registerLazySingleton<AnalyticsService>(() => AnalyticsService());
 
-  getItInstance
-      .registerLazySingleton<ShareService>(() => ShareService());
+  getItInstance.registerLazySingleton<ShareService>(() => ShareService());
 
-  getItInstance
-      .registerLazySingleton<RouterExternalResolver>(() => RouterExternalResolver());    
+  getItInstance.registerLazySingleton<RouterExternalResolver>(
+      () => RouterExternalResolver());
 
-  getItInstance
-      .registerLazySingleton<ConfigureFirebaseDynamicLinks>(() => ConfigureFirebaseDynamicLinks());        
+  getItInstance.registerLazySingleton<ConfigureFirebaseDynamicLinks>(
+      () => ConfigureFirebaseDynamicLinks());
 }
 
 void _registerBlocs() {
@@ -213,8 +224,9 @@ void _registerBlocs() {
       interestRepository: getItInstance(),
       filterChoosedWrapper: getItInstance()));
 
-  getItInstance.registerLazySingleton<PlacesBloc>(
-      () => PlacesBloc(placesRepository: getItInstance(), filterChoosedWrapper: getItInstance()));
+  getItInstance.registerLazySingleton<PlacesBloc>(() => PlacesBloc(
+      placesRepository: getItInstance(),
+      filterChoosedWrapper: getItInstance()));
 
   getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 
@@ -229,8 +241,7 @@ void _registerBlocs() {
 
   getItInstance.registerFactory<GpsOpenCubit>(() => GpsOpenCubit());
 
-  getItInstance.registerFactory<ConnectedCubit>(
-      () => ConnectedCubit());
+  getItInstance.registerFactory<ConnectedCubit>(() => ConnectedCubit());
 
   getItInstance.registerFactory<FavoriteInterestsBloc>(() =>
       FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));
@@ -253,33 +264,35 @@ void _registerBlocs() {
   getItInstance.registerFactory<AddAlbumCubit>(
       () => AddAlbumCubit(wrapperMediaService: getItInstance()));
 
-  getItInstance.registerFactory<EditAlbumCubit>(
-      () => EditAlbumCubit(wrapperMediaService: getItInstance(), albumsRepository: getItInstance(), userWrapper: getItInstance()));
+  getItInstance.registerFactory<EditAlbumCubit>(() => EditAlbumCubit(
+      wrapperMediaService: getItInstance(),
+      albumsRepository: getItInstance(),
+      userWrapper: getItInstance()));
 
   getItInstance.registerFactory<FeedbackCubit>(() => FeedbackCubit(
       feedbackRepository: getItInstance(), userWrapper: getItInstance()));
 
-  getItInstance.registerFactory<HomeCubit>(
-      () => HomeCubit());
+  getItInstance.registerFactory<HomeCubit>(() => HomeCubit());
 
-  getItInstance.registerFactory<AdsCubit>(
-      () => AdsCubit(adsRepository: root<AdsRepository>()));
+  getItInstance.registerLazySingleton<InviteCubit>(() => InviteCubit(
+      inviteRepository: getItInstance(),
+      userWrapper: getItInstance(),
+      shareService: getItInstance(),
+      userActionRepository: getItInstance()));
 
-  getItInstance.registerLazySingleton<InviteCubit>(
-      () => InviteCubit(inviteRepository: getItInstance(), userWrapper: getItInstance(), shareService: getItInstance(), userActionRepository: getItInstance()));
+  getItInstance.registerLazySingleton<UserActionCubit>(
+      () => UserActionCubit(userActionRepository: getItInstance()));
 
-  getItInstance.registerLazySingleton<UserActionCubit>(() => UserActionCubit(userActionRepository: getItInstance()));
+  getItInstance.registerLazySingleton<NotificationsCubit>(
+      () => NotificationsCubit(notificationsRepository: getItInstance()));
 
-  getItInstance.registerLazySingleton<NotificationsCubit>(() => NotificationsCubit(notificationsRepository: getItInstance())); 
-
-  getItInstance.registerFactory<UnsyncOptionCubit>(
-      () => UnsyncOptionCubit());
+  getItInstance.registerFactory<UnsyncOptionCubit>(() => UnsyncOptionCubit());
 
   getItInstance.registerFactory<UnsyncCoupleCubit>(
-      () => UnsyncCoupleCubit(userActionRepository: getItInstance()));    
+      () => UnsyncCoupleCubit(userActionRepository: getItInstance()));
 
-  getItInstance.registerFactory<SuggestionsCubit>(
-      () => SuggestionsCubit(suggestionsRepository: getItInstance<SuggestionsRepository>()));    
+  getItInstance.registerFactory<SuggestionsCubit>(() => SuggestionsCubit(
+      suggestionsRepository: getItInstance<SuggestionsRepository>()));
 }
 
 void _registerSingletonRepositories() {
@@ -357,8 +370,10 @@ void _registerSingletonDataSources() {
   getItInstance.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getItInstance()));
 
-  getItInstance.registerLazySingleton<InviteRemoteDataSource>(
-      () => InviteRemoteDataSourceImpl(remoteClientRepository: getItInstance(), remoteConfig: getItInstance()));
+  getItInstance.registerLazySingleton<InviteRemoteDataSource>(() =>
+      InviteRemoteDataSourceImpl(
+          remoteClientRepository: getItInstance(),
+          remoteConfig: getItInstance()));
 
   getItInstance.registerLazySingleton<UserActionRemoteDataSource>(
       () => UserActionRemoteDataSourceImpl(getItInstance()));
@@ -381,7 +396,7 @@ Future<LocalStorageService> _setupHive() async {
 Future<void> resetInstances() async {
   await getItInstance<LocalStorageService>().clearAll();
   getItInstance<ScreenManagerBloc>()..add(UnsubscribeActionListener());
-  
+
   getItInstance.reset();
 
   await setup();
