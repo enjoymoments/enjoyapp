@@ -5,14 +5,19 @@ import 'package:mozin/features/ads/presentation/bloc/ads_cubit.dart';
 import 'package:mozin/modules/config/setup.dart';
 
 class PublisherBannerAdWidget extends StatefulWidget {
-  PublisherBannerAdWidget({@required this.screenName, this.countAds, this.indexAdsRender});
+  PublisherBannerAdWidget({
+    @required this.screenName,
+    this.itemCount,
+    this.indexRender,
+  });
 
   final String screenName;
-  final int countAds;
-  final int indexAdsRender;
+  final int itemCount;
+  final int indexRender;
 
   @override
-  _PublisherBannerAdWidgetState createState() => _PublisherBannerAdWidgetState();
+  _PublisherBannerAdWidgetState createState() =>
+      _PublisherBannerAdWidgetState();
 }
 
 class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
@@ -20,7 +25,9 @@ class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
 
   @override
   void initState() {
-    _adsCubit = root<AdsCubit>()..loadPublisherBanner(screenName: widget.screenName, count: widget.countAds ?? 1);
+    _adsCubit = root<AdsCubit>()
+      ..loadPublisherBanner(
+          screenName: widget.screenName, count: widget.itemCount ?? 1);
     super.initState();
   }
 
@@ -32,8 +39,9 @@ class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
       child: BlocBuilder<AdsCubit, AdsState>(
         cubit: _adsCubit,
         builder: (context, state) {
-          if(state.publisherBanners.length > 0)
-          return AdWidget(ad: state.publisherBanners[widget.indexAdsRender ?? 0]);
+          if (state.publisherBanners.length > 0)
+            return AdWidget(
+                ad: state.publisherBanners[widget.indexRender ?? 0]);
 
           return SizedBox.shrink();
         },

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
+import 'package:mozin/features/ads/presentation/pages/banners/publisher_banner_ad_widget.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/sub_categories_places.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/place_card_item.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/package_view/custom_quadrant.dart';
@@ -20,9 +23,11 @@ class CategoriesPlaces extends StatefulWidget {
 
 class _CategoriesPlacesState extends State<CategoriesPlaces> {
   CategoriesPlacesCubit _categoriesPlacesCubit;
+  CategoriesPlacesAds _categoriesPlacesAds;
 
   @override
   void initState() {
+    _categoriesPlacesAds = CategoriesPlacesAds()..init();
     _categoriesPlacesCubit = getItInstance<CategoriesPlacesCubit>()
       ..loadPrimary(widget.places);
 
@@ -116,12 +121,95 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
                   item: item,
                 );
               },
-              separatorBuilder: (context, index) => SpacerBox.v16,
+              separatorBuilder: (context, index) => Column(
+                children: [
+                  ..._categoriesPlacesAds.showAd(AdsBannerType.banner, index),
+                  ..._categoriesPlacesAds.showAd(
+                      AdsBannerType.publisherBanner, index),
+                ],
+              ),
             ),
           );
         }
         return SizedBox.shrink();
       },
     );
+  }
+}
+
+enum AdsBannerType { banner, publisherBanner }
+
+class AdsBannerConfig {
+  AdsBannerConfig({
+    @required this.skipAt,
+    @required this.initialIndex,
+    @required this.type,
+    this.lastIndex,
+  });
+
+  final AdsBannerType type;
+  final int skipAt;
+  final int initialIndex;
+  int lastIndex;
+}
+
+class CategoriesPlacesAds {
+  Map<AdsBannerType, AdsBannerConfig> _ads = {};
+
+  void init() {
+    _ads = {
+      AdsBannerType.banner: AdsBannerConfig(
+        type: AdsBannerType.banner,
+        initialIndex: 2,
+        skipAt: 9,
+      ),
+      AdsBannerType.publisherBanner: AdsBannerConfig(
+        type: AdsBannerType.publisherBanner,
+        initialIndex: 6,
+        skipAt: 9,
+      ),
+    };
+  }
+
+  List<Widget> showAd(AdsBannerType type, int currentIndex) {
+    if (type == AdsBannerType.banner) {
+      AdsBannerConfig _config = _ads[AdsBannerType.banner];
+
+      if (_config.initialIndex == currentIndex ||
+          _config.lastIndex != null &&
+              (_config.lastIndex + _config.skipAt) == currentIndex) {
+        _config.lastIndex = currentIndex;
+
+        return [
+          SpacerBox.v16,
+          BannerAdWidget(
+            screenName: Routes.search_places_screen,
+            itemCount: 1,
+            indexRender: 0,
+          ),
+          SpacerBox.v16,
+        ];
+      }
+    } else if (type == AdsBannerType.publisherBanner) {
+      AdsBannerConfig _config = _ads[AdsBannerType.publisherBanner];
+
+      if (_config.initialIndex == currentIndex ||
+          _config.lastIndex != null &&
+              (_config.lastIndex + _config.skipAt) == currentIndex) {
+        _config.lastIndex = currentIndex;
+
+        return [
+          SpacerBox.v16,
+          PublisherBannerAdWidget(
+            screenName: Routes.search_places_screen,
+            itemCount: 1,
+            indexRender: 0,
+          ),
+          SpacerBox.v16,
+        ];
+      }
+    }
+
+    return [SpacerBox.v16];
   }
 }
