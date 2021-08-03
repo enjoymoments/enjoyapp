@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin_core/constants.dart';
 
 part 'intro_event.dart';
 part 'intro_state.dart';

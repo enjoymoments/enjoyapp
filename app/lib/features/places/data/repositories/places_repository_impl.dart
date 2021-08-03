@@ -5,7 +5,7 @@ import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
-import 'package:mozin/modules/config/utils.dart';
+import 'package:mozin_core/utils.dart';
 
 class PlacesRepositoryImpl implements PlacesRepository {
   PlacesRepositoryImpl({

@@ -13,9 +13,7 @@ import 'package:mozin/features/notifications/presentation/pages/notifications_sc
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
-import 'package:mozin/modules/config/constants.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
@@ -25,6 +23,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
+import 'package:mozin_core/constants.dart';
 
 part 'screen_manager_event.dart';
 part 'screen_manager_state.dart';

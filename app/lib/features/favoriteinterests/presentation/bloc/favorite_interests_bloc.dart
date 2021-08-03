@@ -9,7 +9,7 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin/modules/config/utils.dart';
+import 'package:mozin_core/utils.dart';
 
 class MapItemFavorite {
   int indexCategory;

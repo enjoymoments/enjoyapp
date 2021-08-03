@@ -11,7 +11,7 @@ import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin/modules/config/utils.dart';
+import 'package:mozin_core/utils.dart';
 
 part 'edit_album_state.dart';
 
