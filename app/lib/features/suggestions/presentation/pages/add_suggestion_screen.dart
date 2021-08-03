@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_app_bar.dart';
 import 'package:custom_view/custom_circular_progress_indicador.dart';

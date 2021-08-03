@@ -6,7 +6,7 @@ import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:custom_view/AppIcons.dart';

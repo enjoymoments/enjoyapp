@@ -7,7 +7,7 @@ import 'package:mozin/features/me/presentation/blocs/authentication/authenticati
 import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/launch_url_service.dart';

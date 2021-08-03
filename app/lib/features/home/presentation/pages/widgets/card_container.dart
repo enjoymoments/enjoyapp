@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget child;

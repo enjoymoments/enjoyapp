@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/rating_item.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/custom_badge.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';

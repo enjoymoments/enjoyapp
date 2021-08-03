@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 

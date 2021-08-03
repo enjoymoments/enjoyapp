@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_icon.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar_with_name.dart';

@@ -9,7 +9,7 @@ import 'package:mozin/features/home/presentation/pages/widgets/generate_card.dar
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_container.dart';

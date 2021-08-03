@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/shimmer_loading.dart';
 

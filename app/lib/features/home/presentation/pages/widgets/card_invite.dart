@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_content.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 
 class CardInvite extends StatelessWidget {

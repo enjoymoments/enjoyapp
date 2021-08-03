@@ -5,7 +5,7 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_av
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_item.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/time_line_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_divider.dart';

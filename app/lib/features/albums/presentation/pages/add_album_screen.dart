@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,7 +7,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:custom_view/AppIcons.dart';

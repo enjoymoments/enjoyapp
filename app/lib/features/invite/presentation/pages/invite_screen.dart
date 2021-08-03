@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/invite/presentation/pages/widgets/invite_screen_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_app_bar.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';

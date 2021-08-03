@@ -6,7 +6,7 @@ import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.
 import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_icon.dart';

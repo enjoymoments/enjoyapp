@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';

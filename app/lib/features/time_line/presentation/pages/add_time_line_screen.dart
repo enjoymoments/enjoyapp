@@ -6,7 +6,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/add_time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';

@@ -5,7 +5,7 @@ import 'package:mozin/features/feedback/data/models/feedback_model.dart';
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_app_bar.dart';
 import 'package:custom_view/custom_container.dart';

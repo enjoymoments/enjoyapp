@@ -22,7 +22,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/wi
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/photos/photos_tab_item.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/rating_tab_item.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:custom_view/AppIcons.dart';

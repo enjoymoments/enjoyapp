@@ -6,7 +6,7 @@ import 'package:mozin/modules/shared/general/models/media_model.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/photo_item_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:custom_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';

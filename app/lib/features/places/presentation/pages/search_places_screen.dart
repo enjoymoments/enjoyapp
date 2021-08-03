@@ -6,7 +6,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/categories/cate
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_app_bar.dart';
 import 'package:custom_view/custom_container.dart';

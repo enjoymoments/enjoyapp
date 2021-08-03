@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/config/size_config.dart';
+import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:custom_view/AppIcons.dart';
 
