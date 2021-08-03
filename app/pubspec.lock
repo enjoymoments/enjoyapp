@@ -744,6 +744,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  mozin_core:
+    dependency: "direct main"
+    description:
+      path: "../mozin_core"
+      relative: true
+    source: path
+    version: "0.0.1"
   nested:
     dependency: transitive
     description:

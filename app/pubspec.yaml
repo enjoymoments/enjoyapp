@@ -78,6 +78,11 @@ dependencies:
     #   url: git@github.com:custom_view/custom_view.git
     #   ref: develop
     path: ../custom_view
+  mozin_core:
+    # git:
+    #   url: git@github.com:custom_view/custom_view.git
+    #   ref: develop
+    path: ../mozin_core
 
 dev_dependencies:
   flutter_test:
