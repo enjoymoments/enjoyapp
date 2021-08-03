@@ -7,21 +7,21 @@ import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/a
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/size_config.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/custom_text_form_field.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/rounded_loading_button.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_circular_progress_indicador.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/custom_text_form_field.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class AddTimeLineScreen extends StatefulWidget {
   @override

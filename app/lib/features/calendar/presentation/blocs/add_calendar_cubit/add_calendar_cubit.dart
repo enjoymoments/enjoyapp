@@ -4,8 +4,8 @@ import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/config/utils.dart';
 
 part 'add_calendar_state.dart';
 

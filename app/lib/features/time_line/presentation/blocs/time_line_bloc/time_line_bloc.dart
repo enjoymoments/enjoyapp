@@ -8,8 +8,8 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/config/utils.dart';
 
 part 'time_line_event.dart';
 part 'time_line_state.dart';

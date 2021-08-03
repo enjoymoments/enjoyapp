@@ -6,14 +6,14 @@ import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion
 import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class SuggestionsScreen extends StatefulWidget {
   @override

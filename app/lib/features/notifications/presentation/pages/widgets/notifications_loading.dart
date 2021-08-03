@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/shimmer_loading.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class NotificationsLoading extends StatelessWidget {
   const NotificationsLoading({ Key key }) : super(key: key);

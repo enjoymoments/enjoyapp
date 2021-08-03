@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/load_photos_in_memory.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
+import 'package:custom_view/shimmer_loading.dart';
 
 class PhotosTabItem extends StatelessWidget {
   final PlacePhotosBloc placePhotosBloc;

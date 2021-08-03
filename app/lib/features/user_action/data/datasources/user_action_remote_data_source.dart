@@ -1,6 +1,6 @@
 import 'package:mozin/features/user_action/data/models/user_action_model.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class UserActionRemoteDataSource {
   Future<ResponseDefaultModel> addUserAction(UserActionModel model);

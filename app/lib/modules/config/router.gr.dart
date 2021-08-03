@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/custom_success_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/albums/data/models/album_item_model.dart';
@@ -35,10 +36,9 @@ import '../../features/suggestions/presentation/pages/add_suggestion_screen.dart
 import '../../features/suggestions/presentation/pages/suggestions_screen.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
 import '../../features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
-import '../../package_view/custom_success_screen.dart';
-import '../../package_view/gallery_images/gallery_photo_source_type_enum.dart';
-import '../../package_view/gallery_images/gallery_photo_view_wrapper.dart';
-import '../../package_view/onboading_screen.dart';
+import '../shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';
+import '../shared/custom_view_migrate/gallery_images/gallery_photo_view_wrapper.dart';
+import '../shared/custom_view_migrate/onboading_screen.dart';
 import '../shared/general/models/gallery_image_model.dart';
 import 'router.dart';
 

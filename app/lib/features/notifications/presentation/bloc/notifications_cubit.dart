@@ -5,7 +5,7 @@ import 'package:mozin/features/notifications/data/models/notifications_model.dar
 import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'notifications_state.dart';
 

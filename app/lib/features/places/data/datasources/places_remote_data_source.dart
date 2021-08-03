@@ -2,7 +2,7 @@ import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class PlacesRemoteDataSource {
   Future<PlacesModel> getPlaces(

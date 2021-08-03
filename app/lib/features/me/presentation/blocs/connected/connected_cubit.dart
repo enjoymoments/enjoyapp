@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'connected_state.dart';
 

@@ -1,7 +1,7 @@
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/interest_type.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class FavoriteInterestsRemoteDataSource {
   Future<bool> addFavoriteInterest(

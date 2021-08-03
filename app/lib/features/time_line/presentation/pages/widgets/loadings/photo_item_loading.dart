@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/shimmer_loading.dart';
 
 class PhotoItemLoading extends StatelessWidget {
   @override

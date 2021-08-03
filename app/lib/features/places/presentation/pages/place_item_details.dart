@@ -25,16 +25,16 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_border.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_font_size.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_border.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_font_size.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/shimmer_loading.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class PlaceItemDetails extends StatefulWidget {
   final PlaceModel item;

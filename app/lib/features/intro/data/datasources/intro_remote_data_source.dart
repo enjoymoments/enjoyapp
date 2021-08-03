@@ -1,4 +1,4 @@
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class IntroRemoteDataSource {
   //TODO:implement methods here

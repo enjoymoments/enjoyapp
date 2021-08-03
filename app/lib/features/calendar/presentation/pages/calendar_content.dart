@@ -7,12 +7,13 @@ import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_cont
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 class CalendarContent extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin/package_view/AppIcons.dart';
+import 'package:custom_view/AppIcons.dart';
 
 class DefaultMenu extends StatefulWidget {
   final Function(DefaultMenuEnum) onTap;

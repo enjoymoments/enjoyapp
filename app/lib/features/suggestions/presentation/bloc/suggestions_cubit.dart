@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/domain/repositories/suggestions_repository.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'suggestions_state.dart';
 

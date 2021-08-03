@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/shimmer_loading.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class AlbumItem extends StatelessWidget {
   final AlbumItemModel album;

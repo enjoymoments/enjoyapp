@@ -85,7 +85,7 @@ import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/modules/shared/logger/repository/logger_repository.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/device_info_service.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';

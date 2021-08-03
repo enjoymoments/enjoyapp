@@ -11,11 +11,11 @@ import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

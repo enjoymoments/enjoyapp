@@ -9,8 +9,8 @@ import 'package:mozin/features/places/presentation/pages/widgets/place_card_item
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/custom_quadrant.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/custom_quadrant.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class CategoriesPlaces extends StatefulWidget {
   const CategoriesPlaces({Key key, @required this.places}) : super(key: key);

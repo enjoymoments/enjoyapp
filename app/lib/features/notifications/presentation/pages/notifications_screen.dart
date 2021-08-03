@@ -5,11 +5,11 @@ import 'package:mozin/features/notifications/presentation/pages/widgets/notifica
 import 'package:mozin/features/notifications/presentation/pages/widgets/notifications_not_autenticated.dart';
 import 'package:mozin/features/notifications/presentation/pages/widgets/notifications_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/extensions/extension.dart';
 
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class NotificationsScreen extends StatefulWidget {
   @override

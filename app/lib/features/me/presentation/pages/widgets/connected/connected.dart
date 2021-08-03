@@ -12,15 +12,15 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
 import 'package:mozin/modules/shared/general/services/stores_service.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_avatar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
-import 'package:mozin/package_view/custom_tile.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
+import 'package:custom_view/custom_tile.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel user;

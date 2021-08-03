@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';

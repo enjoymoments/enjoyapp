@@ -9,7 +9,7 @@ import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

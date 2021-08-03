@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:mozin/features/me/domain/repositories/me_repository.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'me_event.dart';
 part 'me_state.dart';

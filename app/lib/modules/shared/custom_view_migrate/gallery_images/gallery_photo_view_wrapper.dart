@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 

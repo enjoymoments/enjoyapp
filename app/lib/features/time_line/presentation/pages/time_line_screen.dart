@@ -7,10 +7,10 @@ import 'package:mozin/features/time_line/presentation/pages/widgets/loadings/tim
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class TimeLineScreen extends StatefulWidget {
   @override

@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
-import 'package:vibration/vibration.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 
 class GalleryImageThumbnail extends StatelessWidget {
   const GalleryImageThumbnail({
@@ -69,10 +68,6 @@ class GalleryImageThumbnail extends StatelessWidget {
   }
 
   void _removeMedia(BuildContext context) async {
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate(duration: 50);
-    }
-
     showMaterialModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(

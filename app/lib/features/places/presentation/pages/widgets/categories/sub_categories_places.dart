@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/custom_border.dart';
-import 'package:mozin/package_view/custom_font_size.dart';
+import 'package:custom_view/custom_border.dart';
+import 'package:custom_view/custom_font_size.dart';
 
 class SubCategoriesPlaces extends StatefulWidget {
   const SubCategoriesPlaces({

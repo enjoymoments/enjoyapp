@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_content.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
 
 class CalendarScreen extends StatelessWidget {
   @override

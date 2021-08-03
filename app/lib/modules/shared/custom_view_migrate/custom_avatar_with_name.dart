@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/custom_avatar.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
 
 class CustomAvatarWithName extends StatelessWidget {
   final ImageProvider backgroundImage;

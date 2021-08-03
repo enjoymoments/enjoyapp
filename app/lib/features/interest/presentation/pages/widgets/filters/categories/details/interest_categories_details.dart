@@ -4,9 +4,9 @@ import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_category_item_details.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoriesDetails extends StatelessWidget {
   final InterestBloc interestBloc;

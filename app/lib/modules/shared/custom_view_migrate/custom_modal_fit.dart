@@ -1,6 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 
 class CustomModalFit extends StatelessWidget {
   final List<CustomItemModalFit> items;

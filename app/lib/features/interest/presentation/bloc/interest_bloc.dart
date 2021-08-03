@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/modules/config/utils.dart';
 
 part 'interest_event.dart';
 part 'interest_state.dart';

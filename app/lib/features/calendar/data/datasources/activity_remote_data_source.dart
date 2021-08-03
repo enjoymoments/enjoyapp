@@ -1,5 +1,5 @@
 import 'package:mozin/features/calendar/data/models/activity_model.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class ActivityRemoteDataSource {
   Future<List<ActivityModel>> getActivities();

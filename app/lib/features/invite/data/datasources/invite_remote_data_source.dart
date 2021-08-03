@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/invite/data/models/user_sync_info_model.dart';
 import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class InviteRemoteDataSource {
   Future<String> generateShareUrl(DynamicLinksTypeEnum action, String userInternalId);

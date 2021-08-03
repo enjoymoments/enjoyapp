@@ -1,7 +1,7 @@
 import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class CalendarRemoteDataSource {
   Future<bool> addTaskInCalendar(AddTaskCalendar model);

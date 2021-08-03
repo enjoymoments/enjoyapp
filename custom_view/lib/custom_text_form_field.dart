@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/custom_font_size.dart';
+import 'package:custom_view/custom_font_size.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({

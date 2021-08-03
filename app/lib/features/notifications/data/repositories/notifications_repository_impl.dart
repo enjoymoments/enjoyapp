@@ -3,7 +3,7 @@ import 'package:mozin/features/notifications/data/datasources/notifications_remo
 import 'package:mozin/features/notifications/data/models/notifications_model.dart';
 import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/modules/config/utils.dart';
 
 class NotificationsRepositoryImpl implements NotificationsRepository {
   NotificationsRepositoryImpl({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoryItem extends StatefulWidget {
   const InterestCategoryItem(

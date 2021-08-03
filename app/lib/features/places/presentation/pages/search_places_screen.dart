@@ -7,12 +7,12 @@ import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class SearchPlacesScreen extends StatefulWidget {
   @override

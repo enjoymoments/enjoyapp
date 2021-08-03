@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/spacer_box.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class PercentageWidget extends StatelessWidget {
   final PlaceModel item;

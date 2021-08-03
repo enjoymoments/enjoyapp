@@ -1,10 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
-import 'package:mozin/package_view/custom_border.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_border.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class PlaceAvailableWidget extends StatelessWidget {
   final PlaceModel item;

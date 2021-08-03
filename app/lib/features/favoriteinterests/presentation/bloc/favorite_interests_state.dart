@@ -1,5 +1,5 @@
 import 'package:mozin/modules/shared/general/interest_type.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 class FavoriteInterestsState extends DefaultState {
   FavoriteInterestsState({

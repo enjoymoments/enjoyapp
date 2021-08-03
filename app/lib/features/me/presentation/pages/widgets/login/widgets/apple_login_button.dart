@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
+import 'package:custom_view/AppIcons.dart';
 
 class AppleLoginButton extends StatelessWidget {
   final AuthenticationBloc authenticationBloc;

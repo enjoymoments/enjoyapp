@@ -4,7 +4,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/ph
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/pin_widget.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/place_available_widget.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_open/cubit/gpsopen_cubit.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class GeneralTabItem extends StatelessWidget {
   final PlaceModel item;

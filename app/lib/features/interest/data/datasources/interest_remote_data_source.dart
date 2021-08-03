@@ -1,5 +1,5 @@
 import 'package:mozin/features/interest/data/models/categories_model.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class InterestRemoteDataSource {
   Future<List<CategoriesModel>> getCategories();

@@ -3,8 +3,8 @@ import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/enums/type_range_enum.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class CustomRangeFilter extends StatefulWidget {
   final String title;

@@ -2,9 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 part 'gpsopen_state.dart';
 

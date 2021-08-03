@@ -8,8 +8,8 @@ import 'package:mozin/features/user_action/domain/repositories/user_action_repos
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/share_service.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
-import 'package:mozin/package_view/utils.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/config/utils.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
 part 'invite_state.dart';

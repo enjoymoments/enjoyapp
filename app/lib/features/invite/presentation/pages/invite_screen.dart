@@ -5,17 +5,17 @@ import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/invite/presentation/pages/widgets/invite_screen_loading.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_avatar.dart';
-import 'package:mozin/package_view/custom_button_default.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/custom_gif.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/custom_tile.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
+import 'package:custom_view/custom_button_default.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/custom_gif.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/custom_tile.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class InviteScreen extends StatelessWidget {
   const InviteScreen({

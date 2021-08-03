@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/percentage_widget.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/rating/user_comment_widget.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class RatingTabItem extends StatelessWidget {
   final PlaceModel item;

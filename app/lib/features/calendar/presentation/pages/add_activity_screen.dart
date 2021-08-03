@@ -8,11 +8,11 @@ import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/ad
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/activity_icon.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/activity_loading.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class AddActivityScreen extends StatelessWidget {
   final AddActivityCubit activityCubit;

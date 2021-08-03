@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/categorie_item_loading.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_category_item.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategories extends StatelessWidget {
   final InterestBloc interestBloc;

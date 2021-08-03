@@ -6,8 +6,8 @@ import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
-import 'package:mozin/package_view/gallery_images/gallery_photo_source_type_enum.dart';
+import 'package:custom_view/custom_circular_progress_indicador.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';
 import 'package:uuid/uuid.dart';
 
 List<Widget> buildPhotos(

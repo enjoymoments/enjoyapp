@@ -3,7 +3,7 @@ import 'package:mozin/features/interest/data/models/categories_model.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_category_item_badge.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoryItemDetails extends StatelessWidget {
   const InterestCategoryItemDetails(

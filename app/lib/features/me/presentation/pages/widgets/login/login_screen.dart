@@ -6,9 +6,9 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/apple
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/facebook_login_button.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/google_login_button.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/spacer_box.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/spacer_box.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

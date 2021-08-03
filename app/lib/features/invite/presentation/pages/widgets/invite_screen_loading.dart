@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/shimmerLoading.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/shimmer_loading.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class InviteScreenLoading extends StatelessWidget {
   @override

@@ -2,8 +2,8 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/entities/album_item_entity.dart';
 import 'package:mozin/modules/config/remote_config.dart';
+import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
-import 'package:mozin/modules/shared/remote_client_repository.dart';
 
 abstract class AlbumsRemoteDataSource {
   Future<String> addAlbum(String userId, AlbumItemModel model);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class RatingItem extends StatelessWidget {
 

@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/custom_circular_progress_indicador.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/custom_circular_progress_indicador.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class IntroScreen extends StatefulWidget {
   @override

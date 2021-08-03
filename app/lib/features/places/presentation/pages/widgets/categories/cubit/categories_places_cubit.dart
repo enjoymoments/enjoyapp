@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'categories_places_state.dart';
 

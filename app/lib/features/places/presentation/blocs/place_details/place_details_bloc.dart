@@ -9,7 +9,7 @@ import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_inte
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'place_details_event.dart';
 part 'place_details_state.dart';

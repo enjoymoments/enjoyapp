@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_icon.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
 
 class CustomAppBar extends AppBar {
   CustomAppBar({

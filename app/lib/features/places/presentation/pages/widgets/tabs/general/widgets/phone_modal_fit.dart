@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/extensions/extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PhoneModalFit extends StatelessWidget {

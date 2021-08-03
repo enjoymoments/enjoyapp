@@ -7,7 +7,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'unsynccouple_state.dart';
 

@@ -9,19 +9,20 @@ import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_container.dart';
-import 'package:mozin/package_view/custom_divider.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_item_modal_fit.dart';
-import 'package:mozin/package_view/custom_modal_fit.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/custom_text_form_field.dart';
-import 'package:mozin/package_view/custom_tile.dart';
-import 'package:mozin/package_view/extension.dart';
-import 'package:mozin/package_view/rounded_loading_button.dart';
-import 'package:mozin/package_view/spacer_box.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_container.dart';
+import 'package:custom_view/custom_divider.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/custom_text_form_field.dart';
+import 'package:custom_view/custom_tile.dart';
+import 'package:custom_view/extensions/extension.dart';
+import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
+import 'package:custom_view/spacer_box.dart';
 
 class AddCalendarScreen extends StatefulWidget {
   final TaskCalendarModel taskModel;

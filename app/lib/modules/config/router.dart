@@ -16,13 +16,13 @@ import 'package:mozin/features/notifications/presentation/pages/notifications_sc
 import 'package:mozin/features/suggestions/presentation/pages/add_suggestion_screen.dart';
 import 'package:mozin/features/suggestions/presentation/pages/suggestions_screen.dart';
 import 'package:mozin/features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
-import 'package:mozin/package_view/custom_success_screen.dart';
-import 'package:mozin/package_view/gallery_images/gallery_photo_view_wrapper.dart';
-import 'package:mozin/package_view/onboading_screen.dart';
+import 'package:custom_view/custom_success_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
 import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';
 import 'package:mozin/features/screen_manager/presentation/screen_manager.dart';
 import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_view_wrapper.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[

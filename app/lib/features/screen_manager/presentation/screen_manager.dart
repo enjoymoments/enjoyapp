@@ -8,10 +8,10 @@ import 'package:mozin/modules/config/size_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
-import 'package:mozin/package_view/fab/fab_bottom_app_bar.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
+import 'package:custom_view/fab/fab_bottom_app_bar.dart';
 
 class ScreenManager extends StatefulWidget {
   @override

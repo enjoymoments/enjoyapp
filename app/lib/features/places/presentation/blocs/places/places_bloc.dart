@@ -8,7 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'places_event.dart';
 part 'places_state.dart';

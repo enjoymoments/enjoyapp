@@ -9,10 +9,10 @@ import 'package:mozin/features/interest/presentation/pages/widgets/filters/gener
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/package_view/AppIcons.dart';
-import 'package:mozin/package_view/custom_app_bar.dart';
-import 'package:mozin/package_view/custom_icon.dart';
-import 'package:mozin/package_view/custom_scaffold.dart';
+import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_scaffold.dart';
 
 class InterestScreen extends StatefulWidget {
   final bool isChangeFilter;

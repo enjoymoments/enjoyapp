@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mozin/modules/config/size_config.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:custom_view/size_config.dart';
+import 'package:custom_view/extensions/extension_text.dart';
 
 class CustomButtonDefault extends StatelessWidget {
   const CustomButtonDefault({

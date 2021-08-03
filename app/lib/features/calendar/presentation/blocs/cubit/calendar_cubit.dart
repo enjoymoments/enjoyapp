@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
-import 'package:mozin/package_view/blocs/default_state.dart';
-import 'package:mozin/package_view/extension.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 part 'calendar_state.dart';
 
