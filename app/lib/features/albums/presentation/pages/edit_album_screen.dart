@@ -4,9 +4,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_image_items.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:custom_view/AppIcons.dart';
@@ -133,7 +133,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
 
   Widget _buildAlbumImages(EditAlbumState state) {
     if (state.album != null && state.album.medias.length > 0) {
-      return ImageItems(
+      return CustomImageItems(
         sourceType: SourceTypeEnum.Url,
         onRemoveCallback: (model) {
           _editAlbumCubit.mapRemoveMediaToState(model);
@@ -147,7 +147,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
 
   Widget _buildNewImages(EditAlbumState state) {
     if (state.newImages.length > 0) {
-      return ImageItems(
+      return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
           _editAlbumCubit.mapRemoveMediaToState(model);

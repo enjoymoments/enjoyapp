@@ -47,6 +47,8 @@ class SourceTypeEnum extends Enum<int> {
       return SourceTypeEnum.File;
     } else if (value == 2) {
       return SourceTypeEnum.Url;
+    } else if (value == 3) {
+      return SourceTypeEnum.Memory;
     }
 
     return null;
@@ -56,6 +58,7 @@ class SourceTypeEnum extends Enum<int> {
 
   static const SourceTypeEnum File = SourceTypeEnum._fromValue(1);
   static const SourceTypeEnum Url = SourceTypeEnum._fromValue(2);
+  static const SourceTypeEnum Memory = SourceTypeEnum._fromValue(3);
 
   @override
   String toString() => value.toString();

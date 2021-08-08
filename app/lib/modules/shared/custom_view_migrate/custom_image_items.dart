@@ -7,12 +7,12 @@ import 'package:mozin/modules/config/router.gr.dart';
 import 'package:custom_view/custom_circular_progress_indicador.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';
 
-class ImageItems extends StatelessWidget {
+class CustomImageItems extends StatelessWidget {
   final Function(GalleryImageModel galleryImageModel) onRemoveCallback;
   final List<GalleryImageModel> images;
   final SourceTypeEnum sourceType;
 
-  ImageItems({
+  CustomImageItems({
     Key key,
     @required this.images,
     @required this.onRemoveCallback,
@@ -42,77 +42,28 @@ class ImageItems extends StatelessWidget {
     for (var i = 0; i < images.length; i++) {
       var item = images[i];
 
-      _list.add(_LoadPhotoItem(
+      _list.add(_CustomLoadPhotoItem(
         galleryImages: images,
         index: i,
         item: item,
-        sourceType: PhotoSourceType.file,
+        sourceType: sourceType,
         imageWidth: imageWidth,
       ));
     }
 
     return _list;
   }
-
-  //TODO: in development
-  // Widget _buildCardImage(
-  //   BuildContext context,
-  //   GalleryImageModel image,
-  // ) {
-  //   return GalleryImageThumbnail(
-  //     sourceType: sourceType,
-  //     galleryImageModel: image,
-  //     onRemoveCallback: (model) {
-  //       onRemoveCallback(model);
-  //     },
-  //     onTap: () {
-  //       open(context, image.index);
-  //     },
-  //   );
-  // }
-
-  // void open(BuildContext context, final int index) {
-  //   ExtendedNavigator.of(context).push(
-  //     Routes.gallery_photo_view_wrapper_screen,
-  //     arguments: GalleryPhotoViewWrapperArguments(
-  //       galleryPhotoSourceType: _sourceType(),
-  //       galleryItems: images,
-  //       backgroundDecoration: BoxDecoration(
-  //         color: Theme.of(context).backgroundColor,
-  //       ),
-  //       initialIndex: index,
-  //       scrollDirection: Axis.horizontal,
-  //     ),
-  //   );
-  // }
-
-  // GalleryPhotoSourceTypeEnum _sourceType() {
-  //   if (sourceType == SourceTypeEnum.File) {
-  //     return GalleryPhotoSourceTypeEnum.file;
-  //   } else if (sourceType == SourceTypeEnum.Url) {
-  //     return GalleryPhotoSourceTypeEnum.url;
-  //   }
-
-  //   return null;
-  // }
 }
 
 
-//TODO: in development
-enum PhotoSourceType {
-  memory,
-  network,
-  file,
-}
-
-class _LoadPhotoItem extends StatelessWidget {
+class _CustomLoadPhotoItem extends StatelessWidget {
   final List<GalleryImageModel> galleryImages;
   final int index;
   final GalleryImageModel item;
-  final PhotoSourceType sourceType;
+  final SourceTypeEnum sourceType;
   final double imageWidth;
 
-  const _LoadPhotoItem({
+  const _CustomLoadPhotoItem({
     Key key,
     @required this.galleryImages,
     @required this.index,
@@ -147,11 +98,11 @@ class _LoadPhotoItem extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
             children: <Widget>[
-              if (sourceType == PhotoSourceType.memory)
+              if (sourceType == SourceTypeEnum.Memory)
                 Image.memory(item.byte, fit: BoxFit.cover, width: imageWidth),
-              if (sourceType == PhotoSourceType.network)
+              if (sourceType == SourceTypeEnum.Url)
                 Image.network(item.url, fit: BoxFit.cover, width: imageWidth),
-              if (sourceType == PhotoSourceType.file)
+              if (sourceType == SourceTypeEnum.File)
                 Image.file(item.file, fit: BoxFit.cover, width: imageWidth),
             ],
           ),
@@ -161,11 +112,11 @@ class _LoadPhotoItem extends StatelessWidget {
   }
 
   GalleryPhotoSourceTypeEnum getGalleryPhotoSourceType() {
-    if(sourceType == PhotoSourceType.file) {
+    if(sourceType == SourceTypeEnum.File) {
       return GalleryPhotoSourceTypeEnum.file;
-    } else if (sourceType == PhotoSourceType.memory) {
+    } else if (sourceType == SourceTypeEnum.Memory) {
       return GalleryPhotoSourceTypeEnum.memory;
-    } else if (sourceType == PhotoSourceType.network) {
+    } else if (sourceType == SourceTypeEnum.Url) {
       return GalleryPhotoSourceTypeEnum.url;
     }
 

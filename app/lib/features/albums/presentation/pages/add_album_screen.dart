@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
-import 'package:mozin/features/time_line/presentation/pages/widgets/image_items.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_image_items.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:custom_view/AppIcons.dart';
@@ -173,7 +173,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
 
   Widget _buildNewImages(AddAlbumState state) {
     if (state.allImages.length > 0) {
-      return ImageItems(
+      return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
           _addAlbumCubit.mapRemoveMediaToState(model);
