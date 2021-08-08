@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:custom_view/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
@@ -55,7 +57,6 @@ class CustomImageItems extends StatelessWidget {
   }
 }
 
-
 class _CustomLoadPhotoItem extends StatelessWidget {
   final List<GalleryImageModel> galleryImages;
   final int index;
@@ -101,7 +102,7 @@ class _CustomLoadPhotoItem extends StatelessWidget {
               if (sourceType == SourceTypeEnum.Memory)
                 Image.memory(item.byte, fit: BoxFit.cover, width: imageWidth),
               if (sourceType == SourceTypeEnum.Url)
-                Image.network(item.url, fit: BoxFit.cover, width: imageWidth),
+                _buildImageFromUrl(item.url),
               if (sourceType == SourceTypeEnum.File)
                 Image.file(item.file, fit: BoxFit.cover, width: imageWidth),
             ],
@@ -112,7 +113,7 @@ class _CustomLoadPhotoItem extends StatelessWidget {
   }
 
   GalleryPhotoSourceTypeEnum getGalleryPhotoSourceType() {
-    if(sourceType == SourceTypeEnum.File) {
+    if (sourceType == SourceTypeEnum.File) {
       return GalleryPhotoSourceTypeEnum.file;
     } else if (sourceType == SourceTypeEnum.Memory) {
       return GalleryPhotoSourceTypeEnum.memory;
@@ -121,5 +122,17 @@ class _CustomLoadPhotoItem extends StatelessWidget {
     }
 
     return null;
+  }
+
+  Widget _buildImageFromUrl(String url) {
+    return CachedNetworkImage(
+      fit: BoxFit.cover,
+      imageUrl: url,
+      width: imageWidth,
+      placeholder: (context, url) => ShimmerLoading(
+        width: SizeConfig.sizeByPixel(imageWidth),
+        height: SizeConfig.sizeByPixel(imageWidth),
+      ),
+    );
   }
 }
