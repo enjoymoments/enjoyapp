@@ -50,6 +50,9 @@ class CustomImageItems extends StatelessWidget {
         item: item,
         sourceType: sourceType,
         imageWidth: imageWidth,
+        onLongPressCallback: () {
+          onRemoveCallback(item);
+        },
       ));
     }
 
@@ -63,6 +66,7 @@ class _CustomLoadPhotoItem extends StatelessWidget {
   final GalleryImageModel item;
   final SourceTypeEnum sourceType;
   final double imageWidth;
+  final Function onLongPressCallback;
 
   const _CustomLoadPhotoItem({
     Key key,
@@ -71,11 +75,15 @@ class _CustomLoadPhotoItem extends StatelessWidget {
     @required this.item,
     @required this.sourceType,
     @required this.imageWidth,
+    @required this.onLongPressCallback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onLongPress: () {
+        onLongPressCallback();
+      },
       onTap: () {
         ExtendedNavigator.of(context).push(
           Routes.gallery_photo_view_wrapper_screen,

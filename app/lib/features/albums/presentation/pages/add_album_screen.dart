@@ -21,6 +21,7 @@ import 'package:custom_view/custom_text_form_field.dart';
 import 'package:custom_view/spacer_box.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 
 class AddAlbumScreen extends StatefulWidget {
   const AddAlbumScreen({Key key}) : super(key: key);
@@ -176,7 +177,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
       return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
-          _addAlbumCubit.mapRemoveMediaToState(model);
+          _removePhoto(context, model);
         },
         images: state.allImages,
       );
@@ -187,6 +188,28 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
 
   void _save() {
     _addAlbumCubit.mapSaveToState(_titleController.text);
+  }
+
+  void _removePhoto(BuildContext context, GalleryImageModel model) async {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero remover',
+            iconData: AppIcons.ad,
+            onTap: () {},
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero remover',
+            iconData: AppIcons.trash,
+            onTap: () {
+              _addAlbumCubit.mapRemoveMediaToState(model);
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   void _discardPost(BuildContext context) async {

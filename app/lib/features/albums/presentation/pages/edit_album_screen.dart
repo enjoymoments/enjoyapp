@@ -22,6 +22,7 @@ import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.
 import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:custom_view/spacer_box.dart';
+import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 
 class EditAlbumScreen extends StatefulWidget {
   const EditAlbumScreen({Key key, @required this.album}) : super(key: key);
@@ -136,7 +137,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
       return CustomImageItems(
         sourceType: SourceTypeEnum.Url,
         onRemoveCallback: (model) {
-          _editAlbumCubit.mapRemoveMediaToState(model);
+          _removePhoto(context, model);
         },
         images: state.album.medias.toGalleryImages(),
       );
@@ -150,7 +151,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
       return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
-          _editAlbumCubit.mapRemoveMediaToState(model);
+          _removePhoto(context, model);
         },
         images: state.newImages,
       );
@@ -281,6 +282,28 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   void initValues() {
     _titleController.text = widget.album.titleAlbum;
     _editAlbumCubit.setAlbum(widget.album);
+  }
+
+  void _removePhoto(BuildContext context, GalleryImageModel model) async {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero remover',
+            iconData: AppIcons.ad,
+            onTap: () {},
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero remover',
+            iconData: AppIcons.trash,
+            onTap: () {
+              _editAlbumCubit.mapRemoveMediaToState(model);
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   void _discardPost(BuildContext context) async {

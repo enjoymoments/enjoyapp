@@ -150,7 +150,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
             CustomImageItems(
               sourceType: SourceTypeEnum.File,
               onRemoveCallback: (model) {
-                _addTimeLineBloc.add(RemoveMedia(model));
+                _removePhoto(context, model);
               },
               images: state.images,
             ),
@@ -208,6 +208,28 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           title: 'Galeria'.iconWithLabel(context),
         ),
       ],
+    );
+  }
+
+  void _removePhoto(BuildContext context, GalleryImageModel model) async {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => CustomModalFit(
+        items: [
+          CustomItemModalFit(
+            text: 'Não quero remover',
+            iconData: AppIcons.ad,
+            onTap: () {},
+          ),
+          CustomItemModalFit(
+            text: 'Sim, quero remover',
+            iconData: AppIcons.trash,
+            onTap: () {
+              _addTimeLineBloc.add(RemoveMedia(model));
+            },
+          ),
+        ],
+      ),
     );
   }
 }
