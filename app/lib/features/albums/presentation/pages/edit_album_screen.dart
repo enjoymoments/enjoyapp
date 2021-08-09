@@ -75,7 +75,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
 
   Widget _buildAppBar() {
     return CustomAppBar(
-      title: 'Criar Álbum',
+      title: 'Editar Álbum',
       context: context,
       onPressedBack: () {
         // if (_images.length > 0 ||
@@ -88,7 +88,17 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
         Navigator.of(context).pop();
       },
       actions: <Widget>[
-        _buildActionButton(),
+        RoundedLoadingButton(
+          width: SizeConfig.sizeByPixel(50),
+          controller: _actionButtoncontroller,
+          child: CustomIcon(
+            icon: AppIcons.check,
+            color: Theme.of(context).appBarTheme.iconTheme.color,
+          ),
+          onPressed: () {
+            _save();
+          },
+        ),
       ],
     );
   }
@@ -160,14 +170,6 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
     return SizedBox.shrink();
   }
 
-  Widget _buildActionButton() {
-    if (readOnlyMode) {
-      return _buildActionButtonConfig(AppIcons.ellipsis_h, _options);
-    }
-
-    return _buildActionButtonConfig(AppIcons.check, _save);
-  }
-
   Widget _buildActionButtonConfig(IconData icon, void Function() callback) {
     return RoundedLoadingButton(
       width: SizeConfig.sizeByPixel(50),
@@ -228,56 +230,6 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   //     ],
   //   );
   // }
-
-  void _options() {
-    showMaterialModalBottomSheet(
-      context: context,
-      isDismissible: false,
-      builder: (context) => CustomModalFit(
-        items: [
-          CustomItemModalFit(
-            text: 'Editar álbum',
-            iconData: AppIcons.edit,
-            onTap: () {
-              _actionButtoncontroller.stop();
-            },
-          ),
-          CustomItemModalFit(
-            text: 'Deletar álbum',
-            iconData: AppIcons.trash,
-            onTap: () {
-              _remove();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _remove() {
-    showMaterialModalBottomSheet(
-      context: context,
-      isDismissible: false,
-      builder: (context) => CustomModalFit(
-        items: [
-          CustomItemModalFit(
-            text: 'Não quero deletar',
-            iconData: AppIcons.ad,
-            onTap: () {
-              _actionButtoncontroller.stop();
-            },
-          ),
-          CustomItemModalFit(
-            text: 'Sim, quero deletar',
-            iconData: AppIcons.trash,
-            onTap: () {
-              _editAlbumCubit.deleteAlbum(widget.album);
-            },
-          ),
-        ],
-      ),
-    );
-  }
 
   void initValues() {
     _titleController.text = widget.album.titleAlbum;
