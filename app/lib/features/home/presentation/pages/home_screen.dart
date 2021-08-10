@@ -192,13 +192,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCardCalendar(bool autenticated) {
     return AbsorbPointer(
-      absorbing: !autenticated,
+      absorbing: true,
       child: FeatureCard(
         width: SizeConfig.sizeByPixel(100),
         iconData: AppIcons.calendar_day,
         routeName: Routes.calendar_screen,
         name: 'Calendário',
-        disabled: !autenticated,
+        disabled: true,
       ),
     );
   }
