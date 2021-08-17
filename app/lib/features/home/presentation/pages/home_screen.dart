@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
-              _buildCardSuggestions(),
+              _buildCardSuggestions(_autenticated),
               _buildCardMusics(),
               _buildCardSites(_autenticated),
             ],
@@ -229,13 +229,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardSuggestions() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.random,
-      routeName: Routes.suggestions_screen,
-      name: 'Sugestões',
-      disabled: false,
+  Widget _buildCardSuggestions(bool autenticated) {
+    return AbsorbPointer(
+      absorbing: !autenticated,
+      child: FeatureCard(
+        width: SizeConfig.sizeByPixel(100),
+        iconData: AppIcons.random,
+        routeName: Routes.suggestions_screen,
+        name: 'Sugestões',
+        disabled: !autenticated,
+      ),
     );
   }
 
