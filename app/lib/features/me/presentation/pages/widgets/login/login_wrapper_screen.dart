@@ -22,10 +22,10 @@ class LoginWrapperScreen extends StatelessWidget {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       cubit: root<AuthenticationBloc>(),
       builder: (context, state) {
-        if (root<AuthenticationBloc>().state.isLoading) {
+        if (root<AuthenticationBloc>().state.isLoading || root<AuthenticationBloc>().state.authenticated){
           return MeLoading();
         }
-        
+
         return Center(
           child: SingleChildScrollView(
             child: LoginScreen(),

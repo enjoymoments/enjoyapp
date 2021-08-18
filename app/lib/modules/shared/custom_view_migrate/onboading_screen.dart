@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:mozin/modules/config/router.gr.dart';
+import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
+import 'package:mozin/modules/config/setup.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    ExtendedNavigator.of(context).pushAndRemoveUntil(Routes.screen_manager_screen, (route) => false);
+    root<AuthenticationBloc>().add(CheckAuthenticated());
   }
 
   @override

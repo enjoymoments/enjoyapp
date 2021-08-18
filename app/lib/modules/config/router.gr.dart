@@ -25,7 +25,6 @@ import '../../features/configuration/presentation/pages/configuration_screen.dar
 import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import '../../features/feedback/presentation/pages/feedback_screen.dart';
 import '../../features/interest/presentation/pages/interest_screen.dart';
-import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../features/invite/presentation/bloc/invite_cubit.dart';
 import '../../features/invite/presentation/pages/invite_screen.dart';
 import '../../features/me/presentation/pages/widgets/login/login_wrapper_screen.dart';
@@ -46,8 +45,7 @@ import 'router.dart';
 
 class Routes {
   static const String authentication_wrapper_screen = '/';
-  static const String intro_screen = '/intro-screen';
-  static const String screen_manager_screen = '/root-screen-manager';
+  static const String root_screen_manager_screen = '/root-screen-manager';
   static const String onboarding_screen = '/on-boarding-screen';
   static const String search_places_screen = '/search-places-screen';
   static const String place_item_details_screen = '/place-item-details';
@@ -75,8 +73,7 @@ class Routes {
   static const String login_wrapper_screen = '/login-wrapper-screen';
   static const all = <String>{
     authentication_wrapper_screen,
-    intro_screen,
-    screen_manager_screen,
+    root_screen_manager_screen,
     onboarding_screen,
     search_places_screen,
     place_item_details_screen,
@@ -109,8 +106,7 @@ class Router extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.authentication_wrapper_screen, page: AuthenticationWrapper),
-    RouteDef(Routes.intro_screen, page: IntroScreen),
-    RouteDef(Routes.screen_manager_screen, page: RootScreenManager),
+    RouteDef(Routes.root_screen_manager_screen, page: RootScreenManager),
     RouteDef(Routes.onboarding_screen, page: OnBoardingScreen),
     RouteDef(Routes.search_places_screen, page: SearchPlacesScreen),
     RouteDef(Routes.place_item_details_screen, page: PlaceItemDetails),
@@ -143,12 +139,6 @@ class Router extends RouterBase {
     AuthenticationWrapper: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AuthenticationWrapper(),
-        settings: data,
-      );
-    },
-    IntroScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => IntroScreen(),
         settings: data,
       );
     },

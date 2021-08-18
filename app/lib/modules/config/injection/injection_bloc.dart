@@ -9,7 +9,6 @@ import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_inte
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
 import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
-import 'package:mozin/features/intro/presentation/bloc/intro_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/connected/connected_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
@@ -46,8 +45,6 @@ void registerBlocs(GetIt getItInstance) {
   getItInstance.registerLazySingleton<PlacesBloc>(() => PlacesBloc(
       placesRepository: getItInstance(),
       filterChoosedWrapper: getItInstance()));
-
-  getItInstance.registerFactory<IntroBloc>(() => IntroBloc(getItInstance()));
 
   getItInstance.registerFactory<PlaceDetailsBloc>(
       () => PlaceDetailsBloc(placesRepository: getItInstance()));

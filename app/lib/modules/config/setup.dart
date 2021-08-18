@@ -17,10 +17,12 @@ import 'package:mozin/modules/config/injection/injection_data_source.dart';
 import 'package:mozin/modules/config/injection/injection_model.dart';
 import 'package:mozin/modules/config/injection/injection_repository.dart';
 import 'package:mozin/modules/config/injection/injection_service.dart';
+import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/config/remote_config.dart';
+import 'package:mozin_core/constants.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 GetIt getItInstance = GetIt.instance;
@@ -101,6 +103,9 @@ Future<LocalStorageService> _setupHive() async {
 
 Future<void> resetInstances() async {
   await getItInstance<LocalStorageService>().clearAll();
+  await getItInstance<LocalStorageService>().put(KeyValue<String, String>(
+        key: bypass_onboarding_screen, value: bypass_onboarding_screen));
+
   getItInstance<ScreenManagerBloc>()..add(UnsubscribeActionListener());
 
   getItInstance.reset();
