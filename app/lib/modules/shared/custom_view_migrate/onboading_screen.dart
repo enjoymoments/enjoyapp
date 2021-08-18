@@ -12,7 +12,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    root<AuthenticationBloc>().add(CheckAuthenticated());
+    root<AuthenticationBloc>().add(CloseOnboardScreen());
   }
 
   @override

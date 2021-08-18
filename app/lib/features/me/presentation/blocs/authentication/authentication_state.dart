@@ -7,6 +7,7 @@ class AuthenticationState extends DefaultState {
     bool isError,
     bool isSuccess,
     String errorMessage,
+    this.closeOnboardingScreen,
     this.authenticated,
     this.user,
   }) : super(
@@ -17,6 +18,7 @@ class AuthenticationState extends DefaultState {
           errorMessage: errorMessage,
         );
 
+  final bool closeOnboardingScreen;
   final bool authenticated;
   final UserAppModel user;
 
@@ -27,6 +29,7 @@ class AuthenticationState extends DefaultState {
       isError: false,
       isLoading: true,
       errorMessage: null,
+      closeOnboardingScreen: false,
       authenticated: false,
       user: null,
     );
@@ -38,6 +41,7 @@ class AuthenticationState extends DefaultState {
     bool isEmpty,
     bool isError,
     String errorMessage,
+    bool closeOnboardingScreen,
     bool authenticated,
     UserAppModel user,
   }) {
@@ -47,6 +51,7 @@ class AuthenticationState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
+      closeOnboardingScreen: closeOnboardingScreen ?? this.closeOnboardingScreen,
       authenticated: authenticated ?? this.authenticated,
       user: user ?? this.user,
     );
@@ -59,6 +64,7 @@ class AuthenticationState extends DefaultState {
         isEmpty,
         isError,
         errorMessage,
+        closeOnboardingScreen,
         authenticated,
         user,
       ];

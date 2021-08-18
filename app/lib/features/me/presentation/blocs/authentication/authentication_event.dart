@@ -25,3 +25,5 @@ class AuthenticationUserChanged extends AuthenticationEvent {
   @override
   List<Object> get props => [user];
 }
+
+class CloseOnboardScreen extends AuthenticationEvent {}

@@ -47,6 +47,8 @@ class AuthenticationBloc
       yield* mapLogoutToState();
     } else if (event is CheckAuthenticated) {
       yield* mapCheckAuthenticatedToState();
+    } else if (event is CloseOnboardScreen) {
+      yield* mapCloseOnboardScreenToState();
     }
   }
 
@@ -145,6 +147,15 @@ class AuthenticationBloc
       await resetInstances();
 
       yield state.copyWith(isLoading: false, authenticated: false);
+    } catch (e) {
+      yield state.copyWith(
+          isLoading: false, isError: true, errorMessage: 'Ops');
+    }
+  }
+
+    Stream<AuthenticationState> mapCloseOnboardScreenToState() async* {
+    try {
+      yield state.copyWith(closeOnboardingScreen: true);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
