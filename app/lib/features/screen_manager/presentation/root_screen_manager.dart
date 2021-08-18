@@ -13,12 +13,12 @@ import 'package:custom_view/custom_icon.dart';
 import 'package:custom_view/custom_scaffold.dart';
 import 'package:custom_view/fab/fab_bottom_app_bar.dart';
 
-class ScreenManager extends StatefulWidget {
+class RootScreenManager extends StatefulWidget {
   @override
-  _ScreenManagerState createState() => _ScreenManagerState();
+  _RootScreenManagerState createState() => _RootScreenManagerState();
 }
 
-class _ScreenManagerState extends State<ScreenManager> {
+class _RootScreenManagerState extends State<RootScreenManager> {
   ScreenManagerBloc _screenManagerBloc;
 
   @override

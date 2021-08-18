@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/authentication_wrapper.dart';
 import 'package:mozin/features/albums/presentation/pages/add_album_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/edit_album_screen.dart';
@@ -12,6 +13,7 @@ import 'package:mozin/features/feedback/presentation/pages/feedback_screen.dart'
 import 'package:mozin/features/interest/presentation/pages/interest_screen.dart';
 import 'package:mozin/features/intro/presentation/pages/intro_screen.dart';
 import 'package:mozin/features/invite/presentation/pages/invite_screen.dart';
+import 'package:mozin/features/me/presentation/pages/widgets/login/login_wrapper_screen.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/suggestions/presentation/pages/add_suggestion_screen.dart';
 import 'package:mozin/features/suggestions/presentation/pages/suggestions_screen.dart';
@@ -19,7 +21,7 @@ import 'package:mozin/features/unsync_couple/presentation/pages/unsync_couple_sc
 import 'package:custom_view/custom_success_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
 import 'package:mozin/features/places/presentation/pages/search_places_screen.dart';
-import 'package:mozin/features/screen_manager/presentation/screen_manager.dart';
+import 'package:mozin/features/screen_manager/presentation/root_screen_manager.dart';
 import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_view_wrapper.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
@@ -27,8 +29,10 @@ import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
 @MaterialAutoRouter(
   routes: <AutoRoute>[
     // initial route is named "/"
-    MaterialRoute(name: 'intro_screen', page: IntroScreen, initial: true),
-    MaterialRoute(name: 'screen_manager_screen', page: ScreenManager,),
+    
+    MaterialRoute(name: 'authentication_wrapper_screen', page: AuthenticationWrapper, initial: true),
+    MaterialRoute(name: 'intro_screen', page: IntroScreen,),
+    MaterialRoute(name: 'screen_manager_screen', page: RootScreenManager,),
     MaterialRoute(name: 'onboarding_screen', page: OnBoardingScreen,),
     MaterialRoute(name: 'search_places_screen', page: SearchPlacesScreen,),
     MaterialRoute(name: 'place_item_details_screen', page: PlaceItemDetails,),
@@ -52,6 +56,7 @@ import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
     MaterialRoute(name: 'unsync_couple_screen', page: UnsyncCoupleScreen,),
     MaterialRoute(name: 'suggestions_screen', page: SuggestionsScreen,),
     MaterialRoute(name: 'add_suggestions_screen', page: AddSuggestionScreen,),
+    MaterialRoute(name: 'login_wrapper_screen', page: LoginWrapperScreen,),
   ],
 )
 class $Router {}

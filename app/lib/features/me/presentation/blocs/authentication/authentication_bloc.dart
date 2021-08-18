@@ -90,7 +90,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
+      yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -111,7 +111,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
+      yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -132,7 +132,7 @@ class AuthenticationBloc
 
       _settingsUser(_user);
 
-      yield state.copyWith(isLoading: false, authenticated: true, user: _user);
+      yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
       yield state.copyWith(
           isLoading: false, isError: true, errorMessage: 'Ops');
@@ -161,6 +161,8 @@ class AuthenticationBloc
       _settingsUser(event.user);
       _settingsExecute = true;
     }
+
+    this.add(CheckAuthenticated());
   }
 
   void _settingsUser(UserAppModel user) async {

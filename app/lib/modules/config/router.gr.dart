@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:custom_view/custom_success_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../authentication_wrapper.dart';
 import '../../features/albums/data/models/album_item_model.dart';
 import '../../features/albums/presentation/pages/add_album_screen.dart';
 import '../../features/albums/presentation/pages/albums_screen.dart';
@@ -27,11 +28,12 @@ import '../../features/interest/presentation/pages/interest_screen.dart';
 import '../../features/intro/presentation/pages/intro_screen.dart';
 import '../../features/invite/presentation/bloc/invite_cubit.dart';
 import '../../features/invite/presentation/pages/invite_screen.dart';
+import '../../features/me/presentation/pages/widgets/login/login_wrapper_screen.dart';
 import '../../features/notifications/presentation/pages/notifications_screen.dart';
 import '../../features/places/data/models/place_model.dart';
 import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
-import '../../features/screen_manager/presentation/screen_manager.dart';
+import '../../features/screen_manager/presentation/root_screen_manager.dart';
 import '../../features/suggestions/presentation/pages/add_suggestion_screen.dart';
 import '../../features/suggestions/presentation/pages/suggestions_screen.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
@@ -43,8 +45,9 @@ import '../shared/general/models/gallery_image_model.dart';
 import 'router.dart';
 
 class Routes {
-  static const String intro_screen = '/';
-  static const String screen_manager_screen = '/screen-manager';
+  static const String authentication_wrapper_screen = '/';
+  static const String intro_screen = '/intro-screen';
+  static const String screen_manager_screen = '/root-screen-manager';
   static const String onboarding_screen = '/on-boarding-screen';
   static const String search_places_screen = '/search-places-screen';
   static const String place_item_details_screen = '/place-item-details';
@@ -69,7 +72,9 @@ class Routes {
   static const String unsync_couple_screen = '/unsync-couple-screen';
   static const String suggestions_screen = '/suggestions-screen';
   static const String add_suggestions_screen = '/add-suggestion-screen';
+  static const String login_wrapper_screen = '/login-wrapper-screen';
   static const all = <String>{
+    authentication_wrapper_screen,
     intro_screen,
     screen_manager_screen,
     onboarding_screen,
@@ -95,6 +100,7 @@ class Routes {
     unsync_couple_screen,
     suggestions_screen,
     add_suggestions_screen,
+    login_wrapper_screen,
   };
 }
 
@@ -102,8 +108,9 @@ class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.authentication_wrapper_screen, page: AuthenticationWrapper),
     RouteDef(Routes.intro_screen, page: IntroScreen),
-    RouteDef(Routes.screen_manager_screen, page: ScreenManager),
+    RouteDef(Routes.screen_manager_screen, page: RootScreenManager),
     RouteDef(Routes.onboarding_screen, page: OnBoardingScreen),
     RouteDef(Routes.search_places_screen, page: SearchPlacesScreen),
     RouteDef(Routes.place_item_details_screen, page: PlaceItemDetails),
@@ -128,19 +135,26 @@ class Router extends RouterBase {
     RouteDef(Routes.unsync_couple_screen, page: UnsyncCoupleScreen),
     RouteDef(Routes.suggestions_screen, page: SuggestionsScreen),
     RouteDef(Routes.add_suggestions_screen, page: AddSuggestionScreen),
+    RouteDef(Routes.login_wrapper_screen, page: LoginWrapperScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
+    AuthenticationWrapper: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AuthenticationWrapper(),
+        settings: data,
+      );
+    },
     IntroScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => IntroScreen(),
         settings: data,
       );
     },
-    ScreenManager: (data) {
+    RootScreenManager: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ScreenManager(),
+        builder: (context) => RootScreenManager(),
         settings: data,
       );
     },
@@ -321,6 +335,12 @@ class Router extends RouterBase {
     AddSuggestionScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddSuggestionScreen(),
+        settings: data,
+      );
+    },
+    LoginWrapperScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginWrapperScreen(),
         settings: data,
       );
     },
