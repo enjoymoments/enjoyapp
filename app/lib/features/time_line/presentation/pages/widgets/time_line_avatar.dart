@@ -11,6 +11,28 @@ import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.d
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
+class TimeLineText extends StatelessWidget {
+  const TimeLineText({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TimelineBloc, TimelineState>(
+      cubit: getItInstance<TimelineBloc>(),
+      builder: (context, state) {
+        if (state.timelineSelected == null) {
+          return Text('');
+        }
+
+        if(state.timelineSelected.type == TimeLineTypeEnum.Personal) {
+          return Text('Minha linha do tempo');
+        }
+
+        return Text('Linha do tempo do casal');
+      },
+    );
+  }
+}
+
 class TimeLineAvatar extends StatelessWidget {
   const TimeLineAvatar({
     Key key,
@@ -21,23 +43,21 @@ class TimeLineAvatar extends StatelessWidget {
     return BlocBuilder<TimelineBloc, TimelineState>(
       cubit: getItInstance<TimelineBloc>(),
       builder: (context, state) {
-        var _item = _getTimelineItem(state);
-        if (_item == null) {
+        if (state.timelineSelected == null) {
           return SizedBox.shrink();
         }
 
-        return _buildAvatar(context, state, _item);
+        return _buildAvatar(context, state);
       },
     );
   }
 
-  Widget _buildAvatar(
-      BuildContext context, TimelineState state, GetTimeLineModel item) {
-    if (state.timelines.length < 2) {
+  Widget _buildAvatar(BuildContext context, TimelineState state) {
+    if (state.timelines.length == 1) {
       return Padding(
         padding: EdgeInsets.all(SizeConfig.sizeByPixel(8)),
         child: CustomAvatar(
-          backgroundImage: _getBackgroundImage(item),
+          backgroundImage: _getBackgroundImage(state),
         ),
       );
     }
@@ -47,48 +67,45 @@ class TimeLineAvatar extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: [
-              CustomItemModalFit(
-                text: 'Não quero remover',
-                iconData: AppIcons.ad,
-                onTap: () {},
-              ),
-              CustomItemModalFit(
-                text: 'Sim, quero remover',
-                iconData: AppIcons.trash,
-                onTap: () {},
-              ),
-            ],
+            items: _buildBottomSheetItem(state),
           ),
         );
       },
       child: Padding(
         padding: EdgeInsets.all(SizeConfig.sizeByPixel(8)),
         child: CustomAvatar(
-          backgroundImage: _getBackgroundImage(item),
+          backgroundImage: _getBackgroundImage(state),
         ),
       ),
     );
   }
 
-  GetTimeLineModel _getTimelineItem(TimelineState state) {
-    if (state.timelines?.length == 0) {
-      return null;
+  List<CustomItemModalFit> _buildBottomSheetItem(TimelineState state) {
+    if (state.timelineSelected.type == TimeLineTypeEnum.Couple) {
+      return [
+        CustomItemModalFit(
+          text: 'Ir para minha linha do tempo',
+          iconData: AppIcons.seedling,
+          onTap: () {
+            var _item = _findByType(state, TimeLineTypeEnum.Personal);
+            getItInstance<TimelineBloc>().add(SelectedTimeline(_item));
+          },
+        ),
+      ];
+    } else if (state.timelineSelected.type == TimeLineTypeEnum.Personal) {
+      return [
+        CustomItemModalFit(
+          text: 'Ir para linha do tempo do casal',
+          iconData: AppIcons.seedling,
+          onTap: () {
+            var _item = _findByType(state, TimeLineTypeEnum.Couple);
+            getItInstance<TimelineBloc>().add(SelectedTimeline(_item));
+          },
+        ),
+      ];
     }
 
-    var _item = _findByType(state, TimeLineTypeEnum.Couple);
-
-    if (_item != null) {
-      return _item;
-    }
-
-    _item = _findByType(state, TimeLineTypeEnum.Personal);
-
-    if (_item != null) {
-      return _item;
-    }
-
-    return null;
+    return [];
   }
 
   GetTimeLineModel _findByType(TimelineState state, TimeLineTypeEnum type) {
@@ -96,8 +113,8 @@ class TimeLineAvatar extends StatelessWidget {
         ?.firstWhere((element) => element.type == type, orElse: () => null);
   }
 
-  ImageProvider _getBackgroundImage(GetTimeLineModel item) {
-    if (item.type == TimeLineTypeEnum.Couple) {
+  ImageProvider _getBackgroundImage(TimelineState state) {
+    if (state.timelineSelected.type == TimeLineTypeEnum.Couple) {
       return AssetImage('assets/images/default_avatar.png');
     }
 

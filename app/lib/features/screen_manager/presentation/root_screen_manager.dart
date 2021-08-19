@@ -152,9 +152,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
       return AppBar(
         leadingWidth: SizeConfig.sizeByPixel(55),
         leading: TimeLineAvatar(),
-        title: Text(
-          _getStringbyScreen(state),
-        ),
+        title: TimeLineText(),
         actions: _buildActionButtons(state),
       );
     }
