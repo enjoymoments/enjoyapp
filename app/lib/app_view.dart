@@ -32,10 +32,10 @@ class _AppViewState extends State<AppView> {
         builder: (context, extendedNav) {
           return extendedNav;
         },
+        observers: <NavigatorObserver>[
+          getItInstance<AnalyticsService>().getAnalyticsObserver(),
+        ],
       ),
-      navigatorObservers: <NavigatorObserver>[
-        getItInstance<AnalyticsService>().getAnalyticsObserver(),
-      ],
     );
   }
 }
