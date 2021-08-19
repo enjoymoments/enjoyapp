@@ -33,28 +33,10 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      child: Column(
-        children: [
-          _buildTimeLines(),
-          Expanded(
-            child: _buildBody(),
-          ),
-        ],
-      ),
+      child: _buildBody(),
     );
   }
 
-  Widget _buildTimeLines() {
-    return BlocBuilder<TimelineBloc, TimelineState>(
-      cubit: _timelineBloc,
-      builder: (context, state) {
-        if (state.timelines.isNotEmpty) {
-          return _buildTimelinesContent(state);
-        }
-        return SizedBox.shrink();
-      },
-    );
-  }
 
   Widget _buildBody() {
     return BlocBuilder<TimelineBloc, TimelineState>(
@@ -99,41 +81,42 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
     );
   }
 
-  Widget _buildTimelinesContent(TimelineState state) {
-    return Column(
-      children: [
-        Container(
-          height: SizeConfig.sizeByPixel(65),
-          child: ListView.separated(
-            physics: const AlwaysScrollableScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: state.timelines.length,
-            itemBuilder: (context, index) {
-              var _item = state.timelines[index];
+//TODO:in development - timeline
+  // Widget _buildTimelinesContent(TimelineState state) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //         height: SizeConfig.sizeByPixel(65),
+  //         child: ListView.separated(
+  //           physics: const AlwaysScrollableScrollPhysics(),
+  //           scrollDirection: Axis.horizontal,
+  //           itemCount: state.timelines.length,
+  //           itemBuilder: (context, index) {
+  //             var _item = state.timelines[index];
 
-              return InkWell(
-                onTap: () {
-                  if (state.timelineSelected.id != _item.id) {
-                    _timelineBloc.add(SelectedTimeline(_item));
-                  }
-                },
-                child: TimeLineAvatar(
-                  selected: state.timelineSelected.id == _item.id,
-                  name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
-                  backgroundImage: _item.type == TimeLineTypeEnum.Personal
-                      ? null
-                      : AssetImage('assets/images/default_avatar.png'),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => SpacerBox.h16,
-          ),
-        ),
-        CustomDivider(),
-        SpacerBox.v8,
-      ],
-    );
-  }
+  //             return InkWell(
+  //               onTap: () {
+  //                 if (state.timelineSelected.id != _item.id) {
+  //                   _timelineBloc.add(SelectedTimeline(_item));
+  //                 }
+  //               },
+  //               child: TimeLineAvatar(
+  //                 selected: state.timelineSelected.id == _item.id,
+  //                 name: _item.type == TimeLineTypeEnum.Personal ? 'Você' : 'Casal',
+  //                 backgroundImage: _item.type == TimeLineTypeEnum.Personal
+  //                     ? null
+  //                     : AssetImage('assets/images/default_avatar.png'),
+  //               ),
+  //             );
+  //           },
+  //           separatorBuilder: (context, index) => SpacerBox.h16,
+  //         ),
+  //       ),
+  //       CustomDivider(),
+  //       SpacerBox.v8,
+  //     ],
+  //   );
+  // }
 
   Widget _buildLoading() {
     return ListView.separated(

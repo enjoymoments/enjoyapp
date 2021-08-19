@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
+import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_avatar.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
@@ -44,16 +45,19 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         return CustomScaffold(
           child: _buildContent(state),
           appBar: _buildAppBar(state),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             onPressed: () {
               _screenManagerBloc
                   .add(TapScreen(DefaultMenuEnum.Search, context));
             },
             child: Icon(
               AppIcons.search,
-              color: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+              color:
+                  Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
             ),
             tooltip: 'search',
           ),
@@ -67,9 +71,12 @@ class _RootScreenManagerState extends State<RootScreenManager> {
           // floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: FABBottomAppBar(
-            backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-            color: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
-            selectedColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+            backgroundColor:
+                Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+            selectedColor:
+                Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
             iconSize: Theme.of(context).iconTheme.size,
             centerItemText: '',
             height: SizeConfig.sizeByPixel(50),
@@ -141,6 +148,17 @@ class _RootScreenManagerState extends State<RootScreenManager> {
   }
 
   Widget _buildAppBar(ScreenManagerState state) {
+    if (state.currentScreen == DefaultMenuEnum.TimeLine) {
+      return AppBar(
+        leadingWidth: SizeConfig.sizeByPixel(55),
+        leading: TimeLineAvatar(),
+        title: Text(
+          _getStringbyScreen(state),
+        ),
+        actions: _buildActionButtons(state),
+      );
+    }
+
     return AppBar(
       title: Text(
         _getStringbyScreen(state),
@@ -185,7 +203,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
       case DefaultMenuEnum.Home:
         return 'Início';
       case DefaultMenuEnum.TimeLine:
-        return 'Casal';
+        return 'Linha do tempo';
       case DefaultMenuEnum.Search:
         return '';
       case DefaultMenuEnum.Me:
