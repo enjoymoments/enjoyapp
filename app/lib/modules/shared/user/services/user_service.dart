@@ -4,6 +4,7 @@ import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_in
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_category_model.dart';
 import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/cubit/root_screen_manager_cubit.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -104,7 +105,9 @@ class UserService implements UserInterface {
 
   @override
   Future setActionListener(UserAppModel user) {
-    return userRepository.setActionListener(user);
+    userRepository.setActionListener(user);
+    root<RootScreenManagerCubit>().subscribeActionListener();
+    return Future.value(true);
   }
 
   bool notAuthenticated() {

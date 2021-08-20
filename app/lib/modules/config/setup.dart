@@ -11,7 +11,7 @@ import 'package:mozin/features/ads/domain/repositories/ads_banner_repository.dar
 import 'package:mozin/features/ads/domain/repositories/ads_publisher_banner_repository.dart';
 import 'package:mozin/features/ads/presentation/bloc/ads_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
-import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
+import 'package:mozin/features/screen_manager/presentation/bloc/cubit/root_screen_manager_cubit.dart';
 import 'package:mozin/modules/config/injection/injection_bloc.dart';
 import 'package:mozin/modules/config/injection/injection_data_source.dart';
 import 'package:mozin/modules/config/injection/injection_model.dart';
@@ -31,6 +31,10 @@ GetIt root = GetIt.asNewInstance();
 void setupRoot() {
   root.registerLazySingleton<AuthenticationBloc>(
     () => AuthenticationBloc(),
+  );
+
+  root.registerLazySingleton<RootScreenManagerCubit>(
+    () => RootScreenManagerCubit(),
   );
 
   root.registerLazySingleton<AdsBannerRepository>(
@@ -86,8 +90,9 @@ void _setupRemoteClientRepository() {
             dio: _dio,
             url:
                 //'http://enjoyapi.com.br/graphql/',
-                'https://localhost:5001/graphql',
+                //'https://localhost:5001/graphql',
             //'https://10.0.2.2:5001/graphql',
+            'https://24a450cac6e9.ngrok.io/graphql',
             //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
@@ -106,7 +111,7 @@ Future<void> resetInstances() async {
   await getItInstance<LocalStorageService>().put(KeyValue<String, String>(
         key: bypass_onboarding_screen, value: bypass_onboarding_screen));
 
-  getItInstance<ScreenManagerBloc>()..add(UnsubscribeActionListener());
+  await root<RootScreenManagerCubit>().unsubscribeActionListener();
 
   getItInstance.reset();
 

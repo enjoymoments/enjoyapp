@@ -24,17 +24,3 @@ class TapScreen extends ScreenManagerEvent {
 
   TapScreen(this.screenSelected, this.context);
 }
-
-class SubscribeActionListener extends ScreenManagerEvent {
-  SubscribeActionListener();
-}
-
-class UnsubscribeActionListener extends ScreenManagerEvent {
-  UnsubscribeActionListener();
-}
-
-class ActionListener extends ScreenManagerEvent {
-  final DocumentSnapshot action;
-
-  ActionListener(this.action);
-}

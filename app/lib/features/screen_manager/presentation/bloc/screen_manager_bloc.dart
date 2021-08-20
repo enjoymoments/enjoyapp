@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
@@ -35,10 +34,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     this.wrapperMediaService,
     this.userWrapper,
     this.localStorageService,
-  ) : super(ScreenManagerState.initial()) {
-    //TODO:temporary
-    //_subscribeActionListener();
-  }
+  ) : super(ScreenManagerState.initial());
 
   final TimelineRepository timelineRepository;
   final AlbumsRepository albumsRepository;
@@ -47,15 +43,6 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   final UserWrapper userWrapper;
   final LocalStorageService localStorageService;
-
-  StreamSubscription<DocumentSnapshot> _actionSubscription;
-
-  @override
-  Future<void> close() {
-    //TODO:temporary
-    //_unsubscribeActionListener();
-    return super.close();
-  }
 
   @override
   Stream<ScreenManagerState> mapEventToState(
@@ -67,16 +54,7 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       yield* albumSave(event);
     } else if (event is TapScreen) {
       yield* mapTapScreenToState(event);
-    } 
-    //TOOD:in test
-    // else if (event is SubscribeActionListener) {
-    //   _subscribeActionListener();
-    // } else if (event is UnsubscribeActionListener) {
-    //   _unsubscribeActionListener();
-    // } else if (event is ActionListener) {
-    //   var _test = event.action.data();
-    //   print('test');
-    // }
+    }
   }
 
   Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
@@ -189,23 +167,4 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       }
     }
   }
-
-  //TODO:temporary
-  // void _subscribeActionListener() {
-  //   var _instance = new FirestoreInstanceProvider();
-  //   var _user = userWrapper.getUser;
-
-  //   if (userWrapper.authenticated && _actionSubscription == null) {
-  //     _actionSubscription = _instance.firestore
-  //         .doc('actionListener/${_user.id}')
-  //         .snapshots()
-  //         .listen(
-  //           (action) => add(ActionListener(action)),
-  //         );
-  //   }
-  // }
-
-  // void _unsubscribeActionListener() {
-  //   _actionSubscription?.cancel();
-  // }
 }
