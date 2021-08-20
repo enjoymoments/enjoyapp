@@ -8,7 +8,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_app_bar.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
 import 'package:custom_view/custom_button_default.dart';
 import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_divider.dart';
@@ -133,19 +132,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Row(
-        //   children: [
-        //     CustomAvatar(
-        //       radius: 40,
-        //       backgroundImage: NetworkImage(state.userSyncInfoModel.photo),
-        //     ),
-        //     SpacerBox.h16,
-        //     state.userSyncInfoModel.name
-        //         .title(context, color: Theme.of(context).primaryColor),
-        //   ],
-        // ),
-        // ..._divider(),
-        'Deseja formar uma casal com você. O que vocês irão compartilhar:'
+        'Ao desvincular com o parceiro(a), vocês deixaram de compartilhar: '
             .title(context),
         SpacerBox.v34,
         ..._buildShareContent(context),
@@ -158,23 +145,18 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
   List<Widget> _buildShareContent(BuildContext context) {
     return [
       CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
+        title: 'Linha do tempo',
+        description:
+            'Uma linha do tempo privada, onde poderam postar declaracões de amor e momentos juntos',
+        iconStart: AppIcons.check,
         onTap: () {},
       ),
       ..._divider(),
       CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
-        onTap: () {},
-      ),
-      ..._divider(),
-      CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
+        title: 'Álbuns de fotos',
+        description:
+            'Criar vários álbuns de fotos contendo todos os seus momentos felizes',
+        iconStart: AppIcons.check,
         onTap: () {},
       ),
     ];
