@@ -117,7 +117,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   }
 
   Future<UserAppModel> _updateInstanceUserWithTimelines(UserAppModel user) async {
-    var _timelines = await this.timelineRepository.getTimelines(user.id);
+    var _timelines = user.timelines;
     UserAppModel newInstance;
 
     if (_timelines != null && _timelines.length > 0) {
@@ -132,17 +132,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
       }
 
       newInstance =
-          user.copyWith(timelines: _timelines, timelineSelected: _element);
-    } else {
-      var _newTimelineId = await this
-          .timelineRepository
-          .setTimeline([user.id], TimeLineTypeEnum.Personal);
-
-      var _newTimeline =
-          GetTimeLineModel(id: _newTimelineId, type: TimeLineTypeEnum.Personal);
-
-      newInstance = user
-          .copyWith(timelines: [_newTimeline], timelineSelected: _newTimeline);
+          user.copyWith(timelineSelected: _element);
     }
 
     userWrapper.assignment(newInstance);

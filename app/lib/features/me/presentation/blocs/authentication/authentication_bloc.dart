@@ -21,9 +21,11 @@ class AuthenticationBloc
     );
   }
 
-  AuthenticationRepository get _authenticationRepository => getItInstance<AuthenticationRepository>();
+  AuthenticationRepository get _authenticationRepository =>
+      getItInstance<AuthenticationRepository>();
   UserService get _userService => getItInstance<UserService>();
-  PushNotificationConfig get _pushNotificationConfig => getItInstance<PushNotificationConfig>();
+  PushNotificationConfig get _pushNotificationConfig =>
+      getItInstance<PushNotificationConfig>();
   UserWrapper get _userWrapper => getItInstance<UserWrapper>();
 
   StreamSubscription<UserAppModel> _userSubscription;
@@ -77,7 +79,7 @@ class AuthenticationBloc
     }
   }
 
-    Stream<AuthenticationState> mapLogInWithAppleToState(
+  Stream<AuthenticationState> mapLogInWithAppleToState(
     RequestAppleLogin event,
   ) async* {
     try {
@@ -153,7 +155,7 @@ class AuthenticationBloc
     }
   }
 
-    Stream<AuthenticationState> mapCloseOnboardScreenToState() async* {
+  Stream<AuthenticationState> mapCloseOnboardScreenToState() async* {
     try {
       yield state.copyWith(closeOnboardingScreen: true);
     } catch (e) {
@@ -168,6 +170,7 @@ class AuthenticationBloc
 
     //_settingsExecute - avoids running too often
     if (_settingsExecute == false && event.user != UserAppModel.empty) {
+      _setUserInfo();
       _settingsUser(event.user);
       _settingsExecute = true;
     }
@@ -181,13 +184,19 @@ class AuthenticationBloc
     _userService.setTokensPushNotifications(user, _token);
     _userService.getFavoriteInterests();
     _userService.setActionListener(user);
-    _userService.setUserInfo().then((response) {
-      response.fold((model) {
-        if(model != null) {
-          _userWrapper.setInternalId(model.userInternalId);
-          _userWrapper.setCoupleId(model.coupleId);
-        }
-      }, (error) => null);
-    });
+  }
+
+  Future<void> _setUserInfo() async {
+    var response = await _userService.setUserInfo();
+    response.fold((model) {
+      if (model != null) {
+        var _newInstance =
+            _userWrapper.getUser.copyWith(timelines: model.timelines);
+        _userWrapper.assignment(_newInstance);
+
+        _userWrapper.setInternalId(model.userInternalId);
+        _userWrapper.setCoupleId(model.coupleId);
+      }
+    }, (error) => null);
   }
 }

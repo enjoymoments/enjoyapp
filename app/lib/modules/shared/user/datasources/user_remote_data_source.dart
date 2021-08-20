@@ -17,6 +17,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       userInfo {
         coupleId
         userInternalId
+        timelines {
+          id
+          type
+        }
       }
     }
     ''';
