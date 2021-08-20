@@ -2,15 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meta/meta.dart';
+import 'package:mozin/features/listener_manager/presentation/bloc/listener_manager_state.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/config/setup.dart';
 
-part 'root_screen_manager_state.dart';
-
-class RootScreenManagerCubit extends Cubit<RootScreenManagerState> {
-  RootScreenManagerCubit() : super(RootScreenManagerInitial());
+class ListenerManagerCubit extends Cubit<ListenerManagerState> {
+  ListenerManagerCubit() : super(ListenerManagerState.initial());
 
   StreamSubscription<DocumentSnapshot> _actionSubscription;
 
