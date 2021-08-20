@@ -116,26 +116,27 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     }
   }
 
-  Future<UserAppModel> _updateInstanceUserWithTimelines(UserAppModel user) async {
+  Future<UserAppModel> _updateInstanceUserWithTimelines(
+      UserAppModel user) async {
     var _timelines = user.timelines;
-    UserAppModel newInstance;
 
     if (_timelines != null && _timelines.length > 0) {
       GetTimeLineModel _element = _timelines.firstWhere(
           (element) => element.type == TimeLineTypeEnum.Couple,
           orElse: () => null);
-      
-      if(_element == null) {
+
+      if (_element == null) {
         _element = _timelines.firstWhere(
-          (element) => element.type == TimeLineTypeEnum.Personal,
-          orElse: () => null);
+            (element) => element.type == TimeLineTypeEnum.Personal,
+            orElse: () => null);
       }
 
-      newInstance =
-          user.copyWith(timelineSelected: _element);
+      var _newInstance = user.copyWith(timelineSelected: _element);
+      userWrapper.assignment(_newInstance);
+      
+      return _newInstance;
     }
 
-    userWrapper.assignment(newInstance);
-    return newInstance;
+    return user;
   }
 }
