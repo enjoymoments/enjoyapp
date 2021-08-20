@@ -91,7 +91,7 @@ class InviteScreen extends StatelessWidget {
 
   Widget _buildButtons(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: EdgeInsets.only(bottom: SizeConfig.sizeByPixel(25)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -134,7 +134,7 @@ class InviteScreen extends StatelessWidget {
         ..._divider(),
         'Deseja formar uma casal com você. O que vocês irão compartilhar:'
             .title(context),
-        SpacerBox.v34,
+        SpacerBox.v24,
         ..._buildShareContent(context),
         SpacerBox.v34,
         'Você quer prosseguir?'.title(context),
@@ -145,23 +145,23 @@ class InviteScreen extends StatelessWidget {
   List<Widget> _buildShareContent(BuildContext context) {
     return [
       CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
+        title: 'Coisas para fazer',
+        description: 'Aqui é o lugar para sair da mesmice. Procura o que fazer dentro ou fora de casa com o mozão ;)',
+        iconStart: AppIcons.check,
         onTap: () {},
       ),
       ..._divider(),
       CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
+        title: 'Linha do tempo',
+        description: 'Uma linha do tempo privada, onde poderam postar declaracões de amor e momentos juntos',
+        iconStart: AppIcons.check,
         onTap: () {},
       ),
       ..._divider(),
       CustomTile(
-        title: 'Curtiu o Enjoy? Avalie-nos',
-        description: 'Dá aquela 5 estrelas pra gente ;)',
-        iconStart: AppIcons.thumbs_up,
+        title: 'Álbuns de fotos',
+        description: 'Criar vários álbuns de fotos contendo todos os seus momentos felizes',
+        iconStart: AppIcons.check,
         onTap: () {},
       ),
     ];
