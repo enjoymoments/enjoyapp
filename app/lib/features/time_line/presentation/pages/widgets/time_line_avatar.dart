@@ -1,15 +1,43 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:custom_view/AppIcons.dart';
+import 'package:custom_view/custom_icon.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
+import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
+import 'package:mozin/modules/shared/user/services/user_service.dart';
+
+class TimeLineAddActions extends StatelessWidget {
+  const TimeLineAddActions({ Key key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TimelineBloc, TimelineState>(
+      cubit: getItInstance<TimelineBloc>(),
+      builder: (context, state) {
+        if (getItInstance<UserService>().notAuthenticated() || state.timelineSelected == null) {
+          return SizedBox.shrink();
+        }
+
+        return 
+          IconButton(
+            icon: CustomIcon(icon: AppIcons.plus),
+            onPressed: () {
+              ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
+            },
+          );
+      },
+    );
+  }
+}
 
 class TimeLineText extends StatelessWidget {
   const TimeLineText({ Key key }) : super(key: key);

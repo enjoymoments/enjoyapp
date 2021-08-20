@@ -153,7 +153,9 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         leadingWidth: SizeConfig.sizeByPixel(55),
         leading: TimeLineAvatar(),
         title: TimeLineText(),
-        actions: _buildActionButtons(state),
+        actions: [
+          TimeLineAddActions(),
+        ],
       );
     }
 
@@ -200,8 +202,6 @@ class _RootScreenManagerState extends State<RootScreenManager> {
     switch (state.currentScreen) {
       case DefaultMenuEnum.Home:
         return 'Início';
-      case DefaultMenuEnum.TimeLine:
-        return 'Linha do tempo';
       case DefaultMenuEnum.Search:
         return '';
       case DefaultMenuEnum.Me:

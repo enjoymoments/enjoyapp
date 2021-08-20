@@ -121,9 +121,15 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     UserAppModel newInstance;
 
     if (_timelines != null && _timelines.length > 0) {
-      var _element = _timelines.firstWhere(
+      GetTimeLineModel _element = _timelines.firstWhere(
+          (element) => element.type == TimeLineTypeEnum.Couple,
+          orElse: () => null);
+      
+      if(_element == null) {
+        _element = _timelines.firstWhere(
           (element) => element.type == TimeLineTypeEnum.Personal,
           orElse: () => null);
+      }
 
       newInstance =
           user.copyWith(timelines: _timelines, timelineSelected: _element);
