@@ -5,6 +5,8 @@ class TimelineEvent extends Equatable  {
   List<Object> get props => [];
 }
 
+class InitLoad extends TimelineEvent {}
+
 class LoadPosts extends TimelineEvent {}
 
 class DeletePost extends TimelineEvent {
@@ -12,8 +14,6 @@ class DeletePost extends TimelineEvent {
 
   DeletePost(this.post);
 }
-
-class VerifyAuthenticated extends TimelineEvent {}
 
 class SelectedTimeline extends TimelineEvent {
   final GetTimeLineModel timeline;

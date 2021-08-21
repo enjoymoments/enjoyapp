@@ -10,7 +10,6 @@ class TimelineState extends DefaultState {
     this.posts,
     this.forceRefresh,
     this.limit,
-    this.unauthenticated,
     this.timelines,
     this.timelineSelected
   }): super(
@@ -26,12 +25,11 @@ class TimelineState extends DefaultState {
       isSuccess: false,
       isEmpty: false,
       isError: false,
-      isLoading: false,
+      isLoading: true,
       errorMessage: null,
       posts: [],
       forceRefresh: 0,
       limit: 10,
-      unauthenticated: false,
       timelines: [],
       timelineSelected: null,
     );
@@ -46,7 +44,6 @@ class TimelineState extends DefaultState {
     List<TimeLineItemModel> posts,
     int forceRefresh,
     int limit,
-    bool unauthenticated,
     List<GetTimeLineModel> timelines,
     GetTimeLineModel timelineSelected,
   }) {
@@ -59,7 +56,6 @@ class TimelineState extends DefaultState {
       posts: posts ?? this.posts,
       forceRefresh: forceRefresh ?? this.forceRefresh,
       limit: limit ?? this.limit,
-      unauthenticated: unauthenticated ?? this.unauthenticated,
       timelines: timelines ?? this.timelines,
       timelineSelected: timelineSelected ?? this.timelineSelected,
     );
@@ -68,7 +64,6 @@ class TimelineState extends DefaultState {
   final List<TimeLineItemModel> posts;
   final int forceRefresh;
   final int limit;
-  final bool unauthenticated;
   final List<GetTimeLineModel> timelines;
   final GetTimeLineModel timelineSelected;
 
@@ -82,7 +77,6 @@ class TimelineState extends DefaultState {
         posts,
         forceRefresh,
         limit,
-        unauthenticated,
         timelines,
         timelineSelected,
       ];

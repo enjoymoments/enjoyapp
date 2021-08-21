@@ -31,10 +31,20 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
       yield* mapPostsToState();
     } else if (event is DeletePost) {
       yield* mapDeletePostToState(event);
-    } else if (event is VerifyAuthenticated) {
-      yield* mapVerifyAuthenticatedToState(event);
     } else if (event is SelectedTimeline) {
       yield* mapSelectedTimelineToState(event);
+    } else if (event is InitLoad) {
+      yield* mapInitLoadToState();
+    }
+  }
+
+  Stream<TimelineState> mapInitLoadToState() async* {
+    if (state.posts.isNotEmpty) {
+      yield state.copyWith(
+        forceRefresh: StateUtils.generateRandomNumber(),
+      );
+    } else {
+      this.add(LoadPosts());
     }
   }
 
@@ -51,20 +61,6 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     );
 
     this.add(LoadPosts());
-  }
-
-  Stream<TimelineState> mapVerifyAuthenticatedToState(
-      VerifyAuthenticated event) async* {
-    var _user = userWrapper.getUser;
-    if (_user == UserAppModel.empty) {
-      yield state.copyWith(unauthenticated: true);
-      return;
-    }
-
-    yield state.copyWith(unauthenticated: false);
-    if (state.posts.isEmpty) {
-      this.add(LoadPosts());
-    }
   }
 
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
@@ -131,9 +127,10 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
             orElse: () => null);
       }
 
-      var _newInstance = user.copyWith(timelines: _timelines, timelineSelected: _element);
+      var _newInstance =
+          user.copyWith(timelines: _timelines, timelineSelected: _element);
       userWrapper.assignment(_newInstance);
-      
+
       return _newInstance;
     }
 

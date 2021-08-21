@@ -21,7 +21,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   @override
   void initState() {
-    _timelineBloc = getItInstance<TimelineBloc>()..add(VerifyAuthenticated());
+    _timelineBloc = getItInstance<TimelineBloc>()..add(InitLoad());
 
     super.initState();
   }
@@ -33,18 +33,10 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
     );
   }
 
-
   Widget _buildBody() {
     return BlocBuilder<TimelineBloc, TimelineState>(
       cubit: _timelineBloc,
       builder: (context, state) {
-        if (state.unauthenticated) {
-          return Center(
-            child: "Quer registrar seus momentos?\nFaça login e aproveite."
-                .labelIntro(context),
-          );
-        }
-
         if (state.isLoading) {
           return _buildLoading();
         }
@@ -67,6 +59,12 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
                 );
               },
             ),
+          );
+        }
+
+        if (state.isError) {
+          return Center(
+            child: "Ops, houve um erro. Tente novamente".labelIntro(context),
           );
         }
 
