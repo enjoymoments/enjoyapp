@@ -31,8 +31,11 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
           .doc('actionListener/${_user.id}')
           .snapshots()
           .listen(
-            (action) => _resolverActions(_parseActions(action)),
-          );
+        (action) {
+          _resolverActions(_parseActions(action));
+          _deleteActionRemote(action, _user.id);
+        },
+      );
     }
   }
 
@@ -57,10 +60,16 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
 
   void _forceUpdateTimeline() {
     var user = getItInstance<UserWrapper>().getUser;
-    
-    var _newInstance = user.copyWith(timelineSelected: null, acceptValueNull: true);
+
+    var _newInstance =
+        user.copyWith(timelineSelected: null, acceptValueNull: true);
     getItInstance<UserWrapper>().assignment(_newInstance);
 
     getItInstance<TimelineBloc>().add(LoadPosts());
+  }
+
+  void _deleteActionRemote(DocumentSnapshot action, String userId) {
+    final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
+    _instance.firestore.doc('actionListener/$userId').delete();
   }
 }
