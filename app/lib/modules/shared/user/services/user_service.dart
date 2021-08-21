@@ -104,8 +104,7 @@ class UserService implements UserInterface {
   }
 
   @override
-  Future setActionListener(UserAppModel user) {
-    userRepository.setActionListener(user);
+  Future setActionListener() {
     root<ListenerManagerCubit>().subscribeActionListener();
     return Future.value(true);
   }

@@ -8,7 +8,7 @@ class ListenerActionModel {
   factory ListenerActionModel.fromJson(Map<String, dynamic> json) {
     List<ListenerActionTypeEnum> _actions = [];
 
-    if (json['actions'] != null) {
+    if (json != null && json['actions'] != null) {
       for (var item in json['actions']) {
         _actions.add(ListenerActionTypeEnum(item));
       }

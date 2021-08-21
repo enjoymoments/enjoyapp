@@ -33,7 +33,7 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
           .listen(
         (action) {
           _resolverActions(_parseActions(action));
-          _deleteActionRemote(action, _user.id);
+          _deleteActionRemote(_user.id);
         },
       );
     }
@@ -68,7 +68,7 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
     getItInstance<TimelineBloc>().add(LoadPosts());
   }
 
-  void _deleteActionRemote(DocumentSnapshot action, String userId) {
+  void _deleteActionRemote(String userId) {
     final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
     _instance.firestore.doc('actionListener/$userId').delete();
   }

@@ -183,7 +183,7 @@ class AuthenticationBloc
 
     _userService.setTokensPushNotifications(user, _token);
     _userService.getFavoriteInterests();
-    _userService.setActionListener(user);
+    _userService.setActionListener();
   }
 
   Future<void> _setUserInfo() async {
