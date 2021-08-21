@@ -10,7 +10,7 @@ import 'package:mozin/modules/shared/general/interest_type.dart';
 /// {@endtemplate}
 class UserAppModel extends Equatable {
   /// {@macro user}
-   const UserAppModel({
+  const UserAppModel({
     @required this.id,
     @required this.email,
     @required this.name,
@@ -38,6 +38,7 @@ class UserAppModel extends Equatable {
     List<GetTimeLineModel> timelines,
     GetTimeLineModel timelineSelected,
     InterestType favoriteInterests,
+    bool acceptValueNull = false,
   }) {
     return UserAppModel(
       id: this.id,
@@ -45,7 +46,8 @@ class UserAppModel extends Equatable {
       name: this.name,
       photo: this.photo,
       timelines: timelines ?? this.timelines,
-      timelineSelected: timelineSelected ?? this.timelineSelected,
+      timelineSelected:
+          _getValue(timelineSelected, this.timelineSelected, acceptValueNull),
       favoriteInterests: favoriteInterests ?? this.favoriteInterests,
     );
   }
@@ -64,4 +66,17 @@ class UserAppModel extends Equatable {
         name,
         photo,
       ];
+
+  dynamic _getValue(
+      dynamic newValue, dynamic defaultValue, bool acceptValueNull) {
+    if (newValue != null) {
+      return newValue;
+    }
+
+    if (acceptValueNull) {
+      return null;
+    }
+
+    return defaultValue;
+  }
 }

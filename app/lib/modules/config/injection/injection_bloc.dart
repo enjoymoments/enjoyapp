@@ -32,7 +32,7 @@ void registerBlocs(GetIt getItInstance) {
       .registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(getItInstance()));
 
   getItInstance.registerLazySingleton<TimelineBloc>(
-      () => TimelineBloc(getItInstance(), getItInstance()));
+      () => TimelineBloc(getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance(),

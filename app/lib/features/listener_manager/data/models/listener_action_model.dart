@@ -1,15 +1,21 @@
 import 'package:mozin/features/listener_manager/domain/entities/listener_action_type.dart';
 
 class ListenerActionModel {
-  final ListenerActionTypeEnum type;
+  final List<ListenerActionTypeEnum> actions;
 
-  ListenerActionModel({
-    this.type
-  });
+  ListenerActionModel({this.actions});
 
   factory ListenerActionModel.fromJson(Map<String, dynamic> json) {
+    List<ListenerActionTypeEnum> _actions = [];
+
+    if (json['actions'] != null) {
+      for (var item in json['actions']) {
+        _actions.add(ListenerActionTypeEnum(item));
+      }
+    }
+
     return ListenerActionModel(
-      type: ListenerActionTypeEnum(json['type'] ?? 0),
+      actions: _actions,
     );
   }
 }

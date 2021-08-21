@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -17,11 +18,9 @@ part 'time_line_state.dart';
 class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   TimelineBloc(
     this.timelineRepository,
-    this.userWrapper,
   ) : super(TimelineState.initial());
 
   final TimelineRepository timelineRepository;
-  final UserWrapper userWrapper;
 
   @override
   Stream<TimelineState> mapEventToState(
@@ -50,10 +49,10 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
   Stream<TimelineState> mapSelectedTimelineToState(
       SelectedTimeline event) async* {
-    var _user = userWrapper.getUser;
+    var _user = getItInstance<UserWrapper>().getUser;
 
     var _newInstance = _user.copyWith(timelineSelected: event.timeline);
-    userWrapper.assignment(_newInstance);
+    getItInstance<UserWrapper>().assignment(_newInstance);
 
     yield state.copyWith(
       forceRefresh: StateUtils.generateRandomNumber(),
@@ -66,7 +65,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
     try {
       if (state.posts.remove(event.post)) {
-        var user = userWrapper.getUser;
+        var user = getItInstance<UserWrapper>().getUser;
 
         await this
             .timelineRepository
@@ -87,7 +86,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      var user = userWrapper.getUser;
+      var user = getItInstance<UserWrapper>().getUser;
       if (user.timelineSelected == null) {
         user = await _updateInstanceUserWithTimelines(user);
       }
@@ -126,7 +125,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
       var _newInstance =
           user.copyWith(timelines: _timelines, timelineSelected: _element);
-      userWrapper.assignment(_newInstance);
+      getItInstance<UserWrapper>().assignment(_newInstance);
 
       return _newInstance;
     }
