@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
-import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_container.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart';
 import 'package:mozin/features/home/presentation/pages/widgets/feature_card.dart';
@@ -10,68 +9,36 @@ import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
-import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_divider.dart';
 import 'package:custom_view/spacer_box.dart';
 import 'package:custom_view/extensions/extension.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  UserWrapper _userWrapper;
-  HomeCubit _homeCubit;
-  InviteCubit _inviteCubit;
-
-  @override
-  void initState() {
-    _userWrapper = getItInstance<UserWrapper>();
-    _homeCubit = getItInstance<HomeCubit>();
-    _inviteCubit = getItInstance<InviteCubit>();
-
-    if (_userWrapper.authenticated) {
-      _inviteCubit.verifyLoadedUserInternalId();
-    }
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _homeCubit.close();
-    super.dispose();
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({ Key key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: CustomContainer(
-        child: BlocBuilder<HomeCubit, HomeState>(
-          cubit: _homeCubit,
-          builder: (context, state) {
-            return _buildContent(state);
-          },
-        ),
+        child: _buildContent(context),
       ),
     );
   }
 
-  Widget _buildContent(HomeState state) {
-    final bool _autenticated = _userWrapper.authenticated;
-
+  Widget _buildContent(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildCardInvite(),
         _buildCardHelpMe(),
         SpacerBox.v16,
-        _buildPersonalSection(context, _autenticated),
+        _buildPersonalSection(context),
         SpacerBox.v16,
-        _buildAnotherSection(context, _autenticated),
+        _buildAnotherSection(context),
         SpacerBox.v16,
         Center(
           child: BannerAdWidget(
@@ -82,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildPersonalSection(BuildContext context, bool _autenticated) {
+  Widget _buildPersonalSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -93,10 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
-              _buildCardCalendar(_autenticated),
-              _buildCardAlbuns(_autenticated),
-              _buildCardFavorites(_autenticated),
-              _buildCardSchedule(_autenticated),
+              _buildCardCalendar(),
+              _buildCardAlbuns(),
+              _buildCardFavorites(),
+              _buildCardSchedule(),
             ],
           ),
         ),
@@ -104,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildAnotherSection(BuildContext context, bool _autenticated) {
+  Widget _buildAnotherSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -115,9 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
-              _buildCardSuggestions(_autenticated),
+              _buildCardSuggestions(),
               _buildCardMusics(),
-              _buildCardSites(_autenticated),
+              _buildCardSites(),
             ],
           ),
         ),
@@ -126,10 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCardInvite() {
-    return BlocBuilder<InviteCubit, InviteState>(
-      cubit: _inviteCubit,
+    return BlocBuilder<UserInfoCubit, UserInfoState>(
+      cubit: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
-        if (!state.showCardInvite) {
+        if (state.existCoupleId) {
           return SizedBox.shrink();
         }
 
@@ -137,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                _inviteCubit.generateShareUrl();
+                getItInstance<InviteCubit>().generateShareUrl();
               },
               child: CardContainer(
                 child: AnimatedSwitcher(
@@ -177,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardSchedule(bool autenticated) {
+  Widget _buildCardSchedule() {
     return AbsorbPointer(
       absorbing: true,
       child: FeatureCard(
@@ -190,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardCalendar(bool autenticated) {
+  Widget _buildCardCalendar() {
     return AbsorbPointer(
       absorbing: true,
       child: FeatureCard(
@@ -203,46 +170,37 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCardAlbuns(bool autenticated) {
-    return AbsorbPointer(
-      absorbing: !autenticated,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.camera_retro,
-        routeName: Routes.albums_screen,
-        name: 'Álbuns',
-        disabled: !autenticated,
-      ),
+  Widget _buildCardAlbuns() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.camera_retro,
+      routeName: Routes.albums_screen,
+      name: 'Álbuns',
+      disabled: false,
     );
   }
 
-  Widget _buildCardFavorites(bool autenticated) {
-    return AbsorbPointer(
-      absorbing: !autenticated,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.star,
-        routeName: Routes.favorite_interests_screen,
-        name: 'Favoritos',
-        disabled: !autenticated,
-      ),
+  Widget _buildCardFavorites() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.star,
+      routeName: Routes.favorite_interests_screen,
+      name: 'Favoritos',
+      disabled: false,
     );
   }
 
-  Widget _buildCardSuggestions(bool autenticated) {
-    return AbsorbPointer(
-      absorbing: !autenticated,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.random,
-        routeName: Routes.suggestions_screen,
-        name: 'Sugestões',
-        disabled: !autenticated,
-      ),
+  Widget _buildCardSuggestions() {
+    return FeatureCard(
+      width: SizeConfig.sizeByPixel(100),
+      iconData: AppIcons.random,
+      routeName: Routes.suggestions_screen,
+      name: 'Sugestões',
+      disabled: false,
     );
   }
 
-  Widget _buildCardSites(bool autenticated) {
+  Widget _buildCardSites() {
     return AbsorbPointer(
       absorbing: true,
       child: FeatureCard(
