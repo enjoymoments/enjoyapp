@@ -7,7 +7,6 @@ import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/ad
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
-import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/connected/connected_cubit.dart';
@@ -87,8 +86,6 @@ void registerBlocs(GetIt getItInstance) {
 
   getItInstance.registerFactory<FeedbackCubit>(() => FeedbackCubit(
       feedbackRepository: getItInstance(), userWrapper: getItInstance()));
-
-  getItInstance.registerFactory<HomeCubit>(() => HomeCubit());
 
   getItInstance.registerLazySingleton<InviteCubit>(() => InviteCubit(
       inviteRepository: getItInstance(),
