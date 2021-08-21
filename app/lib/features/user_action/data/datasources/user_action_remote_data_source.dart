@@ -19,7 +19,7 @@ class UserActionRemoteDataSourceImpl implements UserActionRemoteDataSource {
     mutation userAction {
       userAction(action:{
         notificationType: ${model.notificationType.toString()}
-        data: "${model.data}"
+        data: "${model.data ?? ''}"
       }) {
           isSuccess
           data

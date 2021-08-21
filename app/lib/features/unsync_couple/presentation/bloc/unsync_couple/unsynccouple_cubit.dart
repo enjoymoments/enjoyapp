@@ -6,8 +6,8 @@ import 'package:mozin/features/user_action/domain/repositories/user_action_repos
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
-import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 part 'unsynccouple_state.dart';
 
@@ -25,30 +25,14 @@ class UnsyncCoupleCubit extends Cubit<UnsyncCoupleState> {
       isLoading: true,
     ));
 
-    var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
-
-
-//TODO:remove this...backend search the timelines
-    var _data = _user.timelines
-        .where((element) => element.type == TimeLineTypeEnum.Couple)
-        .toList();
-
-    var _timelinesFormat = <String>[];
-
-    _data.forEach((element) { 
-      _timelinesFormat.add(element.id);
-    });
-
     Either<ResponseDefaultModel, Exception> _response =
         await _userActionRepository.addUserAction(
             model: UserActionModel(
-                notificationType: NotificationTypeEnum.UnsyncCouple,
-                data: _timelinesFormat.join(',')));
+                notificationType: NotificationTypeEnum.UnsyncCouple));
 
     _response.fold((model) {
       if (model.isSuccess) {
-        _userWrapper.setCoupleId(model.data);
+        getItInstance<UserWrapper>().setCoupleId(model.data);
       }
 
       emit(state.copyWith(
