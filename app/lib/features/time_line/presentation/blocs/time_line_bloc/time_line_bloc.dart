@@ -67,9 +67,6 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     try {
       if (state.posts.remove(event.post)) {
         var user = userWrapper.getUser;
-        if (user.timelineSelected == null) {
-          user = await _updateInstanceUserWithTimelines(user);
-        }
 
         await this
             .timelineRepository
