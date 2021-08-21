@@ -28,6 +28,8 @@ class UnsyncCoupleCubit extends Cubit<UnsyncCoupleState> {
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
+
+//TODO:resolve this
     var _data = _user.timelines
         .where((element) => element.type == TimeLineTypeEnum.Couple)
         .toList();
