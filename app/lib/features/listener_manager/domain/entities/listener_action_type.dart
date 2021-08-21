@@ -14,6 +14,8 @@ class ListenerActionTypeEnum extends _Enum<int> {
       return ListenerActionTypeEnum.SyncCouple;
     } else if (value == 2) {
       return ListenerActionTypeEnum.UnsyncCouple;
+    } else if (value == 3) {
+      return ListenerActionTypeEnum.RefreshUserInfo;
     }
 
     return null;
@@ -23,6 +25,7 @@ class ListenerActionTypeEnum extends _Enum<int> {
 
   static const ListenerActionTypeEnum SyncCouple = ListenerActionTypeEnum._fromValue(1);
   static const ListenerActionTypeEnum UnsyncCouple = ListenerActionTypeEnum._fromValue(2);
+  static const ListenerActionTypeEnum RefreshUserInfo = ListenerActionTypeEnum._fromValue(3);
 
   @override
   String toString() => value.toString();

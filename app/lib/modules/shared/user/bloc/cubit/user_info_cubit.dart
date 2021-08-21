@@ -3,6 +3,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
+import 'package:mozin_core/utils.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   UserInfoCubit() : super(UserInfoState.initial());
@@ -16,7 +17,11 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         getItInstance<UserWrapper>().setInternalId(model.userInternalId);
         getItInstance<UserWrapper>().setCoupleId(model.coupleId);
 
-        emit(state.copyWith(isLoading: false, existCoupleId: true));
+        emit(state.copyWith(
+          isLoading: false,
+          existCoupleId: model.coupleId != null,
+          forceRefresh: StateUtils.generateRandomNumber(),
+        ));
       }
     }, (error) {
       emit(state.copyWith(isLoading: false, isError: true));

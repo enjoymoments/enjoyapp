@@ -9,6 +9,7 @@ import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 
 class ListenerManagerCubit extends Cubit<ListenerManagerState> {
   ListenerManagerCubit() : super(ListenerManagerState.initial());
@@ -50,15 +51,25 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
 
   void _resolverActions(ListenerActionModel model) {
     for (ListenerActionTypeEnum action in model.actions) {
-      if (action == ListenerActionTypeEnum.SyncCouple) {
-        _forceUpdateTimeline();
-      } else if (action == ListenerActionTypeEnum.UnsyncCouple) {
-        _forceUpdateTimeline();
+      try {
+        if (action == ListenerActionTypeEnum.SyncCouple) {
+          _forceUpdateTimeline();
+        } else if (action == ListenerActionTypeEnum.UnsyncCouple) {
+          _forceUpdateTimeline();
+        } else if (action == ListenerActionTypeEnum.RefreshUserInfo) {
+          _updateUserInfo();
+        }
+      } catch (e) {
+        //TODO:implement logger in here
       }
     }
   }
 
-  void _forceUpdateTimeline() {
+  Future<void> _updateUserInfo() async {
+    getItInstance<UserInfoCubit>().setUserInfo();
+  }
+
+  Future<void> _forceUpdateTimeline() async {
     var user = getItInstance<UserWrapper>().getUser;
 
     var _newInstance =
@@ -68,7 +79,7 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
     getItInstance<TimelineBloc>().add(LoadPosts());
   }
 
-  void _deleteActionRemote(String userId) {
+  Future<void> _deleteActionRemote(String userId) async {
     final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
     _instance.firestore.doc('actionListener/$userId').delete();
   }

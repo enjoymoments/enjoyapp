@@ -200,16 +200,20 @@ class Connected extends StatelessWidget {
           );
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
-              height: SizeConfig.sizeByPixel(40),
-            ),
-            ..._divider(),
-          ],
-        );
+        if (state.isLoading) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ShimmerLoading(
+                width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+                height: SizeConfig.sizeByPixel(40),
+              ),
+              ..._divider(),
+            ],
+          );
+        }
+
+        return SizedBox.shrink();
       },
     );
   }

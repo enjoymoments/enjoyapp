@@ -8,6 +8,7 @@ class UserInfoState extends DefaultState {
     bool isSuccess,
     String errorMessage,
     this.existCoupleId,
+    this.forceRefresh,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -17,6 +18,7 @@ class UserInfoState extends DefaultState {
         );
 
   final bool existCoupleId;
+  final int forceRefresh;
 
   factory UserInfoState.initial() {
     return UserInfoState(
@@ -25,7 +27,8 @@ class UserInfoState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      existCoupleId: false
+      existCoupleId: false,
+      forceRefresh: null,
     );
   }
 
@@ -36,6 +39,7 @@ class UserInfoState extends DefaultState {
     bool isError,
     String errorMessage,
     bool existCoupleId,
+    int forceRefresh,
   }) {
     return UserInfoState(
       isLoading: isLoading ?? this.isLoading,
@@ -44,6 +48,7 @@ class UserInfoState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       existCoupleId: existCoupleId ?? this.existCoupleId,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
@@ -55,5 +60,6 @@ class UserInfoState extends DefaultState {
         isError,
         errorMessage,
         existCoupleId,
+        forceRefresh,
       ];
 }
