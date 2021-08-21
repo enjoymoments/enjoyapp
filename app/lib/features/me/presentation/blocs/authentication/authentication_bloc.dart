@@ -170,7 +170,6 @@ class AuthenticationBloc
 
     //_settingsExecute - avoids running too often
     if (_settingsExecute == false && event.user != UserAppModel.empty) {
-      _setUserInfo();
       _settingsUser(event.user);
       _settingsExecute = true;
     }
@@ -179,6 +178,7 @@ class AuthenticationBloc
   }
 
   void _settingsUser(UserAppModel user) async {
+    _setUserInfo();
     final _token = await _pushNotificationConfig.configureAsync();
 
     _userService.setTokensPushNotifications(user, _token);
@@ -190,10 +190,6 @@ class AuthenticationBloc
     var response = await _userService.setUserInfo();
     response.fold((model) {
       if (model != null) {
-        var _newInstance =
-            _userWrapper.getUser.copyWith(timelines: model.timelines);
-        _userWrapper.assignment(_newInstance);
-
         _userWrapper.setInternalId(model.userInternalId);
         _userWrapper.setCoupleId(model.coupleId);
       }

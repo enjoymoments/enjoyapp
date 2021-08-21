@@ -1,4 +1,5 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
@@ -10,6 +11,7 @@ abstract class TimelineRemoteDataSource {
       String timelineID, String userId, TimeLineItemModel model);
   Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
   Future<void> deletePost(String timelineID, String postID);
+  Future<List<GetTimeLineModel>> getTimelines(String userId);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
@@ -65,5 +67,26 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
       'timelineID': timelineID,
       'postID': postID,
     });
+  }
+
+  @override
+  Future<List<GetTimeLineModel>> getTimelines(String userId) async {
+    String _query = '''
+    query getTimeLines {
+      getTimeLines {
+        id
+        type
+      }
+    }
+    ''';
+
+    var result = await remoteClientRepository.query(_query);
+
+    List<GetTimeLineModel> _result = [];
+
+    for (var e in result['data']['getTimeLines']) {
+      _result.add(GetTimeLineModel.fromJson(e));
+    }
+    return _result;
   }
 }

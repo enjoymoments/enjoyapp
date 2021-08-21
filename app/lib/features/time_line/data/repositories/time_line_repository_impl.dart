@@ -1,4 +1,5 @@
 import 'package:mozin/features/time_line/data/datasources/time_line_remote_data_source.dart';
+import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
@@ -35,6 +36,15 @@ class TimelineRepositoryImpl implements TimelineRepository {
       return remoteDataSource.deletePost(timelineID, postID);
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<List<GetTimeLineModel>> getTimelines(String userId) async {
+    try {
+      return remoteDataSource.getTimelines(userId);
+    } catch (e) {
+      return Future.value(null);
     }
   }
 }

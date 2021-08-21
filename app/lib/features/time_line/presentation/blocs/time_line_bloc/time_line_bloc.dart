@@ -118,7 +118,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
   Future<UserAppModel> _updateInstanceUserWithTimelines(
       UserAppModel user) async {
-    var _timelines = user.timelines;
+    var _timelines = await timelineRepository.getTimelines(user.id);
 
     if (_timelines != null && _timelines.length > 0) {
       GetTimeLineModel _element = _timelines.firstWhere(
@@ -131,7 +131,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
             orElse: () => null);
       }
 
-      var _newInstance = user.copyWith(timelineSelected: _element);
+      var _newInstance = user.copyWith(timelines: _timelines, timelineSelected: _element);
       userWrapper.assignment(_newInstance);
       
       return _newInstance;
