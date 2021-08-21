@@ -61,15 +61,6 @@ class _RootScreenManagerState extends State<RootScreenManager> {
             ),
             tooltip: 'search',
           ),
-          //TODO:experimenal
-          // bottomNavigationBar: _DemoBottomAppBar(
-          //   fabLocation: _fabLocation,
-          //   //shape: null,
-          // ),
-          //TODO:experimenal
-          // floatingActionButton: _buildFab(context),
-          // floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: FABBottomAppBar(
             backgroundColor:
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
@@ -93,58 +84,9 @@ class _RootScreenManagerState extends State<RootScreenManager> {
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
             ],
           ),
-          //TODO:experimenal
-          //Before
-          // bottomNavigationBar: DefaultMenu(onTap: (itemSelected) {
-          //   _screenManagerBloc.add(TapScreen(itemSelected, context));
-          // }),
         );
       },
     );
-  }
-
-  //TODO:experimenal
-  Widget _buildFab(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
-      },
-      tooltip: 'Increment',
-      child: Image.asset(
-        'assets/icons/icon.png',
-        fit: BoxFit.fill,
-      ),
-      backgroundColor: Theme.of(context).primaryColor,
-      elevation: 2.0,
-    );
-
-    //TODO: in development
-    // final icons = [Icons.sms, Icons.mail, Icons.phone];
-
-    // return AnchoredOverlay(
-    //   showOverlay: true,
-    //   overlayBuilder: (context, offset) {
-    //     return CenterAbout(
-    //       position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-    //       child: FabWithIcons(
-    //         icons: icons,
-    //         onIconTapped: (index) {},
-    //       ),
-    //     );
-    //   },
-    //   child: FloatingActionButton(
-    //     onPressed: () {
-    //       _screenManagerBloc.add(TapScreen(DefaultMenuEnum.Search, context));
-    //     },
-    //     tooltip: 'Increment',
-    //     child: Image.asset(
-    //       'assets/icons/icon.png',
-    //       fit: BoxFit.fill,
-    //     ),
-    //     backgroundColor: Theme.of(context).primaryColor,
-    //     elevation: 2.0,
-    //   ),
-    // );
   }
 
   Widget _buildAppBar(ScreenManagerState state) {
