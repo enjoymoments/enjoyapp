@@ -1,7 +1,7 @@
-part of 'unsyncoption_cubit.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
-class UnsyncOptionState extends DefaultState {
-  UnsyncOptionState({
+class UserInfoState extends DefaultState {
+  UserInfoState({
     bool isLoading,
     bool isEmpty,
     bool isError,
@@ -18,18 +18,18 @@ class UnsyncOptionState extends DefaultState {
 
   final bool existCoupleId;
 
-  factory UnsyncOptionState.initial() {
-    return UnsyncOptionState(
+  factory UserInfoState.initial() {
+    return UserInfoState(
       isSuccess: false,
       isEmpty: false,
       isError: false,
       isLoading: false,
       errorMessage: null,
-      existCoupleId: false,
+      existCoupleId: false
     );
   }
 
-  UnsyncOptionState copyWith({
+  UserInfoState copyWith({
     bool isLoading,
     bool isSuccess,
     bool isEmpty,
@@ -37,7 +37,7 @@ class UnsyncOptionState extends DefaultState {
     String errorMessage,
     bool existCoupleId,
   }) {
-    return UnsyncOptionState(
+    return UserInfoState(
       isLoading: isLoading ?? this.isLoading,
       isSuccess: isSuccess ?? this.isSuccess,
       isEmpty: isEmpty ?? this.isEmpty,

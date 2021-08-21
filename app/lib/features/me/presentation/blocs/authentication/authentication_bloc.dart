@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -178,21 +179,13 @@ class AuthenticationBloc
   }
 
   void _settingsUser(UserAppModel user) async {
-    _setUserInfo();
-    final _token = await _pushNotificationConfig.configureAsync();
+    getItInstance<UserInfoCubit>().setUserInfo();
 
-    _userService.setTokensPushNotifications(user, _token);
+    _pushNotificationConfig.configureAsync().then((value) {
+      _userService.setTokensPushNotifications(user, value);
+    });
+
     _userService.getFavoriteInterests();
     _userService.setActionListener();
-  }
-
-  Future<void> _setUserInfo() async {
-    var response = await _userService.setUserInfo();
-    response.fold((model) {
-      if (model != null) {
-        _userWrapper.setInternalId(model.userInternalId);
-        _userWrapper.setCoupleId(model.coupleId);
-      }
-    }, (error) => null);
   }
 }

@@ -11,7 +11,6 @@ import 'package:mozin/features/home/presentation/blocs/home_cubit/home_cubit.dar
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/connected/connected_cubit.dart';
-import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/features/notifications/presentation/bloc/notifications_cubit.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details/place_details_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_bloc.dart';
@@ -26,6 +25,7 @@ import 'package:mozin/features/time_line/presentation/blocs/add_time_line_bloc/a
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/unsync_couple/presentation/bloc/unsync_couple/unsynccouple_cubit.dart';
 import 'package:mozin/features/user_action/presentation/bloc/user_action/user_action_cubit.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 
 void registerBlocs(GetIt getItInstance) {
   getItInstance
@@ -102,7 +102,7 @@ void registerBlocs(GetIt getItInstance) {
   getItInstance.registerLazySingleton<NotificationsCubit>(
       () => NotificationsCubit(notificationsRepository: getItInstance()));
 
-  getItInstance.registerFactory<UnsyncOptionCubit>(() => UnsyncOptionCubit());
+  getItInstance.registerLazySingleton<UserInfoCubit>(() => UserInfoCubit());
 
   getItInstance.registerFactory<UnsyncCoupleCubit>(
       () => UnsyncCoupleCubit(userActionRepository: getItInstance()));

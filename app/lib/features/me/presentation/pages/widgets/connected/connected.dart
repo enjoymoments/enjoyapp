@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
-import 'package:mozin/features/me/presentation/blocs/unsync_option/unsyncoption_cubit.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
@@ -21,15 +21,15 @@ import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/custom_tile.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel user;
-  final UnsyncOptionCubit unsyncOptionCubit;
 
   const Connected({
     Key key,
     @required this.user,
-    @required this.unsyncOptionCubit,
   }) : super(key: key);
 
   @override
@@ -179,8 +179,8 @@ class Connected extends StatelessWidget {
   }
 
   Widget _buildUnsyncCouple() {
-    return BlocBuilder<UnsyncOptionCubit, UnsyncOptionState>(
-      cubit: unsyncOptionCubit,
+    return BlocBuilder<UserInfoCubit, UserInfoState>(
+      cubit: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
         if (state.existCoupleId) {
           return Column(
@@ -191,7 +191,8 @@ class Connected extends StatelessWidget {
                 iconStart: AppIcons.undo,
                 iconEnd: AppIcons.angle_right,
                 onTap: () {
-                  ExtendedNavigator.of(context).push(Routes.unsync_couple_screen);
+                  ExtendedNavigator.of(context)
+                      .push(Routes.unsync_couple_screen);
                 },
               ),
               ..._divider(),
@@ -199,7 +200,16 @@ class Connected extends StatelessWidget {
           );
         }
 
-        return SizedBox.shrink();
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ShimmerLoading(
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              height: SizeConfig.sizeByPixel(40),
+            ),
+            ..._divider(),
+          ],
+        );
       },
     );
   }
