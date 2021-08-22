@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -181,9 +182,12 @@ class AuthenticationBloc
   void _settingsUser(UserAppModel user) async {
     getItInstance<UserInfoCubit>().setUserInfo();
 
-    _pushNotificationConfig.configureAsync().then((value) {
-      _userService.setTokensPushNotifications(user, value);
-    });
+    //TODO:in development
+    if (Platform.isAndroid) {
+      _pushNotificationConfig.configureAsync().then((value) {
+        _userService.setTokensPushNotifications(user, value);
+      });
+    }
 
     _userService.getFavoriteInterests();
     _userService.setActionListener();

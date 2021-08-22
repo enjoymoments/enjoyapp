@@ -17,7 +17,8 @@ class PushNotificationConfig {
     //   },
     // );
 
-    _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
+    //TODO:in development
+    //_firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
 
     var token = await _firebaseMessaging.getToken();
 
