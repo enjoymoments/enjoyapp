@@ -4,7 +4,6 @@ import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart'
 
 abstract class SuggestionsRemoteDataSource {
   Future<ResponseDefaultModel> addSuggestion(SuggestionsModel model);
-  Future<List<SuggestionsModel>> getSuggestions();
   Future<ResponseDefaultModel> updateSuggestions(SuggestionsModel model);
   Future<ResponseDefaultModel> removeSuggestions(SuggestionsModel model);
 }
@@ -31,31 +30,6 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
 
     var result = await remoteClientRepository.query(_query);
     return ResponseDefaultModel.fromJson(result['data']['addSuggestion']);
-  }
-
-  @override
-  Future<List<SuggestionsModel>> getSuggestions() async {
-    String _query = '''
-    query suggestions {
-      getSuggestions {
-        id
-        title
-        description
-        like
-        dislike
-        moreOptionsEnable
-      }
-    }
-    ''';
-
-    var resultQuery = await remoteClientRepository.query(_query);
-    var resultList = <SuggestionsModel>[];
-
-    resultQuery['data']['getSuggestions'].forEach((dynamic v) {
-      resultList.add(SuggestionsModel.fromJson(v));
-    });
-
-    return resultList;
   }
 
   @override

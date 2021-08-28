@@ -19,8 +19,6 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
   void remove(String id) {
     _suggestionsRepository.removeSuggestions(
         model: SuggestionsModel(id:id));
-        
-    getSuggestions();
   }
 
   void save(String title, String description) {
@@ -30,29 +28,5 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     emit(state.copyWith(
       isSuccess: true,
     ));
-  }
-
-  void getSuggestions() async {
-    emit(state.copyWith(
-      isLoading: true,
-    ));
-
-    Either<List<SuggestionsModel>, Exception> _response =
-        await _suggestionsRepository.getSuggestions();
-
-    _response.fold((model) {
-      emit(state.copyWith(
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-        suggestions: model,
-      ));
-    }, (error) {
-      emit(state.copyWith(
-        isLoading: false,
-        isError: true,
-        isSuccess: false,
-      ));
-    });
   }
 }

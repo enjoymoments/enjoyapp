@@ -8,8 +8,6 @@ abstract class SuggestionsRepository {
     @required SuggestionsModel model
   });
 
-  Future<Either<List<SuggestionsModel>, Exception>> getSuggestions();
-
   Future<Either<ResponseDefaultModel, Exception>> updateSuggestions({
     @required SuggestionsModel model
   });

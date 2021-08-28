@@ -34,7 +34,6 @@ import '../../features/places/presentation/pages/place_item_details.dart';
 import '../../features/places/presentation/pages/search_places_screen.dart';
 import '../../features/screen_manager/presentation/root_screen_manager.dart';
 import '../../features/suggestions/presentation/pages/add_suggestion_screen.dart';
-import '../../features/suggestions/presentation/pages/suggestions_screen.dart';
 import '../../features/time_line/presentation/pages/add_time_line_screen.dart';
 import '../../features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
 import '../shared/custom_view_migrate/gallery_images/gallery_photo_source_type_enum.dart';
@@ -68,7 +67,6 @@ class Routes {
   static const String me_authenticated_partial = '/me-authenticated-partial';
   static const String invite_screen = '/invite-screen';
   static const String unsync_couple_screen = '/unsync-couple-screen';
-  static const String suggestions_screen = '/suggestions-screen';
   static const String add_suggestions_screen = '/add-suggestion-screen';
   static const String login_wrapper_screen = '/login-wrapper-screen';
   static const all = <String>{
@@ -95,7 +93,6 @@ class Routes {
     me_authenticated_partial,
     invite_screen,
     unsync_couple_screen,
-    suggestions_screen,
     add_suggestions_screen,
     login_wrapper_screen,
   };
@@ -129,7 +126,6 @@ class Router extends RouterBase {
     RouteDef(Routes.me_authenticated_partial, page: MeAuthenticatedPartial),
     RouteDef(Routes.invite_screen, page: InviteScreen),
     RouteDef(Routes.unsync_couple_screen, page: UnsyncCoupleScreen),
-    RouteDef(Routes.suggestions_screen, page: SuggestionsScreen),
     RouteDef(Routes.add_suggestions_screen, page: AddSuggestionScreen),
     RouteDef(Routes.login_wrapper_screen, page: LoginWrapperScreen),
   ];
@@ -313,12 +309,6 @@ class Router extends RouterBase {
     UnsyncCoupleScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const UnsyncCoupleScreen(),
-        settings: data,
-      );
-    },
-    SuggestionsScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => SuggestionsScreen(),
         settings: data,
       );
     },

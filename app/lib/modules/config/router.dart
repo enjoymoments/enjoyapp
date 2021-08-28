@@ -15,7 +15,6 @@ import 'package:mozin/features/invite/presentation/pages/invite_screen.dart';
 import 'package:mozin/features/me/presentation/pages/widgets/login/login_wrapper_screen.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/suggestions/presentation/pages/add_suggestion_screen.dart';
-import 'package:mozin/features/suggestions/presentation/pages/suggestions_screen.dart';
 import 'package:mozin/features/unsync_couple/presentation/pages/unsync_couple_screen.dart';
 import 'package:custom_view/custom_success_screen.dart';
 import 'package:mozin/features/places/presentation/pages/place_item_details.dart';
@@ -52,7 +51,6 @@ import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
     MaterialRoute(name: 'me_authenticated_partial', page: MeAuthenticatedPartial,),
     MaterialRoute(name: 'invite_screen', page: InviteScreen,),
     MaterialRoute(name: 'unsync_couple_screen', page: UnsyncCoupleScreen,),
-    MaterialRoute(name: 'suggestions_screen', page: SuggestionsScreen,),
     MaterialRoute(name: 'add_suggestions_screen', page: AddSuggestionScreen,),
     MaterialRoute(name: 'login_wrapper_screen', page: LoginWrapperScreen,),
   ],

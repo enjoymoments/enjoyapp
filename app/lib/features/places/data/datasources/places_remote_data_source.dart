@@ -68,6 +68,13 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
                   longitude
                 }
               }
+              suggestedByUsers {
+                id
+                title
+                description
+                like
+                moreOptionsEnable
+              }
             }
         }
       }

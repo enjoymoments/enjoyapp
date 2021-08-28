@@ -153,14 +153,4 @@ class HomeScreen extends StatelessWidget {
       disabled: false,
     );
   }
-
-  Widget _buildCardSuggestions() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.random,
-      routeName: Routes.suggestions_screen,
-      name: 'Sugestões',
-      disabled: false,
-    );
-  }
 }

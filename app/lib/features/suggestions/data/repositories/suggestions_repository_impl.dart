@@ -25,17 +25,6 @@ class SuggestionsRepositoryImpl implements SuggestionsRepository {
   }
 
   @override
-  Future<Either<List<SuggestionsModel>, Exception>> getSuggestions() async {
-    try {
-      var response = await remoteDataSource.getSuggestions();
-      return Left<List<SuggestionsModel>, Exception>(response);
-    } on dynamic catch (e) {
-      return Right<List<SuggestionsModel>, Exception>(
-          (e is Exception) ? e : Exception(e.toString()));
-    }
-  }
-
-  @override
   Future<Either<ResponseDefaultModel, Exception>> removeSuggestions(
       {SuggestionsModel model}) async {
     try {
