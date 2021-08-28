@@ -38,8 +38,6 @@ class HomeScreen extends StatelessWidget {
         SpacerBox.v16,
         _buildPersonalSection(context),
         SpacerBox.v16,
-        _buildAnotherSection(context),
-        SpacerBox.v16,
         Center(
           child: BannerAdWidget(
             screenName: Routes.home_partial,
@@ -64,27 +62,6 @@ class HomeScreen extends StatelessWidget {
               _buildCardAlbuns(),
               _buildCardFavorites(),
               _buildCardSchedule(),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAnotherSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Outros".title(context),
-        CustomDivider(),
-        Container(
-          width: SizeConfig.screenWidth,
-          child: Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            children: [
-              _buildCardSuggestions(),
-              _buildCardMusics(),
-              _buildCardSites(),
             ],
           ),
         ),
@@ -128,19 +105,6 @@ class HomeScreen extends StatelessWidget {
       routeName: Routes.feedback_screen,
       name: 'Ajude-nos a melhorar o app',
       description: 'Compartilhe algum problema, sugestão ou melhoria',
-    );
-  }
-
-  Widget _buildCardMusics() {
-    return AbsorbPointer(
-      absorbing: true,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.music,
-        routeName: Routes.calendar_screen,
-        name: 'Músicas',
-        disabled: true,
-      ),
     );
   }
 
@@ -197,19 +161,6 @@ class HomeScreen extends StatelessWidget {
       routeName: Routes.suggestions_screen,
       name: 'Sugestões',
       disabled: false,
-    );
-  }
-
-  Widget _buildCardSites() {
-    return AbsorbPointer(
-      absorbing: true,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.broadcast_tower,
-        routeName: Routes.calendar_screen,
-        name: 'Sites',
-        disabled: true,
-      ),
     );
   }
 }
