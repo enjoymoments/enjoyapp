@@ -53,7 +53,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
           subCategories {
             subCategoryId
             subCategoryName
-              data {
+              places {
                 address
                 name
                 placeId
