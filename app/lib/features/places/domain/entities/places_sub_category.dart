@@ -5,10 +5,10 @@ class PlacesSubCategory extends Equatable {
   const PlacesSubCategory({
     this.subCategoryId,
     this.subCategoryName,
-    this.data,
+    this.places,
   });
 
-  final List<Place> data;
+  final List<Place> places;
   final String subCategoryName;
   final String subCategoryId;
 
@@ -16,6 +16,6 @@ class PlacesSubCategory extends Equatable {
   List<Object> get props => <Object>[
         subCategoryId,
         subCategoryName,
-        data,
+        places,
       ];
 }

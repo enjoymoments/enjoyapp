@@ -17,7 +17,7 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         places: places,
         categorySelected: _categoryInitial,
         tabsTitle: _buildTabsTitle(_categoryInitial),
-        content: _categoryInitial.subCategories[0].data,
+        content: _categoryInitial.subCategories[0].places,
       ),
     );
   }
@@ -27,7 +27,7 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
       state.copyWith(
         categorySelected: category,
         tabsTitle: _buildTabsTitle(category),
-        content: category.subCategories[0].data,
+        content: category.subCategories[0].places,
       ),
     );
   }

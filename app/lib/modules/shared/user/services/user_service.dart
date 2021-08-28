@@ -36,13 +36,13 @@ class UserService implements UserInterface {
           .indexWhere(
               (element) => element.subCategoryId == model.subCategoryId);
       if (_subCategoryExist != -1) {
-        _user.favoriteInterests.places[_categoryExist].subCategories[_subCategoryExist].data.add(model);
+        _user.favoriteInterests.places[_categoryExist].subCategories[_subCategoryExist].places.add(model);
       } else {
         _user.favoriteInterests.places[_categoryExist].subCategories.add(
           PlacesSubCategoryModel(
             subCategoryId: model.subCategoryId,
             subCategoryName: model.subCategoryName,
-            data: List<PlaceModel>.from([model]),
+            places: List<PlaceModel>.from([model]),
           ),
         );
       }
@@ -56,7 +56,7 @@ class UserService implements UserInterface {
               PlacesSubCategoryModel(
                 subCategoryId: model.subCategoryId,
                 subCategoryName: model.subCategoryName,
-                data: List<PlaceModel>.from([model]),
+                places: List<PlaceModel>.from([model]),
               ),
             ],
           ),
@@ -85,9 +85,9 @@ class UserService implements UserInterface {
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
-    _user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].data.removeAt(indexItem);
+    _user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].places.removeAt(indexItem);
 
-    if(_user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].data.length == 0) {
+    if(_user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].places.length == 0) {
       _user.favoriteInterests.places[indexCategory].subCategories.removeAt(indexSubCategory);
     }
 

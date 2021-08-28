@@ -119,7 +119,7 @@ class FavoriteInterestsBloc
           var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
 
           if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
-            var _indexItem = _subCategoryItem.data.indexWhere(
+            var _indexItem = _subCategoryItem.places.indexWhere(
                 (element) => element.placeId == event.place.placeId);
 
             if (_indexItem != -1) {

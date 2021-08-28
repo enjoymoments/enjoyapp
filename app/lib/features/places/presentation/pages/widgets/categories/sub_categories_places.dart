@@ -75,7 +75,7 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
   void _handleTabSelection() {
     if (_nestedTabController.indexIsChanging) {
       widget.categoriesPlacesCubit.subCategorySelected(
-          widget.subCategories[_nestedTabController.index].data);
+          widget.subCategories[_nestedTabController.index].places);
     }
   }
 }

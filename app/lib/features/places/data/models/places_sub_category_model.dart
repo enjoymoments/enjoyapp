@@ -3,11 +3,11 @@ import 'package:mozin/features/places/domain/entities/places_sub_category.dart';
 
 class PlacesSubCategoryModel extends PlacesSubCategory {
   PlacesSubCategoryModel({
-    List<PlaceModel> data,
+    List<PlaceModel> places,
     String subCategoryName,
     String subCategoryId,
   }) : super(
-          data: data,
+          places: places,
           subCategoryName: subCategoryName,
           subCategoryId: subCategoryId,
         );
@@ -16,7 +16,7 @@ class PlacesSubCategoryModel extends PlacesSubCategory {
     return PlacesSubCategoryModel(
       subCategoryId: json['subCategoryId'],
       subCategoryName: json['subCategoryName'],
-      data: List<PlaceModel>.from(
+      places: List<PlaceModel>.from(
         json["places"].map((x) => PlaceModel.fromJson(categoryId, categoryName, json['subCategoryId'], json['subCategoryName'], x)),
       ),
     );

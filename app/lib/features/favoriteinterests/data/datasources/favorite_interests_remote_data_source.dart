@@ -60,7 +60,7 @@ class FavoriteInterestsRemoteDataSourceImpl
           subCategories {
             subCategoryId
             subCategoryName
-              data {
+              places {
                 address
                 name
                 placeId
