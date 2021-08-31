@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          'Não quer entrar para tomar uma xícara de café?'.labelIntro(context),
+          'Encontre e registre suas melhores experiências'.labelIntro(context),
           SpacerBox.v16,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
-import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
+import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_cubit.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:custom_view/custom_border.dart';
 import 'package:custom_view/custom_font_size.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 
 class SubCategoriesPlaces extends StatefulWidget {
   const SubCategoriesPlaces({
@@ -74,8 +75,17 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
 
   void _handleTabSelection() {
     if (_nestedTabController.indexIsChanging) {
-      widget.categoriesPlacesCubit.subCategorySelected(
-          widget.subCategories[_nestedTabController.index].places);
+      if (widget.categoriesPlacesCubit.state.interestSelected ==
+          InterestEnum.Place) {
+        widget.categoriesPlacesCubit.subCategorySelected(
+            widget.categoriesPlacesCubit.state.interestSelected,
+            widget.subCategories[_nestedTabController.index].places);
+      } else if (widget.categoriesPlacesCubit.state.interestSelected ==
+          InterestEnum.SuggestedByUsers) {
+        widget.categoriesPlacesCubit.subCategorySelected(
+            widget.categoriesPlacesCubit.state.interestSelected,
+            widget.subCategories[_nestedTabController.index].suggestedByUsers);
+      }
     }
   }
 }

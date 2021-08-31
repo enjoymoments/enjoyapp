@@ -1,4 +1,10 @@
-part of 'categories_places_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
+import 'package:mozin/features/places/data/models/session_model.dart';
+import 'package:mozin/features/places/domain/entities/places_category.dart';
+import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
+import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 
 class CategoriesPlacesState extends DefaultState {
   CategoriesPlacesState({
@@ -10,7 +16,10 @@ class CategoriesPlacesState extends DefaultState {
     this.places,
     this.categorySelected,
     this.tabsTitle,
-    this.content,
+    this.contentPlaces,
+    this.contentSuggestedByUsers,
+    this.interestSelected,
+    this.sessions,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -22,7 +31,13 @@ class CategoriesPlacesState extends DefaultState {
   final List<PlacesCategory> places;
   final PlacesCategory categorySelected;
   final List<Widget> tabsTitle;
-  final List<PlaceModel> content;
+  
+  //TODO:view this
+  final InterestEnum interestSelected;
+  final List<SessionModel> sessions;
+
+  final List<PlaceModel> contentPlaces;
+  final List<SuggestionsModel> contentSuggestedByUsers;
 
   factory CategoriesPlacesState.initial() {
     return CategoriesPlacesState(
@@ -31,10 +46,13 @@ class CategoriesPlacesState extends DefaultState {
       isEmpty: false,
       isError: false,
       errorMessage: null,
-      places: List(),
+      places: [],
       categorySelected: null,
-      tabsTitle: List(),
-      content: List(),
+      tabsTitle: [],
+      contentPlaces: [],
+      contentSuggestedByUsers: [],
+      sessions: [],
+      interestSelected: null,
     );
   }
 
@@ -47,7 +65,10 @@ class CategoriesPlacesState extends DefaultState {
     List<PlacesCategory> places,
     PlacesCategory categorySelected,
     List<Widget> tabsTitle,
-    List<PlaceModel> content,
+    List<PlaceModel> contentPlaces,
+    List<SuggestionsModel> contentSuggestedByUsers,
+    List<SessionModel> sessions,
+    InterestEnum interestSelected,
   }) {
     return CategoriesPlacesState(
       isLoading: isLoading ?? this.isLoading,
@@ -58,7 +79,10 @@ class CategoriesPlacesState extends DefaultState {
       places: places ?? this.places,
       categorySelected: categorySelected ?? this.categorySelected,
       tabsTitle: tabsTitle ?? this.tabsTitle,
-      content: content ?? this.content,
+      contentPlaces: contentPlaces ?? this.contentPlaces,
+      contentSuggestedByUsers: contentSuggestedByUsers ?? this.contentSuggestedByUsers,
+      sessions: sessions ?? this.sessions,
+      interestSelected: interestSelected ?? this.interestSelected,
     );
   }
 
@@ -72,6 +96,9 @@ class CategoriesPlacesState extends DefaultState {
         places,
         categorySelected,
         tabsTitle,
-        content,
+        contentPlaces,
+        contentSuggestedByUsers,
+        sessions,
+        interestSelected,
       ];
 }

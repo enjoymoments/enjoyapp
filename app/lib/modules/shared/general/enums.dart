@@ -11,6 +11,8 @@ class InterestEnum extends Enum<int> {
   factory InterestEnum(final int value) {
     if (value == 1) {
       return InterestEnum.Place;
+    } else if (value == 2) {
+      return InterestEnum.SuggestedByUsers;
     }
 
     return null;
@@ -19,6 +21,7 @@ class InterestEnum extends Enum<int> {
   const InterestEnum._fromValue(final int value) : super._fromValue(value);
 
   static const InterestEnum Place = InterestEnum._fromValue(1);
+  static const InterestEnum SuggestedByUsers = InterestEnum._fromValue(2);
 
   @override
   String toString() => value.toString();

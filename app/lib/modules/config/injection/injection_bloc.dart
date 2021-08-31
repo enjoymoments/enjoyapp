@@ -11,11 +11,12 @@ import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/connected/connected_cubit.dart';
 import 'package:mozin/features/notifications/presentation/bloc/notifications_cubit.dart';
+import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_cubit.dart';
+import 'package:mozin/features/places/presentation/blocs/categories_sections/categories_sections_cubit.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details/place_details_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_details_tab/place_details_tab_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
-import 'package:mozin/features/places/presentation/pages/widgets/categories/cubit/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/widgets/gps_open/cubit/gpsopen_cubit.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/features/suggestions/domain/repositories/suggestions_repository.dart';
@@ -106,4 +107,6 @@ void registerBlocs(GetIt getItInstance) {
 
   getItInstance.registerFactory<SuggestionsCubit>(() => SuggestionsCubit(
       suggestionsRepository: getItInstance<SuggestionsRepository>()));
+
+  getItInstance.registerFactory<CategoriesSectionsCubit>(() => CategoriesSectionsCubit());
 }

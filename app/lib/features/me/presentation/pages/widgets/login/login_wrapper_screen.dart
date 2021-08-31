@@ -37,7 +37,7 @@ class LoginWrapperScreen extends StatelessWidget {
 
   Widget _buildAppBar() {
     return AppBar(
-      title: Text('_getStringbyScreen(state),'),
+      title: Text('Login'),
       actions: [],
     );
   }

@@ -23,32 +23,48 @@ class SuggestionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(child: item.title.title(context)),
-            _buildOptions(context),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(child: item.description.description(context)),
-          ],
-        ),
-        //TODO:review this
-        // SpacerBox.v8,
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     _buildLike(context),
-        //     SpacerBox.h43,
-        //     _buildDislike(context),
-        //   ],
-        // ),
-      ],
+    return Container(
+      padding: const EdgeInsets.only(
+        top: 20.0,
+        bottom: 20.0,
+        left: 5.0,
+        right: 5.0,
+      ),
+      decoration: myBoxDecoration(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(child: item.title.title(context)),
+              _buildOptions(context),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(child: item.description.description(context)),
+            ],
+          ),
+          //TODO:review this
+          // SpacerBox.v8,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     _buildLike(context),
+          //     SpacerBox.h43,
+          //     _buildDislike(context),
+          //   ],
+          // ),
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration myBoxDecoration(BuildContext context) {
+    return BoxDecoration(
+      border: Border.all(color: Theme.of(context).hintColor),
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
     );
   }
 
