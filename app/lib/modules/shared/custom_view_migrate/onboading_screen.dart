@@ -1,7 +1,10 @@
+import 'package:custom_view/custom_font_size.dart';
+import 'package:custom_view/spacer_box.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/modules/config/setup.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   @override
@@ -22,8 +25,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       pages: [
         _buildItem('Conheça o Enjoy',
             'O app para deixar a rotina do casal mais interessante'),
+        _buildItem('Pesquise o que fazer',
+            'A partir de alguns filtros, descubra lugares ou coisas para fazer em casa'),
         _buildItem('Compartilhe fotos',
-            'Construa uma linha do tempo contendo todas as suas memórias'),
+            'Crie álbums de fotos e compartilhe com o parceiro(a)'),
+        _buildItem(
+            'Linha do tempo', 'Monte uma linha do tempo privada para o casal'),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
@@ -32,23 +39,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       nextFlex: 0,
       skip: Text(
         'Pular',
-        style: TextStyle(color: Theme.of(context).backgroundColor),
+        style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).backgroundColor,
+            fontSize: CustomFontSize.f18),
       ),
       next: Icon(
         Icons.arrow_forward,
         color: Theme.of(context).backgroundColor,
+        size: CustomFontSize.f22,
       ),
       done: Text(
         'Continuar',
         style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).backgroundColor),
+          fontWeight: FontWeight.w600,
+          color: Theme.of(context).backgroundColor,
+          fontSize: CustomFontSize.f18,
+        ),
       ),
       dotsDecorator: DotsDecorator(
         size: Size(10.0, 10.0),
         color: Theme.of(context).backgroundColor,
         activeSize: Size(22.0, 10.0),
-        activeColor: Color(0xFFFCBA03),
+        activeColor: Theme.of(context).accentIconTheme.color,
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
@@ -58,7 +71,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   PageViewModel _buildItem(String title, String message) {
     TextStyle bodyStyle = TextStyle(
-      fontSize: 19.0,
+      fontSize: CustomFontSize.f22,
       color: Theme.of(context).backgroundColor,
     );
     PageDecoration pageDecoration = PageDecoration(
@@ -75,12 +88,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
     return PageViewModel(
       titleWidget: SizedBox(
-        height: MediaQuery.of(context).size.height / 2.5,
+        height: MediaQuery.of(context).size.height / 4,
       ),
       bodyWidget: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          CustomAvatar(
+            radius: 100,
+            backgroundImage: AssetImage("assets/images/logo_white.png"),
+          ),
+          SpacerBox.v50,
           Text(
             title,
             textAlign: TextAlign.center,
