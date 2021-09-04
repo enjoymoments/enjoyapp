@@ -20,7 +20,6 @@ import '../../features/calendar/presentation/blocs/add_activity_cubit/add_activi
 import '../../features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import '../../features/calendar/presentation/pages/add_activity_screen.dart';
 import '../../features/calendar/presentation/pages/add_calendar_screen.dart';
-import '../../features/calendar/presentation/pages/calendar_screen.dart';
 import '../../features/configuration/presentation/pages/configuration_screen.dart';
 import '../../features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import '../../features/feedback/presentation/pages/feedback_screen.dart';
@@ -54,7 +53,6 @@ class Routes {
       '/gallery-photo-view-wrapper';
   static const String notification_screen = '/notifications-screen';
   static const String favorite_interests_screen = '/favorite-interests-screen';
-  static const String calendar_screen = '/calendar-screen';
   static const String add_calendar_screen = '/add-calendar-screen';
   static const String add_activity_screen = '/add-activity-screen';
   static const String feedback_screen = '/feedback-screen';
@@ -80,7 +78,6 @@ class Routes {
     gallery_photo_view_wrapper_screen,
     notification_screen,
     favorite_interests_screen,
-    calendar_screen,
     add_calendar_screen,
     add_activity_screen,
     feedback_screen,
@@ -113,7 +110,6 @@ class Router extends RouterBase {
         page: GalleryPhotoViewWrapper),
     RouteDef(Routes.notification_screen, page: NotificationsScreen),
     RouteDef(Routes.favorite_interests_screen, page: FavoriteInterestsScreen),
-    RouteDef(Routes.calendar_screen, page: CalendarScreen),
     RouteDef(Routes.add_calendar_screen, page: AddCalendarScreen),
     RouteDef(Routes.add_activity_screen, page: AddActivityScreen),
     RouteDef(Routes.feedback_screen, page: FeedbackScreen),
@@ -208,12 +204,6 @@ class Router extends RouterBase {
     FavoriteInterestsScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => FavoriteInterestsScreen(),
-        settings: data,
-      );
-    },
-    CalendarScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => CalendarScreen(),
         settings: data,
       );
     },

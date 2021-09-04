@@ -6,7 +6,6 @@ import 'package:mozin/features/albums/presentation/pages/albums_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/edit_album_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_activity_screen.dart';
 import 'package:mozin/features/calendar/presentation/pages/add_calendar_screen.dart';
-import 'package:mozin/features/calendar/presentation/pages/calendar_screen.dart';
 import 'package:mozin/features/configuration/presentation/pages/configuration_screen.dart';
 import 'package:mozin/features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import 'package:mozin/features/feedback/presentation/pages/feedback_screen.dart';
@@ -38,7 +37,6 @@ import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
     MaterialRoute(name: 'gallery_photo_view_wrapper_screen', page: GalleryPhotoViewWrapper,),
     MaterialRoute(name: 'notification_screen', page: NotificationsScreen,),
     MaterialRoute(name: 'favorite_interests_screen', page: FavoriteInterestsScreen,),
-    MaterialRoute(name: 'calendar_screen', page: CalendarScreen,),
     MaterialRoute(name: 'add_calendar_screen', page: AddCalendarScreen,),
     MaterialRoute(name: 'add_activity_screen', page: AddActivityScreen,),
     MaterialRoute(name: 'feedback_screen', page: FeedbackScreen,),

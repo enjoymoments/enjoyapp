@@ -58,10 +58,8 @@ class HomeScreen extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
             children: [
-              _buildCardCalendar(),
-              _buildCardAlbuns(),
-              _buildCardFavorites(),
-              _buildCardSchedule(),
+              //_buildCardCalendar(),
+              //_buildCardSchedule(),
             ],
           ),
         ),
@@ -108,49 +106,29 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCardSchedule() {
-    return AbsorbPointer(
-      absorbing: true,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.clock,
-        routeName: Routes.calendar_screen,
-        name: 'Cronograma',
-        disabled: true,
-      ),
-    );
-  }
+  // Widget _buildCardSchedule() {
+  //   return AbsorbPointer(
+  //     absorbing: true,
+  //     child: FeatureCard(
+  //       width: SizeConfig.sizeByPixel(100),
+  //       iconData: AppIcons.clock,
+  //       routeName: Routes.calendar_screen,
+  //       name: 'Cronograma',
+  //       disabled: true,
+  //     ),
+  //   );
+  // }
 
-  Widget _buildCardCalendar() {
-    return AbsorbPointer(
-      absorbing: true,
-      child: FeatureCard(
-        width: SizeConfig.sizeByPixel(100),
-        iconData: AppIcons.calendar_day,
-        routeName: Routes.calendar_screen,
-        name: 'Calendário',
-        disabled: true,
-      ),
-    );
-  }
-
-  Widget _buildCardAlbuns() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.camera_retro,
-      routeName: Routes.albums_screen,
-      name: 'Álbuns',
-      disabled: false,
-    );
-  }
-
-  Widget _buildCardFavorites() {
-    return FeatureCard(
-      width: SizeConfig.sizeByPixel(100),
-      iconData: AppIcons.star,
-      routeName: Routes.favorite_interests_screen,
-      name: 'Favoritos',
-      disabled: false,
-    );
-  }
+  // Widget _buildCardCalendar() {
+  //   return AbsorbPointer(
+  //     absorbing: true,
+  //     child: FeatureCard(
+  //       width: SizeConfig.sizeByPixel(100),
+  //       iconData: AppIcons.calendar_day,
+  //       routeName: Routes.calendar_screen,
+  //       name: 'Calendário',
+  //       disabled: true,
+  //     ),
+  //   );
+  // }
 }

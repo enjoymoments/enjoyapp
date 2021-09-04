@@ -21,9 +21,9 @@ class ScreenManagerState extends Equatable {
       isLoading: false,
       isSuccess: false,
       isFailure: false,
-      currentScreen: DefaultMenuEnum.Home,
+      currentScreen: DefaultMenuEnum.TimeLine,
       contents: {
-        DefaultMenuEnum.Home: HomeScreen(),
+        DefaultMenuEnum.TimeLine: TimeLineScreen(),
       },
     );
   }

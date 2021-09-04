@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
-import 'package:mozin/features/home/presentation/pages/home_screen.dart';
+import 'package:mozin/features/calendar/presentation/pages/calendar_content.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
@@ -160,9 +160,9 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
         case DefaultMenuEnum.Alert:
           contents[DefaultMenuEnum.Alert] = NotificationsScreen();
           break;
-        case DefaultMenuEnum.Home:
+        case DefaultMenuEnum.Calendar:
         default:
-          contents[DefaultMenuEnum.Home] = HomeScreen();
+          contents[DefaultMenuEnum.Calendar] = CalendarContent();
           break;
       }
     }

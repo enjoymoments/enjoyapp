@@ -78,8 +78,8 @@ class _RootScreenManagerState extends State<RootScreenManager> {
               );
             },
             items: [
-              FABBottomAppBarItem(iconData: AppIcons.home, text: 'Início'),
               FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
+              FABBottomAppBarItem(iconData: AppIcons.calendar, text: 'Calendário'),
               FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
             ],
@@ -127,8 +127,18 @@ class _RootScreenManagerState extends State<RootScreenManager> {
             },
           ),
         ];
-      case DefaultMenuEnum.Home:
-        return [];
+      case DefaultMenuEnum.Calendar:
+              if (getItInstance<UserService>().notAuthenticated()) {
+          return [];
+        }
+        return [
+          IconButton(
+          icon: CustomIcon(icon: AppIcons.plus),
+          onPressed: () {
+            ExtendedNavigator.of(context).push(Routes.add_calendar_screen);
+          },
+        ),
+        ];
       case DefaultMenuEnum.Search:
         return [];
       case DefaultMenuEnum.Me:
@@ -142,8 +152,8 @@ class _RootScreenManagerState extends State<RootScreenManager> {
 
   String _getStringbyScreen(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DefaultMenuEnum.Home:
-        return 'Início';
+      case DefaultMenuEnum.Calendar:
+        return 'Calendário';
       case DefaultMenuEnum.Search:
         return '';
       case DefaultMenuEnum.Me:

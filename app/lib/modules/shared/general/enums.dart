@@ -71,9 +71,9 @@ class DefaultMenuEnum extends Enum<int> {
   factory DefaultMenuEnum(final int value, {bool ignoreSearch}) {
     if (ignoreSearch) {
       if (value == 0) {
-        return DefaultMenuEnum.Home;
-      } else if (value == 1) {
         return DefaultMenuEnum.TimeLine;
+      } else if (value == 1) {
+        return DefaultMenuEnum.Calendar;
       } else if (value == 2) {
         return DefaultMenuEnum.Alert;
       } else if (value == 3) {
@@ -81,9 +81,9 @@ class DefaultMenuEnum extends Enum<int> {
       }
     } else {
       if (value == 0) {
-        return DefaultMenuEnum.Home;
-      } else if (value == 1) {
         return DefaultMenuEnum.TimeLine;
+      } else if (value == 1) {
+        return DefaultMenuEnum.Calendar;
       } else if (value == 2) {
         return DefaultMenuEnum.Search;
       } else if (value == 3) {
@@ -98,7 +98,7 @@ class DefaultMenuEnum extends Enum<int> {
 
   const DefaultMenuEnum._fromValue(final int value) : super._fromValue(value);
 
-  static const DefaultMenuEnum Home = DefaultMenuEnum._fromValue(0);
+  static const DefaultMenuEnum Calendar = DefaultMenuEnum._fromValue(0);
   static const DefaultMenuEnum TimeLine = DefaultMenuEnum._fromValue(1);
   static const DefaultMenuEnum Search = DefaultMenuEnum._fromValue(2);
   static const DefaultMenuEnum Me = DefaultMenuEnum._fromValue(3);

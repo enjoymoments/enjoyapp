@@ -63,82 +63,122 @@ class Connected extends StatelessWidget {
   Widget _buildCards(BuildContext context) {
     return Column(
       children: [
-        CustomTile(
-          title: 'Mais sobre nós',
-          description: 'Redes sociais',
-          iconStart: AppIcons.info_circle,
-          iconEnd: AppIcons.angle_right,
-          onTap: () {
-            showMaterialModalBottomSheet(
-              context: context,
-              builder: (context) => CustomModalFit(
-                items: [
-                  CustomItemModalFit(
-                    text: 'Instagram',
-                    iconData: AppIcons.instagram,
-                    onTap: () {
-                      LaunchUrlService.launchURL(
-                          'https://www.instagram.com/myenjoymoments/');
-                    },
-                  ),
-                  CustomItemModalFit(
-                    text: 'Facebook',
-                    iconData: AppIcons.facebook,
-                    onTap: () {
-                      LaunchUrlService.launchURL(
-                          'https://www.facebook.com/Enjoy-108714310939674');
-                    },
-                  ),
-                  CustomItemModalFit(
-                    text: 'Linkedin',
-                    iconData: AppIcons.linkedin,
-                    onTap: () {
-                      LaunchUrlService.launchURL(
-                          'https://www.linkedin.com/company/enjoy-moments/');
-                    },
-                  ),
-                  CustomItemModalFit(
-                    text: 'Site',
-                    iconData: AppIcons.window_maximize,
-                    onTap: () {
-                      LaunchUrlService.launchURL('https://enjoymoments.com.br');
-                    },
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+        _buildFavorites(context),
         ..._divider(),
-        CustomTile(
-          title: 'Curtiu o Enjoy? Avalie-nos',
-          description: 'Dá aquela 5 estrelas pra gente ;)',
-          iconStart: AppIcons.thumbs_up,
-          iconEnd: AppIcons.angle_right,
-          onTap: () {
-            StoresService.redirectToStore(() {
-              context.showSnackBar('Ops... em breve nas lojas');
-            });
-          },
-        ),
+        _buildAlbums(context),
+        ..._divider(),
+        _buildFeedback(context),
+        ..._divider(),
+        _buildMoreAboutUs(context),
+        ..._divider(),
+        _buildOpenStores(context),
         ..._divider(),
         _buildUnsyncCouple(),
-        //TODO:in development
-        // CustomTile(
-        //   title: 'Configurações',
-        //   description: 'Minhas configurações',
-        //   iconStart: AppIcons.cog,
-        //   iconEnd: AppIcons.angle_right,
-        //   onTap: () {
-        //     ExtendedNavigator.of(context).push(Routes.configuration_screen);
-        //   },
-        // ),
-        // ..._divider(),
         BannerAdWidget(
           screenName: Routes.me_authenticated_partial,
         ),
         ..._buildLogout(),
+        SpacerBox.v26,
       ],
+    );
+  }
+
+  Widget _buildFeedback(BuildContext context) {
+    return CustomTile(
+      title: 'Ajude-nos a melhorar o app',
+      description: 'Compartilhe algum problema, sugestão ou melhoria',
+      iconStart: AppIcons.assistive_listening_systems,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        ExtendedNavigator.of(context).push(Routes.feedback_screen);
+      },
+    );
+  }
+
+  Widget _buildAlbums(BuildContext context) {
+    return CustomTile(
+      title: 'Álbums',
+      description: 'Veja aqui os seus álbuns',
+      iconStart: AppIcons.camera_retro,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        ExtendedNavigator.of(context).push(Routes.albums_screen);
+      },
+    );
+  }
+
+  Widget _buildFavorites(BuildContext context) {
+    return CustomTile(
+      title: 'Favoritos',
+      description: 'Veja aqui as suas preferências',
+      iconStart: AppIcons.star,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        ExtendedNavigator.of(context).push(Routes.favorite_interests_screen);
+      },
+    );
+  }
+
+  Widget _buildOpenStores(BuildContext context) {
+    return CustomTile(
+      title: 'Curtiu o Enjoy? Avalie-nos',
+      description: 'Dá aquela 5 estrelas pra gente ;)',
+      iconStart: AppIcons.thumbs_up,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        StoresService.redirectToStore(() {
+          context.showSnackBar('Ops... em breve nas lojas');
+        });
+      },
+    );
+  }
+
+  Widget _buildMoreAboutUs(BuildContext context) {
+    return CustomTile(
+      title: 'Mais sobre nós',
+      description: 'Redes sociais',
+      iconStart: AppIcons.info_circle,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => CustomModalFit(
+            items: [
+              CustomItemModalFit(
+                text: 'Instagram',
+                iconData: AppIcons.instagram,
+                onTap: () {
+                  LaunchUrlService.launchURL(
+                      'https://www.instagram.com/myenjoymoments/');
+                },
+              ),
+              CustomItemModalFit(
+                text: 'Facebook',
+                iconData: AppIcons.facebook,
+                onTap: () {
+                  LaunchUrlService.launchURL(
+                      'https://www.facebook.com/Enjoy-108714310939674');
+                },
+              ),
+              CustomItemModalFit(
+                text: 'Linkedin',
+                iconData: AppIcons.linkedin,
+                onTap: () {
+                  LaunchUrlService.launchURL(
+                      'https://www.linkedin.com/company/enjoy-moments/');
+                },
+              ),
+              CustomItemModalFit(
+                text: 'Site',
+                iconData: AppIcons.window_maximize,
+                onTap: () {
+                  LaunchUrlService.launchURL('https://enjoymoments.com.br');
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
