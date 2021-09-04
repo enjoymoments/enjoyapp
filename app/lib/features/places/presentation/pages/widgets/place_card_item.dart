@@ -18,7 +18,8 @@ class PlaceCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.place_item_details_screen, arguments: PlaceItemDetailsArguments(item: item));
+        ExtendedNavigator.of(context).push(Routes.place_item_details_screen,
+            arguments: PlaceItemDetailsArguments(item: item));
       },
       child: Container(
         padding: const EdgeInsets.only(
@@ -39,20 +40,10 @@ class PlaceCardItem extends StatelessWidget {
                 children: [
                   item.name.title(context),
                   SpacerBox.v8,
-                  Row(
-                    children: [
-                      CustomBadge(
-                        child: RatingItem(
-                          item: item,
-                        ),
-                      ),
-                      SpacerBox.h8,
-                      CustomBadge(
-                        child: (item.types?.first ?? 'Sorvetes').description(
-                          context,
-                        ),
-                      ),
-                    ],
+                  CustomBadge(
+                    child: RatingItem(
+                      item: item,
+                    ),
                   ),
                   SpacerBox.v8,
                   item.vicinity.description(

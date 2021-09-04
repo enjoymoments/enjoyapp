@@ -9,7 +9,7 @@ class CustomBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: 95, //TODO:review
+      width: 150, //TODO:review
       decoration: myBoxDecoration(context),
       child: child,
     );
