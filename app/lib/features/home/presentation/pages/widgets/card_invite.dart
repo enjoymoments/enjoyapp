@@ -41,7 +41,7 @@ class CardInvite extends StatelessWidget {
     return CardContent(
       iconData: AppIcons.paper_plane,
       name: 'Convidar meu par',
-      description: 'O que pretende fazer nos próximos dias ?',
+      description: 'Sincronize sua conta com o seu parceiro(a)',
     );
   }
 }

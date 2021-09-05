@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
+import 'package:mozin/features/home/presentation/pages/widgets/card_container.dart';
+import 'package:mozin/features/home/presentation/pages/widgets/card_invite.dart';
+import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -63,6 +66,7 @@ class Connected extends StatelessWidget {
   Widget _buildCards(BuildContext context) {
     return Column(
       children: [
+        _buildCardInvite(),
         _buildNotifications(context),
         ..._divider(),
         //TODO:in development
@@ -217,6 +221,37 @@ class Connected extends StatelessWidget {
     }
 
     return false;
+  }
+
+  Widget _buildCardInvite() {
+    return BlocBuilder<UserInfoCubit, UserInfoState>(
+      cubit: getItInstance<UserInfoCubit>(),
+      builder: (context, state) {
+        if (state.existCoupleId) {
+          return SizedBox.shrink();
+        }
+
+        return Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                getItInstance<InviteCubit>().generateShareUrl();
+              },
+              child: CardContainer(
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  child: CardInvite(
+                    isLoading: state.isLoading,
+                  ),
+                ),
+              ),
+            ),
+            SpacerBox.v16,
+            ..._divider(),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildUnsyncCouple() {
