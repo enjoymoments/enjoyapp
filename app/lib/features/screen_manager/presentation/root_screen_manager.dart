@@ -80,7 +80,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
             items: [
               FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
               FABBottomAppBarItem(iconData: AppIcons.calendar, text: 'Calendário'),
-              FABBottomAppBarItem(iconData: AppIcons.bell, text: 'Alertas'),
+              FABBottomAppBarItem(iconData: AppIcons.star, text: 'Favoritos'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
             ],
           ),
@@ -143,7 +143,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         return [];
       case DefaultMenuEnum.Me:
         return [];
-      case DefaultMenuEnum.Alert:
+      case DefaultMenuEnum.Favorites:
         return [];
       default:
         return [];
@@ -158,8 +158,8 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         return '';
       case DefaultMenuEnum.Me:
         return 'Eu';
-      case DefaultMenuEnum.Alert:
-        return 'Alertas';
+      case DefaultMenuEnum.Favorites:
+        return 'Favoritos';
       default:
         return '';
     }

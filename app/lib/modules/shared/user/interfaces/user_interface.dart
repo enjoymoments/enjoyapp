@@ -6,7 +6,6 @@ abstract class UserInterface {
   Future setTokensPushNotifications(UserAppModel user, String token);
   Future setActionListener();
 
-  Future getFavoriteInterests();
   void addFavoriteInterest(PlaceModel model);
   void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
   void setUserInfo();

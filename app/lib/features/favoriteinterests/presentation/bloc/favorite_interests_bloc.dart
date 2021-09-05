@@ -44,10 +44,37 @@ class FavoriteInterestsBloc
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
-    yield state.copyWith(
-      favoriteInterests: _user.favoriteInterests,
-      isLoading: false,
-    );
+    if (_user.favoriteInterests == null) {
+      yield state.copyWith(isLoading: true);
+
+      var _favoriteInterests = getItInstance<FavoriteInterestsRepository>();
+      var response = await _favoriteInterests.getFavoriteInterests();
+
+      yield response.fold((model) {
+        _userWrapper.assignment(_user.copyWith(favoriteInterests: model));
+
+        return state.copyWith(
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+          forceRefresh: StateUtils.generateRandomNumber(),
+          favoriteInterests: model,
+        );
+      }, (error) {
+        return state.copyWith(
+          isLoading: false,
+          isError: true,
+          isSuccess: false,
+          forceRefresh: StateUtils.generateRandomNumber(),
+        );
+      });
+    } else {
+      yield state.copyWith(
+        favoriteInterests: _user.favoriteInterests,
+        forceRefresh: StateUtils.generateRandomNumber(),
+        isLoading: false,
+      );
+    }
   }
 
   Stream<FavoriteInterestsState> mapAddPlaceToFavoriteToState(

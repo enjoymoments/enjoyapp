@@ -63,7 +63,7 @@ class Connected extends StatelessWidget {
   Widget _buildCards(BuildContext context) {
     return Column(
       children: [
-        _buildFavorites(context),
+        _buildNotifications(context),
         ..._divider(),
         //TODO:in development
         // _buildAlbums(context),
@@ -96,6 +96,18 @@ class Connected extends StatelessWidget {
     );
   }
 
+  Widget _buildNotifications(BuildContext context) {
+    return CustomTile(
+      title: 'Notificações',
+      description: 'Minha central de notificações',
+      iconStart: AppIcons.bell,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        ExtendedNavigator.of(context).push(Routes.notification_screen);
+      },
+    );
+  }
+
   Widget _buildAlbums(BuildContext context) {
     return CustomTile(
       title: 'Álbums',
@@ -104,18 +116,6 @@ class Connected extends StatelessWidget {
       iconEnd: AppIcons.angle_right,
       onTap: () {
         ExtendedNavigator.of(context).push(Routes.albums_screen);
-      },
-    );
-  }
-
-  Widget _buildFavorites(BuildContext context) {
-    return CustomTile(
-      title: 'Favoritos',
-      description: 'Veja aqui as suas preferências',
-      iconStart: AppIcons.star,
-      iconEnd: AppIcons.angle_right,
-      onTap: () {
-        ExtendedNavigator.of(context).push(Routes.favorite_interests_screen);
       },
     );
   }

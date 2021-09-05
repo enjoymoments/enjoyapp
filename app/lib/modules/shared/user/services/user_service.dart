@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
 import 'package:mozin/features/listener_manager/presentation/bloc/listener_manager_cubit.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_category_model.dart';
@@ -65,19 +64,6 @@ class UserService implements UserInterface {
     }
 
     _userWrapper.assignment(_user);
-  }
-
-  @override
-  Future getFavoriteInterests() async {
-    var _favoriteInterests = getItInstance<FavoriteInterestsRepository>();
-    var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
-
-    var response = await _favoriteInterests.getFavoriteInterests();
-
-    response.fold((model) {
-      _userWrapper.assignment(_user.copyWith(favoriteInterests: model));
-    }, (error) {});
   }
 
   @override

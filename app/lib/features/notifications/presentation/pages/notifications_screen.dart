@@ -1,3 +1,5 @@
+import 'package:custom_view/custom_app_bar.dart';
+import 'package:custom_view/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/notifications/presentation/bloc/notifications_cubit.dart';
@@ -31,6 +33,22 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return CustomScaffold(
+      child: _buildBody(),
+      appBar: _buildAppBar(context),
+      bottomNavigationBar: null,
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: 'Notificações',
+      context: context,
+      onPressedBack: () => Navigator.of(context).pop(),
+    );
+  }
+
+  Widget _buildBody() {
     return CustomContainer(
       child: RefreshIndicator(
         key: _refreshIndicatorKey,

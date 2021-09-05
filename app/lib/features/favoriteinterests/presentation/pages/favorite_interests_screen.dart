@@ -7,9 +7,7 @@ import 'package:mozin/features/places/presentation/pages/widgets/categories/cate
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
-import 'package:custom_view/custom_app_bar.dart';
 import 'package:custom_view/custom_container.dart';
-import 'package:custom_view/custom_scaffold.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class FavoriteInterestsScreen extends StatefulWidget {
@@ -35,11 +33,7 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: _buildBody(),
-      appBar: _buildAppBar(context),
-      bottomNavigationBar: null,
-    );
+    return _buildBody();
   }
 
   Widget _buildBody() {
@@ -78,14 +72,6 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
           return SizedBox.shrink();
         },
       ),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return CustomAppBar(
-      title: 'Favoritos',
-      context: context,
-      onPressedBack: () => Navigator.of(context).pop(),
     );
   }
 }

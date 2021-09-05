@@ -25,7 +25,9 @@ class AuthenticationBloc
 
   AuthenticationRepository get _authenticationRepository =>
       getItInstance<AuthenticationRepository>();
+
   UserService get _userService => getItInstance<UserService>();
+
   PushNotificationConfig get _pushNotificationConfig =>
       getItInstance<PushNotificationConfig>();
   UserWrapper get _userWrapper => getItInstance<UserWrapper>();
@@ -188,8 +190,7 @@ class AuthenticationBloc
         _userService.setTokensPushNotifications(user, value);
       });
     }
-
-    _userService.getFavoriteInterests();
+    
     _userService.setActionListener();
   }
 }

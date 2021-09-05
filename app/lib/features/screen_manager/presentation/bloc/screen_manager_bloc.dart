@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_content.dart';
+import 'package:mozin/features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
-import 'package:mozin/features/notifications/presentation/pages/notifications_screen.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
@@ -157,8 +157,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
         case DefaultMenuEnum.Me:
           contents[DefaultMenuEnum.Me] = MeScreen();
           break;
-        case DefaultMenuEnum.Alert:
-          contents[DefaultMenuEnum.Alert] = NotificationsScreen();
+        case DefaultMenuEnum.Favorites:
+          contents[DefaultMenuEnum.Favorites] = FavoriteInterestsScreen();
           break;
         case DefaultMenuEnum.Calendar:
         default:
