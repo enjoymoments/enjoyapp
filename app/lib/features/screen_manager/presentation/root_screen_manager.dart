@@ -78,7 +78,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
               );
             },
             items: [
-              FABBottomAppBarItem(iconData: AppIcons.seedling, text: 'Casal'),
+              FABBottomAppBarItem(iconData: AppIcons.leaf, text: 'Casal'),
               FABBottomAppBarItem(iconData: AppIcons.calendar, text: 'Calendário'),
               FABBottomAppBarItem(iconData: AppIcons.heart, text: 'Favoritos'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
