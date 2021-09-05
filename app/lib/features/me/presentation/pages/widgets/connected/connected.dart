@@ -65,8 +65,9 @@ class Connected extends StatelessWidget {
       children: [
         _buildFavorites(context),
         ..._divider(),
-        _buildAlbums(context),
-        ..._divider(),
+        //TODO:in development
+        // _buildAlbums(context),
+        // ..._divider(),
         _buildFeedback(context),
         ..._divider(),
         _buildMoreAboutUs(context),
