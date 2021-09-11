@@ -289,7 +289,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
         builder: (context, state) {
           return IconButton(
             icon: CustomIcon(
-                icon: AppIcons.heart,
+                icon: AppIcons.bookmark,
                 color: state.favoriteAdded
                     ? Theme.of(context).accentIconTheme.color
                     : Theme.of(context).appBarTheme.iconTheme.color),

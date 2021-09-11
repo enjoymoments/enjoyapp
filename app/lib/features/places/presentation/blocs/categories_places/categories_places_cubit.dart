@@ -14,7 +14,8 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     emit(
       state.copyWith(
         interestSelected: _getInterests(_categoryInitial),
-        sessions: _getSessions(_categoryInitial),
+        //TOOD:in development
+        //sessions: _getSessions(_categoryInitial),
         places: places,
         categorySelected: _categoryInitial,
         tabsTitle: _buildTabsTitle(_categoryInitial),
@@ -33,7 +34,8 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         contentPlaces: category.subCategories[0].places,
         contentSuggestedByUsers: category.subCategories[0].suggestedByUsers,
         interestSelected: _getInterests(category),
-        sessions: _getSessions(category),
+        //TOOD:in development
+        //sessions: _getSessions(category),
       ),
     );
   }
@@ -67,20 +69,21 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         .toList();
   }
 
-  List<SessionModel> _loadSessions() {
-    if (state.sessions.length == 0) {
-      return [
-        SessionModel(
-            type: InterestEnum.Place, selected: false, text: 'Lugares'),
-        SessionModel(
-            type: InterestEnum.SuggestedByUsers,
-            selected: false,
-            text: 'Sugerido'),
-      ];
-    }
+  //TOOD:in development
+  // List<SessionModel> _loadSessions() {
+  //   if (state.sessions.length == 0) {
+  //     return [
+  //       SessionModel(
+  //           type: InterestEnum.Place, selected: false, text: 'Lugares'),
+  //       SessionModel(
+  //           type: InterestEnum.SuggestedByUsers,
+  //           selected: false,
+  //           text: 'Sugerido'),
+  //     ];
+  //   }
 
-    return state.sessions;
-  }
+  //   return state.sessions;
+  // }
 
   InterestEnum _getInterests(PlacesCategory category) {
     if (category.subCategories[0].places.length > 0 &&
@@ -95,12 +98,13 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     return null;
   }
 
-  List<SessionModel> _getSessions(PlacesCategory category) {
-    if (category.subCategories[0].places.length > 0 &&
-        category.subCategories[0].suggestedByUsers.length > 0) {
-      return _loadSessions();
-    }
+  //TOOD:in development
+  // List<SessionModel> _getSessions(PlacesCategory category) {
+  //   if (category.subCategories[0].places.length > 0 &&
+  //       category.subCategories[0].suggestedByUsers.length > 0) {
+  //     return _loadSessions();
+  //   }
 
-    return <SessionModel>[];
-  }
+  //   return <SessionModel>[];
+  // }
 }

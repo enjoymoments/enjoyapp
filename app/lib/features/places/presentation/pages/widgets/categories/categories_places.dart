@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/publisher_banner_ad_widget.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_state.dart';
@@ -31,10 +32,12 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   SuggestionsCubit _suggestionsCubit;
   CategoriesPlacesCubit _categoriesPlacesCubit;
   _CategoriesPlacesAds _categoriesPlacesAds;
+  FavoriteInterestsBloc _favoriteInterestsBloc;
 
   @override
   void initState() {
     _suggestionsCubit = getItInstance<SuggestionsCubit>();
+    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>();
     _categoriesPlacesAds = _CategoriesPlacesAds();
     _categoriesPlacesCubit = getItInstance<CategoriesPlacesCubit>()
       ..loadPrimary(widget.places);
@@ -44,6 +47,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   @override
   void dispose() {
+    _favoriteInterestsBloc.close();
     _categoriesPlacesCubit.close();
     _suggestionsCubit.close();
     super.dispose();
@@ -53,11 +57,13 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildCategories(),
-        SpacerBox.v8,
+        //TODO:in development
+        // _buildCategories(),
+        // SpacerBox.v8,
         _buildTabs(),
         SpacerBox.v16,
-        _buildSections(),
+        //TODO:in development
+        //_buildSections(),
         _buildContentTabs(),
       ],
     );
@@ -146,7 +152,9 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
       cubit: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
-        return (previous.contentPlaces != current.contentPlaces) || (previous.contentSuggestedByUsers != current.contentSuggestedByUsers);
+        return (previous.contentPlaces != current.contentPlaces) ||
+            (previous.contentSuggestedByUsers !=
+                current.contentSuggestedByUsers);
       },
       builder: (context, state) {
         if (state.interestSelected == InterestEnum.Place &&
@@ -169,7 +177,10 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
         itemBuilder: (context, index) {
           var item = state.contentSuggestedByUsers[index];
           return SuggestionItem(
-              item: item, suggestionsCubit: _suggestionsCubit);
+            item: item,
+            suggestionsCubit: _suggestionsCubit,
+            favoriteInterestsBloc: _favoriteInterestsBloc,
+          );
         },
         separatorBuilder: (context, index) => Column(
           children: [

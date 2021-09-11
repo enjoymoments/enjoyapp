@@ -4,6 +4,7 @@ import 'package:mozin/features/listener_manager/presentation/bloc/listener_manag
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_category_model.dart';
 import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
+import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -19,6 +20,51 @@ class UserService implements UserInterface {
   @override
   Future setTokensPushNotifications(UserAppModel user, String token) {
     return this.userRepository.setTokensPushNotifications(user, token);
+  }
+
+  @override
+  void addFavoriteSuggestionInterest(SuggestionsModel model) {
+    var _userWrapper = getItInstance<UserWrapper>();
+    var _user = _userWrapper.getUser;
+
+    var _categoryExist = _user.favoriteInterests.places
+        .indexWhere((element) => element.categoryId == model.categoryId);
+
+    if (_categoryExist != -1) {
+      var _subCategoryExist = _user
+          .favoriteInterests.places[_categoryExist].subCategories
+          .indexWhere(
+              (element) => element.subCategoryId == model.subCategoryId);
+      if (_subCategoryExist != -1) {
+        _user.favoriteInterests.places[_categoryExist].subCategories[_subCategoryExist].suggestedByUsers.add(model);
+      } else {
+        _user.favoriteInterests.places[_categoryExist].subCategories.add(
+          PlacesSubCategoryModel(
+            subCategoryId: model.subCategoryId,
+            subCategoryName: model.subCategoryName,
+            suggestedByUsers: List<SuggestionsModel>.from([model]),
+          ),
+        );
+      }
+    } else {
+      _user.favoriteInterests.places.add(
+        PlacesCategoryModel(
+          categoryId: model.categoryId,
+          categoryName: model.categoryName,
+          subCategories: List<PlacesSubCategoryModel>.from(
+            [
+              PlacesSubCategoryModel(
+                subCategoryId: model.subCategoryId,
+                subCategoryName: model.subCategoryName,
+                suggestedByUsers: List<SuggestionsModel>.from([model]),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    _userWrapper.assignment(_user);
   }
 
   @override

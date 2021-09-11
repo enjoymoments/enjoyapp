@@ -33,6 +33,8 @@ class FavoriteInterestsBloc
   ) async* {
     if (event is AddPlaceToFavorite) {
       yield* mapAddPlaceToFavoriteToState(event);
+    } else if (event is AddSuggestionToFavorite) {
+      yield* mapAddSuggestionToFavoriteToState(event);
     } else if (event is SetFavoriteItem) {
       yield state.copyWith(favoriteAdded: event.favoriteAdded);
     } else if (event is LoadFavoriteInterests) {
@@ -77,6 +79,58 @@ class FavoriteInterestsBloc
     }
   }
 
+  Stream<FavoriteInterestsState> mapAddSuggestionToFavoriteToState(
+    AddSuggestionToFavorite event,
+  ) async* {
+    Either<bool, Exception> response;
+    var _userService = getItInstance<UserService>();
+    var _userWrapper = getItInstance<UserWrapper>();
+    var _user = _userWrapper.getUser;
+
+    MapItemFavorite _mapItemFavorite = MapItemFavorite();
+    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event.suggestion.categoryId, event.suggestion.subCategoryId, event.suggestion.id);
+
+    var _favoriteAdded = !(_indexItem != -1);
+
+    yield state.copyWith(favoriteAdded: _favoriteAdded);
+
+    if (_indexItem != -1) {
+      response = await _favoriteInterestsRepository
+          .removeFavoriteInterest(event.suggestion.id);
+
+      _userService.removeFavoriteInterest(
+        indexCategory: _mapItemFavorite.indexCategory,
+        indexSubCategory: _mapItemFavorite.indexSubCategory,
+        indexItem: _mapItemFavorite.indexItem,
+      );
+    } else {
+      response = await _favoriteInterestsRepository.addFavoriteInterest(
+        event.suggestion.id,
+        event.suggestion.categoryId,
+        event.suggestion.subCategoryId,
+        InterestEnum.Place,
+      );
+
+      _userService.addFavoriteSuggestionInterest(event.suggestion);
+    }
+
+    yield response.fold((model) {
+      return state.copyWith(
+        isLoading: false,
+        isError: false,
+        isSuccess: true,
+        forceRefresh: StateUtils.generateRandomNumber(),
+      );
+    }, (error) {
+      return state.copyWith(
+        isLoading: false,
+        isError: true,
+        isSuccess: false,
+        forceRefresh: StateUtils.generateRandomNumber(),
+      );
+    });
+  }
+
   Stream<FavoriteInterestsState> mapAddPlaceToFavoriteToState(
     AddPlaceToFavorite event,
   ) async* {
@@ -86,7 +140,7 @@ class FavoriteInterestsBloc
     var _user = _userWrapper.getUser;
 
     MapItemFavorite _mapItemFavorite = MapItemFavorite();
-    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event);
+    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event.place.categoryId, event.place.subCategoryId, event.place.placeId);
 
     var _favoriteAdded = !(_indexItem != -1);
 
@@ -132,22 +186,24 @@ class FavoriteInterestsBloc
   int _getIndexItem(
     UserAppModel user,
     MapItemFavorite mapItemFavorite,
-    AddPlaceToFavorite event,
+    String categoryId,
+    String subCategoryId,
+    String id,
   ) {
     for (var indexCategory = 0;
         indexCategory < user.favoriteInterests.places.length;
         indexCategory++) {
       var _categoryItem = user.favoriteInterests.places[indexCategory];
 
-      if (_categoryItem.categoryId == event.place.categoryId) {
+      if (_categoryItem.categoryId == categoryId) {
         for (var indexSubCategory = 0;
             indexSubCategory < _categoryItem.subCategories.length;
             indexSubCategory++) {
           var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
 
-          if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
+          if (_subCategoryItem.subCategoryId == subCategoryId) {
             var _indexItem = _subCategoryItem.places.indexWhere(
-                (element) => element.placeId == event.place.placeId);
+                (element) => element.placeId == id);
 
             if (_indexItem != -1) {
               mapItemFavorite.indexCategory = indexCategory;

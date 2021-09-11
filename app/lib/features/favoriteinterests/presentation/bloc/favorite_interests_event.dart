@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
+import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 
 abstract class FavoriteInterestsEvent extends Equatable {
   const FavoriteInterestsEvent();
@@ -12,6 +13,14 @@ class AddPlaceToFavorite extends FavoriteInterestsEvent {
 
   AddPlaceToFavorite(
     this.place,
+  );
+}
+
+class AddSuggestionToFavorite extends FavoriteInterestsEvent {
+  final SuggestionsModel suggestion;
+
+  AddSuggestionToFavorite(
+    this.suggestion,
   );
 }
 

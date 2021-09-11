@@ -27,8 +27,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
   @override
   void initState() {
-    _placesBloc = getItInstance<PlacesBloc>()
-      ..add(GetCurrentPosition());
+    _placesBloc = getItInstance<PlacesBloc>()..add(GetCurrentPosition());
     super.initState();
   }
 
@@ -61,7 +60,9 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
               SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 child: Container(
-                  child: Center(child: "Ops...\n não encontramos nada".labelIntro(context)),
+                  child: Center(
+                      child:
+                          "Ops...\n não encontramos nada".labelIntro(context)),
                   height: SizeConfig.screenHeight / 1.5,
                 ),
               ),
@@ -101,6 +102,12 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
                 arguments: InterestScreenArguments(isChangeFilter: true));
           },
         ),
+        IconButton(
+          icon: CustomIcon(icon: AppIcons.plus),
+          onPressed: () {
+            ExtendedNavigator.of(context).push(Routes.add_suggestions_screen);
+          },
+        ),
       ],
     );
   }
@@ -110,8 +117,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       key: _refreshIndicatorKey,
       color: Theme.of(context).primaryColor,
       onRefresh: () async {
-        _placesBloc
-            .add(GetCurrentPosition());
+        _placesBloc.add(GetCurrentPosition());
       },
       child: child,
     );
