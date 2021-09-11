@@ -103,7 +103,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
 
   Widget _buildButtons(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: EdgeInsets.only(bottom: SizeConfig.sizeByPixel(25)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -147,15 +147,15 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
       CustomTile(
         title: 'Linha do tempo',
         description:
-            'Uma linha do tempo privada, onde poderam postar declaracões de amor e momentos juntos',
+            'Monte uma linha do tempo privada contendo fotos de vocês',
         iconStart: AppIcons.check,
         onTap: () {},
       ),
       ..._divider(),
       CustomTile(
-        title: 'Álbuns de fotos',
+        title: 'Calendário de compromissos',
         description:
-            'Criar vários álbuns de fotos contendo todos os seus momentos felizes',
+            'Agende o que fazer para hoje e os próximos dias',
         iconStart: AppIcons.check,
         onTap: () {},
       ),

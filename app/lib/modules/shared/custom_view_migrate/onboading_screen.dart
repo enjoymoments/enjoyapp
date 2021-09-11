@@ -27,10 +27,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             'O app para deixar a rotina do casal mais interessante'),
         _buildItem('Pesquise o que fazer',
             'A partir de alguns filtros, descubra lugares ou coisas para fazer em casa'),
-        _buildItem('Compartilhe fotos',
-            'Crie álbums de fotos e compartilhe com o parceiro(a)'),
         _buildItem(
-            'Linha do tempo', 'Monte uma linha do tempo privada para o casal'),
+            'Linha do tempo', 'Monte uma linha do tempo privada contendo fotos de vocês'),
+        _buildItem('Calendário de compromissos',
+            'Agende o que fazer para hoje e os próximos dias'),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback

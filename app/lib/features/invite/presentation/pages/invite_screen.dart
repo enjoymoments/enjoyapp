@@ -153,14 +153,14 @@ class InviteScreen extends StatelessWidget {
       ..._divider(),
       CustomTile(
         title: 'Linha do tempo',
-        description: 'Uma linha do tempo privada, onde poderam postar declaracões de amor e momentos juntos',
+        description: 'Monte uma linha do tempo privada contendo fotos de vocês',
         iconStart: AppIcons.check,
         onTap: () {},
       ),
       ..._divider(),
       CustomTile(
-        title: 'Álbuns de fotos',
-        description: 'Criar vários álbuns de fotos contendo todos os seus momentos felizes',
+        title: 'Calendário de compromissos',
+        description: 'Agende o que fazer para hoje e os próximos dias',
         iconStart: AppIcons.check,
         onTap: () {},
       ),
