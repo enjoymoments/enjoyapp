@@ -37,7 +37,7 @@ class FavoriteInterestsRemoteDataSourceImpl
        addFavoriteInterest(interest: 
         {
           interestId: "$interestId"
-          interestType: PLACE
+          interestType: SUGGESTION
           categoryId: "$categoryId"
           subCategoryId:"$subCategoryId"
         }
