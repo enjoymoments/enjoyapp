@@ -75,6 +75,13 @@ class FavoriteInterestsRemoteDataSourceImpl
                   longitude
                 }
               }
+              suggestedByUsers {
+                id
+                title
+                description
+                like
+                moreOptionsEnable
+              }
             }
         }
       }
