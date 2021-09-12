@@ -11,5 +11,6 @@ abstract class UserInterface {
   void addFavoriteSuggestionInterest(SuggestionsModel model);
 
   void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
+  void removeFavoriteSuggestionInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
   void setUserInfo();
 }

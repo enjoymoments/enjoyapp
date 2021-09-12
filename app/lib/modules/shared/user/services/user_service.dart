@@ -113,6 +113,24 @@ class UserService implements UserInterface {
   }
 
   @override
+  void removeFavoriteSuggestionInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem}) {
+    var _userWrapper = getItInstance<UserWrapper>();
+    var _user = _userWrapper.getUser;
+
+    _user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].suggestedByUsers.removeAt(indexItem);
+
+    if(_user.favoriteInterests.places[indexCategory].subCategories[indexSubCategory].suggestedByUsers.length == 0) {
+      _user.favoriteInterests.places[indexCategory].subCategories.removeAt(indexSubCategory);
+    }
+
+    if(_user.favoriteInterests.places[indexCategory].subCategories.length == 0) { 
+      _user.favoriteInterests.places.removeAt(indexCategory);
+    }
+
+    _userWrapper.assignment(_user);
+  }
+
+  @override
   void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem}) {
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;

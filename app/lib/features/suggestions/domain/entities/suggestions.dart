@@ -8,6 +8,7 @@ class Suggestions extends Equatable {
     this.like,
     this.dislike,
     this.moreOptionsEnable,
+    this.favoriteAdded,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class Suggestions extends Equatable {
   final int like;
   final int dislike;
   final bool moreOptionsEnable;
+  final bool favoriteAdded;
 
   @override
   List<Object> get props => <Object>[
@@ -25,5 +27,6 @@ class Suggestions extends Equatable {
         like,
         dislike,
         moreOptionsEnable,
+        favoriteAdded,
       ];
 }

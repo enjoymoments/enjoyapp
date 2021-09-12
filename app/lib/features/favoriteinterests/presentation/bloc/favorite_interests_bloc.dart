@@ -88,7 +88,7 @@ class FavoriteInterestsBloc
     var _user = _userWrapper.getUser;
 
     MapItemFavorite _mapItemFavorite = MapItemFavorite();
-    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event.suggestion.categoryId, event.suggestion.subCategoryId, event.suggestion.id);
+    int _indexItem = _getIndexItemSuggestion(_user, _mapItemFavorite, event);
 
     var _favoriteAdded = !(_indexItem != -1);
 
@@ -98,7 +98,7 @@ class FavoriteInterestsBloc
       response = await _favoriteInterestsRepository
           .removeFavoriteInterest(event.suggestion.id);
 
-      _userService.removeFavoriteInterest(
+      _userService.removeFavoriteSuggestionInterest(
         indexCategory: _mapItemFavorite.indexCategory,
         indexSubCategory: _mapItemFavorite.indexSubCategory,
         indexItem: _mapItemFavorite.indexItem,
@@ -140,7 +140,7 @@ class FavoriteInterestsBloc
     var _user = _userWrapper.getUser;
 
     MapItemFavorite _mapItemFavorite = MapItemFavorite();
-    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event.place.categoryId, event.place.subCategoryId, event.place.placeId);
+    int _indexItem = _getIndexItem(_user, _mapItemFavorite, event);
 
     var _favoriteAdded = !(_indexItem != -1);
 
@@ -183,27 +183,60 @@ class FavoriteInterestsBloc
     });
   }
 
-  int _getIndexItem(
+  int _getIndexItemSuggestion(
     UserAppModel user,
     MapItemFavorite mapItemFavorite,
-    String categoryId,
-    String subCategoryId,
-    String id,
+    AddSuggestionToFavorite event,
   ) {
     for (var indexCategory = 0;
         indexCategory < user.favoriteInterests.places.length;
         indexCategory++) {
       var _categoryItem = user.favoriteInterests.places[indexCategory];
 
-      if (_categoryItem.categoryId == categoryId) {
+      if (_categoryItem.categoryId == event.suggestion.categoryId) {
         for (var indexSubCategory = 0;
             indexSubCategory < _categoryItem.subCategories.length;
             indexSubCategory++) {
           var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
 
-          if (_subCategoryItem.subCategoryId == subCategoryId) {
+          if (_subCategoryItem.subCategoryId == event.suggestion.subCategoryId) {
+            var _indexItem = _subCategoryItem.suggestedByUsers.indexWhere(
+                (element) => element.id == event.suggestion.id);
+
+            if (_indexItem != -1) {
+              mapItemFavorite.indexCategory = indexCategory;
+              mapItemFavorite.indexSubCategory = indexSubCategory;
+              mapItemFavorite.indexItem = _indexItem;
+
+              return _indexItem;
+            }
+          }
+        }
+      }
+    }
+
+    return -1;
+  }
+
+  int _getIndexItem(
+    UserAppModel user,
+    MapItemFavorite mapItemFavorite,
+    AddPlaceToFavorite event,
+  ) {
+    for (var indexCategory = 0;
+        indexCategory < user.favoriteInterests.places.length;
+        indexCategory++) {
+      var _categoryItem = user.favoriteInterests.places[indexCategory];
+
+      if (_categoryItem.categoryId == event.place.categoryId) {
+        for (var indexSubCategory = 0;
+            indexSubCategory < _categoryItem.subCategories.length;
+            indexSubCategory++) {
+          var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
+
+          if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
             var _indexItem = _subCategoryItem.places.indexWhere(
-                (element) => element.placeId == id);
+                (element) => element.placeId == event.place.placeId);
 
             if (_indexItem != -1) {
               mapItemFavorite.indexCategory = indexCategory;

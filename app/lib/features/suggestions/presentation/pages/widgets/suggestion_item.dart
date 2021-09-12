@@ -10,22 +10,40 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_font_size.dart';
 import 'package:custom_view/custom_icon.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
-class SuggestionItem extends StatelessWidget {
+class SuggestionItem extends StatefulWidget {
   const SuggestionItem({
     Key key,
     @required this.item,
     @required this.suggestionsCubit,
-    @required this.favoriteInterestsBloc,
   }) : super(key: key);
 
   final SuggestionsModel item;
   final SuggestionsCubit suggestionsCubit;
-  final FavoriteInterestsBloc favoriteInterestsBloc;
+
+  @override
+  _SuggestionItemState createState() => _SuggestionItemState();
+}
+
+class _SuggestionItemState extends State<SuggestionItem> {
+  FavoriteInterestsBloc _favoriteInterestsBloc;
+
+  @override
+  void initState() {
+    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _favoriteInterestsBloc.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +54,7 @@ class SuggestionItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: item.title.title(context)),
+              Expanded(child: widget.item.title.title(context)),
               _buildOptions(context),
             ],
           ),
@@ -44,7 +62,7 @@ class SuggestionItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: item.description.description(context)),
+              Expanded(child: widget.item.description.description(context)),
             ],
           ),
           SpacerBox.v8,
@@ -75,17 +93,17 @@ class SuggestionItem extends StatelessWidget {
 
   Widget _buildFavorite(BuildContext context) {
     return BlocBuilder<FavoriteInterestsBloc, FavoriteInterestsState>(
-      cubit: favoriteInterestsBloc,
+      cubit: _favoriteInterestsBloc,
       builder: (context, state) {
         return IconButton(
           padding: const EdgeInsets.all(0),
           icon: CustomIcon(
               icon: AppIcons.bookmark,
-              color: state.favoriteAdded
+              color: widget.item.favoriteAdded
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
           onPressed: () {
-            favoriteInterestsBloc.add(AddSuggestionToFavorite(item));
+            _favoriteInterestsBloc.add(AddSuggestionToFavorite(widget.item));
           },
         );
       },
@@ -93,7 +111,7 @@ class SuggestionItem extends StatelessWidget {
   }
 
   Widget _buildOptions(BuildContext context) {
-    if (!item.moreOptionsEnable) {
+    if (!widget.item.moreOptionsEnable) {
       return SizedBox.shrink();
     }
 
@@ -133,7 +151,9 @@ class SuggestionItem extends StatelessWidget {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.like.toString().label(context, fontSize: CustomFontSize.f16),
+          widget.item.like
+              .toString()
+              .label(context, fontSize: CustomFontSize.f16),
         ],
       ),
     );
@@ -149,7 +169,9 @@ class SuggestionItem extends StatelessWidget {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.dislike.toString().label(context, fontSize: CustomFontSize.f16),
+          widget.item.dislike
+              .toString()
+              .label(context, fontSize: CustomFontSize.f16),
         ],
       ),
     );
@@ -169,7 +191,7 @@ class SuggestionItem extends StatelessWidget {
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              suggestionsCubit.remove(item.id);
+              widget.suggestionsCubit.remove(widget.item.id);
             },
           ),
         ],

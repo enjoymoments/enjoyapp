@@ -81,6 +81,7 @@ class FavoriteInterestsRemoteDataSourceImpl
                 description
                 like
                 moreOptionsEnable
+                favoriteAdded
               }
             }
         }

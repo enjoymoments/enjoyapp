@@ -74,6 +74,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
                 description
                 like
                 moreOptionsEnable
+                favoriteAdded
               }
             }
         }
