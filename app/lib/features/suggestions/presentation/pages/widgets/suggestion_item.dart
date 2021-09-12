@@ -35,7 +35,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
 
   @override
   void initState() {
-    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>();
+    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>()..add(SetFavoriteItem(widget.item.favoriteAdded));
     super.initState();
   }
 
@@ -99,7 +99,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
           padding: const EdgeInsets.all(0),
           icon: CustomIcon(
               icon: AppIcons.bookmark,
-              color: widget.item.favoriteAdded
+              color: state.favoriteAdded
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
           onPressed: () {
