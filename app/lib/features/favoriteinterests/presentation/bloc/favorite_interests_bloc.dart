@@ -6,12 +6,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin_core/utils.dart';
 
-class MapItemFavorite {
-  int indexCategory;
-  int indexSubCategory;
-  int indexItem;
-}
-
 class FavoriteInterestsBloc
     extends Bloc<FavoriteInterestsEvent, FavoriteInterestsState> {
   FavoriteInterestsBloc() : super(FavoriteInterestsState.initial());
@@ -29,7 +23,7 @@ class FavoriteInterestsBloc
     var _userWrapper = getItInstance<UserWrapper>();
     var _user = _userWrapper.getUser;
 
-    if (_user.favoriteInterests == null) {
+    if (_user.favoriteInterests.places.length == 0) {
       yield state.copyWith(isLoading: true);
 
       var _favoriteInterests = getItInstance<FavoriteInterestsRepository>();

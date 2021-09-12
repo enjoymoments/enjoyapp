@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_event.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_state.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -33,11 +35,18 @@ class FavoriteInterestsItemBloc
   ) async* {
     if (event is AddPlaceToFavorite) {
       yield* mapAddPlaceToFavoriteToState(event);
+      _reloadFavoriteInterests();
     } else if (event is AddSuggestionToFavorite) {
       yield* mapAddSuggestionToFavoriteToState(event);
+      _reloadFavoriteInterests();
     } else if (event is SetFavoriteItem) {
       yield state.copyWith(favoriteAdded: event.favoriteAdded);
     }
+  }
+
+  void _reloadFavoriteInterests() {
+    getItInstance<FavoriteInterestsBloc>()
+      ..add(LoadFavoriteInterests());
   }
 
   Stream<FavoriteInterestsItemState> mapAddSuggestionToFavoriteToState(

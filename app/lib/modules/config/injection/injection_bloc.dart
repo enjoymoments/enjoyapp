@@ -60,7 +60,7 @@ void registerBlocs(GetIt getItInstance) {
 
   getItInstance.registerFactory<ConnectedCubit>(() => ConnectedCubit());
 
-  getItInstance.registerFactory<FavoriteInterestsBloc>(() =>
+  getItInstance.registerLazySingleton<FavoriteInterestsBloc>(() =>
       FavoriteInterestsBloc());
 
   getItInstance.registerFactory<FavoriteInterestsItemBloc>(() =>

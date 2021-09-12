@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/session_model.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
@@ -15,7 +14,6 @@ class CategoriesPlacesState extends DefaultState {
     String errorMessage,
     this.places,
     this.categorySelected,
-    this.tabsTitle,
     this.contentPlaces,
     this.contentSuggestedByUsers,
     this.interestSelected,
@@ -30,7 +28,6 @@ class CategoriesPlacesState extends DefaultState {
 
   final List<PlacesCategory> places;
   final PlacesCategory categorySelected;
-  final List<Widget> tabsTitle;
   
   //TODO:view this
   final InterestEnum interestSelected;
@@ -48,7 +45,6 @@ class CategoriesPlacesState extends DefaultState {
       errorMessage: null,
       places: [],
       categorySelected: null,
-      tabsTitle: [],
       contentPlaces: [],
       contentSuggestedByUsers: [],
       sessions: [],
@@ -64,7 +60,6 @@ class CategoriesPlacesState extends DefaultState {
     String errorMessage,
     List<PlacesCategory> places,
     PlacesCategory categorySelected,
-    List<Widget> tabsTitle,
     List<PlaceModel> contentPlaces,
     List<SuggestionsModel> contentSuggestedByUsers,
     List<SessionModel> sessions,
@@ -78,7 +73,6 @@ class CategoriesPlacesState extends DefaultState {
       errorMessage: errorMessage ?? this.errorMessage,
       places: places ?? this.places,
       categorySelected: categorySelected ?? this.categorySelected,
-      tabsTitle: tabsTitle ?? this.tabsTitle,
       contentPlaces: contentPlaces ?? this.contentPlaces,
       contentSuggestedByUsers: contentSuggestedByUsers ?? this.contentSuggestedByUsers,
       sessions: sessions ?? this.sessions,
@@ -95,7 +89,6 @@ class CategoriesPlacesState extends DefaultState {
         errorMessage,
         places,
         categorySelected,
-        tabsTitle,
         contentPlaces,
         contentSuggestedByUsers,
         sessions,

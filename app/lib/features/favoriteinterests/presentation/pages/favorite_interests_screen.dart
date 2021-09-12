@@ -26,12 +26,6 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
   }
 
   @override
-  void dispose() {
-    _favoriteInterestsBloc.close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return _buildBody();
   }

@@ -143,7 +143,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
         if (state.categorySelected != null) {
           return SubCategoriesPlaces(
             subCategories: state.categorySelected.subCategories,
-            tabstitle: state.tabsTitle,
+            tabstitle: _categoriesPlacesCubit.buildTabsTitle(state.categorySelected),
             categoriesPlacesCubit: _categoriesPlacesCubit,
           );
         }

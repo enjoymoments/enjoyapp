@@ -18,7 +18,6 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         //sessions: _getSessions(_categoryInitial),
         places: places,
         categorySelected: _categoryInitial,
-        tabsTitle: _buildTabsTitle(_categoryInitial),
         contentPlaces: _categoryInitial.subCategories[0].places,
         contentSuggestedByUsers:
             _categoryInitial.subCategories[0].suggestedByUsers,
@@ -30,7 +29,6 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     emit(
       state.copyWith(
         categorySelected: category,
-        tabsTitle: _buildTabsTitle(category),
         contentPlaces: category.subCategories[0].places,
         contentSuggestedByUsers: category.subCategories[0].suggestedByUsers,
         interestSelected: _getInterests(category),
@@ -59,7 +57,7 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     );
   }
 
-  List<Widget> _buildTabsTitle(PlacesCategory category) {
+  List<Widget> buildTabsTitle(PlacesCategory category) {
     return category.subCategories
         .map(
           (e) => Tab(
