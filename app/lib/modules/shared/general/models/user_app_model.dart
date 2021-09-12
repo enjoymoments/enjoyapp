@@ -34,6 +34,25 @@ class UserAppModel extends Equatable {
 
   final InterestType favoriteInterests;
 
+  factory UserAppModel.initial() {
+    return UserAppModel(
+      id: '',
+      email: '',
+      name: '',
+      photo: '',
+      favoriteInterests: InterestType(places: []),
+    );
+  }
+
+  factory UserAppModel.empty() {
+    return UserAppModel(
+      id: '',
+      email: '',
+      name: '',
+      photo: '',
+    );
+  }
+
   UserAppModel copyWith({
     List<GetTimeLineModel> timelines,
     GetTimeLineModel timelineSelected,
@@ -51,13 +70,6 @@ class UserAppModel extends Equatable {
       favoriteInterests: favoriteInterests ?? this.favoriteInterests,
     );
   }
-
-  static const empty = UserAppModel(
-    id: '',
-    email: '',
-    name: '',
-    photo: '',
-  );
 
   @override
   List<Object> get props => [

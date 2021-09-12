@@ -71,7 +71,7 @@ class AuthenticationBloc
 
       var _user = _userWrapper.getUser;
 
-      if (_user != UserAppModel.empty) {
+      if (_user != UserAppModel.empty()) {
         yield state.copyWith(isLoading: false, authenticated: true);
         return;
       }
@@ -93,7 +93,7 @@ class AuthenticationBloc
 
       final _user = await _authenticationRepository.user.first;
 
-      _userWrapper.assignment(_user);
+      _assignmentUser(_user);
 
       _settingsUser(_user);
 
@@ -114,7 +114,7 @@ class AuthenticationBloc
 
       final _user = await _authenticationRepository.user.first;
 
-      _userWrapper.assignment(_user);
+      _assignmentUser(_user);
 
       _settingsUser(_user);
 
@@ -135,7 +135,7 @@ class AuthenticationBloc
 
       final _user = await _authenticationRepository.user.first;
 
-      _userWrapper.assignment(_user);
+      _assignmentUser(_user);
 
       _settingsUser(_user);
 
@@ -168,12 +168,16 @@ class AuthenticationBloc
     }
   }
 
+  void _assignmentUser(UserAppModel user) {
+    _userWrapper.assignment(user, copyWith: true);
+  }
+
   void _mapAuthenticationUserChangedToState(
       AuthenticationUserChanged event) async {
-    _userWrapper.assignment(event.user);
+    _assignmentUser(event.user);
 
     //_settingsExecute - avoids running too often
-    if (_settingsExecute == false && event.user != UserAppModel.empty) {
+    if (_settingsExecute == false && event.user != UserAppModel.empty()) {
       _settingsUser(event.user);
       _settingsExecute = true;
     }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/publisher_banner_ad_widget.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_state.dart';
@@ -32,8 +34,11 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   CategoriesPlacesCubit _categoriesPlacesCubit;
   _CategoriesPlacesAds _categoriesPlacesAds;
 
+  List<FavoriteInterestsItemBloc> _listFavoriteItemBlocs;
+
   @override
   void initState() {
+    _listFavoriteItemBlocs = [];
     _suggestionsCubit = getItInstance<SuggestionsCubit>();
     _categoriesPlacesAds = _CategoriesPlacesAds();
     _categoriesPlacesCubit = getItInstance<CategoriesPlacesCubit>()
@@ -44,6 +49,10 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   @override
   void dispose() {
+    _listFavoriteItemBlocs.forEach((element) { 
+      element.close();
+    });
+
     _categoriesPlacesCubit.close();
     _suggestionsCubit.close();
     super.dispose();
@@ -172,9 +181,14 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
         itemCount: state.contentSuggestedByUsers.length,
         itemBuilder: (context, index) {
           var item = state.contentSuggestedByUsers[index];
+          
+          final FavoriteInterestsItemBloc _favoriteItem = getItInstance<FavoriteInterestsItemBloc>()..add(SetFavoriteItem(item.favoriteAdded));
+          _listFavoriteItemBlocs.add(_favoriteItem);
+
           return SuggestionItem(
             item: item,
             suggestionsCubit: _suggestionsCubit,
+            favoriteInterestsItemBloc: _favoriteItem,
           );
         },
         separatorBuilder: (context, index) => Column(

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Suggestions extends Equatable {
-  const Suggestions({
+  Suggestions({
     this.title,
     this.description,
     this.id,
@@ -17,7 +17,7 @@ class Suggestions extends Equatable {
   final int like;
   final int dislike;
   final bool moreOptionsEnable;
-  final bool favoriteAdded;
+  bool favoriteAdded;
 
   @override
   List<Object> get props => <Object>[

@@ -1,49 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
-import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_event.dart';
-import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_state.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_state.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_font_size.dart';
 import 'package:custom_view/custom_icon.dart';
-import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
-class SuggestionItem extends StatefulWidget {
+class SuggestionItem extends StatelessWidget {
   const SuggestionItem({
     Key key,
     @required this.item,
     @required this.suggestionsCubit,
+    @required this.favoriteInterestsItemBloc,
   }) : super(key: key);
 
   final SuggestionsModel item;
   final SuggestionsCubit suggestionsCubit;
-
-  @override
-  _SuggestionItemState createState() => _SuggestionItemState();
-}
-
-class _SuggestionItemState extends State<SuggestionItem> {
-  FavoriteInterestsBloc _favoriteInterestsBloc;
-
-  @override
-  void initState() {
-    _favoriteInterestsBloc = getItInstance<FavoriteInterestsBloc>()..add(SetFavoriteItem(widget.item.favoriteAdded));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _favoriteInterestsBloc.close();
-    super.dispose();
-  }
+  final FavoriteInterestsItemBloc favoriteInterestsItemBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +36,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
         children: [
           Row(
             children: [
-              Expanded(child: widget.item.title.title(context)),
+              Expanded(child: item.title.title(context)),
               _buildOptions(context),
             ],
           ),
@@ -62,7 +44,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: widget.item.description.description(context)),
+              Expanded(child: item.description.description(context)),
             ],
           ),
           SpacerBox.v8,
@@ -92,8 +74,8 @@ class _SuggestionItemState extends State<SuggestionItem> {
   }
 
   Widget _buildFavorite(BuildContext context) {
-    return BlocBuilder<FavoriteInterestsBloc, FavoriteInterestsState>(
-      cubit: _favoriteInterestsBloc,
+    return BlocBuilder<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
+      cubit: favoriteInterestsItemBloc,
       builder: (context, state) {
         return IconButton(
           padding: const EdgeInsets.all(0),
@@ -103,7 +85,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
           onPressed: () {
-            _favoriteInterestsBloc.add(AddSuggestionToFavorite(widget.item));
+            favoriteInterestsItemBloc.add(AddSuggestionToFavorite(item));
           },
         );
       },
@@ -111,7 +93,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
   }
 
   Widget _buildOptions(BuildContext context) {
-    if (!widget.item.moreOptionsEnable) {
+    if (!item.moreOptionsEnable) {
       return SizedBox.shrink();
     }
 
@@ -151,7 +133,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          widget.item.like
+          item.like
               .toString()
               .label(context, fontSize: CustomFontSize.f16),
         ],
@@ -169,7 +151,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          widget.item.dislike
+          item.dislike
               .toString()
               .label(context, fontSize: CustomFontSize.f16),
         ],
@@ -191,7 +173,7 @@ class _SuggestionItemState extends State<SuggestionItem> {
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              widget.suggestionsCubit.remove(widget.item.id);
+              suggestionsCubit.remove(item.id);
             },
           ),
         ],

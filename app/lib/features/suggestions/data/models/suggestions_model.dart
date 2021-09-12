@@ -1,18 +1,18 @@
 import 'package:mozin/features/suggestions/domain/entities/suggestions.dart';
 
 class SuggestionsModel extends Suggestions {
-  const SuggestionsModel({
+  SuggestionsModel({
     this.categoryId,
     this.categoryName,
     this.subCategoryId,
     this.subCategoryName,
+    this.favoriteAdded,
     String title,
     String description,
     String id,
     int like,
     int dislike,
     bool moreOptionsEnable,
-    bool favoriteAdded,
   }) : super(
           title: title,
           description: description,
@@ -20,13 +20,14 @@ class SuggestionsModel extends Suggestions {
           like: like,
           dislike: dislike,
           moreOptionsEnable: moreOptionsEnable,
-          favoriteAdded: favoriteAdded
+          favoriteAdded: favoriteAdded,
         );
 
   final String categoryId;
   final String categoryName;
   final String subCategoryId;
   final String subCategoryName;
+  bool favoriteAdded;
 
   factory SuggestionsModel.fromJson(
     String categoryId,

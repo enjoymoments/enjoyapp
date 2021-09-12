@@ -6,7 +6,7 @@ import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 void registerSingletonModels(GetIt getItInstance) {
   getItInstance.registerSingleton<UserWrapper>(
       UserWrapper(localStorageService: getItInstance())
-        ..assignment(UserAppModel.empty));
+        ..assignment(UserAppModel.initial()));
   getItInstance.registerSingleton(FilterChoosedWrapper(
     localStorageService: getItInstance(),
   )..init());

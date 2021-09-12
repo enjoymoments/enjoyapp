@@ -1,15 +1,14 @@
-import 'package:mozin/modules/shared/general/interest_type.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
-class FavoriteInterestsState extends DefaultState {
-  FavoriteInterestsState({
+class FavoriteInterestsItemState extends DefaultState {
+  FavoriteInterestsItemState({
     bool isLoading,
     bool isEmpty,
     bool isError,
     bool isSuccess,
     String errorMessage,
     this.forceRefresh,
-    this.favoriteInterests,
+    this.favoriteAdded,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,37 +18,37 @@ class FavoriteInterestsState extends DefaultState {
         );
 
   final int forceRefresh;
-  final InterestType favoriteInterests;
+  final bool favoriteAdded;
 
-  factory FavoriteInterestsState.initial() {
-    return FavoriteInterestsState(
+  factory FavoriteInterestsItemState.initial() {
+    return FavoriteInterestsItemState(
       isLoading: false,
       isSuccess: false,
       isEmpty: false,
       isError: false,
       errorMessage: null,
       forceRefresh: null,
-      favoriteInterests: null,
+      favoriteAdded: false,
     );
   }
 
-  FavoriteInterestsState copyWith({
+  FavoriteInterestsItemState copyWith({
     bool isLoading,
     bool isEmpty,
     bool isError,
     bool isSuccess,
     String errorMessage,
     int forceRefresh,
-    InterestType favoriteInterests,
+    bool favoriteAdded,
   }) {
-    return FavoriteInterestsState(
+    return FavoriteInterestsItemState(
       isLoading: isLoading ?? this.isLoading,
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       isSuccess: isSuccess ?? this.isSuccess,
       errorMessage: errorMessage ?? this.errorMessage,
       forceRefresh: forceRefresh ?? this.forceRefresh,
-      favoriteInterests: favoriteInterests ?? this.favoriteInterests,
+      favoriteAdded: favoriteAdded ?? this.favoriteAdded,
     );
   }
 
@@ -61,6 +60,6 @@ class FavoriteInterestsState extends DefaultState {
         isSuccess,
         errorMessage,
         forceRefresh,
-        favoriteInterests,
+        favoriteAdded,
       ];
 }

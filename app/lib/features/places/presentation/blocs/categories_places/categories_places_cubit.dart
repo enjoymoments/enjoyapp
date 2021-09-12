@@ -86,16 +86,19 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
   // }
 
   InterestEnum _getInterests(PlacesCategory category) {
-    if (category.subCategories[0].places.length > 0 &&
-        category.subCategories[0].suggestedByUsers.length > 0) {
-      return InterestEnum.SuggestedByUsers;
-    } else if (category.subCategories[0].places.length > 0) {
-      return InterestEnum.Place;
-    } else if (category.subCategories[0].suggestedByUsers.length > 0) {
-      return InterestEnum.SuggestedByUsers;
-    }
+    return InterestEnum.SuggestedByUsers;
 
-    return null;
+    //TOOD:in development
+    // if (category.subCategories[0].places.length > 0 &&
+    //     category.subCategories[0].suggestedByUsers.length > 0) {
+    //   return InterestEnum.SuggestedByUsers;
+    // } else if (category.subCategories[0].places.length > 0) {
+    //   return InterestEnum.Place;
+    // } else if (category.subCategories[0].suggestedByUsers.length > 0) {
+    //   return InterestEnum.SuggestedByUsers;
+    // }
+
+    // return null;
   }
 
   //TOOD:in development

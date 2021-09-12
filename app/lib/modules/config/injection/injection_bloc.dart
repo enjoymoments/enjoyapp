@@ -6,6 +6,7 @@ import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/ad
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
+import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
 import 'package:mozin/features/feedback/presentation/cubit/feedback_cubit.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/invite/presentation/bloc/invite_cubit.dart';
@@ -60,7 +61,10 @@ void registerBlocs(GetIt getItInstance) {
   getItInstance.registerFactory<ConnectedCubit>(() => ConnectedCubit());
 
   getItInstance.registerFactory<FavoriteInterestsBloc>(() =>
-      FavoriteInterestsBloc(favoriteInterestsRepository: getItInstance()));
+      FavoriteInterestsBloc());
+
+  getItInstance.registerFactory<FavoriteInterestsItemBloc>(() =>
+      FavoriteInterestsItemBloc(favoriteInterestsRepository: getItInstance()));    
 
   getItInstance
       .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit());

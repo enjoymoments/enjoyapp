@@ -12,14 +12,18 @@ class UserWrapper {
   UserAppModel _user;
 
   UserAppModel get getUser => _user;
-  bool get authenticated => _user != UserAppModel.empty;
+  bool get authenticated => _user != UserAppModel.empty();
   
   static String _internalId = "internal_id";
   static String _shareUrl = "share_url";
   static String _coupleId = "couple_id";
 
-  void assignment(UserAppModel newUser) {
-    _user = newUser;
+  void assignment(UserAppModel newUser, {bool copyWith = false}) {
+    if(copyWith) {
+      _user = newUser.copyWith(timelines: _user.timelines, timelineSelected: _user.timelineSelected, favoriteInterests: _user.favoriteInterests);
+    } else  {
+      _user = newUser;
+    }
   }
 
   void setInternalId(String internalId) {

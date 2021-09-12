@@ -42,7 +42,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
     }
 
     var _user = _userWrapper.getUser;
-    model.userEmail = _user == UserAppModel.empty ? null : _user.email;
+    model.userEmail = _user == UserAppModel.empty() ? null : _user.email;
 
     var _response = await _feedbackRepository.addFeedback(model);
 

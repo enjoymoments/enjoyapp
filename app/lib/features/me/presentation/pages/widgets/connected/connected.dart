@@ -216,7 +216,7 @@ class Connected extends StatelessWidget {
 
   bool _notAuthenticated() {
     if (getItInstance.isRegistered<UserWrapper>() &&
-        (getItInstance<UserWrapper>().getUser == UserAppModel.empty)) {
+        (getItInstance<UserWrapper>().getUser == UserAppModel.empty())) {
       return true;
     }
 
