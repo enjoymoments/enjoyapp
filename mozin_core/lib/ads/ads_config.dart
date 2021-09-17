@@ -4,16 +4,16 @@ enum AdsBannerType { banner, publisherBanner }
 
 class AdsBannerConfig {
   AdsBannerConfig({
-    @required this.skipAt,
-    @required this.initialIndex,
-    @required this.type,
+    required this.skipAt,
+    required this.initialIndex,
+    required this.type,
     this.lastIndex,
   });
 
   final AdsBannerType type;
   final int skipAt;
   final int initialIndex;
-  int lastIndex;
+  int? lastIndex;
 }
 
 abstract class AdsBase {
@@ -26,22 +26,22 @@ abstract class AdsBase {
   List<Widget> showAd(AdsBannerType type, int currentIndex, Widget childDefault) {
     switch (type) {
       case AdsBannerType.banner:
-        AdsBannerConfig _config = ads[AdsBannerType.banner];
+        AdsBannerConfig _config = ads[AdsBannerType.banner]!;
         if (_config.initialIndex == currentIndex ||
             _config.lastIndex != null &&
                 ((_config.lastIndex == currentIndex) ||
-                    ((_config.lastIndex + _config.skipAt) == currentIndex))) {
+                    ((_config.lastIndex! + _config.skipAt) == currentIndex))) {
           _config.lastIndex = currentIndex;
           return buildBanner();
         }
         break;
       case AdsBannerType.publisherBanner:
-        AdsBannerConfig _config = ads[AdsBannerType.publisherBanner];
+        AdsBannerConfig _config = ads[AdsBannerType.publisherBanner]!;
 
         if (_config.initialIndex == currentIndex ||
             _config.lastIndex != null &&
                 ((_config.lastIndex == currentIndex) ||
-                    ((_config.lastIndex + _config.skipAt) == currentIndex))) {
+                    ((_config.lastIndex! + _config.skipAt) == currentIndex))) {
           _config.lastIndex = currentIndex;
           return buildPublisherBanner();
         }
