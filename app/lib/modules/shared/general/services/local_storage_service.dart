@@ -11,7 +11,7 @@ class LocalStorageService {
     box.put(keyValuePair.key, keyValuePair.value);
   }
 
-  Future<Value> get<Key, Value>(Key key) async {
+  Future<Value?> get<Key, Value>(Key key) async {
     return box.get(key);
   }
 

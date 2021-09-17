@@ -1,16 +1,16 @@
 part of 'add_time_line_bloc.dart';
 
 class AddTimeLineState extends DefaultState {
-  final List<GalleryImageModel> images;
-  final int forceRefresh;
-  final String textPost;
+  final List<GalleryImageModel>? images;
+  final int? forceRefresh;
+  final String? textPost;
 
   AddTimeLineState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.images,
     this.forceRefresh,
     this.textPost,
@@ -29,21 +29,21 @@ class AddTimeLineState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      images: List(),
+      images: [],
       forceRefresh: 0,
       textPost: null,
     );
   }
 
   AddTimeLineState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<GalleryImageModel> images,
-    int forceRefresh,
-    String textPost,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<GalleryImageModel>? images,
+    int? forceRefresh,
+    String? textPost,
   }) {
     return AddTimeLineState(
       isLoading: isLoading ?? this.isLoading,
@@ -58,7 +58,7 @@ class AddTimeLineState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

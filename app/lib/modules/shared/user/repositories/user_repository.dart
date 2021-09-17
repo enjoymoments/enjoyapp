@@ -10,14 +10,14 @@ import 'package:mozin/modules/shared/user/models/user_info_model.dart';
 
 class UserRepository {
   UserRepository({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final UserRemoteDataSource remoteDataSource;
+  final UserRemoteDataSource? remoteDataSource;
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
 
-  Future setTokensPushNotifications(UserAppModel user, String token) async {
+  Future setTokensPushNotifications(UserAppModel user, String? token) async {
     await _instance.firestore.collection('users').doc(user.id).set({
       'id': user.id,
       'name': user.name,
@@ -39,7 +39,7 @@ class UserRepository {
 
   Future<Either<UserInfoModel, Exception>> setUserInfo() async {
     try {
-      var response = await remoteDataSource.setUserInfo();
+      var response = await remoteDataSource!.setUserInfo();
       return Left<UserInfoModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<UserInfoModel, Exception>(e);

@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 class PushNotificationConfig {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  Future<String> configureAsync() async {
+  Future<String?> configureAsync() async {
     //TODO:review this
     // _firebaseMessaging.configure(
     //   onMessage: (Map<String, dynamic> message) async {

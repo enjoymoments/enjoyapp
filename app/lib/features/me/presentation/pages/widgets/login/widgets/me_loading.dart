@@ -14,27 +14,27 @@ class MeLoading extends StatelessWidget {
         child: Column(
           children: [
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(30),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(150),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(150),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(150),
             ),
           ],

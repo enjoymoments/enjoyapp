@@ -9,22 +9,22 @@ class PlaceModel extends Place {
     this.categoryName,
     this.subCategoryId,
     this.subCategoryName,
-    String address,
-    String formattedAddress,
-    String formattedPhoneNumber,
-    String name,
-    bool favorited,
-    String placeId,
-    double rating,
-    List<String> types,
-    int userRatingsTotal,
-    String vicinity,
-    int priceLevel,
-    List<String> photoReferences,
-    String icon,
-    LocationModel location,
-    bool openNow,
-    List<Review> reviews,
+    String? address,
+    String? formattedAddress,
+    String? formattedPhoneNumber,
+    String? name,
+    bool? favorited,
+    String? placeId,
+    double? rating,
+    List<String>? types,
+    int? userRatingsTotal,
+    String? vicinity,
+    int? priceLevel,
+    List<String>? photoReferences,
+    String? icon,
+    LocationModel? location,
+    bool? openNow,
+    List<Review>? reviews,
   }) : super(
           address: address,
           formattedAddress: formattedAddress,
@@ -44,16 +44,16 @@ class PlaceModel extends Place {
           reviews: reviews,
         );
 
-  final String categoryId;
-  final String categoryName;
-  final String subCategoryId;
-  final String subCategoryName;
+  final String? categoryId;
+  final String? categoryName;
+  final String? subCategoryId;
+  final String? subCategoryName;
 
   factory PlaceModel.fromJson(
-    String categoryId,
-    String categoryName,
-    String subCategoryId,
-    String subCategoryName,
+    String? categoryId,
+    String? categoryName,
+    String? subCategoryId,
+    String? subCategoryName,
     Map<String, dynamic> json,
   ) {
     return PlaceModel(
@@ -67,7 +67,7 @@ class PlaceModel extends Place {
       rating: json["rating"] != null ? json["rating"].toDouble() : 0,
       types: json["types"] != null
           ? List<String>.from(json["types"].map((x) => x))
-          : List(),
+          : [],
       userRatingsTotal: json["userRatingsTotal"],
       vicinity: json["vicinity"],
       priceLevel: json["priceLevel"] == null ? null : json["priceLevel"],
@@ -86,11 +86,11 @@ class PlaceModel extends Place {
     place.openNow = json['openNow'];
     place.photoReferences = json["photoReferences"] != null
         ? List<String>.from(json["photoReferences"].map((x) => x))
-        : List();
+        : [];
     place.reviews = json["reviews"] != null
         ? List<ReviewModel>.from(
             json["reviews"].map((x) => ReviewModel.fromJson(x)))
-        : List();
+        : [];
 
     return place;
   }

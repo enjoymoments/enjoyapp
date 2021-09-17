@@ -13,7 +13,7 @@ class PublisherBannerAdWidget extends StatefulWidget {
 }
 
 class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
-  BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   final Completer<BannerAd> bannerCompleter =
       Completer<BannerAd>();
 
@@ -31,7 +31,7 @@ class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           print('$BannerAd failedToLoad: $error');
-          bannerCompleter.completeError(null);
+          bannerCompleter.completeError(ad);
         },
         onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
         onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
@@ -53,7 +53,7 @@ class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
       future: bannerCompleter.future,
       builder:
           (BuildContext context, AsyncSnapshot<BannerAd> snapshot) {
-        Widget child;
+        Widget? child;
 
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -63,15 +63,15 @@ class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
             break;
           case ConnectionState.done:
             if (snapshot.hasData) {
-              child = AdWidget(ad: _bannerAd);
+              child = AdWidget(ad: _bannerAd!);
             } else {
               child = Text('Error loading $BannerAd');
             }
         }
 
         return Container(
-          width: _bannerAd.size.width.toDouble(),
-          height: _bannerAd.size.height.toDouble(),
+          width: _bannerAd!.size.width.toDouble(),
+          height: _bannerAd!.size.height.toDouble(),
           child: child,
           color: Colors.blueGrey,
         );

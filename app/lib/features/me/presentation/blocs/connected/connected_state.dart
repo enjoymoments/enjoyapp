@@ -2,11 +2,11 @@ part of 'connected_cubit.dart';
 
 class ConnectedState extends DefaultState {
   ConnectedState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -26,11 +26,11 @@ class ConnectedState extends DefaultState {
   }
 
   ConnectedState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
   }) {
     return ConnectedState(
       isLoading: isLoading ?? this.isLoading,
@@ -42,7 +42,7 @@ class ConnectedState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

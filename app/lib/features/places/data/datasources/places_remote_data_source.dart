@@ -8,15 +8,15 @@ abstract class PlacesRemoteDataSource {
   Future<PlacesModel> getPlaces(
     double latitude,
     double longitude,
-    FilterChoosedModel filters,
+    FilterChoosedModel? filters,
   );
 
   Future<PlaceModel> getPlaceDetails(
-    PlaceModel place,
+    PlaceModel? place,
   );
 
-  Future<String> getPlacePhoto(
-    String placeId,
+  Future<String?> getPlacePhoto(
+    String? placeId,
     String photoReference,
   );
 }
@@ -34,15 +34,15 @@ const List<String> nonStringValuesKeysAccount = <String>[
 class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
   PlacesRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<PlacesModel> getPlaces(
     double latitude,
     double longitude,
-    FilterChoosedModel filters,
+    FilterChoosedModel? filters,
   ) async {
-    String formattedParams = _placeParams(latitude, longitude, filters);
+    String formattedParams = _placeParams(latitude, longitude, filters!);
 
     String _query = '''
     query Interests {
@@ -82,17 +82,17 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return PlacesModel.fromJson(result['data']['search']);
   }
 
   @override
   Future<PlaceModel> getPlaceDetails(
-    PlaceModel place,
+    PlaceModel? place,
   ) async {
     String _query = '''
     query PlaceDetails {
-       placeDetails(placeId: "${place.placeId}") {
+       placeDetails(placeId: "${place!.placeId}") {
         favorited
         formattedAddress
         formattedPhoneNumber
@@ -110,12 +110,12 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return PlaceModel.fromJsonComplement(place, result['data']['placeDetails']);
   }
 
   @override
-  Future<String> getPlacePhoto(String placeId, String photoReference) async {
+  Future<String?> getPlacePhoto(String? placeId, String photoReference) async {
     String _query = '''
     query placePhotos {
       placePhoto(
@@ -124,7 +124,7 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return result['data']['placePhoto'];
   }
 
@@ -139,32 +139,32 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     params['longitude'] = longitude;
 
     if (filters.generalFilters != null) {
-      if (filters.generalFilters.minDistance != null) {
-        params['minDistance'] = filters.generalFilters.minDistance;
+      if (filters.generalFilters!.minDistance != null) {
+        params['minDistance'] = filters.generalFilters!.minDistance;
       }
 
-      if (filters.generalFilters.maxDistance != null) {
-        params['maxDistance'] = filters.generalFilters.maxDistance;
+      if (filters.generalFilters!.maxDistance != null) {
+        params['maxDistance'] = filters.generalFilters!.maxDistance;
       }
 
-      if (filters.generalFilters.minPrice != null) {
-        params['minPrice'] = filters.generalFilters.minPrice;
+      if (filters.generalFilters!.minPrice != null) {
+        params['minPrice'] = filters.generalFilters!.minPrice;
       }
 
-      if (filters.generalFilters.maxPrice != null) {
-        params['maxPrice'] = filters.generalFilters.maxPrice;
+      if (filters.generalFilters!.maxPrice != null) {
+        params['maxPrice'] = filters.generalFilters!.maxPrice;
       }
 
-      if (filters.generalFilters.minTime != null) {
-        params['minTime'] = filters.generalFilters.minTime;
+      if (filters.generalFilters!.minTime != null) {
+        params['minTime'] = filters.generalFilters!.minTime;
       }
 
-      if (filters.generalFilters.maxTime != null) {
-        params['maxTime'] = filters.generalFilters.maxTime;
+      if (filters.generalFilters!.maxTime != null) {
+        params['maxTime'] = filters.generalFilters!.maxTime;
       }
     }
 
-    if (filters.categories != null && filters.categories.length > 0) {
+    if (filters.categories != null && filters.categories!.length > 0) {
       params['categories'] = _formatCategories(filters);
     }
 
@@ -172,14 +172,14 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
   }
 
   String _formatCategories(FilterChoosedModel filters) {
-    List<Map<String, dynamic>> _categories = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> _categories = <Map<String, dynamic>>[];
 
-    for (var categorie in filters.categories) {
-      Map<String, dynamic> _mapSubCategorie = {};
+    for (var categorie in filters.categories!) {
+      Map<String?, dynamic> _mapSubCategorie = {};
 
-      for (var subCategorie in categorie.subCategories) {
+      for (var subCategorie in categorie.subCategories!) {
         if (subCategorie is SubCategoriesModel) {
-          if (subCategorie.selected != null && subCategorie.selected) {
+          if (subCategorie.selected != null && subCategorie.selected!) {
             _mapSubCategorie[subCategorie.id] = subCategorie.id;
           }
         }

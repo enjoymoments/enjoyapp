@@ -13,8 +13,8 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
   Map<String, List<BannerAd>> _adsByScreen = {};
 
   @override
-  Future<Either<List<BannerAd>, Exception>> getAdsByScreen({
-    @required String screenName,
+  Future<Either<List<BannerAd>?, Exception>> getAdsByScreen({
+    required String screenName,
     int count = 1,
     bool reset = false,
   }) async {
@@ -28,7 +28,7 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
         _adsByScreen[screenName] = _list;
       }
 
-      return Left<List<BannerAd>, Exception>(_adsByScreen[screenName]);
+      return Left<List<BannerAd>?, Exception>(_adsByScreen[screenName]);
     } on dynamic catch (e) {
       _logger(e, null);
       return Right<List<BannerAd>, Exception>(
@@ -38,7 +38,7 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
 
   void _resetPublisherBannerList(String screenName) {
     if (_adsByScreen[screenName] != null) {
-      for (var publisherBanner in _adsByScreen[screenName]) {
+      for (var publisherBanner in _adsByScreen[screenName]!) {
         publisherBanner.dispose();
       }
 
@@ -57,7 +57,7 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
     return _result;
   }
 
-  Future<BannerAd> _generatePublisherBanner({AdSize size}) async {
+  Future<BannerAd> _generatePublisherBanner({AdSize? size}) async {
     var _publisherBannerAd = BannerAd(
       adUnitId: '/6499/example/banner',
       request: AdRequest(nonPersonalizedAds: true),
@@ -95,7 +95,7 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
   //   return null;
   // }
 
-  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
+  void _logger(dynamic onError, Map<String, dynamic>? jsonMap) {
     getItInstance<LoggerService>()..addLogAsync(
       LoggerModel(
         typeError: LoggerTypeEnum.Error,

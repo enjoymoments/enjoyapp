@@ -2,11 +2,11 @@ part of 'user_action_cubit.dart';
 
 class UserActionState extends DefaultState {
   UserActionState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -26,11 +26,11 @@ class UserActionState extends DefaultState {
   }
 
   UserActionState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
   }) {
     return UserActionState(
       isLoading: isLoading ?? this.isLoading,
@@ -42,7 +42,7 @@ class UserActionState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

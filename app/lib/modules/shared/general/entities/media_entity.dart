@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 class MediaEntity extends Equatable {
-  final String id;
-  final int type;
-  final String url;
+  final String? id;
+  final int? type;
+  final String? url;
 
   const MediaEntity(this.id, this.type, this.url);
 
@@ -16,5 +16,5 @@ class MediaEntity extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, type, url];
+  List<Object?> get props => [id, type, url];
 }

@@ -6,5 +6,5 @@ abstract class AlbumsRepository {
   Future<Either<List<AlbumItemModel>, Exception>> getAlbums(
     String userId, int limit
   );
-  Future<Either<bool, Exception>> deleteAlbum(String userId, String albumId);
+  Future<Either<bool, Exception>> deleteAlbum(String userId, String? albumId);
 }

@@ -17,24 +17,23 @@ import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 class AlbumItem extends StatelessWidget {
   final AlbumItemModel album;
 
-  const AlbumItem({Key key, @required this.album}) : super(key: key);
+  const AlbumItem({Key? key, required this.album}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.edit_albums_screen,
-            arguments: EditAlbumScreenArguments(album: album));
+        AutoRouter.of(context).push(Edit_albums_screen(album: album));
       },
       child: Column(
         children: [
           _buildHeader(context),
           CachedNetworkImage(
-            imageUrl: album.medias[0].url,
+            imageUrl: album.medias![0].url!,
             fit: BoxFit.cover,
             placeholder: (context, imageProvider) {
               return ShimmerLoading(
-                width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+                width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
                 height: SizeConfig.sizeByPixel(150),
               );
             },
@@ -42,7 +41,7 @@ class AlbumItem extends StatelessWidget {
               return Container(
                 child: Align(
                   alignment: Alignment.center,
-                  child: album.titleAlbum.labelIntro(context,
+                  child: album.titleAlbum!.labelIntro(context,
                       color: Theme.of(context).backgroundColor),
                 ),
                 height: SizeConfig.sizeByPixel(150),
@@ -71,9 +70,9 @@ class AlbumItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        album.dateCreation
+        album.dateCreation!
             .dateCustomFormat('dd/MM/yyyy')
-            .format(album.dateCreation)
+            .format(album.dateCreation!)
             .toString()
             .date(context),
         InkWell(

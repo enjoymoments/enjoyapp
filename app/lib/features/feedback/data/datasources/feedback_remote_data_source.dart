@@ -9,7 +9,7 @@ abstract class FeedbackRemoteDataSource {
 class FeedbackRemoteDataSourceImpl implements FeedbackRemoteDataSource {
   FeedbackRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
 

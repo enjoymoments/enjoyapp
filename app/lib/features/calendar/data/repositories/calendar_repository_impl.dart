@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 
 class CalendarRepositoryImpl implements CalendarRepository {
   CalendarRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final CalendarRemoteDataSource remoteDataSource;
+  final CalendarRemoteDataSource? remoteDataSource;
 
   @override
-  Future<Either<bool, Exception>> addTaskInCalendar(
-      AddTaskCalendar model) async {
+  Future<Either<bool?, Exception>> addTaskInCalendar(
+      AddTaskCalendar? model) async {
     try {
-      var response = await remoteDataSource.addTaskInCalendar(model);
-      return Left<bool, Exception>(response);
+      var response = await remoteDataSource!.addTaskInCalendar(model);
+      return Left<bool?, Exception>(response);
     } on dynamic catch (e) {
       return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
@@ -28,7 +28,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
   Future<Either<List<GroupedDateCalendarModel>, Exception>>
       getTasksInCalendar() async {
     try {
-      var response = await remoteDataSource.getTasksInCalendar();
+      var response = await remoteDataSource!.getTasksInCalendar();
       return Left<List<GroupedDateCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
       return Right<List<GroupedDateCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));
@@ -36,10 +36,10 @@ class CalendarRepositoryImpl implements CalendarRepository {
   }
 
   @override
-  Future<Either<bool, Exception>> removeTaskInCalendar(String taskId) async {
+  Future<Either<bool?, Exception>> removeTaskInCalendar(String? taskId) async {
     try {
-      var response = await remoteDataSource.removeTaskInCalendar(taskId);
-      return Left<bool, Exception>(response);
+      var response = await remoteDataSource!.removeTaskInCalendar(taskId);
+      return Left<bool?, Exception>(response);
     } on dynamic catch (e) {
       return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
     }
@@ -49,7 +49,7 @@ class CalendarRepositoryImpl implements CalendarRepository {
   Future<Either<List<GroupedYearCalendarModel>, Exception>>
       getTasksUserCalendarGroupedByYear() async {
     try {
-      var response = await remoteDataSource.getTasksUserCalendarGroupedByYear();
+      var response = await remoteDataSource!.getTasksUserCalendarGroupedByYear();
       return Left<List<GroupedYearCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
       return Right<List<GroupedYearCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));

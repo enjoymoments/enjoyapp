@@ -12,11 +12,11 @@ import 'package:custom_view/spacer_box.dart';
 
 class TimeLineItem extends StatelessWidget {
   const TimeLineItem(
-      {Key key, @required this.item, @required this.timelineBloc})
+      {Key? key, required this.item, required this.timelineBloc})
       : super(key: key);
 
   final TimeLineItemModel item;
-  final TimelineBloc timelineBloc;
+  final TimelineBloc? timelineBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class TimeLineItem extends StatelessWidget {
               text: 'Sim',
               iconData: AppIcons.check,
               onTap: () {
-                timelineBloc.add(DeletePost(item));
+                timelineBloc!.add(DeletePost(item));
               },
             ),
             CustomItemModalFit(

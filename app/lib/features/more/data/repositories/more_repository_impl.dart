@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class MoreRepositoryImpl implements MoreRepository {
   MoreRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   final MoreRemoteDataSource remoteDataSource;

@@ -2,11 +2,11 @@ part of 'time_line_bloc.dart';
 
 class TimelineState extends DefaultState {
   TimelineState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.posts,
     this.forceRefresh,
     this.limit,
@@ -36,16 +36,16 @@ class TimelineState extends DefaultState {
   }
 
   TimelineState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<TimeLineItemModel> posts,
-    int forceRefresh,
-    int limit,
-    List<GetTimeLineModel> timelines,
-    GetTimeLineModel timelineSelected,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<TimeLineItemModel>? posts,
+    int? forceRefresh,
+    int? limit,
+    List<GetTimeLineModel>? timelines,
+    GetTimeLineModel? timelineSelected,
   }) {
     return TimelineState(
       isLoading: isLoading ?? this.isLoading,
@@ -61,14 +61,14 @@ class TimelineState extends DefaultState {
     );
   }
 
-  final List<TimeLineItemModel> posts;
-  final int forceRefresh;
-  final int limit;
-  final List<GetTimeLineModel> timelines;
-  final GetTimeLineModel timelineSelected;
+  final List<TimeLineItemModel>? posts;
+  final int? forceRefresh;
+  final int? limit;
+  final List<GetTimeLineModel>? timelines;
+  final GetTimeLineModel? timelineSelected;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

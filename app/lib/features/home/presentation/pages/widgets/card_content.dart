@@ -9,10 +9,10 @@ class CardContent extends StatelessWidget {
   final String description;
 
   const CardContent({
-    Key key,
-    @required this.iconData,
-    @required this.name,
-    @required this.description,
+    Key? key,
+    required this.iconData,
+    required this.name,
+    required this.description,
   }) : super(key: key);
 
   @override
@@ -32,12 +32,12 @@ class CardContent extends StatelessWidget {
             ),
           ],
         ),
-        ..._buildDescription(context),
+        ..._buildDescription(context)!,
       ],
     );
   }
 
-  List<Widget> _buildDescription(BuildContext context) {
+  List<Widget>? _buildDescription(BuildContext context) {
     if (description != null) {
       return [
         SpacerBox.v8,

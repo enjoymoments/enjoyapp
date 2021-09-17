@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 
 class AlbumsRepositoryImpl implements AlbumsRepository {
   AlbumsRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final AlbumsRemoteDataSource remoteDataSource;
+  final AlbumsRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<String, Exception>> addAlbum(
       String userId, AlbumItemModel model) async {
     try {
-      var response = await remoteDataSource.addAlbum(userId, model);
+      var response = await remoteDataSource!.addAlbum(userId, model);
       return Left<String, Exception>(response);
     } on dynamic catch (e) {
       return Right<String, Exception>(e);
@@ -26,7 +26,7 @@ class AlbumsRepositoryImpl implements AlbumsRepository {
   Future<Either<List<AlbumItemModel>, Exception>> getAlbums(
       String userId, int limit) async {
     try {
-      var response = await remoteDataSource.getAlbums(userId, limit);
+      var response = await remoteDataSource!.getAlbums(userId, limit);
       return Left<List<AlbumItemModel>, Exception>(response);
     } on dynamic catch (e) {
       return Right<List<AlbumItemModel>, Exception>(e);
@@ -34,9 +34,9 @@ class AlbumsRepositoryImpl implements AlbumsRepository {
   }
 
   @override
-  Future<Either<bool, Exception>> deleteAlbum(String userId, String albumId) async {
+  Future<Either<bool, Exception>> deleteAlbum(String userId, String? albumId) async {
     try {
-      var response = await remoteDataSource.deleteAlbum(userId, albumId);
+      var response = await remoteDataSource!.deleteAlbum(userId, albumId);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
       return Right<bool, Exception>(e);

@@ -11,14 +11,14 @@ class AddTaskCalendar extends Equatable {
     this.activities,
   });
 
-  String taskId;
-  String title;
-  String description;
-  DateTime dateTime; 
-  List<AddActivityCalendar> activities;
+  String? taskId;
+  String? title;
+  String? description;
+  DateTime? dateTime; 
+  List<AddActivityCalendar>? activities;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     this.taskId,
     this.title,
     this.description,

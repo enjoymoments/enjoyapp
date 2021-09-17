@@ -25,12 +25,12 @@ class TimeLineItemLoading extends StatelessWidget {
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(50),
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(150),
         ),
       ],

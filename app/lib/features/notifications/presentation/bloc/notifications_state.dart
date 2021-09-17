@@ -2,11 +2,11 @@ part of 'notifications_cubit.dart';
 
 class NotificationsState extends DefaultState {
   NotificationsState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.notifications,
     this.notAutenticated,
   }) : super(
@@ -17,8 +17,8 @@ class NotificationsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<NotificationsModel> notifications;
-  final bool notAutenticated;
+  final List<NotificationsModel>? notifications;
+  final bool? notAutenticated;
 
   factory NotificationsState.initial() {
     return NotificationsState(
@@ -33,13 +33,13 @@ class NotificationsState extends DefaultState {
   }
 
   NotificationsState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<NotificationsModel> notifications,
-    bool notAutenticated,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<NotificationsModel>? notifications,
+    bool? notAutenticated,
   }) {
     return NotificationsState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class NotificationsState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

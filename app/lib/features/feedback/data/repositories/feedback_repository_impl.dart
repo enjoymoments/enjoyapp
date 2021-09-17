@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 
 class FeedbackRepositoryImpl implements FeedbackRepository {
   FeedbackRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final FeedbackRemoteDataSource remoteDataSource;
+  final FeedbackRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<String, Exception>> addFeedback(FeedbackModel model) async {
     try {
-      var response = await remoteDataSource.addFeedback(model);
+      var response = await remoteDataSource!.addFeedback(model);
       return Left<String, Exception>(response);
     } on dynamic catch (e) {
       return Right<String, Exception>(e);

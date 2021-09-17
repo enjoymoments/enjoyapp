@@ -4,10 +4,10 @@ import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 
 class PlacesSubCategoryModel extends PlacesSubCategory {
   PlacesSubCategoryModel({
-    List<PlaceModel> places,
-    List<SuggestionsModel> suggestedByUsers,
-    String subCategoryName,
-    String subCategoryId,
+    List<PlaceModel>? places,
+    List<SuggestionsModel>? suggestedByUsers,
+    String? subCategoryName,
+    String? subCategoryId,
   }) : super(
           places: places,
           suggestedByUsers: suggestedByUsers,
@@ -16,7 +16,7 @@ class PlacesSubCategoryModel extends PlacesSubCategory {
         );
 
   factory PlacesSubCategoryModel.fromJson(
-      String categoryId, String categoryName, Map<String, dynamic> json) {
+      String? categoryId, String? categoryName, Map<String, dynamic> json) {
     return PlacesSubCategoryModel(
       subCategoryId: json['subCategoryId'],
       subCategoryName: json['subCategoryName'],

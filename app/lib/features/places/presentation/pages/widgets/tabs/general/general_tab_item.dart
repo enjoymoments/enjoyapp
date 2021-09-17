@@ -7,10 +7,10 @@ import 'package:mozin/features/places/presentation/pages/widgets/tabs/general/wi
 import 'package:custom_view/spacer_box.dart';
 
 class GeneralTabItem extends StatelessWidget {
-  final PlaceModel item;
-  final GpsOpenCubit gpsOpenCubit;
+  final PlaceModel? item;
+  final GpsOpenCubit? gpsOpenCubit;
 
-  const GeneralTabItem({Key key, @required this.item, @required this.gpsOpenCubit,}) : super(key: key);
+  const GeneralTabItem({Key? key, required this.item, required this.gpsOpenCubit,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

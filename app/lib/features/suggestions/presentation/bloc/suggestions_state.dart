@@ -2,11 +2,11 @@ part of 'suggestions_cubit.dart';
 
 class SuggestionsState extends DefaultState {
   SuggestionsState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.suggestions,
   }) : super(
           isLoading: isLoading,
@@ -16,7 +16,7 @@ class SuggestionsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<SuggestionsModel> suggestions;
+  final List<SuggestionsModel>? suggestions;
 
   factory SuggestionsState.initial() {
     return SuggestionsState(
@@ -30,12 +30,12 @@ class SuggestionsState extends DefaultState {
   }
 
   SuggestionsState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<SuggestionsModel> suggestions,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<SuggestionsModel>? suggestions,
   }) {
     return SuggestionsState(
       isLoading: isLoading ?? this.isLoading,
@@ -48,7 +48,7 @@ class SuggestionsState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

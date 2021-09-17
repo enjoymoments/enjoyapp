@@ -7,13 +7,13 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/widgets/me_lo
 import 'package:mozin/modules/config/setup.dart';
 
 class LoginWrapperScreen extends StatelessWidget {
-  const LoginWrapperScreen({Key key}) : super(key: key);
+  const LoginWrapperScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -22,7 +22,7 @@ class LoginWrapperScreen extends StatelessWidget {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       bloc: root<AuthenticationBloc>(),
       builder: (context, state) {
-        if (root<AuthenticationBloc>().state.isLoading || root<AuthenticationBloc>().state.authenticated){
+        if (root<AuthenticationBloc>().state.isLoading! || root<AuthenticationBloc>().state.authenticated!){
           return MeLoading();
         }
 

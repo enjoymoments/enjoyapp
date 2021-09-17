@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ScreenManagerRepositoryImpl implements ScreenManagerRepository {
   ScreenManagerRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   final ScreenManagerRemoteDataSource remoteDataSource;

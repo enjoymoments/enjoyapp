@@ -5,11 +5,11 @@ import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 class CustomAvatar extends StatelessWidget {
-  final ImageProvider backgroundImage;
-  final double radius;
+  final ImageProvider? backgroundImage;
+  final double? radius;
 
   const CustomAvatar({
-    Key key,
+    Key? key,
     this.backgroundImage,
     this.radius,
   }) : super(key: key);
@@ -24,10 +24,10 @@ class CustomAvatar extends StatelessWidget {
   }
 
   ImageProvider _getImageAvatar() {
-    final UserAppModel _user = getItInstance<UserWrapper>().getUser;
+    final UserAppModel _user = getItInstance<UserWrapper>().getUser!;
 
-    if (_user.photo != null && _user.photo.isNotEmpty) {
-      return NetworkImage(_user.photo);
+    if (_user.photo != null && _user.photo!.isNotEmpty) {
+      return NetworkImage(_user.photo!);
     }
 
     return AssetImage('assets/images/default_avatar.png');

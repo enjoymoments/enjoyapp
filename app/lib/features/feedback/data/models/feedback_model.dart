@@ -4,9 +4,9 @@ class FeedbackModel extends Feedback {
   
   FeedbackModel({this.description, this.userEmail, this.feedbackType});
 
-  String description;
-  String userEmail;
-  int feedbackType;
+  String? description;
+  String? userEmail;
+  int? feedbackType;
 
   factory FeedbackModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};

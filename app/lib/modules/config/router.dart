@@ -1,4 +1,4 @@
-import 'package:auto_route/auto_route_annotations.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/authentication_wrapper.dart';
 import 'package:mozin/features/albums/presentation/pages/add_album_screen.dart';
@@ -21,39 +21,39 @@ import 'package:mozin/features/places/presentation/pages/search_places_screen.da
 import 'package:mozin/features/screen_manager/presentation/root_screen_manager.dart';
 import 'package:mozin/features/time_line/presentation/pages/add_time_line_screen.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_photo_view_wrapper.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
+import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart'; 
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
     // initial route is named "/"
     
-    MaterialRoute(name: 'authentication_wrapper_screen', page: AuthenticationWrapper, initial: true),
-    MaterialRoute(name: 'root_screen_manager_screen', page: RootScreenManager,),
-    MaterialRoute(name: 'onboarding_screen', page: OnBoardingScreen,),
-    MaterialRoute(name: 'search_places_screen', page: SearchPlacesScreen,),
-    MaterialRoute(name: 'place_item_details_screen', page: PlaceItemDetails,),
-    MaterialRoute(name: 'interest_screen', page: InterestScreen,),
-    MaterialRoute(name: 'add_time_line_screen', page: AddTimeLineScreen,),
-    MaterialRoute(name: 'gallery_photo_view_wrapper_screen', page: GalleryPhotoViewWrapper,),
-    MaterialRoute(name: 'notification_screen', page: NotificationsScreen,),
-    MaterialRoute(name: 'favorite_interests_screen', page: FavoriteInterestsScreen,),
-    MaterialRoute(name: 'add_calendar_screen', page: AddCalendarScreen,),
-    MaterialRoute(name: 'add_activity_screen', page: AddActivityScreen,),
-    MaterialRoute(name: 'feedback_screen', page: FeedbackScreen,),
-    MaterialRoute(name: 'albums_screen', page: AlbumsScreen,),
-    MaterialRoute(name: 'add_albums_screen', page: AddAlbumScreen,),
-    MaterialRoute(name: 'edit_albums_screen', page: EditAlbumScreen,),
-    MaterialRoute(name: 'success_screen', page: CustomSuccessScreen,),
-    MaterialRoute(name: 'configuration_screen', page: ConfigurationScreen,),
-    MaterialRoute(name: 'home_partial', page: HomePartial,),
-    MaterialRoute(name: 'me_authenticated_partial', page: MeAuthenticatedPartial,),
-    MaterialRoute(name: 'invite_screen', page: InviteScreen,),
-    MaterialRoute(name: 'unsync_couple_screen', page: UnsyncCoupleScreen,),
-    MaterialRoute(name: 'add_suggestions_screen', page: AddSuggestionScreen,),
-    MaterialRoute(name: 'login_wrapper_screen', page: LoginWrapperScreen,),
+    AutoRoute(name: 'authentication_wrapper_screen', page: AuthenticationWrapper, initial: true),
+    AutoRoute(name: 'root_screen_manager_screen', page: RootScreenManager,),
+    AutoRoute(name: 'onboarding_screen', page: OnBoardingScreen,),
+    AutoRoute(name: 'search_places_screen', page: SearchPlacesScreen,),
+    AutoRoute(name: 'place_item_details_screen', page: PlaceItemDetails,),
+    AutoRoute(name: 'interest_screen', page: InterestScreen,),
+    AutoRoute(name: 'add_time_line_screen', page: AddTimeLineScreen,),
+    AutoRoute(name: 'gallery_photo_view_wrapper_screen', page: GalleryPhotoViewWrapper,),
+    AutoRoute(name: 'notification_screen', page: NotificationsScreen,),
+    AutoRoute(name: 'favorite_interests_screen', page: FavoriteInterestsScreen,),
+    AutoRoute(name: 'add_calendar_screen', page: AddCalendarScreen,),
+    AutoRoute(name: 'add_activity_screen', page: AddActivityScreen,),
+    AutoRoute(name: 'feedback_screen', page: FeedbackScreen,),
+    AutoRoute(name: 'albums_screen', page: AlbumsScreen,),
+    AutoRoute(name: 'add_albums_screen', page: AddAlbumScreen,),
+    AutoRoute(name: 'edit_albums_screen', page: EditAlbumScreen,),
+    AutoRoute(name: 'success_screen', page: CustomSuccessScreen,),
+    AutoRoute(name: 'configuration_screen', page: ConfigurationScreen,),
+    AutoRoute(name: 'home_partial', page: HomePartial,),
+    AutoRoute(name: 'me_authenticated_partial', page: MeAuthenticatedPartial,),
+    AutoRoute(name: 'invite_screen', page: InviteScreen,),
+    AutoRoute(name: 'unsync_couple_screen', page: UnsyncCoupleScreen,),
+    AutoRoute(name: 'add_suggestions_screen', page: AddSuggestionScreen,),
+    AutoRoute(name: 'login_wrapper_screen', page: LoginWrapperScreen,),
   ],
 )
-class $Router {}
+class $AppRouter {}
 
 class HomePartial extends Widget {
   @override

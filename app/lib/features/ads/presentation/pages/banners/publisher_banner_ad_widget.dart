@@ -6,14 +6,14 @@ import 'package:mozin/modules/config/setup.dart';
 
 class PublisherBannerAdWidget extends StatefulWidget {
   PublisherBannerAdWidget({
-    @required this.screenName,
+    required this.screenName,
     this.itemCount,
     this.indexRender,
   });
 
   final String screenName;
-  final int itemCount;
-  final int indexRender;
+  final int? itemCount;
+  final int? indexRender;
 
   @override
   _PublisherBannerAdWidgetState createState() =>
@@ -21,7 +21,7 @@ class PublisherBannerAdWidget extends StatefulWidget {
 }
 
 class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
-  AdsCubit _adsCubit;
+  AdsCubit? _adsCubit;
 
   @override
   void initState() {
@@ -39,9 +39,9 @@ class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
       child: BlocBuilder<AdsCubit, AdsState>(
         bloc: _adsCubit,
         builder: (context, state) {
-          if (state.publisherBanners.length > 0)
+          if (state.publisherBanners!.length > 0)
             return AdWidget(
-                ad: state.publisherBanners[widget.indexRender ?? 0]);
+                ad: state.publisherBanners![widget.indexRender ?? 0]);
 
           return SizedBox.shrink();
         },

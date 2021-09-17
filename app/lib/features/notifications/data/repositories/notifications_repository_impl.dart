@@ -7,15 +7,15 @@ import 'package:mozin_core/utils.dart';
 
 class NotificationsRepositoryImpl implements NotificationsRepository {
   NotificationsRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final NotificationsRemoteDataSource remoteDataSource;
+  final NotificationsRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<List<NotificationsModel>, Exception>> getNotifications() async {
     try {
-      var response = await remoteDataSource.getNotifications();
+      var response = await remoteDataSource!.getNotifications();
       return Left<List<NotificationsModel>, Exception>(response);
     } catch (e) {
       return Right<List<NotificationsModel>, Exception>(ExceptionsUtils.createException(e));

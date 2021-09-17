@@ -1,6 +1,6 @@
 class UserInfoModel {
-  final String userInternalId;
-  final String coupleId;
+  final String? userInternalId;
+  final String? coupleId;
 
   UserInfoModel({
     this.userInternalId,

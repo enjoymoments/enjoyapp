@@ -36,13 +36,13 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     this.localStorageService,
   ) : super(ScreenManagerState.initial());
 
-  final TimelineRepository timelineRepository;
-  final AlbumsRepository albumsRepository;
+  final TimelineRepository? timelineRepository;
+  final AlbumsRepository? albumsRepository;
 
-  final WrapperMediaService wrapperMediaService;
+  final WrapperMediaService? wrapperMediaService;
 
-  final UserWrapper userWrapper;
-  final LocalStorageService localStorageService;
+  final UserWrapper? userWrapper;
+  final LocalStorageService? localStorageService;
 
   @override
   Stream<ScreenManagerState> mapEventToState(
@@ -59,13 +59,12 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   Stream<ScreenManagerState> mapTapScreenToState(TapScreen event) async* {
     if (event.screenSelected == DefaultMenuEnum.Search) {
-      if (localStorageService.containsKey(bypass_interest_filter)) {
-        ExtendedNavigator.of(event.context).push(Routes.search_places_screen);
+      if (localStorageService!.containsKey(bypass_interest_filter)) {
+        AutoRouter.of(event.context).push(Search_places_screen());
       } else {
-        localStorageService.put(KeyValue<String, String>(
+        localStorageService!.put(KeyValue<String, String>(
             key: bypass_interest_filter, value: bypass_interest_filter));
-        ExtendedNavigator.of(event.context).push(Routes.interest_screen,
-            arguments: InterestScreenArguments(isChangeFilter: false));
+        AutoRouter.of(event.context).push(Interest_screen(isChangeFilter: false));
       }
     } else {
       var _contents = state.contents;
@@ -78,11 +77,11 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   Stream<ScreenManagerState> postSave(QueueNewPost event) async* {
     TimeLineItemModel _transformTimeLineModel(
-        List<KeyValue<String, String>> keyValues) {
+        List<KeyValue<String?, String>> keyValues) {
       final timeLineItemModel = TimeLineItemModel(medias: []);
 
       for (var item in keyValues) {
-        timeLineItemModel.medias
+        timeLineItemModel.medias!
             .add(MediaModel(id: item.key, type: 1, url: item.value));
       }
 
@@ -92,16 +91,16 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     yield state.copyWith(isLoading: true, isFailure: false, isSuccess: false);
 
     try {
-      final keyValues = await wrapperMediaService.uploadMedias(event.medias);
+      final keyValues = await wrapperMediaService!.uploadMedias(event.medias!);
 
       final transform = _transformTimeLineModel(keyValues);
       transform.textPost = event.textPost;
 
-      final user = userWrapper.getUser;
+      final user = userWrapper!.getUser!;
 
       await this
-          .timelineRepository
-          .addTimeLineItem(user.timelineSelected.id, user.id, transform);
+          .timelineRepository!
+          .addTimeLineItem(user.timelineSelected!.id, user.id, transform);
 
       getItInstance<TimelineBloc>()..add(LoadPosts());
 
@@ -114,11 +113,11 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
 
   Stream<ScreenManagerState> albumSave(QueueNewAlbum event) async* {
     AlbumItemModel _transformAlbumItemModel(
-        List<KeyValue<String, String>> keyValues) {
+        List<KeyValue<String?, String>> keyValues) {
       final albumItem = AlbumItemModel(medias: []);
 
       for (var item in keyValues) {
-        albumItem.medias
+        albumItem.medias!
             .add(MediaModel(id: item.key, type: 1, url: item.value));
       }
 
@@ -128,14 +127,14 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
     yield state.copyWith(isLoading: true, isFailure: false, isSuccess: false);
 
     try {
-      final keyValues = await wrapperMediaService.uploadMedias(event.medias);
+      final keyValues = await wrapperMediaService!.uploadMedias(event.medias!);
 
       final transform = _transformAlbumItemModel(keyValues);
       transform.titleAlbum = event.titleAlbum;
 
-      final user = userWrapper.getUser;
+      final user = userWrapper!.getUser!;
 
-      await this.albumsRepository.addAlbum(user.id, transform);
+      await this.albumsRepository!.addAlbum(user.id, transform);
 
       //TODO:album
       //getItInstance<TimelineBloc>()..add(LoadPosts());
@@ -148,21 +147,21 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
   }
 
   void _instanceScreens(
-      Map<DefaultMenuEnum, Widget> contents, TapScreen event) {
-    if (state.contents[event.screenSelected] == null) {
+      Map<DefaultMenuEnum, Widget>? contents, TapScreen event) {
+    if (state.contents![event.screenSelected] == null) {
       switch (event.screenSelected) {
         case DefaultMenuEnum.TimeLine:
-          contents[DefaultMenuEnum.TimeLine] = TimeLineScreen();
+          contents![DefaultMenuEnum.TimeLine] = TimeLineScreen();
           break;
         case DefaultMenuEnum.Me:
-          contents[DefaultMenuEnum.Me] = MeScreen();
+          contents![DefaultMenuEnum.Me] = MeScreen();
           break;
         case DefaultMenuEnum.Favorites:
-          contents[DefaultMenuEnum.Favorites] = FavoriteInterestsScreen();
+          contents![DefaultMenuEnum.Favorites] = FavoriteInterestsScreen();
           break;
         case DefaultMenuEnum.Calendar:
         default:
-          contents[DefaultMenuEnum.Calendar] = CalendarContent();
+          contents![DefaultMenuEnum.Calendar] = CalendarContent();
           break;
       }
     }

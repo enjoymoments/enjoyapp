@@ -1,7 +1,7 @@
 class _ResponseDefaultModelBase<T> {
-  final bool isSuccess;
-  final String message;
-  final T data;
+  final bool? isSuccess;
+  final String? message;
+  final T? data;
 
   _ResponseDefaultModelBase({
     this.isSuccess,
@@ -12,9 +12,9 @@ class _ResponseDefaultModelBase<T> {
 
 class ResponseDefaultModel<T> extends _ResponseDefaultModelBase<T> {
   ResponseDefaultModel({
-    bool isSuccess,
-    final String message,
-    final T data,
+    bool? isSuccess,
+    final String? message,
+    final T? data,
   }) : super(
           isSuccess: isSuccess,
           message: message,

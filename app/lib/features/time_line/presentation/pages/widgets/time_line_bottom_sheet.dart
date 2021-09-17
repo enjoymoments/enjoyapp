@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:custom_view/AppIcons.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -18,7 +19,7 @@ void showTimelineBottomSheet(BuildContext context, TimelineState state) {
 }
 
 List<CustomItemModalFit> _buildBottomSheetItem(TimelineState state) {
-  if (state.timelineSelected.type == TimeLineTypeEnum.Couple) {
+  if (state.timelineSelected!.type == TimeLineTypeEnum.Couple) {
     return [
       CustomItemModalFit(
         text: 'Ir para minha linha do tempo',
@@ -29,7 +30,7 @@ List<CustomItemModalFit> _buildBottomSheetItem(TimelineState state) {
         },
       ),
     ];
-  } else if (state.timelineSelected.type == TimeLineTypeEnum.Personal) {
+  } else if (state.timelineSelected!.type == TimeLineTypeEnum.Personal) {
     return [
       CustomItemModalFit(
         text: 'Ir para linha do tempo do casal',
@@ -45,7 +46,7 @@ List<CustomItemModalFit> _buildBottomSheetItem(TimelineState state) {
   return [];
 }
 
-GetTimeLineModel _findByType(TimelineState state, TimeLineTypeEnum type) {
+GetTimeLineModel? _findByType(TimelineState state, TimeLineTypeEnum type) {
   return state.timelines
-      ?.firstWhere((element) => element.type == type, orElse: () => null);
+      ?.firstWhereOrNull((element) => element.type == type);
 }

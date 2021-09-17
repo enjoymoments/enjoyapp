@@ -9,7 +9,7 @@ abstract class FavoriteInterestsItemEvent extends Equatable {
 }
 
 class AddPlaceToFavorite extends FavoriteInterestsItemEvent {
-  final PlaceModel place;
+  final PlaceModel? place;
 
   AddPlaceToFavorite(
     this.place,
@@ -25,7 +25,7 @@ class AddSuggestionToFavorite extends FavoriteInterestsItemEvent {
 }
 
 class SetFavoriteItem extends FavoriteInterestsItemEvent {
-  final bool favoriteAdded;
+  final bool? favoriteAdded;
 
   SetFavoriteItem(this.favoriteAdded);
 }

@@ -18,21 +18,21 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(AuthenticationState.initial()) {
-    _userSubscription = _authenticationRepository.user.listen(
+    _userSubscription = _authenticationRepository!.user.listen(
       (user) => add(AuthenticationUserChanged(user)),
     );
   }
 
-  AuthenticationRepository get _authenticationRepository =>
+  AuthenticationRepository? get _authenticationRepository =>
       getItInstance<AuthenticationRepository>();
 
-  UserService get _userService => getItInstance<UserService>();
+  UserService? get _userService => getItInstance<UserService>();
 
-  PushNotificationConfig get _pushNotificationConfig =>
+  PushNotificationConfig? get _pushNotificationConfig =>
       getItInstance<PushNotificationConfig>();
-  UserWrapper get _userWrapper => getItInstance<UserWrapper>();
+  UserWrapper? get _userWrapper => getItInstance<UserWrapper>();
 
-  StreamSubscription<UserAppModel> _userSubscription;
+  StreamSubscription<UserAppModel>? _userSubscription;
 
   bool _settingsExecute = false;
 
@@ -69,7 +69,7 @@ class AuthenticationBloc
 
       yield state.copyWith(isLoading: true);
 
-      var _user = _userWrapper.getUser;
+      var _user = _userWrapper!.getUser;
 
       if (_user != UserAppModel.empty()) {
         yield state.copyWith(isLoading: false, authenticated: true);
@@ -89,9 +89,9 @@ class AuthenticationBloc
     try {
       yield state.copyWith(isLoading: true);
 
-      await _authenticationRepository.logInWithApple();
+      await _authenticationRepository!.logInWithApple();
 
-      final _user = await _authenticationRepository.user.first;
+      final _user = await _authenticationRepository!.user.first;
 
       _assignmentUser(_user);
 
@@ -110,9 +110,9 @@ class AuthenticationBloc
     try {
       yield state.copyWith(isLoading: true);
 
-      await _authenticationRepository.logInWithFacebook();
+      await _authenticationRepository!.logInWithFacebook();
 
-      final _user = await _authenticationRepository.user.first;
+      final _user = await _authenticationRepository!.user.first;
 
       _assignmentUser(_user);
 
@@ -131,9 +131,9 @@ class AuthenticationBloc
     try {
       yield state.copyWith(isLoading: true);
 
-      await _authenticationRepository.logInWithGoogle();
+      await _authenticationRepository!.logInWithGoogle();
 
-      final _user = await _authenticationRepository.user.first;
+      final _user = await _authenticationRepository!.user.first;
 
       _assignmentUser(_user);
 
@@ -149,7 +149,7 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapLogoutToState() async* {
     try {
       _settingsExecute = false;
-      await _authenticationRepository.logOut();
+      await _authenticationRepository!.logOut();
       await resetInstances();
 
       yield state.copyWith(isLoading: false, authenticated: false);
@@ -169,7 +169,7 @@ class AuthenticationBloc
   }
 
   void _assignmentUser(UserAppModel user) {
-    _userWrapper.assignment(user, copyWith: true);
+    _userWrapper!.assignment(user, copyWith: true);
   }
 
   void _mapAuthenticationUserChangedToState(
@@ -190,11 +190,11 @@ class AuthenticationBloc
 
     //TODO:in development
     if (Platform.isAndroid) {
-      _pushNotificationConfig.configureAsync().then((value) {
-        _userService.setTokensPushNotifications(user, value);
+      _pushNotificationConfig!.configureAsync().then((value) {
+        _userService!.setTokensPushNotifications(user, value);
       });
     }
     
-    _userService.setActionListener();
+    _userService!.setActionListener();
   }
 }

@@ -4,11 +4,11 @@ import 'package:mozin/modules/shared/general/models/media_model.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 class TimeLineItemModel {
-  String id;
-  AuthorModel author;
-  String textPost;
-  DateTime dateCreation;
-  List<MediaModel> medias;
+  String? id;
+  AuthorModel? author;
+  String? textPost;
+  DateTime? dateCreation;
+  List<MediaModel>? medias;
 
   TimeLineItemModel({
     this.id,
@@ -18,7 +18,7 @@ class TimeLineItemModel {
     this.medias,
   });
 
-  String get dateCreationFormatted => dateCreation.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation);
+  String get dateCreationFormatted => dateCreation!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation!);
 
   Map<String, dynamic> toJson() {
     return {
@@ -28,13 +28,13 @@ class TimeLineItemModel {
   }
 
   List<Map<String, dynamic>> _toJsonMedias() {
-    return medias.map<Map<String, dynamic>>((item) => item.toJson()).toList();
+    return medias!.map<Map<String, dynamic>>((item) => item.toJson()).toList();
   }
 
   static TimeLineItemModel fromEntity(TimeLineItemEntity entity) {
     return TimeLineItemModel(
       id: entity.id,
-      author: AuthorModel.fromEntity(entity.author),
+      author: AuthorModel.fromEntity(entity.author!),
       textPost: entity.textPost,
       dateCreation: entity.dateCreation,
       medias: entity.medias.map((item) => MediaModel.fromEntity(item)).toList(),

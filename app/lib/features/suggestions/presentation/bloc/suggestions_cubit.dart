@@ -9,14 +9,14 @@ part 'suggestions_state.dart';
 
 class SuggestionsCubit extends Cubit<SuggestionsState> {
   SuggestionsCubit({
-    @required SuggestionsRepository suggestionsRepository,
+    required SuggestionsRepository suggestionsRepository,
   })  : assert(suggestionsRepository != null),
         _suggestionsRepository = suggestionsRepository,
         super(SuggestionsState.initial());
 
   final SuggestionsRepository _suggestionsRepository;
 
-  void remove(String id) {
+  void remove(String? id) {
     _suggestionsRepository.removeSuggestions(
         model: SuggestionsModel(id:id));
   }

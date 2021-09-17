@@ -9,14 +9,14 @@ class DefaultState extends Equatable {
     this.errorMessage,
   });
 
-  final bool isLoading;
-  final bool isSuccess;
-  final bool isEmpty;
-  final bool isError;
-  final String errorMessage;
+  final bool? isLoading;
+  final bool? isSuccess;
+  final bool? isEmpty;
+  final bool? isError;
+  final String? errorMessage;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isError,

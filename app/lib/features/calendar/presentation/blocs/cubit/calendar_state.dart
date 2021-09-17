@@ -2,11 +2,11 @@ part of 'calendar_cubit.dart';
 
 class CalendarState extends DefaultState {
   CalendarState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.model,
     this.events,
     this.selectedEvents,
@@ -18,9 +18,9 @@ class CalendarState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<GroupedDateCalendarModel> model;
-  final Map<DateTime, List> events;
-  final List selectedEvents;
+  final List<GroupedDateCalendarModel>? model;
+  final Map<DateTime?, List?>? events;
+  final List? selectedEvents;
 
   factory CalendarState.initial() {
     return CalendarState(
@@ -29,21 +29,21 @@ class CalendarState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      model: List(),
+      model: [],
       events: {},
-      selectedEvents: List(),
+      selectedEvents: [],
     );
   }
 
   CalendarState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<GroupedDateCalendarModel> model,
-    Map<DateTime, List> events,
-    List selectedEvents,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<GroupedDateCalendarModel>? model,
+    Map<DateTime?, List?>? events,
+    List? selectedEvents,
   }) {
     return CalendarState(
       isLoading: isLoading ?? this.isLoading,
@@ -58,7 +58,7 @@ class CalendarState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

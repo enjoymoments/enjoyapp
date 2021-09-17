@@ -19,7 +19,7 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  NotificationsCubit _notificationsCubit;
+  NotificationsCubit? _notificationsCubit;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
@@ -54,25 +54,25 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         key: _refreshIndicatorKey,
         color: Theme.of(context).primaryColor,
         onRefresh: () async {
-          _notificationsCubit.getNotifications(byPass: true);
+          _notificationsCubit!.getNotifications(byPass: true);
         },
         child: BlocBuilder<NotificationsCubit, NotificationsState>(
           bloc: _notificationsCubit,
           builder: (BuildContext context, NotificationsState state) {
-            if (state.notAutenticated == null || state.notAutenticated) {
+            if (state.notAutenticated == null || state.notAutenticated!) {
               return NotificationsNotAutenticated();
             }
 
-            if (state.isLoading) {
+            if (state.isLoading!) {
               return NotificationsLoading();
             }
 
-            if (state.notifications.length > 0) {
+            if (state.notifications!.length > 0) {
               return ListView.separated(
                 separatorBuilder: (context, index) => _buildSeparator(),
-                itemCount: state.notifications.length,
+                itemCount: state.notifications!.length,
                 itemBuilder: (context, index) => NotificationItem(
-                  item: state.notifications[index],
+                  item: state.notifications![index],
                 ),
               );
             }

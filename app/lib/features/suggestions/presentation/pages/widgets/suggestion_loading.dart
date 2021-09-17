@@ -12,7 +12,7 @@ class SuggestionLoading extends StatelessWidget {
       separatorBuilder: (context, index) => SpacerBox.v16,
       itemCount: 15,
       itemBuilder: (context, index) => ShimmerLoading(
-        width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+        width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
         height: SizeConfig.sizeByPixel(60),
       ),
     );

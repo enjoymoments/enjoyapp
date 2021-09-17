@@ -16,7 +16,7 @@ class DeletePost extends TimelineEvent {
 }
 
 class SelectedTimeline extends TimelineEvent {
-  final GetTimeLineModel timeline;
+  final GetTimeLineModel? timeline;
 
   SelectedTimeline(this.timeline);
 }

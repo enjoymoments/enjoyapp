@@ -8,7 +8,7 @@ abstract class PlacePhotosEvent extends Equatable {
 }
 
 class LoadPhotos extends PlacePhotosEvent {
-  final PlaceModel item;
+  final PlaceModel? item;
 
   LoadPhotos(this.item);
 }

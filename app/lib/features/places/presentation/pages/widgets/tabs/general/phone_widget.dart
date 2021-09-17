@@ -10,9 +10,9 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class PhoneWidget extends StatelessWidget {
-  final PlaceModel item;
+  final PlaceModel? item;
 
-  const PhoneWidget({Key key, @required this.item}) : super(key: key);
+  const PhoneWidget({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class PhoneWidget extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => PhoneModalFit(
-            phoneNumber: item.formattedPhoneNumber,
+            phoneNumber: item!.formattedPhoneNumber,
           ),
         );
       },
@@ -35,7 +35,7 @@ class PhoneWidget extends StatelessWidget {
               ),
               SpacerBox.h8,
               Expanded(
-                child: item.formattedPhoneNumber.label(
+                child: item!.formattedPhoneNumber!.label(
                   context,
                 ),
               ),

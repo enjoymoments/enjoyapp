@@ -2,11 +2,11 @@ part of 'places_bloc.dart';
 
 class PlacesState extends DefaultState {
   PlacesState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.model,
   }) : super(
           isLoading: isLoading,
@@ -16,7 +16,7 @@ class PlacesState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final PlacesModel model;
+  final PlacesModel? model;
 
   factory PlacesState.initial() {
     return PlacesState(
@@ -30,12 +30,12 @@ class PlacesState extends DefaultState {
   }
 
   PlacesState copyWith({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
-    PlacesModel model,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
+    PlacesModel? model,
   }) {
     return PlacesState(
       isLoading: isLoading ?? this.isLoading,
@@ -48,7 +48,7 @@ class PlacesState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
     isLoading,
     isEmpty,
     isError,

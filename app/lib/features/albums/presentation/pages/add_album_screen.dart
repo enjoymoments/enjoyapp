@@ -24,17 +24,17 @@ import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 
 class AddAlbumScreen extends StatefulWidget {
-  const AddAlbumScreen({Key key}) : super(key: key);
+  const AddAlbumScreen({Key? key}) : super(key: key);
 
   @override
   _AddAlbumScreenState createState() => _AddAlbumScreenState();
 }
 
 class _AddAlbumScreenState extends State<AddAlbumScreen> {
-  TextEditingController _titleController;
-  RoundedLoadingButtonController _actionButtoncontroller;
-  AddAlbumCubit _addAlbumCubit;
-  List<BaseImageModel> _images;
+  TextEditingController? _titleController;
+  RoundedLoadingButtonController? _actionButtoncontroller;
+  AddAlbumCubit? _addAlbumCubit;
+  late List<BaseImageModel> _images;
   int _currentIndex = 0;
 
   @override
@@ -52,8 +52,8 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
 
   @override
   void dispose() {
-    _addAlbumCubit.close();
-    _titleController.dispose();
+    _addAlbumCubit!.close();
+    _titleController!.dispose();
     super.dispose();
   }
 
@@ -61,7 +61,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: _buildBottomMenu(),
     );
   }
@@ -70,19 +70,19 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
     return BlocConsumer<AddAlbumCubit, AddAlbumState>(
       bloc: _addAlbumCubit,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
-          ExtendedNavigator.of(context).pop();
+        if (state.isSuccess!) {
+          AutoRouter.of(context).pop();
         }
       },
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return CustomCircularProgressIndicator();
         }
 
@@ -120,8 +120,8 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
       context: context,
       onPressedBack: () {
         if (_images.length > 0 ||
-            (_titleController.text != null &&
-                _titleController.text.isNotEmpty)) {
+            (_titleController!.text != null &&
+                _titleController!.text.isNotEmpty)) {
           _discardPost(context);
           return;
         }
@@ -143,7 +143,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
           _currentIndex = index;
         });
 
-        _addAlbumCubit.mapOpenCameraToState(ImageSource.values[index]);
+        _addAlbumCubit!.mapOpenCameraToState(ImageSource.values[index]);
       },
       items: [
         BottomNavigationBarItem(
@@ -164,7 +164,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
       controller: _actionButtoncontroller,
       child: CustomIcon(
         icon: AppIcons.check,
-        color: Theme.of(context).appBarTheme.iconTheme.color,
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),
       onPressed: () {
         _save();
@@ -173,7 +173,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
   }
 
   Widget _buildNewImages(AddAlbumState state) {
-    if (state.allImages.length > 0) {
+    if (state.allImages!.length > 0) {
       return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
@@ -187,7 +187,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
   }
 
   void _save() {
-    _addAlbumCubit.mapSaveToState(_titleController.text);
+    _addAlbumCubit!.mapSaveToState(_titleController!.text);
   }
 
   void _removePhoto(BuildContext context, GalleryImageModel model) async {
@@ -204,7 +204,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
             text: 'Sim, quero remover',
             iconData: AppIcons.trash,
             onTap: () {
-              _addAlbumCubit.mapRemoveMediaToState(model);
+              _addAlbumCubit!.mapRemoveMediaToState(model);
             },
           ),
         ],
@@ -226,7 +226,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
             text: 'Sim, quero descartar',
             iconData: AppIcons.trash,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],

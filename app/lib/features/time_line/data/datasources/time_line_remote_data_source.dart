@@ -8,24 +8,24 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 
 abstract class TimelineRemoteDataSource {
   Future<String> addTimeLineItem(
-      String timelineID, String userId, TimeLineItemModel model);
-  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit);
-  Future<void> deletePost(String timelineID, String postID);
+      String? timelineID, String userId, TimeLineItemModel model);
+  Future<List<TimeLineItemModel>> getPosts(String? timelineID, int? limit);
+  Future<void> deletePost(String? timelineID, String? postID);
   Future<List<GetTimeLineModel>> getTimelines(String userId);
 }
 
 class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   TimelineRemoteDataSourceImpl(this.remoteClientRepository, this.remoteConfig);
 
-  final RemoteClientRepository remoteClientRepository;
-  final RemoteConfig remoteConfig;
+  final RemoteClientRepository? remoteClientRepository;
+  final RemoteConfig? remoteConfig;
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
   static String _collectionRoot = 'timeline';
 
   @override
   Future<String> addTimeLineItem(
-      String timelineID, String userId, TimeLineItemModel model) async {
+      String? timelineID, String userId, TimeLineItemModel model) async {
     var document = _instance.firestore
         .doc('$_collectionRoot/$timelineID')
         .collection('posts')
@@ -40,16 +40,16 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   }
 
   @override
-  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit) async {
+  Future<List<TimeLineItemModel>> getPosts(String? timelineID, int? limit) async {
     var collection = _instance.firestore
         .doc('$_collectionRoot/$timelineID')
         .collection('posts')
         .orderBy('dateCreation', descending: true)
-        .limit(limit);
+        .limit(limit!);
 
     var result = await collection.get();
 
-    var list = List<TimeLineItemModel>();
+    var list = <TimeLineItemModel>[];
 
     for (var item in result.docs) {
       var snap = await TimeLineItemEntity.fromSnapshot(item);
@@ -60,10 +60,10 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
   }
 
   @override
-  Future<void> deletePost(String timelineID, String postID) async {
-    var url = remoteConfig.getString(url_functions);
+  Future<void> deletePost(String? timelineID, String? postID) async {
+    var url = remoteConfig!.getString(url_functions);
 
-    await remoteClientRepository.post('$url/deleteTimeLineItem', data: {
+    await remoteClientRepository!.post('$url/deleteTimeLineItem', data: {
       'timelineID': timelineID,
       'postID': postID,
     });
@@ -80,7 +80,7 @@ class TimelineRemoteDataSourceImpl implements TimelineRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
 
     List<GetTimeLineModel> _result = [];
 

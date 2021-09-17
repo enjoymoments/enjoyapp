@@ -8,12 +8,12 @@ class PlacesCategory extends Equatable {
     this.subCategories,
   });
 
-  final List<PlacesSubCategory> subCategories;
-  final String categoryName;
-  final String categoryId;
+  final List<PlacesSubCategory>? subCategories;
+  final String? categoryName;
+  final String? categoryId;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         categoryId,
         categoryName,
         subCategories,

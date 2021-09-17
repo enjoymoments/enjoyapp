@@ -7,11 +7,11 @@ class UserAction extends Equatable {
     this.data,
   });
 
-  final NotificationTypeEnum notificationType;
-  final String data;
+  final NotificationTypeEnum? notificationType;
+  final String? data;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         notificationType,
         data,
       ];

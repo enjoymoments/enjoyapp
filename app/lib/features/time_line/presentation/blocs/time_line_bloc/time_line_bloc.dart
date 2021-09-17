@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:equatable/equatable.dart';
 import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
@@ -20,7 +21,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     this.timelineRepository,
   ) : super(TimelineState.initial());
 
-  final TimelineRepository timelineRepository;
+  final TimelineRepository? timelineRepository;
 
   @override
   Stream<TimelineState> mapEventToState(
@@ -38,9 +39,9 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
   }
 
   Stream<TimelineState> mapInitLoadToState() async* {
-    if (state.posts.isNotEmpty) {
+    if (state.posts!.isNotEmpty) {
       yield state.copyWith(
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     } else {
       this.add(LoadPosts());
@@ -49,13 +50,13 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
   Stream<TimelineState> mapSelectedTimelineToState(
       SelectedTimeline event) async* {
-    var _user = getItInstance<UserWrapper>().getUser;
+    var _user = getItInstance<UserWrapper>().getUser!;
 
     var _newInstance = _user.copyWith(timelineSelected: event.timeline);
     getItInstance<UserWrapper>().assignment(_newInstance);
 
     yield state.copyWith(
-      forceRefresh: StateUtils.generateRandomNumber(),
+      forceRefresh: StateUtils.generateRandomNumber() as int?,
       timelineSelected: event.timeline,
     );
 
@@ -64,17 +65,17 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
   Stream<TimelineState> mapDeletePostToState(DeletePost event) async* {
     try {
-      if (state.posts.remove(event.post)) {
-        var user = getItInstance<UserWrapper>().getUser;
+      if (state.posts!.remove(event.post)) {
+        var user = getItInstance<UserWrapper>().getUser!;
 
         await this
-            .timelineRepository
-            .deletePost(user.timelineSelected.id, event.post.id);
+            .timelineRepository!
+            .deletePost(user.timelineSelected!.id, event.post.id);
         yield state.copyWith(
           isLoading: false,
           isSuccess: true,
           posts: state.posts,
-          forceRefresh: StateUtils.generateRandomNumber(),
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
         );
       }
     } catch (e) {
@@ -86,14 +87,14 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
     yield state.copyWith(isLoading: true);
 
     try {
-      var user = getItInstance<UserWrapper>().getUser;
+      var user = getItInstance<UserWrapper>().getUser!;
       if (user.timelineSelected == null) {
         user = await _updateInstanceUserWithTimelines(user);
       }
 
       final posts = await this
-          .timelineRepository
-          .getPosts(user.timelineSelected.id, state.limit);
+          .timelineRepository!
+          .getPosts(user.timelineSelected!.id, state.limit);
 
       yield state.copyWith(
         isLoading: false,
@@ -101,7 +102,7 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
         posts: posts,
         timelines: user.timelines,
         timelineSelected: user.timelineSelected,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     } catch (e) {
       yield state.copyWith(isLoading: false, isError: true);
@@ -110,17 +111,15 @@ class TimelineBloc extends Bloc<TimelineEvent, TimelineState> {
 
   Future<UserAppModel> _updateInstanceUserWithTimelines(
       UserAppModel user) async {
-    var _timelines = await timelineRepository.getTimelines(user.id);
+    var _timelines = await timelineRepository!.getTimelines(user.id);
 
     if (_timelines != null && _timelines.length > 0) {
-      GetTimeLineModel _element = _timelines.firstWhere(
-          (element) => element.type == TimeLineTypeEnum.Couple,
-          orElse: () => null);
+      GetTimeLineModel? _element = _timelines.firstWhereOrNull(
+          (element) => element.type == TimeLineTypeEnum.Couple);
 
       if (_element == null) {
-        _element = _timelines.firstWhere(
-            (element) => element.type == TimeLineTypeEnum.Personal,
-            orElse: () => null);
+        _element = _timelines.firstWhereOrNull(
+            (element) => element.type == TimeLineTypeEnum.Personal);
       }
 
       var _newInstance =

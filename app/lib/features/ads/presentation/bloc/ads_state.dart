@@ -2,11 +2,11 @@ part of 'ads_cubit.dart';
 
 class AdsState extends DefaultState {
   AdsState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.banners,
     this.publisherBanners,
   }) : super(
@@ -17,8 +17,8 @@ class AdsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<BannerAd> banners;
-  final List<BannerAd> publisherBanners;
+  final List<BannerAd>? banners;
+  final List<BannerAd>? publisherBanners;
 
   factory AdsState.initial() {
     return AdsState(
@@ -33,13 +33,13 @@ class AdsState extends DefaultState {
   }
 
   AdsState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<BannerAd> banners,
-    List<BannerAd> publisherBanners,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<BannerAd>? banners,
+    List<BannerAd>? publisherBanners,
   }) {
     return AdsState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class AdsState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

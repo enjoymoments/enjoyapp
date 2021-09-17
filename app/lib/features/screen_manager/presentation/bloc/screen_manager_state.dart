@@ -2,11 +2,11 @@ part of 'screen_manager_bloc.dart';
 
 class ScreenManagerState extends Equatable {
   
-  final bool isLoading;
-  final bool isSuccess;
-  final bool isFailure;
-  final DefaultMenuEnum currentScreen;
-  final Map<DefaultMenuEnum, Widget> contents;
+  final bool? isLoading;
+  final bool? isSuccess;
+  final bool? isFailure;
+  final DefaultMenuEnum? currentScreen;
+  final Map<DefaultMenuEnum, Widget>? contents;
 
   ScreenManagerState({
     this.isLoading,
@@ -29,11 +29,11 @@ class ScreenManagerState extends Equatable {
   }
 
   ScreenManagerState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isFailure,
-    DefaultMenuEnum currentScreen,
-    Map<DefaultMenuEnum, Widget> contents,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isFailure,
+    DefaultMenuEnum? currentScreen,
+    Map<DefaultMenuEnum, Widget>? contents,
   }) {
     return ScreenManagerState(
       isLoading: isLoading ?? this.isLoading,
@@ -45,7 +45,7 @@ class ScreenManagerState extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isFailure,

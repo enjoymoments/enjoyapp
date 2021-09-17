@@ -14,7 +14,7 @@ class AlbumsLoading extends StatelessWidget {
         separatorBuilder: (context, index) => SpacerBox.v16,
         itemCount: 5,
         itemBuilder: (context, index) => ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(150),
         ),
       ),

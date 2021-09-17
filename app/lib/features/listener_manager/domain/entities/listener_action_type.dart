@@ -9,7 +9,7 @@ abstract class _Enum<T> {
 }
 
 class ListenerActionTypeEnum extends _Enum<int> {
-  factory ListenerActionTypeEnum(final int value) {
+  factory ListenerActionTypeEnum(final int? value) {
     if (value == 1) {
       return ListenerActionTypeEnum.SyncCouple;
     } else if (value == 2) {
@@ -18,11 +18,12 @@ class ListenerActionTypeEnum extends _Enum<int> {
       return ListenerActionTypeEnum.RefreshUserInfo;
     }
 
-    return null;
+    return ListenerActionTypeEnum.Init;
   }
 
   const ListenerActionTypeEnum._fromValue(final int value) : super._fromValue(value);
 
+  static const ListenerActionTypeEnum Init = ListenerActionTypeEnum._fromValue(0);
   static const ListenerActionTypeEnum SyncCouple = ListenerActionTypeEnum._fromValue(1);
   static const ListenerActionTypeEnum UnsyncCouple = ListenerActionTypeEnum._fromValue(2);
   static const ListenerActionTypeEnum RefreshUserInfo = ListenerActionTypeEnum._fromValue(3);

@@ -2,11 +2,11 @@ part of 'add_activity_cubit.dart';
 
 class AddActivityState extends DefaultState {
   AddActivityState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.activities,
   }) : super(
           isLoading: isLoading,
@@ -16,7 +16,7 @@ class AddActivityState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<ActivityModel> activities;
+  final List<ActivityModel>? activities;
 
   factory AddActivityState.initial() {
     return AddActivityState(
@@ -25,17 +25,17 @@ class AddActivityState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      activities: List(),
+      activities: [],
     );
   }
 
   AddActivityState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<ActivityModel> activities,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<ActivityModel>? activities,
   }) {
     return AddActivityState(
       isLoading: isLoading ?? this.isLoading,
@@ -48,7 +48,7 @@ class AddActivityState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

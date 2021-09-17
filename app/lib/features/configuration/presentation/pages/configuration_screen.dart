@@ -22,7 +22,7 @@ class ConfigurationScreen extends StatelessWidget {
     return CustomAppBar(
       title: 'Configurações',
       context: context,
-      onPressedBack: () => ExtendedNavigator.of(context).pop(),
+      onPressedBack: () => AutoRouter.of(context).pop(),
     );
   }
 

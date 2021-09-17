@@ -5,9 +5,9 @@ import 'package:mozin/modules/shared/general/entities/media_entity.dart';
 
 class TimeLineItemEntity extends Equatable {
   final String id;
-  final AuthorEntity author;
-  final String textPost;
-  final DateTime dateCreation;
+  final AuthorEntity? author;
+  final String? textPost;
+  final DateTime? dateCreation;
   final List<MediaEntity> medias;
 
   const TimeLineItemEntity(
@@ -27,18 +27,18 @@ class TimeLineItemEntity extends Equatable {
     );
   }
 
-  static Future<AuthorEntity> _toAuthor(DocumentSnapshot snap) async {
-    DocumentReference documentAuthor = snap.get('author');
+  static Future<AuthorEntity?> _toAuthor(DocumentSnapshot snap) async {
+    DocumentReference? documentAuthor = snap.get('author');
     if (documentAuthor != null) {
       var _author = await documentAuthor.get();
-      return AuthorEntity.fromSnapshot(_author.data());
+      return AuthorEntity.fromSnapshot(_author.data() as Map<String, dynamic>);
     }
 
     return null;
   }
 
-  static List<MediaEntity> _toEntity(Iterable field) {
-    List<MediaEntity> result = new List<MediaEntity>();
+  static List<MediaEntity> _toEntity(Iterable? field) {
+    List<MediaEntity> result = <MediaEntity>[];
 
     if (field != null) {
       field.forEach((item) {
@@ -50,7 +50,7 @@ class TimeLineItemEntity extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         textPost,
         dateCreation,

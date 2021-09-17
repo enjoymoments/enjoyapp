@@ -4,16 +4,16 @@ import 'package:mozin/features/interest/domain/entities/categories.dart';
 class CategoriesModel extends Categories {
   CategoriesModel({
     this.selected,
-    String id,
-    String name,
-    List<SubCategoriesModel> subCategories,
+    String? id,
+    String? name,
+    List<SubCategoriesModel>? subCategories,
   }) : super(
           id: id,
           name: name,
           subCategories: subCategories,
         );
 
-  bool selected;
+  bool? selected;
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) {
     var listSubCategories = <SubCategoriesModel>[];
@@ -42,7 +42,7 @@ class CategoriesModel extends Categories {
     final Map<String, dynamic> data = <String, dynamic>{};
 
     var listSubCategories = [];
-    subCategories.forEach((dynamic v) {
+    subCategories!.forEach((dynamic v) {
       listSubCategories.add(v.toJson());
     });
 
@@ -55,14 +55,14 @@ class CategoriesModel extends Categories {
   }
 
   CategoriesModel copyWith({
-    String id,
-    String name,
-    List<SubCategoriesModel> subCategories,
+    String? id,
+    String? name,
+    List<SubCategoriesModel>? subCategories,
   }) {
     return CategoriesModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      subCategories: subCategories ?? this.subCategories,
+      subCategories: subCategories ?? this.subCategories as List<SubCategoriesModel>?,
     );
   }
 }

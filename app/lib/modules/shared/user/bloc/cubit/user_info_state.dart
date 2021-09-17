@@ -2,11 +2,11 @@ import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 class UserInfoState extends DefaultState {
   UserInfoState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.existCoupleId,
     this.forceRefresh,
   }) : super(
@@ -17,8 +17,8 @@ class UserInfoState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final bool existCoupleId;
-  final int forceRefresh;
+  final bool? existCoupleId;
+  final int? forceRefresh;
 
   factory UserInfoState.initial() {
     return UserInfoState(
@@ -33,13 +33,13 @@ class UserInfoState extends DefaultState {
   }
 
   UserInfoState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    bool existCoupleId,
-    int forceRefresh,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    bool? existCoupleId,
+    int? forceRefresh,
   }) {
     return UserInfoState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class UserInfoState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

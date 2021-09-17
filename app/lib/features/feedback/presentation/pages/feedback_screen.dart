@@ -25,9 +25,9 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  FeedbackCubit _feedbackCubit;
-  RoundedLoadingButtonController _actionButtoncontroller;
-  TextEditingController _descriptionController;
+  FeedbackCubit? _feedbackCubit;
+  RoundedLoadingButtonController? _actionButtoncontroller;
+  TextEditingController? _descriptionController;
 
   _FeedbackType _feedbackType = _FeedbackType.initial;
 
@@ -43,14 +43,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   void dispose() {
     super.dispose();
-    _feedbackCubit.close();
+    _feedbackCubit!.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -72,17 +72,16 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     return BlocConsumer<FeedbackCubit, FeedbackState>(
       bloc: _feedbackCubit,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
-          ExtendedNavigator.of(context).popAndPush(
-            Routes.success_screen,
-            arguments: CustomSuccessScreenArguments(
+        if (state.isSuccess!) {
+          AutoRouter.of(context).popAndPush(
+            Success_screen(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,7 +152,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       controller: _actionButtoncontroller,
       child: CustomIcon(
         icon: AppIcons.check,
-        color: Theme.of(context).appBarTheme.iconTheme.color,
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),
       onPressed: () {
         save();
@@ -162,8 +161,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   }
 
   void save() {
-    _feedbackCubit.save(FeedbackModel(
-      description: _descriptionController.text,
+    _feedbackCubit!.save(FeedbackModel(
+      description: _descriptionController!.text,
       feedbackType: _feedbackType.index,
     ));
   }
@@ -177,12 +176,12 @@ class _CustomTile extends StatelessWidget {
   final Function(bool) onTap;
 
   const _CustomTile({
-    Key key,
-    @required this.selected,
-    @required this.iconStart,
-    @required this.title,
-    @required this.description,
-    @required this.onTap,
+    Key? key,
+    required this.selected,
+    required this.iconStart,
+    required this.title,
+    required this.description,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -219,11 +218,11 @@ class _CustomTile extends StatelessWidget {
     );
   }
 
-  Color _getSelectedColor(BuildContext context) {
+  Color? _getSelectedColor(BuildContext context) {
     if (selected) {
       return Theme.of(context).primaryColor;
     }
 
-    return Theme.of(context).textTheme.headline5.color;
+    return Theme.of(context).textTheme.headline5!.color;
   }
 }

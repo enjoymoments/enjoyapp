@@ -11,7 +11,7 @@ import 'package:custom_view/spacer_box.dart';
 class UserCommentWidget extends StatelessWidget {
   final ReviewModel review;
 
-  const UserCommentWidget({Key key, @required this.review}) : super(key: key);
+  const UserCommentWidget({Key? key, required this.review}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,10 @@ class UserCommentWidget extends StatelessWidget {
             Row(
               children: [
                 CustomAvatar(
-                  backgroundImage: NetworkImage(review.profilePhotoUrl),
+                  backgroundImage: NetworkImage(review.profilePhotoUrl!),
                 ),
                 SpacerBox.h8,
-                review.authorName.description(context),
+                review.authorName!.description(context),
               ],
             ),
             SpacerBox.v4,
@@ -40,12 +40,12 @@ class UserCommentWidget extends StatelessWidget {
                 SpacerBox.h5,
                 CustomIcon(icon: AppIcons.star, size: 10,),
                 SpacerBox.h8,
-                review.relativeTimeDescription
+                review.relativeTimeDescription!
                     .description(context, fontSize: 10),
               ],
             ),
             SpacerBox.v4,
-            review.text.label(
+            review.text!.label(
               context,
               withoutAutoSize: true,
             ),

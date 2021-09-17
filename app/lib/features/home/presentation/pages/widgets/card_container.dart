@@ -3,11 +3,11 @@ import 'package:custom_view/size_config.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget child;
-  final double width;
+  final double? width;
 
   const CardContainer({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.width,
   }) : super(key: key);
 

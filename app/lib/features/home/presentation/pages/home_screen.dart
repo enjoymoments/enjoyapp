@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.dart';
@@ -18,7 +19,7 @@ import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({ Key key }) : super(key: key);
+  const HomeScreen({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         SpacerBox.v16,
         Center(
           child: BannerAdWidget(
-            screenName: Routes.home_partial,
+            screenName: Home_partial.name,
           ),
         ),
       ],
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       bloc: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
-        if (state.existCoupleId) {
+        if (state.existCoupleId!) {
           return SizedBox.shrink();
         }
 
@@ -100,7 +101,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildCardHelpMe() {
     return GenerateCard(
       iconData: AppIcons.assistive_listening_systems,
-      routeName: Routes.feedback_screen,
+      routeName: Feedback_screen.name,
       name: 'Ajude-nos a melhorar o app',
       description: 'Compartilhe algum problema, sugestão ou melhoria',
     );

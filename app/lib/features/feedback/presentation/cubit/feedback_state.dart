@@ -2,11 +2,11 @@ part of 'feedback_cubit.dart';
 
 class FeedbackState extends DefaultState {
   FeedbackState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.model,
     this.forceRefresh,
   }) : super(
@@ -17,8 +17,8 @@ class FeedbackState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final FeedbackModel model;
-  final int forceRefresh;
+  final FeedbackModel? model;
+  final int? forceRefresh;
 
   factory FeedbackState.initial() {
     return FeedbackState(
@@ -33,13 +33,13 @@ class FeedbackState extends DefaultState {
   }
 
   FeedbackState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    FeedbackModel model,
-    int forceRefresh,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    FeedbackModel? model,
+    int? forceRefresh,
   }) {
     return FeedbackState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class FeedbackState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

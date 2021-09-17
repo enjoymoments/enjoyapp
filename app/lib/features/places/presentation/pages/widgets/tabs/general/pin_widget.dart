@@ -11,10 +11,10 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class PinWidget extends StatelessWidget {
-  final PlaceModel item;
-  final GpsOpenCubit gpsOpenCubit;
+  final PlaceModel? item;
+  final GpsOpenCubit? gpsOpenCubit;
 
-  const PinWidget({Key key, @required this.item, @required this.gpsOpenCubit,}) : super(key: key);
+  const PinWidget({Key? key, required this.item, required this.gpsOpenCubit,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class PinWidget extends StatelessWidget {
               ),
               SpacerBox.h8,
               Expanded(
-                child: item.formattedAddress.label(
+                child: item!.formattedAddress!.label(
                   context,
                 ),
               ),

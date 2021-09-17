@@ -5,11 +5,11 @@ import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoryItemBadge extends StatefulWidget {
   const InterestCategoryItemBadge(
-      {Key key, @required this.item, @required this.callbackSelected})
+      {Key? key, required this.item, required this.callbackSelected})
       : super(key: key);
 
   final SubCategoriesModel item;
-  final Function(bool, SubCategoriesModel) callbackSelected;
+  final Function(bool?, SubCategoriesModel) callbackSelected;
 
   @override
   _InterestCategoryItemBadgeState createState() =>
@@ -17,11 +17,11 @@ class InterestCategoryItemBadge extends StatefulWidget {
 }
 
 class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
-  bool _isSelected;
+  bool? _isSelected;
 
   @override
   void initState() {
-    _isSelected = widget.item.selected != null && widget.item.selected;
+    _isSelected = widget.item.selected != null && widget.item.selected!;
     super.initState();
   }
 
@@ -33,7 +33,7 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
   Widget _buildCardItem(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _isSelected = !_isSelected;
+        _isSelected = !_isSelected!;
         widget.callbackSelected(_isSelected, widget.item);
 
         setState(() {});
@@ -43,7 +43,7 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
         alignment: Alignment.center,
         width: SizeConfig.sizeByPixel(95),
         decoration: myBoxDecoration(context),
-        child: widget.item.name.label(
+        child: widget.item.name!.label(
           context,
           color: _getTextColor(),
           maxLines: 1
@@ -61,13 +61,13 @@ class _InterestCategoryItemBadgeState extends State<InterestCategoryItemBadge> {
   }
 
   Color _getBackgroundColor() {
-    return _isSelected
+    return _isSelected!
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
   }
 
-  Color _getTextColor() {
-    if (_isSelected) {
+  Color? _getTextColor() {
+    if (_isSelected!) {
       return Theme.of(context).backgroundColor;
     }
 

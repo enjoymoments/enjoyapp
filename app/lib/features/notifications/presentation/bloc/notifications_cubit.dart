@@ -11,14 +11,14 @@ part 'notifications_state.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit(
-      {@required NotificationsRepository notificationsRepository})
+      {required NotificationsRepository notificationsRepository})
       : assert(notificationsRepository != null),
         _notificationsRepository = notificationsRepository,
         super(NotificationsState.initial());
 
   final NotificationsRepository _notificationsRepository;
 
-  void getNotifications({bool byPass}) async {
+  void getNotifications({bool? byPass}) async {
     if (getItInstance<UserService>().notAuthenticated()) {
       emit(state.copyWith(
         notAutenticated: true,
@@ -26,7 +26,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       return;
     }
 
-    if (state.notifications.length == 0 || (byPass != null && byPass)) {
+    if (state.notifications!.length == 0 || (byPass != null && byPass)) {
       emit(state.copyWith(
         isLoading: true,
         notAutenticated: false,

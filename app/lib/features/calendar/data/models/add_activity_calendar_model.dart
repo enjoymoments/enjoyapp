@@ -2,8 +2,8 @@ import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.da
 
 class AddActivityCalendarModel extends AddActivityCalendar {
   const AddActivityCalendarModel({
-    String sessionId,
-    String activityId,
+    String? sessionId,
+    String? activityId,
   }) : super(
           sessionId: sessionId,
           activityId: activityId,

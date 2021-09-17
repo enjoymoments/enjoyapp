@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class AuthorEntity extends Equatable {
-  final String id;
-  final String name;
-  final String photo;
-  final String email;
+  final String? id;
+  final String? name;
+  final String? photo;
+  final String? email;
 
   const AuthorEntity(this.id, this.name, this.photo, this.email);
 
@@ -18,7 +18,7 @@ class AuthorEntity extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         name,
         photo,

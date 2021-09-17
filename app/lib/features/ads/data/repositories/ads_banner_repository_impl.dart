@@ -13,8 +13,8 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
   Map<String, List<BannerAd>> _adsByScreen = {};
 
   @override
-  Future<Either<List<BannerAd>, Exception>> getAdsByScreen({
-    @required String screenName,
+  Future<Either<List<BannerAd>?, Exception>> getAdsByScreen({
+    required String screenName,
     int count = 1,
     bool reset = false,
   }) async {
@@ -28,7 +28,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
         _adsByScreen[screenName] = _list;
       }
 
-      return Left<List<BannerAd>, Exception>(_adsByScreen[screenName]);
+      return Left<List<BannerAd>?, Exception>(_adsByScreen[screenName]);
     } on dynamic catch (e) {
       _logger(e, null);
       return Right<List<BannerAd>, Exception>(
@@ -38,7 +38,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
 
   void _resetBannerList(String screenName) {
     if (_adsByScreen[screenName] != null) {
-      for (var banner in _adsByScreen[screenName]) {
+      for (var banner in _adsByScreen[screenName]!) {
         banner.dispose();
       }
 
@@ -47,7 +47,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
   }
 
   Future<List<BannerAd>> _generateBannerList(int count) async {
-    var _result = List<BannerAd>();
+    var _result = <BannerAd>[];
 
     for (var i = 0; i < count; i++) {
       var _item = await _generateBanner();
@@ -57,9 +57,9 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
     return _result;
   }
 
-  Future<BannerAd> _generateBanner({AdSize size}) async {
+  Future<BannerAd> _generateBanner({AdSize? size}) async {
     var _bannerAd = BannerAd(
-      adUnitId: _getAdUnitId(),
+      adUnitId: _getAdUnitId()!,
       request: AdRequest(),
       size: size ?? AdSize.banner,
       listener: BannerAdListener(
@@ -80,7 +80,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
     return _bannerAd;
   }
 
-  String _getAdUnitId() {
+  String? _getAdUnitId() {
     // if (isInDebugMode) {
     //   return BannerAd.testAdUnitId;
     // }
@@ -95,7 +95,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
     return null;
   }
 
-  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
+  void _logger(dynamic onError, Map<String, dynamic>? jsonMap) {
     getItInstance<LoggerService>()..addLogAsync(
       LoggerModel(
         typeError: LoggerTypeEnum.Error,

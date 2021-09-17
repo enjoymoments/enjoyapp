@@ -1,10 +1,10 @@
 class GeneralFilterModel {
-  double minPrice;
-  double maxPrice;
-  double minDistance;
-  double maxDistance;
-  double minTime;
-  double maxTime;
+  double? minPrice;
+  double? maxPrice;
+  double? minDistance;
+  double? maxDistance;
+  double? minTime;
+  double? maxTime;
 
   GeneralFilterModel({
     this.minPrice,

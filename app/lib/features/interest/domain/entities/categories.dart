@@ -8,12 +8,12 @@ class Categories extends Equatable {
     this.subCategories,
   });
 
-  final String id;
-  final String name;
-  final List<SubCategories> subCategories;
+  final String? id;
+  final String? name;
+  final List<SubCategories>? subCategories;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         id,
         name,
         subCategories,

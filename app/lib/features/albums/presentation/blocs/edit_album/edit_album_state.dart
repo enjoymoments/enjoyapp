@@ -2,11 +2,11 @@ part of 'edit_album_cubit.dart';
 
 class EditAlbumState extends DefaultState {
   EditAlbumState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.album,
     this.newImages,
     this.allImages,
@@ -19,10 +19,10 @@ class EditAlbumState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final AlbumItemModel album;
-  final List<GalleryImageModel> newImages;
-  final List<BaseImageModel> allImages;
-  final int forceRefresh;
+  final AlbumItemModel? album;
+  final List<GalleryImageModel>? newImages;
+  final List<BaseImageModel>? allImages;
+  final int? forceRefresh;
 
   factory EditAlbumState.initial() {
     return EditAlbumState(
@@ -32,22 +32,22 @@ class EditAlbumState extends DefaultState {
       isLoading: false,
       errorMessage: null,
       album: null,
-      newImages: List(),
-      allImages: List(),
+      newImages: [],
+      allImages: [],
       forceRefresh: null,
     );
   }
 
   EditAlbumState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    AlbumItemModel album,
-    List<GalleryImageModel> newImages,
-    List<BaseImageModel> allImages,
-    int forceRefresh,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    AlbumItemModel? album,
+    List<GalleryImageModel>? newImages,
+    List<BaseImageModel>? allImages,
+    int? forceRefresh,
   }) {
     return EditAlbumState(
       isLoading: isLoading ?? this.isLoading,
@@ -63,7 +63,7 @@ class EditAlbumState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

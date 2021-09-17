@@ -13,7 +13,7 @@ class PlaceCardItemLoading extends StatelessWidget {
       itemCount: 4,
       itemBuilder: (context, index) {
         return ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(120),
         );
       },

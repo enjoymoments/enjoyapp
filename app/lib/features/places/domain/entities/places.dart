@@ -6,10 +6,10 @@ class Places extends Equatable {
     this.places,
   });
 
-  final List<PlacesCategory> places;
+  final List<PlacesCategory>? places;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         places,
       ];
 }

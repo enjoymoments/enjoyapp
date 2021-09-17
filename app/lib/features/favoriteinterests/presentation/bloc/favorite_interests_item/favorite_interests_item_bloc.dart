@@ -14,15 +14,15 @@ import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin_core/utils.dart';
 
 class MapItemFavorite {
-  int indexCategory;
-  int indexSubCategory;
-  int indexItem;
+  late int indexCategory;
+  late int indexSubCategory;
+  late int indexItem;
 }
 
 class FavoriteInterestsItemBloc
     extends Bloc<FavoriteInterestsItemEvent, FavoriteInterestsItemState> {
   FavoriteInterestsItemBloc(
-      {@required FavoriteInterestsRepository favoriteInterestsRepository})
+      {required FavoriteInterestsRepository favoriteInterestsRepository})
       : assert(favoriteInterestsRepository != null),
         _favoriteInterestsRepository = favoriteInterestsRepository,
         super(FavoriteInterestsItemState.initial());
@@ -53,9 +53,9 @@ class FavoriteInterestsItemBloc
     AddSuggestionToFavorite event,
   ) async* {
     Either<bool, Exception> response;
-    var _userService = getItInstance<UserService>();
+    UserService? _userService = getItInstance<UserService>();
     var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
+    var _user = _userWrapper.getUser!;
 
     MapItemFavorite _mapItemFavorite = MapItemFavorite();
     int _indexItem = _getIndexItemSuggestion(_user, _mapItemFavorite, event);
@@ -67,7 +67,7 @@ class FavoriteInterestsItemBloc
       response = await _favoriteInterestsRepository
           .removeFavoriteInterest(event.suggestion.id);
 
-      _userService.removeFavoriteSuggestionInterest(
+      _userService!.removeFavoriteSuggestionInterest(
         indexCategory: _mapItemFavorite.indexCategory,
         indexSubCategory: _mapItemFavorite.indexSubCategory,
         indexItem: _mapItemFavorite.indexItem,
@@ -83,7 +83,7 @@ class FavoriteInterestsItemBloc
         InterestEnum.Place,
       );
 
-      _userService.addFavoriteSuggestionInterest(event.suggestion);
+      _userService!.addFavoriteSuggestionInterest(event.suggestion);
     }
 
     yield response.fold((model) {
@@ -91,14 +91,14 @@ class FavoriteInterestsItemBloc
         isLoading: false,
         isError: false,
         isSuccess: true,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     }, (error) {
       return state.copyWith(
         isLoading: false,
         isError: true,
         isSuccess: false,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     });
   }
@@ -107,31 +107,31 @@ class FavoriteInterestsItemBloc
     AddPlaceToFavorite event,
   ) async* {
     Either<bool, Exception> response;
-    var _userService = getItInstance<UserService>();
+    UserService? _userService = getItInstance<UserService>();
     var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
+    var _user = _userWrapper.getUser!;
 
     MapItemFavorite _mapItemFavorite = MapItemFavorite();
     int _indexItem = _getIndexItem(_user, _mapItemFavorite, event);
 
     if (_indexItem != -1) {
       response = await _favoriteInterestsRepository
-          .removeFavoriteInterest(event.place.placeId);
+          .removeFavoriteInterest(event.place!.placeId);
 
-      _userService.removeFavoriteInterest(
+      _userService!.removeFavoriteInterest(
         indexCategory: _mapItemFavorite.indexCategory,
         indexSubCategory: _mapItemFavorite.indexSubCategory,
         indexItem: _mapItemFavorite.indexItem,
       );
     } else {
       response = await _favoriteInterestsRepository.addFavoriteInterest(
-        event.place.placeId,
-        event.place.categoryId,
-        event.place.subCategoryId,
+        event.place!.placeId,
+        event.place!.categoryId,
+        event.place!.subCategoryId,
         InterestEnum.Place,
       );
 
-      _userService.addFavoriteInterest(event.place);
+      _userService!.addFavoriteInterest(event.place);
     }
 
     yield response.fold((model) {
@@ -139,14 +139,14 @@ class FavoriteInterestsItemBloc
         isLoading: false,
         isError: false,
         isSuccess: true,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     }, (error) {
       return state.copyWith(
         isLoading: false,
         isError: true,
         isSuccess: false,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       );
     });
   }
@@ -157,18 +157,18 @@ class FavoriteInterestsItemBloc
     AddSuggestionToFavorite event,
   ) {
     for (var indexCategory = 0;
-        indexCategory < user.favoriteInterests.places.length;
+        indexCategory < user.favoriteInterests!.places!.length;
         indexCategory++) {
-      var _categoryItem = user.favoriteInterests.places[indexCategory];
+      var _categoryItem = user.favoriteInterests!.places![indexCategory];
 
       if (_categoryItem.categoryId == event.suggestion.categoryId) {
         for (var indexSubCategory = 0;
-            indexSubCategory < _categoryItem.subCategories.length;
+            indexSubCategory < _categoryItem.subCategories!.length;
             indexSubCategory++) {
-          var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
+          var _subCategoryItem = _categoryItem.subCategories![indexSubCategory];
 
           if (_subCategoryItem.subCategoryId == event.suggestion.subCategoryId) {
-            var _indexItem = _subCategoryItem.suggestedByUsers.indexWhere(
+            var _indexItem = _subCategoryItem.suggestedByUsers!.indexWhere(
                 (element) => element.id == event.suggestion.id);
 
             if (_indexItem != -1) {
@@ -192,19 +192,19 @@ class FavoriteInterestsItemBloc
     AddPlaceToFavorite event,
   ) {
     for (var indexCategory = 0;
-        indexCategory < user.favoriteInterests.places.length;
+        indexCategory < user.favoriteInterests!.places!.length;
         indexCategory++) {
-      var _categoryItem = user.favoriteInterests.places[indexCategory];
+      var _categoryItem = user.favoriteInterests!.places![indexCategory];
 
-      if (_categoryItem.categoryId == event.place.categoryId) {
+      if (_categoryItem.categoryId == event.place!.categoryId) {
         for (var indexSubCategory = 0;
-            indexSubCategory < _categoryItem.subCategories.length;
+            indexSubCategory < _categoryItem.subCategories!.length;
             indexSubCategory++) {
-          var _subCategoryItem = _categoryItem.subCategories[indexSubCategory];
+          var _subCategoryItem = _categoryItem.subCategories![indexSubCategory];
 
-          if (_subCategoryItem.subCategoryId == event.place.subCategoryId) {
-            var _indexItem = _subCategoryItem.places.indexWhere(
-                (element) => element.placeId == event.place.placeId);
+          if (_subCategoryItem.subCategoryId == event.place!.subCategoryId) {
+            var _indexItem = _subCategoryItem.places!.indexWhere(
+                (element) => element!.placeId == event.place!.placeId);
 
             if (_indexItem != -1) {
               mapItemFavorite.indexCategory = indexCategory;

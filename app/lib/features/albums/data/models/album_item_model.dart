@@ -2,10 +2,10 @@ import 'package:mozin/features/albums/domain/entities/album_item_entity.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
 
 class AlbumItemModel {
-  String id;
-  String titleAlbum;
-  DateTime dateCreation;
-  List<MediaModel> medias;
+  String? id;
+  String? titleAlbum;
+  DateTime? dateCreation;
+  List<MediaModel>? medias;
 
   AlbumItemModel({
     this.id,
@@ -22,7 +22,7 @@ class AlbumItemModel {
   }
 
   List<Map<String, dynamic>> _toJsonMedias() {
-    return medias.map<Map<String, dynamic>>((item) => item.toJson()).toList();
+    return medias!.map<Map<String, dynamic>>((item) => item.toJson()).toList();
   }
 
   static AlbumItemModel fromEntity(AlbumItemEntity entity) {

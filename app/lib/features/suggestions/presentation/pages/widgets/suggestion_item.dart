@@ -17,15 +17,15 @@ import 'package:custom_view/spacer_box.dart';
 
 class SuggestionItem extends StatelessWidget {
   const SuggestionItem({
-    Key key,
-    @required this.item,
-    @required this.suggestionsCubit,
-    @required this.favoriteInterestsItemBloc,
+    Key? key,
+    required this.item,
+    required this.suggestionsCubit,
+    required this.favoriteInterestsItemBloc,
   }) : super(key: key);
 
   final SuggestionsModel item;
-  final SuggestionsCubit suggestionsCubit;
-  final FavoriteInterestsItemBloc favoriteInterestsItemBloc;
+  final SuggestionsCubit? suggestionsCubit;
+  final FavoriteInterestsItemBloc? favoriteInterestsItemBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class SuggestionItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: item.title.title(context)),
+              Expanded(child: item.title!.title(context)),
               _buildOptions(context),
             ],
           ),
@@ -44,7 +44,7 @@ class SuggestionItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: item.description.description(context)),
+              Expanded(child: item.description!.description(context)),
             ],
           ),
           SpacerBox.v8,
@@ -81,11 +81,11 @@ class SuggestionItem extends StatelessWidget {
           padding: const EdgeInsets.all(0),
           icon: CustomIcon(
               icon: AppIcons.bookmark,
-              color: state.favoriteAdded
+              color: state.favoriteAdded!
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
           onPressed: () {
-            favoriteInterestsItemBloc.add(AddSuggestionToFavorite(item));
+            favoriteInterestsItemBloc!.add(AddSuggestionToFavorite(item));
           },
         );
       },
@@ -93,7 +93,7 @@ class SuggestionItem extends StatelessWidget {
   }
 
   Widget _buildOptions(BuildContext context) {
-    if (!item.moreOptionsEnable) {
+    if (!item.moreOptionsEnable!) {
       return SizedBox.shrink();
     }
 
@@ -173,7 +173,7 @@ class SuggestionItem extends StatelessWidget {
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              suggestionsCubit.remove(item.id);
+              suggestionsCubit!.remove(item.id);
             },
           ),
         ],

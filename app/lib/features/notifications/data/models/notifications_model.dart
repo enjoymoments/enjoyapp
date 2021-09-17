@@ -4,11 +4,11 @@ import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 class NotificationsModel extends Notifications {
   const NotificationsModel({
-    String id,
-    String data,
-    DateTime dateTime,
-    String message,
-    NotificationTypeEnum notificationType,
+    String? id,
+    String? data,
+    DateTime? dateTime,
+    String? message,
+    NotificationTypeEnum? notificationType,
   }) : super(
             id: id,
             data: data,
@@ -16,7 +16,7 @@ class NotificationsModel extends Notifications {
             message: message,
             notificationType: notificationType);
 
-  String get dateCreationFormatted => dateTime.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateTime);
+  String get dateCreationFormatted => dateTime!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateTime!);
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};

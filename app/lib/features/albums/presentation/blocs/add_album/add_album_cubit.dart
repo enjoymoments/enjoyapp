@@ -13,7 +13,7 @@ part 'add_album_state.dart';
 
 class AddAlbumCubit extends Cubit<AddAlbumState> {
   AddAlbumCubit({
-    @required WrapperMediaService wrapperMediaService,
+    required WrapperMediaService wrapperMediaService,
   })  : assert(wrapperMediaService != null),
         _wrapperMediaService = wrapperMediaService,
         super(AddAlbumState.initial());
@@ -26,17 +26,17 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
         isLoading: false,
         isError: true,
         errorMessage: "Informe um título para o álbum",
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
 
-    if (state.allImages == null || state.allImages.length == 0) {
+    if (state.allImages == null || state.allImages!.length == 0) {
       emit(state.copyWith(
         isLoading: false,
         isError: true,
         errorMessage: "Informe ao menos uma imagem",
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
@@ -48,11 +48,11 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
 
   void mapRemoveMediaToState(BaseImageModel media) {
     try {
-      state.allImages.removeWhere((element) => element.id == media.id);
+      state.allImages!.removeWhere((element) => element.id == media.id);
       emit(state.copyWith(
           isError: false,
           allImages: state.allImages,
-          forceRefresh: StateUtils.generateRandomNumber()));
+          forceRefresh: StateUtils.generateRandomNumber() as int?));
     } catch (e) {
       emit(state.copyWith(isError: true));
     }
@@ -64,8 +64,8 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
     try {
       List<GalleryImageModel> _allImages = [];
 
-      if (state.allImages.length > 0) {
-        _allImages.addAll(state.allImages);
+      if (state.allImages!.length > 0) {
+        _allImages.addAll(state.allImages!);
       }
 
       if (source == ImageSource.camera) {
@@ -79,7 +79,7 @@ class AddAlbumCubit extends Cubit<AddAlbumState> {
       } else if (source == ImageSource.gallery) {
         var files = await _wrapperMediaService.getMedias();
         if (files != null) {
-          if ((files.length + state.allImages.length) > 10) {
+          if ((files.length + state.allImages!.length) > 10) {
             emit(state.copyWith(
                 isLoading: false,
                 isError: true,

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
@@ -25,24 +26,24 @@ import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.
 import 'package:custom_view/spacer_box.dart';
 
 class AddCalendarScreen extends StatefulWidget {
-  final TaskCalendarModel taskModel;
+  final TaskCalendarModel? taskModel;
 
-  const AddCalendarScreen({Key key, this.taskModel}) : super(key: key);
+  const AddCalendarScreen({Key? key, this.taskModel}) : super(key: key);
 
   @override
   _AddCalendarScreenState createState() => _AddCalendarScreenState();
 }
 
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
-  TimeOfDay _selectedTime;
-  DateTime _selectedDate;
+  TimeOfDay? _selectedTime;
+  DateTime? _selectedDate;
 
-  TextEditingController _titleController;
-  TextEditingController _descriptionController;
-  RoundedLoadingButtonController _actionButtoncontroller;
+  TextEditingController? _titleController;
+  TextEditingController? _descriptionController;
+  RoundedLoadingButtonController? _actionButtoncontroller;
 
-  AddCalendarCubit _addCalendarCubit;
-  AddActivityCubit _activityCubit;
+  AddCalendarCubit? _addCalendarCubit;
+  AddActivityCubit? _activityCubit;
 
   bool get isNewItem => widget.taskModel == null;
 
@@ -63,11 +64,11 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   @override
   void dispose() {
-    _addCalendarCubit.close();
-    _activityCubit.close();
+    _addCalendarCubit!.close();
+    _activityCubit!.close();
 
-    _titleController.dispose();
-    _descriptionController.dispose();
+    _titleController!.dispose();
+    _descriptionController!.dispose();
 
     super.dispose();
   }
@@ -76,38 +77,38 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
 
   void _initValues() {
     if (!isNewItem) {
-      _addCalendarCubit.setModel(
-        taskId: widget.taskModel.taskId,
-        title: widget.taskModel.title,
-        description: widget.taskModel.description,
-        datetime: widget.taskModel.dateTime,
-        activities: widget.taskModel.activities,
+      _addCalendarCubit!.setModel(
+        taskId: widget.taskModel!.taskId,
+        title: widget.taskModel!.title,
+        description: widget.taskModel!.description,
+        datetime: widget.taskModel!.dateTime,
+        activities: widget.taskModel!.activities,
       );
 
-      _titleController.text = widget.taskModel.title;
-      _descriptionController.text = widget.taskModel.description;
+      _titleController!.text = widget.taskModel!.title!;
+      _descriptionController!.text = widget.taskModel!.description!;
     }
   }
 
   void save() {
-    final DateTime _datetimeFormatted = _selectedDate != null
-        ? _selectedDate.setTimeOfDay(_selectedTime)
+    final DateTime? _datetimeFormatted = _selectedDate != null
+        ? _selectedDate!.setTimeOfDay(_selectedTime!)
         : null;
 
-    _addCalendarCubit.setModel(
-      title: _titleController.text,
-      description: _descriptionController.text,
+    _addCalendarCubit!.setModel(
+      title: _titleController!.text,
+      description: _descriptionController!.text,
       datetime: _datetimeFormatted,
     );
 
-    _addCalendarCubit.save();
+    _addCalendarCubit!.save();
   }
 
   void remove() {
@@ -119,14 +120,14 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
             text: 'Não quero deletar',
             iconData: AppIcons.ad,
             onTap: () {
-              _actionButtoncontroller.stop();
+              _actionButtoncontroller!.stop();
             },
           ),
           CustomItemModalFit(
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              _addCalendarCubit.remove();
+              _addCalendarCubit!.remove();
             },
           ),
         ],
@@ -149,7 +150,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
             text: 'Sim, quero descartar',
             iconData: AppIcons.trash,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],
@@ -163,13 +164,13 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       context: context,
       onPressedBack: () {
         if (isNewItem &&
-            ((_titleController.text != null &&
-                    _titleController.text.isNotEmpty) ||
-                (_descriptionController.text != null &&
-                    _descriptionController.text.isNotEmpty))) {
+            ((_titleController!.text != null &&
+                    _titleController!.text.isNotEmpty) ||
+                (_descriptionController!.text != null &&
+                    _descriptionController!.text.isNotEmpty))) {
           _discardPost(context);
         } else {
-          ExtendedNavigator.of(context).pop();
+          AutoRouter.of(context).pop();
         }
       },
       actions: <Widget>[
@@ -192,7 +193,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       controller: _actionButtoncontroller,
       child: CustomIcon(
         icon: icon,
-        color: Theme.of(context).appBarTheme.iconTheme.color,
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),
       onPressed: () {
         callback();
@@ -204,16 +205,16 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     return BlocConsumer<AddCalendarCubit, AddCalendarState>(
       bloc: _addCalendarCubit,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
+        if (state.isSuccess!) {
           getItInstance<CalendarCubit>()..loadTasks();
-          ExtendedNavigator.of(context).pop();
+          AutoRouter.of(context).pop();
         }
       },
       builder: (context, state) {
@@ -251,20 +252,20 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               iconStart: AppIcons.calendar_day,
               iconEnd: AppIcons.angle_right,
               title: "Data",
-              description: state.model.dateTime.dateOnlyFormat(),
+              description: state.model!.dateTime!.dateOnlyFormat(),
               onTap: () {
                 showDatePicker(
                   context: context,
-                  initialDate: state.model.dateTime,
+                  initialDate: state.model!.dateTime!,
                   firstDate: DateTime(1940, 1, 1),
                   lastDate: DateTime.now().add(
                     Duration(days: 365),
                   ),
                 ).then((value) {
                   _selectedDate = _selectedTime != null
-                      ? value.setTimeOfDay(_selectedTime)
+                      ? value!.setTimeOfDay(_selectedTime!)
                       : value;
-                  _addCalendarCubit.setModel(
+                  _addCalendarCubit!.setModel(
                     datetime: _selectedDate,
                   );
                 });
@@ -277,15 +278,15 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               iconStart: AppIcons.clock,
               iconEnd: AppIcons.angle_right,
               title: "Hora",
-              description: state.model.dateTime.formattedHourMinute(),
+              description: state.model!.dateTime!.formattedHourMinute(),
               onTap: () {
                 showTimePicker(
                   context: context,
-                  initialTime: state.model.dateTime.timeOfDayFromDateTime(),
+                  initialTime: state.model!.dateTime!.timeOfDayFromDateTime(),
                 ).then((value) {
                   _selectedTime = value;
-                  _addCalendarCubit.setModel(
-                    datetime: state.model.dateTime.setTimeOfDay(value),
+                  _addCalendarCubit!.setModel(
+                    datetime: state.model!.dateTime!.setTimeOfDay(value!),
                   );
                 });
               },
@@ -300,10 +301,9 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               description:
                   "Escolha aqui quais tipos de atividades pretende realizar",
               onTap: () {
-                _activityCubit.setSeleted(widget.taskModel?.activities);
-                ExtendedNavigator.of(context).push(
-                  Routes.add_activity_screen,
-                  arguments: AddActivityScreenArguments(
+                _activityCubit!.setSeleted(widget.taskModel?.activities as List<AddActivityCalendarModel>?);
+                AutoRouter.of(context).push(
+                  Add_activity_screen(
                     addCalendarCubit: _addCalendarCubit,
                     activityCubit: _activityCubit,
                   ),

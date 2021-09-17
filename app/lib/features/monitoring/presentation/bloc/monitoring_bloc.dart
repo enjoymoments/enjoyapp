@@ -8,7 +8,7 @@ part 'monitoring_event.dart';
 part 'monitoring_state.dart';
 
 class MonitoringBloc extends Bloc<MonitoringEvent, MonitoringState> {
-  MonitoringBloc({@required MonitoringRepository monitoringRepository})
+  MonitoringBloc({required MonitoringRepository monitoringRepository})
       : assert(monitoringRepository != null),
         _monitoringRepository = monitoringRepository,
         super(MonitoringState.initial());

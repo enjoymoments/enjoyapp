@@ -20,7 +20,7 @@ class UserInfoCubit extends Cubit<UserInfoState> {
         emit(state.copyWith(
           isLoading: false,
           existCoupleId: model.coupleId != null,
-          forceRefresh: StateUtils.generateRandomNumber(),
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
         ));
       }
     }, (error) {

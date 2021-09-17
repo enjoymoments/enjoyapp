@@ -17,9 +17,9 @@ class HeaderCard extends StatelessWidget {
   final TimeLineItemModel item;
 
   const HeaderCard({
-    Key key,
-    @required this.item,
-    @required this.callback,
+    Key? key,
+    required this.item,
+    required this.callback,
   }) : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class HeaderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             CustomAvatarWithName(
-              name: item.author.name,
+              name: item.author!.name,
               backgroundImage: _getBackgroundImage(),
               child: item.dateCreationFormatted.date(context),
             ),
@@ -66,11 +66,11 @@ class HeaderCard extends StatelessWidget {
     );
   }
 
-  ImageProvider _getBackgroundImage() {
+  ImageProvider? _getBackgroundImage() {
     if (item.author != null &&
-        item.author.photo != null &&
-        item.author.photo.isNotEmpty) {
-      return NetworkImage(item.author.photo);
+        item.author!.photo != null &&
+        item.author!.photo!.isNotEmpty) {
+      return NetworkImage(item.author!.photo!);
     }
     return null;
   }

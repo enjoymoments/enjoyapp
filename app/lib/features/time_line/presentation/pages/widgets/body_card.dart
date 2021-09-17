@@ -15,7 +15,7 @@ import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class BodyCard extends StatefulWidget {
-  const BodyCard({Key key, @required this.item}) : super(key: key);
+  const BodyCard({Key? key, required this.item}) : super(key: key);
 
   final TimeLineItemModel item;
 
@@ -25,11 +25,11 @@ class BodyCard extends StatefulWidget {
 
 class _BodyCardState extends State<BodyCard> {
   int _current = 0;
-  List<GalleryImageModel> _galleryImages;
+  List<GalleryImageModel>? _galleryImages;
 
   @override
   void initState() {
-    _galleryImages = widget.item.medias.toGalleryImages();
+    _galleryImages = widget.item.medias!.toGalleryImages();
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _BodyCardState extends State<BodyCard> {
   }
 
   List<Widget> _buildCarousel() {
-    if (widget.item.medias.length > 0) {
+    if (widget.item.medias!.length > 0) {
       return [
         CarouselSlider(
           items: _buildPhotos(),
@@ -66,15 +66,15 @@ class _BodyCardState extends State<BodyCard> {
                 });
               }),
         ),
-        if (widget.item.medias.length > 1) _buildBulletPoints(),
+        if (widget.item.medias!.length > 1) _buildBulletPoints(),
       ];
     }
     return [];
   }
 
   Widget _buildTextPost() {
-    if (widget.item.textPost != null && widget.item.textPost.isNotEmpty) {
-      return widget.item.textPost.description(context);
+    if (widget.item.textPost != null && widget.item.textPost!.isNotEmpty) {
+      return widget.item.textPost!.description(context);
     }
 
     return SizedBox.shrink();
@@ -83,9 +83,9 @@ class _BodyCardState extends State<BodyCard> {
   Widget _buildBulletPoints() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: widget.item.medias.map(
+      children: widget.item.medias!.map(
         (url) {
-          int index = widget.item.medias.indexOf(url);
+          int index = widget.item.medias!.indexOf(url);
           return Container(
             width: 8.0,
             height: 8.0,
@@ -104,8 +104,8 @@ class _BodyCardState extends State<BodyCard> {
 
   List<Widget> _buildPhotos() {
     List<Widget> widgets = [];
-    for (var i = 0; i < widget.item.medias.length; i++) {
-      var media = widget.item.medias[i];
+    for (var i = 0; i < widget.item.medias!.length; i++) {
+      var media = widget.item.medias![i];
       widgets.add(_buildPhoto(media, i));
     }
 
@@ -115,10 +115,9 @@ class _BodyCardState extends State<BodyCard> {
   Widget _buildPhoto(MediaModel media, int index) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(
-          Routes.gallery_photo_view_wrapper_screen,
-          arguments: GalleryPhotoViewWrapperArguments(
-            loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+        AutoRouter.of(context).push(
+          Gallery_photo_view_wrapper_screen(
+            loadingBuilder: (BuildContext context, ImageChunkEvent? event) =>
                 CustomCircularProgressIndicator(),
             galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.url,
             galleryItems: _galleryImages,
@@ -141,7 +140,7 @@ class _BodyCardState extends State<BodyCard> {
             children: <Widget>[
               CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: media.url,
+                imageUrl: media.url!,
                 width: SizeConfig.screenWidth,
                 height: SizeConfig.screenHeight / 2,
                 placeholder: (context, url) => PhotoItemLoading(),

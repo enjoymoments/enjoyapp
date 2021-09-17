@@ -20,7 +20,7 @@ class ActivityLoading extends StatelessWidget {
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,
@@ -30,7 +30,7 @@ class ActivityLoading extends StatelessWidget {
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,
@@ -40,7 +40,7 @@ class ActivityLoading extends StatelessWidget {
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,
@@ -50,7 +50,7 @@ class ActivityLoading extends StatelessWidget {
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,

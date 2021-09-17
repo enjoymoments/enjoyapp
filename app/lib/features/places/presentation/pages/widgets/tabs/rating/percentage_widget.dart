@@ -6,9 +6,9 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class PercentageWidget extends StatelessWidget {
-  final PlaceModel item;
+  final PlaceModel? item;
 
-  const PercentageWidget({Key key, @required this.item}) : super(key: key);
+  const PercentageWidget({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class PercentageWidget extends StatelessWidget {
       margin: EdgeInsets.only(right: SizeConfig.sizeByPixel(10)),
       child: Column(
         children: [
-          item.rating.toString().description(context, fontSize: 48),
+          item!.rating.toString().description(context, fontSize: 48),
           Row(
             children: [
               Icon(
@@ -36,7 +36,7 @@ class PercentageWidget extends StatelessWidget {
                 size: 14,
               ),
               SpacerBox.h5,
-              "(${item.userRatingsTotal})".description(context),
+              "(${item!.userRatingsTotal})".description(context),
             ],
           ),
         ],

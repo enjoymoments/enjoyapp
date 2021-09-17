@@ -5,15 +5,15 @@ import 'package:custom_view/AppIcons.dart';
 
 class CardInvite extends StatelessWidget {
   const CardInvite({
-    Key key,
-    @required this.isLoading,
+    Key? key,
+    required this.isLoading,
   }) : super(key: key);
 
-  final bool isLoading;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    if (isLoading!) {
       return _buildLoading();
     }
 

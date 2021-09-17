@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -16,10 +18,10 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class AuthenticationRepository {
   /// {@macro authentication_repository}
   AuthenticationRepository({
-    FirebaseAuth firebaseAuth,
-    GoogleSignIn googleSignIn,
-    FacebookAuth facebookAuth,
-    @required LoggerService loggerService,
+    FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
+    FacebookAuth? facebookAuth,
+    required LoggerService? loggerService,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _facebookAuth = facebookAuth ?? FacebookAuth.instance,
@@ -28,7 +30,7 @@ class AuthenticationRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;
-  final LoggerService _loggerService;
+  final LoggerService? _loggerService;
 
   /// Stream of [UserAppModel] which will emit the current user when
   /// the authentication state changes.
@@ -45,7 +47,7 @@ class AuthenticationRepository {
   /// Throws a [GetToken] if an exception occurs.
   Future<String> getToken() async {
     try {
-      return await _firebaseAuth.currentUser?.getIdToken();
+      return (await _firebaseAuth.currentUser?.getIdToken())!;
     } catch (e) {
       _logger(e, null);
       throw GetToken();
@@ -57,7 +59,7 @@ class AuthenticationRepository {
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      final googleUser = await _googleSignIn.signIn();
+      final googleUser = await (_googleSignIn.signIn() as FutureOr<GoogleSignInAccount>);
       final googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -74,7 +76,7 @@ class AuthenticationRepository {
     try {
       final facebookUser = await _facebookAuth.login();
       final FacebookAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(facebookUser.token);
+          FacebookAuthProvider.credential(facebookUser.accessToken!.token) as FacebookAuthCredential;
 
       await _firebaseAuth.signInWithCredential(facebookAuthCredential);
     } catch (e) {
@@ -123,8 +125,8 @@ class AuthenticationRepository {
     }
   }
 
-  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
-    _loggerService.addLogAsync(
+  void _logger(dynamic onError, Map<String, dynamic>? jsonMap) {
+    _loggerService!.addLogAsync(
       LoggerModel(
         typeError: LoggerTypeEnum.Error,
         // ignore: always_specify_types

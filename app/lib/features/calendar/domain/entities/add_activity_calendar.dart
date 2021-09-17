@@ -6,11 +6,11 @@ class AddActivityCalendar extends Equatable {
     this.activityId,
   });
 
-  final String sessionId;
-  final String activityId;
+  final String? sessionId;
+  final String? activityId;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         sessionId,
         activityId,
       ];

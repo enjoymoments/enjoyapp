@@ -92,8 +92,8 @@ void _setupRemoteClientRepository() {
                 //'http://enjoyapi.com.br/graphql/',
                 //'https://localhost:5001/graphql',
             //'https://10.0.2.2:5001/graphql',
-            'https://24a450cac6e9.ngrok.io/graphql',
-            //getItInstance<RemoteConfig>().getString(url_endpoint),
+            getItInstance<RemoteConfig>().getString(url_endpoint),
+            //'https://3dd0-2804-14c-110-81a4-8090-af11-4055-c3b3.ngrok.io/graphql',
             loggerService: getItInstance<LoggerService>(),
           ));
 }

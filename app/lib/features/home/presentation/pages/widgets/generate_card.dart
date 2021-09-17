@@ -10,18 +10,18 @@ class GenerateCard extends StatelessWidget {
   final String description;
 
   const GenerateCard({
-    Key key,
-    @required this.iconData,
-    @required this.routeName,
-    @required this.name,
-    @required this.description,
+    Key? key,
+    required this.iconData,
+    required this.routeName,
+    required this.name,
+    required this.description,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(routeName);
+        AutoRouter.of(context).pushNamed(routeName);
       },
       child: CardContainer(
         child: CardContent(

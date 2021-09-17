@@ -24,17 +24,17 @@ class CustomRangeFilter extends StatefulWidget {
   final TypeRangeEnum typeRange;
 
   const CustomRangeFilter({
-    Key key,
-    @required this.title,
-    @required this.divisions,
-    @required this.min,
-    @required this.max,
-    @required this.textStartRange,
-    @required this.textEndRange,
-    @required this.prefixStartRange,
-    @required this.prefixEndRange,
-    @required this.selectedRanges,
-    @required this.typeRange,
+    Key? key,
+    required this.title,
+    required this.divisions,
+    required this.min,
+    required this.max,
+    required this.textStartRange,
+    required this.textEndRange,
+    required this.prefixStartRange,
+    required this.prefixEndRange,
+    required this.selectedRanges,
+    required this.typeRange,
   }) : super(key: key);
 
   @override
@@ -42,8 +42,8 @@ class CustomRangeFilter extends StatefulWidget {
 }
 
 class _CustomRangeFilterState extends State<CustomRangeFilter> {
-  RangeValues _selectedRanges;
-  InterestBloc _interestBloc;
+  late RangeValues _selectedRanges;
+  InterestBloc? _interestBloc;
 
   @override
   void initState() {
@@ -127,13 +127,13 @@ class _CustomRangeFilterState extends State<CustomRangeFilter> {
 
   void _invokeChange(RangeValues value) {
     if (widget.typeRange == TypeRangeEnum.price) {
-      _interestBloc
+      _interestBloc!
           .add(ChangePrice(minPrice: value.start, maxPrice: value.end));
     } else if (widget.typeRange == TypeRangeEnum.distance) {
-      _interestBloc
+      _interestBloc!
           .add(ChangeDistance(minDistance: value.start, maxDistance: value.end));
     } else if (widget.typeRange == TypeRangeEnum.time) {
-      _interestBloc
+      _interestBloc!
           .add(ChangeTime(minTime: value.start, maxTime: value.end));
     }
   }

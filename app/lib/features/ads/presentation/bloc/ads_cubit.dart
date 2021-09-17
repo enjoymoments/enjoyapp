@@ -9,8 +9,8 @@ part 'ads_state.dart';
 
 class AdsCubit extends Cubit<AdsState> {
   AdsCubit({
-    @required AdsBannerRepository adsBannerRepository,
-    @required AdsPublisherBannerRepository adsPublisherBannerRepository,
+    required AdsBannerRepository adsBannerRepository,
+    required AdsPublisherBannerRepository adsPublisherBannerRepository,
   })  : assert(adsBannerRepository != null),
         _adsBannerRepository = adsBannerRepository,
         assert(adsPublisherBannerRepository != null),
@@ -21,7 +21,7 @@ class AdsCubit extends Cubit<AdsState> {
   final AdsPublisherBannerRepository _adsPublisherBannerRepository;
 
   void loadBanner({
-    @required String screenName,
+    required String screenName,
     int count = 1,
     bool adsReset = false,
   }) async {
@@ -39,7 +39,7 @@ class AdsCubit extends Cubit<AdsState> {
   }
 
   void loadPublisherBanner({
-    @required String screenName,
+    required String screenName,
     int count = 1,
     bool adsReset = false,
   }) async {

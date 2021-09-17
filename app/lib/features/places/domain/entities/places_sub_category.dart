@@ -10,13 +10,13 @@ class PlacesSubCategory extends Equatable {
     this.suggestedByUsers,
   });
 
-  final List<Place> places;
-  final List<Suggestions> suggestedByUsers;
-  final String subCategoryName;
-  final String subCategoryId;
+  final List<Place?>? places;
+  final List<Suggestions>? suggestedByUsers;
+  final String? subCategoryName;
+  final String? subCategoryId;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
         subCategoryId,
         subCategoryName,
         places,

@@ -8,7 +8,7 @@ abstract class NotificationsRemoteDataSource {
 class NotificationsRemoteDataSourceImpl implements NotificationsRemoteDataSource {
   NotificationsRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<List<NotificationsModel>> getNotifications() async {
@@ -22,7 +22,7 @@ class NotificationsRemoteDataSourceImpl implements NotificationsRemoteDataSource
       }
     ''';
 
-    var resultQuery = await remoteClientRepository.query(query);
+    var resultQuery = await remoteClientRepository!.query(query);
     var resultList = <NotificationsModel>[];
 
     resultQuery['data']['getNotifications'].forEach((dynamic v) {

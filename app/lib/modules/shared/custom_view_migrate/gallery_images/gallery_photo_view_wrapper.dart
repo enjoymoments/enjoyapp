@@ -10,21 +10,21 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
     this.backgroundDecoration,
     this.minScale,
     this.maxScale,
-    this.initialIndex,
-    @required this.galleryItems,
-    @required this.galleryPhotoSourceType,
+    required this.initialIndex,
+    required this.galleryItems,
+    required this.galleryPhotoSourceType,
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(initialPage: initialIndex);
 
-  final LoadingBuilder loadingBuilder;
-  final Decoration backgroundDecoration;
+  final LoadingBuilder? loadingBuilder;
+  final Decoration? backgroundDecoration;
   final dynamic minScale;
   final dynamic maxScale;
   final int initialIndex;
   final PageController pageController;
-  final List<GalleryImageModel> galleryItems;
-  final Axis scrollDirection;
-  final GalleryPhotoSourceTypeEnum galleryPhotoSourceType;
+  final List<GalleryImageModel>? galleryItems;
+  final Axis? scrollDirection;
+  final GalleryPhotoSourceTypeEnum? galleryPhotoSourceType;
 
   @override
   State<StatefulWidget> createState() {
@@ -33,7 +33,7 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
 }
 
 class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
-  int currentIndex;
+  int? currentIndex;
 
   @override
   void initState() {
@@ -62,37 +62,37 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
         child: PhotoViewGallery.builder(
           scrollPhysics: const BouncingScrollPhysics(),
           builder: _buildItem,
-          itemCount: widget.galleryItems.length,
+          itemCount: widget.galleryItems!.length,
           loadingBuilder: widget.loadingBuilder,
-          backgroundDecoration: widget.backgroundDecoration,
+          backgroundDecoration: widget.backgroundDecoration as BoxDecoration?,
           pageController: widget.pageController,
           onPageChanged: onPageChanged,
-          scrollDirection: widget.scrollDirection,
+          scrollDirection: widget.scrollDirection!,
         ),
       ),
     );
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    final GalleryImageModel item = widget.galleryItems[index];
+    final GalleryImageModel item = widget.galleryItems![index];
     return PhotoViewGalleryPageOptions(
-      imageProvider: _getImageProvider(item),
+      imageProvider: _getImageProvider(item) as ImageProvider<Object>?,
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 1.1,
-      heroAttributes: PhotoViewHeroAttributes(tag: item.id),
+      heroAttributes: PhotoViewHeroAttributes(tag: item.id!),
     );
   }
 
   ImageProvider<dynamic> _getImageProvider(GalleryImageModel item) {
     if (widget.galleryPhotoSourceType == GalleryPhotoSourceTypeEnum.file) {
-      return FileImage(item.file);
+      return FileImage(item.file!);
     } else if (widget.galleryPhotoSourceType ==
         GalleryPhotoSourceTypeEnum.url) {
-      return NetworkImage(item.url);
+      return NetworkImage(item.url!);
     } else if (widget.galleryPhotoSourceType ==
         GalleryPhotoSourceTypeEnum.memory) {
-      return MemoryImage(item.byte);
+      return MemoryImage(item.byte!);
     }
 
     throw Exception('GalleryPhotoSourceType not found.');

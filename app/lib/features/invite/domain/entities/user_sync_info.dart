@@ -7,11 +7,11 @@ class UserSyncInfo extends Equatable {
     this.photo,
   });
   
-  final String name;
-  final String photo;
+  final String? name;
+  final String? photo;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     name,
     photo,
   ];

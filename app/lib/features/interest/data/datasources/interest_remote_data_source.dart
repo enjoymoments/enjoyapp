@@ -8,7 +8,7 @@ abstract class InterestRemoteDataSource {
 class InterestRemoteDataSourceImpl implements InterestRemoteDataSource {
   InterestRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<List<CategoriesModel>> getCategories() async {
@@ -25,7 +25,7 @@ class InterestRemoteDataSourceImpl implements InterestRemoteDataSource {
       }
     ''';
 
-    var resultQuery = await remoteClientRepository.query(query);
+    var resultQuery = await remoteClientRepository!.query(query);
     var resultList = <CategoriesModel>[];
 
     resultQuery['data']['categories'].forEach((dynamic v) {

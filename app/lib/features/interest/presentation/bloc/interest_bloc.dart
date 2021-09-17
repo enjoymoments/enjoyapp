@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
@@ -14,11 +15,9 @@ part 'interest_state.dart';
 
 class InterestBloc extends Bloc<InterestEvent, InterestState> {
   InterestBloc({
-    @required InterestRepository interestRepository,
-    @required FilterChoosedWrapper filterChoosedWrapper,
-  })  : assert(interestRepository != null),
-        _interestRepository = interestRepository,
-        assert(filterChoosedWrapper != null),
+    required InterestRepository interestRepository,
+    required FilterChoosedWrapper filterChoosedWrapper,
+  })  : _interestRepository = interestRepository,
         _filterChoosedWrapper = filterChoosedWrapper,
         super(InterestState.initial());
 
@@ -47,24 +46,24 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
   Stream<InterestState> mapChangeTimeToState(ChangeTime event) async* {
     _filterChoosedWrapper.changeTime(event.minTime, event.maxTime);
 
-    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber() as int?);
   }
 
   Stream<InterestState> mapChangeDistanceToState(ChangeDistance event) async* {
     _filterChoosedWrapper.changeDistance(event.minDistance, event.maxDistance);
 
-    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber() as int?);
   }
 
   Stream<InterestState> mapChangePriceToState(ChangePrice event) async* {
     _filterChoosedWrapper.changePrice(event.minPrice, event.maxPrice);
 
-    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber());
+    yield state.copyWith(forceRefresh: StateUtils.generateRandomNumber() as int?);
   }
 
   Stream<InterestState> mapSelectSubCategorieToState(
       SelectSubCategorie event) async* {
-    if (event.selected) {
+    if (event.selected == true) {
       _filterChoosedWrapper.insertSubCategorie(
           event.categorie, event.itemSelected);
     } else {
@@ -74,12 +73,12 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
 
     yield state.copyWith(
         showNextButtonSubCategories: _getShowNextButtonSubCategories(),
-        forceRefresh: StateUtils.generateRandomNumber());
+        forceRefresh: StateUtils.generateRandomNumber() as int?);
   }
 
   Stream<InterestState> mapSelectCategorieToState(
       SelectCategorie event) async* {
-    if (event.selected) {
+    if (event.selected == true) {
       _filterChoosedWrapper.insertCategorie(event.itemSelected);
     } else {
       _filterChoosedWrapper.removeCategorie(event.itemSelected);
@@ -87,9 +86,9 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
 
     yield state.copyWith(
         showNextButtonCategories:
-            _filterChoosedWrapper.getFilterChoosed.categories.length > 0,
+            _filterChoosedWrapper.getFilterChoosed!.categories!.length > 0,
         showNextButtonSubCategories: _getShowNextButtonSubCategories(),
-        forceRefresh: StateUtils.generateRandomNumber());
+        forceRefresh: StateUtils.generateRandomNumber() as int?);
   }
 
   Stream<InterestState> mapLoadCategoriesToState() async* {
@@ -103,7 +102,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
         isLoading: false,
         categories: categories,
         showNextButtonCategories:
-            _filterChoosedWrapper.getFilterChoosed.categories.length > 0,
+            _filterChoosedWrapper.getFilterChoosed!.categories!.length > 0,
         showNextButtonSubCategories: _getShowNextButtonSubCategories(),
       );
     }, (exception) {
@@ -113,12 +112,11 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
 
   void _loadCategoriesSelected(List<CategoriesModel> categories) {
     final FilterChoosedModel filterChoosed =
-        _filterChoosedWrapper.getFilterChoosed;
+        _filterChoosedWrapper.getFilterChoosed!;
 
-    filterChoosed.categories.forEach((filterElement) {
-      var element = categories.firstWhere(
-          (categorie) => categorie.id == filterElement.id,
-          orElse: () => null);
+    filterChoosed.categories!.forEach((filterElement) {
+      var element = categories.firstWhereOrNull(
+          (categorie) => categorie.id == filterElement.id);
 
       if (element != null) {
         element.selected = true;
@@ -127,14 +125,13 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
   }
 
   bool _getShowNextButtonSubCategories() {
-    if (_filterChoosedWrapper.getFilterChoosed.categories.length > 0) {
-      final CategoriesModel _exist =
-          _filterChoosedWrapper.getFilterChoosed.categories.firstWhere(
-              (element) => element.subCategories.any((sub) {
+    if (_filterChoosedWrapper.getFilterChoosed!.categories!.length > 0) {
+      final CategoriesModel? _exist =
+          _filterChoosedWrapper.getFilterChoosed!.categories!.firstWhereOrNull(
+              (element) => element.subCategories!.any((sub) {
                     var _cast = sub as SubCategoriesModel;
                     return (_cast.selected ?? false) == true;
-                  }),
-              orElse: () => null);
+                  }));
       return _exist != null;
     }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class NotificationsNotAutenticated extends StatelessWidget {
-  const NotificationsNotAutenticated({ Key key }) : super(key: key);
+  const NotificationsNotAutenticated({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -25,21 +25,21 @@ import 'package:custom_view/spacer_box.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 
 class EditAlbumScreen extends StatefulWidget {
-  const EditAlbumScreen({Key key, @required this.album}) : super(key: key);
+  const EditAlbumScreen({Key? key, required this.album}) : super(key: key);
 
-  final AlbumItemModel album;
+  final AlbumItemModel? album;
 
   @override
   _EditAlbumScreenState createState() => _EditAlbumScreenState();
 }
 
 class _EditAlbumScreenState extends State<EditAlbumScreen> {
-  TextEditingController _titleController;
-  RoundedLoadingButtonController _actionButtoncontroller;
+  TextEditingController? _titleController;
+  RoundedLoadingButtonController? _actionButtoncontroller;
 
-  EditAlbumCubit _editAlbumCubit;
+  EditAlbumCubit? _editAlbumCubit;
   int _currentIndex = 0;
-  List<BaseImageModel> _images;
+  List<BaseImageModel>? _images;
 
   bool get readOnlyMode => true;
 
@@ -59,8 +59,8 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
 
   @override
   void dispose() {
-    _editAlbumCubit.close();
-    _titleController.dispose();
+    _editAlbumCubit!.close();
+    _titleController!.dispose();
     super.dispose();
   }
 
@@ -68,7 +68,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -93,7 +93,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
           controller: _actionButtoncontroller,
           child: CustomIcon(
             icon: AppIcons.check,
-            color: Theme.of(context).appBarTheme.iconTheme.color,
+            color: Theme.of(context).appBarTheme.iconTheme!.color,
           ),
           onPressed: () {
             _save();
@@ -107,23 +107,23 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
     return BlocConsumer<EditAlbumCubit, EditAlbumState>(
       bloc: _editAlbumCubit,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
-          ExtendedNavigator.of(context).pop();
+        if (state.isSuccess!) {
+          AutoRouter.of(context).pop();
         }
       },
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return CustomCircularProgressIndicator();
         }
 
-        if (state.allImages != null && state.allImages.length > 0) {
+        if (state.allImages != null && state.allImages!.length > 0) {
           _images = state.allImages;
           return _buildContent(
             Column(
@@ -143,13 +143,13 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   }
 
   Widget _buildAlbumImages(EditAlbumState state) {
-    if (state.album != null && state.album.medias.length > 0) {
+    if (state.album != null && state.album!.medias!.length > 0) {
       return CustomImageItems(
         sourceType: SourceTypeEnum.Url,
         onRemoveCallback: (model) {
           _removePhoto(context, model);
         },
-        images: state.album.medias.toGalleryImages(),
+        images: state.album!.medias!.toGalleryImages(),
       );
     }
 
@@ -157,7 +157,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   }
 
   Widget _buildNewImages(EditAlbumState state) {
-    if (state.newImages.length > 0) {
+    if (state.newImages!.length > 0) {
       return CustomImageItems(
         sourceType: SourceTypeEnum.File,
         onRemoveCallback: (model) {
@@ -176,7 +176,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
       controller: _actionButtoncontroller,
       child: CustomIcon(
         icon: icon,
-        color: Theme.of(context).appBarTheme.iconTheme.color,
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),
       onPressed: () {
         callback();
@@ -232,8 +232,8 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   // }
 
   void initValues() {
-    _titleController.text = widget.album.titleAlbum;
-    _editAlbumCubit.setAlbum(widget.album);
+    _titleController!.text = widget.album!.titleAlbum!;
+    _editAlbumCubit!.setAlbum(widget.album!);
   }
 
   void _removePhoto(BuildContext context, GalleryImageModel model) async {
@@ -250,7 +250,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
             text: 'Sim, quero remover',
             iconData: AppIcons.trash,
             onTap: () {
-              _editAlbumCubit.mapRemoveMediaToState(model);
+              _editAlbumCubit!.mapRemoveMediaToState(model);
             },
           ),
         ],
@@ -272,7 +272,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
             text: 'Sim, quero descartar',
             iconData: AppIcons.trash,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],
@@ -281,6 +281,6 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   }
 
   void _save() {
-    _editAlbumCubit.mapSaveToState(_titleController.text);
+    _editAlbumCubit!.mapSaveToState(_titleController!.text);
   }
 }

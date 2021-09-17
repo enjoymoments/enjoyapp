@@ -4,9 +4,9 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 
 class FacebookLoginButton extends StatelessWidget {
-  final AuthenticationBloc authenticationBloc;
+  final AuthenticationBloc? authenticationBloc;
 
-  const FacebookLoginButton({Key key, @required this.authenticationBloc})
+  const FacebookLoginButton({Key? key, required this.authenticationBloc})
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class FacebookLoginButton extends StatelessWidget {
       child: IconButton(
         icon: Icon(AppIcons.facebook_f, color: theme.primaryColor),
         onPressed: () {
-          authenticationBloc.add(RequestFacebookLogin());
+          authenticationBloc!.add(RequestFacebookLogin());
         },
       ),
     );

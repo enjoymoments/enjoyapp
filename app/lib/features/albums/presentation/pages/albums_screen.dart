@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
+import 'package:mozin/features/albums/presentation/pages/add_album_screen.dart';
 import 'package:mozin/features/albums/presentation/pages/widgets/album_item.dart';
 import 'package:mozin/features/albums/presentation/pages/widgets/albums_loading.dart';
+import 'package:mozin/modules/config/router.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/AppIcons.dart';
@@ -20,7 +22,7 @@ class AlbumsScreen extends StatefulWidget {
 }
 
 class _AlbumsScreenState extends State<AlbumsScreen> {
-  AlbumsCubit _albumsCubit;
+  AlbumsCubit? _albumsCubit;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
@@ -33,7 +35,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
 
   @override
   void dispose() {
-    _albumsCubit.close();
+    _albumsCubit!.close();
     super.dispose();
   }
 
@@ -41,7 +43,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -57,7 +59,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
         IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.add_albums_screen);
+            AutoRouter.of(context).push(Add_albums_screen());
           },
         ),
       ],
@@ -68,17 +70,17 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
     return BlocConsumer<AlbumsCubit, AlbumsState>(
       bloc: _albumsCubit,
       listener: (consumerContext, state) {
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
       },
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return AlbumsLoading();
         }
 
-        if (state.albums != null && state.albums.length > 0) {
+        if (state.albums != null && state.albums!.length > 0) {
           return CustomContainer(
             child: _buildAlbums(state),
           );
@@ -100,13 +102,13 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
       key: _refreshIndicatorKey,
       color: Theme.of(context).primaryColor,
       onRefresh: () async {
-        _albumsCubit.mapGetAllAlbums();
+        _albumsCubit!.mapGetAllAlbums();
       },
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
         separatorBuilder: (context, index) => SpacerBox.v16,
-        itemCount: state.albums.length,
-        itemBuilder: (context, index) => AlbumItem(album: state.albums[index]),
+        itemCount: state.albums!.length,
+        itemBuilder: (context, index) => AlbumItem(album: state.albums![index]),
       ),
     );
   }

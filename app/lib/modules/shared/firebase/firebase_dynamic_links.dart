@@ -6,8 +6,8 @@ import 'package:mozin/modules/config/setup.dart';
 class ConfigureFirebaseDynamicLinks {
   void initDynamicLinks(BuildContext context) async {
     FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLink) async {
-      final Uri deepLink = dynamicLink?.link;
+        onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+      final Uri? deepLink = dynamicLink?.link;
 
       if (deepLink != null) {
         getItInstance<RouterExternalResolver>().resolver(context, path: deepLink.path);
@@ -17,9 +17,9 @@ class ConfigureFirebaseDynamicLinks {
       print(e.message);
     });
 
-    final PendingDynamicLinkData data =
+    final PendingDynamicLinkData? data =
         await FirebaseDynamicLinks.instance.getInitialLink();
-    final Uri deepLink = data?.link;
+    final Uri? deepLink = data?.link;
 
     if (deepLink != null) {
       print(deepLink.path);

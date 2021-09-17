@@ -3,9 +3,9 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PhoneModalFit extends StatelessWidget {
-  final String phoneNumber;
+  final String? phoneNumber;
 
-  const PhoneModalFit({Key key, @required this.phoneNumber}) : super(key: key);
+  const PhoneModalFit({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

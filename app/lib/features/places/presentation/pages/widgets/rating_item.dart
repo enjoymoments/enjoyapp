@@ -7,21 +7,21 @@ import 'package:custom_view/spacer_box.dart';
 
 class RatingItem extends StatelessWidget {
 
-const RatingItem({Key key, this.mainAxisAlignment, @required this.item}) : super(key: key);
+const RatingItem({Key? key, this.mainAxisAlignment, required this.item}) : super(key: key);
 
-  final MainAxisAlignment mainAxisAlignment;
-  final PlaceModel item;
+  final MainAxisAlignment? mainAxisAlignment;
+  final PlaceModel? item;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
-        item.rating.toString().description(context),
+        item!.rating.toString().description(context),
         SpacerBox.h5,
         CustomIcon(icon: AppIcons.star, size: 10),
         SpacerBox.h5,
-        "(${item.userRatingsTotal})"
+        "(${item!.userRatingsTotal})"
             .description(context),
       ],
     );

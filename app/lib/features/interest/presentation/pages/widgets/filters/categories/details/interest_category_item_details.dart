@@ -7,11 +7,11 @@ import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoryItemDetails extends StatelessWidget {
   const InterestCategoryItemDetails(
-      {Key key, @required this.item, @required this.callbackSelected})
+      {Key? key, required this.item, required this.callbackSelected})
       : super(key: key);
 
   final CategoriesModel item;
-  final Function(bool, SubCategoriesModel) callbackSelected;
+  final Function(bool?, SubCategoriesModel) callbackSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class InterestCategoryItemDetails extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          item.name.title(
+          item.name!.title(
             context,
           ),
           Wrap(
@@ -40,9 +40,9 @@ class InterestCategoryItemDetails extends StatelessWidget {
   }
 
   List<Widget> _generateItems() {
-    return item.subCategories.map((element) {
+    return item.subCategories!.map((element) {
       return InterestCategoryItemBadge(
-        item: element,
+        item: element as SubCategoriesModel,
         callbackSelected: callbackSelected,
       );
     }).toList();

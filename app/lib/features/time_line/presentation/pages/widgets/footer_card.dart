@@ -9,13 +9,13 @@ class FooterCard extends StatelessWidget {
         IconButton(
           alignment: Alignment.centerLeft,
           icon: Icon(Icons.message),
-          iconSize: Theme.of(context).iconTheme.size,
+          iconSize: Theme.of(context).iconTheme.size!,
           onPressed: () {},
         ),
         IconButton(
           alignment: Alignment.centerRight,
           icon: Icon(Icons.share),
-          iconSize: Theme.of(context).iconTheme.size,
+          iconSize: Theme.of(context).iconTheme.size!,
           onPressed: () {},
         ),
       ],

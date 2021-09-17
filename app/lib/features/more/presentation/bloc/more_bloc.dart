@@ -8,7 +8,7 @@ part 'more_event.dart';
 part 'more_state.dart';
 
 class MoreBloc extends Bloc<MoreEvent, MoreState> {
-  MoreBloc({@required MoreRepository moreRepository})
+  MoreBloc({required MoreRepository moreRepository})
       : assert(moreRepository != null),
         _moreRepository = moreRepository,
         super(MoreState.initial());

@@ -6,22 +6,22 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class InviteRemoteDataSource {
-  Future<String> generateShareUrl(DynamicLinksTypeEnum action, String userInternalId);
+  Future<String?> generateShareUrl(DynamicLinksTypeEnum action, String? userInternalId);
   Future<UserSyncInfoModel> getUserSyncInfo(String userSyncInfoId);
 }
 
 class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
   InviteRemoteDataSourceImpl(
-      {@required this.remoteClientRepository, @required this.remoteConfig});
+      {required this.remoteClientRepository, required this.remoteConfig});
 
-  final RemoteClientRepository remoteClientRepository;
-  final RemoteConfig remoteConfig;
+  final RemoteClientRepository? remoteClientRepository;
+  final RemoteConfig? remoteConfig;
 
   @override
-  Future<String> generateShareUrl(DynamicLinksTypeEnum action, String userInternalId) async {
-    var url = remoteConfig.getString(url_functions);
+  Future<String?> generateShareUrl(DynamicLinksTypeEnum action, String? userInternalId) async {
+    var url = remoteConfig!.getString(url_functions);
 
-    var _response = await remoteClientRepository.post(
+    var _response = await remoteClientRepository!.post(
       '$url/generateShareUrl',
       data: {
         'path': '$action/$userInternalId',
@@ -42,7 +42,7 @@ class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return UserSyncInfoModel.fromJson(result['data']['getUserSyncInfo'], userSyncInfoId);
   }
 }

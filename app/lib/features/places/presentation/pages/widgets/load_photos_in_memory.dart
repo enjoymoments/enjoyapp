@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 List<Widget> buildPhotos(
     BuildContext context, List<Uint8List> images, double imageWidth) {
   List<GalleryImageModel> _galleryImages = _transformGalleryModel(images);
-  List<Widget> _list = new List<Widget>();
+  List<Widget> _list = <Widget>[];
 
   for (var i = 0; i < images.length; i++) {
     var item = images[i];
@@ -30,10 +30,10 @@ List<Widget> buildPhotos(
 }
 
 List<GalleryImageModel> _transformGalleryModel(List<Uint8List> images) {
-  var _uuid = getItInstance<Uuid>();
+  Uuid? _uuid = getItInstance<Uuid>();
 
   var _result = images.map((e) {
-    return GalleryImageModel(id: _uuid.v4(), byte: e);
+    return GalleryImageModel(id: _uuid!.v4(), byte: e);
   }).toList();
 
   return _result;
@@ -46,21 +46,20 @@ class LoadPhotoItem extends StatelessWidget {
   final double imageWidth;
 
   const LoadPhotoItem({
-    Key key,
-    @required this.galleryImages,
-    @required this.index,
-    @required this.item,
-    @required this.imageWidth,
+    Key? key,
+    required this.galleryImages,
+    required this.index,
+    required this.item,
+    required this.imageWidth,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(
-          Routes.gallery_photo_view_wrapper_screen,
-          arguments: GalleryPhotoViewWrapperArguments(
-            loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+        AutoRouter.of(context).push(
+          Gallery_photo_view_wrapper_screen(
+            loadingBuilder: (BuildContext context, ImageChunkEvent? event) =>
                 CustomCircularProgressIndicator(),
             galleryPhotoSourceType: GalleryPhotoSourceTypeEnum.memory,
             galleryItems: galleryImages,

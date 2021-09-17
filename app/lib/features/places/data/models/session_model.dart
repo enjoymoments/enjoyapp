@@ -6,5 +6,5 @@ class SessionModel {
   bool selected;
   final String text;
 
-  SessionModel({@required this.type, @required this.selected, @required this.text});
+  SessionModel({required this.type, required this.selected, required this.text});
 }

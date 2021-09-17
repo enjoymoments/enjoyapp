@@ -1,3 +1,4 @@
+import 'package:mozin/features/places/data/models/places_category_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/interest_type.dart';
@@ -5,14 +6,14 @@ import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart'
 
 abstract class FavoriteInterestsRemoteDataSource {
   Future<bool> addFavoriteInterest(
-    String interestId,
-    String categoryId,
-    String subCategoryId,
+    String? interestId,
+    String? categoryId,
+    String? subCategoryId,
     InterestEnum interestType,
   );
 
   Future<bool> removeFavoriteInterest(
-    String interestId,
+    String? interestId,
   );
 
   Future<InterestType> getFavoriteInterests();
@@ -22,13 +23,13 @@ class FavoriteInterestsRemoteDataSourceImpl
     implements FavoriteInterestsRemoteDataSource {
   FavoriteInterestsRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<bool> addFavoriteInterest(
-    String interestId,
-    String categoryId,
-    String subCategoryId,
+    String? interestId,
+    String? categoryId,
+    String? subCategoryId,
     InterestEnum interestType,
   ) async {
     //TODO:review this
@@ -45,7 +46,7 @@ class FavoriteInterestsRemoteDataSourceImpl
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return Future.value(result['data']['addFavoriteInterest']);
   }
 
@@ -89,21 +90,21 @@ class FavoriteInterestsRemoteDataSourceImpl
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return InterestType(
         places:
-            PlacesModel.fromJson(result['data']['getFavoriteInterest']).places);
+            PlacesModel.fromJson(result['data']['getFavoriteInterest']).places as List<PlacesCategoryModel>?);
   }
 
   @override
-  Future<bool> removeFavoriteInterest(String interestId) async {
+  Future<bool> removeFavoriteInterest(String? interestId) async {
     String _query = '''
     mutation removeFavoriteInterest {
        removeFavoriteInterest(interestId: "$interestId")
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return Future.value(result['data']['removeFavoriteInterest']);
   }
 }

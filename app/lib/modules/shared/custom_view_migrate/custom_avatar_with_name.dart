@@ -4,11 +4,11 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
 
 class CustomAvatarWithName extends StatelessWidget {
-  final ImageProvider backgroundImage;
-  final String name;
-  final Widget child;
+  final ImageProvider? backgroundImage;
+  final String? name;
+  final Widget? child;
 
-  const CustomAvatarWithName({Key key, @required this.name, this.child, this.backgroundImage})
+  const CustomAvatarWithName({Key? key, required this.name, this.child, this.backgroundImage})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class CustomAvatarWithName extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            name.label(context),
+            name!.label(context),
             SpacerBox.v2,
             child ?? SizedBox.shrink(),
           ],

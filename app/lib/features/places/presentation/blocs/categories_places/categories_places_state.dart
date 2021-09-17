@@ -7,11 +7,11 @@ import 'package:mozin/modules/shared/general/enums.dart';
 
 class CategoriesPlacesState extends DefaultState {
   CategoriesPlacesState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.places,
     this.categorySelected,
     this.contentPlaces,
@@ -26,15 +26,15 @@ class CategoriesPlacesState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<PlacesCategory> places;
-  final PlacesCategory categorySelected;
+  final List<PlacesCategory>? places;
+  final PlacesCategory? categorySelected;
   
   //TODO:view this
-  final InterestEnum interestSelected;
-  final List<SessionModel> sessions;
+  final InterestEnum? interestSelected;
+  final List<SessionModel>? sessions;
 
-  final List<PlaceModel> contentPlaces;
-  final List<SuggestionsModel> contentSuggestedByUsers;
+  final List<PlaceModel?>? contentPlaces;
+  final List<SuggestionsModel?>? contentSuggestedByUsers;
 
   factory CategoriesPlacesState.initial() {
     return CategoriesPlacesState(
@@ -53,17 +53,17 @@ class CategoriesPlacesState extends DefaultState {
   }
 
   CategoriesPlacesState copyWith({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
-    List<PlacesCategory> places,
-    PlacesCategory categorySelected,
-    List<PlaceModel> contentPlaces,
-    List<SuggestionsModel> contentSuggestedByUsers,
-    List<SessionModel> sessions,
-    InterestEnum interestSelected,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
+    List<PlacesCategory>? places,
+    PlacesCategory? categorySelected,
+    List<PlaceModel?>? contentPlaces,
+    List<SuggestionsModel?>? contentSuggestedByUsers,
+    List<SessionModel>? sessions,
+    InterestEnum? interestSelected,
   }) {
     return CategoriesPlacesState(
       isLoading: isLoading ?? this.isLoading,
@@ -81,7 +81,7 @@ class CategoriesPlacesState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isEmpty,
         isError,

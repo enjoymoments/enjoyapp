@@ -3,12 +3,12 @@ import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/general_filters_model.dart';
 
 class FilterChoosedModel {
-  final List<CategoriesModel> categories;
-  final GeneralFilterModel generalFilters;
+  final List<CategoriesModel>? categories;
+  final GeneralFilterModel? generalFilters;
 
   factory FilterChoosedModel.initial() {
     return FilterChoosedModel(
-      categories: List(),
+      categories: [],
       generalFilters: GeneralFilterModel(
         minPrice: 1.0,
         minDistance: 1.0,
@@ -23,48 +23,48 @@ class FilterChoosedModel {
   FilterChoosedModel({this.categories, this.generalFilters});
 
   void changePrice(double minPrice, double maxPrice) {
-    generalFilters.minPrice = minPrice;
-    generalFilters.maxPrice = maxPrice;
+    generalFilters!.minPrice = minPrice;
+    generalFilters!.maxPrice = maxPrice;
   }
 
   void changeDistance(double minDistance, double maxDistance) {
-    generalFilters.minDistance = minDistance;
-    generalFilters.maxDistance = maxDistance;
+    generalFilters!.minDistance = minDistance;
+    generalFilters!.maxDistance = maxDistance;
   }
 
   void changeTime(double minTime, double maxTime) {
-    generalFilters.minTime = minTime;
-    generalFilters.maxTime = maxTime;
+    generalFilters!.minTime = minTime;
+    generalFilters!.maxTime = maxTime;
   }
 
   void insertCategorie(CategoriesModel item) {
-    categories.add(item);
+    categories!.add(item);
   }
 
   void removeCategorie(CategoriesModel item) {
-    categories.remove(item);
+    categories!.remove(item);
   }
 
   void insertSubCategorie(CategoriesModel categorie, SubCategoriesModel item) {
     CategoriesModel categorieFilter =
-        categories.firstWhere((element) => element.id == categorie.id);
-    SubCategoriesModel subCategorieFilter = categorieFilter.subCategories
-        .firstWhere((element) => element.id == item.id);
+        categories!.firstWhere((element) => element.id == categorie.id);
+    SubCategoriesModel subCategorieFilter = categorieFilter.subCategories!
+        .firstWhere((element) => element.id == item.id) as SubCategoriesModel;
     subCategorieFilter.selected = true;
   }
 
   void removeSubCategorie(CategoriesModel categorie, SubCategoriesModel item) {
     CategoriesModel categorieFilter =
-        categories.firstWhere((element) => element.id == categorie.id);
-    SubCategoriesModel subCategorieFilter = categorieFilter.subCategories
-        .firstWhere((element) => element.id == item.id);
+        categories!.firstWhere((element) => element.id == categorie.id);
+    SubCategoriesModel subCategorieFilter = categorieFilter.subCategories!
+        .firstWhere((element) => element.id == item.id) as SubCategoriesModel;
     subCategorieFilter.selected = false;
   }
 
   Map<String, dynamic> toJson(List<dynamic> _categories) {
     final Map<String, dynamic> data = <String, dynamic>{};
 
-    data['generalFilters'] = this.generalFilters.toJson();
+    data['generalFilters'] = this.generalFilters!.toJson();
     data['categories'] = _categories;
 
     return data;

@@ -61,7 +61,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         size: Size(10.0, 10.0),
         color: Theme.of(context).backgroundColor,
         activeSize: Size(22.0, 10.0),
-        activeColor: Theme.of(context).accentIconTheme.color,
+        activeColor: Theme.of(context).accentIconTheme.color!,
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),

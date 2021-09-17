@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ConfigurationRepositoryImpl implements ConfigurationRepository {
   ConfigurationRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   final ConfigurationRemoteDataSource remoteDataSource;

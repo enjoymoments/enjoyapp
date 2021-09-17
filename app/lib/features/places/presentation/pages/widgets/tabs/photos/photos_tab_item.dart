@@ -8,9 +8,9 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/shimmer_loading.dart';
 
 class PhotosTabItem extends StatelessWidget {
-  final PlacePhotosBloc placePhotosBloc;
+  final PlacePhotosBloc? placePhotosBloc;
 
-  const PhotosTabItem({Key key, @required this.placePhotosBloc})
+  const PhotosTabItem({Key? key, required this.placePhotosBloc})
       : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class PhotosTabItem extends StatelessWidget {
       bloc: placePhotosBloc,
       builder: (context, state) {
         if (state.item?.photos != null) {
-          return _buildPhotos(context, state.item.photos);
+          return _buildPhotos(context, state.item!.photos!);
         }
 
         return _buildLoadingPhotos();

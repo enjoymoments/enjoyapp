@@ -9,7 +9,7 @@ import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 part 'add_activity_state.dart';
 
 class AddActivityCubit extends Cubit<AddActivityState> {
-  AddActivityCubit({@required ActivityRepository activityRepository})
+  AddActivityCubit({required ActivityRepository activityRepository})
       : assert(activityRepository != null),
         _activityRepository = activityRepository,
         super(AddActivityState.initial());
@@ -25,7 +25,7 @@ class AddActivityCubit extends Cubit<AddActivityState> {
     });
   }
 
-  void setSeleted(List<AddActivityCalendarModel> activitiesSelected) {
+  void setSeleted(List<AddActivityCalendarModel>? activitiesSelected) {
     var _activities = state.activities;
     if (activitiesSelected != null) {
       _setActivitySelected(_activities, activitiesSelected);
@@ -34,20 +34,20 @@ class AddActivityCubit extends Cubit<AddActivityState> {
     return emit(state.copyWith(isLoading: false, activities: _activities));
   }
 
-  void _setActivitySelected(List<ActivityModel> activities,
+  void _setActivitySelected(List<ActivityModel>? activities,
       List<AddActivityCalendarModel> activitiesSelected) {
     for (var activityItem in activitiesSelected) {
-      var indexSession = activities
+      var indexSession = activities!
           .indexWhere((element) => element.id == activityItem.sessionId);
 
       if (indexSession != -1) {
         var indexActivity = activities[indexSession]
-            .activities
+            .activities!
             .indexWhere((element) => element.id == activityItem.activityId);
         if (indexActivity != -1) {
-          var activity = activities[indexSession].activities[indexActivity];
+          var activity = activities[indexSession].activities![indexActivity];
 
-          activities[indexSession].activities[indexActivity] =
+          activities[indexSession].activities![indexActivity] =
               ActivityItemModel(
                   id: activity.id,
                   name: activity.name,

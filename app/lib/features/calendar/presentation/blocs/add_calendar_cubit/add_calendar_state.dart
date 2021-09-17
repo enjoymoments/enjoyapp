@@ -2,11 +2,11 @@ part of 'add_calendar_cubit.dart';
 
 class AddCalendarState extends DefaultState {
   AddCalendarState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.forceRefresh,
     this.model,
   }) : super(
@@ -17,8 +17,8 @@ class AddCalendarState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final TaskCalendarModel model;
-  final int forceRefresh;
+  final TaskCalendarModel? model;
+  final int? forceRefresh;
 
   factory AddCalendarState.initial() {
     return AddCalendarState(
@@ -28,7 +28,7 @@ class AddCalendarState extends DefaultState {
       isLoading: false,
       errorMessage: null,
       model: TaskCalendarModel(
-        activities: List(),
+        activities: [],
         dateTime: DateTime.now(),
       ),
       forceRefresh: null,
@@ -36,13 +36,13 @@ class AddCalendarState extends DefaultState {
   }
 
   AddCalendarState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    TaskCalendarModel model,
-    int forceRefresh,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    TaskCalendarModel? model,
+    int? forceRefresh,
   }) {
     return AddCalendarState(
       isLoading: isLoading ?? this.isLoading,
@@ -56,7 +56,7 @@ class AddCalendarState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

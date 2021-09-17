@@ -5,8 +5,8 @@ class CustomModalFit extends StatelessWidget {
   final List<CustomItemModalFit> items;
 
   const CustomModalFit({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
   }) : super(key: key);
 
   @override

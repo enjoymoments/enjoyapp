@@ -7,19 +7,19 @@ import 'package:custom_view/extensions/extension.dart';
 
 class ActivityIcon extends StatefulWidget {
   final ActivityItemModel item;
-  final Function(ActivityItemModel item) onPressed;
+  final void Function(ActivityItemModel? item) onPressed;
 
   const ActivityIcon({
-    Key key,
-    @required this.onPressed,
-    @required this.item,
+    Key? key,
+    required this.onPressed,
+    required this.item,
   }) : super(key: key);
   @override
   _ActivityIconState createState() => _ActivityIconState();
 }
 
 class _ActivityIconState extends State<ActivityIcon> {
-  ActivityItemModel _item;
+  ActivityItemModel? _item;
 
   @override
   void initState() {
@@ -54,14 +54,14 @@ class _ActivityIconState extends State<ActivityIcon> {
               color: _getIconColor(),
             ),
             onPressed: () {
-              _item = _item.copyWith(isSelected: !_item.isSelected);
+              _item = _item!.copyWith(isSelected: !_item!.isSelected!);
               setState(() {
                 widget.onPressed(_item);
               });
             },
           ),
         ),
-        _item.name.description(
+        _item!.name!.description(
           context,
         ),
       ],
@@ -69,13 +69,13 @@ class _ActivityIconState extends State<ActivityIcon> {
   }
 
   Color _getBackgroundColor() {
-    return _item.isSelected
+    return _item!.isSelected!
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
   }
 
   Color _getIconColor() {
-    if (_item.isSelected) {
+    if (_item!.isSelected!) {
       return Theme.of(context).backgroundColor;
     }
 

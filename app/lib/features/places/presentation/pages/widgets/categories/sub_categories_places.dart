@@ -8,15 +8,15 @@ import 'package:mozin/modules/shared/general/enums.dart';
 
 class SubCategoriesPlaces extends StatefulWidget {
   const SubCategoriesPlaces({
-    Key key,
-    @required this.subCategories,
-    @required this.tabstitle,
-    @required this.categoriesPlacesCubit,
+    Key? key,
+    required this.subCategories,
+    required this.tabstitle,
+    required this.categoriesPlacesCubit,
   }) : super(key: key);
 
-  final List<PlacesSubCategoryModel> subCategories;
+  final List<PlacesSubCategoryModel>? subCategories;
   final List<Widget> tabstitle;
-  final CategoriesPlacesCubit categoriesPlacesCubit;
+  final CategoriesPlacesCubit? categoriesPlacesCubit;
 
   @override
   _SubCategoriesPlacesState createState() => _SubCategoriesPlacesState();
@@ -24,29 +24,29 @@ class SubCategoriesPlaces extends StatefulWidget {
 
 class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
     with TickerProviderStateMixin {
-  TabController _nestedTabController;
+  TabController? _nestedTabController;
 
   @override
   void initState() {
     _nestedTabController =
-        new TabController(length: widget.subCategories.length, vsync: this);
+        new TabController(length: widget.subCategories!.length, vsync: this);
 
-    _nestedTabController.addListener(_handleTabSelection);
+    _nestedTabController!.addListener(_handleTabSelection);
     super.initState();
   }
 
   @override
   void dispose() {
-    _nestedTabController.dispose();
+    _nestedTabController!.dispose();
     super.dispose();
   }
 
   @override
   void didUpdateWidget(SubCategoriesPlaces oldWidget) {
-    _nestedTabController.removeListener(_handleTabSelection);
+    _nestedTabController!.removeListener(_handleTabSelection);
     _nestedTabController =
-        new TabController(length: widget.subCategories.length, vsync: this);
-    _nestedTabController.addListener(_handleTabSelection);
+        new TabController(length: widget.subCategories!.length, vsync: this);
+    _nestedTabController!.addListener(_handleTabSelection);
 
     super.didUpdateWidget(oldWidget);
   }
@@ -74,17 +74,17 @@ class _SubCategoriesPlacesState extends State<SubCategoriesPlaces>
   }
 
   void _handleTabSelection() {
-    if (_nestedTabController.indexIsChanging) {
-      if (widget.categoriesPlacesCubit.state.interestSelected ==
+    if (_nestedTabController!.indexIsChanging) {
+      if (widget.categoriesPlacesCubit!.state.interestSelected ==
           InterestEnum.Place) {
-        widget.categoriesPlacesCubit.subCategorySelected(
-            widget.categoriesPlacesCubit.state.interestSelected,
-            widget.subCategories[_nestedTabController.index].places);
-      } else if (widget.categoriesPlacesCubit.state.interestSelected ==
+        widget.categoriesPlacesCubit!.subCategorySelected(
+            widget.categoriesPlacesCubit!.state.interestSelected,
+            widget.subCategories![_nestedTabController!.index].places);
+      } else if (widget.categoriesPlacesCubit!.state.interestSelected ==
           InterestEnum.SuggestedByUsers) {
-        widget.categoriesPlacesCubit.subCategorySelected(
-            widget.categoriesPlacesCubit.state.interestSelected,
-            widget.subCategories[_nestedTabController.index].suggestedByUsers);
+        widget.categoriesPlacesCubit!.subCategorySelected(
+            widget.categoriesPlacesCubit!.state.interestSelected,
+            widget.subCategories![_nestedTabController!.index].suggestedByUsers);
       }
     }
   }

@@ -7,16 +7,16 @@ import 'package:mozin/modules/shared/general/models/response_default_model.dart'
 
 class SuggestionsRepositoryImpl implements SuggestionsRepository {
   SuggestionsRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final SuggestionsRemoteDataSource remoteDataSource;
+  final SuggestionsRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<ResponseDefaultModel, Exception>> addSuggestion(
-      {SuggestionsModel model}) async {
+      {SuggestionsModel? model}) async {
     try {
-      var response = await remoteDataSource.addSuggestion(model);
+      var response = await remoteDataSource!.addSuggestion(model);
       return Left<ResponseDefaultModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<ResponseDefaultModel, Exception>(
@@ -26,9 +26,9 @@ class SuggestionsRepositoryImpl implements SuggestionsRepository {
 
   @override
   Future<Either<ResponseDefaultModel, Exception>> removeSuggestions(
-      {SuggestionsModel model}) async {
+      {SuggestionsModel? model}) async {
     try {
-      var response = await remoteDataSource.removeSuggestions(model);
+      var response = await remoteDataSource!.removeSuggestions(model);
       return Left<ResponseDefaultModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<ResponseDefaultModel, Exception>(
@@ -38,9 +38,9 @@ class SuggestionsRepositoryImpl implements SuggestionsRepository {
 
   @override
   Future<Either<ResponseDefaultModel, Exception>> updateSuggestions(
-      {SuggestionsModel model}) async {
+      {SuggestionsModel? model}) async {
     try {
-      var response = await remoteDataSource.updateSuggestions(model);
+      var response = await remoteDataSource!.updateSuggestions(model);
       return Left<ResponseDefaultModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<ResponseDefaultModel, Exception>(

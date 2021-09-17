@@ -4,8 +4,8 @@ import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class CalendarRemoteDataSource {
-  Future<bool> addTaskInCalendar(AddTaskCalendar model);
-  Future<bool> removeTaskInCalendar(String taskId);
+  Future<bool?> addTaskInCalendar(AddTaskCalendar? model);
+  Future<bool?> removeTaskInCalendar(String? taskId);
   Future<List<GroupedDateCalendarModel>> getTasksInCalendar();
   Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear();
   
@@ -14,15 +14,15 @@ abstract class CalendarRemoteDataSource {
 class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   CalendarRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
-  Future<bool> addTaskInCalendar(
-    AddTaskCalendar model,
+  Future<bool?> addTaskInCalendar(
+    AddTaskCalendar? model,
   ) async {
-    var _listActivities = List<String>();
+    var _listActivities = <String>[];
 
-    for (var activity in model.activities) {
+    for (var activity in model!.activities!) {
       _listActivities.add('''
          {
             sessionId:"${activity.sessionId}"
@@ -44,7 +44,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
     return result['data']['addTaskInCalendar'];
   }
 
@@ -71,9 +71,9 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
 
-    List<GroupedYearCalendarModel> _list = List<GroupedYearCalendarModel>();
+    List<GroupedYearCalendarModel> _list = <GroupedYearCalendarModel>[];
 
     for (var e in result['data']['getTasksUserCalendarGroupedByYear']) {
       _list.add(GroupedYearCalendarModel.fromJson(e));
@@ -83,14 +83,14 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<bool> removeTaskInCalendar(String taskId) async {
+  Future<bool?> removeTaskInCalendar(String? taskId) async {
     String _query = '''
     mutation removeTaskInUserCalendar{
       removeTaskInUserCalendar(taskId:"$taskId")
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
 
     return result['data']['removeTaskInUserCalendar'];
   }
@@ -115,9 +115,9 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
 
-    List<GroupedDateCalendarModel> _list = List<GroupedDateCalendarModel>();
+    List<GroupedDateCalendarModel> _list = <GroupedDateCalendarModel>[];
 
     for (var e in result['data']['getTasksUserCalendar']) {
       _list.add(GroupedDateCalendarModel.fromJson(e));

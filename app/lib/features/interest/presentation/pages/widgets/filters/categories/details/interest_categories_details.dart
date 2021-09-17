@@ -9,9 +9,9 @@ import 'package:custom_view/spacer_box.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoriesDetails extends StatelessWidget {
-  final InterestBloc interestBloc;
+  final InterestBloc? interestBloc;
 
-  const InterestCategoriesDetails({Key key, @required this.interestBloc})
+  const InterestCategoriesDetails({Key? key, required this.interestBloc})
       : super(key: key);
 
   @override
@@ -33,11 +33,11 @@ class InterestCategoriesDetails extends StatelessWidget {
   }
 
   List<Widget> _buildCards() {
-    return getItInstance<FilterChoosedWrapper>().getFilterChoosed.categories.map((element) {
+    return getItInstance<FilterChoosedWrapper>().getFilterChoosed!.categories!.map((element) {
       return InterestCategoryItemDetails(
         item: element,
-        callbackSelected: (bool selected, SubCategoriesModel item) {
-          interestBloc.add(SelectSubCategorie(itemSelected: item, selected: selected, categorie: element));
+        callbackSelected: (bool? selected, SubCategoriesModel item) {
+          interestBloc!.add(SelectSubCategorie(itemSelected: item, selected: selected, categorie: element));
         },
       );
     }).toList();

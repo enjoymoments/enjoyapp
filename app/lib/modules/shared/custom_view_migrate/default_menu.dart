@@ -4,9 +4,9 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:custom_view/AppIcons.dart';
 
 class DefaultMenu extends StatefulWidget {
-  final Function(DefaultMenuEnum) onTap;
+  final Function(DefaultMenuEnum)? onTap;
 
-  const DefaultMenu({Key key, this.onTap}) : super(key: key);
+  const DefaultMenu({Key? key, this.onTap}) : super(key: key);
 
   @override
   _DefaultMenuState createState() => _DefaultMenuState();
@@ -26,7 +26,7 @@ class _DefaultMenuState extends State<DefaultMenu> {
       elevation: 0,
       onTap: (index) {
         _currentIndex = index;
-        widget.onTap(DefaultMenuEnum(_currentIndex));
+        widget.onTap!(DefaultMenuEnum(_currentIndex, ignoreSearch: false));
       },
       items: [
         BottomNavigationBarItem(

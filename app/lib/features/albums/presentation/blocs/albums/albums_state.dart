@@ -2,11 +2,11 @@ part of 'albums_cubit.dart';
 
 class AlbumsState extends DefaultState {
   AlbumsState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.albums,
     this.forceRefresh,
   }) : super(
@@ -17,8 +17,8 @@ class AlbumsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<AlbumItemModel> albums;
-  final int forceRefresh;
+  final List<AlbumItemModel>? albums;
+  final int? forceRefresh;
 
   factory AlbumsState.initial() {
     return AlbumsState(
@@ -27,19 +27,19 @@ class AlbumsState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      albums: List(),
+      albums: [],
       forceRefresh: null,
     );
   }
 
   AlbumsState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<AlbumItemModel> albums,
-    int forceRefresh,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<AlbumItemModel>? albums,
+    int? forceRefresh,
   }) {
     return AlbumsState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class AlbumsState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

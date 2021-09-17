@@ -5,6 +5,7 @@ import 'package:mozin/features/ads/presentation/pages/banners/banner_ad_widget.d
 import 'package:mozin/features/ads/presentation/pages/banners/publisher_banner_ad_widget.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
+import 'package:mozin/features/places/data/models/places_sub_category_model.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_cubit.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_state.dart';
@@ -21,20 +22,20 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin_core/ads/ads_config.dart';
 
 class CategoriesPlaces extends StatefulWidget {
-  const CategoriesPlaces({Key key, @required this.places}) : super(key: key);
+  const CategoriesPlaces({Key? key, required this.places}) : super(key: key);
 
-  final List<PlacesCategory> places;
+  final List<PlacesCategory>? places;
 
   @override
   _CategoriesPlacesState createState() => _CategoriesPlacesState();
 }
 
 class _CategoriesPlacesState extends State<CategoriesPlaces> {
-  SuggestionsCubit _suggestionsCubit;
-  CategoriesPlacesCubit _categoriesPlacesCubit;
-  _CategoriesPlacesAds _categoriesPlacesAds;
+  SuggestionsCubit? _suggestionsCubit;
+  CategoriesPlacesCubit? _categoriesPlacesCubit;
+  late _CategoriesPlacesAds _categoriesPlacesAds;
 
-  List<FavoriteInterestsItemBloc> _listFavoriteItemBlocs;
+  late List<FavoriteInterestsItemBloc?> _listFavoriteItemBlocs;
 
   @override
   void initState() {
@@ -42,7 +43,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
     _suggestionsCubit = getItInstance<SuggestionsCubit>();
     _categoriesPlacesAds = _CategoriesPlacesAds();
     _categoriesPlacesCubit = getItInstance<CategoriesPlacesCubit>()
-      ..loadPrimary(widget.places);
+      ..loadPrimary(widget.places!);
 
     super.initState();
   }
@@ -50,11 +51,11 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   @override
   void dispose() {
     _listFavoriteItemBlocs.forEach((element) { 
-      element.close();
+      element!.close();
     });
 
-    _categoriesPlacesCubit.close();
-    _suggestionsCubit.close();
+    _categoriesPlacesCubit!.close();
+    _suggestionsCubit!.close();
     super.dispose();
   }
 
@@ -81,17 +82,17 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
         return previous.interestSelected != current.interestSelected;
       },
       builder: (context, state) {
-        if (state.sessions.length > 0) {
+        if (state.sessions!.length > 0) {
           return Container(
             height: SizeConfig.sizeByPixel(35),
             child: ListView.separated(
               separatorBuilder: (context, index) => SpacerBox.h8,
               scrollDirection: Axis.horizontal,
-              itemCount: state.sessions.length,
+              itemCount: state.sessions!.length,
               itemBuilder: (context, index) => CustomItemBadge(
-                item: state.sessions[index],
-                text: state.sessions[index].text,
-                callbackSelected: (selected, item) {},
+                item: state.sessions![index],
+                text: state.sessions![index].text,
+                callbackSelected: (selected, dynamic item) {},
               ),
             ),
           );
@@ -110,18 +111,18 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
             previous.categorySelected != current.categorySelected;
       },
       builder: (context, state) {
-        if (state.places.length > 0) {
+        if (state.places!.length > 0) {
           return Container(
             height: SizeConfig.sizeByPixel(35),
             child: ListView.separated(
               separatorBuilder: (context, index) => SpacerBox.h8,
               scrollDirection: Axis.horizontal,
-              itemCount: state.places.length,
+              itemCount: state.places!.length,
               itemBuilder: (context, index) => CustomQuadrant(
-                isSelected: state.categorySelected == state.places[index],
-                text: state.places[index].categoryName,
+                isSelected: state.categorySelected == state.places![index],
+                text: state.places![index].categoryName!,
                 callbackSelected: (isSelected) {
-                  _categoriesPlacesCubit.categorySelected(state.places[index]);
+                  _categoriesPlacesCubit!.categorySelected(state.places![index]);
                 },
               ),
             ),
@@ -142,8 +143,8 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
       builder: (context, state) {
         if (state.categorySelected != null) {
           return SubCategoriesPlaces(
-            subCategories: state.categorySelected.subCategories,
-            tabstitle: _categoriesPlacesCubit.buildTabsTitle(state.categorySelected),
+            subCategories: state.categorySelected!.subCategories as List<PlacesSubCategoryModel>?,
+            tabstitle: _categoriesPlacesCubit!.buildTabsTitle(state.categorySelected!),
             categoriesPlacesCubit: _categoriesPlacesCubit,
           );
         }
@@ -163,10 +164,10 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
       },
       builder: (context, state) {
         if (state.interestSelected == InterestEnum.Place &&
-            state.contentPlaces.length > 0) {
+            state.contentPlaces!.length > 0) {
           return _buildContentPlace(state);
         } else if (state.interestSelected == InterestEnum.SuggestedByUsers &&
-            state.contentSuggestedByUsers.length > 0) {
+            state.contentSuggestedByUsers!.length > 0) {
           return _buildContentSuggestedByUsers(state);
         }
 
@@ -178,11 +179,11 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   Widget _buildContentSuggestedByUsers(CategoriesPlacesState state) {
     return Expanded(
       child: ListView.separated(
-        itemCount: state.contentSuggestedByUsers.length,
+        itemCount: state.contentSuggestedByUsers!.length,
         itemBuilder: (context, index) {
-          var item = state.contentSuggestedByUsers[index];
+          var item = state.contentSuggestedByUsers![index]!;
           
-          final FavoriteInterestsItemBloc _favoriteItem = getItInstance<FavoriteInterestsItemBloc>()..add(SetFavoriteItem(item.favoriteAdded));
+          final FavoriteInterestsItemBloc? _favoriteItem = getItInstance<FavoriteInterestsItemBloc>()..add(SetFavoriteItem(item.favoriteAdded));
           _listFavoriteItemBlocs.add(_favoriteItem);
 
           return SuggestionItem(
@@ -206,9 +207,9 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
   Widget _buildContentPlace(CategoriesPlacesState state) {
     return Expanded(
       child: ListView.separated(
-        itemCount: state.contentPlaces.length,
+        itemCount: state.contentPlaces!.length,
         itemBuilder: (context, index) {
-          var item = state.contentPlaces[index];
+          var item = state.contentPlaces![index];
           return PlaceCardItem(
             item: item,
           );
@@ -252,7 +253,7 @@ class _CategoriesPlacesAds extends AdsBase {
     return [
       SpacerBox.v16,
       BannerAdWidget(
-        screenName: Routes.search_places_screen,
+        screenName: Search_places_screen.name,
         itemCount: 1,
         indexRender: 0,
       ),
@@ -265,7 +266,7 @@ class _CategoriesPlacesAds extends AdsBase {
     return [
       SpacerBox.v16,
       PublisherBannerAdWidget(
-        screenName: Routes.search_places_screen,
+        screenName: Search_places_screen.name,
         itemCount: 1,
         indexRender: 0,
       ),

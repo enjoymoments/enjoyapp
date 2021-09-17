@@ -11,10 +11,10 @@ import 'package:mozin/modules/shared/general/interest_type.dart';
 class UserAppModel extends Equatable {
   /// {@macro user}
   const UserAppModel({
-    @required this.id,
-    @required this.email,
-    @required this.name,
-    @required this.photo,
+    required this.id,
+    required this.email,
+    required this.name,
+    required this.photo,
     this.timelines,
     this.timelineSelected,
     this.favoriteInterests,
@@ -25,14 +25,14 @@ class UserAppModel extends Equatable {
 
   final String id;
 
-  final String name;
+  final String? name;
 
-  final String photo;
+  final String? photo;
 
-  final List<GetTimeLineModel> timelines;
-  final GetTimeLineModel timelineSelected;
+  final List<GetTimeLineModel>? timelines;
+  final GetTimeLineModel? timelineSelected;
 
-  final InterestType favoriteInterests;
+  final InterestType? favoriteInterests;
 
   factory UserAppModel.initial() {
     return UserAppModel(
@@ -54,9 +54,9 @@ class UserAppModel extends Equatable {
   }
 
   UserAppModel copyWith({
-    List<GetTimeLineModel> timelines,
-    GetTimeLineModel timelineSelected,
-    InterestType favoriteInterests,
+    List<GetTimeLineModel>? timelines,
+    GetTimeLineModel? timelineSelected,
+    InterestType? favoriteInterests,
     bool acceptValueNull = false,
   }) {
     return UserAppModel(
@@ -72,7 +72,7 @@ class UserAppModel extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         email,
         id,
         name,

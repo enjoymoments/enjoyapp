@@ -7,12 +7,12 @@ class SuggestionsModel extends Suggestions {
     this.subCategoryId,
     this.subCategoryName,
     this.favoriteAdded,
-    String title,
-    String description,
-    String id,
-    int like,
-    int dislike,
-    bool moreOptionsEnable,
+    String? title,
+    String? description,
+    String? id,
+    int? like,
+    int? dislike,
+    bool? moreOptionsEnable,
   }) : super(
           title: title,
           description: description,
@@ -23,17 +23,17 @@ class SuggestionsModel extends Suggestions {
           favoriteAdded: favoriteAdded,
         );
 
-  final String categoryId;
-  final String categoryName;
-  final String subCategoryId;
-  final String subCategoryName;
-  bool favoriteAdded;
+  final String? categoryId;
+  final String? categoryName;
+  final String? subCategoryId;
+  final String? subCategoryName;
+  bool? favoriteAdded;
 
   factory SuggestionsModel.fromJson(
-    String categoryId,
-    String categoryName,
-    String subCategoryId,
-    String subCategoryName,
+    String? categoryId,
+    String? categoryName,
+    String? subCategoryId,
+    String? subCategoryName,
     Map<String, dynamic> json,
   ) {
     Map<String, dynamic> data = <String, dynamic>{};

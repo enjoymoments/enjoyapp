@@ -8,11 +8,11 @@ class GroupedYearCalendar extends Equatable {
     this.months,
   });
 
-  final int year; 
-  final List<GroupedMonthCalendar> months;
+  final int? year; 
+  final List<GroupedMonthCalendar>? months;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     this.year,
     this.months,
   ];

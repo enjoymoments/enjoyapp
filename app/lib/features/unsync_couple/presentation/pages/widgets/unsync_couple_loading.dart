@@ -12,7 +12,7 @@ class UnsyncCoupleScreenLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildContent(),
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context) as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -22,7 +22,7 @@ class UnsyncCoupleScreenLoading extends StatelessWidget {
       title: 'Convite',
       context: context,
       onPressedBack: () {
-        ExtendedNavigator.of(context).pop();
+        AutoRouter.of(context).pop();
       },
       actions: <Widget>[],
     );
@@ -34,27 +34,27 @@ class UnsyncCoupleScreenLoading extends StatelessWidget {
         child: Column(
           children: [
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(100),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(30),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(80),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(80),
             ),
             SpacerBox.v16,
             ShimmerLoading(
-              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+              width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
               height: SizeConfig.sizeByPixel(80),
             ),
           ],

@@ -29,12 +29,12 @@ class AddTimeLineScreen extends StatefulWidget {
 }
 
 class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
-  TextEditingController _descriptionController;
-  RoundedLoadingButtonController _actionButtoncontroller;
+  TextEditingController? _descriptionController;
+  RoundedLoadingButtonController? _actionButtoncontroller;
 
-  AddTimeLineBloc _addTimeLineBloc;
+  AddTimeLineBloc? _addTimeLineBloc;
   int _currentIndex = 0;
-  List<GalleryImageModel> _images;
+  List<GalleryImageModel>? _images;
 
   @override
   void initState() {
@@ -42,8 +42,8 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
     _actionButtoncontroller = RoundedLoadingButtonController();
     _addTimeLineBloc = getItInstance<AddTimeLineBloc>();
     _descriptionController = TextEditingController();
-    _descriptionController.addListener(() {
-      _addTimeLineBloc.add(TextPost(_descriptionController.text));
+    _descriptionController!.addListener(() {
+      _addTimeLineBloc!.add(TextPost(_descriptionController!.text));
     });
 
     super.initState();
@@ -51,7 +51,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
 
   @override
   void dispose() {
-    _addTimeLineBloc.close();
+    _addTimeLineBloc!.close();
     super.dispose();
   }
 
@@ -59,7 +59,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: _buildBottomMenu(),
     );
   }
@@ -69,9 +69,9 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
       title: 'Criar publicação',
       context: context,
       onPressedBack: () {
-        if (_images.length > 0 ||
-            (_descriptionController.text != null &&
-                _descriptionController.text.isNotEmpty)) {
+        if (_images!.length > 0 ||
+            (_descriptionController!.text != null &&
+                _descriptionController!.text.isNotEmpty)) {
           _discardPost(context);
           return;
         }
@@ -84,16 +84,16 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           controller: _actionButtoncontroller,
           child: CustomIcon(
             icon: AppIcons.check,
-            color: Theme.of(context).appBarTheme.iconTheme.color,
+            color: Theme.of(context).appBarTheme.iconTheme!.color,
           ),
           onPressed: () {
-            if (_images.length > 0 ||
-                (_descriptionController.text != null &&
-                    _descriptionController.text.isNotEmpty)) {
-              _addTimeLineBloc.add(SaveTimeLine());
+            if (_images!.length > 0 ||
+                (_descriptionController!.text != null &&
+                    _descriptionController!.text.isNotEmpty)) {
+              _addTimeLineBloc!.add(SaveTimeLine());
             }
 
-            _actionButtoncontroller.stop();
+            _actionButtoncontroller!.stop();
           },
         ),
       ],
@@ -115,7 +115,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
             text: 'Sim, quero descartar',
             iconData: AppIcons.trash,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],
@@ -127,24 +127,24 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
     return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
       bloc: _addTimeLineBloc,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
+        if (state.isSuccess!) {
           getItInstance<TimelineBloc>()..add(LoadPosts());
-          ExtendedNavigator.of(context).pop();
+          AutoRouter.of(context).pop();
         }
       },
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return CustomCircularProgressIndicator();
         }
 
-        if (state.images != null && state.images.length > 0) {
+        if (state.images != null && state.images!.length > 0) {
           _images = state.images;
           return _buildContent(
             CustomImageItems(
@@ -196,7 +196,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
           _currentIndex = index;
         });
 
-        _addTimeLineBloc.add(OpenMediaEvent(ImageSource.values[index]));
+        _addTimeLineBloc!.add(OpenMediaEvent(ImageSource.values[index]));
       },
       items: [
         BottomNavigationBarItem(
@@ -225,7 +225,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
             text: 'Sim, quero remover',
             iconData: AppIcons.trash,
             onTap: () {
-              _addTimeLineBloc.add(RemoveMedia(model));
+              _addTimeLineBloc!.add(RemoveMedia(model));
             },
           ),
         ],

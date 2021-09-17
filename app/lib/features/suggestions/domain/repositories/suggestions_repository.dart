@@ -5,14 +5,14 @@ import 'package:mozin/modules/shared/general/models/response_default_model.dart'
 
 abstract class SuggestionsRepository {
   Future<Either<ResponseDefaultModel, Exception>> addSuggestion({
-    @required SuggestionsModel model
+    required SuggestionsModel model
   });
 
   Future<Either<ResponseDefaultModel, Exception>> updateSuggestions({
-    @required SuggestionsModel model
+    required SuggestionsModel model
   });
 
   Future<Either<ResponseDefaultModel, Exception>> removeSuggestions({
-    @required SuggestionsModel model
+    required SuggestionsModel model
   });
 }

@@ -19,7 +19,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     this.wrapperMediaService,
   ) : super(AddTimeLineState.initial());
 
-  final WrapperMediaService wrapperMediaService;
+  final WrapperMediaService? wrapperMediaService;
 
   @override
   Stream<Transition<AddTimeLineEvent, AddTimeLineState>> transformEvents(
@@ -58,12 +58,12 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
 
   Stream<AddTimeLineState> mapRemoveMediaToState(RemoveMedia event) async* {
     try {
-      state.images.removeWhere((element) => element.id == event.media.id);
+      state.images!.removeWhere((element) => element.id == event.media.id);
 
       yield state.copyWith(
           isError: false,
           images: state.images,
-          forceRefresh: StateUtils.generateRandomNumber());
+          forceRefresh: StateUtils.generateRandomNumber() as int?);
     } catch (e) {
       yield state.copyWith(isError: true);
     }
@@ -81,17 +81,17 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
       List<GalleryImageModel> images = state.images ?? [];
 
       if (event.source == ImageSource.camera) {
-        var file = await wrapperMediaService.openCamera();
+        var file = await wrapperMediaService!.openCamera();
         if (file != null) {
           images
             ..addAll([
-              GalleryImageModel(id: wrapperMediaService.generateUUIDv4(), file: file, index: 0)
+              GalleryImageModel(id: wrapperMediaService!.generateUUIDv4(), file: file, index: 0)
             ]);
         }
       } else if (event.source == ImageSource.gallery) {
-        var files = await wrapperMediaService.getMedias();
+        var files = await wrapperMediaService!.getMedias();
         if (files != null) {
-          if ((files.length + state.images.length) > 10) {
+          if ((files.length + state.images!.length) > 10) {
             yield state.copyWith(
                 isLoading: false,
                 isError: true,
@@ -99,7 +99,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
             return;
           }
 
-          images.addAll(wrapperMediaService.transformFilesToImages(files));
+          images.addAll(wrapperMediaService!.transformFilesToImages(files));
         }
       }
 

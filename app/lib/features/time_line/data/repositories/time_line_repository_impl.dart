@@ -6,34 +6,34 @@ import 'package:mozin/features/time_line/data/models/time_line_model.dart';
 
 class TimelineRepositoryImpl implements TimelineRepository {
   TimelineRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final TimelineRemoteDataSource remoteDataSource;
+  final TimelineRemoteDataSource? remoteDataSource;
 
   @override
   Future<String> addTimeLineItem(
-      String timelineID, String userId, TimeLineItemModel model) {
+      String? timelineID, String userId, TimeLineItemModel model) {
     try {
-      return remoteDataSource.addTimeLineItem(timelineID, userId, model);
+      return remoteDataSource!.addTimeLineItem(timelineID, userId, model);
     } catch (e) {
       return Future.value(null);
     }
   }
 
   @override
-  Future<List<TimeLineItemModel>> getPosts(String timelineID, int limit) {
+  Future<List<TimeLineItemModel>> getPosts(String? timelineID, int? limit) {
     try {
-      return remoteDataSource.getPosts(timelineID, limit);
+      return remoteDataSource!.getPosts(timelineID, limit);
     } catch (e) {
       return Future.value(null);
     }
   }
 
   @override
-  Future<void> deletePost(String timelineID, String postID) {
+  Future<void> deletePost(String? timelineID, String? postID) {
     try {
-      return remoteDataSource.deletePost(timelineID, postID);
+      return remoteDataSource!.deletePost(timelineID, postID);
     } catch (e) {
       rethrow;
     }
@@ -42,7 +42,7 @@ class TimelineRepositoryImpl implements TimelineRepository {
   @override
   Future<List<GetTimeLineModel>> getTimelines(String userId) async {
     try {
-      return remoteDataSource.getTimelines(userId);
+      return remoteDataSource!.getTimelines(userId);
     } catch (e) {
       return Future.value(null);
     }

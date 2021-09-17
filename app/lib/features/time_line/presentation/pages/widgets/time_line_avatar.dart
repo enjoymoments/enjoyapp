@@ -14,7 +14,7 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 
 class TimeLineAddActions extends StatelessWidget {
-  const TimeLineAddActions({Key key}) : super(key: key);
+  const TimeLineAddActions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TimeLineAddActions extends StatelessWidget {
         return IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
+            AutoRouter.of(context).push(Add_time_line_screen());
           },
         );
       },
@@ -38,7 +38,7 @@ class TimeLineAddActions extends StatelessWidget {
 }
 
 class TimeLineText extends StatelessWidget {
-  const TimeLineText({Key key}) : super(key: key);
+  const TimeLineText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,11 @@ class TimeLineText extends StatelessWidget {
 
         String _textTitle = 'Linha do tempo do casal';
 
-        if (state.timelineSelected.type == TimeLineTypeEnum.Personal) {
+        if (state.timelineSelected!.type == TimeLineTypeEnum.Personal) {
           _textTitle = 'Minha linha do tempo';
         }
 
-        if (state.timelines.length == 1) {
+        if (state.timelines!.length == 1) {
           return Text(_textTitle);
         }
 
@@ -83,7 +83,7 @@ class TimeLineText extends StatelessWidget {
 
 class TimeLineAvatar extends StatelessWidget {
   const TimeLineAvatar({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -101,7 +101,7 @@ class TimeLineAvatar extends StatelessWidget {
   }
 
   Widget _buildAvatar(BuildContext context, TimelineState state) {
-    if (state.timelines.length == 1) {
+    if (state.timelines!.length == 1) {
       return Padding(
         padding: EdgeInsets.all(SizeConfig.sizeByPixel(8)),
         child: Row(
@@ -127,8 +127,8 @@ class TimeLineAvatar extends StatelessWidget {
     );
   }
 
-  ImageProvider _getBackgroundImage(TimelineState state) {
-    if (state.timelineSelected.type == TimeLineTypeEnum.Couple) {
+  ImageProvider? _getBackgroundImage(TimelineState state) {
+    if (state.timelineSelected!.type == TimeLineTypeEnum.Couple) {
       return AssetImage('assets/images/default_avatar.png');
     }
 

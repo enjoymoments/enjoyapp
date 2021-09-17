@@ -8,11 +8,11 @@ class GroupedDateCalendar extends Equatable {
     this.tasks,
   });
 
-  final DateTime date; 
-  final List<AddTaskCalendar> tasks;
+  final DateTime? date; 
+  final List<AddTaskCalendar>? tasks;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     this.date,
     this.tasks,
   ];

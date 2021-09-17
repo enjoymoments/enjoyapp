@@ -9,12 +9,12 @@ class Activity extends Equatable {
     this.activities,
   });
 
-  final String id;
-  final String sessionName;
-  final List<ActivityItem> activities;
+  final String? id;
+  final String? sessionName;
+  final List<ActivityItem>? activities;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     this.id,
     this.sessionName,
     this.activities,

@@ -8,14 +8,14 @@ import 'package:mozin/modules/shared/firebase/firebase_instance_provider.dart';
 abstract class AlbumsRemoteDataSource {
   Future<String> addAlbum(String userId, AlbumItemModel model);
   Future<List<AlbumItemModel>> getAlbums(String userId, int limit);
-  Future<bool> deleteAlbum(String userId, String albumId);
+  Future<bool> deleteAlbum(String userId, String? albumId);
 }
 
 class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
   AlbumsRemoteDataSourceImpl(this.remoteClientRepository, this.remoteConfig);
 
-  final RemoteClientRepository remoteClientRepository;
-  final RemoteConfig remoteConfig;
+  final RemoteClientRepository? remoteClientRepository;
+  final RemoteConfig? remoteConfig;
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
 
@@ -44,7 +44,7 @@ class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
 
     var result = await collection.get();
 
-    var list = List<AlbumItemModel>();
+    var list = <AlbumItemModel>[];
 
     for (var item in result.docs) {
       var snap = await AlbumItemEntity.fromSnapshot(item);
@@ -55,10 +55,10 @@ class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
   }
 
   @override
-  Future<bool> deleteAlbum(String userId, String albumId) async {
-    var url = remoteConfig.getString(url_functions);
+  Future<bool> deleteAlbum(String userId, String? albumId) async {
+    var url = remoteConfig!.getString(url_functions);
 
-    await remoteClientRepository
+    await remoteClientRepository!
         .post('$url/deleteAlbum', data: {
       'albumID': albumId,
       'id': userId,

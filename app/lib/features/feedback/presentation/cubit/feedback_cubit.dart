@@ -11,8 +11,8 @@ part 'feedback_state.dart';
 
 class FeedbackCubit extends Cubit<FeedbackState> {
   FeedbackCubit({
-    @required FeedbackRepository feedbackRepository,
-    @required UserWrapper userWrapper,
+    required FeedbackRepository feedbackRepository,
+    required UserWrapper userWrapper,
   })  : assert(feedbackRepository != null),
         _feedbackRepository = feedbackRepository,
         assert(userWrapper != null),
@@ -27,7 +27,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
       emit(state.copyWith(
         isError: true,
         errorMessage: 'Informe uma descrição',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
@@ -36,13 +36,13 @@ class FeedbackCubit extends Cubit<FeedbackState> {
       emit(state.copyWith(
         isError: true,
         errorMessage: 'Selecione o motivo',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
 
     var _user = _userWrapper.getUser;
-    model.userEmail = _user == UserAppModel.empty() ? null : _user.email;
+    model.userEmail = _user == UserAppModel.empty() ? null : _user!.email;
 
     var _response = await _feedbackRepository.addFeedback(model);
 
@@ -52,7 +52,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
           state.copyWith(
             isError: false,
             isSuccess: true,
-            forceRefresh: StateUtils.generateRandomNumber(),
+            forceRefresh: StateUtils.generateRandomNumber() as int?,
           ),
         );
       },
@@ -62,7 +62,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
             isError: true,
             isSuccess: false,
             errorMessage: 'Ops... houve um erro. Tente novamente!',
-            forceRefresh: StateUtils.generateRandomNumber(),
+            forceRefresh: StateUtils.generateRandomNumber() as int?,
           ),
         );
       },

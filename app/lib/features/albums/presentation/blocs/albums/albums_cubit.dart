@@ -9,8 +9,8 @@ part 'albums_state.dart';
 
 class AlbumsCubit extends Cubit<AlbumsState> {
   AlbumsCubit({
-    @required AlbumsRepository albumsRepository,
-    @required UserWrapper userWrapper,
+    required AlbumsRepository albumsRepository,
+    required UserWrapper userWrapper,
   })  : assert(userWrapper != null),
         _userWrapper = userWrapper,
         assert(albumsRepository != null),
@@ -24,7 +24,7 @@ class AlbumsCubit extends Cubit<AlbumsState> {
     emit(state.copyWith(isLoading: true));
     
     var response =
-        await _albumsRepository.getAlbums(_userWrapper.getUser.id, 10);
+        await _albumsRepository.getAlbums(_userWrapper.getUser!.id, 10);
 
     response.fold((model) {
       emit(state.copyWith(
@@ -32,14 +32,14 @@ class AlbumsCubit extends Cubit<AlbumsState> {
         isError: false,
         isSuccess: true,
         albums: model,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     }, (error) {
       emit(state.copyWith(
         isLoading: false,
         isError: true,
         isSuccess: false,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     });
   }

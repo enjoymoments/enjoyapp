@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class Review extends Equatable {
-  final String authorName;
-  final String profilePhotoUrl;
-  final int rating;
-  final String relativeTimeDescription;
-  final String text;
-  final int time;
+  final String? authorName;
+  final String? profilePhotoUrl;
+  final int? rating;
+  final String? relativeTimeDescription;
+  final String? text;
+  final int? time;
 
   Review({
     this.authorName,
@@ -18,7 +18,7 @@ class Review extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         this.authorName,
         this.profilePhotoUrl,
         this.rating,

@@ -8,7 +8,7 @@ abstract class UserRemoteDataSource {
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   UserRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<UserInfoModel> setUserInfo() async {
@@ -25,7 +25,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_mutation);
+    var result = await remoteClientRepository!.query(_mutation);
     return UserInfoModel.fromJson(result['data']['userInfo']);
   }
 }

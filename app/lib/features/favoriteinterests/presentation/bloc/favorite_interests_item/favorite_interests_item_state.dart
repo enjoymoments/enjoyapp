@@ -2,11 +2,11 @@ import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 class FavoriteInterestsItemState extends DefaultState {
   FavoriteInterestsItemState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.forceRefresh,
     this.favoriteAdded,
   }) : super(
@@ -17,8 +17,8 @@ class FavoriteInterestsItemState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final int forceRefresh;
-  final bool favoriteAdded;
+  final int? forceRefresh;
+  final bool? favoriteAdded;
 
   factory FavoriteInterestsItemState.initial() {
     return FavoriteInterestsItemState(
@@ -33,13 +33,13 @@ class FavoriteInterestsItemState extends DefaultState {
   }
 
   FavoriteInterestsItemState copyWith({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
-    int forceRefresh,
-    bool favoriteAdded,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
+    int? forceRefresh,
+    bool? favoriteAdded,
   }) {
     return FavoriteInterestsItemState(
       isLoading: isLoading ?? this.isLoading,
@@ -53,7 +53,7 @@ class FavoriteInterestsItemState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isEmpty,
         isError,

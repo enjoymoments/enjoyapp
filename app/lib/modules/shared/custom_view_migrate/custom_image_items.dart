@@ -11,14 +11,14 @@ import 'package:mozin/modules/shared/custom_view_migrate/gallery_images/gallery_
 
 class CustomImageItems extends StatelessWidget {
   final Function(GalleryImageModel galleryImageModel) onRemoveCallback;
-  final List<GalleryImageModel> images;
+  final List<GalleryImageModel>? images;
   final SourceTypeEnum sourceType;
 
   CustomImageItems({
-    Key key,
-    @required this.images,
-    @required this.onRemoveCallback,
-    @required this.sourceType,
+    Key? key,
+    required this.images,
+    required this.onRemoveCallback,
+    required this.sourceType,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class CustomImageItems extends StatelessWidget {
         child: Wrap(
           spacing: SizeConfig.sizeByPixel(10),
           children:
-              _buildCustomPhotos(context, images, SizeConfig.sizeByPixel(150)),
+              _buildCustomPhotos(context, images!, SizeConfig.sizeByPixel(150)),
         ),
       );
     } else {
@@ -69,13 +69,13 @@ class _CustomLoadPhotoItem extends StatelessWidget {
   final Function onLongPressCallback;
 
   const _CustomLoadPhotoItem({
-    Key key,
-    @required this.galleryImages,
-    @required this.index,
-    @required this.item,
-    @required this.sourceType,
-    @required this.imageWidth,
-    @required this.onLongPressCallback,
+    Key? key,
+    required this.galleryImages,
+    required this.index,
+    required this.item,
+    required this.sourceType,
+    required this.imageWidth,
+    required this.onLongPressCallback,
   }) : super(key: key);
 
   @override
@@ -85,10 +85,9 @@ class _CustomLoadPhotoItem extends StatelessWidget {
         onLongPressCallback();
       },
       onTap: () {
-        ExtendedNavigator.of(context).push(
-          Routes.gallery_photo_view_wrapper_screen,
-          arguments: GalleryPhotoViewWrapperArguments(
-            loadingBuilder: (BuildContext context, ImageChunkEvent event) =>
+        AutoRouter.of(context).push(
+          Gallery_photo_view_wrapper_screen(
+            loadingBuilder: (BuildContext context, ImageChunkEvent? event) =>
                 CustomCircularProgressIndicator(),
             galleryPhotoSourceType: getGalleryPhotoSourceType(),
             galleryItems: galleryImages,
@@ -108,11 +107,11 @@ class _CustomLoadPhotoItem extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               if (sourceType == SourceTypeEnum.Memory)
-                Image.memory(item.byte, fit: BoxFit.cover, width: imageWidth),
+                Image.memory(item.byte!, fit: BoxFit.cover, width: imageWidth),
               if (sourceType == SourceTypeEnum.Url)
-                _buildImageFromUrl(item.url),
+                _buildImageFromUrl(item.url!),
               if (sourceType == SourceTypeEnum.File)
-                Image.file(item.file, fit: BoxFit.cover, width: imageWidth),
+                Image.file(item.file!, fit: BoxFit.cover, width: imageWidth),
             ],
           ),
         ),
@@ -120,7 +119,7 @@ class _CustomLoadPhotoItem extends StatelessWidget {
     );
   }
 
-  GalleryPhotoSourceTypeEnum getGalleryPhotoSourceType() {
+  GalleryPhotoSourceTypeEnum? getGalleryPhotoSourceType() {
     if (sourceType == SourceTypeEnum.File) {
       return GalleryPhotoSourceTypeEnum.file;
     } else if (sourceType == SourceTypeEnum.Memory) {

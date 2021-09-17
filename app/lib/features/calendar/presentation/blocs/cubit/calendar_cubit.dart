@@ -8,7 +8,7 @@ import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 part 'calendar_state.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
-  CalendarCubit({@required CalendarRepository calendarRepository})
+  CalendarCubit({required CalendarRepository calendarRepository})
       : assert(calendarRepository != null),
         _calendarRepository = calendarRepository,
         super(CalendarState.initial());
@@ -24,7 +24,7 @@ class CalendarCubit extends Cubit<CalendarState> {
 
     _response.fold(
       (value) {
-        Map<DateTime, List> _events = {};
+        Map<DateTime?, List?> _events = {};
 
         for (var item in value) {
           _events[item.date] = item.tasks;

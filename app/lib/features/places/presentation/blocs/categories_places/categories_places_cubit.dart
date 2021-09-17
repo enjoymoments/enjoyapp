@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/session_model.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_places/categories_places_state.dart';
+import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
 class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
@@ -18,9 +20,9 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         //sessions: _getSessions(_categoryInitial),
         places: places,
         categorySelected: _categoryInitial,
-        contentPlaces: _categoryInitial.subCategories[0].places,
+        contentPlaces: _categoryInitial.subCategories![0].places as List<PlaceModel?>?,
         contentSuggestedByUsers:
-            _categoryInitial.subCategories[0].suggestedByUsers,
+            _categoryInitial.subCategories![0].suggestedByUsers as List<SuggestionsModel?>?,
       ),
     );
   }
@@ -29,8 +31,8 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     emit(
       state.copyWith(
         categorySelected: category,
-        contentPlaces: category.subCategories[0].places,
-        contentSuggestedByUsers: category.subCategories[0].suggestedByUsers,
+        contentPlaces: category.subCategories![0].places as List<PlaceModel?>?,
+        contentSuggestedByUsers: category.subCategories![0].suggestedByUsers as List<SuggestionsModel?>?,
         interestSelected: _getInterests(category),
         //TOOD:in development
         //sessions: _getSessions(category),
@@ -38,16 +40,16 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     );
   }
 
-  void subCategorySelected(InterestEnum interestSelected, List<dynamic> data) {
+  void subCategorySelected(InterestEnum? interestSelected, List<dynamic>? data) {
     if (interestSelected == InterestEnum.Place) {
-      emit(state.copyWith(contentPlaces: data));
+      emit(state.copyWith(contentPlaces: data as List<PlaceModel?>?));
     } else if (interestSelected == InterestEnum.SuggestedByUsers) {
-      emit(state.copyWith(contentSuggestedByUsers: data));
+      emit(state.copyWith(contentSuggestedByUsers: data as List<SuggestionsModel?>?));
     }
   }
 
   void selectedSession(SessionModel item) {
-    List<SessionModel> _list = state.sessions.map((e) {
+    List<SessionModel> _list = state.sessions!.map((e) {
       e.selected = e.type == item.type;
       return e;
     }).toList();
@@ -58,7 +60,7 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
   }
 
   List<Widget> buildTabsTitle(PlacesCategory category) {
-    return category.subCategories
+    return category.subCategories!
         .map(
           (e) => Tab(
             text: e.subCategoryName,

@@ -7,9 +7,9 @@ import 'package:custom_view/spacer_box.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategories extends StatelessWidget {
-  final InterestBloc interestBloc;
+  final InterestBloc? interestBloc;
 
-  const InterestCategories({Key key, @required this.interestBloc})
+  const InterestCategories({Key? key, required this.interestBloc})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class InterestCategories extends StatelessWidget {
   }
 
   Widget _buildCards() {
-    if (interestBloc.state.isLoading) {
+    if (interestBloc!.state.isLoading!) {
       return Wrap(
         alignment: WrapAlignment.center,
         spacing: 30,
@@ -35,7 +35,7 @@ class InterestCategories extends StatelessWidget {
       );
     }
 
-    if (interestBloc.state.categories.isNotEmpty) {
+    if (interestBloc!.state.categories!.isNotEmpty) {
       return Wrap(
         alignment: WrapAlignment.center,
         spacing: 30,
@@ -47,11 +47,11 @@ class InterestCategories extends StatelessWidget {
   }
 
   List<Widget> _generateItems() {
-    return interestBloc.state.categories.map((element) {
+    return interestBloc!.state.categories!.map((element) {
       return InterestCategoryItem(
         categorie: element,
-        callbackSelected: (bool selected) {
-          interestBloc
+        callbackSelected: (bool? selected) {
+          interestBloc!
               .add(SelectCategorie(itemSelected: element, selected: selected));
         },
       );

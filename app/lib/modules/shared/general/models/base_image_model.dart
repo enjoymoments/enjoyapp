@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseImageModel {
-  final String id;
+  final String? id;
 
-  BaseImageModel({@required this.id});
+  BaseImageModel({required this.id});
 }

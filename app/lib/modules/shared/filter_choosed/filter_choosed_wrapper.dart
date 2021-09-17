@@ -8,17 +8,17 @@ import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 
 class FilterChoosedWrapper {
-  FilterChoosedWrapper({@required this.localStorageService});
+  FilterChoosedWrapper({required this.localStorageService});
 
   static String keyFilter = 'key_filter';
 
-  FilterChoosedModel _filterChoosed;
-  final LocalStorageService localStorageService;
+  FilterChoosedModel? _filterChoosed;
+  final LocalStorageService? localStorageService;
 
-  FilterChoosedModel get getFilterChoosed => _filterChoosed;
+  FilterChoosedModel? get getFilterChoosed => _filterChoosed;
 
   void init() {
-    if (localStorageService.containsKey(keyFilter)) {
+    if (localStorageService!.containsKey(keyFilter)) {
       readLocal();
       return;
     }
@@ -31,51 +31,51 @@ class FilterChoosedWrapper {
   }
 
   void changePrice(double minPrice, double maxPrice) {
-    _filterChoosed.changePrice(minPrice, maxPrice);
+    _filterChoosed!.changePrice(minPrice, maxPrice);
   }
 
   void changeDistance(double minDistance, double maxDistance) {
-    _filterChoosed.changeDistance(minDistance, maxDistance);
+    _filterChoosed!.changeDistance(minDistance, maxDistance);
   }
 
   void changeTime(double minTime, double maxTime) {
-    _filterChoosed.changeTime(minTime, maxTime);
+    _filterChoosed!.changeTime(minTime, maxTime);
   }
 
   void insertCategorie(CategoriesModel item) {
     item.selected = true;
-    _filterChoosed.insertCategorie(item);
+    _filterChoosed!.insertCategorie(item);
     saveLocal();
   }
 
   void removeCategorie(CategoriesModel item) {
     item.selected = false;
-    _filterChoosed.removeCategorie(item);
+    _filterChoosed!.removeCategorie(item);
     saveLocal();
   }
 
   void insertSubCategorie(CategoriesModel categorie, SubCategoriesModel item) {
-    _filterChoosed.insertSubCategorie(categorie, item);
+    _filterChoosed!.insertSubCategorie(categorie, item);
     saveLocal();
   }
 
   void removeSubCategorie(CategoriesModel categorie, SubCategoriesModel item) {
-    _filterChoosed.removeSubCategorie(categorie, item);
+    _filterChoosed!.removeSubCategorie(categorie, item);
     saveLocal();
   }
 
   void saveLocal() {
     List<dynamic> _categories = <dynamic>[];
     List<CategoriesModel> _categoriesCopy =
-        List<CategoriesModel>.from(_filterChoosed.categories);
+        List<CategoriesModel>.from(_filterChoosed!.categories!);
 
     for (CategoriesModel categorie in _categoriesCopy) {
       _categories.add(categorie.toJson());
     }
 
-    var _result = json.encode(_filterChoosed.toJson(_categories));
+    var _result = json.encode(_filterChoosed!.toJson(_categories));
 
-    localStorageService
+    localStorageService!
         .put(KeyValue<String, String>(key: keyFilter, value: _result))
         .catchError((onError) {
       print('save local error');
@@ -83,7 +83,7 @@ class FilterChoosedWrapper {
   }
 
   void readLocal() {
-    localStorageService.get(keyFilter).then((value) {
+    localStorageService!.get(keyFilter).then((value) {
       var _decode = json.decode(value);
 
       var _result = FilterChoosedModel.fromJson(_decode);

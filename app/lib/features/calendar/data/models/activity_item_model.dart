@@ -2,10 +2,10 @@ import 'package:mozin/features/calendar/domain/entities/activity_item.dart';
 
 class ActivityItemModel extends ActivityItem {
   ActivityItemModel({
-    String id,
-    String name,
-    int codePoint,
-    bool isSelected,
+    String? id,
+    String? name,
+    int? codePoint,
+    bool? isSelected,
   }) : super(
           id: id,
           name: name,
@@ -34,10 +34,10 @@ class ActivityItemModel extends ActivityItem {
   }
 
   ActivityItemModel copyWith({
-    String id,
-    String name,
-    int codePoint,
-    bool isSelected,
+    String? id,
+    String? name,
+    int? codePoint,
+    bool? isSelected,
   }) {
     return ActivityItemModel(
       id: id ?? this.id,

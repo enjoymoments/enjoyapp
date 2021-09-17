@@ -4,24 +4,25 @@ import 'package:intl/intl.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
 
-extension NavigatorStateExtension on ExtendedNavigatorState {
-  void pushNamedIfNotCurrent(String routeName, {Object arguments}) {
-    if (!isCurrent(routeName)) {
-      push(routeName, arguments: arguments);
-    }
-  }
+//TODO:null-safety
+// extension NavigatorStateExtension on ExtendedNavigatorState {
+//   void pushNamedIfNotCurrent(String routeName, {Object arguments}) {
+//     if (!isCurrent(routeName)) {
+//       push(routeName, arguments: arguments);
+//     }
+//   }
 
-  bool isCurrent(String routeName) {
-    bool isCurrent = false;
-    popUntil((route) {
-      if (route.settings.name == routeName) {
-        isCurrent = true;
-      }
-      return true;
-    });
-    return isCurrent;
-  }
-}
+//   bool isCurrent(String routeName) {
+//     bool isCurrent = false;
+//     popUntil((route) {
+//       if (route.settings.name == routeName) {
+//         isCurrent = true;
+//       }
+//       return true;
+//     });
+//     return isCurrent;
+//   }
+// }
 
 extension DateTimeExtension on DateTime {
   DateTime setTimeOfDay(TimeOfDay time) {

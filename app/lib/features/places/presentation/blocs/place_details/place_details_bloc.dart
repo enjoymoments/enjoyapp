@@ -16,7 +16,7 @@ part 'place_details_state.dart';
 
 class PlaceDetailsBloc extends Bloc<PlaceDetailsEvent, PlaceDetailsState> {
   PlaceDetailsBloc({
-    @required PlacesRepository placesRepository,
+    required PlacesRepository placesRepository,
   })  : assert(placesRepository != null),
         _placesRepository = placesRepository,
         super(PlaceDetailsState.initial());
@@ -40,8 +40,8 @@ class PlaceDetailsBloc extends Bloc<PlaceDetailsEvent, PlaceDetailsState> {
 
     yield response.fold((item) {
       event.item = item;
-      event.placePhotosBloc.add(LoadPhotos(event.item));
-      event.favoriteInterestsItemBloc.add(SetFavoriteItem(event.item.favorited));
+      event.placePhotosBloc!.add(LoadPhotos(event.item));
+      event.favoriteInterestsItemBloc!.add(SetFavoriteItem(event.item!.favorited));
 
       return state.copyWith(
           isLoading: false, isError: false, isSuccess: true, item: item);

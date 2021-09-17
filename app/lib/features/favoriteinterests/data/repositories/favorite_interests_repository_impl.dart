@@ -7,20 +7,20 @@ import 'package:mozin/modules/shared/general/interest_type.dart';
 
 class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
   FavoriteInterestsRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final FavoriteInterestsRemoteDataSource remoteDataSource;
+  final FavoriteInterestsRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<bool, Exception>> addFavoriteInterest(
-    String interestId,
-    String categoryId,
-    String subCategoryId,
+    String? interestId,
+    String? categoryId,
+    String? subCategoryId,
     InterestEnum interestType,
   ) async {
     try {
-      var response = await remoteDataSource.addFavoriteInterest(
+      var response = await remoteDataSource!.addFavoriteInterest(
         interestId,
         categoryId,
         subCategoryId,
@@ -36,7 +36,7 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
   @override
   Future<Either<InterestType, Exception>> getFavoriteInterests() async {
     try {
-      var response = await remoteDataSource.getFavoriteInterests();
+      var response = await remoteDataSource!.getFavoriteInterests();
       return Left<InterestType, Exception>(response);
     } on dynamic catch (e) {
       return Right<InterestType, Exception>(
@@ -46,9 +46,9 @@ class FavoriteInterestsRepositoryImpl implements FavoriteInterestsRepository {
 
   @override
   Future<Either<bool, Exception>> removeFavoriteInterest(
-      String interestId) async {
+      String? interestId) async {
     try {
-      var response = await remoteDataSource.removeFavoriteInterest(interestId);
+      var response = await remoteDataSource!.removeFavoriteInterest(interestId);
       return Left<bool, Exception>(response);
     } on dynamic catch (e) {
       return Right<bool, Exception>(

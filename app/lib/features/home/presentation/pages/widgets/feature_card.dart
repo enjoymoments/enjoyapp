@@ -10,14 +10,14 @@ class FeatureCard extends StatelessWidget {
   final IconData iconData;
   final String routeName;
   final String name;
-  final double width;
+  final double? width;
   final bool disabled;
 
   const FeatureCard({
-    Key key,
-    @required this.iconData,
-    @required this.routeName,
-    @required this.name,
+    Key? key,
+    required this.iconData,
+    required this.routeName,
+    required this.name,
     this.width,
     this.disabled = false,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class FeatureCard extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          ExtendedNavigator.of(context).push(routeName);
+          AutoRouter.of(context).pushNamed(routeName);
         },
         child: CardContainer(
           width: width,

@@ -4,8 +4,8 @@ import 'package:mozin/modules/shared/general/entities/media_entity.dart';
 
 class AlbumItemEntity extends Equatable {
   final String id;
-  final String titleAlbum;
-  final DateTime dateCreation;
+  final String? titleAlbum;
+  final DateTime? dateCreation;
   final List<MediaEntity> medias;
 
   const AlbumItemEntity(
@@ -22,8 +22,8 @@ class AlbumItemEntity extends Equatable {
     );
   }
 
-  static List<MediaEntity> _toEntity(Iterable field) {
-    List<MediaEntity> result = new List<MediaEntity>();
+  static List<MediaEntity> _toEntity(Iterable? field) {
+    List<MediaEntity> result = <MediaEntity>[];
 
     if (field != null) {
       field.forEach((item) {
@@ -35,7 +35,7 @@ class AlbumItemEntity extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         dateCreation,
         medias,

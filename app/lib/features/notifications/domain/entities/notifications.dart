@@ -10,14 +10,14 @@ class Notifications extends Equatable {
     this.notificationType,
   });
 
-  final String id;
-  final String data;
-  final DateTime dateTime;
-  final String message;
-  final NotificationTypeEnum notificationType;
+  final String? id;
+  final String? data;
+  final DateTime? dateTime;
+  final String? message;
+  final NotificationTypeEnum? notificationType;
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
     this.id,
     this.data,
     this.dateTime,

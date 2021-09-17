@@ -17,7 +17,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
-  TimelineBloc _timelineBloc;
+  TimelineBloc? _timelineBloc;
 
   @override
   void initState() {
@@ -37,24 +37,24 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
     return BlocBuilder<TimelineBloc, TimelineState>(
       bloc: _timelineBloc,
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return _buildLoading();
         }
 
-        if (state.posts.isNotEmpty) {
+        if (state.posts!.isNotEmpty) {
           return RefreshIndicator(
             key: _refreshIndicatorKey,
             color: Theme.of(context).primaryColor,
             onRefresh: () async {
-              _timelineBloc.add(LoadPosts());
+              _timelineBloc!.add(LoadPosts());
             },
             child: ListView.separated(
               physics: const AlwaysScrollableScrollPhysics(),
-              itemCount: state.posts.length,
+              itemCount: state.posts!.length,
               separatorBuilder: (context, index) => SpacerBox.v16,
               itemBuilder: (context, index) {
                 return TimeLineItem(
-                  item: state.posts[index],
+                  item: state.posts![index],
                   timelineBloc: _timelineBloc,
                 );
               },
@@ -62,7 +62,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
           );
         }
 
-        if (state.isError) {
+        if (state.isError!) {
           return Center(
             child: "Ops, houve um erro. Tente novamente".labelIntro(context),
           );

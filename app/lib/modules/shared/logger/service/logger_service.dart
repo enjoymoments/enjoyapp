@@ -7,26 +7,26 @@ import 'package:package_info/package_info.dart';
 
 class LoggerService {
   LoggerService({
-    @required this.loggerRepository,
-    @required this.deviceInfoService,
-    @required this.userWrapper,
+    required this.loggerRepository,
+    required this.deviceInfoService,
+    required this.userWrapper,
   });
 
-  final LoggerRepository loggerRepository;
-  final DeviceInfoService deviceInfoService;
-  final UserWrapper userWrapper;
+  final LoggerRepository? loggerRepository;
+  final DeviceInfoService? deviceInfoService;
+  final UserWrapper? userWrapper;
 
   Future<void> addLogAsync(LoggerModel log) async {
-    log.deviceInfo = await deviceInfoService.getDeviceInfo();
+    log.deviceInfo = await deviceInfoService!.getDeviceInfo();
 
     final PackageInfo packageInfo = await getPackageInfoAsync();
     log.appName = packageInfo.appName;
     log.appVersion = packageInfo.version;
     log.packageName = packageInfo.packageName;
 
-    log.login = userWrapper.getUser.email;
+    log.login = userWrapper!.getUser!.email;
 
-    loggerRepository.addLog(log);
+    loggerRepository!.addLog(log);
   }
 
   //TODO:review

@@ -9,7 +9,7 @@ import 'package:custom_view/spacer_box.dart';
 class GeneralFiltersScreen extends StatelessWidget {
   final GeneralFilterModel generalFilters;
 
-  const GeneralFiltersScreen({Key key, @required this.generalFilters}) : super(key: key);
+  const GeneralFiltersScreen({Key? key, required this.generalFilters}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class GeneralFiltersScreen extends StatelessWidget {
       prefixStartRange: 'R\$',
       textEndRange: '2000',
       prefixEndRange: 'R\$',
-      selectedRanges: RangeValues(generalFilters.minPrice, generalFilters.maxPrice),
+      selectedRanges: RangeValues(generalFilters.minPrice!, generalFilters.maxPrice!),
     );
   }
 
@@ -55,7 +55,7 @@ class GeneralFiltersScreen extends StatelessWidget {
       prefixStartRange: 'Km',
       textEndRange: '20',
       prefixEndRange: 'Km',
-      selectedRanges: RangeValues(generalFilters.minDistance, generalFilters.maxDistance),
+      selectedRanges: RangeValues(generalFilters.minDistance!, generalFilters.maxDistance!),
     );
   }
 
@@ -70,7 +70,7 @@ class GeneralFiltersScreen extends StatelessWidget {
       prefixStartRange: 'Hs',
       textEndRange: '23:59',
       prefixEndRange: 'Hs',
-      selectedRanges: RangeValues(generalFilters.minTime, generalFilters.maxTime),
+      selectedRanges: RangeValues(generalFilters.minTime!, generalFilters.maxTime!),
     );
   }
 }

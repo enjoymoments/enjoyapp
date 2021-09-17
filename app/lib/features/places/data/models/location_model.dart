@@ -2,8 +2,8 @@ import 'package:mozin/features/places/domain/entities/location.dart';
 
 class LocationModel extends Location {
   LocationModel({
-    double latitude,
-    double longitude,
+    double? latitude,
+    double? longitude,
   }) : super(
           latitude: latitude,
           longitude: longitude,

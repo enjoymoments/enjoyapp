@@ -4,7 +4,7 @@ import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 
 class LoggerRepository {
-  final RemoteConfig remoteConfig;
+  final RemoteConfig? remoteConfig;
 
   LoggerRepository({this.remoteConfig});
 
@@ -23,7 +23,7 @@ class LoggerRepository {
         'type': model.typeError.index,
       };
 
-      var url = remoteConfig.getString(url_functions);
+      var url = remoteConfig!.getString(url_functions);
 
       _dio
           .post('$url/writeLog', data: data)

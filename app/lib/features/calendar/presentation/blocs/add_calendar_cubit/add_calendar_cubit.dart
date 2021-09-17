@@ -10,7 +10,7 @@ import 'package:mozin_core/utils.dart';
 part 'add_calendar_state.dart';
 
 class AddCalendarCubit extends Cubit<AddCalendarState> {
-  AddCalendarCubit({@required CalendarRepository calendarRepository})
+  AddCalendarCubit({required CalendarRepository calendarRepository})
       : assert(calendarRepository != null),
         _calendarRepository = calendarRepository,
         super(AddCalendarState.initial());
@@ -18,7 +18,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   final CalendarRepository _calendarRepository;
 
   void addActivity(AddActivityCalendarModel model) {
-    state.model.activities.add(model);
+    state.model!.activities!.add(model);
     emit(state.copyWith(
       model: state.model,
       isError: false,
@@ -27,7 +27,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }
 
   void removeActivity(AddActivityCalendarModel model) {
-    state.model.activities.remove(model);
+    state.model!.activities!.remove(model);
     emit(state.copyWith(
       model: state.model,
       isError: false,
@@ -36,52 +36,52 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }
 
   void setModel({
-    String taskId,
-    String title,
-    String description,
-    DateTime datetime,
-    List<AddActivityCalendar> activities,
+    String? taskId,
+    String? title,
+    String? description,
+    DateTime? datetime,
+    List<AddActivityCalendar>? activities,
   }) {
-    state.model.taskId = taskId ?? state.model.taskId;
-    state.model.title = title ?? state.model.title;
-    state.model.dateTime = datetime ?? state.model.dateTime;
-    state.model.description = description ?? state.model.description;
-    state.model.activities = activities ?? state.model.activities;
+    state.model!.taskId = taskId ?? state.model!.taskId;
+    state.model!.title = title ?? state.model!.title;
+    state.model!.dateTime = datetime ?? state.model!.dateTime;
+    state.model!.description = description ?? state.model!.description;
+    state.model!.activities = activities ?? state.model!.activities;
 
     emit(
       state.copyWith(
         model: state.model,
         isError: false,
         errorMessage: '',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ),
     );
   }
 
   void save() {
-    if (state.model.title == null || state.model.title == "") {
+    if (state.model!.title == null || state.model!.title == "") {
       emit(state.copyWith(
         isError: true,
         errorMessage: 'Informe o título',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
 
-    if (state.model.dateTime == null) {
+    if (state.model!.dateTime == null) {
       emit(state.copyWith(
         isError: true,
         errorMessage: 'Informe a data e hora',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
 
-    if (state.model.activities.length == 0) {
+    if (state.model!.activities!.length == 0) {
       emit(state.copyWith(
         isError: true,
         errorMessage: 'Selecione ao menos uma atividade',
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
@@ -91,16 +91,16 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
 
   void remove() async {
     var _response =
-        await _calendarRepository.removeTaskInCalendar(state.model.taskId);
+        await _calendarRepository.removeTaskInCalendar(state.model!.taskId);
 
     _response.fold(
       (value) {
-        if (value) {
+        if (value!) {
           emit(
             state.copyWith(
               isError: false,
               isSuccess: true,
-              forceRefresh: StateUtils.generateRandomNumber(),
+              forceRefresh: StateUtils.generateRandomNumber() as int?,
             ),
           );
         } else {
@@ -109,7 +109,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
               isError: true,
               isSuccess: false,
               errorMessage: 'Ops... houve um erro. Tente novamente!',
-              forceRefresh: StateUtils.generateRandomNumber(),
+              forceRefresh: StateUtils.generateRandomNumber() as int?,
             ),
           );
         }
@@ -120,7 +120,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
             isError: true,
             isSuccess: false,
             errorMessage: 'Ops... houve um erro. Tente novamente!',
-            forceRefresh: StateUtils.generateRandomNumber(),
+            forceRefresh: StateUtils.generateRandomNumber() as int?,
           ),
         );
       },
@@ -132,12 +132,12 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
 
     _response.fold(
       (value) {
-        if (value) {
+        if (value!) {
           emit(
             state.copyWith(
               isError: false,
               isSuccess: true,
-              forceRefresh: StateUtils.generateRandomNumber(),
+              forceRefresh: StateUtils.generateRandomNumber() as int?,
             ),
           );
         } else {
@@ -146,7 +146,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
               isError: true,
               isSuccess: false,
               errorMessage: 'Ops... houve um erro. Tente novamente!',
-              forceRefresh: StateUtils.generateRandomNumber(),
+              forceRefresh: StateUtils.generateRandomNumber() as int?,
             ),
           );
         }
@@ -157,7 +157,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
             isError: true,
             isSuccess: false,
             errorMessage: 'Ops... houve um erro. Tente novamente!',
-            forceRefresh: StateUtils.generateRandomNumber(),
+            forceRefresh: StateUtils.generateRandomNumber() as int?,
           ),
         );
       },

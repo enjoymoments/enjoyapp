@@ -3,7 +3,7 @@ import 'package:mozin/features/notifications/data/models/notifications_model.dar
 import 'package:custom_view/extensions/extension.dart';
 
 class NotificationItem extends StatelessWidget {
-  const NotificationItem({Key key, @required this.item}) : super(key: key);
+  const NotificationItem({Key? key, required this.item}) : super(key: key);
 
   final NotificationsModel item;
 
@@ -12,7 +12,7 @@ class NotificationItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        item.message.title(context),
+        item.message!.title(context),
         item.dateCreationFormatted.description(context),
       ],
     );

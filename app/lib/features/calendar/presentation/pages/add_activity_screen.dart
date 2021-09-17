@@ -15,20 +15,20 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class AddActivityScreen extends StatelessWidget {
-  final AddActivityCubit activityCubit;
-  final AddCalendarCubit addCalendarCubit;
+  final AddActivityCubit? activityCubit;
+  final AddCalendarCubit? addCalendarCubit;
 
   const AddActivityScreen({
-    Key key,
-    @required this.activityCubit,
-    @required this.addCalendarCubit,
+    Key? key,
+    required this.activityCubit,
+    required this.addCalendarCubit,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context) as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -38,7 +38,7 @@ class AddActivityScreen extends StatelessWidget {
       title: 'Tipos de atividades',
       context: context,
       onPressedBack: () {
-        ExtendedNavigator.of(context).pop();
+        AutoRouter.of(context).pop();
       },
     );
   }
@@ -47,8 +47,8 @@ class AddActivityScreen extends StatelessWidget {
     return BlocBuilder<AddActivityCubit, AddActivityState>(
       bloc: activityCubit,
       builder: (context, state) {
-        if (state.activities != null && state.activities.length > 0) {
-          return _buildContent(context, state.activities);
+        if (state.activities != null && state.activities!.length > 0) {
+          return _buildContent(context, state.activities!);
         }
 
         return ActivityLoading();
@@ -78,20 +78,20 @@ class AddActivityScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        section.sessionName.label(context),
+        section.sessionName!.label(context),
         Wrap(
-          children: section.activities.buildWithBetweenSpace<ActivityItemModel>(
+          children: section.activities!.buildWithBetweenSpace<ActivityItemModel>(
             space: SpacerBox.h16,
             builderItem: (e) {
               return ActivityIcon(
                 item: e,
-                onPressed: (ActivityItemModel item) {
-                  if (item.isSelected) {
-                    addCalendarCubit.addActivity(
+                onPressed: (ActivityItemModel? item) {
+                  if (item!.isSelected!) {
+                    addCalendarCubit!.addActivity(
                         AddActivityCalendarModel(
                             sessionId: section.id, activityId: item.id));
                   } else {
-                    addCalendarCubit.removeActivity(
+                    addCalendarCubit!.removeActivity(
                         AddActivityCalendarModel(
                             sessionId: section.id, activityId: item.id));
                   }

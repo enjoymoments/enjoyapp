@@ -7,10 +7,10 @@ class CustomItemModalFit extends StatelessWidget {
   final IconData iconData;
 
   const CustomItemModalFit({
-    Key key,
-    @required this.onTap,
-    @required this.text,
-    @required this.iconData,
+    Key? key,
+    required this.onTap,
+    required this.text,
+    required this.iconData,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class CustomItemModalFit extends StatelessWidget {
       title: Text(text),
       leading: Icon(iconData),
       onTap: () {
-        ExtendedNavigator.of(context).pop();
+        AutoRouter.of(context).pop();
         onTap();
       },
     );

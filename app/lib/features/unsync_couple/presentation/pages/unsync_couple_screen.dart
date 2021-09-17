@@ -19,7 +19,7 @@ import 'package:custom_view/spacer_box.dart';
 
 class UnsyncCoupleScreen extends StatefulWidget {
   const UnsyncCoupleScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class UnsyncCoupleScreen extends StatefulWidget {
 }
 
 class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
-  UnsyncCoupleCubit _unsyncCoupleCubit;
+  UnsyncCoupleCubit? _unsyncCoupleCubit;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
 
   @override
   void dispose() {
-    _unsyncCoupleCubit.close();
+    _unsyncCoupleCubit!.close();
     super.dispose();
   }
 
@@ -46,22 +46,22 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
     return BlocConsumer<UnsyncCoupleCubit, UnsyncCoupleState>(
       bloc: _unsyncCoupleCubit,
       listener: (consumerContext, state) {
-        if (state.isSuccess) {
+        if (state.isSuccess!) {
           _redirectSuccessScreen(context);
         }
       },
       builder: (BuildContext context, UnsyncCoupleState state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return UnsyncCoupleScreenLoading();
         }
 
-        if (state.isError) {
+        if (state.isError!) {
           return CustomScaffold(
             child: Center(
               child:
                   'Ops...\n houve um erro. Tente novamente'.labelIntro(context),
             ),
-            appBar: _buildAppBar(context),
+            appBar: _buildAppBar(context) as AppBar,
             bottomNavigationBar: null,
           );
         }
@@ -77,7 +77,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
               ),
             ),
           ),
-          appBar: _buildAppBar(context),
+          appBar: _buildAppBar(context) as AppBar,
           bottomNavigationBar: _buildButtons(context),
         );
       },
@@ -85,9 +85,8 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
   }
 
   void _redirectSuccessScreen(BuildContext context) {
-    ExtendedNavigator.of(context).popAndPush(
-      Routes.success_screen,
-      arguments: CustomSuccessScreenArguments(
+    AutoRouter.of(context).popAndPush(
+      Success_screen(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,7 +110,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
             text: 'Sim',
             width: SizeConfig.sizeByPixel(100),
             onTap: () {
-              _unsyncCoupleCubit.unsyncCouple();
+              _unsyncCoupleCubit!.unsyncCouple();
             },
           ),
           SpacerBox.h16,
@@ -120,7 +119,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
             width: SizeConfig.sizeByPixel(100),
             swipeColors: true,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],
@@ -175,7 +174,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
       title: 'Desvincular',
       context: context,
       onPressedBack: () {
-        ExtendedNavigator.of(context).pop();
+        AutoRouter.of(context).pop();
       },
       actions: <Widget>[],
     );

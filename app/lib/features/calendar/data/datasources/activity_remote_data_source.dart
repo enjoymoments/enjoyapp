@@ -8,7 +8,7 @@ abstract class ActivityRemoteDataSource {
 class ActivityRemoteDataSourceImpl implements ActivityRemoteDataSource {
   ActivityRemoteDataSourceImpl(this.remoteClientRepository);
 
-  final RemoteClientRepository remoteClientRepository;
+  final RemoteClientRepository? remoteClientRepository;
 
   @override
   Future<List<ActivityModel>> getActivities() async {
@@ -26,9 +26,9 @@ class ActivityRemoteDataSourceImpl implements ActivityRemoteDataSource {
     }
     ''';
 
-    var result = await remoteClientRepository.query(_query);
+    var result = await remoteClientRepository!.query(_query);
 
-    List<ActivityModel> _list = List<ActivityModel>();
+    List<ActivityModel> _list = <ActivityModel>[];
 
     for (var e in result['data']['getActivities']) {
       _list.add(ActivityModel.fromJson(e));

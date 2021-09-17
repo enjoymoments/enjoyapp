@@ -8,9 +8,9 @@ import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
 class RemoteClientRepository {
   RemoteClientRepository({
-    @required Dio dio,
-    @required String url,
-    @required LoggerService loggerService,
+    required Dio dio,
+    required String url,
+    required LoggerService loggerService,
   })  : assert(dio != null),
         _dio = dio,
         assert(url != null),
@@ -22,7 +22,7 @@ class RemoteClientRepository {
   final String _url;
   final LoggerService _loggerService;
 
-  Future<dynamic> query(String doc, {Map<String, dynamic> variables}) async {
+  Future<dynamic> query(String doc, {Map<String, dynamic>? variables}) async {
     Options _opt = await _getOptions();
 
     var jsonMap = {'query': doc, 'variables': variables};
@@ -69,7 +69,7 @@ class RemoteClientRepository {
     };
   }
 
-  void _logger(dynamic onError, Map<String, dynamic> jsonMap) {
+  void _logger(dynamic onError, Map<String, dynamic>? jsonMap) {
     _loggerService.addLogAsync(
       LoggerModel(
         typeError: LoggerTypeEnum.Error,

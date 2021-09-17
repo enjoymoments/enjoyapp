@@ -5,23 +5,23 @@ import 'package:mozin/features/places/domain/entities/location.dart';
 import 'package:mozin/features/places/domain/entities/review.dart';
 
 class Place extends Equatable {
-  final String address;
-  String formattedAddress;
-  String formattedPhoneNumber;
-  final String name;
-  bool favorited;
-  final String placeId;
-  final double rating;
-  final List<String> types;
-  final int userRatingsTotal;
-  final String vicinity;
-  final int priceLevel;
-  List<String> photoReferences;
-  final String icon;
-  final Location location;
-  bool openNow;
-  List<Review> reviews;
-  List<Uint8List> photos;
+  final String? address;
+  String? formattedAddress;
+  String? formattedPhoneNumber;
+  final String? name;
+  bool? favorited;
+  final String? placeId;
+  final double? rating;
+  final List<String>? types;
+  final int? userRatingsTotal;
+  final String? vicinity;
+  final int? priceLevel;
+  List<String>? photoReferences;
+  final String? icon;
+  final Location? location;
+  bool? openNow;
+  List<Review>? reviews;
+  List<Uint8List>? photos;
 
   Place({
     this.address,
@@ -44,7 +44,7 @@ class Place extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         this.address,
         this.formattedAddress,
         this.formattedPhoneNumber,

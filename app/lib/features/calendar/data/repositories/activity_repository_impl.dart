@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 
 class ActivityRepositoryImpl implements ActivityRepository {
   ActivityRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final ActivityRemoteDataSource remoteDataSource;
+  final ActivityRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<List<ActivityModel>, Exception>> getActivities() async {
     try {
-      var response = await remoteDataSource.getActivities();
+      var response = await remoteDataSource!.getActivities();
       return Left<List<ActivityModel>, Exception>(response);
     } on dynamic catch (e) {
       return Right<List<ActivityModel>, Exception>(e);

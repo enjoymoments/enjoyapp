@@ -13,9 +13,8 @@ part 'place_photos_event.dart';
 part 'place_photos_state.dart';
 
 class PlacePhotosBloc extends Bloc<PlacePhotosEvent, PlacePhotosState> {
-  PlacePhotosBloc({@required PlacesRepository placesRepository})
-      : assert(placesRepository != null),
-        _placesRepository = placesRepository,
+  PlacePhotosBloc({required PlacesRepository placesRepository})
+      : _placesRepository = placesRepository,
         super(PlacePhotosState.initial());
 
   final PlacesRepository _placesRepository;
@@ -30,25 +29,25 @@ class PlacePhotosBloc extends Bloc<PlacePhotosEvent, PlacePhotosState> {
   }
 
   Stream<PlacePhotosState> mapPhotosToState(LoadPhotos event) async* {
-    List<Future<String>> _listFutures = List<Future<String>>();
-    List<Uint8List> _listPhotos = List<Uint8List>();
+    List<Future<String>> _listFutures = <Future<String>>[];
+    List<Uint8List> _listPhotos = <Uint8List>[];
 
-    for (var photoReference in event.item.photoReferences) {
+    for (var photoReference in event.item!.photoReferences!) {
       _listFutures.add(
-        _placesRepository.getPlacePhoto(event.item.placeId, photoReference).then(
-          (String value) {
+        _placesRepository.getPlacePhoto(event.item!.placeId, photoReference).then(
+          (String? value) {
             if (value != null) {
               var image = base64.decode(value);
               _listPhotos.add(image);
             }
-          },
+          } as FutureOr<String> Function(String?),
         ),
       );
     }
 
     await Future.wait(_listFutures);
 
-    event.item.photos = _listPhotos;
+    event.item!.photos = _listPhotos;
 
     yield state.copyWith(item: event.item);
   }

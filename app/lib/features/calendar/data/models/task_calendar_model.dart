@@ -3,11 +3,11 @@ import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 
 class TaskCalendarModel extends AddTaskCalendar {
   TaskCalendarModel({
-    String taskId,
-    String title,
-    String description,
-    DateTime dateTime,
-    List<AddActivityCalendarModel> activities,
+    String? taskId,
+    String? title,
+    String? description,
+    DateTime? dateTime,
+    List<AddActivityCalendarModel>? activities,
   }) : super(
           taskId: taskId,
           title: title,

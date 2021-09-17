@@ -10,7 +10,7 @@ abstract class UserInterface {
   void addFavoriteInterest(PlaceModel model);
   void addFavoriteSuggestionInterest(SuggestionsModel model);
 
-  void removeFavoriteInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
-  void removeFavoriteSuggestionInterest({@required int indexCategory, @required int indexSubCategory, @required int indexItem});
+  void removeFavoriteInterest({required int indexCategory, required int indexSubCategory, required int indexItem});
+  void removeFavoriteSuggestionInterest({required int indexCategory, required int indexSubCategory, required int indexItem});
   void setUserInfo();
 }

@@ -7,11 +7,11 @@ import 'package:custom_view/spacer_box.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class PlaceAvailableWidget extends StatelessWidget {
-  final PlaceModel item;
+  final PlaceModel? item;
   
   final ExpandableController controller = ExpandableController();
 
-  PlaceAvailableWidget({Key key, @required this.item}) : super(key: key);
+  PlaceAvailableWidget({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class PlaceAvailableWidget extends StatelessWidget {
         child: CustomContainer(
           child: ExpandablePanel(
             controller: controller,
-            header: _buildCollapsed(context),
+            collapsed: _buildCollapsed(context),
             expanded: _buildExpanded(context),
           ),
         ),
@@ -39,7 +39,7 @@ class PlaceAvailableWidget extends StatelessWidget {
           color: Theme.of(context).primaryColor,
         ),
         SpacerBox.h8,
-        (item.openNow ? "Aberto" : "Fechado").label(context, color: Theme.of(context).primaryColor),
+        (item!.openNow! ? "Aberto" : "Fechado").label(context, color: Theme.of(context).primaryColor),
         SpacerBox.h8,
         "Fecha às 22:30".label(context),
       ],
@@ -74,7 +74,7 @@ class PlaceAvailableWidget extends StatelessWidget {
   }
 
   Widget _buildDay(BuildContext context,
-      {@required String day, @required String hour}) {
+      {required String day, required String hour}) {
     return Row(
       children: [
         day.label(context),

@@ -13,7 +13,7 @@ part 'unsynccouple_state.dart';
 
 class UnsyncCoupleCubit extends Cubit<UnsyncCoupleState> {
   UnsyncCoupleCubit({
-    @required UserActionRepository userActionRepository,
+    required UserActionRepository userActionRepository,
   })  : assert(userActionRepository != null),
         _userActionRepository = userActionRepository,
         super(UnsyncCoupleState.initial());
@@ -31,13 +31,13 @@ class UnsyncCoupleCubit extends Cubit<UnsyncCoupleState> {
                 notificationType: NotificationTypeEnum.UnsyncCouple));
 
     _response.fold((model) {
-      if (model.isSuccess) {
+      if (model.isSuccess!) {
         getItInstance<UserWrapper>().setCoupleId(model.data);
       }
 
       emit(state.copyWith(
         isLoading: false,
-        isError: !model.isSuccess,
+        isError: !model.isSuccess!,
         isSuccess: model.isSuccess,
       ));
     }, (error) {

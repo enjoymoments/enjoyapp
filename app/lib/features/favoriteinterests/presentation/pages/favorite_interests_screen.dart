@@ -16,7 +16,7 @@ class FavoriteInterestsScreen extends StatefulWidget {
 }
 
 class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
-  FavoriteInterestsBloc _favoriteInterestsBloc;
+  FavoriteInterestsBloc? _favoriteInterestsBloc;
 
   @override
   void initState() {
@@ -35,14 +35,14 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
       child: BlocBuilder<FavoriteInterestsBloc, FavoriteInterestsState>(
         bloc: _favoriteInterestsBloc,
         builder: (context, state) {
-          if (state.isLoading) {
+          if (state.isLoading!) {
             return PlaceCardItemLoading();
           }
 
           if (state.favoriteInterests != null &&
-              state.favoriteInterests.places.length > 0) {
+              state.favoriteInterests!.places!.length > 0) {
             return CategoriesPlaces(
-              places: state.favoriteInterests.places,
+              places: state.favoriteInterests!.places,
             );
           }
 
@@ -54,7 +54,7 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
             );
           }
 
-          if (state.isError) {
+          if (state.isError!) {
             return Container(
               child: Center(
                   child: "Ops... houve um erro.\nTente novamente"

@@ -10,7 +10,7 @@ import 'package:mozin/modules/shared/general/services/local_storage_service.dart
 import 'package:mozin_core/constants.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({Key key}) : super(key: key);
+  const AuthenticationWrapper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AuthenticationWrapper extends StatelessWidget {
             previous.closeOnboardingScreen != current.closeOnboardingScreen;
       },
       builder: (context, state) {
-        if (state.authenticated) {
+        if (state.authenticated!) {
           return RootScreenManager();
         }
 

@@ -4,8 +4,8 @@ import 'package:mozin/features/calendar/domain/entities/grouped_month_calendar.d
 
 class GroupedMonthCalendarModel extends GroupedMonthCalendar {
   const GroupedMonthCalendarModel({
-    int month,
-    List<TaskCalendarModel> tasks,
+    int? month,
+    List<TaskCalendarModel>? tasks,
   }) : super(
           month: month,
           tasks: tasks,

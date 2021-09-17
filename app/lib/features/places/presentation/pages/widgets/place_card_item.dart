@@ -10,16 +10,15 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class PlaceCardItem extends StatelessWidget {
-  final PlaceModel item;
+  final PlaceModel? item;
 
-  const PlaceCardItem({Key key, @required this.item}) : super(key: key);
+  const PlaceCardItem({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.place_item_details_screen,
-            arguments: PlaceItemDetailsArguments(item: item));
+        AutoRouter.of(context).push(Place_item_details_screen(item: item));
       },
       child: Container(
         padding: const EdgeInsets.only(
@@ -38,7 +37,7 @@ class PlaceCardItem extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  item.name.title(context),
+                  item!.name!.title(context),
                   SpacerBox.v8,
                   CustomBadge(
                     child: RatingItem(
@@ -46,7 +45,7 @@ class PlaceCardItem extends StatelessWidget {
                     ),
                   ),
                   SpacerBox.v8,
-                  item.vicinity.description(
+                  item!.vicinity!.description(
                     context,
                     maxLines: 2,
                   ),
@@ -63,7 +62,7 @@ class PlaceCardItem extends StatelessWidget {
   Widget _buildIcon() {
     return CachedNetworkImage(
       fit: BoxFit.cover,
-      imageUrl: item.icon,
+      imageUrl: item!.icon!,
       height: SizeConfig.sizeByPixel(25),
     );
   }

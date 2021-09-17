@@ -4,13 +4,13 @@ import 'package:mozin/modules/shared/general/interest_type.dart';
 
 abstract class FavoriteInterestsRepository {
   Future<Either<bool, Exception>> addFavoriteInterest(
-    String interestId,
-    String categoryId,
-    String subCategoryId,
+    String? interestId,
+    String? categoryId,
+    String? subCategoryId,
     InterestEnum interestType,
   );
 
-  Future<Either<bool, Exception>> removeFavoriteInterest(String interestId);
+  Future<Either<bool, Exception>> removeFavoriteInterest(String? interestId);
 
   Future<Either<InterestType, Exception>> getFavoriteInterests();
 }

@@ -7,12 +7,12 @@ abstract class PlacesRepository {
   Future<Either<PlacesModel, Exception>> getPlaces(
     double latitude,
     double longitude,
-    FilterChoosedModel filters,
+    FilterChoosedModel? filters,
   );
 
   Future<Either<PlaceModel, Exception>> getPlaceDetails(
-    PlaceModel place,
+    PlaceModel? place,
   );
 
-  Future<String> getPlacePhoto(String placeId, String photoReference);
+  Future<String?> getPlacePhoto(String? placeId, String photoReference);
 }

@@ -15,8 +15,8 @@ part 'places_state.dart';
 
 class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
   PlacesBloc({
-    @required PlacesRepository placesRepository,
-    @required FilterChoosedWrapper filterChoosedWrapper,
+    required PlacesRepository placesRepository,
+    required FilterChoosedWrapper filterChoosedWrapper,
   })  : assert(placesRepository != null),
         _placesRepository = placesRepository,
         assert(filterChoosedWrapper != null),

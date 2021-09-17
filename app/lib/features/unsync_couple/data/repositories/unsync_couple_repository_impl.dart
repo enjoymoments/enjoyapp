@@ -4,7 +4,7 @@ import 'package:mozin/features/unsync_couple/domain/repositories/unsync_couple_r
 
 class UnsyncCoupleRepositoryImpl implements UnsyncCoupleRepository {
   UnsyncCoupleRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   final UnsyncCoupleRemoteDataSource remoteDataSource;

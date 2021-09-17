@@ -20,7 +20,7 @@ class SearchPlacesScreen extends StatefulWidget {
 }
 
 class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
-  PlacesBloc _placesBloc;
+  PlacesBloc? _placesBloc;
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
@@ -45,17 +45,17 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       child: BlocBuilder<PlacesBloc, PlacesState>(
         bloc: _placesBloc,
         builder: (context, state) {
-          if (state.isLoading) {
+          if (state.isLoading!) {
             return PlaceCardItemLoading();
           }
 
-          if (state.model.places != null && state.model.places.length > 0) {
+          if (state.model!.places != null && state.model!.places!.length > 0) {
             return CategoriesPlaces(
-              places: state.model.places,
+              places: state.model!.places,
             );
           }
 
-          if (state.model.places != null && state.model.places.length == 0) {
+          if (state.model!.places != null && state.model!.places!.length == 0) {
             return _generateContent(
               SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
@@ -69,7 +69,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
             );
           }
 
-          if (state.isError) {
+          if (state.isError!) {
             return _generateContent(
               SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
@@ -98,14 +98,13 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
         IconButton(
           icon: CustomIcon(icon: AppIcons.filter),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.interest_screen,
-                arguments: InterestScreenArguments(isChangeFilter: true));
+            AutoRouter.of(context).push(Interest_screen(isChangeFilter: true));
           },
         ),
         IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.add_suggestions_screen);
+            AutoRouter.of(context).push(Add_suggestions_screen());
           },
         ),
       ],
@@ -117,7 +116,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       key: _refreshIndicatorKey,
       color: Theme.of(context).primaryColor,
       onRefresh: () async {
-        _placesBloc.add(GetCurrentPosition());
+        _placesBloc!.add(GetCurrentPosition());
       },
       child: child,
     );

@@ -7,14 +7,14 @@ class ScreenManagerEvent extends Equatable {
   List<Object> get props => [];
 }
 class QueueNewPost extends ScreenManagerEvent {
-  final String textPost;
-  final List<GalleryImageModel> medias;
+  final String? textPost;
+  final List<GalleryImageModel>? medias;
 
   QueueNewPost(this.textPost, this.medias);
 }
 class QueueNewAlbum extends ScreenManagerEvent {
   final String titleAlbum;
-  final List<GalleryImageModel> medias;
+  final List<GalleryImageModel>? medias;
 
   QueueNewAlbum(this.titleAlbum, this.medias);
 }

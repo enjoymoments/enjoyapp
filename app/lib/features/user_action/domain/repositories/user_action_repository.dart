@@ -5,6 +5,6 @@ import 'package:mozin/modules/shared/general/models/response_default_model.dart'
 
 abstract class UserActionRepository {
   Future<Either<ResponseDefaultModel, Exception>> addUserAction({
-    @required UserActionModel model
+    required UserActionModel model
   });
 }

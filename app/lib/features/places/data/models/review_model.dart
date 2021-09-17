@@ -2,12 +2,12 @@ import 'package:mozin/features/places/domain/entities/review.dart';
 
 class ReviewModel extends Review {
   ReviewModel({
-    String authorName,
-    String profilePhotoUrl,
-    int rating,
-    String relativeTimeDescription,
-    String text,
-    int time,
+    String? authorName,
+    String? profilePhotoUrl,
+    int? rating,
+    String? relativeTimeDescription,
+    String? text,
+    int? time,
   }) : super(
           authorName: authorName,
           profilePhotoUrl: profilePhotoUrl,

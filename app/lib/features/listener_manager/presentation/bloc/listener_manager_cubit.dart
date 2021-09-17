@@ -14,7 +14,7 @@ import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 class ListenerManagerCubit extends Cubit<ListenerManagerState> {
   ListenerManagerCubit() : super(ListenerManagerState.initial());
 
-  StreamSubscription<DocumentSnapshot> _actionSubscription;
+  StreamSubscription<DocumentSnapshot>? _actionSubscription;
 
   @override
   Future<void> close() {
@@ -29,7 +29,7 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
     if (getItInstance<UserWrapper>().authenticated &&
         _actionSubscription == null) {
       _actionSubscription = _instance.firestore
-          .doc('actionListener/${_user.id}')
+          .doc('actionListener/${_user!.id}')
           .snapshots()
           .listen(
         (action) {
@@ -46,11 +46,11 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
   }
 
   ListenerActionModel _parseActions(DocumentSnapshot action) {
-    return ListenerActionModel.fromJson(action.data());
+    return ListenerActionModel.fromJson(action.data() as Map<String, dynamic>?);
   }
 
   void _resolverActions(ListenerActionModel model) {
-    for (ListenerActionTypeEnum action in model.actions) {
+    for (ListenerActionTypeEnum action in model.actions!) {
       try {
         if (action == ListenerActionTypeEnum.SyncCouple) {
           _forceUpdateTimeline();
@@ -70,7 +70,7 @@ class ListenerManagerCubit extends Cubit<ListenerManagerState> {
   }
 
   Future<void> _forceUpdateTimeline() async {
-    var user = getItInstance<UserWrapper>().getUser;
+    var user = getItInstance<UserWrapper>().getUser!;
 
     var _newInstance =
         user.copyWith(timelineSelected: null, acceptValueNull: true);

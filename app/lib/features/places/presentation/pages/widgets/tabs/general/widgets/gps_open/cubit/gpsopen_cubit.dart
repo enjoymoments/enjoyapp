@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +14,10 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
   GpsOpenCubit() : super(GpsOpenInitial());
 
   void getElements(
-      BuildContext context, String title, String description, double latitude, double longitude) async {
-    List<Widget> _elements = new List<Widget>();
+      BuildContext context, String? title, String? description, double? latitude, double? longitude) async {
+    List<Widget> _elements = <Widget>[];
 
-    if (await MapLauncher.isMapAvailable(MapType.google)) {
+    if (await (MapLauncher.isMapAvailable(MapType.google) as FutureOr<bool>)) {
       _elements.add(
         ListTile(
           title: 'Google Maps'.label(context),
@@ -25,8 +27,8 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
           onTap: () async {
             await MapLauncher.showMarker(
               mapType: MapType.google,
-              coords: Coords(latitude, longitude),
-              title: title,
+              coords: Coords(latitude!, longitude!),
+              title: title!,
               description: description,
             );
           },
@@ -34,7 +36,7 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
       );
     }
 
-    if (await MapLauncher.isMapAvailable(MapType.waze)) {
+    if (await (MapLauncher.isMapAvailable(MapType.waze) as FutureOr<bool>)) {
       _elements.add(
         ListTile(
           title: "Waze".label(context),
@@ -44,8 +46,8 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
           onTap: () async {
             await MapLauncher.showMarker(
               mapType: MapType.waze,
-              coords: Coords(latitude, longitude),
-              title: title,
+              coords: Coords(latitude!, longitude!),
+              title: title!,
               description: description,
             );
           },
@@ -53,7 +55,7 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
       );
     }
 
-    if (await MapLauncher.isMapAvailable(MapType.apple)) {
+    if (await (MapLauncher.isMapAvailable(MapType.apple) as FutureOr<bool>)) {
       _elements.add(
         ListTile(
           title: "Apple Maps".label(context),
@@ -63,8 +65,8 @@ class GpsOpenCubit extends Cubit<GpsOpenState> {
           onTap: () async {
             await MapLauncher.showMarker(
               mapType: MapType.apple,
-              coords: Coords(latitude, longitude),
-              title: title,
+              coords: Coords(latitude!, longitude!),
+              title: title!,
               description: description,
             );
           },

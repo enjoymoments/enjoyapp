@@ -3,8 +3,8 @@ import 'package:mozin/features/calendar/domain/entities/grouped_date_calendar.da
 
 class GroupedDateCalendarModel extends GroupedDateCalendar {
   const GroupedDateCalendarModel({
-    DateTime date,
-    List<TaskCalendarModel> tasks,
+    DateTime? date,
+    List<TaskCalendarModel>? tasks,
   }) : super(
           date: date,
           tasks: tasks

@@ -7,7 +7,7 @@ part 'user_action_state.dart';
 
 class UserActionCubit extends Cubit<UserActionState> {
   UserActionCubit({
-    @required UserActionRepository userActionRepository,
+    required UserActionRepository userActionRepository,
   })  : assert(userActionRepository != null),
         _userActionRepository = userActionRepository,
         super(UserActionState.initial());

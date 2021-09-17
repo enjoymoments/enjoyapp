@@ -3,8 +3,8 @@ import 'package:mozin/features/calendar/domain/entities/grouped_year_calendar.da
 
 class GroupedYearCalendarModel extends GroupedYearCalendar {
   const GroupedYearCalendarModel({
-    int year,
-    List<GroupedMonthCalendarModel> months,
+    int? year,
+    List<GroupedMonthCalendarModel>? months,
   }) : super(
           year: year,
           months: months

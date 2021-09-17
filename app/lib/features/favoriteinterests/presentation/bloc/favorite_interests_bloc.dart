@@ -21,9 +21,9 @@ class FavoriteInterestsBloc
 
   Stream<FavoriteInterestsState> loadFavoriteInterests() async* {
     var _userWrapper = getItInstance<UserWrapper>();
-    var _user = _userWrapper.getUser;
+    var _user = _userWrapper.getUser!;
 
-    if (_user.favoriteInterests.places.length == 0) {
+    if (_user.favoriteInterests!.places!.length == 0) {
       yield state.copyWith(isLoading: true);
 
       var _favoriteInterests = getItInstance<FavoriteInterestsRepository>();
@@ -36,7 +36,7 @@ class FavoriteInterestsBloc
           isLoading: false,
           isError: false,
           isSuccess: true,
-          forceRefresh: StateUtils.generateRandomNumber(),
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
           favoriteInterests: model,
         );
       }, (error) {
@@ -44,13 +44,13 @@ class FavoriteInterestsBloc
           isLoading: false,
           isError: true,
           isSuccess: false,
-          forceRefresh: StateUtils.generateRandomNumber(),
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
         );
       });
     } else {
       yield state.copyWith(
         favoriteInterests: _user.favoriteInterests,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
         isLoading: false,
       );
     }

@@ -16,10 +16,10 @@ part 'invite_state.dart';
 
 class InviteCubit extends Cubit<InviteState> {
   InviteCubit({
-    @required InviteRepository inviteRepository,
-    @required UserWrapper userWrapper,
-    @required ShareService shareService,
-    @required UserActionRepository userActionRepository,
+    required InviteRepository inviteRepository,
+    required UserWrapper userWrapper,
+    required ShareService shareService,
+    required UserActionRepository userActionRepository,
   })  : assert(userWrapper != null),
         _userWrapper = userWrapper,
         assert(inviteRepository != null),
@@ -38,7 +38,7 @@ class InviteCubit extends Cubit<InviteState> {
   void getUserSyncInfo(String userSyncInfoId) async {
     emit(state.copyWith(
       isLoading: true,
-      forceRefresh: StateUtils.generateRandomNumber(),
+      forceRefresh: StateUtils.generateRandomNumber() as int?,
     ));
 
     Either<UserSyncInfoModel, Exception> _response =
@@ -63,25 +63,25 @@ class InviteCubit extends Cubit<InviteState> {
   void syncUser() async {
     emit(state.copyWith(
       isLoading: true,
-      forceRefresh: StateUtils.generateRandomNumber(),
+      forceRefresh: StateUtils.generateRandomNumber() as int?,
     ));
 
     Either<ResponseDefaultModel, Exception> _response =
         await _userActionRepository.addUserAction(
       model: UserActionModel(
         notificationType: NotificationTypeEnum.SyncCouple,
-        data: state.userSyncInfoModel.userSyncInfoId,
+        data: state.userSyncInfoModel!.userSyncInfoId,
       ),
     );
 
     _response.fold((model) {
-      if (model.isSuccess) {
+      if (model.isSuccess!) {
         _userWrapper.setCoupleId(model.data);
       }
 
       emit(state.copyWith(
         isLoading: false,
-        isError: !model.isSuccess,
+        isError: !model.isSuccess!,
         isSuccess: model.isSuccess,
       ));
     }, (error) {
@@ -94,7 +94,7 @@ class InviteCubit extends Cubit<InviteState> {
   }
 
   void generateShareUrl() async {
-    if (state.isLoading) {
+    if (state.isLoading!) {
       return;
     }
 
@@ -110,7 +110,7 @@ class InviteCubit extends Cubit<InviteState> {
         isError: false,
         isSuccess: true,
         shareUrl: _shareUrl,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
@@ -121,21 +121,21 @@ class InviteCubit extends Cubit<InviteState> {
 
     response.fold((model) {
       _userWrapper.setShareUrl(model);
-      _shareService.share(model);
+      _shareService.share(model!);
 
       emit(state.copyWith(
         isLoading: false,
         isError: false,
         isSuccess: true,
         shareUrl: model,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     }, (error) {
       emit(state.copyWith(
         isLoading: false,
         isError: true,
         isSuccess: false,
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     });
   }

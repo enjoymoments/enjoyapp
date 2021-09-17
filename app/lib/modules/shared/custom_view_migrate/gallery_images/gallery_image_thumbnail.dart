@@ -10,11 +10,11 @@ import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 
 class GalleryImageThumbnail extends StatelessWidget {
   const GalleryImageThumbnail({
-    Key key,
-    @required this.galleryImageModel,
-    @required this.onRemoveCallback,
-    @required this.onTap,
-    @required this.sourceType,
+    Key? key,
+    required this.galleryImageModel,
+    required this.onRemoveCallback,
+    required this.onTap,
+    required this.sourceType,
   }) : super(key: key);
 
   final GalleryImageModel galleryImageModel;
@@ -32,7 +32,7 @@ class GalleryImageThumbnail extends StatelessWidget {
           _removeMedia(context);
         },
         child: Hero(
-          tag: galleryImageModel.id,
+          tag: galleryImageModel.id!,
           child: Container(
             height: 80,
             child: Card(
@@ -51,15 +51,15 @@ class GalleryImageThumbnail extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
+  Widget? _buildImage() {
     if (sourceType == SourceTypeEnum.File) {
       return Image.file(
-        galleryImageModel.file,
+        galleryImageModel.file!,
         fit: BoxFit.fill,
       );
     } else if (sourceType == SourceTypeEnum.Url) {
       return CachedNetworkImage(
-        imageUrl: galleryImageModel.url,
+        imageUrl: galleryImageModel.url!,
         fit: BoxFit.fill,
       );
     }

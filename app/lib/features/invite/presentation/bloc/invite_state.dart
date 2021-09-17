@@ -2,11 +2,11 @@ part of 'invite_cubit.dart';
 
 class InviteState extends DefaultState {
   InviteState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.forceRefresh,
     this.shareUrl,
     this.userSyncInfoModel,
@@ -18,9 +18,9 @@ class InviteState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final int forceRefresh;
-  final String shareUrl;
-  final UserSyncInfoModel userSyncInfoModel;
+  final int? forceRefresh;
+  final String? shareUrl;
+  final UserSyncInfoModel? userSyncInfoModel;
 
   factory InviteState.initial() {
     return InviteState(
@@ -36,14 +36,14 @@ class InviteState extends DefaultState {
   }
 
   InviteState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    int forceRefresh,
-    String shareUrl,
-    UserSyncInfoModel userSyncInfoModel,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    int? forceRefresh,
+    String? shareUrl,
+    UserSyncInfoModel? userSyncInfoModel,
   }) {
     return InviteState(
       isLoading: isLoading ?? this.isLoading,
@@ -58,7 +58,7 @@ class InviteState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

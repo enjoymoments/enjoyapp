@@ -15,9 +15,9 @@ import 'package:custom_view/custom_icon.dart';
 import 'package:custom_view/custom_scaffold.dart';
 
 class InterestScreen extends StatefulWidget {
-  final bool isChangeFilter;
+  final bool? isChangeFilter;
 
-  const InterestScreen({Key key, @required this.isChangeFilter})
+  const InterestScreen({Key? key, required this.isChangeFilter})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class InterestScreen extends StatefulWidget {
 class _InterestScreenState extends State<InterestScreen> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
-  InterestBloc _interestBloc;
+  InterestBloc? _interestBloc;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _InterestScreenState extends State<InterestScreen> {
     return CustomAppBar(
       title: 'Interesses',
       context: context,
-      onPressedBack: () => ExtendedNavigator.of(context).pop(),
+      onPressedBack: () => AutoRouter.of(context).pop(),
       automaticallyImplyLeading: false,
     );
   }
@@ -66,9 +66,9 @@ class _InterestScreenState extends State<InterestScreen> {
             //_selectedGeneralFilters(),
           ],
           onDone: () => _onIntroEnd(context, state),
-          freeze: !state.showNextButtonCategories,
+          freeze: !state.showNextButtonCategories!,
           showSkipButton: false,
-          showNextButton: state.showNextButtonCategories,
+          showNextButton: state.showNextButtonCategories!,
           skipFlex: 0,
           nextFlex: 0,
           next: CustomIcon(
@@ -78,7 +78,7 @@ class _InterestScreenState extends State<InterestScreen> {
           done: Text(
             'Filtrar',
             style: TextStyle(
-                color: state.showNextButtonSubCategories
+                color: state.showNextButtonSubCategories!
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).disabledColor),
           ),
@@ -97,13 +97,13 @@ class _InterestScreenState extends State<InterestScreen> {
   }
 
   void _onIntroEnd(context, InterestState state) {
-    if (state.showNextButtonSubCategories) {
-      ExtendedNavigator.of(context).pop();
+    if (state.showNextButtonSubCategories!) {
+      AutoRouter.of(context).pop();
 
-      if (widget.isChangeFilter != null && widget.isChangeFilter) {
+      if (widget.isChangeFilter != null && widget.isChangeFilter!) {
         getItInstance<PlacesBloc>()..add(GetCurrentPosition());
       } else {
-        ExtendedNavigator.of(context).push(Routes.search_places_screen);
+        AutoRouter.of(context).push(Search_places_screen());
       }
     }
   }

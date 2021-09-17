@@ -3,8 +3,8 @@ import 'package:mozin/modules/shared/general/enums.dart';
 
 class UserActionModel extends UserAction {
   const UserActionModel({
-    NotificationTypeEnum notificationType,
-    String data,
+    NotificationTypeEnum? notificationType,
+    String? data,
   }) : super(
           notificationType: notificationType,
           data: data,

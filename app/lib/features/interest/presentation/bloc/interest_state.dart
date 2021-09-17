@@ -2,11 +2,11 @@ part of 'interest_bloc.dart';
 
 class InterestState extends DefaultState {
   InterestState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.categories,
     this.forceRefresh,
     this.showNextButtonCategories,
@@ -19,10 +19,10 @@ class InterestState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<CategoriesModel> categories;
-  final int forceRefresh;
-  final bool showNextButtonCategories;
-  final bool showNextButtonSubCategories;
+  final List<CategoriesModel>? categories;
+  final int? forceRefresh;
+  final bool? showNextButtonCategories;
+  final bool? showNextButtonSubCategories;
 
   factory InterestState.initial() {
     return InterestState(
@@ -31,7 +31,7 @@ class InterestState extends DefaultState {
       isError: false,
       isLoading: false,
       errorMessage: null,
-      categories: List(),
+      categories: [],
       forceRefresh: null,
       showNextButtonCategories: false,
       showNextButtonSubCategories: false,
@@ -39,15 +39,15 @@ class InterestState extends DefaultState {
   }
 
   InterestState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    List<CategoriesModel> categories,
-    int forceRefresh,
-    bool showNextButtonCategories,
-    bool showNextButtonSubCategories,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    List<CategoriesModel>? categories,
+    int? forceRefresh,
+    bool? showNextButtonCategories,
+    bool? showNextButtonSubCategories,
   }) {
     return InterestState(
       isLoading: isLoading ?? this.isLoading,
@@ -63,7 +63,7 @@ class InterestState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

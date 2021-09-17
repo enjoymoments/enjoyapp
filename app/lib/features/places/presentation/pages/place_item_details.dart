@@ -38,9 +38,9 @@ import 'package:custom_view/shimmer_loading.dart';
 import 'package:custom_view/spacer_box.dart';
 
 class PlaceItemDetails extends StatefulWidget {
-  final PlaceModel item;
+  final PlaceModel? item;
 
-  PlaceItemDetails({Key key, @required this.item}) : super(key: key);
+  PlaceItemDetails({Key? key, required this.item}) : super(key: key);
 
   @override
   _PlaceItemDetailsState createState() => _PlaceItemDetailsState();
@@ -60,13 +60,13 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     ),
   ];
 
-  TabController _nestedTabController;
-  PlaceDetailsTabBloc _placeDetailsTabBloc;
-  PlaceDetailsBloc _placeDetailsBloc;
-  PlacePhotosBloc _placePhotosBloc;
-  GpsOpenCubit _gpsOpenCubit;
-  FavoriteInterestsItemBloc _favoriteInterestsItemBloc;
-  UserAppModel _user;
+  TabController? _nestedTabController;
+  PlaceDetailsTabBloc? _placeDetailsTabBloc;
+  PlaceDetailsBloc? _placeDetailsBloc;
+  PlacePhotosBloc? _placePhotosBloc;
+  GpsOpenCubit? _gpsOpenCubit;
+  FavoriteInterestsItemBloc? _favoriteInterestsItemBloc;
+  UserAppModel? _user;
 
   @override
   void initState() {
@@ -82,32 +82,32 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     _gpsOpenCubit = getItInstance<GpsOpenCubit>()
       ..getElements(
         context,
-        widget.item.name,
-        widget.item.formattedAddress,
-        widget.item.location.latitude,
-        widget.item.location.longitude,
+        widget.item!.name,
+        widget.item!.formattedAddress,
+        widget.item!.location!.latitude,
+        widget.item!.location!.longitude,
       );
 
     _nestedTabController =
         new TabController(length: _tabsTitle.length, vsync: this);
 
-    _nestedTabController.addListener(_handleTabSelection);
+    _nestedTabController!.addListener(_handleTabSelection);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _nestedTabController.dispose();
-    _placeDetailsTabBloc.close();
-    _placeDetailsBloc.close();
-    _placePhotosBloc.close();
-    _gpsOpenCubit.close();
-    _favoriteInterestsItemBloc.close();
+    _nestedTabController!.dispose();
+    _placeDetailsTabBloc!.close();
+    _placeDetailsBloc!.close();
+    _placePhotosBloc!.close();
+    _gpsOpenCubit!.close();
+    _favoriteInterestsItemBloc!.close();
   }
 
   _handleTabSelection() {
-    if (_nestedTabController.indexIsChanging) {
-      _placeDetailsTabBloc.add(ChangeTabEvent(_nestedTabController.index));
+    if (_nestedTabController!.indexIsChanging) {
+      _placeDetailsTabBloc!.add(ChangeTabEvent(_nestedTabController!.index));
     }
   }
 
@@ -130,7 +130,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             BlocListener<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
               bloc: _favoriteInterestsItemBloc,
               listener: (context, state) {
-                if (state.isError) {
+                if (state.isError!) {
                   context.showSnackBar('Ops... houve um erro. Tente novamente');
                 }
               },
@@ -139,10 +139,10 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
               bloc: _placePhotosBloc,
               builder: (context, state) {
-                if (state.isLoading) {
+                if (state.isLoading!) {
                   return _buildLoadingPhotos();
                 } else if (state.item?.photos != null) {
-                  return _buildCarousel(state.item.photos);
+                  return _buildCarousel(state.item!.photos!);
                 }
 
                 return _buildLoadingPhotos();
@@ -152,7 +152,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
               bloc: _placeDetailsBloc,
               builder: (context, state) {
-                if (state.isLoading) {
+                if (state.isLoading!) {
                   return _buildLoadingContent();
                 } else if (state.item != null) {
                   return _buildContent();
@@ -200,7 +200,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
       children: [
         SpacerBox.v8,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(30),
         ),
         SpacerBox.v4,
@@ -219,22 +219,22 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(34),
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(80),
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(80),
         ),
         SpacerBox.v16,
         ShimmerLoading(
-          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+          width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
           height: SizeConfig.sizeByPixel(50),
         ),
       ],
@@ -245,7 +245,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.item.name.title(context),
+        widget.item!.name!.title(context),
         SpacerBox.v4,
         RatingItem(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -291,11 +291,11 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
           return IconButton(
             icon: CustomIcon(
                 icon: AppIcons.bookmark,
-                color: state.favoriteAdded
+                color: state.favoriteAdded!
                     ? Theme.of(context).accentIconTheme.color
-                    : Theme.of(context).appBarTheme.iconTheme.color),
+                    : Theme.of(context).appBarTheme.iconTheme!.color),
             onPressed: () {
-              _favoriteInterestsItemBloc.add(AddPlaceToFavorite(widget.item));
+              _favoriteInterestsItemBloc!.add(AddPlaceToFavorite(widget.item));
             },
           );
         },

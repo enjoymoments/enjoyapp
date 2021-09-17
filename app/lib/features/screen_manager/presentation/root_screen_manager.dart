@@ -20,7 +20,7 @@ class RootScreenManager extends StatefulWidget {
 }
 
 class _RootScreenManagerState extends State<RootScreenManager> {
-  ScreenManagerBloc _screenManagerBloc;
+  ScreenManagerBloc? _screenManagerBloc;
 
   @override
   void initState() {
@@ -43,15 +43,15 @@ class _RootScreenManagerState extends State<RootScreenManager> {
       bloc: _screenManagerBloc,
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
-          child: _buildContent(state),
-          appBar: _buildAppBar(state),
+          child: _buildContent(state)!,
+          appBar: _buildAppBar(state) as AppBar,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             backgroundColor:
                 Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             onPressed: () {
-              _screenManagerBloc
+              _screenManagerBloc!
                   .add(TapScreen(DefaultMenuEnum.Search, context));
             },
             child: Icon(
@@ -68,12 +68,12 @@ class _RootScreenManagerState extends State<RootScreenManager> {
                 Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
             selectedColor:
                 Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-            iconSize: Theme.of(context).iconTheme.size,
+            iconSize: Theme.of(context).iconTheme.size!,
             centerItemText: '',
             height: SizeConfig.sizeByPixel(50),
             notchedShape: CircularNotchedRectangle(),
             onTabSelected: (index) {
-              _screenManagerBloc.add(
+              _screenManagerBloc!.add(
                 TapScreen(DefaultMenuEnum(index, ignoreSearch: true), context),
               );
             },
@@ -109,8 +109,8 @@ class _RootScreenManagerState extends State<RootScreenManager> {
     );
   }
 
-  Widget _buildContent(ScreenManagerState state) {
-    return state.contents[state.currentScreen];
+  Widget? _buildContent(ScreenManagerState state) {
+    return state.contents![state.currentScreen!];
   }
 
   List<Widget> _buildActionButtons(ScreenManagerState state) {
@@ -123,7 +123,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
           IconButton(
             icon: CustomIcon(icon: AppIcons.plus),
             onPressed: () {
-              ExtendedNavigator.of(context).push(Routes.add_time_line_screen);
+              AutoRouter.of(context).push(Add_time_line_screen());
             },
           ),
         ];
@@ -135,7 +135,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
           IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            ExtendedNavigator.of(context).push(Routes.add_calendar_screen);
+            AutoRouter.of(context).push(Add_calendar_screen());
           },
         ),
         ];

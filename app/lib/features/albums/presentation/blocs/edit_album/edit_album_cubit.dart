@@ -17,9 +17,9 @@ part 'edit_album_state.dart';
 
 class EditAlbumCubit extends Cubit<EditAlbumState> {
   EditAlbumCubit({
-    @required WrapperMediaService wrapperMediaService,
-    @required AlbumsRepository albumsRepository,
-    @required UserWrapper userWrapper,
+    required WrapperMediaService wrapperMediaService,
+    required AlbumsRepository albumsRepository,
+    required UserWrapper userWrapper,
   })  : assert(wrapperMediaService != null),
         _wrapperMediaService = wrapperMediaService,
         assert(albumsRepository != null),
@@ -33,7 +33,7 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
   final UserWrapper _userWrapper;
 
   void deleteAlbum(AlbumItemModel item) async {
-    var _user = _userWrapper.getUser;
+    var _user = _userWrapper.getUser!;
     Either<bool, Exception> _response = await _albumsRepository.deleteAlbum(_user.id, item.id);
 
     _response.fold((success) {
@@ -48,7 +48,7 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
         isLoading: false,
         isError: true,
         errorMessage: "Ops... houve um erro. Tente novamente",
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     });
   }
@@ -63,17 +63,17 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
         isLoading: false,
         isError: true,
         errorMessage: "Informe um título para o álbum",
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
 
-    if (state.newImages == null || state.newImages.length == 0) {
+    if (state.newImages == null || state.newImages!.length == 0) {
       emit(state.copyWith(
         isLoading: false,
         isError: true,
         errorMessage: "Informe ao menos uma imagem",
-        forceRefresh: StateUtils.generateRandomNumber(),
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
     }
@@ -85,7 +85,7 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
 
   void mapRemoveMediaToState(BaseImageModel media) {
     try {
-      state.allImages.removeWhere((element) => element.id == media.id);
+      state.allImages!.removeWhere((element) => element.id == media.id);
 
       //TODO:review this, remove the server too.
       // if (media is MediaModel) {
@@ -93,14 +93,14 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
       // }
 
       if (media is GalleryImageModel) {
-        state.newImages.removeWhere((element) => element.id == media.id);
+        state.newImages!.removeWhere((element) => element.id == media.id);
       }
 
       emit(state.copyWith(
           isError: false,
           allImages: state.allImages,
           newImages: state.newImages,
-          forceRefresh: StateUtils.generateRandomNumber()));
+          forceRefresh: StateUtils.generateRandomNumber() as int?));
     } catch (e) {
       emit(state.copyWith(isError: true));
     }
@@ -113,12 +113,12 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
       List<BaseImageModel> _allImages = [];
       List<GalleryImageModel> _newImages = state.newImages ?? [];
 
-      if (state.album?.medias != null && state.album.medias.length > 0) {
-        _allImages.addAll(state.album.medias);
+      if (state.album?.medias != null && state.album!.medias!.length > 0) {
+        _allImages.addAll(state.album!.medias!);
       }
 
-      if (state.newImages.length > 0) {
-        _allImages.addAll(state.newImages);
+      if (state.newImages!.length > 0) {
+        _allImages.addAll(state.newImages!);
       }
 
       if (source == ImageSource.camera) {
@@ -133,7 +133,7 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
       } else if (source == ImageSource.gallery) {
         var files = await _wrapperMediaService.getMedias();
         if (files != null) {
-          if ((files.length + state.allImages.length) > 10) {
+          if ((files.length + state.allImages!.length) > 10) {
             emit(state.copyWith(
                 isLoading: false,
                 isError: true,

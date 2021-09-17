@@ -7,23 +7,23 @@ import 'package:custom_view/extensions/extension.dart';
 
 class InterestCategoryItem extends StatefulWidget {
   const InterestCategoryItem(
-      {Key key, @required this.categorie, @required this.callbackSelected})
+      {Key? key, required this.categorie, required this.callbackSelected})
       : super(key: key);
 
   final CategoriesModel categorie;
-  final Function(bool) callbackSelected;
+  final Function(bool?) callbackSelected;
 
   @override
   _InterestCategoryItemState createState() => _InterestCategoryItemState();
 }
 
 class _InterestCategoryItemState extends State<InterestCategoryItem> {
-  bool _isSelected;
+  bool? _isSelected;
 
   @override
   void initState() {
     _isSelected =
-        widget.categorie.selected != null && widget.categorie.selected;
+        widget.categorie.selected != null && widget.categorie.selected!;
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
   Widget _buildCardItem(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _isSelected = !_isSelected;
+        _isSelected = !_isSelected!;
         widget.callbackSelected(_isSelected);
 
         setState(() {});
@@ -53,7 +53,7 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
               icon: AppIcons.check,
               color: _getTextColor(),
             ),
-            widget.categorie.name.label(
+            widget.categorie.name!.label(
               context,
               color: _getTextColor(),
             ),
@@ -72,13 +72,13 @@ class _InterestCategoryItemState extends State<InterestCategoryItem> {
   }
 
   Color _getBackgroundColor() {
-    return _isSelected
+    return _isSelected!
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
   }
 
-  Color _getTextColor() {
-    if (_isSelected) {
+  Color? _getTextColor() {
+    if (_isSelected!) {
       return Theme.of(context).backgroundColor;
     }
 

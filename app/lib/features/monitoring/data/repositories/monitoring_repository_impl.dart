@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class MonitoringRepositoryImpl implements MonitoringRepository {
   MonitoringRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
   final MonitoringRemoteDataSource remoteDataSource;

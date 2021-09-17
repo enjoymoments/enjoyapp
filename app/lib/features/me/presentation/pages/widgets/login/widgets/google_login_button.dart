@@ -4,9 +4,9 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 
 class GoogleLoginButton extends StatelessWidget {
-  final AuthenticationBloc authenticationBloc;
+  final AuthenticationBloc? authenticationBloc;
 
-  const GoogleLoginButton({Key key, @required this.authenticationBloc})
+  const GoogleLoginButton({Key? key, required this.authenticationBloc})
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class GoogleLoginButton extends StatelessWidget {
       child: IconButton(
         icon: Icon(AppIcons.google, color: theme.primaryColor),
         onPressed: () {
-          authenticationBloc.add(RequestGoogleLogin());
+          authenticationBloc!.add(RequestGoogleLogin());
         },
       ),
     );

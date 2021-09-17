@@ -10,7 +10,7 @@ class PhotoItemLoading extends StatelessWidget {
 
     return CustomContainer(
       child: ShimmerLoading(
-        width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+        width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
         height: SizeConfig.sizeByPixel(150),
       ),
     );

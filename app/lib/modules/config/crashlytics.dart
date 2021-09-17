@@ -16,8 +16,8 @@ void reportErrorsPlatform() {
     } else {
       // In production mode report to the application zone to report to
       // Crashlytics.
-      Crashlytics.instance.recordFlutterError(details);
-      _recordLogging(details?.toString(), details?.stack?.toString());
+      FirebaseCrashlytics.instance.recordFlutterError(details);
+      _recordLogging(details.toString(), details.stack?.toString());
     }
   };
 }
@@ -34,15 +34,15 @@ Future<void> reportError(dynamic error, dynamic stackTrace) async {
 
   debugPrint('Reporting to Crashlitycs...');
 
-  Crashlytics.instance.recordError(
+  FirebaseCrashlytics.instance.recordError(
     error,
     stackTrace,
   );
 
-  _recordLogging(error?.toString(), stackTrace?.toString());
+  _recordLogging(error.toString(), stackTrace?.toString());
 }
 
-void _recordLogging(String error, String stackTrace) {
+void _recordLogging(String error, String? stackTrace) {
   try {
     final LoggerService _logger = getItInstance<LoggerService>();
 

@@ -2,7 +2,7 @@ import 'package:mozin/features/places/data/models/places_category_model.dart';
 import 'package:mozin/features/places/domain/entities/places.dart';
 
 class PlacesModel extends Places {
-  PlacesModel({List<PlacesCategoryModel> places})
+  PlacesModel({List<PlacesCategoryModel>? places})
       : super(
           places: places,
         );

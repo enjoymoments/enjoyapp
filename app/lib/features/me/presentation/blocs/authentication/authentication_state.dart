@@ -2,11 +2,11 @@ part of 'authentication_bloc.dart';
 
 class AuthenticationState extends DefaultState {
   AuthenticationState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.closeOnboardingScreen,
     this.authenticated,
     this.user,
@@ -18,9 +18,9 @@ class AuthenticationState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final bool closeOnboardingScreen;
-  final bool authenticated;
-  final UserAppModel user;
+  final bool? closeOnboardingScreen;
+  final bool? authenticated;
+  final UserAppModel? user;
 
   factory AuthenticationState.initial() {
     return AuthenticationState(
@@ -36,14 +36,14 @@ class AuthenticationState extends DefaultState {
   }
 
   AuthenticationState copyWith({
-    bool isLoading,
-    bool isSuccess,
-    bool isEmpty,
-    bool isError,
-    String errorMessage,
-    bool closeOnboardingScreen,
-    bool authenticated,
-    UserAppModel user,
+    bool? isLoading,
+    bool? isSuccess,
+    bool? isEmpty,
+    bool? isError,
+    String? errorMessage,
+    bool? closeOnboardingScreen,
+    bool? authenticated,
+    UserAppModel? user,
   }) {
     return AuthenticationState(
       isLoading: isLoading ?? this.isLoading,
@@ -58,7 +58,7 @@ class AuthenticationState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isSuccess,
         isEmpty,

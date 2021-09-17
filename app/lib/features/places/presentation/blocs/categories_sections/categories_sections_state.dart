@@ -5,11 +5,11 @@ import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 class CategoriesSectionsState extends DefaultState {
   CategoriesSectionsState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.sessions,
     this.sessionSelected,
   }) : super(
@@ -20,8 +20,8 @@ class CategoriesSectionsState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final List<SessionModel> sessions;
-  final SessionModel sessionSelected;
+  final List<SessionModel>? sessions;
+  final SessionModel? sessionSelected;
   
   factory CategoriesSectionsState.initial() {
     return CategoriesSectionsState(
@@ -36,13 +36,13 @@ class CategoriesSectionsState extends DefaultState {
   }
 
   CategoriesSectionsState copyWith({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
-    List<SessionModel> sessions,
-    SessionModel sessionSelected,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
+    List<SessionModel>? sessions,
+    SessionModel? sessionSelected,
   }) {
     return CategoriesSectionsState(
       isLoading: isLoading ?? this.isLoading,
@@ -56,7 +56,7 @@ class CategoriesSectionsState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isEmpty,
         isError,

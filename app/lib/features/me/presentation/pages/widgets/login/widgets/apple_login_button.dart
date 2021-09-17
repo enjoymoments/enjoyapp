@@ -4,9 +4,9 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
 
 class AppleLoginButton extends StatelessWidget {
-  final AuthenticationBloc authenticationBloc;
+  final AuthenticationBloc? authenticationBloc;
 
-  const AppleLoginButton({Key key, @required this.authenticationBloc})
+  const AppleLoginButton({Key? key, required this.authenticationBloc})
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class AppleLoginButton extends StatelessWidget {
       child: IconButton(
         icon: Icon(AppIcons.apple, color: theme.primaryColor),
         onPressed: () {
-          authenticationBloc.add(RequestAppleLogin());
+          authenticationBloc!.add(RequestAppleLogin());
         },
       ),
     );

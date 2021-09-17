@@ -7,15 +7,15 @@ import 'package:mozin/modules/shared/general/models/response_default_model.dart'
 
 class UserActionRepositoryImpl implements UserActionRepository {
   UserActionRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final UserActionRemoteDataSource remoteDataSource;
+  final UserActionRemoteDataSource? remoteDataSource;
 
   @override
-  Future<Either<ResponseDefaultModel, Exception>> addUserAction({UserActionModel model}) async {
+  Future<Either<ResponseDefaultModel, Exception>> addUserAction({UserActionModel? model}) async {
     try {
-      var response = await remoteDataSource.addUserAction(model);
+      var response = await remoteDataSource!.addUserAction(model);
       return Left<ResponseDefaultModel, Exception>(response);
     } on dynamic catch (e) {
       return Right<ResponseDefaultModel, Exception>(

@@ -28,11 +28,11 @@ import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 
 class Connected extends StatelessWidget {
-  final UserAppModel user;
+  final UserAppModel? user;
 
   const Connected({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -58,7 +58,7 @@ class Connected extends StatelessWidget {
           radius: SizeConfig.sizeByPixel(25),
         ),
         SpacerBox.h16,
-        user.name.title(context),
+        user!.name!.title(context),
       ],
     );
   }
@@ -80,7 +80,7 @@ class Connected extends StatelessWidget {
         ..._divider(),
         _buildUnsyncCouple(),
         BannerAdWidget(
-          screenName: Routes.me_authenticated_partial,
+          screenName: Me_authenticated_partial.name,
         ),
         ..._buildLogout(),
         SpacerBox.v26,
@@ -95,7 +95,7 @@ class Connected extends StatelessWidget {
       iconStart: AppIcons.assistive_listening_systems,
       iconEnd: AppIcons.angle_right,
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.feedback_screen);
+        AutoRouter.of(context).push(Feedback_screen());
       },
     );
   }
@@ -107,7 +107,7 @@ class Connected extends StatelessWidget {
       iconStart: AppIcons.bell,
       iconEnd: AppIcons.angle_right,
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.notification_screen);
+        AutoRouter.of(context).push(Notification_screen());
       },
     );
   }
@@ -119,7 +119,7 @@ class Connected extends StatelessWidget {
       iconStart: AppIcons.camera_retro,
       iconEnd: AppIcons.angle_right,
       onTap: () {
-        ExtendedNavigator.of(context).push(Routes.albums_screen);
+        AutoRouter.of(context).push(Albums_screen());
       },
     );
   }
@@ -227,7 +227,7 @@ class Connected extends StatelessWidget {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       bloc: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
-        if (state.existCoupleId) {
+        if (state.existCoupleId!) {
           return SizedBox.shrink();
         }
 
@@ -258,7 +258,7 @@ class Connected extends StatelessWidget {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
       bloc: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
-        if (state.existCoupleId) {
+        if (state.existCoupleId!) {
           return Column(
             children: [
               CustomTile(
@@ -267,8 +267,8 @@ class Connected extends StatelessWidget {
                 iconStart: AppIcons.undo,
                 iconEnd: AppIcons.angle_right,
                 onTap: () {
-                  ExtendedNavigator.of(context)
-                      .push(Routes.unsync_couple_screen);
+                  AutoRouter.of(context)
+                      .push(Unsync_couple_screen());
                 },
               ),
               ..._divider(),
@@ -276,12 +276,12 @@ class Connected extends StatelessWidget {
           );
         }
 
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ShimmerLoading(
-                width: SizeConfig.sizeByPixel(SizeConfig.screenWidth),
+                width: SizeConfig.sizeByPixel(SizeConfig.screenWidth!),
                 height: SizeConfig.sizeByPixel(40),
               ),
               ..._divider(),

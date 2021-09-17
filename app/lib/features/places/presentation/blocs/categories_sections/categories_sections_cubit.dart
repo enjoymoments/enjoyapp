@@ -16,7 +16,7 @@ class CategoriesSectionsCubit extends Cubit<CategoriesSectionsState> {
   }
 
   void selectedSession(SessionModel item) {
-    List<SessionModel> _list = state.sessions.map((e) {
+    List<SessionModel> _list = state.sessions!.map((e) {
       e.selected = e.type == item.type;
       return e;
     }).toList();
@@ -26,8 +26,8 @@ class CategoriesSectionsCubit extends Cubit<CategoriesSectionsState> {
     );
   }
 
-  List<SessionModel> _loadSessions() {
-    if (state.sessions.length == 0) {
+  List<SessionModel>? _loadSessions() {
+    if (state.sessions!.length == 0) {
       return [
         SessionModel(
             type: InterestEnum.Place, selected: false, text: 'Lugares'),

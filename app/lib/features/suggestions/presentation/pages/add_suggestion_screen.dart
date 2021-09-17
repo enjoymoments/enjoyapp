@@ -19,17 +19,17 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
 
 class AddSuggestionScreen extends StatefulWidget {
-  const AddSuggestionScreen({Key key}) : super(key: key);
+  const AddSuggestionScreen({Key? key}) : super(key: key);
 
   @override
   _AddSuggestionScreenState createState() => _AddSuggestionScreenState();
 }
 
 class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
-  TextEditingController _titleController;
-  TextEditingController _descriptionController;
-  RoundedLoadingButtonController _actionButtoncontroller;
-  SuggestionsCubit _suggestionsCubit;
+  TextEditingController? _titleController;
+  TextEditingController? _descriptionController;
+  RoundedLoadingButtonController? _actionButtoncontroller;
+  SuggestionsCubit? _suggestionsCubit;
 
   @override
   void initState() {
@@ -45,9 +45,9 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
 
   @override
   void dispose() {
-    _suggestionsCubit.close();
-    _titleController.dispose();
-    _descriptionController.dispose();
+    _suggestionsCubit!.close();
+    _titleController!.dispose();
+    _descriptionController!.dispose();
     super.dispose();
   }
 
@@ -55,7 +55,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: _buildBody(),
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar() as AppBar,
       bottomNavigationBar: null,
     );
   }
@@ -64,19 +64,19 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
     return BlocConsumer<SuggestionsCubit, SuggestionsState>(
       bloc: _suggestionsCubit,
       listener: (consumerContext, state) {
-        _actionButtoncontroller.stop();
+        _actionButtoncontroller!.stop();
 
-        if (state.isError) {
+        if (state.isError!) {
           consumerContext.showSnackBar(
               state.errorMessage ?? 'Ops, houve um erro. Tente novamente');
         }
 
-        if (state.isSuccess) {
-          ExtendedNavigator.of(context).pop();
+        if (state.isSuccess!) {
+          AutoRouter.of(context).pop();
         }
       },
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return CustomCircularProgressIndicator();
         }
 
@@ -121,8 +121,8 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
       context: context,
       onPressedBack: () {
         if (
-            _titleController.text != null &&
-                _titleController.text.isNotEmpty) {
+            _titleController!.text != null &&
+                _titleController!.text.isNotEmpty) {
           _discardPost(context);
           return;
         }
@@ -141,7 +141,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
       controller: _actionButtoncontroller,
       child: CustomIcon(
         icon: AppIcons.check,
-        color: Theme.of(context).appBarTheme.iconTheme.color,
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),
       onPressed: () {
         _save();
@@ -150,7 +150,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   }
 
   void _save() {
-    _suggestionsCubit.save(_titleController.text, _descriptionController.text);
+    _suggestionsCubit!.save(_titleController!.text, _descriptionController!.text);
   }
 
   void _discardPost(BuildContext context) async {
@@ -167,7 +167,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
             text: 'Sim, quero descartar',
             iconData: AppIcons.trash,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],

@@ -9,20 +9,20 @@ import 'package:mozin_core/utils.dart';
 
 class PlacesRepositoryImpl implements PlacesRepository {
   PlacesRepositoryImpl({
-    @required this.remoteDataSource,
+    required this.remoteDataSource,
   });
 
-  final PlacesRemoteDataSource remoteDataSource;
+  final PlacesRemoteDataSource? remoteDataSource;
 
   @override
   Future<Either<PlacesModel, Exception>> getPlaces(
     double latitude,
     double longitude,
-    FilterChoosedModel filters,
+    FilterChoosedModel? filters,
   ) async {
     try {
       var response =
-          await remoteDataSource.getPlaces(latitude, longitude, filters);
+          await remoteDataSource!.getPlaces(latitude, longitude, filters);
       return Left<PlacesModel, Exception>(response);
     } catch (e) {
       return Right<PlacesModel, Exception>(ExceptionsUtils.createException(e));
@@ -31,9 +31,9 @@ class PlacesRepositoryImpl implements PlacesRepository {
 
   @override
   Future<Either<PlaceModel, Exception>> getPlaceDetails(
-      PlaceModel place) async {
+      PlaceModel? place) async {
     try {
-      var response = await remoteDataSource.getPlaceDetails(place);
+      var response = await remoteDataSource!.getPlaceDetails(place);
       return Left<PlaceModel, Exception>(response);
     } catch (e) {
       return Right<PlaceModel, Exception>(ExceptionsUtils.createException(e));
@@ -41,9 +41,9 @@ class PlacesRepositoryImpl implements PlacesRepository {
   }
 
   @override
-  Future<String> getPlacePhoto(String placeId, String photoReference) async {
+  Future<String?> getPlacePhoto(String? placeId, String photoReference) async {
     try {
-      return remoteDataSource.getPlacePhoto(placeId, photoReference);
+      return remoteDataSource!.getPlacePhoto(placeId, photoReference);
     } catch (e) {
       return Future.value(null);
     }

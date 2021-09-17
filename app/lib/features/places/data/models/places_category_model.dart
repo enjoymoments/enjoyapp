@@ -3,9 +3,9 @@ import 'package:mozin/features/places/domain/entities/places_category.dart';
 
 class PlacesCategoryModel extends PlacesCategory {
   PlacesCategoryModel({
-    List<PlacesSubCategoryModel> subCategories,
-    String categoryName,
-    String categoryId,
+    List<PlacesSubCategoryModel>? subCategories,
+    String? categoryName,
+    String? categoryId,
   }) : super(
           subCategories: subCategories,
           categoryName: categoryName,

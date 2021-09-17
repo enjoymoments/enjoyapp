@@ -3,9 +3,9 @@ import 'package:mozin/features/calendar/domain/entities/activity.dart';
 
 class ActivityModel extends Activity {
   const ActivityModel({
-    String id,
-    String sessionName,
-    List<ActivityItemModel> activities,
+    String? id,
+    String? sessionName,
+    List<ActivityItemModel>? activities,
   }) : super(
           id: id,
           sessionName: sessionName,

@@ -3,11 +3,11 @@ import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 class PlaceDetailsTabState extends DefaultState {
   PlaceDetailsTabState({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
     this.currentTab,
   }) : super(
           isLoading: isLoading,
@@ -17,7 +17,7 @@ class PlaceDetailsTabState extends DefaultState {
           errorMessage: errorMessage,
         );
 
-  final PlaceDetailTabsEnum currentTab;
+  final PlaceDetailTabsEnum? currentTab;
 
   factory PlaceDetailsTabState.initial() {
     return PlaceDetailsTabState(
@@ -31,12 +31,12 @@ class PlaceDetailsTabState extends DefaultState {
   }
 
   PlaceDetailsTabState copyWith({
-    bool isLoading,
-    bool isEmpty,
-    bool isError,
-    bool isSuccess,
-    String errorMessage,
-    PlaceDetailTabsEnum currentTab,
+    bool? isLoading,
+    bool? isEmpty,
+    bool? isError,
+    bool? isSuccess,
+    String? errorMessage,
+    PlaceDetailTabsEnum? currentTab,
   }) {
     return PlaceDetailsTabState(
       isLoading: isLoading ?? this.isLoading,
@@ -49,7 +49,7 @@ class PlaceDetailsTabState extends DefaultState {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         isLoading,
         isEmpty,
         isError,

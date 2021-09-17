@@ -1,10 +1,10 @@
 import 'package:mozin/features/time_line/domain/entities/author_entity.dart';
 
 class AuthorModel {
-  String id;
-  String name;
-  String photo;
-  String email;
+  String? id;
+  String? name;
+  String? photo;
+  String? email;
 
   AuthorModel({this.id, this.name, this.photo, this.email});
 

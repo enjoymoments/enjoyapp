@@ -1,8 +1,8 @@
 import 'package:mozin/modules/shared/general/enums.dart';
 
 class GetTimeLineModel {
-  String id;
-  TimeLineTypeEnum type;
+  String? id;
+  TimeLineTypeEnum? type;
 
   GetTimeLineModel({
     this.id,

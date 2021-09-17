@@ -19,21 +19,20 @@ import 'package:custom_view/spacer_box.dart';
 
 class InviteScreen extends StatelessWidget {
   const InviteScreen({
-    Key key,
-    @required this.inviteCubit,
+    Key? key,
+    required this.inviteCubit,
   }) : super(key: key);
 
-  final InviteCubit inviteCubit;
+  final InviteCubit? inviteCubit;
 
   @override
   Widget build(BuildContext context) {
     return _buildChild(context);
-  }  
+  }
 
   void _redirectSuccessScreen(BuildContext context) {
-    ExtendedNavigator.of(context).popAndPush(
-      Routes.success_screen,
-      arguments: CustomSuccessScreenArguments(
+    AutoRouter.of(context).popAndPush(
+      Success_screen(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,22 +50,22 @@ class InviteScreen extends StatelessWidget {
     return BlocConsumer<InviteCubit, InviteState>(
       bloc: inviteCubit,
       listener: (consumerContext, state) {
-        if (state.isSuccess) {
+        if (state.isSuccess!) {
           _redirectSuccessScreen(context);
         }
       },
       builder: (BuildContext context, InviteState state) {
-        if (state.isLoading) {
+        if (state.isLoading!) {
           return InviteScreenLoading();
         }
 
-        if (state.isError) {
+        if (state.isError!) {
           return CustomScaffold(
             child: Center(
               child:
                   'Ops...\n houve um erro. Tente novamente'.labelIntro(context),
             ),
-            appBar: _buildAppBar(context),
+            appBar: _buildAppBar(context) as AppBar,
             bottomNavigationBar: null,
           );
         }
@@ -82,7 +81,7 @@ class InviteScreen extends StatelessWidget {
               ),
             ),
           ),
-          appBar: _buildAppBar(context),
+          appBar: _buildAppBar(context) as AppBar,
           bottomNavigationBar: _buildButtons(context),
         );
       },
@@ -99,7 +98,7 @@ class InviteScreen extends StatelessWidget {
             text: 'Sim',
             width: SizeConfig.sizeByPixel(100),
             onTap: () {
-              inviteCubit.syncUser();
+              inviteCubit!.syncUser();
             },
           ),
           SpacerBox.h16,
@@ -108,7 +107,7 @@ class InviteScreen extends StatelessWidget {
             width: SizeConfig.sizeByPixel(100),
             swipeColors: true,
             onTap: () {
-              ExtendedNavigator.of(context).pop();
+              AutoRouter.of(context).pop();
             },
           ),
         ],
@@ -124,10 +123,10 @@ class InviteScreen extends StatelessWidget {
           children: [
             CustomAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(state.userSyncInfoModel.photo),
+              backgroundImage: NetworkImage(state.userSyncInfoModel!.photo!),
             ),
             SpacerBox.h16,
-            state.userSyncInfoModel.name
+            state.userSyncInfoModel!.name!
                 .title(context, color: Theme.of(context).primaryColor),
           ],
         ),
@@ -146,7 +145,8 @@ class InviteScreen extends StatelessWidget {
     return [
       CustomTile(
         title: 'Coisas para fazer',
-        description: 'Aqui é o lugar para sair da mesmice. Procura o que fazer dentro ou fora de casa com o mozão ;)',
+        description:
+            'Aqui é o lugar para sair da mesmice. Procura o que fazer dentro ou fora de casa com o mozão ;)',
         iconStart: AppIcons.check,
         onTap: () {},
       ),
@@ -180,7 +180,7 @@ class InviteScreen extends StatelessWidget {
       title: 'Convite',
       context: context,
       onPressedBack: () {
-        ExtendedNavigator.of(context).pop();
+        AutoRouter.of(context).pop();
       },
       actions: <Widget>[],
     );
