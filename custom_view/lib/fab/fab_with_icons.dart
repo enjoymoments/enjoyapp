@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 // https://stackoverflow.com/questions/46480221/flutter-floating-action-button-with-speed-dail
 class FabWithIcons extends StatefulWidget {
   FabWithIcons({this.icons, this.onIconTapped});
-  final List<IconData> icons;
-  ValueChanged<int> onIconTapped;
+  final List<IconData>? icons;
+  ValueChanged<int>? onIconTapped;
   @override
   State createState() => FabWithIconsState();
 }
 
 class FabWithIconsState extends State<FabWithIcons>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class FabWithIconsState extends State<FabWithIcons>
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: 
-      List.generate(widget.icons.length, (int index) {
+      List.generate(widget.icons!.length, (int index) {
         return _buildChild(index);
       }).toList()
         ..add(
@@ -47,13 +47,13 @@ class FabWithIconsState extends State<FabWithIcons>
       child: ScaleTransition(
         scale: CurvedAnimation(
           parent: _controller,
-          curve: Interval(0.0, 1.0 - index / widget.icons.length / 2.0,
+          curve: Interval(0.0, 1.0 - index / widget.icons!.length / 2.0,
               curve: Curves.easeOut),
         ),
         child: FloatingActionButton(
           backgroundColor: backgroundColor,
           mini: true,
-          child: Icon(widget.icons[index], color: foregroundColor),
+          child: Icon(widget.icons![index], color: foregroundColor),
           onPressed: () => _onTapped(index),
         ),
       ),
@@ -81,6 +81,6 @@ class FabWithIconsState extends State<FabWithIcons>
 
   void _onTapped(int index) {
     _controller.reverse();
-    widget.onIconTapped(index);
+    widget.onIconTapped!(index);
   }
 }

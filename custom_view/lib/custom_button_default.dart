@@ -4,9 +4,9 @@ import 'package:custom_view/extensions/extension_text.dart';
 
 class CustomButtonDefault extends StatelessWidget {
   const CustomButtonDefault({
-    Key key,
-    @required this.text,
-    @required this.onTap,
+    Key? key,
+    required this.text,
+    required this.onTap,
     this.width,
     this.height,
     this.swipeColors,
@@ -14,9 +14,9 @@ class CustomButtonDefault extends StatelessWidget {
 
   final String text;
   final Function onTap;
-  final double width;
-  final double height;
-  final bool swipeColors;
+  final double? width;
+  final double? height;
+  final bool? swipeColors;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CustomButtonDefault extends StatelessWidget {
       primary: swipeColors == true
           ? Theme.of(context).backgroundColor
           : Theme.of(context).primaryColor,
-      minimumSize: Size(width ?? SizeConfig.screenWidth, height ?? 50),
+      minimumSize: Size(width ?? SizeConfig.screenWidth!, height ?? 50),
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Theme.of(context).primaryColor),
         borderRadius: BorderRadius.all(Radius.circular(4)),

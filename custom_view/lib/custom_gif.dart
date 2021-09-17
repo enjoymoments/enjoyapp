@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomGif extends StatelessWidget {
   const CustomGif({
-    Key key,
-    @required this.path,
+    Key? key,
+    required this.path,
   }) : super(key: key);
 
   final String path;

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 extension ListWidget on List {
   List<Widget> buildWithBetweenSpace<T>({
-    @required Widget Function(T item) builderItem,
-    @required Widget space,
+    required Widget Function(T item) builderItem,
+    required Widget space,
   }) {
-    List<Widget> _result = List<Widget>();
+    List<Widget> _result = <Widget>[];
 
     for (var item in this) {
       _result.add(builderItem(item));

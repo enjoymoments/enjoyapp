@@ -3,8 +3,8 @@ import 'package:custom_view/extensions/extension_text.dart';
 
 class FABBottomAppBarItem {
   FABBottomAppBarItem({this.iconData, this.text});
-  IconData iconData;
-  String text;
+  IconData? iconData;
+  String? text;
 }
 
 class FABBottomAppBar extends StatefulWidget {
@@ -19,27 +19,27 @@ class FABBottomAppBar extends StatefulWidget {
     this.notchedShape,
     this.onTabSelected,
   }) {
-    assert(this.items.length == 2 || this.items.length == 4);
+    assert(this.items!.length == 2 || this.items!.length == 4);
   }
-  final List<FABBottomAppBarItem> items;
-  final String centerItemText;
+  final List<FABBottomAppBarItem>? items;
+  final String? centerItemText;
   final double height;
   final double iconSize;
-  final Color backgroundColor;
-  final Color color;
-  final Color selectedColor;
-  final NotchedShape notchedShape;
-  final ValueChanged<int> onTabSelected;
+  final Color? backgroundColor;
+  final Color? color;
+  final Color? selectedColor;
+  final NotchedShape? notchedShape;
+  final ValueChanged<int?>? onTabSelected;
 
   @override
   State<StatefulWidget> createState() => FABBottomAppBarState();
 }
 
 class FABBottomAppBarState extends State<FABBottomAppBar> {
-  int _selectedIndex = 0;
+  int? _selectedIndex = 0;
 
-  _updateIndex(int index) {
-    widget.onTabSelected(index);
+  _updateIndex(int? index) {
+    widget.onTabSelected!(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -47,9 +47,9 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = List.generate(widget.items.length, (int index) {
+    List<Widget> items = List.generate(widget.items!.length, (int index) {
       return _buildTabItem(
-        item: widget.items[index],
+        item: widget.items![index],
         index: index,
         onPressed: _updateIndex,
       );
@@ -114,18 +114,18 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
   // }
 
   Widget _buildTabItem({
-    FABBottomAppBarItem item,
-    int index,
-    ValueChanged<int> onPressed,
+    required FABBottomAppBarItem item,
+    int? index,
+    ValueChanged<int?>? onPressed,
   }) {
-    Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    Color? color = _selectedIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       child: SizedBox(
         height: widget.height,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: () => onPressed(index),
+            onTap: () => onPressed!(index),
             child: 
             //TODO:experimenal
             //Icon(item.iconData, color: color, size: widget.iconSize),
@@ -134,7 +134,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(item.iconData, color: color, size: widget.iconSize),
-                item.text.iconWithLabel(context, color:color),
+                item.text!.iconWithLabel(context, color:color),
               ],
             ),
           ),

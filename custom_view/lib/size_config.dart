@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SizeConfig {
-  static MediaQueryData _mediaQueryData;
-  static double screenWidth;
-  static double screenHeight;
-  static double blockSizeHorizontal;
-  static double blockSizeVertical;
+  static late MediaQueryData _mediaQueryData;
+  static double? screenWidth;
+  static late double screenHeight;
+  static double? blockSizeHorizontal;
+  static double? blockSizeVertical;
 
-  static double _safeAreaHorizontal;
-  static double _safeAreaVertical;
-  static double safeBlockHorizontal;
-  static double safeBlockVertical;
+  static late double _safeAreaHorizontal;
+  static late double _safeAreaVertical;
+  static double? safeBlockHorizontal;
+  static double? safeBlockVertical;
 
   /// Tamanho da largura do protótitpo do XD, usado como base no calculo para
   /// saber qual o valor será setado nos componentes.
@@ -20,13 +20,13 @@ class SizeConfig {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _getSizeHorizontal();
     screenHeight = _getSizeVertical();
-    blockSizeHorizontal = screenWidth / 100;
+    blockSizeHorizontal = screenWidth! / 100;
     blockSizeVertical = screenHeight / 100;
     _safeAreaHorizontal =
         _mediaQueryData.padding.left + _mediaQueryData.padding.right;
     _safeAreaVertical =
         _mediaQueryData.padding.top + _mediaQueryData.padding.bottom;
-    safeBlockHorizontal = (screenWidth - _safeAreaHorizontal) / 50;
+    safeBlockHorizontal = (screenWidth! - _safeAreaHorizontal) / 50;
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 50;
   }
 
@@ -39,7 +39,7 @@ class SizeConfig {
   /// do device do protótipo. No iPhone 5s a largura é 320 e o texto de 16 seria
   /// 13.65, ficando proporcional ao tamanho da tela.
   static double sizeByPixel(double size) {
-    return screenWidth * (size / _widthPrototypeByDesign);
+    return screenWidth! * (size / _widthPrototypeByDesign);
   }
 
   double _getSizeVertical() {

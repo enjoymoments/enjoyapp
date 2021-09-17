@@ -4,10 +4,10 @@ import 'package:custom_view/extensions/extension_text.dart';
 
 class CustomQuadrant extends StatefulWidget {
   const CustomQuadrant({
-    Key key,
-    @required this.isSelected,
-    @required this.text,
-    @required this.callbackSelected,
+    Key? key,
+    required this.isSelected,
+    required this.text,
+    required this.callbackSelected,
   }) : super(key: key);
 
   final bool isSelected;
@@ -59,7 +59,7 @@ class _CustomQuadrantState extends State<CustomQuadrant> {
         : Theme.of(context).hintColor;
   }
 
-  Color _getTextColor() {
+  Color? _getTextColor() {
     if (widget.isSelected) {
       return Theme.of(context).backgroundColor;
     }

@@ -4,12 +4,12 @@ import 'package:custom_view/extensions/extension_text.dart';
 
 class CustomItemBadge<T> extends StatefulWidget {
   const CustomItemBadge(
-      {Key key, @required this.item, @required this.text, @required this.callbackSelected})
+      {Key? key, required this.item, required this.text, required this.callbackSelected})
       : super(key: key);
 
   final T item;
   final String text;
-  final Function(bool, T) callbackSelected;
+  final Function(bool?, T) callbackSelected;
 
   @override
   _CustomItemBadgeState createState() =>
@@ -17,7 +17,7 @@ class CustomItemBadge<T> extends StatefulWidget {
 }
 
 class _CustomItemBadgeState extends State<CustomItemBadge> {
-  bool _isSelected;
+  bool? _isSelected;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _CustomItemBadgeState extends State<CustomItemBadge> {
   Widget _buildCardItem(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _isSelected = !_isSelected;
+        _isSelected = !_isSelected!;
         widget.callbackSelected(_isSelected, widget.item);
 
         setState(() {});
@@ -61,13 +61,13 @@ class _CustomItemBadgeState extends State<CustomItemBadge> {
   }
 
   Color _getBackgroundColor() {
-    return _isSelected
+    return _isSelected!
         ? Theme.of(context).primaryColor
         : Theme.of(context).hintColor;
   }
 
-  Color _getTextColor() {
-    if (_isSelected) {
+  Color? _getTextColor() {
+    if (_isSelected!) {
       return Theme.of(context).backgroundColor;
     }
 

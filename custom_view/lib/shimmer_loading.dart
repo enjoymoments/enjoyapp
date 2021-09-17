@@ -3,8 +3,8 @@ import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoading extends StatelessWidget {
   ShimmerLoading(
-      {@required this.width,
-      @required this.height,
+      {required this.width,
+      required this.height,
       this.child,
       this.baseColor,
       this.secondColor,
@@ -20,10 +20,10 @@ class ShimmerLoading extends StatelessWidget {
   final Duration duration;
   final bool running;
   final int loop;
-  final Key key;
-  final Widget child;
-  final Color baseColor;
-  final Color secondColor;
+  final Key? key;
+  final Widget? child;
+  final Color? baseColor;
+  final Color? secondColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,10 @@ class ShimmerLoading extends StatelessWidget {
         period: duration,
         key: key,
         baseColor: baseColor != null
-            ? baseColor
+            ? baseColor!
             : Theme.of(context).hintColor,
         highlightColor: secondColor != null
-            ? secondColor
+            ? secondColor!
             : Colors.white,
         child: child ??
             Container(

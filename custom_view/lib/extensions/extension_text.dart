@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 extension Texts on String {
   Widget iconWithLabel(
     BuildContext context, {
-    Color color,
+    Color? color,
     double fontSize = CustomFontSize.f16,
   }) {
     return Text(
@@ -16,20 +16,20 @@ extension Texts on String {
 
   Widget description(BuildContext context,
           {double fontSize = CustomFontSize.f18,
-          TextAlign textAlign,
-          int maxLines,
-          Color color,
-          TextDecoration decoration,
-          double letterSpacing,
-          FontWeight fontWeight}) =>
+          TextAlign? textAlign,
+          int? maxLines,
+          Color? color,
+          TextDecoration? decoration,
+          double? letterSpacing,
+          FontWeight? fontWeight}) =>
       AutoSizeText(
         this,
         textAlign: textAlign,
         maxLines: maxLines,
-        style: Theme.of(context).textTheme.headline4.copyWith(
+        style: Theme.of(context).textTheme.headline4!.copyWith(
             fontSize: fontSize,
             decoration: decoration,
-            color: color ?? Theme.of(context).textTheme.headline5.color,
+            color: color ?? Theme.of(context).textTheme.headline5!.color,
             letterSpacing: letterSpacing,
             fontWeight: fontWeight),
       );
@@ -37,15 +37,15 @@ extension Texts on String {
   Widget date(
     BuildContext context, {
     double fontSize = CustomFontSize.f13,
-    Color color,
-    int maxLines,
-    double letterSpacing,
-    FontWeight fontWeight,
+    Color? color,
+    int? maxLines,
+    double? letterSpacing,
+    FontWeight? fontWeight,
   }) {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline4.copyWith(
+      style: Theme.of(context).textTheme.headline4!.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,
@@ -57,15 +57,15 @@ extension Texts on String {
   Widget title(
     BuildContext context, {
     double fontSize = CustomFontSize.f22,
-    Color color,
-    int maxLines,
-    double letterSpacing,
-    FontWeight fontWeight,
+    Color? color,
+    int? maxLines,
+    double? letterSpacing,
+    FontWeight? fontWeight,
   }) {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline5.copyWith(
+      style: Theme.of(context).textTheme.headline5!.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,
@@ -78,15 +78,15 @@ extension Texts on String {
     BuildContext context, {
     bool withoutAutoSize = false,
     double fontSize = CustomFontSize.f20,
-    Color color,
+    Color? color,
     int maxLines = 2,
-    double letterSpacing,
-    FontWeight fontWeight,
+    double? letterSpacing,
+    FontWeight? fontWeight,
   }) {
     if (withoutAutoSize == true) {
       return Text(
         this,
-        style: Theme.of(context).textTheme.headline5.copyWith(
+        style: Theme.of(context).textTheme.headline5!.copyWith(
               fontSize: fontSize,
               color: color,
               letterSpacing: letterSpacing,
@@ -98,7 +98,7 @@ extension Texts on String {
     return AutoSizeText(
       this,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.headline5.copyWith(
+      style: Theme.of(context).textTheme.headline5!.copyWith(
             fontSize: fontSize,
             color: color,
             letterSpacing: letterSpacing,
@@ -109,7 +109,7 @@ extension Texts on String {
 
   Widget labelIntro(
     BuildContext context, {
-    Color color,
+    Color? color,
   }) {
     return AutoSizeText(
       this,

@@ -3,11 +3,11 @@ import 'package:custom_view/custom_font_size.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key key,
-    @required this.validate,
-    @required this.hintText,
-    @required this.labelText,
-    @required this.textInputType,
+    Key? key,
+    required this.validate,
+    required this.hintText,
+    required this.labelText,
+    required this.textInputType,
     this.controller,
     this.maxLines,
     this.maxLength = 100,
@@ -17,8 +17,8 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final TextInputType textInputType;
-  final int maxLines;
-  final TextEditingController controller;
+  final int? maxLines;
+  final TextEditingController? controller;
   final int maxLength;
 
   @override
@@ -42,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
       ),
-      validator: validate,
+      validator: validate as String? Function(String?)?,
     );
   }
 }

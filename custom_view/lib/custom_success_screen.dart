@@ -4,7 +4,7 @@ import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_scaffold.dart';
 
 class CustomSuccessScreen extends StatelessWidget {
-  const CustomSuccessScreen({Key key, @required this.child}) : super(key: key);
+  const CustomSuccessScreen({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
@@ -14,7 +14,7 @@ class CustomSuccessScreen extends StatelessWidget {
       child: CustomContainer(
         child: child,
       ),
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context) as AppBar,
       bottomNavigationBar: null,
     );
   }

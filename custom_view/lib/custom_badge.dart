@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomBadge extends StatelessWidget {
   final Widget child;
 
-  const CustomBadge({Key key, @required this.child}) : super(key: key);
+  const CustomBadge({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
