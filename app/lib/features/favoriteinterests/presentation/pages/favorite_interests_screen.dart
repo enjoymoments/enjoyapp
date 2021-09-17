@@ -33,7 +33,7 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
   Widget _buildBody() {
     return CustomContainer(
       child: BlocBuilder<FavoriteInterestsBloc, FavoriteInterestsState>(
-        cubit: _favoriteInterestsBloc,
+        bloc: _favoriteInterestsBloc,
         builder: (context, state) {
           if (state.isLoading) {
             return PlaceCardItemLoading();

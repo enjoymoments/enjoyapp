@@ -62,7 +62,7 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
       adUnitId: _getAdUnitId(),
       request: AdRequest(),
       size: size ?? AdSize.banner,
-      listener: AdListener(
+      listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('$BannerAd loaded.');
         },
@@ -72,7 +72,6 @@ class AdsBannerRepositoryImpl implements AdsBannerRepository {
         },
         onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
         onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-        onApplicationExit: (Ad ad) => print('$BannerAd onApplicationExit.'),
       ),
     );
 

@@ -125,7 +125,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<AddTimeLineBloc, AddTimeLineState>(
-      cubit: _addTimeLineBloc,
+      bloc: _addTimeLineBloc,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

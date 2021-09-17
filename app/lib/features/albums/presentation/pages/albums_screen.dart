@@ -66,7 +66,7 @@ class _AlbumsScreenState extends State<AlbumsScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<AlbumsCubit, AlbumsState>(
-      cubit: _albumsCubit,
+      bloc: _albumsCubit,
       listener: (consumerContext, state) {
         if (state.isError) {
           consumerContext.showSnackBar(

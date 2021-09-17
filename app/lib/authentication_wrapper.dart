@@ -15,7 +15,7 @@ class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      cubit: root<AuthenticationBloc>(),
+      bloc: root<AuthenticationBloc>(),
       buildWhen: (previous, current) {
         return previous.authenticated != current.authenticated ||
             previous.closeOnboardingScreen != current.closeOnboardingScreen;

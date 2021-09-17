@@ -76,7 +76,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   Widget _buildSections() {
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
-      cubit: _categoriesPlacesCubit,
+      bloc: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
         return previous.interestSelected != current.interestSelected;
       },
@@ -104,7 +104,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   Widget _buildCategories() {
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
-      cubit: _categoriesPlacesCubit,
+      bloc: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
         return previous.places != current.places ||
             previous.categorySelected != current.categorySelected;
@@ -135,7 +135,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   Widget _buildTabs() {
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
-      cubit: _categoriesPlacesCubit,
+      bloc: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
         return previous.categorySelected != current.categorySelected;
       },
@@ -155,7 +155,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   Widget _buildContentTabs() {
     return BlocBuilder<CategoriesPlacesCubit, CategoriesPlacesState>(
-      cubit: _categoriesPlacesCubit,
+      bloc: _categoriesPlacesCubit,
       buildWhen: (previous, current) {
         return (previous.contentPlaces != current.contentPlaces) ||
             (previous.contentSuggestedByUsers !=

@@ -43,7 +43,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   Widget _buildBody() {
     return CustomContainer(
       child: BlocBuilder<PlacesBloc, PlacesState>(
-        cubit: _placesBloc,
+        bloc: _placesBloc,
         builder: (context, state) {
           if (state.isLoading) {
             return PlaceCardItemLoading();

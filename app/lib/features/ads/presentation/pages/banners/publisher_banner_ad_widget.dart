@@ -37,7 +37,7 @@ class _PublisherBannerAdWidgetState extends State<PublisherBannerAdWidget> {
       width: AdSize.largeBanner.width.toDouble(),
       height: AdSize.largeBanner.height.toDouble(),
       child: BlocBuilder<AdsCubit, AdsState>(
-        cubit: _adsCubit,
+        bloc: _adsCubit,
         builder: (context, state) {
           if (state.publisherBanners.length > 0)
             return AdWidget(

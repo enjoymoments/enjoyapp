@@ -75,7 +75,7 @@ class SuggestionItem extends StatelessWidget {
 
   Widget _buildFavorite(BuildContext context) {
     return BlocBuilder<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
-      cubit: favoriteInterestsItemBloc,
+      bloc: favoriteInterestsItemBloc,
       builder: (context, state) {
         return IconButton(
           padding: const EdgeInsets.all(0),

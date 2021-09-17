@@ -46,7 +46,7 @@ class _CalendarContentState extends State<CalendarContent>
     return SingleChildScrollView(
       child: CustomContainer(
         child: BlocBuilder<CalendarCubit, CalendarState>(
-          cubit: _calendarCubit,
+          bloc: _calendarCubit,
           builder: (context, state) {
             if (state.model != null) {
               return Column(

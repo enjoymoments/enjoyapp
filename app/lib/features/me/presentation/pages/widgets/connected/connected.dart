@@ -225,7 +225,7 @@ class Connected extends StatelessWidget {
 
   Widget _buildCardInvite() {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
-      cubit: getItInstance<UserInfoCubit>(),
+      bloc: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
         if (state.existCoupleId) {
           return SizedBox.shrink();
@@ -256,7 +256,7 @@ class Connected extends StatelessWidget {
 
   Widget _buildUnsyncCouple() {
     return BlocBuilder<UserInfoCubit, UserInfoState>(
-      cubit: getItInstance<UserInfoCubit>(),
+      bloc: getItInstance<UserInfoCubit>(),
       builder: (context, state) {
         if (state.existCoupleId) {
           return Column(

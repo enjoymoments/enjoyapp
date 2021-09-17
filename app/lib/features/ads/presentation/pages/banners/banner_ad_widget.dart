@@ -36,7 +36,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
       width: AdSize.banner.width.toDouble(),
       height: AdSize.banner.height.toDouble(),
       child: BlocBuilder<AdsCubit, AdsState>(
-        cubit: _adsCubit,
+        bloc: _adsCubit,
         builder: (context, state) {
           if (state.banners.length > 0)
             return AdWidget(ad: state.banners[widget.indexRender ?? 0]);

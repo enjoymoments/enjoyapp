@@ -105,7 +105,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<EditAlbumCubit, EditAlbumState>(
-      cubit: _editAlbumCubit,
+      bloc: _editAlbumCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

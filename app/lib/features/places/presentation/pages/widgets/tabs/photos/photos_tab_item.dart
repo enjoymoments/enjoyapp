@@ -16,7 +16,7 @@ class PhotosTabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
-      cubit: placePhotosBloc,
+      bloc: placePhotosBloc,
       builder: (context, state) {
         if (state.item?.photos != null) {
           return _buildPhotos(context, state.item.photos);

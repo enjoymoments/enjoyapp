@@ -128,7 +128,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
         child: Column(
           children: [
             BlocListener<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
-              cubit: _favoriteInterestsItemBloc,
+              bloc: _favoriteInterestsItemBloc,
               listener: (context, state) {
                 if (state.isError) {
                   context.showSnackBar('Ops... houve um erro. Tente novamente');
@@ -137,7 +137,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
               child: SizedBox.shrink(),
             ),
             BlocBuilder<PlacePhotosBloc, PlacePhotosState>(
-              cubit: _placePhotosBloc,
+              bloc: _placePhotosBloc,
               builder: (context, state) {
                 if (state.isLoading) {
                   return _buildLoadingPhotos();
@@ -150,7 +150,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
             ),
             SpacerBox.v8,
             BlocBuilder<PlaceDetailsBloc, PlaceDetailsState>(
-              cubit: _placeDetailsBloc,
+              bloc: _placeDetailsBloc,
               builder: (context, state) {
                 if (state.isLoading) {
                   return _buildLoadingContent();
@@ -286,7 +286,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
   Widget _buildIconStar() {
     if (_user != UserAppModel.empty()) {
       return BlocBuilder<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
-        cubit: _favoriteInterestsItemBloc,
+        bloc: _favoriteInterestsItemBloc,
         builder: (context, state) {
           return IconButton(
             icon: CustomIcon(
@@ -307,7 +307,7 @@ class _PlaceItemDetailsState extends State<PlaceItemDetails>
 
   Widget _buildContentTab() {
     return BlocBuilder<PlaceDetailsTabBloc, PlaceDetailsTabState>(
-      cubit: _placeDetailsTabBloc,
+      bloc: _placeDetailsTabBloc,
       builder: (context, state) {
         if (state.currentTab == PlaceDetailTabsEnum.general) {
           return GeneralTabItem(

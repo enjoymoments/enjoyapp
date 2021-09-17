@@ -49,7 +49,7 @@ class InviteScreen extends StatelessWidget {
 
   Widget _buildChild(BuildContext context) {
     return BlocConsumer<InviteCubit, InviteState>(
-      cubit: inviteCubit,
+      bloc: inviteCubit,
       listener: (consumerContext, state) {
         if (state.isSuccess) {
           _redirectSuccessScreen(context);

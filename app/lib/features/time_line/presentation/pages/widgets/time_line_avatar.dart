@@ -19,7 +19,7 @@ class TimeLineAddActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimelineBloc, TimelineState>(
-      cubit: getItInstance<TimelineBloc>(),
+      bloc: getItInstance<TimelineBloc>(),
       builder: (context, state) {
         if (getItInstance<UserService>().notAuthenticated() ||
             state.timelineSelected == null) {
@@ -43,7 +43,7 @@ class TimeLineText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimelineBloc, TimelineState>(
-      cubit: getItInstance<TimelineBloc>(),
+      bloc: getItInstance<TimelineBloc>(),
       builder: (context, state) {
         if (state.timelineSelected == null) {
           return Text('');
@@ -89,7 +89,7 @@ class TimeLineAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimelineBloc, TimelineState>(
-      cubit: getItInstance<TimelineBloc>(),
+      bloc: getItInstance<TimelineBloc>(),
       builder: (context, state) {
         if (state.timelineSelected == null) {
           return SizedBox.shrink();

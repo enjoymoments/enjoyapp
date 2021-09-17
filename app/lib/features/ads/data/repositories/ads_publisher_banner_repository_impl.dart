@@ -10,10 +10,10 @@ import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 
 class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
-  Map<String, List<PublisherBannerAd>> _adsByScreen = {};
+  Map<String, List<BannerAd>> _adsByScreen = {};
 
   @override
-  Future<Either<List<PublisherBannerAd>, Exception>> getAdsByScreen({
+  Future<Either<List<BannerAd>, Exception>> getAdsByScreen({
     @required String screenName,
     int count = 1,
     bool reset = false,
@@ -28,10 +28,10 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
         _adsByScreen[screenName] = _list;
       }
 
-      return Left<List<PublisherBannerAd>, Exception>(_adsByScreen[screenName]);
+      return Left<List<BannerAd>, Exception>(_adsByScreen[screenName]);
     } on dynamic catch (e) {
       _logger(e, null);
-      return Right<List<PublisherBannerAd>, Exception>(
+      return Right<List<BannerAd>, Exception>(
           (e is Exception) ? e : Exception(e.toString()));
     }
   }
@@ -46,8 +46,8 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
     }
   }
 
-  Future<List<PublisherBannerAd>> _generatePublisherBannerList(int count) async {
-    var _result = List<PublisherBannerAd>();
+  Future<List<BannerAd>> _generatePublisherBannerList(int count) async {
+    var _result = <BannerAd>[];
 
     for (var i = 0; i < count; i++) {
       var _item = await _generatePublisherBanner();
@@ -57,22 +57,21 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
     return _result;
   }
 
-  Future<PublisherBannerAd> _generatePublisherBanner({AdSize size}) async {
-    var _publisherBannerAd = PublisherBannerAd(
+  Future<BannerAd> _generatePublisherBanner({AdSize size}) async {
+    var _publisherBannerAd = BannerAd(
       adUnitId: '/6499/example/banner',
-      request: PublisherAdRequest(nonPersonalizedAds: true),
-      sizes: [AdSize.largeBanner],
-      listener: AdListener(
+      request: AdRequest(nonPersonalizedAds: true),
+      size: AdSize.largeBanner,
+      listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          print('$PublisherBannerAd loaded.');
+          //print('$PublisherBannerAd loaded.');
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('$PublisherBannerAd failedToLoad: $error');
+          //print('$PublisherBannerAd failedToLoad: $error');
           _logger(Exception('$error'), null);
         },
-        onAdOpened: (Ad ad) => print('$PublisherBannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('$PublisherBannerAd onAdClosed.'),
-        onApplicationExit: (Ad ad) => print('$PublisherBannerAd onApplicationExit.'),
+        onAdOpened: (Ad ad) => print('onAdOpened.'),
+        onAdClosed: (Ad ad) => print('onAdClosed.'),
       ),
     );
 

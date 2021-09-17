@@ -40,7 +40,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
     SizeConfig().init(context);
 
     return BlocBuilder<ScreenManagerBloc, ScreenManagerState>(
-      cubit: _screenManagerBloc,
+      bloc: _screenManagerBloc,
       builder: (BuildContext context, ScreenManagerState state) {
         return CustomScaffold(
           child: _buildContent(state),

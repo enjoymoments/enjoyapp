@@ -35,7 +35,7 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
 
   Widget _buildBody() {
     return BlocBuilder<TimelineBloc, TimelineState>(
-      cubit: _timelineBloc,
+      bloc: _timelineBloc,
       builder: (context, state) {
         if (state.isLoading) {
           return _buildLoading();

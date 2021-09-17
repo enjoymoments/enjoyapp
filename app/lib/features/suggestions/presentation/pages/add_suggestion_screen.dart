@@ -62,7 +62,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<SuggestionsCubit, SuggestionsState>(
-      cubit: _suggestionsCubit,
+      bloc: _suggestionsCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

@@ -13,30 +13,28 @@ class PublisherBannerAdWidget extends StatefulWidget {
 }
 
 class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
-  PublisherBannerAd _bannerAd;
-  final Completer<PublisherBannerAd> bannerCompleter =
-      Completer<PublisherBannerAd>();
+  BannerAd _bannerAd;
+  final Completer<BannerAd> bannerCompleter =
+      Completer<BannerAd>();
 
   @override
   void initState() {
     super.initState();
-    _bannerAd = PublisherBannerAd(
+    _bannerAd = BannerAd(
       adUnitId: '/6499/example/banner',
-      request: PublisherAdRequest(nonPersonalizedAds: true),
-      sizes: [widget.size],
-      listener: AdListener(
+      request: AdRequest(nonPersonalizedAds: true),
+      size: widget.size,
+      listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
-          print('$PublisherBannerAd loaded.');
-          bannerCompleter.complete(ad as PublisherBannerAd);
+          print('$BannerAd loaded.');
+          bannerCompleter.complete(ad as BannerAd);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('$PublisherBannerAd failedToLoad: $error');
+          print('$BannerAd failedToLoad: $error');
           bannerCompleter.completeError(null);
         },
-        onAdOpened: (Ad ad) => print('$PublisherBannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('$PublisherBannerAd onAdClosed.'),
-        onApplicationExit: (Ad ad) =>
-            print('$PublisherBannerAd onApplicationExit.'),
+        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
+        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
       ),
     );
     Future<void>.delayed(Duration(seconds: 1), () => _bannerAd?.load());
@@ -51,10 +49,10 @@ class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PublisherBannerAd>(
+    return FutureBuilder<BannerAd>(
       future: bannerCompleter.future,
       builder:
-          (BuildContext context, AsyncSnapshot<PublisherBannerAd> snapshot) {
+          (BuildContext context, AsyncSnapshot<BannerAd> snapshot) {
         Widget child;
 
         switch (snapshot.connectionState) {
@@ -67,13 +65,13 @@ class PublisherBannerAdState extends State<PublisherBannerAdWidget> {
             if (snapshot.hasData) {
               child = AdWidget(ad: _bannerAd);
             } else {
-              child = Text('Error loading $PublisherBannerAd');
+              child = Text('Error loading $BannerAd');
             }
         }
 
         return Container(
-          width: _bannerAd.sizes[0].width.toDouble(),
-          height: _bannerAd.sizes[0].height.toDouble(),
+          width: _bannerAd.size.width.toDouble(),
+          height: _bannerAd.size.height.toDouble(),
           child: child,
           color: Colors.blueGrey,
         );

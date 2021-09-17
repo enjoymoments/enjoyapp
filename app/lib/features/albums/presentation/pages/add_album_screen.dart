@@ -68,7 +68,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<AddAlbumCubit, AddAlbumState>(
-      cubit: _addAlbumCubit,
+      bloc: _addAlbumCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

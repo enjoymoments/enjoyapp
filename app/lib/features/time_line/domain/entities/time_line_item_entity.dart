@@ -19,11 +19,11 @@ class TimeLineItemEntity extends Equatable {
     return TimeLineItemEntity(
       snap.id,
       _author,
-      snap.data()['textPost'],
-      snap.data()['dateCreation'] != null
-          ? DateTime.parse(snap.data()['dateCreation'].toDate().toString())
+      (snap.data() as Map)['textPost'],
+      (snap.data() as Map)['dateCreation'] != null
+          ? DateTime.parse((snap.data() as Map)['dateCreation'].toDate().toString())
           : null,
-      _toEntity(snap.data()['medias']),
+      _toEntity((snap.data() as Map)['medias']),
     );
   }
 

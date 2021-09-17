@@ -70,7 +70,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<FeedbackCubit, FeedbackState>(
-      cubit: _feedbackCubit,
+      bloc: _feedbackCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

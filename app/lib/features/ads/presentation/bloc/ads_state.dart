@@ -18,7 +18,7 @@ class AdsState extends DefaultState {
         );
 
   final List<BannerAd> banners;
-  final List<PublisherBannerAd> publisherBanners;
+  final List<BannerAd> publisherBanners;
 
   factory AdsState.initial() {
     return AdsState(
@@ -39,7 +39,7 @@ class AdsState extends DefaultState {
     bool isError,
     String errorMessage,
     List<BannerAd> banners,
-    List<PublisherBannerAd> publisherBanners,
+    List<BannerAd> publisherBanners,
   }) {
     return AdsState(
       isLoading: isLoading ?? this.isLoading,

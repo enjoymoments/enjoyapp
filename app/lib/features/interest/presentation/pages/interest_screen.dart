@@ -55,7 +55,7 @@ class _InterestScreenState extends State<InterestScreen> {
 
   Widget _buildBody(BuildContext context) {
     return BlocBuilder<InterestBloc, InterestState>(
-      cubit: _interestBloc,
+      bloc: _interestBloc,
       builder: (context, state) {
         return IntroductionScreen(
           key: introKey,

@@ -202,7 +202,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   Widget _buildBody() {
     return BlocConsumer<AddCalendarCubit, AddCalendarState>(
-      cubit: _addCalendarCubit,
+      bloc: _addCalendarCubit,
       listener: (consumerContext, state) {
         _actionButtoncontroller.stop();
 

@@ -12,7 +12,7 @@ class GpsModalFit extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: BlocBuilder<GpsOpenCubit, GpsOpenState>(
-          cubit: gpsOpenCubit,
+          bloc: gpsOpenCubit,
           builder: (context, state) {
             if (state is GpsElements) {
               return state.elements;

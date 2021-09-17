@@ -20,7 +20,7 @@ class LoginWrapperScreen extends StatelessWidget {
 
   Widget _buildBody() {
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      cubit: root<AuthenticationBloc>(),
+      bloc: root<AuthenticationBloc>(),
       builder: (context, state) {
         if (root<AuthenticationBloc>().state.isLoading || root<AuthenticationBloc>().state.authenticated){
           return MeLoading();

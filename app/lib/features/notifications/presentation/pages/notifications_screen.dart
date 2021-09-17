@@ -57,7 +57,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           _notificationsCubit.getNotifications(byPass: true);
         },
         child: BlocBuilder<NotificationsCubit, NotificationsState>(
-          cubit: _notificationsCubit,
+          bloc: _notificationsCubit,
           builder: (BuildContext context, NotificationsState state) {
             if (state.notAutenticated == null || state.notAutenticated) {
               return NotificationsNotAutenticated();

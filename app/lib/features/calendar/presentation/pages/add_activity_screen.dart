@@ -45,7 +45,7 @@ class AddActivityScreen extends StatelessWidget {
 
   Widget _buildBody() {
     return BlocBuilder<AddActivityCubit, AddActivityState>(
-      cubit: activityCubit,
+      bloc: activityCubit,
       builder: (context, state) {
         if (state.activities != null && state.activities.length > 0) {
           return _buildContent(context, state.activities);

@@ -44,7 +44,7 @@ class _UnsyncCoupleScreenState extends State<UnsyncCoupleScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UnsyncCoupleCubit, UnsyncCoupleState>(
-      cubit: _unsyncCoupleCubit,
+      bloc: _unsyncCoupleCubit,
       listener: (consumerContext, state) {
         if (state.isSuccess) {
           _redirectSuccessScreen(context);
