@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
-import 'package:mozin/modules/config/router.gr.dart' as rt;
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
@@ -27,22 +26,14 @@ class _AppViewState extends State<AppView> {
     return MaterialApp.router(
       routerDelegate: AutoRouterDelegate(
         _appRouter,
+        navigatorObservers: () => [
+          getItInstance<AnalyticsService>().getAnalyticsObserver(),
+        ],
       ),
       routeInformationParser: _appRouter.defaultRouteParser(),
       title: 'Mozin',
       debugShowCheckedModeBanner: false,
       theme: getTheme(context),
-      //TODO:null-safety
-      //onGenerateRoute: (settings) => rt.AppRouter().onGenerateRoute(settings),
-      // builder: ExtendedNavigator.builder(
-      //   router: rt.Router(),
-      //   builder: (context, extendedNav) {
-      //     return extendedNav;
-      //   },
-      //   observers: <NavigatorObserver>[
-      //     getItInstance<AnalyticsService>().getAnalyticsObserver(),
-      //   ],
-      // ),
     );
   }
 }
