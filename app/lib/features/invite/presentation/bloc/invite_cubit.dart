@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/invite/data/models/user_sync_info_model.dart';
 import 'package:mozin/features/invite/domain/repositories/invite_repository.dart';
 import 'package:mozin/features/user_action/data/models/user_action_model.dart';
 import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin_core/utils.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
@@ -98,6 +99,9 @@ class InviteCubit extends Cubit<InviteState> {
       return;
     }
 
+    //TODO:review this
+    getItInstance<UserInfoCubit>().isLoading(true);
+
     emit(state.copyWith(isLoading: true));
 
     await Future<void>.delayed(Duration(milliseconds: 750));
@@ -105,6 +109,10 @@ class InviteCubit extends Cubit<InviteState> {
     var _shareUrl = await _userWrapper.getShareUrl();
     if (_shareUrl != null) {
       _shareService.share(_shareUrl);
+      
+      //TODO:review this
+      getItInstance<UserInfoCubit>().isLoading(false);
+
       emit(state.copyWith(
         isLoading: false,
         isError: false,
@@ -123,6 +131,9 @@ class InviteCubit extends Cubit<InviteState> {
       _userWrapper.setShareUrl(model);
       _shareService.share(model!);
 
+      //TODO:review this
+      getItInstance<UserInfoCubit>().isLoading(false);
+
       emit(state.copyWith(
         isLoading: false,
         isError: false,
@@ -131,6 +142,9 @@ class InviteCubit extends Cubit<InviteState> {
         forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
     }, (error) {
+      //TODO:review this
+      getItInstance<UserInfoCubit>().isLoading(false);
+
       emit(state.copyWith(
         isLoading: false,
         isError: true,

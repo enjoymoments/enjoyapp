@@ -27,4 +27,8 @@ class UserInfoCubit extends Cubit<UserInfoState> {
       emit(state.copyWith(isLoading: false, isError: true));
     });
   }
+
+  void isLoading(bool value) {
+    emit(state.copyWith(isLoading: value));
+  }
 }
