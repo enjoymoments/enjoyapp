@@ -293,25 +293,26 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
             ),
             SpacerBox.v16,
             CustomDivider(),
-            SpacerBox.v16,
-            CustomTile(
-              iconStart: AppIcons.tasks,
-              iconEnd: AppIcons.angle_right,
-              title: "Atividades",
-              description:
-                  "Escolha aqui quais tipos de atividades pretende realizar",
-              onTap: () {
-                _activityCubit!.setSeleted(widget.taskModel?.activities as List<AddActivityCalendarModel>?);
-                AutoRouter.of(context).push(
-                  Add_activity_screen(
-                    addCalendarCubit: _addCalendarCubit,
-                    activityCubit: _activityCubit,
-                  ),
-                );
-              },
-            ),
-            SpacerBox.v16,
-            CustomDivider(),
+            //TODO:in development
+            // SpacerBox.v16,
+            // CustomTile(
+            //   iconStart: AppIcons.tasks,
+            //   iconEnd: AppIcons.angle_right,
+            //   title: "Atividades",
+            //   description:
+            //       "Escolha aqui quais tipos de atividades pretende realizar",
+            //   onTap: () {
+            //     _activityCubit!.setSeleted(widget.taskModel?.activities as List<AddActivityCalendarModel>?);
+            //     AutoRouter.of(context).push(
+            //       Add_activity_screen(
+            //         addCalendarCubit: _addCalendarCubit,
+            //         activityCubit: _activityCubit,
+            //       ),
+            //     );
+            //   },
+            // ),
+            // SpacerBox.v16,
+            // CustomDivider(),
           ],
         ),
       ),

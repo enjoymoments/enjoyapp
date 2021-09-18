@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.dart';
@@ -11,8 +10,7 @@ part 'add_calendar_state.dart';
 
 class AddCalendarCubit extends Cubit<AddCalendarState> {
   AddCalendarCubit({required CalendarRepository calendarRepository})
-      : assert(calendarRepository != null),
-        _calendarRepository = calendarRepository,
+      : _calendarRepository = calendarRepository,
         super(AddCalendarState.initial());
 
   final CalendarRepository _calendarRepository;
@@ -77,14 +75,15 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
       return;
     }
 
-    if (state.model!.activities!.length == 0) {
-      emit(state.copyWith(
-        isError: true,
-        errorMessage: 'Selecione ao menos uma atividade',
-        forceRefresh: StateUtils.generateRandomNumber() as int?,
-      ));
-      return;
-    }
+    //TODO:in development
+    // if (state.model!.activities!.length == 0) {
+    //   emit(state.copyWith(
+    //     isError: true,
+    //     errorMessage: 'Selecione ao menos uma atividade',
+    //     forceRefresh: StateUtils.generateRandomNumber() as int?,
+    //   ));
+    //   return;
+    // }
 
     sendRequest();
   }
