@@ -8,8 +8,9 @@ class CalendarState extends DefaultState {
     bool? isSuccess,
     String? errorMessage,
     this.model,
-    this.events,
+    required this.events,
     this.selectedEvents,
+    this.forceRefresh,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -19,8 +20,9 @@ class CalendarState extends DefaultState {
         );
 
   final List<GroupedDateCalendarModel>? model;
-  final Map<DateTime?, List?>? events;
+  final Map<DateTime, List> events;
   final List? selectedEvents;
+  final int? forceRefresh;
 
   factory CalendarState.initial() {
     return CalendarState(
@@ -32,6 +34,7 @@ class CalendarState extends DefaultState {
       model: [],
       events: {},
       selectedEvents: [],
+      forceRefresh: null,
     );
   }
 
@@ -42,8 +45,9 @@ class CalendarState extends DefaultState {
     bool? isError,
     String? errorMessage,
     List<GroupedDateCalendarModel>? model,
-    Map<DateTime?, List?>? events,
+    Map<DateTime, List>? events,
     List? selectedEvents,
+    int? forceRefresh,
   }) {
     return CalendarState(
       isLoading: isLoading ?? this.isLoading,
@@ -54,6 +58,7 @@ class CalendarState extends DefaultState {
       model: model ?? this.model,
       events: events ?? this.events,
       selectedEvents: selectedEvents ?? this.selectedEvents,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
@@ -67,5 +72,6 @@ class CalendarState extends DefaultState {
         model,
         events,
         selectedEvents,
+        forceRefresh,
       ];
 }

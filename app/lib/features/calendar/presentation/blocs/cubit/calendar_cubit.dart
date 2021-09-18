@@ -1,22 +1,26 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
+import 'package:mozin_core/utils.dart';
 
 part 'calendar_state.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   CalendarCubit({required CalendarRepository calendarRepository})
-      : assert(calendarRepository != null),
-        _calendarRepository = calendarRepository,
+      : _calendarRepository = calendarRepository,
         super(CalendarState.initial());
 
   final CalendarRepository _calendarRepository;
 
   void selectedEvents(List selectedEventsParameter) {
-    emit(state.copyWith(selectedEvents: selectedEventsParameter));
+    emit(
+      state.copyWith(
+        selectedEvents: selectedEventsParameter,
+        forceRefresh: StateUtils.generateRandomNumber() as int?,
+      ),
+    );
   }
 
   void loadTasks() async {
@@ -24,18 +28,17 @@ class CalendarCubit extends Cubit<CalendarState> {
 
     _response.fold(
       (value) {
-        Map<DateTime?, List?> _events = {};
+        Map<DateTime, List> _events = {};
 
         for (var item in value) {
-          _events[item.date] = item.tasks;
+          _events[item.date!.clearTime()] = item.tasks!;
         }
 
         emit(
           state.copyWith(
-            events: _events,
-            model: value,
-            selectedEvents: _events[DateTime.now().clearTime()] ?? []
-          ),
+              events: _events,
+              model: value,
+              selectedEvents: _events[DateTime.now().clearTime()] ?? []),
         );
       },
       (error) {
