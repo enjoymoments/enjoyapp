@@ -59,11 +59,11 @@ class AuthenticationRepository {
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
     try {
-      final googleUser = await (_googleSignIn.signIn() as FutureOr<GoogleSignInAccount>);
-      final googleAuth = await googleUser.authentication;
+      final googleUser = await _googleSignIn.signIn();
+      final googleAuth = await googleUser?.authentication;
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
       );
       await _firebaseAuth.signInWithCredential(credential);
     } catch (e) {
