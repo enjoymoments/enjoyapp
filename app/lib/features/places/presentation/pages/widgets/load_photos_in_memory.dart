@@ -33,7 +33,7 @@ List<GalleryImageModel> _transformGalleryModel(List<Uint8List> images) {
   Uuid? _uuid = getItInstance<Uuid>();
 
   var _result = images.map((e) {
-    return GalleryImageModel(id: _uuid!.v4(), byte: e);
+    return GalleryImageModel(id: _uuid.v4(), byte: e);
   }).toList();
 
   return _result;

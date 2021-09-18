@@ -75,7 +75,7 @@ class AdsPublisherBannerRepositoryImpl implements AdsPublisherBannerRepository {
       ),
     );
 
-    await _publisherBannerAd?.load();
+    await _publisherBannerAd.load();
 
     return _publisherBannerAd;
   }

@@ -197,7 +197,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
               hintText: 'Título do álbum',
               labelText: 'Título do álbum',
               maxLines: 1,
-              validate: (String value) {},
+              validate: (String? value) {},
             ),
             SpacerBox.v16,
             images,

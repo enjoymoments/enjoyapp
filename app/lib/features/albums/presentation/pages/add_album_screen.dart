@@ -104,7 +104,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
               hintText: 'Título do álbum',
               labelText: 'Título do álbum',
               maxLines: 1,
-              validate: (String value) {},
+              validate: (String? value) {},
             ),
             SpacerBox.v16,
             _buildNewImages(state),

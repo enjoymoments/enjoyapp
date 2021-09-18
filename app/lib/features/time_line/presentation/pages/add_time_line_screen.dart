@@ -177,7 +177,7 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
               hintText: 'No que você está pensando?',
               labelText: 'No que você está pensando?',
               maxLines: 5,
-              validate: (String value) {},
+              validate: (String? value) {},
             ),
             SpacerBox.v16,
             images,

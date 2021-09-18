@@ -98,7 +98,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
               hintText: 'Título',
               labelText: 'Título',
               maxLines: 1,
-              validate: (String value) {},
+              validate: (String? value) {},
             ),
             SpacerBox.v16,
             CustomTextFormField(
@@ -107,7 +107,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
               hintText: 'Descrição',
               labelText: 'Descrição',
               maxLines: 10,
-              validate: (String value) {},
+              validate: (String? value) {},
             ),
           ],
         ),

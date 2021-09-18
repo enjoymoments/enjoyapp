@@ -236,7 +236,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               hintText: 'Título do evento',
               labelText: 'Título do evento',
               maxLines: 1,
-              validate: (String value) => null,
+              validate: (String? value) => null,
             ),
             SpacerBox.v16,
             CustomTextFormField(
@@ -245,7 +245,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               hintText: 'Descrição do evento',
               labelText: 'Descrição do evento',
               maxLines: 4,
-              validate: (String value) => null,
+              validate: (String? value) => null,
             ),
             SpacerBox.v34,
             CustomTile(

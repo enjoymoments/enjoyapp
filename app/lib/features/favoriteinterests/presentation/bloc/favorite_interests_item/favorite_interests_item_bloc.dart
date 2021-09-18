@@ -67,7 +67,7 @@ class FavoriteInterestsItemBloc
       response = await _favoriteInterestsRepository
           .removeFavoriteInterest(event.suggestion.id);
 
-      _userService!.removeFavoriteSuggestionInterest(
+      _userService.removeFavoriteSuggestionInterest(
         indexCategory: _mapItemFavorite.indexCategory,
         indexSubCategory: _mapItemFavorite.indexSubCategory,
         indexItem: _mapItemFavorite.indexItem,
@@ -83,7 +83,7 @@ class FavoriteInterestsItemBloc
         InterestEnum.Place,
       );
 
-      _userService!.addFavoriteSuggestionInterest(event.suggestion);
+      _userService.addFavoriteSuggestionInterest(event.suggestion);
     }
 
     yield response.fold((model) {
@@ -118,7 +118,7 @@ class FavoriteInterestsItemBloc
       response = await _favoriteInterestsRepository
           .removeFavoriteInterest(event.place!.placeId);
 
-      _userService!.removeFavoriteInterest(
+      _userService.removeFavoriteInterest(
         indexCategory: _mapItemFavorite.indexCategory,
         indexSubCategory: _mapItemFavorite.indexSubCategory,
         indexItem: _mapItemFavorite.indexItem,
@@ -131,7 +131,7 @@ class FavoriteInterestsItemBloc
         InterestEnum.Place,
       );
 
-      _userService!.addFavoriteInterest(event.place);
+      _userService.addFavoriteInterest(event.place);
     }
 
     yield response.fold((model) {

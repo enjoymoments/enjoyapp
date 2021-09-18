@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength = 100,
   }) : super(key: key);
 
-  final Function(String) validate;
+  final String? Function(String?)? validate;
   final String hintText;
   final String labelText;
   final TextInputType textInputType;
@@ -42,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0),
         ),
       ),
-      validator: validate as String? Function(String?)?,
+      validator: validate,
     );
   }
 }
