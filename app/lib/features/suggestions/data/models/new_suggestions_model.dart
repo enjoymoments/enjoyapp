@@ -4,22 +4,26 @@ class NewSuggestionsModel {
     required this.title,
     this.description,
     this.url,
-    required this.categoriesSelected,
+    required this.categoryId,
+    required this.subCategoryId,
+    
+    //TODO:only 1 subCategory select for now
+    //required this.categoriesSelected,
   });
 
   final String title;
   final String? description;
   final String? url;
-  final Map<String, List<String>> categoriesSelected;
+  
+  //TODO:only 1 subCategory select for now
+  //final Map<String, List<String>> categoriesSelected;
+
+  final String categoryId;
+  final String subCategoryId;
 
   @override
   String toString() {
     return '''
     ''';
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    return data;
   }
 }

@@ -22,7 +22,10 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
     mutation addSuggestion {
       addSuggestion(suggestion:{
         title: "${model!.title}",
-        description: "${model.description}"
+        description: "${model.description}",
+        url: "${model.url ?? ''}",
+        categoryId: "${model.categoryId}",
+        subCategoryId: "${model.subCategoryId}",
       }) {
           isSuccess
       }

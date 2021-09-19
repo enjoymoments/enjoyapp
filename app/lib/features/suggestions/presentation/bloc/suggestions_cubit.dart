@@ -48,20 +48,24 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     var _category = _categoriesSelected[category.id!];
 
     if (subCategory.selected!) {
-      if (_category != null) {
-        _category.add(subCategory.id!);
-      } else {
-        _category = [subCategory.id!];
-      }
+      //TODO:only 1 subCategory select for now
+      // if (_category != null) {
+      //   _category.add(subCategory.id!);
+      // } else {
+      //   _category = [subCategory.id!];
+      // }
+      _category = [subCategory.id!];
       _categoriesSelected[category.id!] = _category;
     } else {
       if (_category != null) {
         _category.removeWhere((element) => element == subCategory.id!);
         if (_category.isEmpty) {
           _categoriesSelected.remove(category.id!);
-        } else {
-          _categoriesSelected[category.id!] = _category;
-        }
+        } 
+        //TODO:only 1 subCategory select for now
+        // else {
+        //   _categoriesSelected[category.id!] = _category;
+        // }
       }
     }
 
@@ -71,7 +75,11 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     for (var item in _categories) {
       for (SubCategories subItem in item.subCategories!) {
         if (subItem is SubCategoriesModel) {
-          subItem.selected = subCategory.id == subItem.id;
+          if(subCategory.selected!) {
+            subItem.selected = subCategory.id == subItem.id;
+          } else {
+            subItem.selected = false;
+          } 
         }
       }
     }
@@ -126,7 +134,11 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
         title: title,
         description: description,
         url: url,
-        categoriesSelected: state.categoriesSelected,
+        
+        //TODO:only 1 subCategory select for now
+        //categoriesSelected: state.categoriesSelected,
+        categoryId: state.categoriesSelected.keys.first,
+        subCategoryId: state.categoriesSelected[state.categoriesSelected.keys.first]!.first, 
       ),
     );
 
