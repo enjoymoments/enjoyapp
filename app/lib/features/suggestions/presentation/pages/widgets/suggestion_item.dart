@@ -47,18 +47,20 @@ class SuggestionItem extends StatelessWidget {
               Expanded(child: item.description!.description(context)),
             ],
           ),
+          
           SpacerBox.v8,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildFavorite(context),
-              Row(
-                children: [
-                  _buildLike(context),
-                  SpacerBox.h43,
-                  _buildDislike(context),
-                ],
-              ),
+              //TODO:in development
+              // Row(
+              //   children: [
+              //     _buildLike(context),
+              //     SpacerBox.h43,
+              //     _buildDislike(context),
+              //   ],
+              // ),
             ],
           ),
         ],

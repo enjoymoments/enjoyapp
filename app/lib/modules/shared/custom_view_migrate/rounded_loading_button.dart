@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-//TODO:in test
-
 enum LoadingState { idle, loading, success, error }
 
 class RoundedLoadingButton extends StatefulWidget {
