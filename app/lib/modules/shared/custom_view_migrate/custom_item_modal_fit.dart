@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class CustomItemModalFit extends StatelessWidget {
   final Function onTap;
@@ -16,7 +17,7 @@ class CustomItemModalFit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(text),
+      title: text.description(context),
       leading: Icon(iconData),
       onTap: () {
         AutoRouter.of(context).pop();

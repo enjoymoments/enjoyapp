@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/custom_font_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:mozin/features/interest/presentation/bloc/interest_bloc.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/details/interest_categories_details.dart';
 import 'package:mozin/features/interest/presentation/pages/widgets/filters/categories/interest_categories.dart';
-import 'package:mozin/features/interest/presentation/pages/widgets/filters/general/general_filters_screen.dart';
 import 'package:mozin/features/places/presentation/blocs/places/places_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -78,6 +78,7 @@ class _InterestScreenState extends State<InterestScreen> {
           done: Text(
             'Filtrar',
             style: TextStyle(
+              fontSize: CustomFontSize.f18,
                 color: state.showNextButtonSubCategories!
                     ? Theme.of(context).primaryColor
                     : Theme.of(context).disabledColor),
