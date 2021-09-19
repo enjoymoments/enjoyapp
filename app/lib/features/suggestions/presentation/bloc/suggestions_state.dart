@@ -8,6 +8,9 @@ class SuggestionsState extends DefaultState {
     bool? isSuccess,
     String? errorMessage,
     this.suggestions,
+    required this.categories,
+    required this.categoriesSelected,
+    this.forceRefresh,
   }) : super(
           isLoading: isLoading,
           isSuccess: isSuccess,
@@ -17,6 +20,9 @@ class SuggestionsState extends DefaultState {
         );
 
   final List<SuggestionsModel>? suggestions;
+  final List<CategoriesModel> categories;
+  final Map<String, List<String>> categoriesSelected;
+  final int? forceRefresh;
 
   factory SuggestionsState.initial() {
     return SuggestionsState(
@@ -26,6 +32,9 @@ class SuggestionsState extends DefaultState {
       isLoading: false,
       errorMessage: null,
       suggestions: [],
+      categories: [],
+      categoriesSelected: {},
+      forceRefresh: null,
     );
   }
 
@@ -36,6 +45,9 @@ class SuggestionsState extends DefaultState {
     bool? isError,
     String? errorMessage,
     List<SuggestionsModel>? suggestions,
+    List<CategoriesModel>? categories,
+    Map<String, List<String>>? categoriesSelected,
+    int? forceRefresh,
   }) {
     return SuggestionsState(
       isLoading: isLoading ?? this.isLoading,
@@ -44,6 +56,9 @@ class SuggestionsState extends DefaultState {
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
       suggestions: suggestions ?? this.suggestions,
+      categories: categories ?? this.categories,
+      categoriesSelected: categoriesSelected ?? this.categoriesSelected,
+      forceRefresh: forceRefresh ?? this.forceRefresh,
     );
   }
 
@@ -55,5 +70,8 @@ class SuggestionsState extends DefaultState {
         isError,
         errorMessage,
         suggestions,
+        categories,
+        categoriesSelected,
+        forceRefresh,
       ];
 }

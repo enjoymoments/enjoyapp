@@ -110,7 +110,9 @@ void registerBlocs(GetIt getItInstance) {
       () => UnsyncCoupleCubit(userActionRepository: getItInstance()));
 
   getItInstance.registerFactory<SuggestionsCubit>(() => SuggestionsCubit(
-      suggestionsRepository: getItInstance<SuggestionsRepository>()));
+      suggestionsRepository: getItInstance<SuggestionsRepository>(),
+      interestRepository: getItInstance(),
+      ));
 
   getItInstance.registerFactory<CategoriesSectionsCubit>(() => CategoriesSectionsCubit());
 }

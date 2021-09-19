@@ -1,9 +1,10 @@
+import 'package:mozin/features/suggestions/data/models/new_suggestions_model.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class SuggestionsRemoteDataSource {
-  Future<ResponseDefaultModel> addSuggestion(SuggestionsModel? model);
+  Future<ResponseDefaultModel> addSuggestion(NewSuggestionsModel? model);
   Future<ResponseDefaultModel> updateSuggestions(SuggestionsModel? model);
   Future<ResponseDefaultModel> removeSuggestions(SuggestionsModel? model);
 }
@@ -15,7 +16,7 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
 
   @override
   Future<ResponseDefaultModel> addSuggestion(
-    SuggestionsModel? model,
+    NewSuggestionsModel? model,
   ) async {
     String _query = '''
     mutation addSuggestion {

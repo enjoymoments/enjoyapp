@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
+import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_category_item_details.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
@@ -28,17 +30,20 @@ class AddSuggestionScreen extends StatefulWidget {
 class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
+  TextEditingController? _urlController;
+
   RoundedLoadingButtonController? _actionButtoncontroller;
   SuggestionsCubit? _suggestionsCubit;
 
   @override
   void initState() {
-    _suggestionsCubit = getItInstance<SuggestionsCubit>();
+    _suggestionsCubit = getItInstance<SuggestionsCubit>()..loadCategories();
 
     _actionButtoncontroller = RoundedLoadingButtonController();
 
     _titleController = TextEditingController();
     _descriptionController = TextEditingController();
+    _urlController = TextEditingController();
 
     super.initState();
   }
@@ -48,6 +53,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
     _suggestionsCubit!.close();
     _titleController!.dispose();
     _descriptionController!.dispose();
+    _urlController!.dispose();
     super.dispose();
   }
 
@@ -94,7 +100,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
           children: <Widget>[
             CustomTextFormField(
               controller: _titleController,
-              textInputType: TextInputType.visiblePassword,
+              textInputType: TextInputType.text,
               hintText: 'Título',
               labelText: 'Título',
               maxLines: 1,
@@ -103,12 +109,23 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
             SpacerBox.v16,
             CustomTextFormField(
               controller: _descriptionController,
-              textInputType: TextInputType.visiblePassword,
+              textInputType: TextInputType.text,
               hintText: 'Descrição',
               labelText: 'Descrição',
               maxLines: 10,
               validate: (String? value) {},
             ),
+            SpacerBox.v16,
+            CustomTextFormField(
+              controller: _urlController,
+              textInputType: TextInputType.text,
+              hintText: 'URL',
+              labelText: 'Link para conteúdo externo',
+              maxLines: 1,
+              validate: (String? value) {},
+            ),
+            SpacerBox.v16,
+            ..._buildCards(state),
           ],
         ),
       ),
@@ -120,9 +137,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
       title: 'Criar Sugestão',
       context: context,
       onPressedBack: () {
-        if (
-            _titleController!.text != null &&
-                _titleController!.text.isNotEmpty) {
+        if (_titleController!.text.isNotEmpty) {
           _discardPost(context);
           return;
         }
@@ -149,8 +164,20 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
     );
   }
 
+  List<Widget> _buildCards(SuggestionsState state) {
+    return state.categories.map((element) {
+      return SuggestionCategoryItemDetails(
+        item: element,
+        callbackSelected: (SubCategoriesModel item) {
+          _suggestionsCubit!.selectedSubCategorie(element, item);
+        },
+      );
+    }).toList();
+  }
+
   void _save() {
-    _suggestionsCubit!.save(_titleController!.text, _descriptionController!.text);
+    _suggestionsCubit!
+        .save(_titleController!.text, _descriptionController!.text, _urlController!.text);
   }
 
   void _discardPost(BuildContext context) async {
