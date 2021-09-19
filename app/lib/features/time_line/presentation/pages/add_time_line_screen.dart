@@ -135,7 +135,6 @@ class _AddTimeLineScreenState extends State<AddTimeLineScreen> {
         }
 
         if (state.isSuccess!) {
-          getItInstance<TimelineBloc>()..add(LoadPosts());
           AutoRouter.of(context).pop();
         }
       },

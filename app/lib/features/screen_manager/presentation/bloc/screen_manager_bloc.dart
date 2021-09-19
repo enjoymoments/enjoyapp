@@ -102,8 +102,6 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
           .timelineRepository!
           .addTimeLineItem(user.timelineSelected!.id, user.id, transform);
 
-      getItInstance<TimelineBloc>()..add(LoadPosts());
-
       yield state.copyWith(isLoading: false, isSuccess: true, isFailure: false);
     } catch (e) {
       //TODO:not showing snacbar here. Not contains a 'Scaffold' in tree

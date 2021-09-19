@@ -102,6 +102,7 @@ class SuggestionItem extends StatelessWidget {
         return InkWell(
           child: CustomIcon(
               icon: AppIcons.bookmark,
+              size: SizeConfig.sizeByPixel(22),
               color: state.favoriteAdded!
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
