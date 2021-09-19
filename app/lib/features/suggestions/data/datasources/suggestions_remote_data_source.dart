@@ -58,7 +58,11 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
   Future<ResponseDefaultModel> removeSuggestions(SuggestionsModel? model) async {
     String _query = '''
     mutation removeSuggestion {
-      removeSuggestion(id: "${model!.id}") {
+      removeSuggestion(suggestion:{
+        id: "${model!.id}",
+        categoryId: "${model.categoryId}",
+        subCategoryId: "${model.subCategoryId}",
+      }) {
           isSuccess
       }
     }

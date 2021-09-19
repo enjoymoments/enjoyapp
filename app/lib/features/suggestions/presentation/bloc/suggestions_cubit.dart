@@ -93,8 +93,8 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     ));
   }
 
-  void remove(String? id) {
-    _suggestionsRepository.removeSuggestions(model: SuggestionsModel(id: id));
+  void remove(SuggestionsModel item) {
+    _suggestionsRepository.removeSuggestions(model: item);
   }
 
   void save(String? title, String? description, String? url) {

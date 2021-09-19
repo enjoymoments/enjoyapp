@@ -190,7 +190,7 @@ class SuggestionItem extends StatelessWidget {
             text: 'Sim, quero deletar',
             iconData: AppIcons.trash,
             onTap: () {
-              suggestionsCubit!.remove(item.id);
+              suggestionsCubit!.remove(item);
             },
           ),
         ],
