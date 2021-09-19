@@ -50,8 +50,10 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           }
 
           if (state.model!.places != null && state.model!.places!.length > 0) {
-            return CategoriesPlaces(
-              places: state.model!.places,
+            return _generateContent(
+              CategoriesPlaces(
+                places: state.model!.places,
+              ),
             );
           }
 
