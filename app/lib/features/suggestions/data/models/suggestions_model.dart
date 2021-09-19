@@ -13,6 +13,7 @@ class SuggestionsModel extends Suggestions {
     int? like,
     int? dislike,
     bool? moreOptionsEnable,
+    String? url,
   }) : super(
           title: title,
           description: description,
@@ -20,6 +21,7 @@ class SuggestionsModel extends Suggestions {
           like: like,
           dislike: dislike,
           moreOptionsEnable: moreOptionsEnable,
+          url: url,
           favoriteAdded: favoriteAdded,
         );
 
@@ -51,6 +53,7 @@ class SuggestionsModel extends Suggestions {
       dislike: json['dislike'],
       moreOptionsEnable: json['moreOptionsEnable'],
       favoriteAdded: json['favoriteAdded'],
+      url: json['url'],
     );
   }
 

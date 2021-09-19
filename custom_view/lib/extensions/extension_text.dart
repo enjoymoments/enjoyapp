@@ -34,6 +34,27 @@ extension Texts on String {
             fontWeight: fontWeight),
       );
 
+
+  Widget link(BuildContext context,
+          {double fontSize = CustomFontSize.f20,
+          TextAlign? textAlign,
+          int? maxLines,
+          Color? color,
+          TextDecoration? decoration,
+          double? letterSpacing,
+          FontWeight? fontWeight}) =>
+      AutoSizeText(
+        this,
+        textAlign: textAlign,
+        maxLines: maxLines,
+        style: Theme.of(context).textTheme.headline4!.copyWith(
+            fontSize: fontSize,
+            decoration: TextDecoration.underline,
+            color: color ?? Theme.of(context).textTheme.headline5!.color,
+            letterSpacing: letterSpacing,
+            fontWeight: fontWeight),
+      );
+
   Widget date(
     BuildContext context, {
     double fontSize = CustomFontSize.f13,

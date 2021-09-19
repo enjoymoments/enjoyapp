@@ -9,6 +9,7 @@ class Suggestions extends Equatable {
     this.dislike,
     this.moreOptionsEnable,
     this.favoriteAdded,
+    this.url,
   });
 
   final String? title;
@@ -17,6 +18,7 @@ class Suggestions extends Equatable {
   final int? like;
   final int? dislike;
   final bool? moreOptionsEnable;
+  final String? url;
   bool? favoriteAdded;
 
   @override
@@ -28,5 +30,6 @@ class Suggestions extends Equatable {
         dislike,
         moreOptionsEnable,
         favoriteAdded,
+        url,
       ];
 }

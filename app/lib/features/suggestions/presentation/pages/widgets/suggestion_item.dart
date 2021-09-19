@@ -14,6 +14,7 @@ import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.d
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
+import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
 
 class SuggestionItem extends StatelessWidget {
   const SuggestionItem({
@@ -33,6 +34,7 @@ class SuggestionItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: myBoxDecoration(context),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -47,10 +49,10 @@ class SuggestionItem extends StatelessWidget {
               Expanded(child: item.description!.description(context)),
             ],
           ),
-          
+          ..._buildUrl(context),
           SpacerBox.v8,
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               _buildFavorite(context),
               //TODO:in development
@@ -63,9 +65,27 @@ class SuggestionItem extends StatelessWidget {
               // ),
             ],
           ),
+          SpacerBox.v8,
         ],
       ),
     );
+  }
+
+  List<Widget> _buildUrl(BuildContext context) {
+    if (item.url != null && item.url!.isNotEmpty) {
+      return [
+        SpacerBox.v8,
+        InkWell(
+          child: item.url!.link(context),
+          onTap: () {
+            LaunchUrlService.launchURL(item.url!);
+          },
+        ),
+        SpacerBox.v8,
+      ];
+    }
+
+    return [SizedBox.shrink()];
   }
 
   BoxDecoration myBoxDecoration(BuildContext context) {
@@ -79,14 +99,13 @@ class SuggestionItem extends StatelessWidget {
     return BlocBuilder<FavoriteInterestsItemBloc, FavoriteInterestsItemState>(
       bloc: favoriteInterestsItemBloc,
       builder: (context, state) {
-        return IconButton(
-          padding: const EdgeInsets.all(0),
-          icon: CustomIcon(
+        return InkWell(
+          child: CustomIcon(
               icon: AppIcons.bookmark,
               color: state.favoriteAdded!
                   ? Theme.of(context).accentIconTheme.color
                   : Theme.of(context).iconTheme.color),
-          onPressed: () {
+          onTap: () {
             favoriteInterestsItemBloc!.add(AddSuggestionToFavorite(item));
           },
         );
@@ -135,9 +154,7 @@ class SuggestionItem extends StatelessWidget {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.like
-              .toString()
-              .label(context, fontSize: CustomFontSize.f16),
+          item.like.toString().label(context, fontSize: CustomFontSize.f16),
         ],
       ),
     );
@@ -153,9 +170,7 @@ class SuggestionItem extends StatelessWidget {
             size: CustomFontSize.f16,
           ),
           SpacerBox.h5,
-          item.dislike
-              .toString()
-              .label(context, fontSize: CustomFontSize.f16),
+          item.dislike.toString().label(context, fontSize: CustomFontSize.f16),
         ],
       ),
     );
