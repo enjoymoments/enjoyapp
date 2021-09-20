@@ -22,7 +22,7 @@ class CustomAvatarWithName extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            name!.label(context),
+            if (name != null) name!.label(context) else SizedBox.shrink(),
             SpacerBox.v2,
             child ?? SizedBox.shrink(),
           ],

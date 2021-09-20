@@ -58,7 +58,7 @@ class Connected extends StatelessWidget {
           radius: SizeConfig.sizeByPixel(25),
         ),
         SpacerBox.h16,
-        user!.name!.title(context),
+        if(user!.name != null) user!.name!.title(context) else SizedBox.shrink(),
       ],
     );
   }
