@@ -95,7 +95,7 @@ class AuthenticationBloc
 
       _assignmentUser(_user);
 
-      _settingsUser(_user);
+      await _settingsUser(_user);
 
       yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
@@ -116,7 +116,7 @@ class AuthenticationBloc
 
       _assignmentUser(_user);
 
-      _settingsUser(_user);
+      await _settingsUser(_user);
 
       yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
@@ -137,7 +137,7 @@ class AuthenticationBloc
 
       _assignmentUser(_user);
 
-      _settingsUser(_user);
+      await _settingsUser(_user);
 
       yield state.copyWith(isLoading: false, user: _user);
     } catch (e) {
@@ -178,15 +178,15 @@ class AuthenticationBloc
 
     //_settingsExecute - avoids running too often
     if (_settingsExecute == false && event.user != UserAppModel.empty()) {
-      _settingsUser(event.user);
+      await _settingsUser(event.user);
       _settingsExecute = true;
     }
 
     this.add(CheckAuthenticated());
   }
 
-  void _settingsUser(UserAppModel user) async {
-    getItInstance<UserInfoCubit>().setUserInfo();
+  Future<void> _settingsUser(UserAppModel user) async {
+    await getItInstance<UserInfoCubit>().setUserInfo();
 
     //TODO:in development
     if (Platform.isAndroid) {
