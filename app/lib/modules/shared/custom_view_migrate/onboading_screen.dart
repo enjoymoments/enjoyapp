@@ -21,6 +21,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
+      globalBackgroundColor: Theme.of(context).primaryColor,
       key: introKey,
       pages: [
         _buildItem('Conheça o Enjoy',
