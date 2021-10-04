@@ -166,6 +166,14 @@ class Connected extends StatelessWidget {
                 },
               ),
               CustomItemModalFit(
+                text: 'Spotify',
+                iconData: AppIcons.spotify,
+                onTap: () {
+                  LaunchUrlService.launchURL(
+                      'https://open.spotify.com/user/whvsg60a3i1giwyact9w99gof?si=aae88c39c743416a');
+                },
+              ),
+              CustomItemModalFit(
                 text: 'Linkedin',
                 iconData: AppIcons.linkedin,
                 onTap: () {
