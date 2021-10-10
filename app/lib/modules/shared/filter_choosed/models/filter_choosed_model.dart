@@ -22,20 +22,21 @@ class FilterChoosedModel {
 
   FilterChoosedModel({this.categories, this.generalFilters});
 
-  void changePrice(double minPrice, double maxPrice) {
-    generalFilters!.minPrice = minPrice;
-    generalFilters!.maxPrice = maxPrice;
-  }
+  //TODO:in development
+  // void changePrice(double minPrice, double maxPrice) {
+  //   generalFilters!.minPrice = minPrice;
+  //   generalFilters!.maxPrice = maxPrice;
+  // }
 
-  void changeDistance(double minDistance, double maxDistance) {
-    generalFilters!.minDistance = minDistance;
-    generalFilters!.maxDistance = maxDistance;
-  }
+  // void changeDistance(double minDistance, double maxDistance) {
+  //   generalFilters!.minDistance = minDistance;
+  //   generalFilters!.maxDistance = maxDistance;
+  // }
 
-  void changeTime(double minTime, double maxTime) {
-    generalFilters!.minTime = minTime;
-    generalFilters!.maxTime = maxTime;
-  }
+  // void changeTime(double minTime, double maxTime) {
+  //   generalFilters!.minTime = minTime;
+  //   generalFilters!.maxTime = maxTime;
+  // }
 
   void insertCategorie(CategoriesModel item) {
     categories!.add(item);

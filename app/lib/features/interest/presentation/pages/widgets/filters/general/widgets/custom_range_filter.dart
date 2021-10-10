@@ -126,15 +126,16 @@ class _CustomRangeFilterState extends State<CustomRangeFilter> {
   }
 
   void _invokeChange(RangeValues value) {
-    if (widget.typeRange == TypeRangeEnum.price) {
-      _interestBloc!
-          .add(ChangePrice(minPrice: value.start, maxPrice: value.end));
-    } else if (widget.typeRange == TypeRangeEnum.distance) {
-      _interestBloc!
-          .add(ChangeDistance(minDistance: value.start, maxDistance: value.end));
-    } else if (widget.typeRange == TypeRangeEnum.time) {
-      _interestBloc!
-          .add(ChangeTime(minTime: value.start, maxTime: value.end));
-    }
+    //TODO:in development
+    // if (widget.typeRange == TypeRangeEnum.price) {
+    //   _interestBloc!
+    //       .add(ChangePrice(minPrice: value.start, maxPrice: value.end));
+    // } else if (widget.typeRange == TypeRangeEnum.distance) {
+    //   _interestBloc!
+    //       .add(ChangeDistance(minDistance: value.start, maxDistance: value.end));
+    // } else if (widget.typeRange == TypeRangeEnum.time) {
+    //   _interestBloc!
+    //       .add(ChangeTime(minTime: value.start, maxTime: value.end));
+    // }
   }
 }
