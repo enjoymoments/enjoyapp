@@ -83,6 +83,9 @@ class FavoriteInterestsRemoteDataSourceImpl
                 like
                 moreOptionsEnable
                 url
+                urlAndroid
+                urlIOS
+                urlReference
                 favoriteAdded
               }
             }

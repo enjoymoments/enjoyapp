@@ -14,6 +14,9 @@ class SuggestionsModel extends Suggestions {
     int? dislike,
     bool? moreOptionsEnable,
     String? url,
+    String? urlAndroid,
+    String? urlIOS,
+    String? urlReference,
   }) : super(
           title: title,
           description: description,
@@ -22,6 +25,9 @@ class SuggestionsModel extends Suggestions {
           dislike: dislike,
           moreOptionsEnable: moreOptionsEnable,
           url: url,
+          urlAndroid: urlAndroid,
+          urlIOS: urlIOS,
+          urlReference: urlReference,
           favoriteAdded: favoriteAdded,
         );
 
@@ -54,6 +60,9 @@ class SuggestionsModel extends Suggestions {
       moreOptionsEnable: json['moreOptionsEnable'],
       favoriteAdded: json['favoriteAdded'],
       url: json['url'],
+      urlAndroid: json['urlAndroid'],
+      urlIOS: json['urlIOS'],
+      urlReference: json['urlReference'],
     );
   }
 

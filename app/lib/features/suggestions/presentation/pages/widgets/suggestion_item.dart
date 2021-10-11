@@ -43,13 +43,10 @@ class SuggestionItem extends StatelessWidget {
             ],
           ),
           SpacerBox.v8,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(child: item.description!.description(context)),
-            ],
-          ),
-          ..._buildUrl(context),
+          _buildDescription(context),
+          ..._buildUrl(context, 'URL', item.url),
+          ..._buildUrl(context, "ANDROID", item.urlAndroid),
+          ..._buildUrl(context, "IOS", item.urlIOS),
           SpacerBox.v8,
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -71,14 +68,34 @@ class SuggestionItem extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildUrl(BuildContext context) {
-    if (item.url != null && item.url!.isNotEmpty) {
+  Widget _buildDescription(BuildContext context) {
+    if (item.description?.isNotEmpty ?? false) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(child: item.description!.description(context)),
+        ],
+      );
+    }
+
+    return SizedBox.shrink();
+  }
+
+  List<Widget> _buildUrl(BuildContext context, String label, String? url) {
+    if (url?.isNotEmpty ?? false) {
       return [
         SpacerBox.v8,
         InkWell(
-          child: item.url!.link(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              label.description(context),
+              SpacerBox.v4,
+              url!.link(context),
+            ],
+          ),
           onTap: () {
-            LaunchUrlService.launchURL(item.url!);
+            LaunchUrlService.launchURL(url);
           },
         ),
         SpacerBox.v8,
@@ -124,7 +141,7 @@ class SuggestionItem extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: [
+            items: [              
               CustomItemModalFit(
                 text: 'Deletar',
                 iconData: AppIcons.trash,
@@ -132,6 +149,14 @@ class SuggestionItem extends StatelessWidget {
                   confirmRemove(context);
                 },
               ),
+              if (item.urlReference?.isNotEmpty ?? false)
+                CustomItemModalFit(
+                  text: 'Referência',
+                  iconData: AppIcons.window_maximize,
+                  onTap: () {
+                    LaunchUrlService.launchURL(item.urlReference!);
+                  },
+                ),
             ],
           ),
         );

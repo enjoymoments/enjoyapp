@@ -75,6 +75,9 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
                 like
                 moreOptionsEnable
                 url
+                urlAndroid
+                urlIOS
+                urlReference
                 favoriteAdded
               }
             }
