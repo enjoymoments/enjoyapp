@@ -132,7 +132,7 @@ class SuggestionItem extends StatelessWidget {
   }
 
   Widget _buildOptions(BuildContext context) {
-    if (!item.moreOptionsEnable!) {
+    if (!item.moreOptionsEnable! && (item.urlReference == null || item.urlReference == "")) {
       return SizedBox.shrink();
     }
 
@@ -141,7 +141,8 @@ class SuggestionItem extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: [              
+            items: [            
+              if(item.moreOptionsEnable!)  
               CustomItemModalFit(
                 text: 'Deletar',
                 iconData: AppIcons.trash,
@@ -170,37 +171,38 @@ class SuggestionItem extends StatelessWidget {
     );
   }
 
-  Widget _buildLike(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Row(
-        children: [
-          CustomIcon(
-            icon: AppIcons.thumbs_up,
-            size: CustomFontSize.f16,
-          ),
-          SpacerBox.h5,
-          item.like.toString().label(context, fontSize: CustomFontSize.f16),
-        ],
-      ),
-    );
-  }
+  //TODO:in development
+  // Widget _buildLike(BuildContext context) {
+  //   return InkWell(
+  //     onTap: () {},
+  //     child: Row(
+  //       children: [
+  //         CustomIcon(
+  //           icon: AppIcons.thumbs_up,
+  //           size: CustomFontSize.f16,
+  //         ),
+  //         SpacerBox.h5,
+  //         item.like.toString().label(context, fontSize: CustomFontSize.f16),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildDislike(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Row(
-        children: [
-          CustomIcon(
-            icon: AppIcons.thumbs_down,
-            size: CustomFontSize.f16,
-          ),
-          SpacerBox.h5,
-          item.dislike.toString().label(context, fontSize: CustomFontSize.f16),
-        ],
-      ),
-    );
-  }
+  // Widget _buildDislike(BuildContext context) {
+  //   return InkWell(
+  //     onTap: () {},
+  //     child: Row(
+  //       children: [
+  //         CustomIcon(
+  //           icon: AppIcons.thumbs_down,
+  //           size: CustomFontSize.f16,
+  //         ),
+  //         SpacerBox.h5,
+  //         item.dislike.toString().label(context, fontSize: CustomFontSize.f16),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void confirmRemove(BuildContext context) {
     showMaterialModalBottomSheet(
