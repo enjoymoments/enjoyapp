@@ -63,16 +63,33 @@ class _TimeLineScreenState extends State<TimeLineScreen> {
         }
 
         if (state.isError!) {
-          return Center(
-            child: "Ops, houve um erro. Tente novamente".labelIntro(context),
-          );
+          return _buildEmptyState("Ops, houve um erro. Tente novamente");            
         }
 
-        return Center(
-          child: "Que tal criar a primeira postagem?".labelIntro(context),
-        );
+        return _buildEmptyState("Que tal criar a primeira postagem?");
       },
     );
+  }
+
+  Widget _buildEmptyState(String text) {
+            return Stack(
+          children: [
+            RefreshIndicator(
+              key: _refreshIndicatorKey,
+              color: Theme.of(context).primaryColor,
+              onRefresh: () async {
+                _timelineBloc!.add(LoadPosts());
+              },
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [],
+              ),
+            ),
+            Center(
+              child:text.labelIntro(context),
+            ),
+          ],
+        );
   }
 
   Widget _buildLoading() {
