@@ -24,7 +24,7 @@ class _CalendarContentState extends State<CalendarContent>
     with TickerProviderStateMixin {
   late CalendarCubit _calendarCubit;
   late AnimationController _animationController;
-  DateTime? _selectedDay;
+  late DateTime _selectedDay;
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _CalendarContentState extends State<CalendarContent>
       },
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
-      focusedDay: DateTime.now(),
+      focusedDay: _selectedDay,
       startingDayOfWeek: StartingDayOfWeek.sunday,
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {
