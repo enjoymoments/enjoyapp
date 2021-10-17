@@ -130,10 +130,11 @@ class AppRouter extends _i1.RootStackRouter {
     Add_calendar_screen.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
-          final args = data.argsAs<Add_calendar_screenArgs>(
-              orElse: () => const Add_calendar_screenArgs());
+          final args = data.argsAs<Add_calendar_screenArgs>();
           return _i13.AddCalendarScreen(
-              key: args.key, taskModel: args.taskModel);
+              key: args.key,
+              taskModel: args.taskModel,
+              selectedDate: args.selectedDate);
         }),
     Add_activity_screen.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -388,20 +389,27 @@ class Favorite_interests_screen extends _i1.PageRouteInfo {
 }
 
 class Add_calendar_screen extends _i1.PageRouteInfo<Add_calendar_screenArgs> {
-  Add_calendar_screen({_i2.Key? key, _i29.TaskCalendarModel? taskModel})
+  Add_calendar_screen(
+      {_i2.Key? key,
+      _i29.TaskCalendarModel? taskModel,
+      required DateTime selectedDate})
       : super(name,
             path: '/add-calendar-screen',
-            args: Add_calendar_screenArgs(key: key, taskModel: taskModel));
+            args: Add_calendar_screenArgs(
+                key: key, taskModel: taskModel, selectedDate: selectedDate));
 
   static const String name = 'Add_calendar_screen';
 }
 
 class Add_calendar_screenArgs {
-  const Add_calendar_screenArgs({this.key, this.taskModel});
+  const Add_calendar_screenArgs(
+      {this.key, this.taskModel, required this.selectedDate});
 
   final _i2.Key? key;
 
   final _i29.TaskCalendarModel? taskModel;
+
+  final DateTime selectedDate;
 }
 
 class Add_activity_screen extends _i1.PageRouteInfo<Add_activity_screenArgs> {

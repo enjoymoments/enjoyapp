@@ -214,7 +214,7 @@ class _CalendarContentState extends State<CalendarContent>
         return InkWell(
           onTap: () {
             AutoRouter.of(context)
-                .push(Add_calendar_screen(taskModel: _eventCast));
+                .push(Add_calendar_screen(taskModel: _eventCast, selectedDate: _selectedDay));
           },
           child: Container(
             width: SizeConfig.screenWidth,

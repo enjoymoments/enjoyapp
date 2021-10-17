@@ -27,16 +27,17 @@ import 'package:custom_view/spacer_box.dart';
 
 class AddCalendarScreen extends StatefulWidget {
   final TaskCalendarModel? taskModel;
+  final DateTime selectedDate;
 
-  const AddCalendarScreen({Key? key, this.taskModel}) : super(key: key);
+  const AddCalendarScreen({Key? key, this.taskModel, required this.selectedDate,}) : super(key: key);
 
   @override
   _AddCalendarScreenState createState() => _AddCalendarScreenState();
 }
 
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
-  TimeOfDay? _selectedTime;
-  DateTime? _selectedDate;
+  late TimeOfDay _selectedTime;  
+  late DateTime _selectedDate;
 
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
@@ -49,6 +50,9 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
 
   @override
   void initState() {
+    _selectedTime = TimeOfDay.now();
+    _selectedDate = widget.selectedDate;
+
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
     _activityCubit = getItInstance<AddActivityCubit>()
       ..getActivities();
@@ -98,9 +102,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void save() {
-    final DateTime? _datetimeFormatted = _selectedDate != null
-        ? _selectedDate!.setTimeOfDay(_selectedTime!)
-        : null;
+    final DateTime? _datetimeFormatted = _selectedDate.setTimeOfDay(_selectedTime);
 
     _addCalendarCubit!.setModel(
       title: _titleController!.text,
@@ -262,9 +264,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
                     Duration(days: 365),
                   ),
                 ).then((value) {
-                  _selectedDate = _selectedTime != null
-                      ? value!.setTimeOfDay(_selectedTime!)
-                      : value;
+                  _selectedDate = value!.setTimeOfDay(_selectedTime);
                   _addCalendarCubit!.setModel(
                     datetime: _selectedDate,
                   );
@@ -284,7 +284,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
                   context: context,
                   initialTime: state.model!.dateTime!.timeOfDayFromDateTime(),
                 ).then((value) {
-                  _selectedTime = value;
+                  _selectedTime = value ?? _selectedTime;
                   _addCalendarCubit!.setModel(
                     datetime: state.model!.dateTime!.setTimeOfDay(value!),
                   );

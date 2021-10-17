@@ -135,7 +135,7 @@ class _RootScreenManagerState extends State<RootScreenManager> {
           IconButton(
           icon: CustomIcon(icon: AppIcons.plus),
           onPressed: () {
-            AutoRouter.of(context).push(Add_calendar_screen());
+            AutoRouter.of(context).push(Add_calendar_screen(selectedDate: DateTime.now()));
           },
         ),
         ];
