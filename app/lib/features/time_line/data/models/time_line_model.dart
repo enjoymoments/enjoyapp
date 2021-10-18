@@ -18,7 +18,7 @@ class TimeLineItemModel {
     this.medias,
   });
 
-  String get dateCreationFormatted => dateCreation!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation!);
+  String get dateCreationFormatted => dateCreation != null ? dateCreation!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation!) : '';
 
   Map<String, dynamic> toJson() {
     return {
