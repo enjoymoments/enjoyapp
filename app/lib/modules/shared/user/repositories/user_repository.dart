@@ -17,14 +17,29 @@ class UserRepository {
 
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
 
-  Future setTokensPushNotifications(UserAppModel user, String? token) async {
-    await _instance.firestore.collection('users').doc(user.id).set({
-      'id': user.id,
-      'name': user.name,
-      'photo': user.photo,
-      'email': user.email,
-    }, SetOptions(merge: true));
+  ///TODO:review this CHANGE THIS FOR BACKEND
+  Future<bool> createUserInFirestore(UserAppModel user) async {
+    QuerySnapshot<Map<String, dynamic>> _result = await _instance.firestore
+        .collection('users')
+        .where('email', isEqualTo: user.email)
+        .get();
+        
+    if (_result.docs.length == 0) {
+      await _instance.firestore.collection('users').doc(user.id).set({
+        'id': user.id,
+        'name': user.name,
+        'photo': user.photo,
+        'email': user.email,
+      }, SetOptions(merge: true));
 
+      return Future.value(true);
+    }
+
+    return Future.value(false);
+  }
+
+  ///TODO:review this CHANGE THIS FOR BACKEND
+  Future setTokensPushNotifications(UserAppModel user, String? token) async {
     var _newToken = _instance.firestore
         .doc('users/' + user.id)
         .collection('tokens')

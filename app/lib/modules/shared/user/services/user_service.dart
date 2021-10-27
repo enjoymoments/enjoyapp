@@ -167,4 +167,9 @@ class UserService implements UserInterface {
 
     return false;
   }
+
+  @override
+  Future<bool> createUserInFirestore(UserAppModel user) {
+    return this.userRepository!.createUserInFirestore(user);
+  }
 }

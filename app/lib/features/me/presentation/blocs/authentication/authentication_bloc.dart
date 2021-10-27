@@ -186,6 +186,7 @@ class AuthenticationBloc
   }
 
   Future<void> _settingsUser(UserAppModel user) async {
+    await _userService!.createUserInFirestore(user);
     await getItInstance<UserInfoCubit>().setUserInfo();
 
     //TODO:in development
@@ -194,7 +195,7 @@ class AuthenticationBloc
         _userService!.setTokensPushNotifications(user, value);
       });
     }
-    
+
     _userService!.setActionListener();
   }
 }

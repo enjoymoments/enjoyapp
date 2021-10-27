@@ -4,6 +4,7 @@ import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 
 abstract class UserInterface {
+  Future<bool> createUserInFirestore(UserAppModel user);
   Future setTokensPushNotifications(UserAppModel user, String token);
   Future setActionListener();
 
