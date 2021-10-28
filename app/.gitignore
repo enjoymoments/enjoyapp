@@ -9,7 +9,7 @@
 .buildlog/
 .history
 .svn/
-*proxy_config.dart
+*proxy_config2.dart
 
 # IntelliJ related
 *.iml
