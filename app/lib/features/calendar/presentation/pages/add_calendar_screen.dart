@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -29,18 +30,23 @@ class AddCalendarScreen extends StatefulWidget {
   final TaskCalendarModel? taskModel;
   final DateTime selectedDate;
 
-  const AddCalendarScreen({Key? key, this.taskModel, required this.selectedDate,}) : super(key: key);
+  const AddCalendarScreen({
+    Key? key,
+    this.taskModel,
+    required this.selectedDate,
+  }) : super(key: key);
 
   @override
   _AddCalendarScreenState createState() => _AddCalendarScreenState();
 }
 
 class _AddCalendarScreenState extends State<AddCalendarScreen> {
-  late TimeOfDay _selectedTime;  
+  late TimeOfDay _selectedTime;
   late DateTime _selectedDate;
 
   TextEditingController? _titleController;
   TextEditingController? _descriptionController;
+  TextEditingController? _urlController;
   RoundedLoadingButtonController? _actionButtoncontroller;
 
   AddCalendarCubit? _addCalendarCubit;
@@ -54,12 +60,12 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     _selectedDate = widget.selectedDate;
 
     _addCalendarCubit = getItInstance<AddCalendarCubit>();
-    _activityCubit = getItInstance<AddActivityCubit>()
-      ..getActivities();
+    _activityCubit = getItInstance<AddActivityCubit>()..getActivities();
 
     _actionButtoncontroller = RoundedLoadingButtonController();
     _titleController = TextEditingController();
     _descriptionController = TextEditingController();
+    _urlController = TextEditingController();
 
     _initValues();
 
@@ -102,7 +108,8 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void save() {
-    final DateTime? _datetimeFormatted = _selectedDate.setTimeOfDay(_selectedTime);
+    final DateTime? _datetimeFormatted =
+        _selectedDate.setTimeOfDay(_selectedTime);
 
     _addCalendarCubit!.setModel(
       title: _titleController!.text,
@@ -145,8 +152,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
           CustomItemModalFit(
             text: 'Não quero descartar',
             iconData: AppIcons.ad,
-            onTap: () {
-            },
+            onTap: () {},
           ),
           CustomItemModalFit(
             text: 'Sim, quero descartar',
@@ -248,6 +254,11 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               labelText: 'Descrição do evento',
               maxLines: 4,
               validate: (String? value) => null,
+            ),
+            SpacerBox.v16,
+            CustomUrlFormField(
+              controller: _urlController,
+              validate: (String? value) {},
             ),
             SpacerBox.v34,
             CustomTile(

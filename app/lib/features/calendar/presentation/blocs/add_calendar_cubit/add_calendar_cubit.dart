@@ -4,7 +4,7 @@ import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:mozin_core/mozin_core.dart';
 
 part 'add_calendar_state.dart';
 
@@ -37,6 +37,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
     String? taskId,
     String? title,
     String? description,
+    String? url,
     DateTime? datetime,
     List<AddActivityCalendar>? activities,
   }) {
@@ -44,6 +45,7 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
     state.model!.title = title ?? state.model!.title;
     state.model!.dateTime = datetime ?? state.model!.dateTime;
     state.model!.description = description ?? state.model!.description;
+    state.model!.url = url ?? state.model!.url;
     state.model!.activities = activities ?? state.model!.activities;
 
     emit(
@@ -73,6 +75,17 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
         forceRefresh: StateUtils.generateRandomNumber() as int?,
       ));
       return;
+    }
+
+    if (state.model!.url != null && state.model!.url!.isNotEmpty) {
+      if (!state.model!.url!.regexUrlHasMatch()) {
+        emit(state.copyWith(
+          isError: true,
+          errorMessage: 'Informe uma url válida',
+          forceRefresh: StateUtils.generateRandomNumber() as int?,
+        ));
+        return;
+      }
     }
 
     //TODO:in development

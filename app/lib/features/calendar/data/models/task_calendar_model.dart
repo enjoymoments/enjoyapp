@@ -6,12 +6,14 @@ class TaskCalendarModel extends AddTaskCalendar {
     String? taskId,
     String? title,
     String? description,
+    String? url,
     DateTime? dateTime,
     List<AddActivityCalendarModel>? activities,
   }) : super(
           taskId: taskId,
           title: title,
           description: description,
+          url: url,
           dateTime: dateTime,
           activities: activities,
         );
@@ -29,6 +31,7 @@ class TaskCalendarModel extends AddTaskCalendar {
       taskId: json['taskId'],
       title: json['title'],
       description: json['description'],
+      url: json['url'],
       dateTime: DateTime.tryParse(json['dateTime']),
       activities: listActivities,
     );

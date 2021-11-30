@@ -213,8 +213,8 @@ class _CalendarContentState extends State<CalendarContent>
         var _eventCast = event as TaskCalendarModel;
         return InkWell(
           onTap: () {
-            AutoRouter.of(context)
-                .push(Add_calendar_screen(taskModel: _eventCast, selectedDate: _selectedDay));
+            AutoRouter.of(context).push(Add_calendar_screen(
+                taskModel: _eventCast, selectedDate: _selectedDay));
           },
           child: Container(
             width: SizeConfig.screenWidth,
@@ -224,16 +224,18 @@ class _CalendarContentState extends State<CalendarContent>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _eventCast.title!.title(context),
-                        SpacerBox.v4,
-                        ..._buildDescription(_eventCast),
-                        _eventCast.dateTime!
-                            .formattedHourMinute()
-                            .label(context),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _eventCast.title!.title(context),
+                          SpacerBox.v4,
+                          ..._buildDescription(_eventCast),
+                          _eventCast.dateTime!
+                              .formattedHourMinute()
+                              .label(context),
+                        ],
+                      ),
                     ),
                     CustomIcon(
                       icon: AppIcons.angle_right,

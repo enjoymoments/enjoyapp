@@ -8,7 +8,6 @@ abstract class CalendarRemoteDataSource {
   Future<bool?> removeTaskInCalendar(String? taskId);
   Future<List<GroupedDateCalendarModel>> getTasksInCalendar();
   Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear();
-  
 }
 
 class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
@@ -38,6 +37,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
       addTaskInCalendar(task:{
         title: "${model.title}"
         description: "${model.description}"
+        url: "${model.url}"
         dateTime: "${model.dateTime}"
         activities: [$_activitiesFormated]
       })
@@ -49,7 +49,8 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear() async {
+  Future<List<GroupedYearCalendarModel>>
+      getTasksUserCalendarGroupedByYear() async {
     String _query = '''
     query getTasksUserCalendarGroupedByYear {
       getTasksUserCalendarGroupedByYear {

@@ -7,7 +7,7 @@ import 'package:mozin/features/suggestions/data/models/new_suggestions_model.dar
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/domain/repositories/suggestions_repository.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:mozin_core/mozin_core.dart';
 
 part 'suggestions_state.dart';
 
@@ -15,7 +15,7 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
   SuggestionsCubit({
     required InterestRepository interestRepository,
     required SuggestionsRepository suggestionsRepository,
-  })   : _interestRepository = interestRepository,
+  })  : _interestRepository = interestRepository,
         _suggestionsRepository = suggestionsRepository,
         super(SuggestionsState.initial());
 
@@ -62,7 +62,7 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
         _category.removeWhere((element) => element == subCategory.id!);
         if (_category.isEmpty) {
           _categoriesSelected.remove(category.id!);
-        } 
+        }
         //TODO:only 1 subCategory select for now
         // else {
         //   _categoriesSelected[category.id!] = _category;
@@ -76,11 +76,11 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     for (var item in _categories) {
       for (SubCategories subItem in item.subCategories!) {
         if (subItem is SubCategoriesModel) {
-          if(subCategory.selected!) {
+          if (subCategory.selected!) {
             subItem.selected = subCategory.id == subItem.id;
           } else {
             subItem.selected = false;
-          } 
+          }
         }
       }
     }
@@ -108,11 +108,7 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     }
 
     if (url != null && url.isNotEmpty) {
-      final Match? stringMatch = RegExp(
-              r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)')
-          .matchAsPrefix(url);
-
-      if (stringMatch == null) {
+      if (!url.regexUrlHasMatch()) {
         emit(state.copyWith(
           isError: true,
           errorMessage: 'Informe uma url válida',
@@ -136,11 +132,12 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
         title: title,
         description: description,
         url: url,
-        
+
         //TODO:only 1 subCategory select for now
         //categoriesSelected: state.categoriesSelected,
         categoryId: state.categoriesSelected.keys.first,
-        subCategoryId: state.categoriesSelected[state.categoriesSelected.keys.first]!.first, 
+        subCategoryId: state
+            .categoriesSelected[state.categoriesSelected.keys.first]!.first,
       ),
     );
 
