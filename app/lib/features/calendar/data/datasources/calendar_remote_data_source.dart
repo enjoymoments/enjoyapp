@@ -61,6 +61,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
             taskId
             title
             description
+            url
             dateTime
             activities {
               sessionId
@@ -106,6 +107,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
           taskId
           title
           description
+          url
           dateTime
           activities {
             sessionId

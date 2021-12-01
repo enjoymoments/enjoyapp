@@ -85,18 +85,10 @@ class SuggestionItem extends StatelessWidget {
     if (url?.isNotEmpty ?? false) {
       return [
         SpacerBox.v8,
-        InkWell(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              label.description(context),
-              SpacerBox.v4,
-              url!.link(context),
-            ],
-          ),
-          onTap: () {
-            LaunchUrlService.launchURL(url);
-          },
+        url!.linkTapWithLabel(
+          context,
+          label,
+          (url) => LaunchUrlService.launchURL(url),
         ),
         SpacerBox.v8,
       ];
@@ -132,7 +124,8 @@ class SuggestionItem extends StatelessWidget {
   }
 
   Widget _buildOptions(BuildContext context) {
-    if (!item.moreOptionsEnable! && (item.urlReference == null || item.urlReference == "")) {
+    if (!item.moreOptionsEnable! &&
+        (item.urlReference == null || item.urlReference == "")) {
       return SizedBox.shrink();
     }
 
@@ -141,15 +134,15 @@ class SuggestionItem extends StatelessWidget {
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
-            items: [            
-              if(item.moreOptionsEnable!)  
-              CustomItemModalFit(
-                text: 'Deletar',
-                iconData: AppIcons.trash,
-                onTap: () {
-                  confirmRemove(context);
-                },
-              ),
+            items: [
+              if (item.moreOptionsEnable!)
+                CustomItemModalFit(
+                  text: 'Deletar',
+                  iconData: AppIcons.trash,
+                  onTap: () {
+                    confirmRemove(context);
+                  },
+                ),
               if (item.urlReference?.isNotEmpty ?? false)
                 CustomItemModalFit(
                   text: 'Referência',

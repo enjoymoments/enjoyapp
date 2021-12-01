@@ -25,6 +25,7 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
 import 'package:custom_view/spacer_box.dart';
+import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
 
 class AddCalendarScreen extends StatefulWidget {
   final TaskCalendarModel? taskModel;
@@ -259,10 +260,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               validate: (String? value) => null,
             ),
             SpacerBox.v16,
-            CustomUrlFormField(
-              controller: _urlController,
-              validate: (String? value) {},
-            ),
+            _buildUrl(),
             SpacerBox.v34,
             CustomTile(
               iconStart: AppIcons.calendar_day,
@@ -330,6 +328,21 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildUrl() {
+    if (_urlController!.text.isEmpty) {
+      return CustomUrlFormField(
+        controller: _urlController,
+        validate: (String? value) {},
+      );
+    }
+
+    return _urlController!.text.linkTapWithLabel(
+      context,
+      'URL',
+      (url) => LaunchUrlService.launchURL(url),
     );
   }
 }
