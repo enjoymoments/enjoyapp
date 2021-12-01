@@ -14,6 +14,7 @@ import 'package:custom_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
+import 'package:custom_view/extensions/extension.dart';
 
 class CalendarContent extends StatefulWidget {
   @override
@@ -231,6 +232,8 @@ class _CalendarContentState extends State<CalendarContent>
                           _eventCast.title!.title(context),
                           SpacerBox.v4,
                           ..._buildDescription(_eventCast),
+                          ..._buildUrl(_eventCast),
+                          SpacerBox.v4,
                           _eventCast.dateTime!
                               .formattedHourMinute()
                               .label(context),
@@ -253,6 +256,17 @@ class _CalendarContentState extends State<CalendarContent>
         );
       },
     ).toList();
+  }
+
+  List<Widget> _buildUrl(TaskCalendarModel eventCast) {
+    if (eventCast.url != null) {
+      return [
+        SpacerBox.v4,
+        eventCast.url!.link(context),
+      ];
+    }
+
+    return [];
   }
 
   List<Widget> _buildDescription(TaskCalendarModel eventCast) {
