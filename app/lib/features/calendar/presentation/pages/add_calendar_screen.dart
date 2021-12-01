@@ -107,6 +107,10 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
       _titleController!.text = widget.taskModel!.title!;
       _descriptionController!.text = widget.taskModel!.description ?? '';
       _urlController!.text = widget.taskModel!.url ?? '';
+    } else {
+      _addCalendarCubit!.setModel(
+        datetime: _selectedDate,
+      );
     }
   }
 

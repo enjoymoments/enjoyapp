@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/calendar/data/models/calendar_content_model.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/time_line_avatar.dart';
 import 'package:mozin/modules/config/router.gr.dart';
@@ -79,8 +80,10 @@ class _RootScreenManagerState extends State<RootScreenManager> {
             },
             items: [
               FABBottomAppBarItem(iconData: AppIcons.heart, text: 'Casal'),
-              FABBottomAppBarItem(iconData: AppIcons.calendar, text: 'Calendário'),
-              FABBottomAppBarItem(iconData: AppIcons.bookmark, text: 'Favoritos'),
+              FABBottomAppBarItem(
+                  iconData: AppIcons.calendar, text: 'Calendário'),
+              FABBottomAppBarItem(
+                  iconData: AppIcons.bookmark, text: 'Favoritos'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
             ],
           ),
@@ -128,16 +131,18 @@ class _RootScreenManagerState extends State<RootScreenManager> {
           ),
         ];
       case DefaultMenuEnum.Calendar:
-              if (getItInstance<UserService>().notAuthenticated()) {
+        if (getItInstance<UserService>().notAuthenticated()) {
           return [];
         }
         return [
           IconButton(
-          icon: CustomIcon(icon: AppIcons.plus),
-          onPressed: () {
-            AutoRouter.of(context).push(Add_calendar_screen(selectedDate: DateTime.now()));
-          },
-        ),
+            icon: CustomIcon(icon: AppIcons.plus),
+            onPressed: () {
+              AutoRouter.of(context).push(Add_calendar_screen(
+                  selectedDate:
+                      getItInstance<CalendarContentModel>().selectedDate));
+            },
+          ),
         ];
       case DefaultMenuEnum.Search:
         return [];

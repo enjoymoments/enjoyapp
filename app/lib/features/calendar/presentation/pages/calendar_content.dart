@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mozin/features/calendar/data/models/calendar_content_model.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/pages/widgets/calendar_content_loading.dart';
@@ -25,12 +26,12 @@ class _CalendarContentState extends State<CalendarContent>
     with TickerProviderStateMixin {
   late CalendarCubit _calendarCubit;
   late AnimationController _animationController;
-  late DateTime _selectedDay;
+  late CalendarContentModel _calendarContentModel;
 
   @override
   void initState() {
     super.initState();
-    _selectedDay = DateTime.now();
+    _calendarContentModel = getItInstance<CalendarContentModel>();
 
     _calendarCubit = getItInstance<CalendarCubit>()..loadTasks();
 
@@ -83,7 +84,7 @@ class _CalendarContentState extends State<CalendarContent>
       },
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
-      focusedDay: _selectedDay,
+      focusedDay: _calendarContentModel.selectedDate,
       startingDayOfWeek: StartingDayOfWeek.sunday,
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {
@@ -129,7 +130,7 @@ class _CalendarContentState extends State<CalendarContent>
             .copyWith(color: Theme.of(context).primaryColor),
       ),
       selectedDayPredicate: (day) {
-        return isSameDay(_selectedDay, day);
+        return isSameDay(_calendarContentModel.selectedDate, day);
       },
       calendarBuilders: CalendarBuilders(
         selectedBuilder: (context, date, _) {
@@ -174,7 +175,7 @@ class _CalendarContentState extends State<CalendarContent>
         },
       ),
       onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
-        _selectedDay = selectedDay;
+        _calendarContentModel.set(selectedDate: selectedDay);
 
         List? _events = _calendarCubit.state.events[selectedDay.clearTime()];
         _calendarCubit.selectedEvents(_events ?? []);
@@ -215,7 +216,8 @@ class _CalendarContentState extends State<CalendarContent>
         return InkWell(
           onTap: () {
             AutoRouter.of(context).push(Add_calendar_screen(
-                taskModel: _eventCast, selectedDate: _selectedDay));
+                taskModel: _eventCast,
+                selectedDate: _calendarContentModel.selectedDate));
           },
           child: Container(
             width: SizeConfig.screenWidth,
