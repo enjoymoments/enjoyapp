@@ -98,12 +98,14 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
         taskId: widget.taskModel!.taskId,
         title: widget.taskModel!.title,
         description: widget.taskModel!.description,
+        url: widget.taskModel!.url,
         datetime: widget.taskModel!.dateTime,
         activities: widget.taskModel!.activities,
       );
 
       _titleController!.text = widget.taskModel!.title!;
-      _descriptionController!.text = widget.taskModel!.description!;
+      _descriptionController!.text = widget.taskModel!.description ?? '';
+      _urlController!.text = widget.taskModel!.url ?? '';
     }
   }
 
@@ -114,6 +116,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
     _addCalendarCubit!.setModel(
       title: _titleController!.text,
       description: _descriptionController!.text,
+      url: _urlController!.text,
       datetime: _datetimeFormatted,
     );
 
