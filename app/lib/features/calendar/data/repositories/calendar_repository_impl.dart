@@ -15,44 +15,51 @@ class CalendarRepositoryImpl implements CalendarRepository {
 
   @override
   Future<Either<bool?, Exception>> addTaskInCalendar(
-      AddTaskCalendar? model) async {
+      String? coupleId, AddTaskCalendar? model) async {
     try {
-      var response = await remoteDataSource!.addTaskInCalendar(model);
+      var response = await remoteDataSource!.addTaskInCalendar(coupleId, model);
       return Left<bool?, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
+      return Right<bool, Exception>(
+          (e is Exception) ? e : Exception(e.toString()));
     }
   }
 
   @override
-  Future<Either<List<GroupedDateCalendarModel>, Exception>>
-      getTasksInCalendar() async {
+  Future<Either<List<GroupedDateCalendarModel>, Exception>> getTasksInCalendar(
+      String? coupleId) async {
     try {
-      var response = await remoteDataSource!.getTasksInCalendar();
+      var response = await remoteDataSource!.getTasksInCalendar(coupleId);
       return Left<List<GroupedDateCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<GroupedDateCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));
+      return Right<List<GroupedDateCalendarModel>, Exception>(
+          (e is Exception) ? e : Exception(e.toString()));
     }
   }
 
   @override
-  Future<Either<bool?, Exception>> removeTaskInCalendar(String? taskId) async {
+  Future<Either<bool?, Exception>> removeTaskInCalendar(
+      String? coupleId, String? taskId) async {
     try {
-      var response = await remoteDataSource!.removeTaskInCalendar(taskId);
+      var response =
+          await remoteDataSource!.removeTaskInCalendar(coupleId, taskId);
       return Left<bool?, Exception>(response);
     } on dynamic catch (e) {
-      return Right<bool, Exception>((e is Exception) ? e : Exception(e.toString()));
+      return Right<bool, Exception>(
+          (e is Exception) ? e : Exception(e.toString()));
     }
   }
 
   @override
   Future<Either<List<GroupedYearCalendarModel>, Exception>>
-      getTasksUserCalendarGroupedByYear() async {
+      getTasksUserCalendarGroupedByYear(String? coupleId) async {
     try {
-      var response = await remoteDataSource!.getTasksUserCalendarGroupedByYear();
+      var response =
+          await remoteDataSource!.getTasksUserCalendarGroupedByYear(coupleId);
       return Left<List<GroupedYearCalendarModel>, Exception>(response);
     } on dynamic catch (e) {
-      return Right<List<GroupedYearCalendarModel>, Exception>((e is Exception) ? e : Exception(e.toString()));
+      return Right<List<GroupedYearCalendarModel>, Exception>(
+          (e is Exception) ? e : Exception(e.toString()));
     }
   }
 }

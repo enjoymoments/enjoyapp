@@ -4,10 +4,11 @@ import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class CalendarRemoteDataSource {
-  Future<bool?> addTaskInCalendar(AddTaskCalendar? model);
-  Future<bool?> removeTaskInCalendar(String? taskId);
-  Future<List<GroupedDateCalendarModel>> getTasksInCalendar();
-  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear();
+  Future<bool?> addTaskInCalendar(String? coupleId, AddTaskCalendar? model);
+  Future<bool?> removeTaskInCalendar(String? coupleId, String? taskId);
+  Future<List<GroupedDateCalendarModel>> getTasksInCalendar(String? coupleId);
+  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear(
+      String? coupleId);
 }
 
 class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
@@ -17,6 +18,7 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
 
   @override
   Future<bool?> addTaskInCalendar(
+    String? coupleId,
     AddTaskCalendar? model,
   ) async {
     var _listActivities = <String>[];
@@ -34,12 +36,14 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
 
     String _query = '''
     mutation addTask {
-      addTaskInCalendar(task:{
-        title: "${model.title}"
-        description: "${model.description}"
-        url: "${model.url}"
-        dateTime: "${model.dateTime}"
-        activities: [$_activitiesFormated]
+      addTaskInCalendar(
+        coupleId: ${_formatCoupleId(coupleId)},
+        task:{
+          title: "${model.title}"
+          description: "${model.description}"
+          url: "${model.url}"
+          dateTime: "${model.dateTime}"
+          activities: [$_activitiesFormated]
       })
     }
     ''';
@@ -49,11 +53,11 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<List<GroupedYearCalendarModel>>
-      getTasksUserCalendarGroupedByYear() async {
+  Future<List<GroupedYearCalendarModel>> getTasksUserCalendarGroupedByYear(
+      String? coupleId) async {
     String _query = '''
     query getTasksUserCalendarGroupedByYear {
-      getTasksUserCalendarGroupedByYear {
+      getTasksUserCalendarGroupedByYear(coupleId: ${_formatCoupleId(coupleId)}) {
         year
         months {
           month
@@ -85,10 +89,12 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<bool?> removeTaskInCalendar(String? taskId) async {
+  Future<bool?> removeTaskInCalendar(String? coupleId, String? taskId) async {
     String _query = '''
     mutation removeTaskInUserCalendar{
-      removeTaskInUserCalendar(taskId:"$taskId")
+      removeTaskInUserCalendar(
+        coupleId: ${_formatCoupleId(coupleId)},
+        taskId:"$taskId")
     }
     ''';
 
@@ -98,10 +104,11 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   }
 
   @override
-  Future<List<GroupedDateCalendarModel>> getTasksInCalendar() async {
+  Future<List<GroupedDateCalendarModel>> getTasksInCalendar(
+      String? coupleId) async {
     String _query = '''
     query getTasksUserCalendar {
-      getTasksUserCalendar {
+      getTasksUserCalendar(coupleId: ${_formatCoupleId(coupleId)}) {
         date
         tasks {
           taskId
@@ -127,5 +134,9 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
     }
 
     return _list;
+  }
+
+  String? _formatCoupleId(String? coupleId) {
+    return coupleId != null ? "\"$coupleId\"" : null;
   }
 }

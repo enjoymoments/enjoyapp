@@ -3,7 +3,9 @@ import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/entities/add_activity_calendar.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin_core/mozin_core.dart';
 
 part 'add_calendar_state.dart';
@@ -102,8 +104,9 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }
 
   void remove() async {
-    var _response =
-        await _calendarRepository.removeTaskInCalendar(state.model!.taskId);
+    String? _coupleId = await getItInstance<UserWrapper>().getCoupleId();
+    var _response = await _calendarRepository.removeTaskInCalendar(
+        _coupleId, state.model!.taskId);
 
     _response.fold(
       (value) {
@@ -140,7 +143,9 @@ class AddCalendarCubit extends Cubit<AddCalendarState> {
   }
 
   void sendRequest() async {
-    var _response = await _calendarRepository.addTaskInCalendar(state.model);
+    String? _coupleId = await getItInstance<UserWrapper>().getCoupleId();
+    var _response =
+        await _calendarRepository.addTaskInCalendar(_coupleId, state.model);
 
     _response.fold(
       (value) {

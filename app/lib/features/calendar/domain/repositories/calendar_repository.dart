@@ -4,8 +4,12 @@ import 'package:mozin/features/calendar/data/models/grouped_year_calendar_model.
 import 'package:mozin/features/calendar/domain/entities/add_task_calendar.dart';
 
 abstract class CalendarRepository {
-  Future<Either<bool?, Exception>> addTaskInCalendar(AddTaskCalendar? model);
-  Future<Either<bool?, Exception>> removeTaskInCalendar(String? taskId);
-  Future<Either<List<GroupedDateCalendarModel>, Exception>> getTasksInCalendar();
-  Future<Either<List<GroupedYearCalendarModel>, Exception>> getTasksUserCalendarGroupedByYear();
+  Future<Either<bool?, Exception>> addTaskInCalendar(
+      String? coupleId, AddTaskCalendar? model);
+  Future<Either<bool?, Exception>> removeTaskInCalendar(
+      String? coupleId, String? taskId);
+  Future<Either<List<GroupedDateCalendarModel>, Exception>> getTasksInCalendar(
+      String? coupleId);
+  Future<Either<List<GroupedYearCalendarModel>, Exception>>
+      getTasksUserCalendarGroupedByYear(String? coupleId);
 }
