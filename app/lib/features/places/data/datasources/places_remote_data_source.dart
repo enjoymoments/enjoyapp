@@ -3,6 +3,7 @@ import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
+import 'package:mozin_core/mozin_core.dart';
 
 abstract class PlacesRemoteDataSource {
   Future<PlacesModel> getPlaces(
@@ -172,7 +173,8 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
       params['categories'] = _formatCategories(filters);
     }
 
-    return _formatParams(params);
+    return formatParams(params,
+        nonStringValuesKeysAccount: nonStringValuesKeysAccount);
   }
 
   String _formatCategories(FilterChoosedModel filters) {
@@ -201,17 +203,5 @@ class PlacesRemoteDataSourceImpl implements PlacesRemoteDataSource {
     }
 
     return '[${_categories.toList().join(', ')}]';
-  }
-
-  String _formatParams(Map<String, dynamic> params) {
-    return params.entries
-        .map((final MapEntry<String, dynamic> e) {
-          if (nonStringValuesKeysAccount.contains(e.key)) {
-            return '${e.key}: ${e.value}';
-          }
-          return '${e.key}: "${e.value}"';
-        })
-        .toList()
-        .join(', ');
   }
 }
