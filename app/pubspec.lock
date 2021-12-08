@@ -256,9 +256,11 @@ packages:
   custom_view:
     dependency: "direct main"
     description:
-      name: custom_view
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: "1677225fd46f7d27cd690cb0d3ff94818985b8dd"
+      url: "https://github.com/enjoymoments/custom_view.git"
+    source: git
     version: "0.0.2"
   dart_style:
     dependency: transitive
