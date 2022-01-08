@@ -263,9 +263,11 @@ packages:
   custom_view:
     dependency: "direct main"
     description:
-      path: "../../custom_view"
-      relative: true
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "8f1360f2b65600a2fc8efdae8a4f2c8c12ced41e"
+      url: "https://github.com/enjoymoments/custom_view.git"
+    source: git
     version: "0.0.2"
   dart_style:
     dependency: transitive
