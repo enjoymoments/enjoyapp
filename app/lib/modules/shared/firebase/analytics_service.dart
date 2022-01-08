@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class AnalyticsService {
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
 
   NavigatorObserver getAnalyticsObserver() =>
       _MyObserver(analytics: _firebaseAnalytics);
