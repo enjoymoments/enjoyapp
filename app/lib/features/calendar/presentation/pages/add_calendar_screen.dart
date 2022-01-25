@@ -308,7 +308,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
               },
             ),
             SpacerBox.v16,
-            CustomDivider(),
+            //CustomDivider(),
             //TODO:in development
             // SpacerBox.v16,
             // CustomTile(
