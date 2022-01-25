@@ -1,3 +1,4 @@
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
@@ -6,13 +7,11 @@ import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_inte
 import 'package:mozin/features/places/presentation/pages/widgets/categories/categories_places.dart';
 import 'package:mozin/features/places/presentation/pages/widgets/loadings/place_card_item_loading.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:custom_view/size_config.dart';
-import 'package:custom_view/custom_container.dart';
-import 'package:custom_view/extensions/extension.dart';
 
 class FavoriteInterestsScreen extends StatefulWidget {
   @override
-  _FavoriteInterestsScreenState createState() => _FavoriteInterestsScreenState();
+  _FavoriteInterestsScreenState createState() =>
+      _FavoriteInterestsScreenState();
 }
 
 class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
@@ -27,7 +26,19 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody();
+    return CustomScaffold(
+      appBar: _buildAppBar(context),
+      bottomNavigationBar: null,
+      child: _buildBody(),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+      title: 'Favoritos',
+      context: context,
+      onPressedBack: () => Navigator.of(context).pop(),
+    );
   }
 
   Widget _buildBody() {
@@ -49,7 +60,9 @@ class _FavoriteInterestsScreenState extends State<FavoriteInterestsScreen> {
           if (state.favoriteInterests == null ||
               state.favoriteInterests?.places?.length == 0) {
             return Container(
-              child: Center(child: "Ops...\n não encontramos nenhum favorito".labelIntro(context)),
+              child: Center(
+                  child: "Ops...\n não encontramos nenhum favorito"
+                      .labelIntro(context)),
               height: SizeConfig.screenHeight / 1.5,
             );
           }
