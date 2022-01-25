@@ -39,6 +39,13 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     try {
       yield state.copyWith(isLoading: true, isError: false);
 
+      var _existPermission = await Geolocator.checkPermission();
+      
+      if(_existPermission == LocationPermission.denied ||
+        _existPermission == LocationPermission.deniedForever) {
+        await Geolocator.requestPermission();
+      }
+
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
 
