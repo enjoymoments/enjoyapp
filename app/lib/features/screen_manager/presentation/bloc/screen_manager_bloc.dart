@@ -148,15 +148,17 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       Map<DefaultMenuEnum, Widget>? contents, TapScreen event) {
     if (state.contents![event.screenSelected] == null) {
       switch (event.screenSelected) {
-        case DefaultMenuEnum.TimeLine:
-          contents![DefaultMenuEnum.TimeLine] = TimeLineScreen();
-          break;
+        //TODO:review this - temporarily
+        // case DefaultMenuEnum.TimeLine:
+        //   contents![DefaultMenuEnum.TimeLine] = TimeLineScreen();
+        //   break;
         case DefaultMenuEnum.Me:
           contents![DefaultMenuEnum.Me] = MeScreen();
           break;
-        case DefaultMenuEnum.Favorites:
-          contents![DefaultMenuEnum.Favorites] = FavoriteInterestsScreen();
-          break;
+        //TODO:review this - temporarily
+        // case DefaultMenuEnum.Favorites:
+        //   contents![DefaultMenuEnum.Favorites] = FavoriteInterestsScreen();
+        //   break;
         case DefaultMenuEnum.Calendar:
         default:
           contents![DefaultMenuEnum.Calendar] = CalendarContent();

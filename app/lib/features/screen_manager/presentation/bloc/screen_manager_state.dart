@@ -21,9 +21,11 @@ class ScreenManagerState extends Equatable {
       isLoading: false,
       isSuccess: false,
       isFailure: false,
-      currentScreen: DefaultMenuEnum.TimeLine,
+      //TODO:review this - temporarily
+      //currentScreen: DefaultMenuEnum.TimeLine,
+      currentScreen: DefaultMenuEnum.Calendar,
       contents: {
-        DefaultMenuEnum.TimeLine: TimeLineScreen(),
+        DefaultMenuEnum.Calendar: CalendarContent(),
       },
     );
   }

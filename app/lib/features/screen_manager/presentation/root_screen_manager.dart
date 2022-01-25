@@ -79,11 +79,12 @@ class _RootScreenManagerState extends State<RootScreenManager> {
               );
             },
             items: [
-              FABBottomAppBarItem(iconData: AppIcons.heart, text: 'Casal'),
+              //TODO:review this - temporarily
+              //FABBottomAppBarItem(iconData: AppIcons.heart, text: 'Casal'),
               FABBottomAppBarItem(
                   iconData: AppIcons.calendar, text: 'Calendário'),
-              FABBottomAppBarItem(
-                  iconData: AppIcons.bookmark, text: 'Favoritos'),
+              // FABBottomAppBarItem(
+              //     iconData: AppIcons.bookmark, text: 'Favoritos'),
               FABBottomAppBarItem(iconData: AppIcons.user, text: 'Eu'),
             ],
           ),
@@ -93,16 +94,17 @@ class _RootScreenManagerState extends State<RootScreenManager> {
   }
 
   Widget _buildAppBar(ScreenManagerState state) {
-    if (state.currentScreen == DefaultMenuEnum.TimeLine) {
-      return AppBar(
-        leadingWidth: SizeConfig.sizeByPixel(55),
-        leading: TimeLineAvatar(),
-        title: TimeLineText(),
-        actions: [
-          TimeLineAddActions(),
-        ],
-      );
-    }
+    //TODO:review this - temporarily
+    // if (state.currentScreen == DefaultMenuEnum.TimeLine) {
+    //   return AppBar(
+    //     leadingWidth: SizeConfig.sizeByPixel(55),
+    //     leading: TimeLineAvatar(),
+    //     title: TimeLineText(),
+    //     actions: [
+    //       TimeLineAddActions(),
+    //     ],
+    //   );
+    // }
 
     return AppBar(
       title: Text(
@@ -118,18 +120,19 @@ class _RootScreenManagerState extends State<RootScreenManager> {
 
   List<Widget> _buildActionButtons(ScreenManagerState state) {
     switch (state.currentScreen) {
-      case DefaultMenuEnum.TimeLine:
-        if (getItInstance<UserService>().notAuthenticated()) {
-          return [];
-        }
-        return [
-          IconButton(
-            icon: CustomIcon(icon: AppIcons.plus),
-            onPressed: () {
-              AutoRouter.of(context).push(Add_time_line_screen());
-            },
-          ),
-        ];
+      //TODO:review this - temporarily
+      // case DefaultMenuEnum.TimeLine:
+      //   if (getItInstance<UserService>().notAuthenticated()) {
+      //     return [];
+      //   }
+      //   return [
+      //     IconButton(
+      //       icon: CustomIcon(icon: AppIcons.plus),
+      //       onPressed: () {
+      //         AutoRouter.of(context).push(Add_time_line_screen());
+      //       },
+      //     ),
+      //   ];
       case DefaultMenuEnum.Calendar:
         if (getItInstance<UserService>().notAuthenticated()) {
           return [];
@@ -148,8 +151,9 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         return [];
       case DefaultMenuEnum.Me:
         return [];
-      case DefaultMenuEnum.Favorites:
-        return [];
+      //TODO:review this - temporarily
+      // case DefaultMenuEnum.Favorites:
+      //   return [];
       default:
         return [];
     }
@@ -163,8 +167,9 @@ class _RootScreenManagerState extends State<RootScreenManager> {
         return '';
       case DefaultMenuEnum.Me:
         return 'Eu';
-      case DefaultMenuEnum.Favorites:
-        return 'Favoritos';
+      //TODO:review this - temporarily
+      // case DefaultMenuEnum.Favorites:
+      //   return 'Favoritos';
       default:
         return '';
     }

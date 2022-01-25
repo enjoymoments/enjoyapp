@@ -67,6 +67,8 @@ class Connected extends StatelessWidget {
     return Column(
       children: [
         _buildCardInvite(),
+        _buildFavorites(context),
+        ..._divider(),
         _buildNotifications(context),
         ..._divider(),
         //TODO:in development
@@ -96,6 +98,18 @@ class Connected extends StatelessWidget {
       iconEnd: AppIcons.angle_right,
       onTap: () {
         AutoRouter.of(context).push(Feedback_screen());
+      },
+    );
+  }
+
+  Widget _buildFavorites(BuildContext context) {
+    return CustomTile(
+      title: 'Meus Favoritos',
+      description: 'Aonde ficam salvo as coisas que me interessam',
+      iconStart: AppIcons.star,
+      iconEnd: AppIcons.angle_right,
+      onTap: () {
+        AutoRouter.of(context).push(Favorite_interests_screen());
       },
     );
   }

@@ -72,29 +72,47 @@ class SourceTypeEnum extends Enum<int> {
 
 class DefaultMenuEnum extends Enum<int> {
   factory DefaultMenuEnum(final int? value, {required bool ignoreSearch}) {
+
     if (ignoreSearch) {
       if (value == 0) {
-        return DefaultMenuEnum.TimeLine;
-      } else if (value == 1) {
         return DefaultMenuEnum.Calendar;
-      } else if (value == 2) {
-        return DefaultMenuEnum.Favorites;
-      } else if (value == 3) {
+      } else if (value == 1) {
         return DefaultMenuEnum.Me;
       }
     } else {
       if (value == 0) {
-        return DefaultMenuEnum.TimeLine;
+         return DefaultMenuEnum.Calendar;
       } else if (value == 1) {
-        return DefaultMenuEnum.Calendar;
+          return DefaultMenuEnum.Search;
       } else if (value == 2) {
-        return DefaultMenuEnum.Search;
-      } else if (value == 3) {
-        return DefaultMenuEnum.Favorites;
-      } else if (value == 4) {
-        return DefaultMenuEnum.Me;
+          return DefaultMenuEnum.Me;
       }
     }
+
+    //TODO:review this - temporarily
+    // if (ignoreSearch) {
+    //   if (value == 0) {
+    //     return DefaultMenuEnum.TimeLine;
+    //   } else if (value == 1) {
+    //     return DefaultMenuEnum.Calendar;
+    //   } else if (value == 2) {
+    //     return DefaultMenuEnum.Favorites;
+    //   } else if (value == 3) {
+    //     return DefaultMenuEnum.Me;
+    //   }
+    // } else {
+    //   if (value == 0) {
+    //     return DefaultMenuEnum.TimeLine;
+    //   } else if (value == 1) {
+    //     return DefaultMenuEnum.Calendar;
+    //   } else if (value == 2) {
+    //     return DefaultMenuEnum.Search;
+    //   } else if (value == 3) {
+    //     return DefaultMenuEnum.Favorites;
+    //   } else if (value == 4) {
+    //     return DefaultMenuEnum.Me;
+    //   }
+    // }
 
     return DefaultMenuEnum.Init;
   }
@@ -103,10 +121,10 @@ class DefaultMenuEnum extends Enum<int> {
 
   static const DefaultMenuEnum Init = DefaultMenuEnum._fromValue(-1);
   static const DefaultMenuEnum Calendar = DefaultMenuEnum._fromValue(0);
-  static const DefaultMenuEnum TimeLine = DefaultMenuEnum._fromValue(1);
+  //static const DefaultMenuEnum TimeLine = DefaultMenuEnum._fromValue(1);
   static const DefaultMenuEnum Search = DefaultMenuEnum._fromValue(2);
   static const DefaultMenuEnum Me = DefaultMenuEnum._fromValue(3);
-  static const DefaultMenuEnum Favorites = DefaultMenuEnum._fromValue(4);
+  //static const DefaultMenuEnum Favorites = DefaultMenuEnum._fromValue(4);
 
   @override
   String toString() => value.toString();
