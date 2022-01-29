@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: fd4085765706134af2363a8b1f8615ee86445028
+      resolved-ref: "84df9159aa66f1f8057c36e49afae8a78d8fdcbc"
       url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
     source: git
     version: "0.0.1"
