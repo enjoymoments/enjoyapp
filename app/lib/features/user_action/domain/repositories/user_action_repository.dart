@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/user_action/data/models/user_action_model.dart';
-import 'package:mozin/modules/shared/general/models/response_default_model.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 abstract class UserActionRepository {
-  Future<Either<ResponseDefaultModel, Exception>> addUserAction({
-    required UserActionModel model
-  });
+  Future<Either<ResponseDefaultModel, Exception>> addUserAction(
+      {required UserActionModel model});
 }

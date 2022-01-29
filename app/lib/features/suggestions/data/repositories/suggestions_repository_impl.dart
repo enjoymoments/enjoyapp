@@ -3,7 +3,7 @@ import 'package:mozin/features/suggestions/data/datasources/suggestions_remote_d
 import 'package:mozin/features/suggestions/data/models/new_suggestions_model.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/domain/repositories/suggestions_repository.dart';
-import 'package:mozin/modules/shared/general/models/response_default_model.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class SuggestionsRepositoryImpl implements SuggestionsRepository {
   SuggestionsRepositoryImpl({

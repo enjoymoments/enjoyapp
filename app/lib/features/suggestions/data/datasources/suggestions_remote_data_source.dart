@@ -1,6 +1,6 @@
 import 'package:mozin/features/suggestions/data/models/new_suggestions_model.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
-import 'package:mozin/modules/shared/general/models/response_default_model.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 
 abstract class SuggestionsRemoteDataSource {
@@ -37,7 +37,8 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
   }
 
   @override
-  Future<ResponseDefaultModel> updateSuggestions(SuggestionsModel? model) async {
+  Future<ResponseDefaultModel> updateSuggestions(
+      SuggestionsModel? model) async {
     String _query = '''
     mutation updateSuggestion {
       updateSuggestion(suggestion:{
@@ -55,7 +56,8 @@ class SuggestionsRemoteDataSourceImpl implements SuggestionsRemoteDataSource {
   }
 
   @override
-  Future<ResponseDefaultModel> removeSuggestions(SuggestionsModel? model) async {
+  Future<ResponseDefaultModel> removeSuggestions(
+      SuggestionsModel? model) async {
     String _query = '''
     mutation removeSuggestion {
       removeSuggestion(suggestion:{
