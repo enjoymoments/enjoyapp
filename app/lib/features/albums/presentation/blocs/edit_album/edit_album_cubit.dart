@@ -11,7 +11,7 @@ import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'edit_album_state.dart';
 
@@ -34,15 +34,15 @@ class EditAlbumCubit extends Cubit<EditAlbumState> {
 
   void deleteAlbum(AlbumItemModel item) async {
     var _user = _userWrapper.getUser!;
-    Either<bool, Exception> _response = await _albumsRepository.deleteAlbum(_user.id, item.id);
+    Either<bool, Exception> _response =
+        await _albumsRepository.deleteAlbum(_user.id, item.id);
 
     _response.fold((success) {
       emit(state.copyWith(
-        isLoading: false,
-        isError: false,
-        isSuccess: true,
-        errorMessage: "Ops... houve um erro. Tente novamente"
-      ));
+          isLoading: false,
+          isError: false,
+          isSuccess: true,
+          errorMessage: "Ops... houve um erro. Tente novamente"));
     }, (error) {
       emit(state.copyWith(
         isLoading: false,

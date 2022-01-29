@@ -2,8 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mozin/features/notifications/data/datasources/notifications_remote_data_source.dart';
 import 'package:mozin/features/notifications/data/models/notifications_model.dart';
 import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class NotificationsRepositoryImpl implements NotificationsRepository {
   NotificationsRepositoryImpl({
@@ -18,7 +17,8 @@ class NotificationsRepositoryImpl implements NotificationsRepository {
       var response = await remoteDataSource!.getNotifications();
       return Left<List<NotificationsModel>, Exception>(response);
     } catch (e) {
-      return Right<List<NotificationsModel>, Exception>(ExceptionsUtils.createException(e));
+      return Right<List<NotificationsModel>, Exception>(
+          ExceptionsUtils.createException(e));
     }
   }
 }

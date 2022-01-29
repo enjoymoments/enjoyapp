@@ -4,7 +4,7 @@ import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 part 'albums_state.dart';
 
 class AlbumsCubit extends Cubit<AlbumsState> {
@@ -22,7 +22,7 @@ class AlbumsCubit extends Cubit<AlbumsState> {
 
   void mapGetAllAlbums() async {
     emit(state.copyWith(isLoading: true));
-    
+
     var response =
         await _albumsRepository.getAlbums(_userWrapper.getUser!.id, 10);
 

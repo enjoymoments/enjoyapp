@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mozin/features/screen_manager/presentation/bloc/screen_manager_bloc.dart';
 import 'package:mozin/modules/config/setup.dart';
@@ -7,7 +7,6 @@ import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
 
 part 'add_album_state.dart';
 

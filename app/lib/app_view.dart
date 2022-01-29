@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/me/presentation/blocs/authentication/authentication_bloc.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
-import 'package:mozin_core/theme.dart';
 
 class AppView extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _AppViewState extends State<AppView> {
       routeInformationParser: _appRouter.defaultRouteParser(),
       title: 'Mozin',
       debugShowCheckedModeBanner: false,
-      theme: getTheme(context),
+      theme: getTheme(context, "Abel"),
     );
   }
 }

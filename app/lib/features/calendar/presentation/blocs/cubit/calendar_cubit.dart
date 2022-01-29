@@ -5,7 +5,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'calendar_state.dart';
 

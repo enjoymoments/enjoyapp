@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin_core/utils.dart';
 
 class UserInfoCubit extends Cubit<UserInfoState> {
   UserInfoCubit() : super(UserInfoState.initial());

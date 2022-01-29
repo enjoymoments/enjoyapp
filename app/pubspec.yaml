@@ -76,7 +76,12 @@ dependencies:
   # custom_view: 0.0.2
   custom_view:
     git:
-      url: https://github.com/enjoymoments/custom_view.git
+      url: https://github.com/pesquisaedesenvolvimento/custom_view.git
+      ref: main
+    # path: ../../custom_view
+  custom_utilities:
+    git:
+      url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
       ref: main
     # path: ../../custom_view
   mozin_core:

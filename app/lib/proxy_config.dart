@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mozin_core/is_debug_mode.dart';
 
 class ProxyConfig {
   static void config(HttpClient httpClient, SecurityContext ctx) {

@@ -19,7 +19,7 @@ import 'package:custom_view/size_config.dart';
 import 'package:custom_view/custom_quadrant.dart';
 import 'package:custom_view/spacer_box.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin_core/ads/ads_config.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class CategoriesPlaces extends StatefulWidget {
   const CategoriesPlaces({Key? key, required this.places}) : super(key: key);
@@ -50,7 +50,7 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
 
   @override
   void dispose() {
-    _listFavoriteItemBlocs.forEach((element) { 
+    _listFavoriteItemBlocs.forEach((element) {
       element!.close();
     });
 
@@ -122,7 +122,8 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
                 isSelected: state.categorySelected == state.places![index],
                 text: state.places![index].categoryName!,
                 callbackSelected: (isSelected) {
-                  _categoriesPlacesCubit!.categorySelected(state.places![index]);
+                  _categoriesPlacesCubit!
+                      .categorySelected(state.places![index]);
                 },
               ),
             ),
@@ -143,8 +144,10 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
       builder: (context, state) {
         if (state.categorySelected != null) {
           return SubCategoriesPlaces(
-            subCategories: state.categorySelected!.subCategories as List<PlacesSubCategoryModel>?,
-            tabstitle: _categoriesPlacesCubit!.buildTabsTitle(state.categorySelected!),
+            subCategories: state.categorySelected!.subCategories
+                as List<PlacesSubCategoryModel>?,
+            tabstitle:
+                _categoriesPlacesCubit!.buildTabsTitle(state.categorySelected!),
             categoriesPlacesCubit: _categoriesPlacesCubit,
           );
         }
@@ -182,8 +185,10 @@ class _CategoriesPlacesState extends State<CategoriesPlaces> {
         itemCount: state.contentSuggestedByUsers!.length,
         itemBuilder: (context, index) {
           var item = state.contentSuggestedByUsers![index]!;
-          
-          final FavoriteInterestsItemBloc? _favoriteItem = getItInstance<FavoriteInterestsItemBloc>()..add(SetFavoriteItem(item.favoriteAdded));
+
+          final FavoriteInterestsItemBloc? _favoriteItem =
+              getItInstance<FavoriteInterestsItemBloc>()
+                ..add(SetFavoriteItem(item.favoriteAdded));
           _listFavoriteItemBlocs.add(_favoriteItem);
 
           return SuggestionItem(

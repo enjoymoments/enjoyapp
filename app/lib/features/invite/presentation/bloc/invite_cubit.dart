@@ -10,7 +10,7 @@ import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
 part 'invite_state.dart';
@@ -109,7 +109,7 @@ class InviteCubit extends Cubit<InviteState> {
     var _shareUrl = await _userWrapper.getShareUrl();
     if (_shareUrl != null) {
       _shareService.share(_shareUrl);
-      
+
       //TODO:review this
       getItInstance<UserInfoCubit>().isLoading(false);
 

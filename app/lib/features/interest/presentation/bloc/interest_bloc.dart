@@ -7,7 +7,7 @@ import 'package:mozin/features/interest/domain/repositories/interest_repository.
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
 import 'package:mozin/modules/shared/filter_choosed/models/filter_choosed_model.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'interest_event.dart';
 part 'interest_state.dart';
@@ -16,7 +16,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
   InterestBloc({
     required InterestRepository interestRepository,
     required FilterChoosedWrapper filterChoosedWrapper,
-  })   : _interestRepository = interestRepository,
+  })  : _interestRepository = interestRepository,
         _filterChoosedWrapper = filterChoosedWrapper,
         super(InterestState.initial());
 
@@ -33,7 +33,7 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
       yield* mapSelectCategorieToState(event);
     } else if (event is SelectSubCategorie) {
       yield* mapSelectSubCategorieToState(event);
-    } 
+    }
     //TODO:in development
     // else if (event is ChangePrice) {
     //   yield* mapChangePriceToState(event);
@@ -120,8 +120,8 @@ class InterestBloc extends Bloc<InterestEvent, InterestState> {
         _filterChoosedWrapper.getFilterChoosed!;
 
     filterChoosed.categories!.forEach((filterElement) {
-      var element = categories.firstWhereOrNull(
-          (categorie) => categorie.id == filterElement.id);
+      var element = categories
+          .firstWhereOrNull((categorie) => categorie.id == filterElement.id);
 
       if (element != null) {
         element.selected = true;

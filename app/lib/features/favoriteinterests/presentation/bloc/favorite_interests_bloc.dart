@@ -4,7 +4,7 @@ import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_inte
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_state.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class FavoriteInterestsBloc
     extends Bloc<FavoriteInterestsEvent, FavoriteInterestsState> {

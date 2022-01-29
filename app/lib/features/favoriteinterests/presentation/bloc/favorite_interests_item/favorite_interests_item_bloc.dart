@@ -11,7 +11,7 @@ import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class MapItemFavorite {
   late int indexCategory;
@@ -45,8 +45,7 @@ class FavoriteInterestsItemBloc
   }
 
   void _reloadFavoriteInterests() {
-    getItInstance<FavoriteInterestsBloc>()
-      ..add(LoadFavoriteInterests());
+    getItInstance<FavoriteInterestsBloc>()..add(LoadFavoriteInterests());
   }
 
   Stream<FavoriteInterestsItemState> mapAddSuggestionToFavoriteToState(
@@ -167,9 +166,10 @@ class FavoriteInterestsItemBloc
             indexSubCategory++) {
           var _subCategoryItem = _categoryItem.subCategories![indexSubCategory];
 
-          if (_subCategoryItem.subCategoryId == event.suggestion.subCategoryId) {
-            var _indexItem = _subCategoryItem.suggestedByUsers!.indexWhere(
-                (element) => element.id == event.suggestion.id);
+          if (_subCategoryItem.subCategoryId ==
+              event.suggestion.subCategoryId) {
+            var _indexItem = _subCategoryItem.suggestedByUsers!
+                .indexWhere((element) => element.id == event.suggestion.id);
 
             if (_indexItem != -1) {
               mapItemFavorite.indexCategory = indexCategory;

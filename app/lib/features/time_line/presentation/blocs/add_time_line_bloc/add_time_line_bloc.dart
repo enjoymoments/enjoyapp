@@ -8,7 +8,7 @@ import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin_core/utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'add_time_line_event.dart';
@@ -52,7 +52,7 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
     } else if (event is RemoveMedia) {
       yield* mapRemoveMediaToState(event);
     } else if (event is TextPost) {
-      yield state.copyWith(textPost: event.text);   
+      yield state.copyWith(textPost: event.text);
     }
   }
 
@@ -70,7 +70,8 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
   }
 
   Stream<AddTimeLineState> mapSaveToState() async* {
-    getItInstance<ScreenManagerBloc>()..add(QueueNewPost(state.textPost, state.images));
+    getItInstance<ScreenManagerBloc>()
+      ..add(QueueNewPost(state.textPost, state.images));
     yield state.copyWith(isLoading: false, isError: false, isSuccess: true);
   }
 
@@ -85,7 +86,10 @@ class AddTimeLineBloc extends Bloc<AddTimeLineEvent, AddTimeLineState> {
         if (file != null) {
           images
             ..addAll([
-              GalleryImageModel(id: wrapperMediaService!.generateUUIDv4(), file: file, index: 0)
+              GalleryImageModel(
+                  id: wrapperMediaService!.generateUUIDv4(),
+                  file: file,
+                  index: 0)
             ]);
         }
       } else if (event.source == ImageSource.gallery) {

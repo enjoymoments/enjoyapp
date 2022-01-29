@@ -1,10 +1,10 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
 import 'package:mozin/modules/shared/logger/models/logger_model.dart';
 import 'package:mozin/modules/shared/logger/service/logger_service.dart';
-import 'package:mozin_core/is_debug_mode.dart';
 
 void reportErrorsPlatform() {
   // This captures errors reported by the Flutter framework.
