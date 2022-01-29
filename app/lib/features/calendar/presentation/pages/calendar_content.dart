@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mozin/features/calendar/data/models/calendar_content_model.dart';
@@ -13,8 +14,6 @@ import 'package:custom_view/custom_container.dart';
 import 'package:custom_view/custom_icon.dart';
 import 'package:custom_view/spacer_box.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:custom_view/extensions/extension.dart';
-import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:custom_view/extensions/extension.dart';
 
 class CalendarContent extends StatefulWidget {

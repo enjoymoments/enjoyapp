@@ -1,4 +1,4 @@
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class UserInfoState extends DefaultState {
   UserInfoState({

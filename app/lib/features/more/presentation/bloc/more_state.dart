@@ -1,7 +1,6 @@
 part of 'more_bloc.dart';
 
 class MoreState extends DefaultState {
-
   MoreState();
 
   factory MoreState.initial() {

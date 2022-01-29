@@ -1,21 +1,15 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
-import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
-import 'package:mozin/modules/shared/logger/models/logger_model.dart';
-import 'package:mozin/modules/shared/logger/service/logger_service.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 class RemoteClientRepository {
   RemoteClientRepository({
     required Dio dio,
     required String url,
     required LoggerService loggerService,
-  })  : assert(dio != null),
-        _dio = dio,
-        assert(url != null),
+  })  : _dio = dio,
         _url = url,
-        assert(loggerService != null),
         _loggerService = loggerService;
 
   final Dio _dio;
@@ -83,6 +77,7 @@ class RemoteClientRepository {
           'query': jsonMap,
         },
       ),
+      getItInstance.get<UserWrapper>().getUser?.email,
     );
   }
 }

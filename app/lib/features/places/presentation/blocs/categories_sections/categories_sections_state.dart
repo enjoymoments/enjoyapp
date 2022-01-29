@@ -1,7 +1,5 @@
-
-
 import 'package:mozin/features/places/data/models/session_model.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class CategoriesSectionsState extends DefaultState {
   CategoriesSectionsState({
@@ -22,7 +20,7 @@ class CategoriesSectionsState extends DefaultState {
 
   final List<SessionModel>? sessions;
   final SessionModel? sessionSelected;
-  
+
   factory CategoriesSectionsState.initial() {
     return CategoriesSectionsState(
       isLoading: false,

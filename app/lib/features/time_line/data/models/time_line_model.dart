@@ -1,7 +1,7 @@
 import 'package:mozin/features/time_line/data/models/author_model.dart';
 import 'package:mozin/features/time_line/domain/entities/time_line_item_entity.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
-import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class TimeLineItemModel {
   String? id;
@@ -13,12 +13,17 @@ class TimeLineItemModel {
   TimeLineItemModel({
     this.id,
     this.author,
-    this.textPost,  
+    this.textPost,
     this.dateCreation,
     this.medias,
   });
 
-  String get dateCreationFormatted => dateCreation != null ? dateCreation!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateCreation!) : '';
+  String get dateCreationFormatted => dateCreation != null
+      ? dateCreation!
+          .dateCustomFormat('dd/MM/yyyy -')
+          .add_Hm()
+          .format(dateCreation!)
+      : '';
 
   Map<String, dynamic> toJson() {
     return {

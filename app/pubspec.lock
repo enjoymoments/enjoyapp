@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "7cbe77e5130d78d9be551e3c49406b6dfac3bfa7"
+      resolved-ref: a4f407d8ce0efc0223649bc7e697873f2b0d4b70
       url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
     source: git
     version: "0.0.1"
@@ -293,7 +293,7 @@ packages:
     source: hosted
     version: "0.10.1"
   device_info:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: device_info
       url: "https://pub.dartlang.org"
@@ -307,7 +307,7 @@ packages:
     source: hosted
     version: "2.0.1"
   dio:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dio
       url: "https://pub.dartlang.org"
@@ -321,7 +321,7 @@ packages:
     source: hosted
     version: "2.0.0"
   equatable:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: equatable
       url: "https://pub.dartlang.org"
@@ -756,7 +756,7 @@ packages:
     source: hosted
     version: "2.4.3"
   intl:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -861,7 +861,7 @@ packages:
     source: hosted
     version: "2.0.2"
   package_info:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: package_info
       url: "https://pub.dartlang.org"

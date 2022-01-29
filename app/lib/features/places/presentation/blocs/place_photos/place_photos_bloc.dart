@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'place_photos_event.dart';
 part 'place_photos_state.dart';
@@ -34,14 +32,16 @@ class PlacePhotosBloc extends Bloc<PlacePhotosEvent, PlacePhotosState> {
 
     for (var photoReference in event.item!.photoReferences!) {
       _listFutures.add(
-        _placesRepository.getPlacePhoto(event.item!.placeId, photoReference).then(
-          (String? value) {
-            if (value != null) {
-              var image = base64.decode(value);
-              _listPhotos.add(image);
-            }
-          } as FutureOr<String> Function(String?),
-        ),
+        _placesRepository
+            .getPlacePhoto(event.item!.placeId, photoReference)
+            .then(
+              (String? value) {
+                if (value != null) {
+                  var image = base64.decode(value);
+                  _listPhotos.add(image);
+                }
+              } as FutureOr<String> Function(String?),
+            ),
       );
     }
 

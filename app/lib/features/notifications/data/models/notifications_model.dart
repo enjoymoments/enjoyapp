@@ -1,6 +1,6 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/notifications/domain/entities/notifications.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
-import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 class NotificationsModel extends Notifications {
   const NotificationsModel({
@@ -16,7 +16,8 @@ class NotificationsModel extends Notifications {
             message: message,
             notificationType: notificationType);
 
-  String get dateCreationFormatted => dateTime!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateTime!);
+  String get dateCreationFormatted =>
+      dateTime!.dateCustomFormat('dd/MM/yyyy -').add_Hm().format(dateTime!);
 
   factory NotificationsModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> data = <String, dynamic>{};

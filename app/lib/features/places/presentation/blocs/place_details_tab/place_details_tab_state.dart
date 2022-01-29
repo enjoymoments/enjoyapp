@@ -1,5 +1,5 @@
 import 'package:mozin/features/places/domain/enums/place_detail_tabs_enum.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class PlaceDetailsTabState extends DefaultState {
   PlaceDetailsTabState({

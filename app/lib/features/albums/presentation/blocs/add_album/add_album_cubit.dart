@@ -6,7 +6,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'add_album_state.dart';
 

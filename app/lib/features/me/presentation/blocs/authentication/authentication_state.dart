@@ -51,7 +51,8 @@ class AuthenticationState extends DefaultState {
       isEmpty: isEmpty ?? this.isEmpty,
       isError: isError ?? this.isError,
       errorMessage: errorMessage ?? this.errorMessage,
-      closeOnboardingScreen: closeOnboardingScreen ?? this.closeOnboardingScreen,
+      closeOnboardingScreen:
+          closeOnboardingScreen ?? this.closeOnboardingScreen,
       authenticated: authenticated ?? this.authenticated,
       user: user ?? this.user,
     );

@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/calendar/data/models/activity_item_model.dart';
 import 'package:mozin/features/calendar/data/models/activity_model.dart';
 import 'package:mozin/features/calendar/data/models/add_activity_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/activity_repository.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'add_activity_state.dart';
 

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:custom_view/custom_icon.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/extensions/extension_text.dart';
-import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 
 class AlbumItem extends StatelessWidget {
   final AlbumItemModel album;
@@ -103,7 +103,7 @@ class AlbumItem extends StatelessWidget {
     );
   }
 
-    void _remove(BuildContext context) {
+  void _remove(BuildContext context) {
     showMaterialModalBottomSheet(
       context: context,
       isDismissible: false,

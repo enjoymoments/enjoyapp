@@ -1,12 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/user_action/data/models/user_action_model.dart';
 import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/response_default_model.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 part 'unsynccouple_state.dart';

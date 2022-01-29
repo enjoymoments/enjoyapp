@@ -1,17 +1,15 @@
 import 'package:bloc/bloc.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/notifications/data/models/notifications_model.dart';
 import 'package:mozin/features/notifications/domain/repositories/notifications_repository.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'notifications_state.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit(
-      {required NotificationsRepository notificationsRepository})
+  NotificationsCubit({required NotificationsRepository notificationsRepository})
       : assert(notificationsRepository != null),
         _notificationsRepository = notificationsRepository,
         super(NotificationsState.initial());

@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:mozin/features/calendar/data/models/grouped_date_calendar_model.dart';
 import 'package:mozin/features/calendar/domain/repositories/calendar_repository.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
-import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 

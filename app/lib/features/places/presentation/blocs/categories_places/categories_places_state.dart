@@ -1,8 +1,8 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/session_model.dart';
 import 'package:mozin/features/places/domain/entities/places_category.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
 class CategoriesPlacesState extends DefaultState {
@@ -28,7 +28,7 @@ class CategoriesPlacesState extends DefaultState {
 
   final List<PlacesCategory>? places;
   final PlacesCategory? categorySelected;
-  
+
   //TODO:view this
   final InterestEnum? interestSelected;
   final List<SessionModel>? sessions;
@@ -74,7 +74,8 @@ class CategoriesPlacesState extends DefaultState {
       places: places ?? this.places,
       categorySelected: categorySelected ?? this.categorySelected,
       contentPlaces: contentPlaces ?? this.contentPlaces,
-      contentSuggestedByUsers: contentSuggestedByUsers ?? this.contentSuggestedByUsers,
+      contentSuggestedByUsers:
+          contentSuggestedByUsers ?? this.contentSuggestedByUsers,
       sessions: sessions ?? this.sessions,
       interestSelected: interestSelected ?? this.interestSelected,
     );

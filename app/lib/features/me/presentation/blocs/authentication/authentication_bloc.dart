@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/authentication/repositories/authentication_repository.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
@@ -10,7 +10,6 @@ import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

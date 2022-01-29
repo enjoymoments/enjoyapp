@@ -6,7 +6,6 @@ import 'package:mozin/features/interest/domain/repositories/interest_repository.
 import 'package:mozin/features/suggestions/data/models/new_suggestions_model.dart';
 import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/domain/repositories/suggestions_repository.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 
 part 'suggestions_state.dart';

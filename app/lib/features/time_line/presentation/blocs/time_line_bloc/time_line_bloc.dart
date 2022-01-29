@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:equatable/equatable.dart';
 import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
@@ -10,7 +9,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 
 part 'time_line_event.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dio/adapter.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
@@ -18,7 +18,6 @@ import 'package:mozin/modules/config/injection/injection_model.dart';
 import 'package:mozin/modules/config/injection/injection_repository.dart';
 import 'package:mozin/modules/config/injection/injection_service.dart';
 import 'package:mozin/modules/shared/general/models/key_value.dart';
-import 'package:mozin/modules/shared/logger/service/logger_service.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/config/remote_config.dart';
@@ -91,8 +90,8 @@ void _setupRemoteClientRepository() {
             url:
                 //'http://enjoyapi.com.br/graphql/',
                 //'https://localhost:5001/graphql',
-            //'https://10.0.2.2:5001/graphql',
-            getItInstance<RemoteConfig>().getString(url_endpoint),
+                //'https://10.0.2.2:5001/graphql',
+                getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
@@ -108,7 +107,7 @@ Future<LocalStorageService> _setupHive() async {
 Future<void> resetInstances() async {
   await getItInstance<LocalStorageService>().clearAll();
   await getItInstance<LocalStorageService>().put(KeyValue<String, String>(
-        key: bypass_onboarding_screen, value: bypass_onboarding_screen));
+      key: bypass_onboarding_screen, value: bypass_onboarding_screen));
 
   await root<ListenerManagerCubit>().unsubscribeActionListener();
 

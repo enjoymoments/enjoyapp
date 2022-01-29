@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-import 'package:equatable/equatable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:mozin/modules/shared/filter_choosed/filter_choosed_wrapper.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'places_event.dart';
 part 'places_state.dart';
@@ -40,17 +38,18 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
       yield state.copyWith(isLoading: true, isError: false);
 
       var _existPermission = await Geolocator.checkPermission();
-      
-      if(_existPermission == LocationPermission.denied ||
-        _existPermission == LocationPermission.deniedForever) {
+
+      if (_existPermission == LocationPermission.denied ||
+          _existPermission == LocationPermission.deniedForever) {
         await Geolocator.requestPermission();
       }
 
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.best);
 
-      Either<PlacesModel, Exception> response = await _placesRepository
-          .getPlaces(position.latitude, position.longitude, _filterChoosedWrapper.getFilterChoosed);
+      Either<PlacesModel, Exception> response =
+          await _placesRepository.getPlaces(position.latitude,
+              position.longitude, _filterChoosedWrapper.getFilterChoosed);
 
       yield response.fold((model) {
         return state.copyWith(

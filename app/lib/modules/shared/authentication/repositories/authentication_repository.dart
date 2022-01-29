@@ -1,15 +1,14 @@
 import 'dart:async';
 
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/authentication/exceptions/authentication_exceptions.dart';
 import 'package:mozin/modules/shared/authentication/utils/authentication_extensions.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
-import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
-import 'package:mozin/modules/shared/logger/models/logger_model.dart';
-import 'package:mozin/modules/shared/logger/service/logger_service.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// {@template authentication_repository}
@@ -76,7 +75,8 @@ class AuthenticationRepository {
     try {
       final facebookUser = await _facebookAuth.login();
       final FacebookAuthCredential facebookAuthCredential =
-          FacebookAuthProvider.credential(facebookUser.accessToken!.token) as FacebookAuthCredential;
+          FacebookAuthProvider.credential(facebookUser.accessToken!.token)
+              as FacebookAuthCredential;
 
       await _firebaseAuth.signInWithCredential(facebookAuthCredential);
     } catch (e) {
@@ -139,6 +139,7 @@ class AuthenticationRepository {
           'query': jsonMap,
         },
       ),
+      getItInstance.get<UserWrapper>().getUser?.email,
     );
   }
 }

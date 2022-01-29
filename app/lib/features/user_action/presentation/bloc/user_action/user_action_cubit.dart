@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'user_action_state.dart';
 

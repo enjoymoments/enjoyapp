@@ -2,9 +2,7 @@ import 'package:custom_utilities/custom_utilities.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/logger/enums/logger_type_enum.dart';
-import 'package:mozin/modules/shared/logger/models/logger_model.dart';
-import 'package:mozin/modules/shared/logger/service/logger_service.dart';
+import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 
 void reportErrorsPlatform() {
   // This captures errors reported by the Flutter framework.
@@ -59,6 +57,7 @@ void _recordLogging(String error, String? stackTrace) {
           'command': stackTrace,
         },
       ),
+      getItInstance.get<UserWrapper>().getUser?.email,
     );
   } catch (e) {
     print('error in set logger crashlytics');

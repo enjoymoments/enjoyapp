@@ -32,27 +32,22 @@ dependencies:
   get_it: ^7.1.3
   cached_network_image: ^3.1.0
   flutter_bloc: ^7.2.1
-  equatable: ^2.0.3
   introduction_screen: ^2.1.0
   auto_size_text: ^3.0.0-nullsafety.0
   file_picker: ^4.0.3
   image_picker: ^0.8.4+1
   photo_view: ^0.13.0
   uuid: ^3.0.4
-  device_info: ^2.0.2
   hive: ^2.0.4
   path_provider: ^2.0.4
   google_sign_in: ^5.1.0
   modal_bottom_sheet: ^2.0.0
-  intl: ^0.17.0
   carousel_slider: ^4.0.0
   url_launcher: ^6.0.10
   expandable: ^5.0.1
   percent_indicator: ^3.0.1
   auto_route: ^3.2.1
-  dio: ^4.0.0
   dartz: ^0.10.0
-  package_info: ^2.0.2
   geolocator: ^8.0.1
   shimmer: ^2.0.0
   rxdart: ^0.27.2

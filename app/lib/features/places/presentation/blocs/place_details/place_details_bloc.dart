@@ -2,14 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
 import 'package:mozin/features/places/presentation/blocs/place_photos/place_photos_bloc.dart';
-import 'package:mozin/modules/shared/core_migrate/bloc/default_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 part 'place_details_event.dart';
 part 'place_details_state.dart';
@@ -41,7 +39,8 @@ class PlaceDetailsBloc extends Bloc<PlaceDetailsEvent, PlaceDetailsState> {
     yield response.fold((item) {
       event.item = item;
       event.placePhotosBloc!.add(LoadPhotos(event.item));
-      event.favoriteInterestsItemBloc!.add(SetFavoriteItem(event.item!.favorited));
+      event.favoriteInterestsItemBloc!
+          .add(SetFavoriteItem(event.item!.favorited));
 
       return state.copyWith(
           isLoading: false, isError: false, isSuccess: true, item: item);

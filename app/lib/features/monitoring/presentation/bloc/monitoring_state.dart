@@ -1,7 +1,6 @@
 part of 'monitoring_bloc.dart';
 
 class MonitoringState extends DefaultState {
-
   MonitoringState();
 
   factory MonitoringState.initial() {
