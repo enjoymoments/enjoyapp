@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: a4f407d8ce0efc0223649bc7e697873f2b0d4b70
+      resolved-ref: fd4085765706134af2363a8b1f8615ee86445028
       url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
     source: git
     version: "0.0.1"
@@ -1015,7 +1015,7 @@ packages:
     source: hosted
     version: "0.27.3"
   share:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: share
       url: "https://pub.dartlang.org"
@@ -1188,7 +1188,7 @@ packages:
     source: hosted
     version: "2.0.4"
   url_launcher:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: url_launcher
       url: "https://pub.dartlang.org"

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class StoresService {
   static void redirectToStore(Function callbackPlatformNotFound) {

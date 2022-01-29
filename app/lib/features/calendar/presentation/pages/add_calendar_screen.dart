@@ -12,7 +12,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
-import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
 
 class AddCalendarScreen extends StatefulWidget {
   final TaskCalendarModel? taskModel;

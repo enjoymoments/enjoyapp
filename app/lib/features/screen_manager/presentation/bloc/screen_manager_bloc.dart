@@ -2,23 +2,18 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/calendar/presentation/pages/calendar_content.dart';
-import 'package:mozin/features/favoriteinterests/presentation/pages/favorite_interests_screen.dart';
 import 'package:mozin/features/me/presentation/pages/me_screen.dart';
 import 'package:mozin/features/time_line/domain/repositories/time_line_repository.dart';
-import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
-import 'package:mozin/features/time_line/presentation/pages/time_line_screen.dart';
 import 'package:mozin/modules/config/router.gr.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/modules/shared/general/models/key_value.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/general/models/media_model.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
-import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
@@ -64,7 +59,8 @@ class ScreenManagerBloc extends Bloc<ScreenManagerEvent, ScreenManagerState> {
       } else {
         localStorageService!.put(KeyValue<String, String>(
             key: bypass_interest_filter, value: bypass_interest_filter));
-        AutoRouter.of(event.context).push(Interest_screen(isChangeFilter: false));
+        AutoRouter.of(event.context)
+            .push(Interest_screen(isChangeFilter: false));
       }
     } else {
       var _contents = state.contents;

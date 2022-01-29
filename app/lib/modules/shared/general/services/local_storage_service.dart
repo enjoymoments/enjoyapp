@@ -1,8 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:mozin/modules/shared/general/models/key_value.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class LocalStorageService {
-
   final Box<dynamic> box;
 
   LocalStorageService(this.box);

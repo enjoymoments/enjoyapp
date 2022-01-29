@@ -17,7 +17,6 @@ import 'package:mozin/modules/config/injection/injection_data_source.dart';
 import 'package:mozin/modules/config/injection/injection_model.dart';
 import 'package:mozin/modules/config/injection/injection_repository.dart';
 import 'package:mozin/modules/config/injection/injection_service.dart';
-import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin/modules/config/remote_config.dart';

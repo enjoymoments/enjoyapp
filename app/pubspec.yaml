@@ -43,7 +43,6 @@ dependencies:
   google_sign_in: ^5.1.0
   modal_bottom_sheet: ^2.0.0
   carousel_slider: ^4.0.0
-  url_launcher: ^6.0.10
   expandable: ^5.0.1
   percent_indicator: ^3.0.1
   auto_route: ^3.2.1
@@ -66,7 +65,6 @@ dependencies:
   cloud_firestore: ^3.1.6
   google_mobile_ads: ^1.0.1
   firebase_dynamic_links: ^4.0.4
-  share: ^2.0.4
   sign_in_with_apple: ^3.2.0
   # custom_view: 0.0.2
   custom_view:

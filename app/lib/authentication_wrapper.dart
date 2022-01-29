@@ -5,9 +5,9 @@ import 'package:mozin/features/me/presentation/pages/widgets/login/login_wrapper
 import 'package:mozin/features/screen_manager/presentation/root_screen_manager.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/onboading_screen.dart';
-import 'package:mozin/modules/shared/general/models/key_value.dart';
 import 'package:mozin/modules/shared/general/services/local_storage_service.dart';
 import 'package:mozin_core/constants.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
   const AuthenticationWrapper({Key? key}) : super(key: key);

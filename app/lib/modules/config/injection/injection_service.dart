@@ -5,7 +5,6 @@ import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';
 import 'package:mozin/modules/shared/firebase/firebase_dynamic_links.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
-import 'package:mozin/modules/shared/general/services/share_service.dart';
 import 'package:mozin/modules/shared/general/services/wrapper_media_service.dart';
 import 'package:mozin/modules/shared/user/services/user_service.dart';
 import 'package:uuid/uuid.dart';

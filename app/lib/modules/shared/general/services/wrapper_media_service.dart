@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mozin/modules/shared/firebase/firebase_storage_service.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
-import 'package:mozin/modules/shared/general/models/key_value.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path/path.dart' as Path;
@@ -24,12 +23,11 @@ class WrapperMediaService {
     return uuidService!.v4();
   }
 
-  Future<List<PlatformFile>> getMedias({FileType fileType = FileType.image}) async {
-    FilePickerResult? _result = await FilePicker.platform.pickFiles(
-      type: fileType,
-      allowMultiple: true
-    );
-    
+  Future<List<PlatformFile>> getMedias(
+      {FileType fileType = FileType.image}) async {
+    FilePickerResult? _result = await FilePicker.platform
+        .pickFiles(type: fileType, allowMultiple: true);
+
     return _result?.files ?? [];
   }
 
@@ -66,10 +64,11 @@ class WrapperMediaService {
       try {
         _listFutures.add(
           firebaseStorageService!
-              .uploadFile(
-                  userWrapper!.getUser!.id, item.file!, "${item.id}$extensionFile")
+              .uploadFile(userWrapper!.getUser!.id, item.file!,
+                  "${item.id}$extensionFile")
               .then((value) {
-            _listUrls.add(KeyValue<String?, String>(key: item.id, value: value));
+            _listUrls
+                .add(KeyValue<String?, String>(key: item.id, value: value));
           }).catchError((onError) {
             _errorItems.add(item);
           }),

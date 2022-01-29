@@ -13,7 +13,6 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';
-import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
 import 'package:mozin/modules/shared/general/services/stores_service.dart';
 import 'package:custom_view/AppIcons.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_avatar.dart';
@@ -26,6 +25,7 @@ import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_cubit.dart';
 import 'package:mozin/modules/shared/user/bloc/cubit/user_info_state.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class Connected extends StatelessWidget {
   final UserAppModel? user;
@@ -58,7 +58,10 @@ class Connected extends StatelessWidget {
           radius: SizeConfig.sizeByPixel(25),
         ),
         SpacerBox.h16,
-        if(user!.name != null) user!.name!.title(context) else SizedBox.shrink(),
+        if (user!.name != null)
+          user!.name!.title(context)
+        else
+          SizedBox.shrink(),
       ],
     );
   }
@@ -289,8 +292,7 @@ class Connected extends StatelessWidget {
                 iconStart: AppIcons.undo,
                 iconEnd: AppIcons.angle_right,
                 onTap: () {
-                  AutoRouter.of(context)
-                      .push(Unsync_couple_screen());
+                  AutoRouter.of(context).push(Unsync_couple_screen());
                 },
               ),
               ..._divider(),

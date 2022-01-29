@@ -8,13 +8,12 @@ import 'package:mozin/features/suggestions/data/models/suggestions_model.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:custom_view/size_config.dart';
 import 'package:custom_view/AppIcons.dart';
-import 'package:custom_view/custom_font_size.dart';
 import 'package:custom_view/custom_icon.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:custom_view/extensions/extension.dart';
 import 'package:custom_view/spacer_box.dart';
-import 'package:mozin/modules/shared/general/services/launch_url_service.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 
 class SuggestionItem extends StatelessWidget {
   const SuggestionItem({
