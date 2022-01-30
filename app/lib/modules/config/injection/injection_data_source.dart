@@ -1,4 +1,4 @@
-import 'package:get_it/get_it.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/albums/data/datasources/albums_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/activity_remote_data_source.dart';
 import 'package:mozin/features/calendar/data/datasources/calendar_remote_data_source.dart';

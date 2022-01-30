@@ -1,6 +1,5 @@
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mozin/features/albums/data/repositories/albums_repository_impl.dart';
 import 'package:mozin/features/albums/domain/repositories/albums_repository.dart';
 import 'package:mozin/features/calendar/data/repositories/activity_repository_impl.dart';

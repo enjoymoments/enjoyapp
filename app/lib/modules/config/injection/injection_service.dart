@@ -1,5 +1,4 @@
 import 'package:custom_utilities/custom_utilities.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mozin/modules/config/push_notification_config.dart';
 import 'package:mozin/modules/config/router_external_resolver.dart';
 import 'package:mozin/modules/shared/firebase/analytics_service.dart';

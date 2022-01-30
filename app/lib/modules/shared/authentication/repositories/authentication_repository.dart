@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/authentication/exceptions/authentication_exceptions.dart';
 import 'package:mozin/modules/shared/authentication/utils/authentication_extensions.dart';
 import 'package:mozin/modules/shared/general/models/user_app_model.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';

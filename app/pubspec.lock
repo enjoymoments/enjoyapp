@@ -21,7 +21,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.10"
+    version: "3.1.11"
   args:
     dependency: transitive
     description:
@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "84df9159aa66f1f8057c36e49afae8a78d8fdcbc"
+      resolved-ref: "1b5b0e2ea24a28858fd88b64d6199523cc67a4e9"
       url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
     source: git
     version: "0.0.1"
@@ -384,7 +384,7 @@ packages:
     source: hosted
     version: "0.4.0+6"
   firebase_auth:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
@@ -557,7 +557,7 @@ packages:
     source: hosted
     version: "3.3.0"
   flutter_facebook_auth:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_facebook_auth
       url: "https://pub.dartlang.org"
@@ -644,7 +644,7 @@ packages:
     source: hosted
     version: "2.1.4"
   get_it:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: get_it
       url: "https://pub.dartlang.org"
@@ -665,7 +665,7 @@ packages:
     source: hosted
     version: "1.0.1"
   google_sign_in:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_sign_in
       url: "https://pub.dartlang.org"
@@ -1043,7 +1043,7 @@ packages:
     source: hosted
     version: "2.0.0"
   sign_in_with_apple:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: sign_in_with_apple
       url: "https://pub.dartlang.org"

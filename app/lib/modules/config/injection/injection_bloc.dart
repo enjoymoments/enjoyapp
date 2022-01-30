@@ -1,4 +1,4 @@
-import 'package:get_it/get_it.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/albums/presentation/blocs/add_album/add_album_cubit.dart';
 import 'package:mozin/features/albums/presentation/blocs/albums/albums_cubit.dart';
 import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
@@ -32,8 +32,8 @@ void registerBlocs(GetIt getItInstance) {
   getItInstance
       .registerFactory<AddTimeLineBloc>(() => AddTimeLineBloc(getItInstance()));
 
-  getItInstance.registerLazySingleton<TimelineBloc>(
-      () => TimelineBloc(getItInstance()));
+  getItInstance
+      .registerLazySingleton<TimelineBloc>(() => TimelineBloc(getItInstance()));
 
   getItInstance.registerLazySingleton<ScreenManagerBloc>(() =>
       ScreenManagerBloc(getItInstance(), getItInstance(), getItInstance(),
@@ -60,11 +60,11 @@ void registerBlocs(GetIt getItInstance) {
 
   getItInstance.registerFactory<ConnectedCubit>(() => ConnectedCubit());
 
-  getItInstance.registerLazySingleton<FavoriteInterestsBloc>(() =>
-      FavoriteInterestsBloc());
+  getItInstance.registerLazySingleton<FavoriteInterestsBloc>(
+      () => FavoriteInterestsBloc());
 
   getItInstance.registerFactory<FavoriteInterestsItemBloc>(() =>
-      FavoriteInterestsItemBloc(favoriteInterestsRepository: getItInstance()));    
+      FavoriteInterestsItemBloc(favoriteInterestsRepository: getItInstance()));
 
   getItInstance
       .registerFactory<CategoriesPlacesCubit>(() => CategoriesPlacesCubit());
@@ -110,9 +110,10 @@ void registerBlocs(GetIt getItInstance) {
       () => UnsyncCoupleCubit(userActionRepository: getItInstance()));
 
   getItInstance.registerFactory<SuggestionsCubit>(() => SuggestionsCubit(
-      suggestionsRepository: getItInstance<SuggestionsRepository>(),
-      interestRepository: getItInstance(),
+        suggestionsRepository: getItInstance<SuggestionsRepository>(),
+        interestRepository: getItInstance(),
       ));
 
-  getItInstance.registerFactory<CategoriesSectionsCubit>(() => CategoriesSectionsCubit());
+  getItInstance.registerFactory<CategoriesSectionsCubit>(
+      () => CategoriesSectionsCubit());
 }

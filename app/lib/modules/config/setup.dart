@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dio/adapter.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mozin/features/ads/data/repositories/ads_banner_repository_impl.dart';
 import 'package:mozin/features/ads/data/repositories/ads_publisher_banner_repository_impl.dart';
