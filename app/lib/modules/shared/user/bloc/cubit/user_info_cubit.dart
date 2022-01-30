@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/models/user_wrapper.dart';

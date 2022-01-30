@@ -30,7 +30,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
   cached_network_image: ^3.1.0
-  flutter_bloc: ^7.2.1
   introduction_screen: ^2.1.0
   auto_size_text: ^3.0.0-nullsafety.0
   file_picker: ^4.0.3
@@ -71,7 +70,7 @@ dependencies:
     git:
       url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
       ref: main
-    # path: ../../custom_view
+    # path: ../custom_utilities
   mozin_core:
     # git:
     #   url: git@github.com:custom_view/custom_view.git

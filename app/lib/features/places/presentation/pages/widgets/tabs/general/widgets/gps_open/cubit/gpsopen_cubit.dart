@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:custom_view/AppIcons.dart';
@@ -13,8 +12,8 @@ part 'gpsopen_state.dart';
 class GpsOpenCubit extends Cubit<GpsOpenState> {
   GpsOpenCubit() : super(GpsOpenInitial());
 
-  void getElements(
-      BuildContext context, String? title, String? description, double? latitude, double? longitude) async {
+  void getElements(BuildContext context, String? title, String? description,
+      double? latitude, double? longitude) async {
     List<Widget> _elements = <Widget>[];
 
     if (await (MapLauncher.isMapAvailable(MapType.google) as FutureOr<bool>)) {

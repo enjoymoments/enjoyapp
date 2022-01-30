@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "1b5b0e2ea24a28858fd88b64d6199523cc67a4e9"
+      resolved-ref: "046dcf0417ae02704d04d431e40c47db4af670ca"
       url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
     source: git
     version: "0.0.1"
@@ -536,7 +536,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_bloc
       url: "https://pub.dartlang.org"

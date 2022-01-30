@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:bloc/bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mozin/features/places/data/models/places_model.dart';
 import 'package:mozin/features/places/domain/repositories/places_repository.dart';
@@ -15,9 +14,7 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
   PlacesBloc({
     required PlacesRepository placesRepository,
     required FilterChoosedWrapper filterChoosedWrapper,
-  })  : assert(placesRepository != null),
-        _placesRepository = placesRepository,
-        assert(filterChoosedWrapper != null),
+  })  : _placesRepository = placesRepository,
         _filterChoosedWrapper = filterChoosedWrapper,
         super(PlacesState.initial());
 

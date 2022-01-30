@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mozin/features/ads/domain/repositories/ads_banner_repository.dart';

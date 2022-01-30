@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/user_action/data/models/user_action_model.dart';
 import 'package:mozin/features/user_action/domain/repositories/user_action_repository.dart';

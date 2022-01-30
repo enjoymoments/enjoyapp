@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:mozin/features/favoriteinterests/domain/repositories/favorite_interests_repository.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_bloc.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_event.dart';

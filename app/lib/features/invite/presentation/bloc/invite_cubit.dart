@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/invite/data/models/user_sync_info_model.dart';
 import 'package:mozin/features/invite/domain/repositories/invite_repository.dart';

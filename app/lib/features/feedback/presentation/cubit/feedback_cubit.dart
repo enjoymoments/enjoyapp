@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:mozin/features/feedback/data/models/feedback_model.dart';
 import 'package:mozin/features/feedback/domain/repositories/feedback_repository.dart';
 import 'package:custom_utilities/custom_utilities.dart';
@@ -11,9 +10,7 @@ class FeedbackCubit extends Cubit<FeedbackState> {
   FeedbackCubit({
     required FeedbackRepository feedbackRepository,
     required UserWrapper userWrapper,
-  })  : assert(feedbackRepository != null),
-        _feedbackRepository = feedbackRepository,
-        assert(userWrapper != null),
+  })  : _feedbackRepository = feedbackRepository,
         _userWrapper = userWrapper,
         super(FeedbackState.initial());
 

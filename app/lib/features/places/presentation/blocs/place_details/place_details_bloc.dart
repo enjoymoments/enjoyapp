@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_bloc.dart';
 import 'package:mozin/features/favoriteinterests/presentation/bloc/favorite_interests_item/favorite_interests_item_event.dart';
@@ -15,8 +14,7 @@ part 'place_details_state.dart';
 class PlaceDetailsBloc extends Bloc<PlaceDetailsEvent, PlaceDetailsState> {
   PlaceDetailsBloc({
     required PlacesRepository placesRepository,
-  })  : assert(placesRepository != null),
-        _placesRepository = placesRepository,
+  })  : _placesRepository = placesRepository,
         super(PlaceDetailsState.initial());
 
   final PlacesRepository _placesRepository;

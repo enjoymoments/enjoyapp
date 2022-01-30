@@ -1,6 +1,4 @@
 import 'package:custom_utilities/custom_utilities.dart';
-import 'package:equatable/equatable.dart';
-import 'package:bloc/bloc.dart';
 import 'package:mozin/features/more/domain/repositories/more_repository.dart';
 
 part 'more_event.dart';

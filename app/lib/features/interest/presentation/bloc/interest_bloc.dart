@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:bloc/bloc.dart';
 import 'package:mozin/features/interest/data/models/categories_model.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/interest/domain/repositories/interest_repository.dart';

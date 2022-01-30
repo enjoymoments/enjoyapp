@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mozin/features/notifications/data/models/notifications_model.dart';
@@ -10,8 +9,7 @@ part 'notifications_state.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit({required NotificationsRepository notificationsRepository})
-      : assert(notificationsRepository != null),
-        _notificationsRepository = notificationsRepository,
+      : _notificationsRepository = notificationsRepository,
         super(NotificationsState.initial());
 
   final NotificationsRepository _notificationsRepository;

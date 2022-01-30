@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:mozin/features/places/data/models/session_model.dart';
 import 'package:mozin/features/places/presentation/blocs/categories_sections/categories_sections_state.dart';
 import 'package:mozin/modules/shared/general/enums.dart';

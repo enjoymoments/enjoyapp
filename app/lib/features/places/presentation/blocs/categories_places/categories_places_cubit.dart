@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:mozin/features/places/data/models/place_model.dart';
 import 'package:mozin/features/places/data/models/session_model.dart';
@@ -20,9 +20,10 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
         //sessions: _getSessions(_categoryInitial),
         places: places,
         categorySelected: _categoryInitial,
-        contentPlaces: _categoryInitial.subCategories![0].places as List<PlaceModel?>?,
-        contentSuggestedByUsers:
-            _categoryInitial.subCategories![0].suggestedByUsers as List<SuggestionsModel?>?,
+        contentPlaces:
+            _categoryInitial.subCategories![0].places as List<PlaceModel?>?,
+        contentSuggestedByUsers: _categoryInitial
+            .subCategories![0].suggestedByUsers as List<SuggestionsModel?>?,
       ),
     );
   }
@@ -32,7 +33,8 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
       state.copyWith(
         categorySelected: category,
         contentPlaces: category.subCategories![0].places as List<PlaceModel?>?,
-        contentSuggestedByUsers: category.subCategories![0].suggestedByUsers as List<SuggestionsModel?>?,
+        contentSuggestedByUsers: category.subCategories![0].suggestedByUsers
+            as List<SuggestionsModel?>?,
         interestSelected: _getInterests(category),
         //TOOD:in development
         //sessions: _getSessions(category),
@@ -40,11 +42,13 @@ class CategoriesPlacesCubit extends Cubit<CategoriesPlacesState> {
     );
   }
 
-  void subCategorySelected(InterestEnum? interestSelected, List<dynamic>? data) {
+  void subCategorySelected(
+      InterestEnum? interestSelected, List<dynamic>? data) {
     if (interestSelected == InterestEnum.Place) {
       emit(state.copyWith(contentPlaces: data as List<PlaceModel?>?));
     } else if (interestSelected == InterestEnum.SuggestedByUsers) {
-      emit(state.copyWith(contentSuggestedByUsers: data as List<SuggestionsModel?>?));
+      emit(state.copyWith(
+          contentSuggestedByUsers: data as List<SuggestionsModel?>?));
     }
   }
 
