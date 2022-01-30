@@ -40,7 +40,7 @@ void registerSingletonRepositories(GetIt getItInstance) {
       () => UserRepository(remoteDataSource: getItInstance()));
 
   getItInstance.registerLazySingleton<LoggerRepository>(() => LoggerRepository(
-      baseUrl: getItInstance<RemoteConfig>().getString(url_endpoint)));
+      baseUrl: getItInstance<RemoteConfig>().getString(url_functions)));
 
   getItInstance.registerLazySingleton<InterestRepository>(
       () => InterestRepositoryImpl(remoteDataSource: getItInstance()));
