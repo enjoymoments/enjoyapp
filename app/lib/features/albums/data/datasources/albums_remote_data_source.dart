@@ -1,3 +1,4 @@
+import 'package:custom_utilities/custom_utilities.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/domain/entities/album_item_entity.dart';
@@ -20,12 +21,9 @@ class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
   final FirestoreInstanceProvider _instance = new FirestoreInstanceProvider();
 
   @override
-  Future<String> addAlbum(
-      String userId, AlbumItemModel model) async {
-    var document = _instance.firestore
-        .doc('users/$userId')
-        .collection('albums')
-        .doc();
+  Future<String> addAlbum(String userId, AlbumItemModel model) async {
+    var document =
+        _instance.firestore.doc('users/$userId').collection('albums').doc();
 
     var map = model.toJson();
     map['dateCreation'] = DateTime.now();
@@ -58,8 +56,7 @@ class AlbumsRemoteDataSourceImpl implements AlbumsRemoteDataSource {
   Future<bool> deleteAlbum(String userId, String? albumId) async {
     var url = remoteConfig!.getString(url_functions);
 
-    await remoteClientRepository!
-        .post('$url/deleteAlbum', data: {
+    await remoteClientRepository!.post('$url/deleteAlbum', data: {
       'albumID': albumId,
       'id': userId,
     });

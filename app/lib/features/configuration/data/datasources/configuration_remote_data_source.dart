@@ -4,7 +4,8 @@ abstract class ConfigurationRemoteDataSource {
   //TODO:implement methods here
 }
 
-class ConfigurationRemoteDataSourceImpl implements ConfigurationRemoteDataSource {
+class ConfigurationRemoteDataSourceImpl
+    implements ConfigurationRemoteDataSource {
   ConfigurationRemoteDataSourceImpl(this.remoteClientRepository);
 
   final RemoteClientRepository remoteClientRepository;

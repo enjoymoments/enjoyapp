@@ -1,12 +1,12 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
 import 'package:mozin/features/invite/data/models/user_sync_info_model.dart';
 import 'package:mozin/modules/config/remote_config.dart';
-import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/core_migrate/remote_client_repository.dart';
+import 'package:mozin/modules/shared/general/enums.dart';
 
 abstract class InviteRemoteDataSource {
-  Future<String?> generateShareUrl(DynamicLinksTypeEnum action, String? userInternalId);
+  Future<String?> generateShareUrl(
+      DynamicLinksTypeEnum action, String? userInternalId);
   Future<UserSyncInfoModel> getUserSyncInfo(String userSyncInfoId);
 }
 
@@ -18,7 +18,8 @@ class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
   final RemoteConfig? remoteConfig;
 
   @override
-  Future<String?> generateShareUrl(DynamicLinksTypeEnum action, String? userInternalId) async {
+  Future<String?> generateShareUrl(
+      DynamicLinksTypeEnum action, String? userInternalId) async {
     var url = remoteConfig!.getString(url_functions);
 
     var _response = await remoteClientRepository!.post(
@@ -43,6 +44,7 @@ class InviteRemoteDataSourceImpl implements InviteRemoteDataSource {
     ''';
 
     var result = await remoteClientRepository!.query(_query);
-    return UserSyncInfoModel.fromJson(result['data']['getUserSyncInfo'], userSyncInfoId);
+    return UserSyncInfoModel.fromJson(
+        result['data']['getUserSyncInfo'], userSyncInfoId);
   }
 }

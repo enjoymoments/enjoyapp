@@ -2,23 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/interest/data/models/sub_categories_model.dart';
 import 'package:mozin/features/suggestions/presentation/bloc/suggestions_cubit.dart';
 import 'package:mozin/features/suggestions/presentation/pages/widgets/suggestion_category_item_details.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:custom_view/size_config.dart';
-import 'package:custom_view/AppIcons.dart';
-import 'package:custom_view/custom_app_bar.dart';
-import 'package:custom_view/custom_circular_progress_indicador.dart';
-import 'package:custom_view/custom_container.dart';
-import 'package:custom_view/custom_icon.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
-import 'package:custom_view/custom_scaffold.dart';
-import 'package:custom_view/custom_text_form_field.dart';
-import 'package:custom_view/spacer_box.dart';
-import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
 
 class AddSuggestionScreen extends StatefulWidget {

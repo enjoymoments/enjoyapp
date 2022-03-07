@@ -1,18 +1,13 @@
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/time_line/presentation/blocs/time_line_bloc/time_line_bloc.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/body_card.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/enum/action_header_enum.dart';
 import 'package:mozin/features/time_line/presentation/pages/widgets/header_card.dart';
 import 'package:mozin/features/time_line/data/models/time_line_model.dart';
-import 'package:custom_view/AppIcons.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
-import 'package:custom_view/spacer_box.dart';
 
 class TimeLineItem extends StatelessWidget {
-  const TimeLineItem(
-      {Key? key, required this.item, required this.timelineBloc})
+  const TimeLineItem({Key? key, required this.item, required this.timelineBloc})
       : super(key: key);
 
   final TimeLineItemModel item;

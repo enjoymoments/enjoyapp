@@ -5,7 +5,8 @@ abstract class NotificationsRemoteDataSource {
   Future<List<NotificationsModel>> getNotifications();
 }
 
-class NotificationsRemoteDataSourceImpl implements NotificationsRemoteDataSource {
+class NotificationsRemoteDataSourceImpl
+    implements NotificationsRemoteDataSource {
   NotificationsRemoteDataSourceImpl(this.remoteClientRepository);
 
   final RemoteClientRepository? remoteClientRepository;

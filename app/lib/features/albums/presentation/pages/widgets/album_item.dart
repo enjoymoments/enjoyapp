@@ -1,18 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:custom_utilities/custom_utilities.dart';
-import 'package:custom_view/AppIcons.dart';
-import 'package:custom_view/custom_icon.dart';
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/modules/config/router.gr.dart';
-import 'package:custom_view/size_config.dart';
-import 'package:custom_view/shimmer_loading.dart';
-import 'package:custom_view/extensions/extension.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
-import 'package:custom_view/extensions/extension_text.dart';
 
 class AlbumItem extends StatelessWidget {
   final AlbumItemModel album;

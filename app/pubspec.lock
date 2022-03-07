@@ -263,20 +263,16 @@ packages:
   custom_utilities:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: "046dcf0417ae02704d04d431e40c47db4af670ca"
-      url: "https://github.com/pesquisaedesenvolvimento/custom_utilities.git"
-    source: git
+      path: "../../custom_utilities"
+      relative: true
+    source: path
     version: "0.0.1"
   custom_view:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: "19ab0368a1699f61b67482c0290cbe8b07ad7f4a"
-      url: "https://github.com/pesquisaedesenvolvimento/custom_view.git"
-    source: git
+      path: "../../custom_view"
+      relative: true
+    source: path
     version: "0.0.2"
   dart_style:
     dependency: transitive
@@ -826,7 +822,7 @@ packages:
     source: hosted
     version: "1.0.1"
   modal_bottom_sheet:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: modal_bottom_sheet
       url: "https://pub.dartlang.org"

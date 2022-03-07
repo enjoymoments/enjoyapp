@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:mozin/features/time_line/data/models/get_time_line_model.dart';
 import 'package:mozin/modules/shared/general/interest_type.dart';
 

@@ -1,27 +1,15 @@
+import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/albums/data/models/album_item_model.dart';
 import 'package:mozin/features/albums/presentation/blocs/edit_album/edit_album_cubit.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:custom_view/size_config.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/custom_image_items.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 import 'package:mozin/modules/shared/general/models/base_image_model.dart';
-import 'package:custom_view/AppIcons.dart';
-import 'package:custom_view/custom_app_bar.dart';
-import 'package:custom_view/custom_circular_progress_indicador.dart';
-import 'package:custom_view/custom_container.dart';
-import 'package:custom_view/custom_icon.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
-import 'package:custom_view/custom_scaffold.dart';
-import 'package:custom_view/custom_text_form_field.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
-import 'package:custom_view/extensions/extension.dart';
 import 'package:mozin/modules/shared/core_migrate/extension_utils.dart';
-import 'package:custom_view/spacer_box.dart';
 import 'package:mozin/modules/shared/general/models/gallery_image_model.dart';
 
 class EditAlbumScreen extends StatefulWidget {

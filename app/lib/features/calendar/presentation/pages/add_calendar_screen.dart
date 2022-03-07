@@ -2,15 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:custom_utilities/custom_utilities.dart';
 import 'package:custom_view/custom_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mozin/features/calendar/data/models/task_calendar_model.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_activity_cubit/add_activity_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/add_calendar_cubit/add_calendar_cubit.dart';
 import 'package:mozin/features/calendar/presentation/blocs/cubit/calendar_cubit.dart';
 import 'package:mozin/modules/config/setup.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_item_modal_fit.dart';
-import 'package:mozin/modules/shared/custom_view_migrate/custom_modal_fit.dart';
 import 'package:mozin/modules/shared/custom_view_migrate/rounded_loading_button.dart';
 
 class AddCalendarScreen extends StatefulWidget {
