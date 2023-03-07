@@ -7,7 +7,7 @@ import 'package:mozin/modules/config/setup.dart';
 import 'package:mozin/modules/shared/general/enums.dart';
 
 void showTimelineBottomSheet(BuildContext context, TimelineState state) {
-  showMaterialModalBottomSheet(
+  showModalBottomSheet(
     context: context,
     builder: (context) => CustomModalFit(
       items: _buildBottomSheetItem(state),

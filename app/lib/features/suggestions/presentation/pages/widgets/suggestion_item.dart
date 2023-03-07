@@ -122,7 +122,7 @@ class SuggestionItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        showMaterialModalBottomSheet(
+        showModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
             items: [
@@ -189,7 +189,7 @@ class SuggestionItem extends StatelessWidget {
   // }
 
   void confirmRemove(BuildContext context) {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [

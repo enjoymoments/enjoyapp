@@ -69,7 +69,7 @@ class AlbumItem extends StatelessWidget {
             .date(context),
         InkWell(
           onTap: () {
-            showMaterialModalBottomSheet(
+            showModalBottomSheet(
               context: context,
               builder: (context) => CustomModalFit(
                 items: [
@@ -96,7 +96,7 @@ class AlbumItem extends StatelessWidget {
   }
 
   void _remove(BuildContext context) {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       isDismissible: false,
       builder: (context) => CustomModalFit(

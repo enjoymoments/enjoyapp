@@ -30,7 +30,7 @@ class HeaderCard extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                showMaterialModalBottomSheet(
+                showModalBottomSheet(
                   context: context,
                   builder: (context) => CustomModalFit(
                     items: [

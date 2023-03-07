@@ -64,18 +64,21 @@ dependencies:
     # git:
     #   url: https://github.com/pesquisaedesenvolvimento/custom_view.git
     #   ref: main
-    path: ../../custom_view
+    path: ../custom_view
   custom_utilities:
     # git:
     #   url: https://github.com/pesquisaedesenvolvimento/custom_utilities.git
     #   ref: main
-    path: ../../custom_utilities
+    path: ../custom_utilities
   mozin_core:
     # git:
     #   url: git@github.com:custom_view/custom_view.git
     #   ref: develop
     path: ../mozin_core
   collection: ^1.15.0-nullsafety.4
+
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
 
 dev_dependencies:
   flutter_test:

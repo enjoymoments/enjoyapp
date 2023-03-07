@@ -111,7 +111,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void remove() {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [
@@ -135,7 +135,7 @@ class _AddCalendarScreenState extends State<AddCalendarScreen> {
   }
 
   void _discardPost(BuildContext context) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [

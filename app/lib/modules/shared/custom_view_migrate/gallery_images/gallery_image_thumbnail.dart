@@ -64,7 +64,7 @@ class GalleryImageThumbnail extends StatelessWidget {
   }
 
   void _removeMedia(BuildContext context) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [

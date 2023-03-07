@@ -165,7 +165,7 @@ class _AddSuggestionScreenState extends State<AddSuggestionScreen> {
   }
 
   void _discardPost(BuildContext context) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [

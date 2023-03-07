@@ -34,7 +34,7 @@ class TimeLineItem extends StatelessWidget {
 
   void _invokeActionsHeader(BuildContext context, ActionHeaderEnum action) {
     if (action == ActionHeaderEnum.DELETE) {
-      showMaterialModalBottomSheet(
+      showModalBottomSheet(
         context: context,
         builder: (context) => CustomModalFit(
           items: [

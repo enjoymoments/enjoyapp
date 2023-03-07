@@ -151,7 +151,7 @@ class Connected extends StatelessWidget {
       iconStart: AppIcons.info_circle,
       iconEnd: AppIcons.angle_right,
       onTap: () {
-        showMaterialModalBottomSheet(
+        showModalBottomSheet(
           context: context,
           builder: (context) => CustomModalFit(
             items: [

@@ -136,11 +136,11 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
       items: [
         BottomNavigationBarItem(
           icon: CustomIcon(icon: AppIcons.camera),
-          title: 'Câmera'.iconWithLabel(context),
+          label: 'Câmera',
         ),
         BottomNavigationBarItem(
           icon: CustomIcon(icon: AppIcons.film),
-          title: 'Galeria'.iconWithLabel(context),
+          label: 'Galeria',
         ),
       ],
     );
@@ -179,7 +179,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
   }
 
   void _removePhoto(BuildContext context, GalleryImageModel model) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [
@@ -201,7 +201,7 @@ class _AddAlbumScreenState extends State<AddAlbumScreen> {
   }
 
   void _discardPost(BuildContext context) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [

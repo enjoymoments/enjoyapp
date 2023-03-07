@@ -225,7 +225,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   }
 
   void _removePhoto(BuildContext context, GalleryImageModel model) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [
@@ -247,7 +247,7 @@ class _EditAlbumScreenState extends State<EditAlbumScreen> {
   }
 
   void _discardPost(BuildContext context) async {
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
       context: context,
       builder: (context) => CustomModalFit(
         items: [
