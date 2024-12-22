@@ -1,6 +1,12 @@
 # mozin
 
-A new Flutter project.
+- Flutter version: 2.10.5
+
+
+## For authentication with Google
+
+- https://coderwall.com/p/r09hoq/android-generate-release-debug-keystores
+- https://stackoverflow.com/questions/54557479/flutter-and-google-sign-in-plugin-platformexceptionsign-in-failed-com-google
 
 ## Route
 
