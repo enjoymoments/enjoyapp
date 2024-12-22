@@ -59,6 +59,7 @@ dependencies:
   cloud_firestore: ^3.1.6
   google_mobile_ads: ^1.0.1
   firebase_dynamic_links: ^4.0.4
+  pretty_dio_logger: ^1.1.1
   # custom_view: 0.0.2
   custom_view:
     # git:

@@ -21,6 +21,7 @@ import 'package:mozin/modules/shared/general/services/local_storage_service.dart
 import 'package:mozin/modules/config/remote_config.dart';
 import 'package:mozin_core/constants.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 GetIt getItInstance = GetIt.instance;
 GetIt root = GetIt.asNewInstance();
@@ -75,6 +76,14 @@ Future<RemoteConfig> _setupFirebaseRemoteConfig() async {
 
 void _setupRemoteClientRepository() {
   Dio _dio = Dio();
+  _dio.interceptors.add(PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseBody: true,
+    responseHeader: true,
+    error: true,
+  ));
+
   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
       (HttpClient client) {
     client.badCertificateCallback =
@@ -85,11 +94,10 @@ void _setupRemoteClientRepository() {
   getItInstance.registerLazySingleton<RemoteClientRepository>(
       () => RemoteClientRepository(
             dio: _dio,
-            url:
-                //'http://enjoyapi.com.br/graphql/',
-                //'https://localhost:5001/graphql',
-                //'https://10.0.2.2:5001/graphql',
-                getItInstance<RemoteConfig>().getString(url_endpoint),
+            url: 'https://enjoyapi-ded8eb557791.herokuapp.com/graphql/',
+            //'http://localhost:5100/graphql',
+            //'https://10.0.2.2:5001/graphql',
+            //getItInstance<RemoteConfig>().getString(url_endpoint),
             loggerService: getItInstance<LoggerService>(),
           ));
 }
